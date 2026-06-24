@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 
 const API_URL = "/api/clients";
 
@@ -64,6 +64,14 @@ const EMPTY_CLIENT = {
   preferredContact1: "WhatsApp Message",
   preferredContact2: "Phone Call",
   preferredContact3: "Email",
+  preferredContact4: "SMS",
+  preferredContact5: "Email",
+  preferredContactDetail1: "",
+  preferredContactDetail2: "",
+  preferredContactDetail3: "",
+  preferredContactDetail4: "",
+  preferredContactDetail5: "",
+  hasBackupPhone: false,
   preferredContactHoursFrom: "09:00",
   preferredContactHoursTo: "18:00",
 
@@ -91,6 +99,21 @@ const EMPTY_CLIENT = {
   streetAddress: "",
   district: "",
   townCity: "",
+  state: "",
+  municipality: "",
+  council: "",
+  borough: "",
+  locationAdminType: "",
+  locationAdminTypeManual: "",
+  locationAdminTypeIsManual: false,
+  locationFieldsLocked: false,
+  locationLockReason: "",
+  locationMismatchWarnings: [],
+  googleContactResourceName: "",
+  googleContactMatched: false,
+  googleContactMatchSource: "",
+  linkedClientId: "",
+  linkedClientMatchStatus: "",
 
   documentType: "NRIC",
   documentStatus: "Pending Verification",
@@ -450,6 +473,45 @@ const CONTACT_METHOD_OPTIONS = [
   "Emergency / Next of Kin Only",
   "Unknown",
   "To be confirmed"
+];
+const LOCATION_ADMIN_TYPE_OPTIONS = [
+  "Municipality",
+  "Municipal Council",
+  "City Council",
+  "District Council",
+  "Local Council",
+  "Borough",
+  "District",
+  "Town",
+  "City",
+  "Village",
+  "Township",
+  "Parish",
+  "Region",
+  "Province",
+  "State",
+  "Territory",
+  "County",
+  "Shire",
+  "Local Government Area",
+  "Administrative Division",
+  "Federal Territory",
+  "Autonomous Region",
+  "Prefecture",
+  "Commune",
+  "Canton",
+  "Ward",
+  "Subdistrict",
+  "Mukim",
+  "Barangay",
+  "Regency",
+  "Department",
+  "Governorate",
+  "Emirate",
+  "Not Applicable / N/A",
+  "Unknown",
+  "To be confirmed",
+  "Other / Manual"
 ];
 
 const AVAILABILITY_REASON_OPTIONS = [
@@ -1149,6 +1211,14 @@ function normalizeClient(rawClient) {
     preferredContact1: source.preferredContact1 || "WhatsApp Message",
     preferredContact2: source.preferredContact2 || "Phone Call",
     preferredContact3: source.preferredContact3 || "Email",
+    preferredContact4: source.preferredContact4 || "SMS",
+    preferredContact5: source.preferredContact5 || "Email",
+    preferredContactDetail1: source.preferredContactDetail1 || "",
+    preferredContactDetail2: source.preferredContactDetail2 || "",
+    preferredContactDetail3: source.preferredContactDetail3 || "",
+    preferredContactDetail4: source.preferredContactDetail4 || "",
+    preferredContactDetail5: source.preferredContactDetail5 || "",
+    hasBackupPhone: source.hasBackupPhone !== undefined ? Boolean(source.hasBackupPhone) : Boolean(source.backupPhoneNumber),
     preferredContactHoursFrom: source.preferredContactHoursFrom || "09:00",
     preferredContactHoursTo: source.preferredContactHoursTo || "18:00",
 
@@ -1175,6 +1245,21 @@ function normalizeClient(rawClient) {
     streetAddress: source.streetAddress || source.address || "",
     district: source.district || "",
     townCity: source.townCity || source.city || source.town || "",
+    state: source.state || source.province || source.territory || "",
+    municipality: source.municipality || "",
+    council: source.council || "",
+    borough: source.borough || "",
+    locationAdminType: source.locationAdminType || "",
+    locationAdminTypeManual: source.locationAdminTypeManual || "",
+    locationAdminTypeIsManual: Boolean(source.locationAdminTypeIsManual),
+    locationFieldsLocked: Boolean(source.locationFieldsLocked),
+    locationLockReason: source.locationLockReason || "",
+    locationMismatchWarnings: Array.isArray(source.locationMismatchWarnings) ? source.locationMismatchWarnings : [],
+    googleContactResourceName: source.googleContactResourceName || "",
+    googleContactMatched: Boolean(source.googleContactMatched),
+    googleContactMatchSource: source.googleContactMatchSource || "",
+    linkedClientId: source.linkedClientId || "",
+    linkedClientMatchStatus: source.linkedClientMatchStatus || "",
 
     documentType: source.documentType || "NRIC",
     documentStatus: source.documentStatus || "Pending Verification",
@@ -1355,7 +1440,41 @@ export default function Clients() {
   const [status, setStatus] = useState("");
   const [statusType, setStatusType] = useState("info");
   const [isSaving, setIsSaving] = useState(false);
-  const [validationErrors, setValidationErrors] = useState([]);
+  const [validationErrors, setValidationErrors] = useState([]);  const [fieldErrors, setFieldErrors] = useState({});
+  const [numericWarnings, setNumericWarnings] = useState({});
+  const [contactDatabaseSearch, setContactDatabaseSearch] = useState("");
+  const [googleContactSearch, setGoogleContactSearch] = useState("");
+  const [googleContactStatus, setGoogleContactStatus] = useState("");
+
+  const contactDatabaseResults = useMemo(() => {
+    const query = contactDatabaseSearch.trim().toLowerCase();
+    if (!query) return [];
+
+    return clients
+      .map(normalizeClient)
+      .filter((client) => [
+        client.givenName,
+        client.surname,
+        client.name,
+        client.email,
+        client.phoneNumber,
+        client.backupPhoneNumber,
+        client.whatsappNumber,
+        client.emergencyContactNumber,
+        client.nricPassportNumber,
+        client.postcode,
+        client.townCity,
+        client.district,
+        client.state,
+        client.municipality,
+        client.council,
+        client.borough,
+        client.country,
+        client.specialRemarksStaffLawyerNotes,
+        client.documentRelatedReferenceNotes
+      ].filter(Boolean).join(" ").toLowerCase().includes(query))
+      .slice(0, 8);
+  }, [clients, contactDatabaseSearch]);
 
   const showNationalityField =
     form.ethnicity === "Foreigner" ||
@@ -1382,6 +1501,87 @@ export default function Clients() {
   function showStatus(message, type = "info") {
     setStatus(message);
     setStatusType(type);
+  }
+  function isPhoneLikeContactMethod(method) {
+    return ["WhatsApp Message", "WhatsApp Call", "Phone Call", "SMS"].includes(method);
+  }
+
+  function shouldSanitizeNumericField(field, currentForm) {
+    if (["phoneNumber", "backupPhoneNumber", "whatsappNumber", "whatsapp2Number", "emergencyContactNumber"].includes(field)) {
+      return true;
+    }
+
+    if (field === "preferredContactDetail1") return isPhoneLikeContactMethod(currentForm.preferredContact1);
+    if (field === "preferredContactDetail2") return isPhoneLikeContactMethod(currentForm.preferredContact2);
+    if (field === "preferredContactDetail3") return isPhoneLikeContactMethod(currentForm.preferredContact3);
+    if (field === "preferredContactDetail4") return isPhoneLikeContactMethod(currentForm.preferredContact4);
+    if (field === "preferredContactDetail5") return isPhoneLikeContactMethod(currentForm.preferredContact5);
+
+    return false;
+  }
+
+  function deriveFieldErrors(payload) {
+    const nextErrors = {};
+    const isBlank = (value) => String(value || "").trim() === "";
+
+    if (isBlank(payload.titlePrefix)) nextErrors.titlePrefix = "Title Prefix is required.";
+    if (isBlank(payload.givenName)) nextErrors.givenName = "Given Name is required.";
+    if (isBlank(payload.nricPassportNumber)) nextErrors.nricPassportNumber = "NRIC No. / Passport No. is required.";
+    if (isBlank(payload.email) && isBlank(payload.phoneNumber)) nextErrors.phoneNumber = "Email Address or Primary Phone Number is required.";
+    if (!isBlank(payload.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(payload.email).trim())) nextErrors.email = "Invalid email format.";
+    if (isBlank(payload.country)) nextErrors.country = "Country is required.";
+    if (isBlank(payload.buildingHouseNo)) nextErrors.buildingHouseNo = "Building / House No. is required.";
+    if (isBlank(payload.postcode)) nextErrors.postcode = "Postcode No. is required.";
+    if (isBlank(payload.townCity)) nextErrors.townCity = "Town / City is required.";
+
+    [1, 2, 3, 4, 5].forEach((rank) => {
+      const method = payload["preferredContact" + rank];
+      const detailField = "preferredContactDetail" + rank;
+      const detail = payload[detailField];
+      if (rank === 1 && isBlank(method)) nextErrors.preferredContact1 = "1st Contact Choice is required.";
+      if (!isBlank(method) && !["Not Applicable / N/A", "Unknown", "To be confirmed"].includes(method) && isBlank(detail)) {
+        nextErrors[detailField] = rank + " Contact Detail is required when a method is selected.";
+      }
+      if (method === "Email" && !isBlank(detail) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(detail).trim())) {
+        nextErrors[detailField] = "Invalid email format for contact detail.";
+      }
+    });
+
+    if (payload.locationAdminType === "Other / Manual" && isBlank(payload.locationAdminTypeManual)) {
+      nextErrors.locationAdminTypeManual = "Manual location/admin category is required when Other / Manual is selected.";
+    }
+
+    return nextErrors;
+  }
+
+  function inputClass(field) {
+    return fieldErrors[field] ? "field-input-error" : undefined;
+  }
+
+  function renderInlineError(field) {
+    return fieldErrors[field] ? <small className="field-error">{fieldErrors[field]}</small> : null;
+  }
+
+  function renderNumericWarning(field) {
+    return numericWarnings[field] ? <small className="field-warning-message">{numericWarnings[field]}</small> : null;
+  }
+
+  async function searchGoogleContacts() {
+    const query = googleContactSearch.trim();
+    if (!query) {
+      setGoogleContactStatus("Enter a name, phone, or email before searching Google Contacts.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/google-contacts/search?q=" + encodeURIComponent(query));
+      if (!response.ok) {
+        throw new Error("Google Contacts connector not configured");
+      }
+      setGoogleContactStatus("Google Contacts connector responded. Review backend result handling in the next phase.");
+    } catch (error) {
+      setGoogleContactStatus("Google Contacts connector is not configured yet. Showing local client contact database results only.");
+    }
   }
 
   async function loadClients() {
@@ -1422,10 +1622,26 @@ export default function Clients() {
   }, []);
 
   function updateForm(field, value) {
+    let safeValue = value;
+
+    if (shouldSanitizeNumericField(field, form)) {
+      const digitsOnly = String(value || "").replace(/\D/g, "");
+      const hadInvalidCharacters = String(value || "") !== digitsOnly;
+      safeValue = digitsOnly;
+      setNumericWarnings((previous) => ({
+        ...previous,
+        [field]: hadInvalidCharacters ? "Only numeric characters are allowed. Please enter a valid phone number." : ""
+      }));
+    } else {
+      setNumericWarnings((previous) => ({ ...previous, [field]: "" }));
+    }
+
+    setFieldErrors((previous) => ({ ...previous, [field]: undefined }));
+
     setForm((previous) => {
       const next = {
         ...previous,
-        [field]: value
+        [field]: safeValue
       };
 
       if (field === "givenName" || field === "surname") {
@@ -1563,6 +1779,8 @@ export default function Clients() {
   function resetForm() {
     setForm(EMPTY_CLIENT);
     setValidationErrors([]);
+    setFieldErrors({});
+    setNumericWarnings({});
     setEditingId("");
   }
 
@@ -1792,9 +2010,12 @@ function isUnavailablePlaceholder(value) {
     event.preventDefault();
 
     const { errors, flags } = validateClientForm(form);
-    setValidationErrors(errors);
+    const nextFieldErrors = deriveFieldErrors(form);
+    const mergedErrors = Array.from(new Set([...errors, ...Object.values(nextFieldErrors).filter(Boolean)]));
+    setFieldErrors(nextFieldErrors);
+    setValidationErrors(mergedErrors);
 
-    if (errors.length > 0) {
+    if (mergedErrors.length > 0) {
       window.alert("Client profile validation failed. Please correct the highlighted issues before saving.");
       showStatus("Please fix the missing, inconsistent, or invalid client profile details before saving.", "error");
       return;
@@ -1877,6 +2098,8 @@ function isUnavailablePlaceholder(value) {
       genderSource: normalized.gender ? "manual" : "auto"
     });
     setValidationErrors([]);
+    setFieldErrors({});
+    setNumericWarnings({});
     showStatus("Editing selected client. Modify the profile and click Save Modified Client.", "info");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -1964,6 +2187,13 @@ function isUnavailablePlaceholder(value) {
         normalized.preferredContact1,
         normalized.preferredContact2,
         normalized.preferredContact3,
+        normalized.preferredContact4,
+        normalized.preferredContact5,
+        normalized.preferredContactDetail1,
+        normalized.preferredContactDetail2,
+        normalized.preferredContactDetail3,
+        normalized.preferredContactDetail4,
+        normalized.preferredContactDetail5,
         normalized.emergencyContactName,
         normalized.emergencyContactRelationship,
         normalized.emergencyContactNumber,
@@ -1973,6 +2203,14 @@ function isUnavailablePlaceholder(value) {
         normalized.region,
         normalized.townCity,
         normalized.district,
+        normalized.state,
+        normalized.municipality,
+        normalized.council,
+        normalized.borough,
+        normalized.locationAdminType,
+        normalized.locationAdminTypeManual,
+        normalized.googleContactResourceName,
+        normalized.linkedClientId,
         normalized.streetAddress,
         normalized.buildingHouseNo,
         normalized.buildingHouseName,
@@ -1991,7 +2229,45 @@ function isUnavailablePlaceholder(value) {
   }, [clients, searchTerm]);
 
   return (
-    <section className="client-module client-v6">
+    <section className="client-module client-v6">      <style>{`
+        /* L360_SURGICAL_CLIENT_PATCH_V2_STYLE */
+        .client-form-has-errors input:required:invalid,
+        .client-form-has-errors select:required:invalid,
+        .field-input-error {
+          border: 2px solid #dc2626 !important;
+          background: #fff1f2 !important;
+          box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.12);
+        }
+        .field-error,
+        .field-warning-message {
+          display: block;
+          color: #b91c1c;
+          font-weight: 700;
+          margin-top: 4px;
+        }
+        .client-contact-search-panel {
+          border: 1px solid rgba(148, 163, 184, 0.45);
+          border-radius: 14px;
+          padding: 14px;
+          margin: 14px 0;
+          background: rgba(248, 250, 252, 0.92);
+        }
+        .client-contact-result-list {
+          display: grid;
+          gap: 8px;
+          margin-top: 10px;
+        }
+        .client-contact-result-card {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          align-items: center;
+          padding: 10px;
+          border: 1px solid rgba(148, 163, 184, 0.35);
+          border-radius: 12px;
+          background: #ffffff;
+        }
+      `}</style>
       <div className="client-module-header">
         <div>
           <h2>Client Registration / Client Profile</h2>
@@ -2012,6 +2288,39 @@ function isUnavailablePlaceholder(value) {
           {status}
         </p>
       )}
+      <div className="client-contact-search-panel">
+        <h3>Search Existing Client / Contact Database</h3>
+        <p className="mandatory-note">
+          Search by name, phone, WhatsApp, email, NRIC/passport, postcode, town, district, municipality, council, borough, state, or remarks before creating a duplicate profile.
+        </p>
+        <div className="inline-fields two-even">
+          <input
+            value={contactDatabaseSearch}
+            onChange={(event) => setContactDatabaseSearch(event.target.value)}
+            placeholder="Search local client contact database"
+          />
+          <input
+            value={googleContactSearch}
+            onChange={(event) => setGoogleContactSearch(event.target.value)}
+            placeholder="Google Contacts search-ready field"
+          />
+        </div>
+        <button type="button" className="btn btn-secondary" onClick={searchGoogleContacts}>Search Google Contacts Connector</button>
+        {googleContactStatus && <small className="field-warning-message">{googleContactStatus}</small>}
+        {contactDatabaseResults.length > 0 && (
+          <div className="client-contact-result-list">
+            {contactDatabaseResults.map((client) => (
+              <div className="client-contact-result-card" key={getClientId(client) || client.email || client.phoneNumber}>
+                <span>
+                  <strong>{[client.givenName, client.surname].filter(Boolean).join(" ") || client.name || "Unnamed client"}</strong><br />
+                  {client.email || "No email"} Â· {formatPhoneDisplay(client.phoneCountryCode, client.phoneNumber)} Â· {client.townCity || "No town/city"}
+                </span>
+                <button type="button" className="btn btn-secondary btn-small" onClick={() => editClient(client)}>Edit / Load</button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {validationErrors.length > 0 && (
         <div className="client-validation-box">
@@ -2024,7 +2333,7 @@ function isUnavailablePlaceholder(value) {
         </div>
       )}
 
-      <form className="client-form client-form-v6" onSubmit={saveClient}>
+      <form className={"client-form client-form-v6" + (validationErrors.length > 0 ? " client-form-has-errors" : "")} onSubmit={saveClient}>
                 <div className="form-section">
           <h3>Client Profile Details</h3>
 
@@ -2264,27 +2573,42 @@ function isUnavailablePlaceholder(value) {
                   placeholder="0123456789"
                 />
               </div>
-              <small>Display format: +60 0123456789. Digits only, no spaces or dashes.</small>
+              <small>Display format: +60 0123456789. Digits only, no spaces or dashes.</small>              {renderInlineError("phoneNumber")}
+              {renderNumericWarning("phoneNumber")}
               {malaysiaPhoneWarning && <small className="field-warning">Check format: Malaysian mobile numbers should start with 01.</small>}
             </label>
 
-            <label className="full">
-              Secondary / Backup Phone Number
-              <div className="inline-fields code-and-number">
-                <input
-                  list="client-country-code-options"
-                  value={form.backupPhoneCountryCode}
-                  onChange={(event) => updateForm("backupPhoneCountryCode", event.target.value)}
-                  placeholder="+60 Malaysia"
-                />
-                <input
-                  value={form.backupPhoneNumber}
-                  onChange={(event) => updateForm("backupPhoneNumber", event.target.value)}
-                  placeholder="Backup phone, if any"
-                />
-              </div>
-              {malaysiaBackupPhoneWarning && <small className="field-warning">Check format: Malaysian backup phone numbers should start with 01.</small>}
+            <label className="checkbox-tile full">
+              <input
+                type="checkbox"
+                checked={form.hasBackupPhone}
+                onChange={(event) => updateForm("hasBackupPhone", event.target.checked)}
+              />
+              Add Secondary / Backup Phone Number
             </label>
+
+            {form.hasBackupPhone && (
+              <label className="full">
+                Secondary / Backup Phone Number
+                <div className="inline-fields code-and-number">
+                  <input
+                    list="client-country-code-options"
+                    value={form.backupPhoneCountryCode}
+                    onChange={(event) => updateForm("backupPhoneCountryCode", event.target.value)}
+                    placeholder="+60 Malaysia"
+                  />
+                  <input
+                    className={inputClass("backupPhoneNumber")}
+                    value={form.backupPhoneNumber}
+                    onChange={(event) => updateForm("backupPhoneNumber", event.target.value)}
+                    placeholder="Backup phone, if any"
+                  />
+                </div>
+                {renderInlineError("backupPhoneNumber")}
+                {renderNumericWarning("backupPhoneNumber")}
+                {malaysiaBackupPhoneWarning && <small className="field-warning">Check format: Malaysian backup phone numbers should start with 01.</small>}
+              </label>
+            )}
 
             <label className="checkbox-tile full">
               <input
@@ -2370,6 +2694,59 @@ function isUnavailablePlaceholder(value) {
                   <option key={option} value={option}>{option}</option>
                 ))}
               </select>
+            </label>
+            <label>
+              3rd Contact Detail
+              <input
+                className={inputClass("preferredContactDetail3")}
+                value={form.preferredContactDetail3}
+                onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
+                placeholder="Phone, email, or contact detail for 3rd choice"
+              />
+              {renderInlineError("preferredContactDetail3")}
+              {renderNumericWarning("preferredContactDetail3")}
+            </label>
+
+            <label>
+              4th Contact Choice
+              <select value={form.preferredContact4} onChange={(event) => updateForm("preferredContact4", event.target.value)}>
+                {CONTACT_METHOD_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              4th Contact Detail
+              <input
+                className={inputClass("preferredContactDetail4")}
+                value={form.preferredContactDetail4}
+                onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
+                placeholder="Phone, email, or contact detail for 4th choice"
+              />
+              {renderInlineError("preferredContactDetail4")}
+              {renderNumericWarning("preferredContactDetail4")}
+            </label>
+
+            <label>
+              5th Contact Choice
+              <select value={form.preferredContact5} onChange={(event) => updateForm("preferredContact5", event.target.value)}>
+                {CONTACT_METHOD_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              5th Contact Detail
+              <input
+                className={inputClass("preferredContactDetail5")}
+                value={form.preferredContactDetail5}
+                onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
+                placeholder="Phone, email, or contact detail for 5th choice"
+              />
+              {renderInlineError("preferredContactDetail5")}
+              {renderNumericWarning("preferredContactDetail5")}
             </label>
 
             <label>
@@ -2516,6 +2893,86 @@ function isUnavailablePlaceholder(value) {
               Town / City
               <input value={form.townCity} onChange={(event) => updateForm("townCity", event.target.value)} placeholder="Town / City" />
             </label>
+            <label>
+              State / Province / Territory
+              <input
+                list="l360-state-location-options"
+                className={inputClass("state")}
+                value={form.state}
+                onChange={(event) => updateForm("state", event.target.value)}
+                placeholder="State / Province / Territory"
+              />
+              {renderInlineError("state")}
+            </label>
+
+            <label>
+              Municipality
+              <input
+                list="l360-municipality-options"
+                value={form.municipality}
+                onChange={(event) => updateForm("municipality", event.target.value)}
+                placeholder="Municipality"
+              />
+            </label>
+
+            <label>
+              Council
+              <input
+                list="l360-council-options"
+                value={form.council}
+                onChange={(event) => updateForm("council", event.target.value)}
+                placeholder="Council"
+              />
+            </label>
+
+            <label>
+              Borough
+              <input
+                list="l360-borough-options"
+                value={form.borough}
+                onChange={(event) => updateForm("borough", event.target.value)}
+                placeholder="Borough"
+              />
+            </label>
+
+            <label>
+              Location / Admin Category Type
+              <input
+                list="l360-location-admin-type-options"
+                value={form.locationAdminType}
+                onChange={(event) => updateForm("locationAdminType", event.target.value)}
+                placeholder="Municipality, Council, Borough, District, County, Parish, Shire, Mukim, etc."
+              />
+            </label>
+
+            {form.locationAdminType === "Other / Manual" && (
+              <label className="full">
+                Manual Location / Admin Category
+                <input
+                  className={inputClass("locationAdminTypeManual")}
+                  value={form.locationAdminTypeManual}
+                  onChange={(event) => updateForm("locationAdminTypeManual", event.target.value)}
+                  placeholder="Enter official local category, e.g. Mukim, Parish, County, Shire, Borough, Council, Municipality."
+                />
+                {renderInlineError("locationAdminTypeManual")}
+              </label>
+            )}
+
+            <datalist id="l360-location-admin-type-options">
+              {LOCATION_ADMIN_TYPE_OPTIONS.map((option) => <option key={option} value={option} />)}
+            </datalist>
+            <datalist id="l360-state-location-options">
+              {Array.from(new Set(clients.map((client) => normalizeClient(client).state).filter(Boolean))).map((option) => <option key={option} value={option} />)}
+            </datalist>
+            <datalist id="l360-municipality-options">
+              {Array.from(new Set(clients.map((client) => normalizeClient(client).municipality).filter(Boolean))).map((option) => <option key={option} value={option} />)}
+            </datalist>
+            <datalist id="l360-council-options">
+              {Array.from(new Set(clients.map((client) => normalizeClient(client).council).filter(Boolean))).map((option) => <option key={option} value={option} />)}
+            </datalist>
+            <datalist id="l360-borough-options">
+              {Array.from(new Set(clients.map((client) => normalizeClient(client).borough).filter(Boolean))).map((option) => <option key={option} value={option} />)}
+            </datalist>
           </div>
         </div>
 <div className="form-section">
