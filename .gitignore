@@ -49,3 +49,6 @@ _L360_RUNNER/
 *.backup
 
 # === L360 SAFE BASELINE IGNORE BLOCK END ===
+
+# L360 local-only generated control clutter; keep on disk, do not track.
+_L360_CONTROL/
