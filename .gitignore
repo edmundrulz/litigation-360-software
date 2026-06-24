@@ -12,3 +12,7 @@ backend/.env
 _L360_CONTROL/
 _REPAIR_BACKUPS/
 QUARANTINE_NOT_DELETED/
+
+# Local backup snapshots
+backups/
+
