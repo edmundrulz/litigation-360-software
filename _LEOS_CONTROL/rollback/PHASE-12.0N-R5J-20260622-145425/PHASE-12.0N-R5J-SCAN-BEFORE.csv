@@ -1,0 +1,3 @@
+﻿"PatternName","Line","Match","LineText"
+"const isBlank declaration","1611","const isBlank =","    const isBlank = (value) => String(value || """").trim() === """";"
+"function isBlank declaration","1659","function isBlank(","    function isBlank(value) {"

@@ -1,0 +1,95 @@
+{
+  "registry": "automation-registry",
+  "generatedAt": "2026-06-19T06:02:47.948Z",
+  "eventTypesFileExists": true,
+  "handlerRegistryExists": true,
+  "events": [
+    "CLIENT_CREATED",
+    "MATTER_CREATED",
+    "DOCUMENT_UPLOADED",
+    "TASK_COMPLETED",
+    "COURT_DATE_ADDED",
+    "DEADLINE_CREATED",
+    "PAYMENT_RECEIVED",
+    "INVOICE_CREATED",
+    "USER_CREATED",
+    "ROLE_CHANGED"
+  ],
+  "handlers": [
+    {
+      "name": "clientCreated",
+      "file": "backend/src/automation/handlers/clientCreated.js"
+    },
+    {
+      "name": "courtDateAdded",
+      "file": "backend/src/automation/handlers/courtDateAdded.js"
+    },
+    {
+      "name": "deadlineCreated",
+      "file": "backend/src/automation/handlers/deadlineCreated.js"
+    },
+    {
+      "name": "documentUploaded",
+      "file": "backend/src/automation/handlers/documentUploaded.js"
+    },
+    {
+      "name": "invoiceCreated",
+      "file": "backend/src/automation/handlers/invoiceCreated.js"
+    },
+    {
+      "name": "matterCreated",
+      "file": "backend/src/automation/handlers/matterCreated.js"
+    },
+    {
+      "name": "paymentReceived",
+      "file": "backend/src/automation/handlers/paymentReceived.js"
+    },
+    {
+      "name": "roleChanged",
+      "file": "backend/src/automation/handlers/roleChanged.js"
+    },
+    {
+      "name": "taskCompleted",
+      "file": "backend/src/automation/handlers/taskCompleted.js"
+    },
+    {
+      "name": "userCreated",
+      "file": "backend/src/automation/handlers/userCreated.js"
+    }
+  ],
+  "schedulerFiles": [
+    "backend/src/automation/courtOperationsEngine.js",
+    "backend/src/automation/performanceOptimizationEngine.js",
+    "backend/src/index.backup.js",
+    "backend/src/index.js",
+    "backend/src/jobs/systemScheduler.js",
+    "backend/src/routes/dashboard.backup-before-8-5A.js",
+    "backend/src/routes/dashboard.js",
+    "backend/src/routes/scheduler.js",
+    "backend/src/routes_BACKUP_BEFORE_ROLE_HARDENING/dashboard.js",
+    "backend/src/routes_BACKUP_BEFORE_ROLE_HARDENING/scheduler.js"
+  ],
+  "notificationFiles": [
+    "backend/src/automation/autonomousOperationsEngine.js",
+    "backend/src/automation/courtNavigationEngine.js",
+    "backend/src/automation/courtOperationsEngine.js",
+    "backend/src/automation/documentLifecycleEngine.js",
+    "backend/src/automation/enterpriseGovernanceEngine.js",
+    "backend/src/automation/enterpriseHardeningEngine.js",
+    "backend/src/automation/enterpriseMonitoringEngine.js",
+    "backend/src/automation/executiveCommandCentre.js",
+    "backend/src/automation/legalOperationsAssistant.js",
+    "backend/src/automation/matterIntelligenceEngine.js",
+    "backend/src/automation/metricsCollector.js",
+    "backend/src/automation/notificationService.js",
+    "backend/src/automation/predictiveAnalyticsEngine.js",
+    "backend/src/automation/workflowEngine.js",
+    "backend/src/index.js",
+    "backend/src/routes/notificationRoutes.js"
+  ],
+  "totals": {
+    "events": 10,
+    "handlers": 10,
+    "schedulerRelatedFiles": 10
+  }
+}

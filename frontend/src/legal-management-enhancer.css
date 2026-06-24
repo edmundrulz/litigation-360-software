@@ -1,0 +1,526 @@
+/* ============================================================
+   LEOS sidebar-integrated legal tools with iconography
+   ============================================================ */
+
+.leos-pro-dock,
+#leos-pro-legal-dock,
+#leos-legal-enhancer {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.leos-sidebar-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.leos-sidebar-tools-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+}
+
+.leos-sidebar-tools-title-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(201,166,70,0.18);
+  border: 1px solid rgba(201,166,70,0.55);
+  color: #f6d778;
+  flex: 0 0 auto;
+}
+
+.leos-sidebar-tools-title {
+  color: rgba(255,255,255,0.82);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.leos-sidebar-tool-btn {
+  cursor: pointer;
+}
+
+.leos-sidebar-btn-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leos-sidebar-btn-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  color: #f8d778;
+}
+
+.leos-primary-tool .leos-sidebar-btn-icon {
+  background: rgba(17,24,39,0.08);
+  color: #8a6612;
+}
+
+.leos-sidebar-btn-label {
+  display: block;
+  font-weight: 850;
+}
+
+.leos-pro-drawer,
+.leos-pro-drawer * {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.leos-pro-drawer {
+  position: fixed;
+  left: 245px;
+  top: 34px;
+  width: min(880px, calc(100vw - 275px));
+  max-height: calc(100vh - 68px);
+  overflow: auto;
+  z-index: 2147483001;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5decf;
+  border-radius: 20px;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.32);
+  padding: 20px;
+  display: none;
+}
+
+.leos-pro-drawer.open {
+  display: block;
+}
+
+.leos-pro-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  border-bottom: 1px solid #ebe4d8;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+}
+
+.leos-pro-head-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.leos-pro-head-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #fff8dd;
+  border: 1px solid #e5d38f;
+  color: #8a6612;
+  flex: 0 0 auto;
+}
+
+.leos-pro-head h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 23px;
+}
+
+.leos-pro-head p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.leos-pro-close {
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  padding: 8px 12px;
+  font-weight: 900;
+}
+
+.leos-pro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.leos-pro-card {
+  display: grid;
+  gap: 8px;
+  min-height: 92px;
+  border: 1px solid #e5decf;
+  background: #fffdf8;
+  border-radius: 16px;
+  padding: 14px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.leos-pro-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leos-pro-card-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: #fff8dd;
+  border: 1px solid #ecd89c;
+  color: #8a6612;
+  flex: 0 0 auto;
+}
+
+.leos-pro-card strong {
+  color: #111827;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.leos-pro-card span,
+.leos-pro-card small,
+.leos-pro-card p {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+a.leos-pro-card:hover,
+button.leos-pro-card:hover {
+  border-color: #c9a646;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+button.leos-pro-card {
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.leos-pro-input,
+.leos-pro-form input,
+.leos-pro-form textarea,
+.leos-pro-form select {
+  width: 100%;
+  border: 1px solid #d8d0c1;
+  border-radius: 12px;
+  padding: 11px 12px;
+  margin-bottom: 10px;
+  font: inherit;
+  background: #ffffff;
+}
+
+.leos-pro-form label {
+  display: block;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.leos-pro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 6px;
+}
+
+.leos-pro-primary,
+.leos-pro-secondary {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+}
+
+.leos-pro-primary {
+  border: none;
+  background: #111827;
+  color: #ffffff;
+}
+
+.leos-pro-secondary {
+  border: 1px solid #c9a646;
+  background: #fff8dd;
+  color: #5b4614;
+}
+
+.leos-pro-pill {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #047857;
+  font-weight: 900;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.leos-pro-legal-rule {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.leos-pro-danger-rule {
+  border: 1px solid #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.leos-pro-link-row {
+  display: grid;
+  gap: 8px;
+}
+
+.leos-pro-link-tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.leos-pro-delete {
+  cursor: pointer;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-weight: 900;
+  font-size: 11px;
+}
+
+.leos-pro-legal-category {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-weight: 900;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.leos-svg-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.leos-svg-icon.large {
+  width: 24px;
+  height: 24px;
+}
+
+.leos-svg-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 900px) {
+  .leos-pro-drawer {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    width: auto;
+    max-height: calc(100vh - 20px);
+  }
+}
+/* L360-SIDEBAR-ACTIVE-FORCE-V2-START */
+/*
+Purpose:
+Force one consistent active-state design inside the Litigation 360 sidebar.
+
+Reason:
+The first patch may not work when:
+1. legal-management-enhancer.css loads after App.css;
+2. the active class is named selected/current/is-active instead of active;
+3. active styling is injected by the Legal Tools enhancer;
+4. the Legal Web Links item uses a different wrapper class.
+
+Rule:
+All active/current/selected sidebar menu buttons use the SAME white active state.
+Normal dark menu buttons remain dark.
+Section labels/icons may remain gold.
+*/
+
+.sidebar a.active,
+.sidebar button.active,
+.sidebar .active > a,
+.sidebar .active > button,
+.sidebar a.selected,
+.sidebar button.selected,
+.sidebar .selected > a,
+.sidebar .selected > button,
+.sidebar a.current,
+.sidebar button.current,
+.sidebar .current > a,
+.sidebar .current > button,
+.sidebar a.is-active,
+.sidebar button.is-active,
+.sidebar .is-active > a,
+.sidebar .is-active > button,
+.sidebar a[aria-current],
+.sidebar button[aria-current],
+.sidebar a[aria-current="page"],
+.sidebar button[aria-current="page"],
+.sidebar a[data-active="true"],
+.sidebar button[data-active="true"],
+.sidebar [role="link"].active,
+.sidebar [role="button"].active,
+.sidebar [class*="active"] > a,
+.sidebar [class*="active"] > button,
+.sidebar [class*="selected"] > a,
+.sidebar [class*="selected"] > button,
+.sidebar [class*="current"] > a,
+.sidebar [class*="current"] > button,
+.sidebar .legal-tools a.active,
+.sidebar .legal-tools button.active,
+.sidebar .legal-tools .active,
+.sidebar .legal-tools .selected,
+.sidebar .legal-tools .current,
+.sidebar .legal-tools .is-active,
+.sidebar .legal-management-tools a.active,
+.sidebar .legal-management-tools button.active,
+.sidebar .legal-management-tools .active,
+.sidebar .legal-management-tools .selected,
+.sidebar .legal-management-tools .current,
+.sidebar .legal-management-tools .is-active,
+.sidebar [class*="legal"] a.active,
+.sidebar [class*="legal"] button.active,
+.sidebar [class*="legal"] .active,
+.sidebar [class*="legal"] .selected,
+.sidebar [class*="legal"] .current,
+.sidebar [class*="legal"] .is-active,
+.sidebar [class*="Legal"] a.active,
+.sidebar [class*="Legal"] button.active,
+.sidebar [class*="Legal"] .active,
+.sidebar [class*="Legal"] .selected,
+.sidebar [class*="Legal"] .current,
+.sidebar [class*="Legal"] .is-active {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #061225 !important;
+  border-color: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: none !important;
+}
+
+/* Force child text/icons inside active menu items to readable dark */
+.sidebar a.active *,
+.sidebar button.active *,
+.sidebar .active > a *,
+.sidebar .active > button *,
+.sidebar a.selected *,
+.sidebar button.selected *,
+.sidebar .selected > a *,
+.sidebar .selected > button *,
+.sidebar a.current *,
+.sidebar button.current *,
+.sidebar .current > a *,
+.sidebar .current > button *,
+.sidebar a.is-active *,
+.sidebar button.is-active *,
+.sidebar .is-active > a *,
+.sidebar .is-active > button *,
+.sidebar a[aria-current] *,
+.sidebar button[aria-current] *,
+.sidebar a[data-active="true"] *,
+.sidebar button[data-active="true"] *,
+.sidebar [class*="active"] > a *,
+.sidebar [class*="active"] > button *,
+.sidebar [class*="selected"] > a *,
+.sidebar [class*="selected"] > button *,
+.sidebar [class*="current"] > a *,
+.sidebar [class*="current"] > button *,
+.sidebar [class*="legal"] .active *,
+.sidebar [class*="legal"] .selected *,
+.sidebar [class*="legal"] .current *,
+.sidebar [class*="legal"] .is-active *,
+.sidebar [class*="Legal"] .active *,
+.sidebar [class*="Legal"] .selected *,
+.sidebar [class*="Legal"] .current *,
+.sidebar [class*="Legal"] .is-active * {
+  color: #061225 !important;
+}
+
+/* Standardize icon capsule inside active items */
+.sidebar a.active .icon,
+.sidebar button.active .icon,
+.sidebar .active > a .icon,
+.sidebar .active > button .icon,
+.sidebar a.selected .icon,
+.sidebar button.selected .icon,
+.sidebar .selected > a .icon,
+.sidebar .selected > button .icon,
+.sidebar a.current .icon,
+.sidebar button.current .icon,
+.sidebar .current > a .icon,
+.sidebar .current > button .icon,
+.sidebar a.is-active .icon,
+.sidebar button.is-active .icon,
+.sidebar .is-active > a .icon,
+.sidebar .is-active > button .icon,
+.sidebar a[aria-current] .icon,
+.sidebar button[aria-current] .icon,
+.sidebar a[data-active="true"] .icon,
+.sidebar button[data-active="true"] .icon,
+.sidebar [class*="active"] > a .icon,
+.sidebar [class*="active"] > button .icon,
+.sidebar [class*="selected"] > a .icon,
+.sidebar [class*="selected"] > button .icon,
+.sidebar [class*="current"] > a .icon,
+.sidebar [class*="current"] > button .icon {
+  background: rgba(6, 18, 37, 0.08) !important;
+}
+
+/* Remove cream/gold active background from Legal Tools menu items only */
+.sidebar .legal-tools a,
+.sidebar .legal-tools button,
+.sidebar .legal-management-tools a,
+.sidebar .legal-management-tools button,
+.sidebar [class*="legal"] a,
+.sidebar [class*="legal"] button,
+.sidebar [class*="Legal"] a,
+.sidebar [class*="Legal"] button {
+  box-shadow: none;
+}
+
+/* L360-SIDEBAR-ACTIVE-FORCE-V2-END */

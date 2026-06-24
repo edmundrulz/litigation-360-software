@@ -1,0 +1,3 @@
+28:      action: 'CREATE_CLIENT',
+72:      action: 'UPDATE_CLIENT',
+108:      action: 'DELETE_CLIENT',

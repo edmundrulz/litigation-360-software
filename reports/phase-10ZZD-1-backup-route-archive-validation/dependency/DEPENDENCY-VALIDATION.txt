@@ -1,0 +1,33 @@
+Phase 10ZZD.1 Dependency Validation
+Generated: 06/21/2026 10:02:21
+
+FILE: auth_POSTGRES_BACKUP_DO_NOT_DELETE.js
+Dependency Found: NO
+
+FILE: backupRecoveryRoutes.js
+Dependency Found: NO
+
+FILE: cases.js.doctor-backup
+Dependency Found: NO
+
+FILE: clients.js.doctor-backup
+Dependency Found: NO
+
+FILE: dashboard.backup-before-8-5A.js
+Dependency Found: NO
+
+FILE: deadlines.js.doctor-backup
+Dependency Found: NO
+
+FILE: debug.js.doctor-backup
+Dependency Found: NO
+
+FILE: documents.js.doctor-backup
+Dependency Found: NO
+
+FILE: errors.js.doctor-backup
+Dependency Found: NO
+
+FILE: staff.js.doctor-backup
+Dependency Found: NO
+

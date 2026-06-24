@@ -1,0 +1,36 @@
+﻿# ROLLBACK PROTOCOL
+
+Generated at:
+2026-06-23 12:23:24 +08:00
+
+## Scope
+
+This phase only creates or updates documentation/control files.
+
+## Backup Behavior
+
+When an existing file is overwritten by this bootstrap script, a backup copy is stored in:
+
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324
+
+## Safe Rollback Method
+
+Preferred rollback is manual restore from backup.
+
+1. Open backup folder:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324
+
+2. Compare the backup file with the current file.
+
+3. Copy the backup content back into the current file only if needed.
+
+## Do Not Use
+
+Do not use broad delete commands.
+
+Forbidden without explicit approval:
+Remove-Item -Recurse -Force
+
+## Production Safety
+
+No backend, database, auth, RBAC, API route, server, package, environment, or production logic file is intentionally modified by this bootstrap.

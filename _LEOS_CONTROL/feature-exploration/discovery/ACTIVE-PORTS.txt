@@ -1,0 +1,14 @@
+﻿
+  TCP    0.0.0.0:5000           0.0.0.0:0              LISTENING       48472
+  TCP    [::]:5000              [::]:0                 LISTENING       48472
+  TCP    [::1]:5000             [::1]:65199            TIME_WAIT       0
+  TCP    [::1]:5173             [::]:0                 LISTENING       42004
+  TCP    [::1]:5173             [::1]:49668            TIME_WAIT       0
+  TCP    [::1]:5173             [::1]:50367            TIME_WAIT       0
+  TCP    [::1]:5173             [::1]:52337            ESTABLISHED     42004
+  TCP    [::1]:5173             [::1]:63898            TIME_WAIT       0
+  TCP    [::1]:5173             [::1]:65241            FIN_WAIT_2      42004
+  TCP    [::1]:52337            [::1]:5173             ESTABLISHED     18220
+  TCP    [::1]:65241            [::1]:5173             CLOSE_WAIT      18220
+
+

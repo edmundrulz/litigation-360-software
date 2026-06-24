@@ -1,0 +1,19 @@
+{
+  "registry": "perkeso-registry",
+  "generatedAt": "2026-06-19T07:51:05.168Z",
+  "offices": [
+    {
+      "name": "PERKESO Kuala Lumpur - Jalan Tun Razak",
+      "monitored": true,
+      "criticality": "HIGH"
+    },
+    {
+      "name": "PERKESO Headquarters - Jalan Ampang",
+      "monitored": true,
+      "criticality": "HIGH"
+    }
+  ],
+  "totals": {
+    "offices": 2
+  }
+}

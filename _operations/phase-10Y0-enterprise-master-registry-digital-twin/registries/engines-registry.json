@@ -1,0 +1,391 @@
+{
+  "registry": "engines-registry",
+  "generatedAt": "2026-06-19T07:51:04.747Z",
+  "engines": [
+    {
+      "name": "alertManager",
+      "file": "backend/src/automation/alertManager.js",
+      "sizeBytes": 3207,
+      "modifiedAt": "2026-06-18T23:52:40.396Z",
+      "dependencies": []
+    },
+    {
+      "name": "autonomousOperationsEngine",
+      "file": "backend/src/automation/autonomousOperationsEngine.js",
+      "sizeBytes": 13526,
+      "modifiedAt": "2026-06-18T14:48:20.925Z",
+      "dependencies": [
+        "./executiveCommandCentre",
+        "./predictiveAnalyticsEngine",
+        "./legalOperationsAssistant",
+        "./notificationService",
+        "./workflowEngine",
+        "./courtOperationsEngine",
+        "./documentLifecycleEngine",
+        "./matterIntelligenceEngine"
+      ]
+    },
+    {
+      "name": "backupRecoveryEngine",
+      "file": "backend/src/automation/backupRecoveryEngine.js",
+      "sizeBytes": 7160,
+      "modifiedAt": "2026-06-18T17:29:45.098Z",
+      "dependencies": [
+        "./enterpriseHardeningEngine"
+      ]
+    },
+    {
+      "name": "courtNavigationEngine",
+      "file": "backend/src/automation/courtNavigationEngine.js",
+      "sizeBytes": 18100,
+      "modifiedAt": "2026-06-18T16:50:33.102Z",
+      "dependencies": [
+        "./courtOperationsEngine",
+        "./documentLifecycleEngine",
+        "./workflowEngine",
+        "./notificationService"
+      ]
+    },
+    {
+      "name": "courtOperationsEngine",
+      "file": "backend/src/automation/courtOperationsEngine.js",
+      "sizeBytes": 9987,
+      "modifiedAt": "2026-06-18T11:51:14.754Z",
+      "dependencies": [
+        "./eventBus",
+        "./notificationService",
+        "./workflowEngine"
+      ]
+    },
+    {
+      "name": "deploymentGatekeeperEngine",
+      "file": "backend/src/automation/deploymentGatekeeperEngine.js",
+      "sizeBytes": 9978,
+      "modifiedAt": "2026-06-19T07:11:33.607Z",
+      "dependencies": [
+        "./deploymentScoringEngine",
+        "./releaseValidatorEngine",
+        "./environmentValidationEngine",
+        "./enterpriseHardeningEngine",
+        "./enterpriseMonitoringEngine",
+        "./backupRecoveryEngine",
+        "./performanceOptimizationEngine",
+        "./executiveDeploymentDashboardEngine"
+      ]
+    },
+    {
+      "name": "deploymentReadinessCentre",
+      "file": "backend/src/automation/deploymentReadinessCentre.js",
+      "sizeBytes": 9171,
+      "modifiedAt": "2026-06-19T05:00:18.329Z",
+      "dependencies": []
+    },
+    {
+      "name": "deploymentScoringEngine",
+      "file": "backend/src/automation/deploymentScoringEngine.js",
+      "sizeBytes": 10778,
+      "modifiedAt": "2026-06-19T06:12:52.655Z",
+      "dependencies": [
+        "./deploymentReadinessCentre",
+        "./environmentValidationEngine",
+        "./releaseValidatorEngine",
+        "./enterpriseMonitoringEngine",
+        "./enterpriseHardeningEngine",
+        "./backupRecoveryEngine",
+        "./performanceOptimizationEngine"
+      ]
+    },
+    {
+      "name": "documentLifecycleEngine",
+      "file": "backend/src/automation/documentLifecycleEngine.js",
+      "sizeBytes": 10695,
+      "modifiedAt": "2026-06-18T11:36:24.243Z",
+      "dependencies": [
+        "./eventBus",
+        "./notificationService",
+        "./workflowEngine"
+      ]
+    },
+    {
+      "name": "enterpriseGovernanceEngine",
+      "file": "backend/src/automation/enterpriseGovernanceEngine.js",
+      "sizeBytes": 12435,
+      "modifiedAt": "2026-06-18T16:07:45.232Z",
+      "dependencies": [
+        "./notificationService",
+        "./workflowEngine",
+        "./matterIntelligenceEngine",
+        "./autonomousOperationsEngine"
+      ]
+    },
+    {
+      "name": "enterpriseHardeningEngine",
+      "file": "backend/src/automation/enterpriseHardeningEngine.js",
+      "sizeBytes": 9486,
+      "modifiedAt": "2026-06-18T17:16:50.615Z",
+      "dependencies": []
+    },
+    {
+      "name": "enterpriseMonitoringEngine",
+      "file": "backend/src/automation/enterpriseMonitoringEngine.js",
+      "sizeBytes": 4632,
+      "modifiedAt": "2026-06-18T23:52:40.401Z",
+      "dependencies": [
+        "./metricsCollector",
+        "./alertManager"
+      ]
+    },
+    {
+      "name": "environmentValidationEngine",
+      "file": "backend/src/automation/environmentValidationEngine.js",
+      "sizeBytes": 11244,
+      "modifiedAt": "2026-06-19T05:19:31.214Z",
+      "dependencies": []
+    },
+    {
+      "name": "eventBus",
+      "file": "backend/src/automation/eventBus.js",
+      "sizeBytes": 2486,
+      "modifiedAt": "2026-06-18T10:51:02.229Z",
+      "dependencies": [
+        "./handlerRegistry"
+      ]
+    },
+    {
+      "name": "eventTypes",
+      "file": "backend/src/automation/eventTypes.js",
+      "sizeBytes": 431,
+      "modifiedAt": "2026-06-18T10:17:19.106Z",
+      "dependencies": []
+    },
+    {
+      "name": "executiveCommandCentre",
+      "file": "backend/src/automation/executiveCommandCentre.js",
+      "sizeBytes": 5725,
+      "modifiedAt": "2026-06-18T13:06:03.665Z",
+      "dependencies": [
+        "./handlerRegistry",
+        "./eventBus",
+        "./notificationService",
+        "./workflowEngine",
+        "./documentLifecycleEngine",
+        "./courtOperationsEngine",
+        "./matterIntelligenceEngine"
+      ]
+    },
+    {
+      "name": "executiveDeploymentDashboardEngine",
+      "file": "backend/src/automation/executiveDeploymentDashboardEngine.js",
+      "sizeBytes": 4546,
+      "modifiedAt": "2026-06-19T06:35:15.292Z",
+      "dependencies": [
+        "./deploymentScoringEngine",
+        "./deploymentReadinessCentre",
+        "./environmentValidationEngine",
+        "./releaseValidatorEngine",
+        "./enterpriseMonitoringEngine",
+        "./performanceOptimizationEngine"
+      ]
+    },
+    {
+      "name": "handlerRegistry",
+      "file": "backend/src/automation/handlerRegistry.js",
+      "sizeBytes": 2173,
+      "modifiedAt": "2026-06-18T10:17:19.180Z",
+      "dependencies": [
+        "./eventTypes",
+        "./handlers/clientCreated",
+        "./handlers/matterCreated",
+        "./handlers/documentUploaded",
+        "./handlers/taskCompleted",
+        "./handlers/courtDateAdded",
+        "./handlers/deadlineCreated",
+        "./handlers/paymentReceived",
+        "./handlers/invoiceCreated",
+        "./handlers/userCreated",
+        "./handlers/roleChanged"
+      ]
+    },
+    {
+      "name": "clientCreated",
+      "file": "backend/src/automation/handlers/clientCreated.js",
+      "sizeBytes": 289,
+      "modifiedAt": "2026-06-18T10:17:19.126Z",
+      "dependencies": []
+    },
+    {
+      "name": "courtDateAdded",
+      "file": "backend/src/automation/handlers/courtDateAdded.js",
+      "sizeBytes": 293,
+      "modifiedAt": "2026-06-18T10:17:19.144Z",
+      "dependencies": []
+    },
+    {
+      "name": "deadlineCreated",
+      "file": "backend/src/automation/handlers/deadlineCreated.js",
+      "sizeBytes": 295,
+      "modifiedAt": "2026-06-18T10:17:19.148Z",
+      "dependencies": []
+    },
+    {
+      "name": "documentUploaded",
+      "file": "backend/src/automation/handlers/documentUploaded.js",
+      "sizeBytes": 298,
+      "modifiedAt": "2026-06-18T10:17:19.134Z",
+      "dependencies": []
+    },
+    {
+      "name": "invoiceCreated",
+      "file": "backend/src/automation/handlers/invoiceCreated.js",
+      "sizeBytes": 292,
+      "modifiedAt": "2026-06-18T10:17:19.160Z",
+      "dependencies": []
+    },
+    {
+      "name": "matterCreated",
+      "file": "backend/src/automation/handlers/matterCreated.js",
+      "sizeBytes": 289,
+      "modifiedAt": "2026-06-18T10:17:19.131Z",
+      "dependencies": []
+    },
+    {
+      "name": "paymentReceived",
+      "file": "backend/src/automation/handlers/paymentReceived.js",
+      "sizeBytes": 295,
+      "modifiedAt": "2026-06-18T10:17:19.156Z",
+      "dependencies": []
+    },
+    {
+      "name": "roleChanged",
+      "file": "backend/src/automation/handlers/roleChanged.js",
+      "sizeBytes": 283,
+      "modifiedAt": "2026-06-18T10:17:19.172Z",
+      "dependencies": []
+    },
+    {
+      "name": "taskCompleted",
+      "file": "backend/src/automation/handlers/taskCompleted.js",
+      "sizeBytes": 289,
+      "modifiedAt": "2026-06-18T10:17:19.140Z",
+      "dependencies": []
+    },
+    {
+      "name": "userCreated",
+      "file": "backend/src/automation/handlers/userCreated.js",
+      "sizeBytes": 283,
+      "modifiedAt": "2026-06-18T10:17:19.162Z",
+      "dependencies": []
+    },
+    {
+      "name": "legalOperationsAssistant",
+      "file": "backend/src/automation/legalOperationsAssistant.js",
+      "sizeBytes": 8504,
+      "modifiedAt": "2026-06-18T13:14:26.004Z",
+      "dependencies": [
+        "./executiveCommandCentre",
+        "./matterIntelligenceEngine",
+        "./notificationService"
+      ]
+    },
+    {
+      "name": "loadTestingEngine",
+      "file": "backend/src/automation/loadTestingEngine.js",
+      "sizeBytes": 1926,
+      "modifiedAt": "2026-06-19T00:43:37.468Z",
+      "dependencies": [
+        "./enterpriseMonitoringEngine",
+        "./enterpriseHardeningEngine",
+        "./backupRecoveryEngine"
+      ]
+    },
+    {
+      "name": "mapsIntegrationLayer",
+      "file": "backend/src/automation/mapsIntegrationLayer.js",
+      "sizeBytes": 5414,
+      "modifiedAt": "2026-06-18T16:29:36.778Z",
+      "dependencies": [
+        "./courtNavigationEngine",
+        "./courtOperationsEngine"
+      ]
+    },
+    {
+      "name": "matterIntelligenceEngine",
+      "file": "backend/src/automation/matterIntelligenceEngine.js",
+      "sizeBytes": 9703,
+      "modifiedAt": "2026-06-18T12:47:20.346Z",
+      "dependencies": [
+        "./notificationService",
+        "./documentLifecycleEngine",
+        "./courtOperationsEngine",
+        "./workflowEngine"
+      ]
+    },
+    {
+      "name": "metricsCollector",
+      "file": "backend/src/automation/metricsCollector.js",
+      "sizeBytes": 3991,
+      "modifiedAt": "2026-06-18T23:52:40.394Z",
+      "dependencies": []
+    },
+    {
+      "name": "notificationService",
+      "file": "backend/src/automation/notificationService.js",
+      "sizeBytes": 3821,
+      "modifiedAt": "2026-06-18T10:59:40.155Z",
+      "dependencies": []
+    },
+    {
+      "name": "performanceOptimizationEngine",
+      "file": "backend/src/automation/performanceOptimizationEngine.js",
+      "sizeBytes": 3968,
+      "modifiedAt": "2026-06-19T00:43:37.468Z",
+      "dependencies": [
+        "./enterpriseMonitoringEngine",
+        "./enterpriseHardeningEngine",
+        "./backupRecoveryEngine"
+      ]
+    },
+    {
+      "name": "predictiveAnalyticsEngine",
+      "file": "backend/src/automation/predictiveAnalyticsEngine.js",
+      "sizeBytes": 10185,
+      "modifiedAt": "2026-06-18T13:53:57.335Z",
+      "dependencies": [
+        "./executiveCommandCentre",
+        "./matterIntelligenceEngine",
+        "./courtOperationsEngine",
+        "./workflowEngine",
+        "./documentLifecycleEngine",
+        "./notificationService"
+      ]
+    },
+    {
+      "name": "releaseValidatorEngine",
+      "file": "backend/src/automation/releaseValidatorEngine.js",
+      "sizeBytes": 8900,
+      "modifiedAt": "2026-06-19T05:28:44.600Z",
+      "dependencies": [
+        "./deploymentReadinessCentre",
+        "./environmentValidationEngine",
+        "./enterpriseHardeningEngine",
+        "./backupRecoveryEngine",
+        "./enterpriseMonitoringEngine",
+        "./performanceOptimizationEngine"
+      ]
+    },
+    {
+      "name": "workflowEngine",
+      "file": "backend/src/automation/workflowEngine.js",
+      "sizeBytes": 8021,
+      "modifiedAt": "2026-06-18T11:14:34.990Z",
+      "dependencies": [
+        "./eventBus",
+        "./notificationService"
+      ]
+    }
+  ],
+  "totals": {
+    "engines": 38,
+    "criticalEnginesDetected": 10
+  }
+}

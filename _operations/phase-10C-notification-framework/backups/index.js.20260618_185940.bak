@@ -1,0 +1,102 @@
+﻿require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+
+const { logError } = require("./utils/errorBus");
+const { startScheduler } = require("./jobs/systemScheduler");
+
+const app = express();
+
+// GLOBAL SECURITY SHIELD
+app.use(helmet());
+
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many requests. Please slow down.",
+  },
+});
+
+app.use("/api", apiLimiter);
+
+/* =====================================================
+   CORE MIDDLEWARE
+===================================================== */
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:5173"
+  ],
+  credentials: true
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+/* =====================================================
+   BASIC SYSTEM ROUTES
+===================================================== */
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Backend running" });
+});
+
+app.use("/api/health", require("./routes/health"));
+
+/* =====================================================
+   MAIN APPLICATION ROUTES
+===================================================== */
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/cases", require("./routes/cases"));
+app.use("/api/clients", require("./routes/clients"));
+app.use("/api/staff", require("./routes/staff"));
+app.use("/api/matters", require("./routes/matters"));
+app.use("/api/time-entries", require("./routes/timeEntries"));
+app.use("/api/deadlines", require("./routes/deadlines"));
+app.use("/api/documents", require("./routes/documents"));
+app.use("/api/audit-logs", require("./routes/auditLogs"));
+
+/* =====================================================
+   OBSERVABILITY / DIAGNOSTIC ROUTES
+===================================================== */
+app.use("/api/system-diagnostic", require("./routes/systemDiagnostic"));
+app.use("/api/debug", require("./routes/debug"));
+app.use("/api/monitor", require("./routes/monitor"));
+app.use("/api/errors", require("./routes/errors"));
+app.use("/api/system-report", require("./routes/systemReport"));
+app.use("/api/integrity-scan", require("./routes/integrityScanner"));
+app.use("/api/auto-heal", require("./routes/autoHeal"));
+app.use("/api/scheduler", require("./routes/scheduler"));
+app.use("/api/dashboard", require("./routes/dashboard"));
+app.use("/api/matter-number", require("./routes/matterNumbering"));
+app.use("/api/client-identity", require("./routes/clientIdentity"));
+app.use("/api/conflict-check", require("./routes/conflictCheck"));
+app.use("/api/matter-intake", require("./routes/matterIntake"));
+app.use("/api/workflow", require("./routes/workflow"));
+app.use("/api/task-automation", require("./routes/taskAutomation"));
+app.use("/api/court-deadline", require("./routes/courtDeadline"));
+app.use("/api/enterprise", require("./routes/enterpriseRoutes"));
+app.use("/api/enterprise/handlers", require("./routes/handlerRoutes"));
+app.use("/api/enterprise/events", require("./routes/eventBusRoutes"));
+
+const PORT = process.env.PORT || 5000;
+
+startScheduler();
+
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
+
+module.exports = app;
+
+

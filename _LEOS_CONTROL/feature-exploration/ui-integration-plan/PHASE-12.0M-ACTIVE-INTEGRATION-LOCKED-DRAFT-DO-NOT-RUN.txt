@@ -1,0 +1,15 @@
+# PHASE 12.0M ACTIVE FRONTEND INTEGRATION - LOCKED DRAFT ONLY
+#
+# DO NOT RUN THIS FILE YET.
+#
+# This is a draft of the next step after the Phase 12.0L V2 plan is reviewed.
+# Phase 12.0M would:
+# 1. Backup App.jsx
+# 2. Copy LegalManagementShell files into frontend/src/components/legal-management-shell
+# 3. Copy LegalHomePage.jsx into frontend/src/pages
+# 4. Add import and route to App.jsx
+# 5. Run npm build or smoke test
+#
+# This draft is intentionally saved as .txt so it is not accidentally executed.
+#
+# WAIT FOR APPROVAL BEFORE ACTIVE INTEGRATION.

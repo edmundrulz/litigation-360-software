@@ -1,0 +1,99 @@
+PRICING STRATEGY
+
+Do not create 20 confusing tiers.
+
+Use simple, clear tiers.
+
+TIER 0 — FREE TRIAL
+Price: RM0
+Duration: 14 or 30 days
+Purpose: Let firms test safely.
+
+Limits:
+- 1 firm
+- 1 admin user
+- 5 sample matters
+- Limited storage
+- No bulk export
+- No production data guarantee unless upgraded
+
+TIER 1 — COMMUNITY
+Price: RM0
+Purpose: Brand awareness.
+Target: Solo lawyers, students, small testers.
+
+Limits:
+- 1 user
+- 20 matters
+- Basic tasks
+- Basic documents
+- Basic reminders
+- No AI automation
+- No premium support
+
+TIER 2 — STARTER
+Price: RM99/month
+Target: Small firm / sole proprietor.
+
+Includes:
+- Matter management
+- Client management
+- Document upload
+- Calendar
+- Tasks
+- Basic reminders
+- Basic dashboard
+- Basic audit logs
+
+TIER 3 — PROFESSIONAL
+Price: RM199/month
+Target: 2–5 lawyer firm.
+
+Adds:
+- Workflow automation
+- Client portal
+- Better reporting
+- Email reminders
+- Matter timeline
+- Document tagging
+- Deadline tracker
+
+TIER 4 — BUSINESS
+Price: RM399/month
+Target: serious automation users.
+
+Adds:
+- AI assistant
+- Conflict checking
+- Court deadline engine
+- Google Maps court travel module
+- Bundle checklist
+- Automation dashboard
+- Advanced notifications
+
+TIER 5 — ENTERPRISE
+Price: RM999+/month
+Target: larger firms.
+
+Adds:
+- Multi-user control
+- Multi-department
+- Advanced RBAC
+- API access
+- Power Automate integration
+- Advanced audit
+- Advanced backup
+- Priority support
+
+TIER 6 — ENTERPRISE PLUS
+Price: Custom
+Target: large firms / multi-branch.
+
+Adds:
+- Custom workflows
+- Custom integrations
+- Dedicated onboarding
+- Dedicated support
+- Private hosting option
+- Custom reports
+- Custom training

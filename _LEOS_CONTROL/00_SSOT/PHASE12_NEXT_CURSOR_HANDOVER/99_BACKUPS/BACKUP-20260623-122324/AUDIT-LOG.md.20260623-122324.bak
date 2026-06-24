@@ -1,0 +1,8 @@
+﻿# AUDIT LOG
+
+Generated at:
+2026-06-23 12:22:50 +08:00
+
+| Timestamp | Action | Scope | Risk | Result |
+|---|---|---|---|---|
+| 2026-06-23 12:22:50 +08:00 | SSOT bootstrap executed | Documentation/control-layer | Low | Created or updated SSOT control pack |

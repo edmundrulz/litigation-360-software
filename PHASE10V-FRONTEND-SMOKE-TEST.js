@@ -1,0 +1,100 @@
+﻿const fs = require("fs");
+const path = require("path");
+
+const ROOT = "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software";
+const FRONTEND = path.join(ROOT, "frontend");
+const SRC = path.join(FRONTEND, "src");
+const REPORTS = path.join(ROOT, "_operations", "phase-10V-frontend-smoke-testing", "reports");
+
+fs.mkdirSync(REPORTS, { recursive: true });
+
+function exists(filePath) {
+  return fs.existsSync(filePath);
+}
+
+function read(filePath) {
+  return exists(filePath) ? fs.readFileSync(filePath, "utf8") : "";
+}
+
+function has(filePath, text) {
+  return read(filePath).includes(text);
+}
+
+const app = exists(path.join(SRC, "App.jsx"))
+  ? path.join(SRC, "App.jsx")
+  : path.join(SRC, "App.js");
+
+const files = {
+  packageJson: path.join(FRONTEND, "package.json"),
+  app,
+  dashboard: path.join(SRC, "enterprise", "pages", "EnterpriseOperationsDashboard.jsx"),
+  connectivity: path.join(SRC, "enterprise", "pages", "FrontendBackendConnectivityValidator.jsx"),
+  api: path.join(SRC, "enterprise", "api", "enterpriseApi.js"),
+  connectivityApi: path.join(SRC, "enterprise", "api", "connectivityValidatorApi.js"),
+  card: path.join(SRC, "enterprise", "components", "EnterpriseStatusCard.jsx"),
+  panel: path.join(SRC, "enterprise", "components", "BackendConnectivityPanel.jsx")
+};
+
+const checks = [
+  { name: "frontend package.json exists", pass: exists(files.packageJson), path: files.packageJson },
+  { name: "App file exists", pass: exists(files.app), path: files.app },
+  { name: "Enterprise dashboard page exists", pass: exists(files.dashboard), path: files.dashboard },
+  { name: "Connectivity validator page exists", pass: exists(files.connectivity), path: files.connectivity },
+  { name: "Enterprise API exists", pass: exists(files.api), path: files.api },
+  { name: "Connectivity API exists", pass: exists(files.connectivityApi), path: files.connectivityApi },
+  { name: "Status card component exists", pass: exists(files.card), path: files.card },
+  { name: "Connectivity panel component exists", pass: exists(files.panel), path: files.panel },
+
+  { name: "App imports EnterpriseOperationsDashboard", pass: has(files.app, "EnterpriseOperationsDashboard") },
+  { name: "App imports FrontendBackendConnectivityValidator", pass: has(files.app, "FrontendBackendConnectivityValidator") },
+  { name: "App has Enterprise Dashboard button", pass: has(files.app, "Enterprise Dashboard") },
+  { name: "App has Connectivity Validator button", pass: has(files.app, "Connectivity Validator") },
+
+  { name: "Dashboard has 15s auto refresh", pass: has(files.dashboard, "15000") && has(files.dashboard, "setInterval") },
+  { name: "Connectivity has 30s auto refresh", pass: has(files.connectivity, "30000") && has(files.connectivity, "setInterval") },
+
+  { name: "Enterprise API has monitoring endpoint", pass: has(files.api, "/api/enterprise/monitoring/health") },
+  { name: "Enterprise API has performance endpoint", pass: has(files.api, "/api/enterprise/performance/benchmark") },
+  { name: "Connectivity API has maps endpoint", pass: has(files.connectivityApi, "/api/enterprise/maps/health") },
+  { name: "Connectivity API has documents endpoint", pass: has(files.connectivityApi, "/api/enterprise/documents/lifecycle/health") },
+  { name: "Connectivity API has court operations endpoint", pass: has(files.connectivityApi, "/api/enterprise/court-operations/health") },
+
+  { name: "Industrial Court present in UI", pass: has(files.dashboard, "Industrial Court Kuala Lumpur") && has(files.connectivity, "Industrial Court Kuala Lumpur") },
+  { name: "PERKESO present in UI", pass: has(files.dashboard, "PERKESO") && has(files.connectivity, "PERKESO") }
+];
+
+const passed = checks.filter((check) => check.pass).length;
+const failed = checks.length - passed;
+
+const report = {
+  phase: "10V",
+  module: "Frontend Smoke Testing",
+  timestamp: new Date().toISOString(),
+  status: failed === 0 ? "PASS" : "FAIL",
+  passed,
+  failed,
+  checks
+};
+
+fs.writeFileSync(path.join(REPORTS, "phase10V-frontend-smoke-test-report.json"), JSON.stringify(report, null, 2));
+
+const lines = [
+  "LITIGATION 360 - PHASE 10V FRONTEND SMOKE TEST REPORT",
+  "====================================================",
+  "",
+  "Timestamp: " + report.timestamp,
+  "Status: " + report.status,
+  "Passed: " + report.passed,
+  "Failed: " + report.failed,
+  ""
+];
+
+for (const check of checks) {
+  lines.push((check.pass ? "PASS" : "FAIL") + " - " + check.name);
+}
+
+console.log(lines.join("\n"));
+
+if (report.status !== "PASS") {
+  process.exit(1);
+}

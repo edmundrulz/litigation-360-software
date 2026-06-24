@@ -1,0 +1,68 @@
+LITIGATION 360
+MONETIZATION & PRODUCTIZATION MASTER PLAN
+
+STATUS:
+Safe documentation/control-layer addendum.
+
+PURPOSE:
+Convert Litigation 360 from an internal legal operating system into a marketable subscription software product for Malaysian law firms.
+
+CORE STRATEGY:
+Start cheap to build trust, adoption, awareness, and proof.
+
+Do not overcomplicate the pricing.
+
+Recommended pricing model:
+
+1. Free Trial
+RM0
+14 or 30 days
+
+2. Community
+RM0
+For solo testing / limited use
+
+3. Starter
+RM99/month
+Small firms
+
+4. Professional
+RM199/month
+Growing firms
+
+5. Business
+RM399/month
+Automation-heavy firms
+
+6. Enterprise
+RM999+/month
+Large firms
+
+7. Enterprise Plus
+Custom pricing
+Multi-branch / custom deployment
+
+PRIMARY GOAL:
+Make Litigation 360 easy to try, easy to trust, hard to leave.
+
+MARKET POSITIONING:
+Malaysia-focused legal practice operating system.
+
+Not just case management.
+
+Not just document storage.
+
+Not just billing.
+
+Litigation 360 is:
+- Matter system
+- Document system
+- Calendar system
+- Reminder system
+- Court assistant
+- Digital legal assistant
+- Billing helper
+- Workflow conveyor belt
+- Law firm operations cockpit
+
+END.

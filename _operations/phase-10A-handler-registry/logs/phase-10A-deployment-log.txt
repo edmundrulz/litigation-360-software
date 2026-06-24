@@ -1,0 +1,42 @@
+[Thu 18/06/2026 17:27:49.09] ============================================================
+[Thu 18/06/2026 17:27:49.11] LITIGATION 360 - PHASE 10A SAFE DEPLOYMENT V3
+[Thu 18/06/2026 17:27:49.17] ============================================================
+[Thu 18/06/2026 17:27:49.19] Project root: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+[Thu 18/06/2026 17:27:49.22] Backend: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend
+[Thu 18/06/2026 17:27:49.30] Node command: C:\Program Files\nodejs\node.exe
+v24.16.0
+[Thu 18/06/2026 17:27:49.45] Creating folders...
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\automation already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\automation\handlers already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\routes already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\reports already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\docs already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\scripts already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\validation already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\backups already exists.
+[Thu 18/06/2026 17:27:49.78] Folders ready.
+        1 file(s) copied.
+[Thu 18/06/2026 17:27:49.82] Writing eventTypes.js
+[Thu 18/06/2026 17:27:49.86] Writing handler clientCreated.js
+[Thu 18/06/2026 17:28:35.49] ============================================================
+[Thu 18/06/2026 17:28:35.51] LITIGATION 360 - PHASE 10A SAFE DEPLOYMENT V3
+[Thu 18/06/2026 17:28:35.53] ============================================================
+[Thu 18/06/2026 17:28:35.55] Project root: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+[Thu 18/06/2026 17:28:35.58] Backend: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend
+[Thu 18/06/2026 17:28:35.66] Node command: C:\Program Files\nodejs\node.exe
+v24.16.0
+[Thu 18/06/2026 17:28:35.79] Creating folders...
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\automation already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\automation\handlers already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\routes already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\reports already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\docs already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\scripts already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\validation already exists.
+A subdirectory or file C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry\backups already exists.
+[Thu 18/06/2026 17:28:36.04] Folders ready.
+        1 file(s) copied.
+[Thu 18/06/2026 17:28:36.09] Writing eventTypes.js
+[Thu 18/06/2026 17:28:36.12] Writing handler clientCreated.js

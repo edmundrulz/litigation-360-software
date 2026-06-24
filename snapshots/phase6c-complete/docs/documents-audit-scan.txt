@@ -1,0 +1,5 @@
+5:const auditLog = require('../utils/auditLogger');
+32:    auditLog({
+34:      action: 'CREATE_DOCUMENT',
+57:    auditLog({
+59:      action: 'DELETE_DOCUMENT',

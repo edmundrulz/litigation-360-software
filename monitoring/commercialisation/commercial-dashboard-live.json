@@ -1,0 +1,14 @@
+{
+  "phase": "10ZZG.6",
+  "name": "Commercial Monitoring Dashboard API",
+  "status": "DEPLOYED",
+  "port": 5061,
+  "dashboard_endpoint": "/test/admin/owner/dashboard",
+  "clients_endpoint": "/test/admin/owner/clients",
+  "trials_endpoint": "/test/admin/owner/trials",
+  "feature_overrides_endpoint": "/test/admin/owner/feature-overrides",
+  "audit_summary_endpoint": "/test/admin/owner/audit-summary",
+  "commercial_health_endpoint": "/test/admin/owner/commercial-health",
+  "ground_zero_status": "FULL_ACCESS_UNLIMITED",
+  "live_tests": "PENDING"
+}

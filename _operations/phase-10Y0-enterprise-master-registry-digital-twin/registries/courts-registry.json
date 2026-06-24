@@ -1,0 +1,39 @@
+{
+  "registry": "court-registry",
+  "generatedAt": "2026-06-19T07:51:05.168Z",
+  "courts": [
+    {
+      "name": "Federal Court",
+      "type": "COURT",
+      "monitored": true
+    },
+    {
+      "name": "Court of Appeal",
+      "type": "COURT",
+      "monitored": true
+    },
+    {
+      "name": "High Court",
+      "type": "COURT",
+      "monitored": true
+    },
+    {
+      "name": "Sessions Court",
+      "type": "COURT",
+      "monitored": true
+    },
+    {
+      "name": "Magistrates Court",
+      "type": "COURT",
+      "monitored": true
+    },
+    {
+      "name": "Industrial Court Kuala Lumpur",
+      "type": "INDUSTRIAL_COURT",
+      "monitored": true
+    }
+  ],
+  "totals": {
+    "courts": 6
+  }
+}

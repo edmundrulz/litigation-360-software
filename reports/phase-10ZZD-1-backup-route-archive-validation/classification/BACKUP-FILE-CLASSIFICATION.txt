@@ -1,0 +1,13 @@
+Phase 10ZZD.1 Backup File Classification
+Generated: 06/21/2026 10:02:21
+
+auth_POSTGRES_BACKUP_DO_NOT_DELETE.js	REVIEW	Filename contains DO_NOT_DELETE
+backupRecoveryRoutes.js	ARCHIVE CANDIDATE	No dependency or route registration found
+cases.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found
+clients.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found
+dashboard.backup-before-8-5A.js	ARCHIVE CANDIDATE	No dependency or route registration found
+deadlines.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found
+debug.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found
+documents.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found
+errors.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found
+staff.js.doctor-backup	ARCHIVE CANDIDATE	No dependency or route registration found

@@ -1,0 +1,3 @@
+﻿"PatternName","Line","Match","LineText"
+"required raw star JSX","1345","{required && *}","      {required && *}"
+"generic JSX && raw star","1345","{required && *}","      {required && *}"

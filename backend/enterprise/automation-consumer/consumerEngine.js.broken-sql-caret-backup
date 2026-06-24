@@ -1,0 +1,31 @@
+function createAutomationConsumerEngine(db, handlers) { 
+  if (!db) throw new Error("ConsumerEngine requires database instance"); 
+  const eventHandlers = handlers || {}; 
+ 
+  function processNext() { 
+    const event = db.prepare("SELECT * FROM automation_events WHERE status = 'PENDING' ORDER BY id ASC LIMIT 1").get(); 
+    if (!event) return { status: "NO_EVENTS" }; 
+    const handler = eventHandlers[event.event_type]; 
+    if (!handler) { 
+      db.prepare("UPDATE automation_events SET status='FAILED', failure_reason=?, updated_at=CURRENT_TIMESTAMP WHERE event_id=?").run("No handler registered", event.event_id); 
+      db.prepare("INSERT INTO automation_event_history ^(event_id, old_status, new_status, action, message, created_by^) VALUES ^(?, 'PENDING', 'FAILED', 'NO_HANDLER', 'No handler registered', 'CONSUMER_ENGINE'^)").run(event.event_id); 
+      return { status: "FAILED", reason: "NO_HANDLER", event_id: event.event_id }; 
+    } 
+    try { 
+      db.prepare("UPDATE automation_events SET status='PROCESSING', updated_at=CURRENT_TIMESTAMP WHERE event_id=?").run(event.event_id); 
+      const payload = JSON.parse(event.payload_json || "{}"); 
+      const result = handler(event, payload); 
+      db.prepare("UPDATE automation_events SET status='COMPLETED', processed_at=CURRENT_TIMESTAMP, updated_at=CURRENT_TIMESTAMP WHERE event_id=?").run(event.event_id); 
+      db.prepare("INSERT INTO automation_event_history ^(event_id, old_status, new_status, action, message, created_by^) VALUES ^(?, 'PROCESSING', 'COMPLETED', 'CONSUME', 'Event consumed successfully', 'CONSUMER_ENGINE'^)").run(event.event_id); 
+      return { status: "COMPLETED", event_id: event.event_id, result: result }; 
+    } catch (err) { 
+      db.prepare("UPDATE automation_events SET status='FAILED', failure_reason=?, updated_at=CURRENT_TIMESTAMP WHERE event_id=?").run(err.message, event.event_id); 
+      db.prepare("INSERT INTO automation_event_history ^(event_id, old_status, new_status, action, message, created_by^) VALUES ^(?, 'PROCESSING', 'FAILED', 'CONSUME_FAILED', ?, 'CONSUMER_ENGINE'^)").run(event.event_id, err.message); 
+      return { status: "FAILED", event_id: event.event_id, reason: err.message }; 
+    } 
+  } 
+ 
+  return { processNext }; 
+} 
+ 
+module.exports = { createAutomationConsumerEngine }; 

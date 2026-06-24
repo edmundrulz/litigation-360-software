@@ -1,0 +1,203 @@
+﻿import React, { useState } from "react";
+
+const API_URL = "http://localhost:5000/api";
+
+const steps = [
+  "Client Details",
+  "Case / Matter Details",
+  "Deadline Details",
+  "Document Details",
+  "Review",
+  "Submit"
+];
+
+export default function MatterIntakeWizard() {
+  const [step, setStep] = useState(1);
+  const [draftGuid, setDraftGuid] = useState(null);
+  const [message, setMessage] = useState("");
+
+  const [clientData, setClientData] = useState({
+    full_name: "",
+    email: "",
+    phone: "",
+    address: ""
+  });
+
+  const [caseData, setCaseData] = useState({
+    case_number: "",
+    title: "",
+    status: "Active",
+    description: "",
+    opened_date: ""
+  });
+
+  const [deadlineData, setDeadlineData] = useState({
+    title: "",
+    deadline_date: "",
+    reminder_days: 7,
+    notes: ""
+  });
+
+  const [documentData, setDocumentData] = useState({
+    file_name: "",
+    file_path: "",
+    document_type: "General"
+  });
+
+  async function ensureDraft() {
+    if (draftGuid) return draftGuid;
+
+    const res = await fetch(`${API_URL}/intake/draft`, {
+      method: "POST"
+    });
+
+    const draft = await res.json();
+    setDraftGuid(draft.draft_guid);
+    return draft.draft_guid;
+  }
+
+  function currentPayload() {
+    if (step === 1) return clientData;
+    if (step === 2) return caseData;
+    if (step === 3) return deadlineData;
+    if (step === 4) return documentData;
+    if (step === 5) return { reviewed: true };
+    return {};
+  }
+
+  async function saveAndNext() {
+    const guid = await ensureDraft();
+
+    const res = await fetch(`${API_URL}/intake/draft/${guid}/step/${step}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(currentPayload())
+    });
+
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({}));
+      setMessage(error.error || "Failed to save current step");
+      return;
+    }
+
+    setMessage("Step saved");
+    setStep(step + 1);
+  }
+
+  async function submitWizard() {
+    const guid = await ensureDraft();
+
+    const res = await fetch(`${API_URL}/intake/draft/${guid}/submit`, {
+      method: "POST"
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMessage(data.error || "Submit failed");
+      return;
+    }
+
+    setMessage("Submitted successfully. Client, case, deadline and document created.");
+  }
+
+  return (
+    <div style={{ padding: 24, maxWidth: 1100, margin: "0 auto" }}>
+      <h1>Matter Intake Conveyor</h1>
+
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}>
+        {steps.map((label, index) => (
+          <div
+            key={label}
+            style={{
+              padding: "10px 14px",
+              borderRadius: 8,
+              border: "1px solid #ccc",
+              background: index + 1 === step ? "#eef" : index + 1 < step ? "#efe" : "#f7f7f7",
+              fontWeight: index + 1 === step ? "bold" : "normal"
+            }}
+          >
+            {index + 1 < step ? "✓ " : index + 1 === step ? "▶ " : ""}
+            {index + 1}. {label}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ border: "1px solid #ddd", borderRadius: 10, padding: 24, minHeight: 300 }}>
+        {step === 1 && (
+          <section>
+            <h2>Step 1: Client Details</h2>
+            <input placeholder="Full Name" value={clientData.full_name} onChange={e => setClientData({ ...clientData, full_name: e.target.value })} />
+            <input placeholder="Email" value={clientData.email} onChange={e => setClientData({ ...clientData, email: e.target.value })} />
+            <input placeholder="Phone" value={clientData.phone} onChange={e => setClientData({ ...clientData, phone: e.target.value })} />
+            <input placeholder="Address" value={clientData.address} onChange={e => setClientData({ ...clientData, address: e.target.value })} />
+          </section>
+        )}
+
+        {step === 2 && (
+          <section>
+            <h2>Step 2: Case / Matter Details</h2>
+            <input placeholder="Case Number" value={caseData.case_number} onChange={e => setCaseData({ ...caseData, case_number: e.target.value })} />
+            <input placeholder="Title" value={caseData.title} onChange={e => setCaseData({ ...caseData, title: e.target.value })} />
+            <input placeholder="Status" value={caseData.status} onChange={e => setCaseData({ ...caseData, status: e.target.value })} />
+            <input placeholder="Opened Date" value={caseData.opened_date} onChange={e => setCaseData({ ...caseData, opened_date: e.target.value })} />
+            <textarea placeholder="Description" value={caseData.description} onChange={e => setCaseData({ ...caseData, description: e.target.value })} />
+          </section>
+        )}
+
+        {step === 3 && (
+          <section>
+            <h2>Step 3: Deadline Details</h2>
+            <input placeholder="Deadline Title" value={deadlineData.title} onChange={e => setDeadlineData({ ...deadlineData, title: e.target.value })} />
+            <input placeholder="Deadline Date YYYY-MM-DD" value={deadlineData.deadline_date} onChange={e => setDeadlineData({ ...deadlineData, deadline_date: e.target.value })} />
+            <input placeholder="Reminder Days" value={deadlineData.reminder_days} onChange={e => setDeadlineData({ ...deadlineData, reminder_days: e.target.value })} />
+            <textarea placeholder="Notes" value={deadlineData.notes} onChange={e => setDeadlineData({ ...deadlineData, notes: e.target.value })} />
+          </section>
+        )}
+
+        {step === 4 && (
+          <section>
+            <h2>Step 4: Document Details</h2>
+            <input placeholder="File Name" value={documentData.file_name} onChange={e => setDocumentData({ ...documentData, file_name: e.target.value })} />
+            <input placeholder="File Path" value={documentData.file_path} onChange={e => setDocumentData({ ...documentData, file_path: e.target.value })} />
+            <input placeholder="Document Type" value={documentData.document_type} onChange={e => setDocumentData({ ...documentData, document_type: e.target.value })} />
+          </section>
+        )}
+
+        {step === 5 && (
+          <section>
+            <h2>Step 5: Review</h2>
+            <pre>{JSON.stringify({ clientData, caseData, deadlineData, documentData }, null, 2)}</pre>
+          </section>
+        )}
+
+        {step === 6 && (
+          <section>
+            <h2>Step 6: Submit</h2>
+            <p>Click submit to create the client, case/matter, deadline and document.</p>
+          </section>
+        )}
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24 }}>
+        <button disabled={step === 1} onClick={() => setStep(step - 1)}>
+          ← Previous Step
+        </button>
+
+        {step < 6 && (
+          <button onClick={saveAndNext}>
+            Save & Next Step →
+          </button>
+        )}
+
+        {step === 6 && (
+          <button onClick={submitWizard}>
+            Submit Intake
+          </button>
+        )}
+      </div>
+
+      <p style={{ marginTop: 16 }}>{message}</p>
+    </div>
+  );
+}

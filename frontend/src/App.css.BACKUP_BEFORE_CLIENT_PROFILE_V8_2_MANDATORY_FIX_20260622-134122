@@ -1,0 +1,2717 @@
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6fa;
+  color: #1f2937;
+}
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 255px;
+  background: #111827;
+  color: white;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  text-align: left;
+  background: #1f2937;
+  color: #e5e7eb;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.sidebar button.active {
+  background: white;
+  color: #111827;
+}
+
+.main {
+  flex: 1;
+  padding: 28px;
+  overflow-x: hidden;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  background: white;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.15;
+}
+
+.topbar p {
+  margin: 8px 0 0;
+  color: #64748b;
+}
+
+.pill {
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.good {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.bad {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.hero, .card, .metric, .jsonbox {
+  background: white;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.hero h2 {
+  margin: 0 0 10px;
+  font-size: 30px;
+}
+
+.hero p, .card p {
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.actions button, .summary button {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 0;
+  background: #111827;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.grid, .summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.card strong {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #047857;
+}
+
+.badcard {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.badcard strong {
+  color: #be123c;
+}
+
+.metric span {
+  display: block;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.metric strong {
+  font-size: 24px;
+}
+
+.jsonbox {
+  margin-top: 24px;
+}
+
+.jsonbox pre {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 18px;
+  border-radius: 12px;
+  overflow: auto;
+  max-height: 520px;
+}
+
+@media (max-width: 850px) {
+  .shell { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .topbar { flex-direction: column; align-items: flex-start; }
+}
+
+/* Phase 10Y Stabilisation Enhancements */
+.card {
+  min-height: 165px;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.actions button:hover,
+.summary button:hover,
+.sidebar button:hover {
+  opacity: 0.9;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+  }
+}
+
+/* Phase 10ZE Final Safe Workspace Wiring */
+.clickable-card {
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.clickable-card:hover {
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+/* Phase 10ZF Navigation + LEOS Module Menu */
+.clickable-card {
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.clickable-card:hover {
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.planned-card {
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.module-toolbar {
+  background: white;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.module-toolbar button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ============================================================
+   Table layout fix - prevents Actions column from being cropped
+   ============================================================ */
+
+.main {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.main table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  box-sizing: border-box;
+}
+
+.main th,
+.main td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.main th:last-child,
+.main td:last-child {
+  min-width: 110px;
+  width: 110px;
+  text-align: center;
+  white-space: nowrap;
+  padding-right: 40px;
+}
+
+.main td:last-child button {
+  display: block;
+  min-width: 72px;
+  margin: 4px auto;
+}
+
+/* L360 TABLE WIDTH FIX START */
+/* Fix right-side cropping in module tables and make the app use the full browser width. */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: none !important;
+  min-width: 0;
+}
+
+body {
+  margin: 0;
+  overflow-x: auto;
+}
+
+#root {
+  box-sizing: border-box;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left;
+}
+
+main,
+section,
+.hero,
+.summary,
+.grid,
+.module-toolbar {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none !important;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+thead,
+tbody,
+tr {
+  width: 100%;
+}
+
+th,
+td {
+  box-sizing: border-box;
+  padding: 8px 10px;
+  vertical-align: top;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+th:last-child,
+td:last-child {
+  min-width: 90px;
+  padding-right: 16px;
+  white-space: nowrap;
+}
+
+td button,
+th button {
+  max-width: 100%;
+}
+
+/* Make action buttons stack neatly instead of getting chopped on the right. */
+td:last-child button {
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+/* L360 TABLE WIDTH FIX END */
+
+/* L360 ENHANCED CLIENT TABLE START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 ENHANCED CLIENT TABLE END */
+
+/* L360 CLIENT SAVE UI FIX START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-count-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.client-count-card span {
+  font-size: 0.95rem;
+  color: #566275;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-weight: 700;
+}
+
+.client-status-success {
+  border-color: #8fd19e;
+  background: #ecf9ef;
+  color: #145c25;
+}
+
+.client-status-warning {
+  border-color: #ffd27d;
+  background: #fff8e8;
+  color: #7a5200;
+}
+
+.client-status-error {
+  border-color: #f1a2a2;
+  background: #fff0f0;
+  color: #8a1111;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-count-card {
+    text-align: left;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 CLIENT SAVE UI FIX END */
+
+/* L360 CLIENT REGISTRATION V2 START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module h3 {
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-count-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.client-count-card span {
+  font-size: 0.95rem;
+  color: #566275;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-weight: 700;
+}
+
+.client-status-success {
+  border-color: #8fd19e;
+  background: #ecf9ef;
+  color: #145c25;
+}
+
+.client-status-warning {
+  border-color: #ffd27d;
+  background: #fff8e8;
+  color: #7a5200;
+}
+
+.client-status-error {
+  border-color: #f1a2a2;
+  background: #fff0f0;
+  color: #8a1111;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-document-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px dashed #9aa8ba;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-count-card {
+    text-align: left;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 CLIENT REGISTRATION V2 END */
+
+/* L360 CLIENT CONTACT FORM V3 START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module h3 {
+  margin: 22px 0 14px;
+  padding: 10px 12px;
+  border-left: 5px solid #0b3b6f;
+  background: #f5f8fc;
+  border-radius: 8px;
+  font-size: 1.25rem;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.client-count-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.client-count-card span {
+  font-size: 0.95rem;
+  color: #566275;
+}
+
+.client-status,
+.client-validation-box {
+  padding: 12px 14px;
+  border: 1px solid #d7dce5;
+  border-radius: 10px;
+  background: #f7f9fc;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.client-status-success {
+  border-color: #8fd19e;
+  background: #ecf9ef;
+  color: #145c25;
+}
+
+.client-status-warning {
+  border-color: #ffd27d;
+  background: #fff8e8;
+  color: #7a5200;
+}
+
+.client-status-error,
+.client-validation-box {
+  border-color: #f1a2a2;
+  background: #fff0f0;
+  color: #8a1111;
+}
+
+.client-validation-box ul {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 16px 18px;
+  align-items: start;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.client-checkbox-label {
+  justify-content: center;
+  min-height: 78px;
+}
+
+.client-checkbox-label input {
+  width: auto !important;
+  margin-right: 8px;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-form-grid textarea,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 11px;
+  border: 1px solid #cbd3df;
+  border-radius: 9px;
+  font: inherit;
+  min-height: 44px;
+}
+
+.client-form-grid textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+  line-height: 1.35;
+}
+
+.client-span-2 {
+  grid-column: span 2;
+}
+
+.field-required {
+  color: #b00020;
+  font-weight: 900;
+}
+
+.field-number {
+  color: #0b3b6f;
+  font-weight: 900;
+}
+
+.field-warning {
+  color: #a15c00 !important;
+  font-weight: 700 !important;
+}
+
+.client-document-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px dashed #9aa8ba;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.client-form-actions button {
+  min-width: 140px;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 280px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1250px) {
+  .client-form-grid {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+
+  .client-span-2 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-count-card {
+    text-align: left;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .client-span-2 {
+    grid-column: span 1;
+  }
+}
+
+/* L360 CLIENT CONTACT FORM V3 END */
+
+/* L360 CLIENT FORM LAYOUT STABILIZER START */
+
+/* Page/container: allow the workspace to breathe but keep the form controlled. */
+html,
+body,
+#root {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+body {
+  overflow-x: auto;
+}
+
+#root {
+  box-sizing: border-box;
+}
+
+/* Main client module sizing */
+.client-module {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+
+.client-module * {
+  box-sizing: border-box !important;
+}
+
+/* Header sizing */
+.client-module h2 {
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 6px !important;
+}
+
+.client-module p {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+
+/* Section headers: smaller, cleaner, not oversized blocks */
+.client-module h3 {
+  display: block !important;
+  width: 100% !important;
+  margin: 20px 0 12px !important;
+  padding: 8px 10px !important;
+  border-left: 4px solid #0b3b6f !important;
+  background: #f5f8fc !important;
+  border-radius: 7px !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+}
+
+/* Form card */
+.client-form {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  padding: 16px !important;
+  border-radius: 12px !important;
+}
+
+/* CRITICAL FIX:
+   4 columns were too cramped and caused fields to spill outside.
+   Use a stable 2-column layout for professional forms. */
+.client-form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px 18px !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+/* Every grid item must be allowed to shrink inside its column. */
+.client-form-grid > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/* Longer notes/textareas should take the full row. */
+.client-span-2 {
+  grid-column: 1 / -1 !important;
+}
+
+/* Labels: consistent small professional size */
+.client-form-grid label,
+.client-search-row label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  color: #162033 !important;
+}
+
+/* Inputs/selects/textareas: same height, same font, no overflow */
+.client-form-grid input,
+.client-form-grid select,
+.client-form-grid textarea,
+.client-search-row input {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #cbd3df !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  font-weight: 600 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.client-form-grid textarea {
+  min-height: 76px !important;
+  resize: vertical !important;
+}
+
+/* Helper notes: smaller and not visually overpowering */
+.client-form-grid small {
+  display: block !important;
+  max-width: 100% !important;
+  font-size: 11.5px !important;
+  line-height: 1.3 !important;
+  font-weight: 500 !important;
+  color: #5f6b7a !important;
+}
+
+/* Required and number markers */
+.field-required,
+.field-number {
+  display: inline-block !important;
+  margin-left: 4px !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+}
+
+.field-required {
+  color: #b00020 !important;
+}
+
+.field-number {
+  color: #0b3b6f !important;
+}
+
+/* Checkbox rows: fix the checkbox floating far away and align it properly. */
+.client-form-grid label.client-checkbox-label,
+.client-checkbox-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #e2e7ef !important;
+  border-radius: 8px !important;
+  background: #fbfcfe !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+.client-checkbox-label input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Validation/status boxes */
+.client-status,
+.client-validation-box {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+
+/* Buttons: not tiny, but not oversized */
+.client-form-actions {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 16px !important;
+  flex-wrap: wrap !important;
+}
+
+.client-form-actions button {
+  min-width: 120px !important;
+  min-height: 34px !important;
+  padding: 7px 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* Client search: clean single full-width row */
+.client-search-row {
+  margin: 16px 0 !important;
+}
+
+.client-search-row input {
+  min-height: 40px !important;
+}
+
+/* Table stays horizontally scrollable instead of crushing columns */
+.client-table-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+.client-table {
+  width: max-content !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-size: 13px !important;
+}
+
+.client-table td {
+  font-size: 12.5px !important;
+  max-width: 260px !important;
+}
+
+/* Responsive: 1 column on smaller screens */
+@media (max-width: 900px) {
+  .client-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-span-2 {
+    grid-column: 1 / -1 !important;
+  }
+
+  .client-module-header {
+    flex-direction: column !important;
+  }
+
+  .client-count-card {
+    text-align: left !important;
+  }
+}
+
+/* L360 CLIENT FORM LAYOUT STABILIZER END */
+
+/* L360 CLIENT CONTACT FORM V4 START */
+
+.client-v4,
+.client-v4 * {
+  box-sizing: border-box !important;
+}
+
+.client-v4 {
+  width: 100% !important;
+  max-width: none !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  color: #142033 !important;
+}
+
+.client-v4 h2 {
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 4px !important;
+}
+
+.client-v4 p {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+}
+
+.client-form-v4 {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  padding: 18px !important;
+  border: 1px solid #d7dce5 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+}
+
+.client-form-v4 .form-section {
+  margin-bottom: 20px !important;
+}
+
+.client-form-v4 h3 {
+  margin: 0 0 14px !important;
+  padding: 9px 12px !important;
+  border-left: 4px solid #0b3b6f !important;
+  background: #f4f7fb !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #142033 !important;
+}
+
+.client-form-v4 .smart-grid {
+  display: grid !important;
+  gap: 14px 18px !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+.client-form-v4 .smart-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.client-form-v4 .smart-grid > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.client-form-v4 .full {
+  grid-column: 1 / -1 !important;
+}
+
+.client-form-v4 label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #142033 !important;
+}
+
+.client-form-v4 input,
+.client-form-v4 select,
+.client-form-v4 textarea {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #cbd3df !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  color: #142033 !important;
+}
+
+.client-form-v4 textarea {
+  min-height: 82px !important;
+  resize: vertical !important;
+}
+
+.client-form-v4 small {
+  display: block !important;
+  font-size: 11.25px !important;
+  line-height: 1.3 !important;
+  font-weight: 500 !important;
+  color: #586579 !important;
+}
+
+.client-form-v4 .inline-fields {
+  display: grid !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.client-form-v4 .code-and-number {
+  grid-template-columns: minmax(150px, 0.36fr) minmax(180px, 0.64fr) !important;
+}
+
+.client-form-v4 .two-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.client-form-v4 .checkbox-tile,
+.client-form-v4 .status-checks {
+  border: 1px solid #e1e7f0 !important;
+  border-radius: 10px !important;
+  padding: 10px 12px !important;
+  background: #fbfcfe !important;
+}
+
+.client-form-v4 .checkbox-tile {
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 42px !important;
+}
+
+.client-form-v4 .checkbox-tile input[type="checkbox"],
+.client-form-v4 .status-checks input[type="checkbox"] {
+  width: 17px !important;
+  height: 17px !important;
+  min-height: 17px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+
+.client-form-v4 .status-checks {
+  display: grid !important;
+  grid-template-columns: 150px repeat(4, minmax(120px, 1fr)) !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.client-form-v4 .status-checks span {
+  font-weight: 800 !important;
+}
+
+.client-form-v4 .status-checks label {
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.client-form-v4 .action-link,
+.client-form-v4 .muted-box {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: 800 !important;
+}
+
+.client-form-v4 .action-link {
+  border: 1px solid #0b6bcb !important;
+  background: #eef6ff !important;
+}
+
+.client-form-v4 .muted-box {
+  border: 1px solid #d7dce5 !important;
+  background: #f7f9fc !important;
+  color: #6b7280 !important;
+}
+
+.client-form-v4 .important-notes textarea {
+  min-height: 110px !important;
+  border-color: #d3a12f !important;
+  background: #fffaf0 !important;
+}
+
+.client-form-v4 .history-box {
+  padding: 10px 12px !important;
+  border: 1px dashed #9aa8ba !important;
+  border-radius: 10px !important;
+  background: #f7f9fc !important;
+}
+
+.client-form-v4 .history-box p {
+  margin: 6px 0 0 !important;
+}
+
+.client-form-actions {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 18px !important;
+  flex-wrap: wrap !important;
+}
+
+.client-form-actions button {
+  min-width: 132px !important;
+  min-height: 36px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+.field-required {
+  color: #b00020 !important;
+  font-weight: 900 !important;
+}
+
+.field-number {
+  color: #0b3b6f !important;
+  font-weight: 900 !important;
+}
+
+.field-warning {
+  color: #a15c00 !important;
+  font-weight: 800 !important;
+}
+
+.client-table-wrap {
+  overflow-x: auto !important;
+}
+
+.client-table {
+  width: max-content !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  font-size: 12.75px !important;
+}
+
+.client-table td {
+  font-size: 12.25px !important;
+  max-width: 280px !important;
+}
+
+@media (max-width: 1000px) {
+  .client-form-v4 .smart-grid.two {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v4 .code-and-number,
+  .client-form-v4 .two-even,
+  .client-form-v4 .status-checks {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v4 .full {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* L360 CLIENT CONTACT FORM V4 END */
+
+/* L360 CLIENT PROFILE V5 START */
+
+.client-v5,
+.client-v5 * {
+  box-sizing: border-box !important;
+}
+
+.client-v5 {
+  width: 100% !important;
+  max-width: none !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  color: #142033 !important;
+}
+
+.client-form-v5 {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 18px !important;
+  border: 1px solid #d7dce5 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+}
+
+.client-form-v5 .form-section {
+  margin-bottom: 22px !important;
+}
+
+.client-form-v5 h3 {
+  margin: 0 0 14px !important;
+  padding: 9px 12px !important;
+  border-left: 4px solid #0b3b6f !important;
+  background: #f4f7fb !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #142033 !important;
+}
+
+.client-form-v5 .smart-grid {
+  display: grid !important;
+  gap: 14px 18px !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+.client-form-v5 .smart-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.client-form-v5 .full {
+  grid-column: 1 / -1 !important;
+}
+
+.client-form-v5 label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #142033 !important;
+}
+
+.client-form-v5 input,
+.client-form-v5 select,
+.client-form-v5 textarea {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #cbd3df !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  color: #142033 !important;
+}
+
+.client-form-v5 input[readonly],
+.client-form-v5 input:disabled,
+.client-form-v5 select:disabled {
+  background: #f1f5f9 !important;
+  color: #4b5563 !important;
+}
+
+.client-form-v5 textarea {
+  min-height: 82px !important;
+  resize: vertical !important;
+}
+
+.client-form-v5 small {
+  display: block !important;
+  font-size: 11.25px !important;
+  line-height: 1.3 !important;
+  font-weight: 500 !important;
+  color: #586579 !important;
+}
+
+.client-form-v5 .inline-fields {
+  display: grid !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.client-form-v5 .code-and-number {
+  grid-template-columns: minmax(150px, 0.36fr) minmax(180px, 0.64fr) !important;
+}
+
+.client-form-v5 .two-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.client-form-v5 .checkbox-tile {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 42px !important;
+  border: 1px solid #e1e7f0 !important;
+  border-radius: 10px !important;
+  padding: 10px 12px !important;
+  background: #fbfcfe !important;
+}
+
+.client-form-v5 .checkbox-tile input[type="checkbox"] {
+  width: 17px !important;
+  height: 17px !important;
+  min-height: 17px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+
+.client-form-v5 .action-link,
+.client-form-v5 .muted-box {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: 800 !important;
+}
+
+.client-form-v5 .action-link {
+  border: 1px solid #0b6bcb !important;
+  background: #eef6ff !important;
+}
+
+.client-form-v5 .muted-box {
+  border: 1px solid #d7dce5 !important;
+  background: #f7f9fc !important;
+  color: #6b7280 !important;
+}
+
+.client-form-v5 .important-notes textarea {
+  min-height: 110px !important;
+  border-color: #d3a12f !important;
+  background: #fffaf0 !important;
+}
+
+.field-required {
+  color: #b00020 !important;
+  font-weight: 900 !important;
+}
+
+.field-number {
+  color: #0b3b6f !important;
+  font-weight: 900 !important;
+}
+
+.field-warning {
+  color: #a15c00 !important;
+  font-weight: 800 !important;
+}
+
+.client-table-wrap {
+  overflow-x: auto !important;
+}
+
+.client-table {
+  width: max-content !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  font-size: 12.75px !important;
+}
+
+.client-table td {
+  font-size: 12.25px !important;
+  max-width: 280px !important;
+}
+
+@media (max-width: 1000px) {
+  .client-form-v5 .smart-grid.two,
+  .client-form-v5 .code-and-number,
+  .client-form-v5 .two-even {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v5 .full {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* L360 CLIENT PROFILE V5 END */
+
+/* L360 CLIENT PROFILE V6 START */
+
+.client-v6,
+.client-v6 * {
+  box-sizing: border-box !important;
+}
+
+.client-v6 {
+  width: 100% !important;
+  max-width: none !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  color: #142033 !important;
+}
+
+.client-v6 h2 {
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 4px !important;
+}
+
+.client-v6 p {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+}
+
+.client-form-v6 {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  padding: 18px !important;
+  border: 1px solid #d7dce5 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+}
+
+.client-form-v6 .form-section {
+  margin-bottom: 20px !important;
+}
+
+.client-form-v6 h3 {
+  margin: 0 0 14px !important;
+  padding: 9px 12px !important;
+  border-left: 4px solid #0b3b6f !important;
+  background: #f4f7fb !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #142033 !important;
+}
+
+.client-form-v6 .smart-grid {
+  display: grid !important;
+  gap: 14px 18px !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+.client-form-v6 .smart-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.client-form-v6 .smart-grid > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.client-form-v6 .full {
+  grid-column: 1 / -1 !important;
+}
+
+.client-form-v6 label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #142033 !important;
+}
+
+.client-form-v6 input,
+.client-form-v6 select,
+.client-form-v6 textarea {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #cbd3df !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  color: #142033 !important;
+}
+
+.client-form-v6 textarea {
+  min-height: 82px !important;
+  resize: vertical !important;
+}
+
+.client-form-v6 small {
+  display: block !important;
+  font-size: 11.25px !important;
+  line-height: 1.3 !important;
+  font-weight: 500 !important;
+  color: #586579 !important;
+}
+
+.client-form-v6 .inline-fields {
+  display: grid !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.client-form-v6 .code-and-number {
+  grid-template-columns: minmax(150px, 0.36fr) minmax(180px, 0.64fr) !important;
+}
+
+.client-form-v6 .two-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.client-form-v6 .checkbox-tile {
+  border: 1px solid #e1e7f0 !important;
+  border-radius: 10px !important;
+  padding: 10px 12px !important;
+  background: #fbfcfe !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 42px !important;
+}
+
+.client-form-v6 .checkbox-tile input[type="checkbox"] {
+  width: 17px !important;
+  height: 17px !important;
+  min-height: 17px !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+
+.client-form-v6 .action-link,
+.client-form-v6 .muted-box {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 38px !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: 800 !important;
+}
+
+.client-form-v6 .action-link {
+  border: 1px solid #0b6bcb !important;
+  background: #eef6ff !important;
+}
+
+.client-form-v6 .muted-box {
+  border: 1px solid #d7dce5 !important;
+  background: #f7f9fc !important;
+  color: #6b7280 !important;
+}
+
+.client-form-v6 .important-notes textarea {
+  min-height: 110px !important;
+  border-color: #d3a12f !important;
+  background: #fffaf0 !important;
+}
+
+.client-form-v6 .review-flag-box,
+.client-form-v6 .audit-box {
+  padding: 12px !important;
+  border: 1px solid #ffd27d !important;
+  border-radius: 10px !important;
+  background: #fff8e8 !important;
+}
+
+.client-form-v6 .review-flag-box ul {
+  margin: 8px 0 0 !important;
+  padding-left: 20px !important;
+}
+
+.client-form-v6 .audit-box p {
+  margin: 6px 0 0 !important;
+}
+
+.client-form-actions {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 18px !important;
+  flex-wrap: wrap !important;
+}
+
+.client-form-actions button {
+  min-width: 132px !important;
+  min-height: 36px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+.field-required {
+  color: #b00020 !important;
+  font-weight: 900 !important;
+}
+
+.field-warning {
+  color: #a15c00 !important;
+  font-weight: 800 !important;
+}
+
+.client-table-wrap {
+  overflow-x: auto !important;
+}
+
+.client-table {
+  width: max-content !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  font-size: 12.75px !important;
+}
+
+.client-table td {
+  font-size: 12.25px !important;
+  max-width: 280px !important;
+}
+
+@media (max-width: 1000px) {
+  .client-form-v6 .smart-grid.two {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v6 .code-and-number,
+  .client-form-v6 .two-even {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v6 .full {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* L360 CLIENT PROFILE V6 END */
+
+/* L360 CLIENT UI V7 ALIGNMENT PATCH START */
+
+/* Toolbar: Previous left, Home centered, Next right, all on the same horizontal line. */
+.module-toolbar-fixed {
+  display: grid !important;
+  grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr) !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 54px !important;
+  padding: 12px 16px !important;
+  margin: 0 0 18px !important;
+  position: relative !important;
+  z-index: 20 !important;
+  clear: both !important;
+}
+
+.module-toolbar-slot {
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+.module-toolbar-left {
+  justify-content: flex-start !important;
+}
+
+.module-toolbar-center {
+  justify-content: center !important;
+  gap: 12px !important;
+  text-align: center !important;
+}
+
+.module-toolbar-right {
+  justify-content: flex-end !important;
+}
+
+.module-toolbar-fixed button {
+  white-space: nowrap !important;
+}
+
+.module-toolbar-fixed strong {
+  white-space: nowrap !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+.module-content-stack {
+  position: relative !important;
+  z-index: 1 !important;
+  clear: both !important;
+}
+
+/* Client module stacking: never overlap toolbar. */
+.client-module,
+.client-v6 {
+  position: relative !important;
+  z-index: 1 !important;
+  clear: both !important;
+  margin-top: 0 !important;
+}
+
+/* Professional form alignment. */
+.client-form-v6 .smart-grid.two,
+.client-form-v7 .smart-grid.two {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px 18px !important;
+  align-items: start !important;
+}
+
+.client-form-v6 .smart-grid > *,
+.client-form-v7 .smart-grid > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.client-form-v6 label,
+.client-form-v7 label {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  align-self: start !important;
+}
+
+.client-form-v6 input,
+.client-form-v6 select,
+.client-form-v6 textarea,
+.client-form-v7 input,
+.client-form-v7 select,
+.client-form-v7 textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Keep paired fields clean and one-line. */
+.client-form-v6 .inline-fields,
+.client-form-v7 .inline-fields {
+  display: grid !important;
+  align-items: start !important;
+  width: 100% !important;
+  gap: 10px !important;
+}
+
+.client-form-v6 .code-and-number,
+.client-form-v7 .code-and-number {
+  grid-template-columns: minmax(150px, 0.34fr) minmax(220px, 0.66fr) !important;
+}
+
+.client-form-v6 .two-even,
+.client-form-v7 .two-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Remove visual confusion from old numeric marker layout if any old marker remains. */
+.field-number {
+  display: none !important;
+}
+
+/* Keep NRIC / Passport label clean and readable. */
+.client-form-v6 label,
+.client-form-v7 label {
+  overflow-wrap: normal !important;
+}
+
+.client-form-v6 small,
+.client-form-v7 small {
+  max-width: 100% !important;
+}
+
+/* The email field now belongs with contact information and should span the form width. */
+.client-form-v6 label.full,
+.client-form-v7 label.full {
+  grid-column: 1 / -1 !important;
+}
+
+/* Datalist relationship field should behave like a standard aligned input. */
+#client-relationship-options {
+  width: 100% !important;
+}
+
+/* Mobile/tablet fallback. */
+@media (max-width: 1000px) {
+  .module-toolbar-fixed {
+    grid-template-columns: 1fr !important;
+  }
+
+  .module-toolbar-left,
+  .module-toolbar-center,
+  .module-toolbar-right {
+    justify-content: center !important;
+  }
+
+  .client-form-v6 .smart-grid.two,
+  .client-form-v7 .smart-grid.two,
+  .client-form-v6 .code-and-number,
+  .client-form-v7 .code-and-number,
+  .client-form-v6 .two-even,
+  .client-form-v7 .two-even {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* L360 CLIENT UI V7 ALIGNMENT PATCH END */
+
+/* L360 V7 NAV CLIENT ALIGNMENT START */
+
+/* --- Navigation toolbar: Previous / Home / Next on same horizontal line --- */
+.module-toolbar.module-toolbar-fixed,
+.module-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(150px, 1fr) auto minmax(220px, 1fr) !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 54px !important;
+  padding: 12px 14px !important;
+  margin: 0 0 16px !important;
+  position: relative !important;
+  z-index: 5 !important;
+  overflow: visible !important;
+}
+
+.module-toolbar .toolbar-left {
+  justify-self: start !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.module-toolbar .toolbar-center {
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+.module-toolbar .toolbar-right {
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+.module-toolbar button {
+  white-space: nowrap !important;
+  min-height: 34px !important;
+  padding: 8px 14px !important;
+}
+
+.module-toolbar .toolbar-home-button {
+  font-weight: 800 !important;
+}
+
+/* Prevent the client module from visually overlapping the toolbar */
+.client-module,
+.client-v6 {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: 0 !important;
+  clear: both !important;
+}
+
+/* --- Professional form alignment --- */
+.client-form-v6,
+.client-form-v6 * {
+  box-sizing: border-box !important;
+}
+
+.client-form-v6 {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.client-form-v6 .smart-grid.two {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+  gap: 16px 20px !important;
+  align-items: start !important;
+}
+
+.client-form-v6 .smart-grid.two > label {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.client-form-v6 label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  font-size: 12.5px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+}
+
+.client-form-v6 input,
+.client-form-v6 select,
+.client-form-v6 textarea {
+  width: 100% !important;
+  min-height: 38px !important;
+  max-width: 100% !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+
+.client-form-v6 .full {
+  grid-column: 1 / -1 !important;
+}
+
+.client-form-v6 .inline-fields {
+  display: grid !important;
+  width: 100% !important;
+  gap: 10px !important;
+}
+
+.client-form-v6 .code-and-number {
+  grid-template-columns: 170px minmax(0, 1fr) !important;
+}
+
+.client-form-v6 .two-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Keep single-line labels visible */
+.client-form-v6 label,
+.client-form-v6 h3 {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.client-form-v6 small {
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  font-weight: 500 !important;
+}
+
+/* Relationship field and other datalist fields should look like normal inputs */
+.client-form-v6 input[list] {
+  background: #ffffff !important;
+}
+
+/* Table remains scrollable instead of crushing columns */
+.client-table-wrap {
+  overflow-x: auto !important;
+  max-width: 100% !important;
+}
+
+.client-table {
+  width: max-content !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+}
+
+/* Responsive fallback */
+@media (max-width: 1000px) {
+  .module-toolbar.module-toolbar-fixed,
+  .module-toolbar {
+    grid-template-columns: 1fr !important;
+    justify-items: stretch !important;
+  }
+
+  .module-toolbar .toolbar-left,
+  .module-toolbar .toolbar-center,
+  .module-toolbar .toolbar-right {
+    justify-self: stretch !important;
+    justify-content: center !important;
+  }
+
+  .client-form-v6 .smart-grid.two {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v6 .code-and-number,
+  .client-form-v6 .two-even {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* L360 V7 NAV CLIENT ALIGNMENT END */
+
+/* L360 CLIENT PROFILE V8_1 ALIGNMENT START */
+
+.client-v6,
+.client-v6 *,
+.client-form-v6,
+.client-form-v6 * {
+  box-sizing: border-box !important;
+}
+
+.client-form-v6 {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Consistent two-column professional layout */
+.client-form-v6 .smart-grid.two {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+  gap: 16px 20px !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+.client-form-v6 .smart-grid.two > label,
+.client-form-v6 .smart-grid.two > div {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+/* Force important entry fields into single-line appearance */
+.client-form-v6 input,
+.client-form-v6 select {
+  min-height: 38px !important;
+  height: 38px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.client-form-v6 textarea {
+  min-height: 82px !important;
+}
+
+/* Given Name and Surname: same row, same sizing */
+.client-form-v6 .name-lock-grid label:nth-of-type(3),
+.client-form-v6 .name-lock-grid label:nth-of-type(4) {
+  align-self: start !important;
+}
+
+.client-form-v6 .single-line-input {
+  display: block !important;
+  width: 100% !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  line-height: 1.25 !important;
+}
+
+/* Inline phone/address pairs */
+.client-form-v6 .inline-fields {
+  display: grid !important;
+  gap: 10px !important;
+  width: 100% !important;
+  align-items: center !important;
+}
+
+.client-form-v6 .code-and-number {
+  grid-template-columns: 170px minmax(0, 1fr) !important;
+}
+
+.client-form-v6 .two-even {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Clean labels: no awkward wrapping */
+.client-form-v6 label {
+  font-size: 12.5px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.client-form-v6 h3 {
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+}
+
+/* Full-width rows */
+.client-form-v6 .full {
+  grid-column: 1 / -1 !important;
+}
+
+/* Manual override checkbox alignment */
+.client-form-v6 .checkbox-tile {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 38px !important;
+}
+
+.client-form-v6 .checkbox-tile input[type="checkbox"] {
+  width: 17px !important;
+  height: 17px !important;
+  min-height: 17px !important;
+  margin: 0 !important;
+}
+
+/* Table remains horizontally scrollable */
+.client-table-wrap {
+  overflow-x: auto !important;
+  max-width: 100% !important;
+}
+
+.client-table {
+  width: max-content !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .client-form-v6 .smart-grid.two {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v6 .code-and-number,
+  .client-form-v6 .two-even {
+    grid-template-columns: 1fr !important;
+  }
+
+  .client-form-v6 .full {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* L360 CLIENT PROFILE V8_1 ALIGNMENT END */

@@ -1,0 +1,6 @@
+﻿# GOVERNANCE SOURCE PHASES
+
+_operations\phase-10ZZ0-enterprise-documentation-governance-audit | FOUND
+_operations\phase-10ZZ1A-enterprise-sop-library | FOUND
+_operations\phase-10ZZ2-validation-governance-audit | FOUND
+_operations\phase-10ZZ3-testing-governance-audit | FOUND

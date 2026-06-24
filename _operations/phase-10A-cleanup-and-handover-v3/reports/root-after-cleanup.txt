@@ -1,0 +1,69 @@
+﻿
+Mode   Length  LastWriteTime         Name                                                
+----   ------  -------------         ----                                                
+d-----         17/6/2026 4:22:05 PM  '`'                                                 
+d-----         17/6/2026 4:22:06 PM  '```sql                                             
+d--h--         9/6/2026 5:24:42 PM   .git                                                
+d-----         9/6/2026 3:33:25 PM   android-app                                         
+d-----         18/6/2026 5:24:17 PM  backend                                             
+d-----         16/6/2026 8:18:10 PM  backup                                              
+d-----         14/6/2026 5:12:15 PM  backups                                             
+d-----         17/6/2026 3:26:30 AM  CLEANUP_QUARANTINE                                  
+d-----         18/6/2026 9:30:01 AM  configs                                             
+d-----         18/6/2026 9:29:56 AM  data                                                
+d-----         18/6/2026 8:26:19 AM  docs                                                
+d-----         17/6/2026 5:49:36 PM  frontend                                            
+d-----         17/6/2026 7:24:04 AM  node_modules                                        
+d-----         17/6/2026 7:01:33 PM  reports                                             
+d-----         18/6/2026 9:29:57 AM  scripts                                             
+d-----         17/6/2026 10:51:41 AM snapshots                                           
+d-----         18/6/2026 9:29:57 AM  tests                                               
+d-----         14/6/2026 5:16:49 PM  tools                                               
+d-----         9/6/2026 3:33:19 PM   windows-app                                         
+d-----         18/6/2026 9:29:56 AM  _L360_PHASE_09_5_ENTERPRISE_CORE                    
+d-----         18/6/2026 5:45:32 PM  _operations                                         
+-a---- 0       18/6/2026 3:55:38 PM  .env                                                
+-a---- 0       18/6/2026 3:55:38 PM  .env.example                                        
+-a---- 14      11/6/2026 3:28:35 PM  .gitignore                                          
+-a---- 18694   9/6/2026 3:32:39 PM   ARCHITECTURE.md                                     
+-a---- 0       18/6/2026 3:55:38 PM  ARCHIVE_DOCTOR_BACKUPS                              
+-a---- 858     17/6/2026 6:46:54 PM  CHECK-L360-STATUS.bat                               
+-a---- 32      18/6/2026 5:42:53 PM  cleanup-error-output.txt                            
+-a---- 1543    15/6/2026 10:40:23 AM create-audit-plan-doc.bat                           
+-a---- 4291    14/6/2026 6:23:12 PM  create-phase6-docs-safe.bat                         
+-a---- 1520    15/6/2026 11:56:15 AM create-phase6c-completion-report.bat                
+-a---- 17828   15/6/2026 12:13:01 PM Create_AI_Prompt_Library_SAFE.cmd                   
+-a---- 12958   18/6/2026 5:27:42 PM  deploy-phase-10A-handler-registry-V3-safe-logged.bat
+-a---- 3367608 13/6/2026 4:19:29 PM  FULL_FILE_LIST.txt                                  
+-a---- 35963   9/6/2026 11:42:23 AM  keepawake.ps1                                       
+-a---- 1509    17/6/2026 10:37:36 AM L360-LANGUAGE-AUDIT-ONLY.bat                        
+-a---- 8201    18/6/2026 5:45:08 PM  L360-SAFE-CLEANUP-V3.ps1                            
+-a---- 31648   23/5/2026 7:10:08 AM  Microsoft.Management.Deployment.winmd               
+-a---- 4608    15/6/2026 10:04:34 PM Microsoft.Services.Store.winmd                      
+-a---- 185966  17/6/2026 7:24:20 AM  package-lock.json                                   
+-a---- 495     17/6/2026 7:36:44 AM  package.json                                        
+-a---- 696     15/6/2026 11:29:11 AM patch-phase6-runner-status.js                       
+-a---- 746     17/6/2026 3:37:19 AM  PHASE-LEDGER.md                                     
+-a---- 4408    15/6/2026 11:29:22 AM phase6-today-runner.bat                             
+-a---- 1074    17/6/2026 10:25:31 AM PHASE7C-AUTO-AUDIT-VERIFY.bat                       
+-a---- 1476    17/6/2026 9:26:18 AM  PHASE7C-AUTO-CRUD-SMOKE.bat                         
+-a---- 1204    17/6/2026 9:20:44 AM  PHASE7C-AUTO-ROUTE-TESTS.bat                        
+-a---- 842     17/6/2026 9:24:06 AM  PHASE7C-AUTO-SECURITY-TESTS.bat                     
+-a---- 5219    17/6/2026 10:50:56 AM PHASE7C-CLOSEOUT-TO-PHASE8.bat                      
+-a---- 741     17/6/2026 7:22:58 AM  PHASE7C-TEST-PLAN.md                                
+-a---- 5484407 15/6/2026 12:36:08 PM phase7_backend_file_inventory.txt                   
+-a---- 637     17/6/2026 3:35:30 AM  PROJECT-RULES.md                                    
+-a---- 1036    17/6/2026 3:35:04 AM  PROJECT-STATUS.md                                   
+-a---- 3374503 14/6/2026 4:41:46 PM  PROJECT_FILES.txt                                   
+-a---- 1011570 13/6/2026 4:19:14 PM  PROJECT_FILE_TREE.txt                               
+-a---- 1013447 14/6/2026 4:41:41 PM  PROJECT_TREE.txt                                    
+-a---- 38      9/6/2026 3:32:39 PM   README.md                                           
+-a---- 193     18/6/2026 5:45:11 PM  RUN-L360-SAFE-CLEANUP-V3.bat                        
+-a---- 7596    16/6/2026 11:13:43 AM SAFE_360_Ecosystem_Migration.cmd                    
+-a---- 1802    18/6/2026 4:46:56 PM  START-L360-CLEAN.bat                                
+-a---- 543     17/6/2026 6:59:24 PM  START-L360.bat                                      
+-a---- 285     14/6/2026 4:33:14 PM  stop-dev-admin.bat                                  
+-a---- 138     17/6/2026 6:59:24 PM  STOP-L360.bat                                       
+-a---- 929     14/6/2026 6:24:14 PM  verify-phase6-readonly.bat                          
+
+

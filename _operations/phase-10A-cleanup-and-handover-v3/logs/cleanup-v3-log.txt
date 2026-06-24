@@ -1,0 +1,135 @@
+[2026-06-18 17:45:33] ============================================================
+[2026-06-18 17:45:33] L360 SAFE CLEANUP V3 START
+[2026-06-18 17:45:33] Mode: DRYRUN
+[2026-06-18 17:45:33] ProjectRoot: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+[2026-06-18 17:45:33] Creating inventories
+[2026-06-18 17:45:33] Scanning known junk artifacts
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\%NODE%
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\r.name).join('
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\{
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\{)
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\'No
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\+
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\at
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\bytes
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\count
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Database
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Date().toString()
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\dbPath
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\ERROR
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\executed
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\expected
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\file
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Files
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Found
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Inventory
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\migration
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\modified
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\new
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\No
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\not
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\only
+[2026-06-18 17:45:33] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\path
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\READ
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Row
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Safety
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\SQLite
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\stat.mtime.toString()
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\stat.size
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Status
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\table.name
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\table.sql
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Tables
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Target
+[2026-06-18 17:45:34] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\YES
+[2026-06-18 17:45:34] L360 SAFE CLEANUP V3 COMPLETE
+[2026-06-18 17:46:47] ============================================================
+[2026-06-18 17:46:47] L360 SAFE CLEANUP V3 START
+[2026-06-18 17:46:47] Mode: DRYRUN
+[2026-06-18 17:46:47] ProjectRoot: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+[2026-06-18 17:46:47] Creating inventories
+[2026-06-18 17:46:47] Scanning known junk artifacts
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\%NODE%
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\r.name).join('
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\{
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\{)
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\'No
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\+
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\at
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\bytes
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\count
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Database
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Date().toString()
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\dbPath
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\ERROR
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\executed
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\expected
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\file
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Files
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Found
+[2026-06-18 17:46:47] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Inventory
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\migration
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\modified
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\new
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\No
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\not
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\only
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\path
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\READ
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Row
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Safety
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\SQLite
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\stat.mtime.toString()
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\stat.size
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Status
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\table.name
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\table.sql
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Tables
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Target
+[2026-06-18 17:46:48] DRYRUN WOULD MOVE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\YES
+[2026-06-18 17:46:48] L360 SAFE CLEANUP V3 COMPLETE
+[2026-06-18 17:47:00] ============================================================
+[2026-06-18 17:47:00] L360 SAFE CLEANUP V3 START
+[2026-06-18 17:47:00] Mode: APPLY
+[2026-06-18 17:47:00] ProjectRoot: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+[2026-06-18 17:47:00] Creating inventories
+[2026-06-18 17:47:00] Scanning known junk artifacts
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\%NODE% --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\%NODE%
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\r.name).join(' --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\r.name).join('
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\{ --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\{
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\{) --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\{)
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\'No --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\'No
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\+ --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\+
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\at --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\at
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\bytes --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\bytes
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\count --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\count
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Database --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Database
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Date().toString() --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Date().toString()
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\dbPath --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\dbPath
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\ERROR --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\ERROR
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\executed --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\executed
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\expected --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\expected
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\file --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\file
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Files --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Files
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Found --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Found
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Inventory --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Inventory
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\migration --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\migration
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\modified --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\modified
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\new --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\new
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\No --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\No
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\not --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\not
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\only --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\only
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\path --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\path
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\READ --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\READ
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Row --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Row
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Safety --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Safety
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\SQLite --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\SQLite
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\stat.mtime.toString() --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\stat.mtime.toString()
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\stat.size --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\stat.size
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Status --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Status
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\table.name --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\table.name
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\table.sql --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\table.sql
+[2026-06-18 17:47:01] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Tables --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Tables
+[2026-06-18 17:47:02] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\Target --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\Target
+[2026-06-18 17:47:02] MOVED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\YES --> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover-v3\quarantine\YES
+[2026-06-18 17:47:02] L360 SAFE CLEANUP V3 COMPLETE

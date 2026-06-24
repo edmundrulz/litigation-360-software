@@ -1,0 +1,43 @@
+﻿import React, { useState } from "react";
+import EnterpriseOperationsDashboard from "./enterprise/pages/EnterpriseOperationsDashboard";
+
+function LegacyHome() {
+  return (
+    <div style={{ padding: 24, fontFamily: "Arial, sans-serif" }}>
+      <h1>Litigation 360</h1>
+      <p>Frontend shell active.</p>
+      <p>Use the Enterprise Operations Dashboard button above to view Phase 10 monitoring.</p>
+    </div>
+  );
+}
+
+export default function App() {
+  const [view, setView] = useState("enterprise");
+
+  return (
+    <div>
+      <div style={{
+        display: "flex",
+        gap: 12,
+        alignItems: "center",
+        padding: "12px 18px",
+        borderBottom: "1px solid #ddd",
+        fontFamily: "Arial, sans-serif",
+        background: "#f8fafc",
+        position: "sticky",
+        top: 0,
+        zIndex: 10
+      }}>
+        <strong>Litigation 360</strong>
+        <button onClick={() => setView("enterprise")}>Enterprise Dashboard</button>
+        <button onClick={() => setView("home")}>Home</button>
+        <span style={{ marginLeft: "auto", fontSize: 12 }}>
+          Phase 10T Frontend App Integration
+        </span>
+      </div>
+
+      {view === "enterprise" ? <EnterpriseOperationsDashboard /> : view === "connectivity" ? <FrontendBackendConnectivityValidator /> : <LegacyHome />}
+    </div>
+  );
+}
+

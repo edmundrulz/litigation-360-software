@@ -1,0 +1,1473 @@
+Folder PATH listing for volume Windows
+Volume serial number is 0000029E F0B7:DAA5
+C:\USERS\JEP_EDMUNDRULZ\LITIGATION-360-WORKSPACE\LITIGATION-360-SOFTWARE\_OPERATIONS
++---enterprise-architecture
+¦   +---docs
+¦   ¦       MASTER-ARCHITECTURE-DIAGRAM.md
+¦   ¦       MASTER-AUTOMATION-REGISTRY.md
+¦   ¦       MASTER-CRITICALITY-REGISTRY.md
+¦   ¦       MASTER-ENDPOINT-REGISTRY.md
+¦   ¦       MASTER-ENGINE-REGISTRY.md
+¦   ¦       MASTER-ROUTE-REGISTRY.md
+¦   ¦       MASTER-WORKFLOW-REGISTRY.md
+¦   ¦       PHASE10X3A-ENTERPRISE-ARCHITECTURE-REGISTRY-PROTOCOL.md
+¦   ¦       
+¦   +---registries
+¦           automation-registry.json
+¦           criticality-registry.json
+¦           endpoint-registry.json
+¦           engine-dependency-map.json
+¦           enterprise-architecture-master-registry.json
+¦           frontend-backend-map.json
+¦           route-engine-map.json
+¦           workflow-registry.json
+¦           
++---enterprise-audit
+¦   ¦   enterprise-core-content-audit.txt
+¦   ¦   enterprise-core-file-audit.txt
+¦   ¦   PHASE-09-5B-AUTOMATION-PIPELINE-VERIFICATION.md
+¦   ¦   PHASE-09-5B-CONSUMER-ENGINE-VERIFICATION.md
+¦   ¦   PHASE-09-5BC-FINAL-VERIFICATION.md
+¦   ¦   
+¦   +---01-automation-bus
+¦   +---02-shared-services
+¦   +---03-notifications
+¦   +---04-monitoring
+¦   +---05-reliability
+¦   +---06-document-intelligence
+¦   +---07-cleanup-candidates
++---enterprise-governance
+¦   +---backups
+¦   +---checklists
+¦   ¦       MASTER-DEPLOYMENT-CHECKLIST.md
+¦   ¦       MASTER-HANDOVER-CHECKLIST.md
+¦   ¦       
+¦   +---docs
+¦   ¦       MASTER-BACKEND-REGISTRY.md
+¦   ¦       MASTER-DATABASE-REGISTRY.md
+¦   ¦       MASTER-DEPLOYMENT-PROTOCOL.md
+¦   ¦       MASTER-ENDPOINT-REGISTRY.md
+¦   ¦       MASTER-ENGINE-REGISTRY.md
+¦   ¦       MASTER-FRONTEND-REGISTRY.md
+¦   ¦       MASTER-OPERATIONS-HANDBOOK.md
+¦   ¦       MASTER-RECOVERY-PROTOCOL.md
+¦   ¦       MASTER-ROLLBACK-PROTOCOL.md
+¦   ¦       MASTER-TESTING-PROTOCOL.md
+¦   ¦       MASTER-VALIDATION-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---registries
+¦   ¦       MASTER-GOVERNANCE-REGISTRY.json
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10X7-master-governance-docs-report.json
+¦   ¦       phase10X7-validation-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X7.js
+¦           
++---housekeeping-reports
+¦       all-filenames-sorted-%DATESTAMP%_%TIMESTAMP
+¦       all-filenames-sorted-Thu018-06-2026_09-35-55.13.txt
+¦       cleanup-candidates-%DATESTAMP%_%TIMESTAMP
+¦       cleanup-candidates-Thu018-06-2026_09-35-55.13.txt
+¦       file-inventory-%DATESTAMP%_%TIMESTAMP
+¦       file-inventory-SAFE-SCAN.txt
+¦       file-inventory-Thu018-06-2026_09-35-55.13.txt
+¦       folder-tree-%DATESTAMP%_%TIMESTAMP
+¦       folder-tree-SAFE-SCAN.txt
+¦       folder-tree-Thu018-06-2026_09-35-55.13.txt
+¦       project-structure-check-%DATESTAMP%_%TIMESTAMP
+¦       project-structure-check-SAFE-SCAN.txt
+¦       project-structure-check-Thu018-06-2026_09-35-55.13.txt
+¦       size-report-%DATESTAMP%_%TIMESTAMP
+¦       size-report-SAFE-SCAN.txt
+¦       size-report-Thu018-06-2026_09-35-55.13.txt
+¦       
++---phase-09-9-hardening
+¦   ¦   PHASE-09-9-STATUS.txt
+¦   ¦   
+¦   +---01-system-audit
+¦   +---02-database-checks
+¦   +---02-dependency-scanner
+¦   ¦       dependency-scan-active-runtime-report.txt
+¦   ¦       dependency-scan-live-report.txt
+¦   ¦       dependency-scan-report.txt
+¦   ¦       dependency-scan-runtime-report.txt
+¦   ¦       dependency-scanner.js
+¦   ¦       
+¦   +---03-backend-checks
+¦   +---03-housekeeping
+¦   ¦   ¦   backend-root-junk-dry-run-report.txt
+¦   ¦   ¦   backend-tree.txt
+¦   ¦   ¦   empty-folders.txt
+¦   ¦   ¦   full-file-inventory.txt
+¦   ¦   ¦   housekeeping-report.txt
+¦   ¦   ¦   quarantine-backend-junk.js
+¦   ¦   ¦   suspicious-files.txt
+¦   ¦   ¦   zero-byte-files.txt
+¦   ¦   ¦   
+¦   ¦   +---quarantine
+¦   ¦       ¦   node.junk
+¦   ¦       ¦   nodemon.junk
+¦   ¦       ¦   powershell.junk
+¦   ¦       ¦   
+¦   ¦       +---backend-root-junk
+¦   ¦       ¦       b-time.junk
+¦   ¦       ¦       close-brace.junk
+¦   ¦       ¦       const.junk
+¦   ¦       ¦       copy.junk
+¦   ¦       ¦       findstr.junk
+¦   ¦       ¦       for.junk
+¦   ¦       ¦       if.junk
+¦   ¦       ¦       mkdir.junk
+¦   ¦       ¦       name.junk
+¦   ¦       ¦       open-brace.junk
+¦   ¦       ¦       path.junk
+¦   ¦       ¦       process-exit-0.junk
+¦   ¦       ¦       return.junk
+¦   ¦       ¦       singlequote-at.junk
+¦   ¦       ¦       time.junk
+¦   ¦       ¦       type.junk
+¦   ¦       ¦       
+¦   ¦       +---backend-root-junk-advanced
+¦   ¦           ¦   console.log__-_.junk
+¦   ¦           ¦   console.log___CLEANUP_-1.junk
+¦   ¦           ¦   console.log___CLEANUP_.junk
+¦   ¦           ¦   fs.mkdirSync_backupDir.junk
+¦   ¦           ¦   fs.statSync_f.path_.isFile___.junk
+¦   ¦           ¦   fs.unlinkSync_file.path.junk
+¦   ¦           ¦   litigation-360-backend_1.0.0.junk
+¦   ¦           ¦   __.junk
+¦   ¦           ¦   __n.junk
+¦   ¦           ¦   
+¦   ¦           +---count.junk
+¦   ¦           +---Date__.toString__.junk
+¦   ¦           +---dbPath.junk
+¦   ¦           +---File.junk
+¦   ¦           ¦   +---n
+¦   ¦           ¦       +---n'
+¦   ¦           +---Found.junk
+¦   ¦           ¦   +---n
+¦   ¦           ¦       +---n'
+¦   ¦           +---new.junk
+¦   ¦           +---Row.junk
+¦   ¦           +---t.name.junk
+¦   ¦           +---t.sql.junk
+¦   ¦           +---Tables.junk
+¦   ¦           +---_-.junk
+¦   ¦           +---_-1.junk
+¦   ¦           +---_.junk
+¦   ¦           ¦   +---n
+¦   ¦           ¦   ¦   +---n'
+¦   ¦           ¦   +---n```
+¦   ¦           ¦       +---n
+¦   ¦           ¦           +---n'
+¦   ¦           +---___.junk
+¦   ¦           +---____.junk
+¦   ¦           +---____sql.junk
+¦   ¦               +---n'
+¦   +---04-api-checks
+¦   +---04-integrity-scanner
+¦   ¦       integrity-report.txt
+¦   ¦       integrity-scanner.js
+¦   ¦       resolve-test-automation-events.js
+¦   ¦       
+¦   +---05-automation-checks
+¦   +---05-recovery-center
+¦   ¦   ¦   recovery-report.txt
+¦   ¦   ¦   recovery-verify.js
+¦   ¦   ¦   
+¦   ¦   +---backups
+¦   ¦           litigation360-recovery-test.db
+¦   ¦           
+¦   +---06-golden-snapshot
+¦   ¦   +---configs
+¦   ¦   ¦       golden-config.json
+¦   ¦   ¦       
+¦   ¦   +---database
+¦   ¦   ¦       litigation360-golden.db
+¦   ¦   ¦       
+¦   ¦   +---reports
+¦   ¦           backend-root-junk-dry-run-report.txt
+¦   ¦           backend-tree.txt
+¦   ¦           dependency-scan-active-runtime-report.txt
+¦   ¦           dependency-scan-live-report.txt
+¦   ¦           dependency-scan-report.txt
+¦   ¦           dependency-scan-runtime-report.txt
+¦   ¦           empty-folders.txt
+¦   ¦           full-file-inventory.txt
+¦   ¦           housekeeping-report.txt
+¦   ¦           integrity-report.txt
+¦   ¦           recovery-report.txt
+¦   ¦           suspicious-files.txt
+¦   ¦           zero-byte-files.txt
+¦   ¦           
+¦   +---06-recovery
+¦   +---07-cleanup-review
+¦   +---08-phase10-readiness
++---phase-10A-cleanup-and-handover
+¦   +---handover
+¦   ¦       MASTER-HANDOVER-PATH-MAP.txt
+¦   ¦       NEXT-THREAD-OPENING-PROMPT.md
+¦   ¦       
+¦   +---logs
+¦   ¦       cleanup-log.txt
+¦   ¦       
+¦   +---quarantine
+¦   ¦       (
+¦   ¦       clearInterval(timer)
+¦   ¦       console.log('-'
+¦   ¦       console.log('[CLEANUP]
+¦   ¦       console.log(`[CLEANUP]
+¦   ¦       fs.existsSync(candidate))
+¦   ¦       
+¦   +---reports
+¦           full-tree-before-cleanup.txt
+¦           root-before-cleanup.txt
+¦           
++---phase-10A-cleanup-and-handover-v2
++---phase-10A-cleanup-and-handover-v3
+¦   +---handover
+¦   ¦       MASTER-HANDOVER-PATH-MAP.txt
+¦   ¦       NEXT-THREAD-OPENING-PROMPT.txt
+¦   ¦       
+¦   +---logs
+¦   ¦       cleanup-v3-log.txt
+¦   ¦       
+¦   +---quarantine
+¦   ¦   ¦   %NODE%
+¦   ¦   ¦   r.name).join('
+¦   ¦   ¦   {
+¦   ¦   ¦   {)
+¦   ¦   ¦   
+¦   ¦   +---'No
+¦   ¦   +---+
+¦   ¦   +---at
+¦   ¦   +---bytes
+¦   ¦   ¦   +---n'
+¦   ¦   +---count
+¦   ¦   +---Database
+¦   ¦   ¦   +---n
+¦   ¦   ¦       +---n'
+¦   ¦   +---Date().toString()
+¦   ¦   +---dbPath
+¦   ¦   +---ERROR
+¦   ¦   ¦   +---n
+¦   ¦   ¦       +---nDatabase
+¦   ¦   +---executed
+¦   ¦   ¦   +---n'
+¦   ¦   +---expected
+¦   ¦   +---file
+¦   ¦   +---Files
+¦   ¦   +---Found
+¦   ¦   ¦   +---n
+¦   ¦   ¦   ¦   +---n'
+¦   ¦   ¦   +---n'
+¦   ¦   +---Inventory
+¦   ¦   ¦   +---n
+¦   ¦   ¦       +---n'
+¦   ¦   +---migration
+¦   ¦   +---modified
+¦   ¦   ¦   +---n'
+¦   ¦   +---new
+¦   ¦   +---No
+¦   ¦   +---not
+¦   ¦   +---only
+¦   ¦   ¦   +---n'
+¦   ¦   +---path
+¦   ¦   ¦   +---n'
+¦   ¦   +---READ
+¦   ¦   +---Row
+¦   ¦   +---Safety
+¦   ¦   +---SQLite
+¦   ¦   +---stat.mtime.toString()
+¦   ¦   +---stat.size
+¦   ¦   +---Status
+¦   ¦   ¦   +---n
+¦   ¦   ¦       +---n'
+¦   ¦   +---table.name
+¦   ¦   +---table.sql
+¦   ¦   +---Tables
+¦   ¦   +---Target
+¦   ¦   +---YES
+¦   ¦       +---n'
+¦   +---reports
+¦           apply-errors.txt
+¦           apply-moved-items.txt
+¦           dryrun-would-move.txt
+¦           files-before-cleanup.txt
+¦           folders-before-cleanup.txt
+¦           missing-known-junk.txt
+¦           quarantine-inventory.txt
+¦           root-after-cleanup.txt
+¦           root-before-cleanup.txt
+¦           
++---phase-10A-handler-registry
+¦   +---backups
+¦   ¦       eventTypes.backup.js
+¦   ¦       
+¦   +---docs
+¦   +---logs
+¦   ¦       phase-10A-deployment-log.txt
+¦   ¦       
+¦   +---reports
+¦   +---scripts
+¦   +---validation
++---phase-10A-handler-registry-finisher
+¦   +---backups
+¦   ¦       eventTypes.js.20260618_181719.bak
+¦   ¦       index.js.20260618_181719.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10A-FINISHER-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10A-finisher-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10A-finisher-report.json
+¦   ¦       phase10A-finisher-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10A-finisher.js
+¦           
++---phase-10B-universal-event-bus
+¦   +---backups
+¦   ¦       index.js.20260618_185102.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10B-EVENT-BUS-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10B-event-bus-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10B-event-bus-report.json
+¦   ¦       phase10B-event-bus-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10B-event-bus.js
+¦           
++---phase-10C-notification-framework
+¦   +---backups
+¦   ¦       index.js.20260618_185940.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10C-NOTIFICATION-FRAMEWORK-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10C-notification-framework-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10C-notification-framework-report.json
+¦   ¦       phase10C-notification-framework-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10C-notification-framework.js
+¦           
++---phase-10D-workflow-automation-engine
+¦   +---backups
+¦   ¦       index.js.20260618_191434.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10D-WORKFLOW-ENGINE-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10D-workflow-engine-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10D-workflow-engine-report.json
+¦   ¦       phase10D-workflow-engine-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10D-workflow-engine.js
+¦           
++---phase-10E-document-lifecycle-engine
+¦   +---backups
+¦   ¦       index.js.20260618_193624.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10E-DOCUMENT-LIFECYCLE-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10E-document-lifecycle-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10E-document-lifecycle-report.json
+¦   ¦       phase10E-document-lifecycle-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10E-document-lifecycle.js
+¦           
++---phase-10F-court-operations-engine
+¦   +---backups
+¦   ¦       index.js.20260618_195114.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10F-COURT-OPERATIONS-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10F-court-operations-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10F-court-operations-report.json
+¦   ¦       phase10F-court-operations-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10F-court-operations.js
+¦           
++---phase-10G-matter-intelligence-engine
+¦   +---backups
+¦   ¦       index.js.20260618_204720.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10G-MATTER-INTELLIGENCE-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10G-matter-intelligence-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10G-matter-intelligence-report.json
+¦   ¦       phase10G-matter-intelligence-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10G-matter-intelligence.js
+¦           
++---phase-10H-executive-command-centre
+¦   +---backups
+¦   ¦       index.js.20260618_210603.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10H-EXECUTIVE-COMMAND-CENTRE-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10H-executive-command-centre-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10H-executive-command-centre-report.json
+¦   ¦       phase10H-executive-command-centre-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10H-executive-command-centre.js
+¦           
++---phase-10I-legal-operations-assistant-core
+¦   +---backups
+¦   ¦       index.js.20260618_211425.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10I-LEGAL-OPERATIONS-ASSISTANT-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10I-legal-operations-assistant-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10I-legal-operations-assistant-report.json
+¦   ¦       phase10I-legal-operations-assistant-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10I-legal-operations-assistant.js
+¦           
++---phase-10J-predictive-litigation-analytics
+¦   +---backups
+¦   ¦       index.js.20260618_215357.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10J-PREDICTIVE-ANALYTICS-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10J-predictive-analytics-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10J-predictive-analytics-report.json
+¦   ¦       phase10J-predictive-analytics-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10J-predictive-analytics.js
+¦           
++---phase-10K-court-navigation-intelligence
+¦   +---backups
+¦   ¦       index.js.20260618_220740.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10K-COURT-NAVIGATION-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10K-court-navigation-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10K-court-navigation-report.json
+¦   ¦       phase10K-court-navigation-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10K-court-navigation.js
+¦           
++---phase-10K-court-registry-perkeso-industrial-court-patch
+¦   +---backups
+¦   ¦       courtNavigationEngine.js.20260618_221422.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10K-PERKESO-INDUSTRIAL-COURT-PATCH-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10K-perkeso-industrial-court-patch-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10K-perkeso-industrial-court-patch-report.json
+¦   ¦       phase10K-perkeso-industrial-court-patch-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10K-perkeso-industrial-court-patch.js
+¦           
++---phase-10L-maps-court-registry-fix
+¦   ¦   validate-10L-court-registry-fix.js
+¦   ¦   
+¦   +---backups
+¦   ¦       courtNavigationEngine.js.20260619_005033.bak
+¦   ¦       
+¦   +---logs
+¦   ¦       court-registry-fix-log.txt
+¦   ¦       
+¦   +---reports
+¦           phase10L-court-registry-fix-report.json
+¦           
++---phase-10L-maps-restore
+¦   ¦   validate-10L-restore.js
+¦   ¦   
+¦   +---backups
+¦   ¦       index.js.20260619_002936.bak
+¦   ¦       
+¦   +---logs
+¦   ¦       restore-log.txt
+¦   ¦       
+¦   +---reports
+¦           phase10L-restore-report.json
+¦           
++---phase-10M-autonomous-operations-engine
+¦   +---backups
+¦   ¦       index.js.20260618_224820.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10M-AUTONOMOUS-OPERATIONS-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10M-autonomous-operations-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10M-autonomous-operations-report.json
+¦   ¦       phase10M-autonomous-operations-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10M-autonomous-operations.js
+¦           
++---phase-10M-master-documentation
+¦   +---registers
+¦   +---reports
+¦           PHASE-10M-2-REPORT.txt
+¦           PHASE-10M-3-REPORT.txt
+¦           PHASE-10M-4-REPORT.txt
+¦           PHASE-10M-INSTALL-REPORT.txt
+¦           
++---phase-10N-enterprise-governance
+¦   +---backups
+¦   ¦       index.js.20260619_000745.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10N-ENTERPRISE-GOVERNANCE-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10N-governance-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10N-governance-report.json
+¦   ¦       phase10N-governance-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10N-governance.js
+¦           
++---phase-10N-governance
+¦   +---registers
+¦   ¦       CHANGE-REGISTER.csv
+¦   ¦       DECISION-REGISTER.csv
+¦   ¦       RELEASE-REGISTER.csv
+¦   ¦       RISK-REGISTER.csv
+¦   ¦       
+¦   +---reports
+¦   ¦       PHASE-10N-0-REPORT.txt
+¦   ¦       
+¦   +---templates
+¦           CHANGE-REQUEST-TEMPLATE.md
+¦           DECISION-TEMPLATE.md
+¦           INCIDENT-TEMPLATE.md
+¦           RELEASE-TEMPLATE.md
+¦           RISK-TEMPLATE.md
+¦           
++---phase-10O-enterprise-hardening
+¦   +---backups
+¦   ¦       index.js.20260619_010659.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10O-HARDENING-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10O-hardening-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10O-hardening-report.json
+¦   ¦       phase10O-hardening-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10O-hardening.js
+¦           
++---phase-10O-hardening-path-fix
+¦   ¦   validate-10O-path-fix.js
+¦   ¦   
+¦   +---backups
+¦   ¦       enterpriseHardeningEngine.js.20260619_011650.bak
+¦   ¦       
+¦   +---logs
+¦   ¦       path-fix-log.txt
+¦   ¦       
+¦   +---reports
+¦           phase10O-path-fix-report.json
+¦           
++---phase-10P-backup-recovery-disaster-readiness
+¦   +---backups
+¦   ¦       index.js.20260619_012945.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10P-BACKUP-RECOVERY-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10P-backup-recovery-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10P-backup-recovery-report.json
+¦   ¦       phase10P-backup-recovery-report.txt
+¦   ¦       
+¦   +---runtime-snapshots
+¦   ¦   +---SNP-2026-06-18T17-29-45-265Z
+¦   ¦           .env
+¦   ¦           litigation360.db
+¦   ¦           package-lock.json
+¦   ¦           package.json
+¦   ¦           snapshot-manifest.json
+¦   ¦           START-L360-CLEAN.bat
+¦   ¦           STOP-L360.bat
+¦   ¦           
+¦   +---snapshots
+¦   +---validation
+¦           validate-phase10P-backup-recovery.js
+¦           
++---phase-10Q-enterprise-monitoring
+¦   +---backups
+¦   ¦       index.js.20260619_075240.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       latest-monitoring-dashboard.json
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10Q-MONITORING-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10Q-monitoring-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10Q-monitoring-report.json
+¦   ¦       phase10Q-monitoring-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-phase10Q-monitoring.js
+¦           
++---phase-10R-performance-optimization
+¦   +---backups
+¦   ¦       index.js.20260619_084337.bak
+¦   ¦       
+¦   +---benchmarks
+¦   ¦       latest-load-test.json
+¦   ¦       latest-performance-benchmark.json
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10R-PERFORMANCE-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10R-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10R-performance-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10R-performance.js
+¦           
++---phase-10S-frontend-dashboard-v2-fix
+¦   +---backups
+¦   ¦       enterpriseApi.js.20260619_095545.bak
+¦   ¦       EnterpriseOperationsDashboard.jsx.20260619_095545.bak
+¦   ¦       EnterpriseStatusCard.jsx.20260619_095545.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10S-FRONTEND-DASHBOARD-V2-FIX.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10S-v2-fix-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10S-v2-fix.js
+¦           
++---phase-10S-frontend-operations-dashboard
+¦   +---backups
+¦   +---docs
+¦   ¦       PHASE10S-FRONTEND-DASHBOARD-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   +---validation
+¦           validate-phase10S-frontend-dashboard.js
+¦           
++---phase-10T-frontend-app-integration
+¦   +---backups
+¦   ¦       App.jsx.20260619_102223.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10T-FRONTEND-APP-INTEGRATION.md
+¦   ¦       
+¦   +---logs
+¦   ¦       phase-10T-log.txt
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10T-frontend-app-integration-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10T.js
+¦           
++---phase-10U-app-wiring-fix
+¦   +---backups
+¦   ¦       App.jsx.20260619_111942.bak
+¦   ¦       
+¦   +---docs
+¦   +---reports
+¦   ¦       phase10U-app-wiring-fix-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10U-app-wiring-fix.js
+¦           
++---phase-10U-frontend-backend-connectivity-validator
+¦   +---backups
+¦   ¦       App.jsx.20260619_111241.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10U-CONNECTIVITY-VALIDATOR.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10U-connectivity-validator-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10U.js
+¦           
++---phase-10V-frontend-smoke-test-v2-fix
+¦   +---backups
+¦   ¦       PHASE10V-FRONTEND-SMOKE-TEST.js.20260619_114346.bak
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10V-v2-fix-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10V-v2-fix.js
+¦           
++---phase-10V-frontend-smoke-testing
+¦   +---backups
+¦   +---docs
+¦   ¦       PHASE10V-FRONTEND-SMOKE-TESTING.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10V-deployment-validation-report.json
+¦   ¦       phase10V-frontend-smoke-test-report.json
+¦   ¦       
+¦   +---tests
+¦   +---validation
+¦           validate-phase10V.js
+¦           
++---phase-10W-frontend-build-production-validation
+¦   +---backups
+¦   +---build-reports
+¦   ¦       npm-build-error.txt
+¦   ¦       npm-build-output.txt
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10W-FRONTEND-BUILD-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10W-frontend-build-report.json
+¦   ¦       phase10W-prebuild-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10W-final.js
+¦           validate-phase10W-prebuild.js
+¦           
++---phase-10X-gui-replacement
+¦   +---backups
+¦   ¦   +---src_20260619_122638
+¦   ¦       ¦   api.js
+¦   ¦       ¦   App.backup.css
+¦   ¦       ¦   App.backup.jsx
+¦   ¦       ¦   App.css
+¦   ¦       ¦   App.jsx
+¦   ¦       ¦   index.css
+¦   ¦       ¦   main.jsx
+¦   ¦       ¦   
+¦   ¦       +---assets
+¦   ¦       ¦       hero.png
+¦   ¦       ¦       react.svg
+¦   ¦       ¦       vite.svg
+¦   ¦       ¦       
+¦   ¦       +---assistant
+¦   ¦       +---command-centre
+¦   ¦       +---components
+¦   ¦       +---constants
+¦   ¦       ¦       caseStatus.js
+¦   ¦       ¦       
+¦   ¦       +---enterprise
+¦   ¦       ¦   +---api
+¦   ¦       ¦   ¦       connectivityValidatorApi.js
+¦   ¦       ¦   ¦       enterpriseApi.js
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---components
+¦   ¦       ¦   ¦       BackendConnectivityPanel.jsx
+¦   ¦       ¦   ¦       EnterpriseStatusCard.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---pages
+¦   ¦       ¦           EnterpriseOperationsDashboard.jsx
+¦   ¦       ¦           FrontendBackendConnectivityValidator.jsx
+¦   ¦       ¦           
+¦   ¦       +---layout
+¦   ¦       ¦       layout.jsx
+¦   ¦       ¦       
+¦   ¦       +---monitoring
+¦   ¦       +---notifications
+¦   ¦       +---pages
+¦   ¦       ¦       Cases.jsx
+¦   ¦       ¦       Clients.jsx
+¦   ¦       ¦       Dashboard.jsx
+¦   ¦       ¦       Deadlines.jsx
+¦   ¦       ¦       Documents.jsx
+¦   ¦       ¦       Matters.jsx
+¦   ¦       ¦       OperationsDashboard.backup.jsx
+¦   ¦       ¦       OperationsDashboard.jsx
+¦   ¦       ¦       ProjectDashboard.jsx
+¦   ¦       ¦       Staff.jsx
+¦   ¦       ¦       SystemDashboard.jsx
+¦   ¦       ¦       
+¦   ¦       +---rules
+¦   ¦       ¦       assignmentEngine.js
+¦   ¦       ¦       caseRules.js
+¦   ¦       ¦       
+¦   ¦       +---services
+¦   ¦       ¦       api.js
+¦   ¦       ¦       assignmentService.js
+¦   ¦       ¦       caseService.js
+¦   ¦       ¦       clientService.js
+¦   ¦       ¦       staffService.js
+¦   ¦       ¦       
+¦   ¦       +---utils
+¦   ¦       ¦       appGuard.js
+¦   ¦       ¦       formatters.js
+¦   ¦       ¦       
+¦   ¦       +---widgets
+¦   +---reports
+¦           PHASE10X_GUI_REPLACEMENT_REPORT.md
+¦           
++---phase-10X0-deployment-readiness-baseline-audit
+¦   +---backups
+¦   +---docs
+¦   ¦       PHASE10X0-BASELINE-AUDIT-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---registries
+¦   ¦       _backend_inventory.json
+¦   ¦       _database_registry.json
+¦   ¦       _deployment_registry.json
+¦   ¦       _enterprise_registry.json
+¦   ¦       _frontend_inventory.json
+¦   ¦       _master_baseline_registry.json
+¦   ¦       _route_registry.json
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10X0-baseline-audit-summary.json
+¦   ¦       phase10X0-baseline-audit-summary.txt
+¦   ¦       phase10X0-validation-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X0.js
+¦           
++---phase-10X1-deployment-readiness-centre
+¦   +---backups
+¦   ¦       index.js.20260619_130018.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       latest-deployment-readiness-dashboard.json
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10X1-DEPLOYMENT-READINESS-CENTRE.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10X1-deployment-readiness-centre-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X1.js
+¦           
++---phase-10X2-environment-validation-engine
+¦   +---backups
+¦   ¦       index.js.20260619_131931.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       latest-environment-validation-report.json
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10X2-ENVIRONMENT-VALIDATION.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10X2-environment-validation-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X2.js
+¦           
++---phase-10X3-release-validator
+¦   +---backups
+¦   ¦       index.js.20260619_132844.bak
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10X3-RELEASE-VALIDATOR.md
+¦   ¦       
+¦   +---logs
+¦   +---release-candidates
+¦   ¦       latest-release-candidate.json
+¦   ¦       RC-2026-06-19T05-28-56-935Z.json
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10X3-release-validator-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X3.js
+¦           
++---phase-10X3A-enterprise-architecture-registry
+¦   +---backups
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10X3A-enterprise-architecture-registry-report.json
+¦   ¦       phase10X3A-validation-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X3A.js
+¦           
++---phase-10X4-deployment-scoring-engine
+¦   +---backups
+¦   ¦       index.js.20260619_141252.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       latest-deployment-scoring-report.json
+¦   ¦       
+¦   +---docs
+¦   ¦       ENTERPRISE-DEPLOYMENT-CRITERIA.md
+¦   ¦       ENTERPRISE-GRADE-MODEL.md
+¦   ¦       ENTERPRISE-RISK-MODEL.md
+¦   ¦       ENTERPRISE-SCORING-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10X4-deployment-scoring-report.json
+¦   ¦       
+¦   +---trends
+¦   ¦       latest-score.json
+¦   ¦       score-2026-06-19T06-12-57-335Z.json
+¦   ¦       score-2026-06-19T06-13-02-500Z.json
+¦   ¦       score-2026-06-19T06-13-06-869Z.json
+¦   ¦       score-2026-06-19T06-13-11-499Z.json
+¦   ¦       score-2026-06-19T06-13-15-942Z.json
+¦   ¦       score-2026-06-19T06-35-20-659Z.json
+¦   ¦       score-2026-06-19T06-35-25-640Z.json
+¦   ¦       score-2026-06-19T06-35-35-028Z.json
+¦   ¦       score-2026-06-19T06-35-39-826Z.json
+¦   ¦       score-2026-06-19T06-35-49-214Z.json
+¦   ¦       score-2026-06-19T06-35-54-724Z.json
+¦   ¦       score-2026-06-19T07-11-40-226Z.json
+¦   ¦       score-2026-06-19T07-11-46-765Z.json
+¦   ¦       score-2026-06-19T07-11-58-033Z.json
+¦   ¦       score-2026-06-19T07-12-05-112Z.json
+¦   ¦       score-2026-06-19T07-12-17-294Z.json
+¦   ¦       score-2026-06-19T07-12-23-455Z.json
+¦   ¦       score-2026-06-19T07-12-35-658Z.json
+¦   ¦       score-2026-06-19T07-12-41-595Z.json
+¦   ¦       score-2026-06-19T07-12-54-831Z.json
+¦   ¦       score-2026-06-19T07-13-02-893Z.json
+¦   ¦       score-2026-06-19T07-13-16-333Z.json
+¦   ¦       score-2026-06-19T07-13-23-484Z.json
+¦   ¦       score-2026-06-19T07-13-36-935Z.json
+¦   ¦       score-2026-06-19T07-13-46-317Z.json
+¦   ¦       score-2026-06-19T07-14-01-583Z.json
+¦   ¦       score-2026-06-19T07-14-08-316Z.json
+¦   ¦       score-2026-06-19T07-14-20-737Z.json
+¦   ¦       score-2026-06-19T07-14-27-387Z.json
+¦   ¦       score-2026-06-19T07-14-39-029Z.json
+¦   ¦       score-2026-06-19T07-14-44-667Z.json
+¦   ¦       score-2026-06-19T08-17-02-006Z.json
+¦   ¦       score-2026-06-19T08-17-08-352Z.json
+¦   ¦       score-2026-06-19T08-17-14-920Z.json
+¦   ¦       score-2026-06-19T08-17-27-223Z.json
+¦   ¦       score-2026-06-19T08-17-32-819Z.json
+¦   ¦       score-2026-06-19T08-17-45-488Z.json
+¦   ¦       score-2026-06-19T08-17-51-367Z.json
+¦   ¦       score-2026-06-19T08-18-07-378Z.json
+¦   ¦       score-2026-06-19T08-18-13-649Z.json
+¦   ¦       score-2026-06-19T08-18-20-937Z.json
+¦   ¦       score-2026-06-19T08-18-32-802Z.json
+¦   ¦       score-2026-06-19T08-18-38-556Z.json
+¦   ¦       score-2026-06-19T08-18-49-356Z.json
+¦   ¦       score-2026-06-19T08-18-54-512Z.json
+¦   ¦       score-2026-06-19T08-19-10-090Z.json
+¦   ¦       score-2026-06-19T08-19-14-906Z.json
+¦   ¦       score-2026-06-19T08-19-20-093Z.json
+¦   ¦       score-2026-06-19T08-19-30-014Z.json
+¦   ¦       score-2026-06-19T08-19-34-902Z.json
+¦   ¦       score-2026-06-19T08-19-46-908Z.json
+¦   ¦       score-2026-06-19T08-19-54-224Z.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X4.js
+¦           
++---phase-10X5-executive-deployment-dashboard
+¦   +---backups
+¦   ¦       index.js.20260619_143515.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       latest-executive-deployment-dashboard.json
+¦   ¦       
+¦   +---docs
+¦   ¦       PHASE10X5-EXECUTIVE-DEPLOYMENT-DASHBOARD.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10X5-executive-deployment-dashboard-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X5.js
+¦           
++---phase-10X6-deployment-gatekeeper
+¦   +---backups
+¦   ¦       index.js.20260619_151133.bak
+¦   ¦       
+¦   +---decisions
+¦   ¦       DG-2026-06-19T07-14-51-134Z-07b285f43ffa2.json
+¦   ¦       latest-decision.json
+¦   ¦       
+¦   +---docs
+¦   ¦       DEPLOYMENT-APPROVAL-RULES.md
+¦   ¦       DEPLOYMENT-DECISION-HISTORY.md
+¦   ¦       DEPLOYMENT-GATEKEEPER-PROTOCOL.md
+¦   ¦       DEPLOYMENT-OVERRIDE-PROTOCOL.md
+¦   ¦       DEPLOYMENT-REJECTION-RULES.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       latest-gatekeeper-report.json
+¦   ¦       phase10X6-deployment-gatekeeper-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10X6.js
+¦           
++---phase-10Y-gui-stabilisation
+¦   +---backups
+¦   ¦   +---src_20260619_123247
+¦   ¦       ¦   api.js
+¦   ¦       ¦   App.backup.css
+¦   ¦       ¦   App.backup.jsx
+¦   ¦       ¦   App.css
+¦   ¦       ¦   App.jsx
+¦   ¦       ¦   index.css
+¦   ¦       ¦   main.jsx
+¦   ¦       ¦   
+¦   ¦       +---assets
+¦   ¦       ¦       hero.png
+¦   ¦       ¦       react.svg
+¦   ¦       ¦       vite.svg
+¦   ¦       ¦       
+¦   ¦       +---assistant
+¦   ¦       +---command-centre
+¦   ¦       +---components
+¦   ¦       +---constants
+¦   ¦       ¦       caseStatus.js
+¦   ¦       ¦       
+¦   ¦       +---enterprise
+¦   ¦       ¦   +---api
+¦   ¦       ¦   ¦       connectivityValidatorApi.js
+¦   ¦       ¦   ¦       enterpriseApi.js
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---components
+¦   ¦       ¦   ¦       BackendConnectivityPanel.jsx
+¦   ¦       ¦   ¦       EnterpriseStatusCard.jsx
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---pages
+¦   ¦       ¦           EnterpriseOperationsDashboard.jsx
+¦   ¦       ¦           FrontendBackendConnectivityValidator.jsx
+¦   ¦       ¦           
+¦   ¦       +---layout
+¦   ¦       ¦       layout.jsx
+¦   ¦       ¦       
+¦   ¦       +---monitoring
+¦   ¦       +---notifications
+¦   ¦       +---pages
+¦   ¦       ¦       Cases.jsx
+¦   ¦       ¦       Clients.jsx
+¦   ¦       ¦       Dashboard.jsx
+¦   ¦       ¦       Deadlines.jsx
+¦   ¦       ¦       Documents.jsx
+¦   ¦       ¦       Matters.jsx
+¦   ¦       ¦       OperationsDashboard.backup.jsx
+¦   ¦       ¦       OperationsDashboard.jsx
+¦   ¦       ¦       ProjectDashboard.jsx
+¦   ¦       ¦       Staff.jsx
+¦   ¦       ¦       SystemDashboard.jsx
+¦   ¦       ¦       
+¦   ¦       +---rules
+¦   ¦       ¦       assignmentEngine.js
+¦   ¦       ¦       caseRules.js
+¦   ¦       ¦       
+¦   ¦       +---services
+¦   ¦       ¦       api.js
+¦   ¦       ¦       assignmentService.js
+¦   ¦       ¦       caseService.js
+¦   ¦       ¦       clientService.js
+¦   ¦       ¦       staffService.js
+¦   ¦       ¦       
+¦   ¦       +---utils
+¦   ¦       ¦       appGuard.js
+¦   ¦       ¦       formatters.js
+¦   ¦       ¦       
+¦   ¦       +---widgets
+¦   +---docs
+¦   ¦       PHASE10Y_DOCUMENTATION.md
+¦   ¦       
+¦   +---logs
+¦   ¦       npm-build-20260619_123247.log
+¦   ¦       
+¦   +---reports
+¦           PHASE10Y_VERIFICATION_CHECKLIST.md
+¦           
++---phase-10Y0-enterprise-master-registry-digital-twin
+¦   +---backups
+¦   +---docs
+¦   ¦       MASTER-COURT-REGISTRY.md
+¦   ¦       MASTER-DEPENDENCY-MAP.md
+¦   ¦       MASTER-DIGITAL-TWIN.md
+¦   ¦       MASTER-IMPACT-ANALYSIS.md
+¦   ¦       MASTER-INTEGRATION-REGISTRY.md
+¦   ¦       MASTER-PERKESO-REGISTRY.md
+¦   ¦       MASTER-SYSTEM-REGISTRY.md
+¦   ¦       MASTER-TECHNICAL-DEBT-REPORT.md
+¦   ¦       PHASE10Y0-MASTER-REGISTRY-DIGITAL-TWIN-PROTOCOL.md
+¦   ¦       
+¦   +---graphs
+¦   ¦       deployment-dependencies.json
+¦   ¦       engine-dependencies.json
+¦   ¦       route-dependencies.json
+¦   ¦       workflow-dependencies.json
+¦   ¦       
+¦   +---impact-analysis
+¦   ¦       impact-analysis.json
+¦   ¦       
+¦   +---logs
+¦   +---registries
+¦   ¦       courts-registry.json
+¦   ¦       dashboards-registry.json
+¦   ¦       deployment-registry.json
+¦   ¦       documents-registry.json
+¦   ¦       endpoints-registry.json
+¦   ¦       engines-registry.json
+¦   ¦       industrialCourt-registry.json
+¦   ¦       integrations-registry.json
+¦   ¦       master-system-registry.json
+¦   ¦       perkeso-registry.json
+¦   ¦       routes-registry.json
+¦   ¦       workflows-registry.json
+¦   ¦       
+¦   +---reports
+¦   ¦       phase10Y0-enterprise-master-registry-report.json
+¦   ¦       phase10Y0-validation-report.json
+¦   ¦       
+¦   +---technical-debt
+¦   ¦       technical-debt-scan.json
+¦   ¦       
+¦   +---twins
+¦   ¦       litigation360-digital-twin.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10Y0.js
+¦           
++---phase-10Z-final-gate-regression-audit
+¦   +---docs
+¦   ¦       PHASE-10Z-FINAL-GATE-REGRESSION-AUDIT-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase-10Z-final-gate-regression-audit.csv
+¦   ¦       phase-10Z-final-gate-regression-audit.json
+¦   ¦       phase-10Z-final-gate-regression-audit.txt
+¦   ¦       
+¦   +---validation
++---phase-10Z-gap-repair-10Z2-10Z3
+¦   +---backups
+¦   ¦       index.js.20260619-175222.bak
+¦   ¦       
+¦   +---docs
+¦   +---logs
+¦   +---reports
+¦   ¦       gap-repair-validation-report.txt
+¦   ¦       
+¦   +---validation
+¦           validate-gap-repair.js
+¦           
++---phase-10Z0-enterprise-operations-command-centre
+¦   +---alerts
+¦   ¦       latest-executive-alerts.json
+¦   ¦       
+¦   +---backups
+¦   ¦       index.js.20260619_161648.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       latest-enterprise-operations-dashboard.json
+¦   ¦       
+¦   +---docs
+¦   ¦       ALERT-MANAGEMENT-PROTOCOL.md
+¦   ¦       ENTERPRISE-OPERATIONS-HANDBOOK.md
+¦   ¦       INDUSTRIAL-COURT-PROTOCOL.md
+¦   ¦       OPERATIONS-CENTRE-PROTOCOL.md
+¦   ¦       PERKESO-OPERATIONS-PROTOCOL.md
+¦   ¦       
+¦   +---logs
+¦   +---reports
+¦   ¦       phase10Z0-enterprise-operations-command-centre-report.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase10Z0.js
+¦           
++---phase-10Z1-alert-escalation-centre
+¦   ¦   CHECK-PHASE10Z1-ENDPOINTS.bat
+¦   ¦   
+¦   +---alerts
+¦   ¦       alert-registry.json
+¦   ¦       
+¦   +---backups
+¦   ¦   +---20260619-170233
+¦   ¦   ¦       index.js
+¦   ¦   ¦       
+¦   ¦   +---20260619-170242
+¦   ¦           alertEngine.js
+¦   ¦           alertEscalationApi.js
+¦   ¦           alertRoutes.js
+¦   ¦           EnterpriseAlertEscalationCentre.jsx
+¦   ¦           escalationEngine.js
+¦   ¦           index.js
+¦   ¦           notificationEngine.js
+¦   ¦           
+¦   +---dashboards
+¦   ¦       alert-dashboard.json
+¦   ¦       
+¦   +---docs
+¦   ¦       ALERT-MANAGEMENT-PROTOCOL.md
+¦   ¦       ALERT-RESOLUTION-PROCESS.md
+¦   ¦       ALERT-SEVERITY-MODEL.md
+¦   ¦       COURT-DEADLINE-ALERTS.md
+¦   ¦       DEPLOYMENT-ALERTS.md
+¦   ¦       ESCALATION-PROTOCOL.md
+¦   ¦       INDUSTRIAL-COURT-ALERTS.md
+¦   ¦       LIVE-MONITORING-AND-PERFORMANCE.md
+¦   ¦       NOTIFICATION-PROTOCOL.md
+¦   ¦       PERKESO-ALERTS.md
+¦   ¦       
+¦   +---escalations
+¦   ¦       escalation-registry.json
+¦   ¦       
+¦   +---logs
+¦   +---notifications
+¦   ¦       notification-registry.json
+¦   ¦       
+¦   +---reports
+¦   ¦       alert-health.json
+¦   ¦       alert-metrics.json
+¦   ¦       
+¦   +---validation
+¦           validate-phase-10Z1.js
+¦           validation-report.json
+¦           
++---phase-10Z2-enterprise-operations-analytics-centre
+¦   +---analytics
+¦   +---backups
+¦   ¦       index.js.20260619-170447.bak
+¦   ¦       
+¦   +---dashboards
+¦   ¦       phase-10Z2-dashboard.json
+¦   ¦       
+¦   +---docs
+¦   ¦       ANALYTICS-VALIDATION-PROCESS.md
+¦   ¦       COURT-ANALYTICS-PROTOCOL.md
+¦   ¦       DEPLOYMENT-ANALYTICS.md
+¦   ¦       EXECUTIVE-ANALYTICS-REPORTING.md
+¦   ¦       INDUSTRIAL-COURT-ANALYTICS.md
+¦   ¦       LIVE-MONITORING-PROTOCOL.md
+¦   ¦       METRICS-MODEL.md
+¦   ¦       OPERATIONS-ANALYTICS-PROTOCOL.md
+¦   ¦       PERFORMANCE-ANALYTICS-PROTOCOL.md
+¦   ¦       PERKESO-ANALYTICS.md
+¦   ¦       
+¦   +---exports
+¦   +---logs
+¦   +---metrics
+¦   +---reports
+¦   ¦       phase-10Z2-validation-report.json
+¦   ¦       
+¦   +---snapshots
+¦   +---validation
+¦           validate-phase-10Z2.js
+¦           
++---phase-10Z3-predictive-intelligence-engine
+¦   +---analytics
+¦   +---backups
+¦   +---court-forecasting
+¦   +---dashboards
+¦   ¦       predictive-dashboard.json
+¦   ¦       
+¦   +---deployment-forecasting
+¦   +---docs
+¦   ¦       COURT-RISK-PREDICTION.md
+¦   ¦       DEPLOYMENT-RISK-PREDICTION.md
+¦   ¦       EXECUTIVE-PREDICTION-DASHBOARD.md
+¦   ¦       FORECASTING-PROTOCOL.md
+¦   ¦       INDUSTRIAL-COURT-FORECASTING.md
+¦   ¦       PERKESO-FORECASTING.md
+¦   ¦       PHASE-10Z-GAP-REPAIR-PROTOCOL.md
+¦   ¦       PREDICTIVE-INTELLIGENCE-HANDBOOK.md
+¦   ¦       RISK-SCORING-MODEL.md
+¦   ¦       TREND-ANALYSIS-PROTOCOL.md
+¦   ¦       WORKLOAD-FORECASTING.md
+¦   ¦       
+¦   +---logs
+¦   +---performance-forecasting
+¦   +---predictions
+¦   +---reports
+¦   +---risk-models
+¦   +---trend-analysis
+¦   +---validation
++---phase-10Z4-autonomous-operations-supervisor
+¦   +---analytics
+¦   +---automation
+¦   +---backups
+¦   ¦       index.js.20260619-171811.bak
+¦   ¦       
+¦   +---court-supervision
+¦   +---dashboards
+¦   ¦       AUTONOMOUS-SUPERVISOR-DASHBOARD.json
+¦   ¦       
+¦   +---deployment-supervision
+¦   +---docs
+¦   ¦       AUTO-RECOVERY-PROTOCOL.md
+¦   ¦       AUTO-REMEDIATION-PROTOCOL.md
+¦   ¦       AUTONOMOUS-SUPERVISOR-HANDBOOK.md
+¦   ¦       COURT-SUPERVISION-PROTOCOL.md
+¦   ¦       DECISION-ENGINE-PROTOCOL.md
+¦   ¦       DEPLOYMENT-SUPERVISION.md
+¦   ¦       EXECUTIVE-CONTROL-MODEL.md
+¦   ¦       INDUSTRIAL-COURT-SUPERVISION.md
+¦   ¦       PERKESO-SUPERVISION.md
+¦   ¦       WATCHDOG-PROTOCOL.md
+¦   ¦       
+¦   +---executive-escalation
+¦   +---logs
+¦   +---recovery
+¦   +---remediation
+¦   +---reports
+¦   ¦       PHASE-10Z4-AUTONOMOUS-SUPERVISOR-REPORT.md
+¦   ¦       
+¦   +---supervision
+¦   +---validation
+¦   ¦       PHASE-10Z4-VALIDATION-REPORT.txt
+¦   ¦       
+¦   +---watchdogs
++---phase-10ZE-frontend-wiring
+¦   +---backups
+¦   ¦       App.jsx.backup
+¦   ¦       
+¦   +---final-safe-replacement
+¦   ¦       App.jsx.before-full-safe-replace
+¦   ¦       
+¦   +---manual-review-backup
+¦   ¦       App.jsx.before-auto-surgical-routing
+¦   ¦       App.jsx.before-surgical-routing
+¦   ¦       
+¦   +---reports
++---phase-10ZF-navigation-module-menu
+¦   +---backups
+¦   ¦       App.css.before-10ZF
+¦   ¦       App.jsx.before-10ZF
+¦   ¦       
+¦   +---reports
+¦           DEPLOYMENT-VERIFICATION-REPORT.txt
+¦           health.json
+¦           PHASE-10ZF-CLOSEOUT-CHECKLIST.txt
+¦           
++---phase-10ZG-dashboard-framework
+¦   +---backups
+¦   ¦       App.css.before-10ZG
+¦   ¦       App.jsx.before-10ZG
+¦   ¦       
+¦   +---reports
+¦           PHASE-10ZG-DEPLOYMENT-REPORT.txt
+¦           VERIFY-PHASE-10ZG-REPORT.txt
+¦           
++---phase-10ZY0-enterprise-discovery-inventory-audit
+¦   +---docs
+¦   +---inventory
+¦   +---logs
+¦   +---reports
+¦   ¦       MASTER-INVENTORY.json
+¦   ¦       MASTER-INVENTORY.txt
+¦   ¦       
+¦   +---validation
++---phase-11-0-autonomous-legal-enterprise-ecosystem-foundation
+    +---agents
+    +---backups
+    ¦       index.js.20260619-172540.bak
+    ¦       
+    +---court-intelligence
+    +---dashboards
+    ¦       ecosystem-dashboard.json
+    ¦       
+    +---docs
+    ¦       AUTONOMOUS-LEGAL-ENTERPRISE-ECOSYSTEM-HANDBOOK.md
+    ¦       COURT-AGENCY-INTELLIGENCE-PROTOCOL.md
+    ¦       ECOSYSTEM-ORCHESTRATION-PROTOCOL.md
+    ¦       EXECUTIVE-ECOSYSTEM-DASHBOARD.md
+    ¦       GOVERNANCE-AND-SAFETY-GATES.md
+    ¦       INDUSTRIAL-COURT-ECOSYSTEM-COVERAGE.md
+    ¦       LEGAL-AGENT-REGISTRY.md
+    ¦       PERKESO-ECOSYSTEM-COVERAGE.md
+    ¦       VALIDATION-AND-TESTING-PROTOCOL.md
+    ¦       
+    +---ecosystem
+    +---governance
+    +---industrial-court
+    +---legal-intelligence
+    +---logs
+    +---orchestration
+    +---perkeso
+    +---reports
+    ¦       phase-11-0-validation-report.txt
+    ¦       
+    +---validation
+            validate-phase-11-0.js
+            

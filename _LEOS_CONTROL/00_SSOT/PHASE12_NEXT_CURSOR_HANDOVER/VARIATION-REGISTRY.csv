@@ -1,0 +1,8 @@
+﻿VariationID,Variation,SSOTRelationship,Status,RiskLevel,Timestamp
+V001,Cursor plus PowerShell plus React plus Node.js,Main workflow,Active,Low,2026-06-23 12:23:24 +08:00
+V002,VS Code plus GitHub Copilot,Backup workflow,Secondary,Low,2026-06-23 12:23:24 +08:00
+V003,Replit Lovable Bolt v0,Prototype only,Not main,Medium,2026-06-23 12:23:24 +08:00
+V004,Documentation control layer work,Current approved branch,Active,Low,2026-06-23 12:23:24 +08:00
+V005,Live monitoring and logs,Approved control support,Active,Low,2026-06-23 12:23:24 +08:00
+V006,Production backend API database changes,Future branch only,Locked,High,2026-06-23 12:23:24 +08:00
+V007,Phase 11 implementation,Future branch only,Locked,High,2026-06-23 12:23:24 +08:00

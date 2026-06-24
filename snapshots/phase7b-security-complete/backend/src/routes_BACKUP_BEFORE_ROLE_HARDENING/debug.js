@@ -1,0 +1,24 @@
+const express = require("express");
+const router = express.Router();
+
+const { getErrors, clearErrors } = require("../utils/errorBus");
+
+// GET LIVE ERRORS
+router.get("/errors", (req, res) => {
+  res.json({
+    count: getErrors().length,
+    errors: getErrors()
+  });
+});
+
+// CLEAR ERROR BUFFER
+router.delete("/errors", (req, res) => {
+  clearErrors();
+
+  res.json({
+    success: true,
+    message: "Error buffer cleared"
+  });
+});
+
+module.exports = router;

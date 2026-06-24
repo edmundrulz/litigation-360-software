@@ -1,0 +1,19 @@
+{
+  "protected_firms": [
+    "FIRM_GROUND_ZERO"
+  ],
+  "ground_zero_rules": {
+    "cannot_downgrade": true,
+    "cannot_suspend": true,
+    "cannot_expire_trial": true,
+    "cannot_lock_features": true,
+    "cannot_billing_lock": true,
+    "must_remain_unlimited": true
+  },
+  "dangerous_actions": [
+    "DOWNGRADE_PLAN",
+    "SUSPEND_FIRM",
+    "END_TRIAL",
+    "REVOKE_FEATURE_OVERRIDE"
+  ]
+}

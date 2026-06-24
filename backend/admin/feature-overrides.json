@@ -1,0 +1,9 @@
+{
+  "manual_feature_overrides": {
+    "FIRM_STARTER_SAMPLE": {
+      "USER_STARTER": [
+        "FAKE_FEATURE_DOES_NOT_EXIST"
+      ]
+    }
+  }
+}

@@ -1,0 +1,949 @@
+============================================================
+FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx
+EXTRACTED: 2026-06-22 23:54:56
+============================================================
+
+---- MATCH: Create Case | LINE: 192 | CONTEXT: 180 to 210 ----
+  180:     setEditingId(null);
+  181:     setShowForm(false);
+  182:   }
+  183: 
+  184:   if (loading) return <div>Loading...</div>;
+  185: 
+  186:   return (
+  187:     <div>
+  188: 
+  189:       {successMsg && <div>{successMsg}</div>}
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+  194: 
+  195:       {showForm && (
+  196:         <form onSubmit={handleSubmit}>
+  197: 
+  198:           <input
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+
+---- MATCH: Case Title | LINE: 202 | CONTEXT: 190 to 220 ----
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+  194: 
+  195:       {showForm && (
+  196:         <form onSubmit={handleSubmit}>
+  197: 
+  198:           <input
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+  211:             <option value="">Select Client</option>
+  212: 
+  213:             {clients.map(c => (
+  214:               <option key={c.id} value={c.id}>
+  215:                 {c.full_name}
+  216:               </option>
+  217:             ))}
+  218:           </select>
+  219: 
+  220:           <button type="submit" disabled={saving}>
+
+---- MATCH: Select Client | LINE: 211 | CONTEXT: 199 to 229 ----
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+  211:             <option value="">Select Client</option>
+  212: 
+  213:             {clients.map(c => (
+  214:               <option key={c.id} value={c.id}>
+  215:                 {c.full_name}
+  216:               </option>
+  217:             ))}
+  218:           </select>
+  219: 
+  220:           <button type="submit" disabled={saving}>
+  221:             {saving ? "Saving..." : editingId ? "Update" : "Create"}
+  222:           </button>
+  223: 
+  224:         </form>
+  225:       )}
+  226: 
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+
+---- MATCH: Title | LINE: 33 | CONTEXT: 21 to 51 ----
+   21:   const [staffList, setStaffList] = useState([]);
+   22: 
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+   28: 
+   29:   const [successMsg, setSuccessMsg] = useState(null);
+   30: 
+   31:   const [formData, setFormData] = useState({
+   32:     case_number: "",
+   33:     title: "",
+   34:     client_id: "",
+   35:     status: "NEW",
+   36:     description: "",
+   37:     opened_date: ""
+   38:   });
+   39: 
+   40:   // =======================
+   41:   // LOAD DATA
+   42:   // =======================
+   43:   useEffect(() => {
+   44:     loadData();
+   45:   }, []);
+   46: 
+   47:   async function loadData() {
+   48:     try {
+   49:       setLoading(true);
+   50: 
+   51:       const [casesData, staffData, clientsData] = await Promise.all([
+
+---- MATCH: Title | LINE: 156 | CONTEXT: 144 to 174 ----
+  144: 
+  145:     await removeCase(id);
+  146:     setSuccessMsg("Case deleted");
+  147:     await loadData();
+  148:   }
+  149: 
+  150:   // =======================
+  151:   // EDIT
+  152:   // =======================
+  153:   function handleEdit(c) {
+  154:     setFormData({
+  155:       case_number: c.case_number || "",
+  156:       title: c.title || "",
+  157:       client_id: c.client_id || "",
+  158:       status: c.status || "NEW",
+  159:       description: c.description || "",
+  160:       opened_date: c.opened_date || ""
+  161:     });
+  162: 
+  163:     setEditingId(c.id);
+  164:     setShowForm(true);
+  165:   }
+  166: 
+  167:   // =======================
+  168:   // RESET
+  169:   // =======================
+  170:   function resetForm() {
+  171:     setFormData({
+  172:       case_number: "",
+  173:       title: "",
+  174:       client_id: "",
+
+---- MATCH: Title | LINE: 173 | CONTEXT: 161 to 191 ----
+  161:     });
+  162: 
+  163:     setEditingId(c.id);
+  164:     setShowForm(true);
+  165:   }
+  166: 
+  167:   // =======================
+  168:   // RESET
+  169:   // =======================
+  170:   function resetForm() {
+  171:     setFormData({
+  172:       case_number: "",
+  173:       title: "",
+  174:       client_id: "",
+  175:       status: "NEW",
+  176:       description: "",
+  177:       opened_date: ""
+  178:     });
+  179: 
+  180:     setEditingId(null);
+  181:     setShowForm(false);
+  182:   }
+  183: 
+  184:   if (loading) return <div>Loading...</div>;
+  185: 
+  186:   return (
+  187:     <div>
+  188: 
+  189:       {successMsg && <div>{successMsg}</div>}
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+
+---- MATCH: Title | LINE: 199 | CONTEXT: 187 to 217 ----
+  187:     <div>
+  188: 
+  189:       {successMsg && <div>{successMsg}</div>}
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+  194: 
+  195:       {showForm && (
+  196:         <form onSubmit={handleSubmit}>
+  197: 
+  198:           <input
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+  211:             <option value="">Select Client</option>
+  212: 
+  213:             {clients.map(c => (
+  214:               <option key={c.id} value={c.id}>
+  215:                 {c.full_name}
+  216:               </option>
+  217:             ))}
+
+---- MATCH: Title | LINE: 200 | CONTEXT: 188 to 218 ----
+  188: 
+  189:       {successMsg && <div>{successMsg}</div>}
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+  194: 
+  195:       {showForm && (
+  196:         <form onSubmit={handleSubmit}>
+  197: 
+  198:           <input
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+  211:             <option value="">Select Client</option>
+  212: 
+  213:             {clients.map(c => (
+  214:               <option key={c.id} value={c.id}>
+  215:                 {c.full_name}
+  216:               </option>
+  217:             ))}
+  218:           </select>
+
+---- MATCH: Title | LINE: 202 | CONTEXT: 190 to 220 ----
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+  194: 
+  195:       {showForm && (
+  196:         <form onSubmit={handleSubmit}>
+  197: 
+  198:           <input
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+  211:             <option value="">Select Client</option>
+  212: 
+  213:             {clients.map(c => (
+  214:               <option key={c.id} value={c.id}>
+  215:                 {c.full_name}
+  216:               </option>
+  217:             ))}
+  218:           </select>
+  219: 
+  220:           <button type="submit" disabled={saving}>
+
+---- MATCH: Title | LINE: 230 | CONTEXT: 218 to 248 ----
+  218:           </select>
+  219: 
+  220:           <button type="submit" disabled={saving}>
+  221:             {saving ? "Saving..." : editingId ? "Update" : "Create"}
+  222:           </button>
+  223: 
+  224:         </form>
+  225:       )}
+  226: 
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>
+  240:               <td>{formatStatus(c.status)}</td>
+  241:               <td>
+  242:                 <button onClick={() => handleEdit(c)}>Edit</button>
+  243:                 <button onClick={() => handleDelete(c.id)}>Delete</button>
+  244:               </td>
+  245:             </tr>
+  246:           ))}
+  247:         </tbody>
+  248: 
+
+---- MATCH: Title | LINE: 239 | CONTEXT: 227 to 254 ----
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>
+  240:               <td>{formatStatus(c.status)}</td>
+  241:               <td>
+  242:                 <button onClick={() => handleEdit(c)}>Edit</button>
+  243:                 <button onClick={() => handleDelete(c.id)}>Delete</button>
+  244:               </td>
+  245:             </tr>
+  246:           ))}
+  247:         </tbody>
+  248: 
+  249:       </table>
+  250: 
+  251:     </div>
+  252:   );
+  253: }
+  254: 
+
+---- MATCH: Status | LINE: 15 | CONTEXT: 3 to 33 ----
+    3: import { fetchAllClients } from "../services/clientService";
+    4: import { autoAssignCase } from "../rules/assignmentEngine";
+    5: 
+    6: import React, { useState, useEffect } from "react";
+    7: 
+    8: import {
+    9:   fetchAllCases,
+   10:   addCase,
+   11:   editCase,
+   12:   removeCase
+   13: } from "../services/caseService";
+   14: 
+   15: import { formatStatus } from "../utils/formatters";
+   16: 
+   17: export default function Cases() {
+   18: 
+   19:   const [cases, setCases] = useState([]);
+   20:   const [clients, setClients] = useState([]);
+   21:   const [staffList, setStaffList] = useState([]);
+   22: 
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+   28: 
+   29:   const [successMsg, setSuccessMsg] = useState(null);
+   30: 
+   31:   const [formData, setFormData] = useState({
+   32:     case_number: "",
+   33:     title: "",
+
+---- MATCH: Status | LINE: 35 | CONTEXT: 23 to 53 ----
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+   28: 
+   29:   const [successMsg, setSuccessMsg] = useState(null);
+   30: 
+   31:   const [formData, setFormData] = useState({
+   32:     case_number: "",
+   33:     title: "",
+   34:     client_id: "",
+   35:     status: "NEW",
+   36:     description: "",
+   37:     opened_date: ""
+   38:   });
+   39: 
+   40:   // =======================
+   41:   // LOAD DATA
+   42:   // =======================
+   43:   useEffect(() => {
+   44:     loadData();
+   45:   }, []);
+   46: 
+   47:   async function loadData() {
+   48:     try {
+   49:       setLoading(true);
+   50: 
+   51:       const [casesData, staffData, clientsData] = await Promise.all([
+   52:         fetchAllCases(),
+   53:         fetchAllStaff(),
+
+---- MATCH: Status | LINE: 158 | CONTEXT: 146 to 176 ----
+  146:     setSuccessMsg("Case deleted");
+  147:     await loadData();
+  148:   }
+  149: 
+  150:   // =======================
+  151:   // EDIT
+  152:   // =======================
+  153:   function handleEdit(c) {
+  154:     setFormData({
+  155:       case_number: c.case_number || "",
+  156:       title: c.title || "",
+  157:       client_id: c.client_id || "",
+  158:       status: c.status || "NEW",
+  159:       description: c.description || "",
+  160:       opened_date: c.opened_date || ""
+  161:     });
+  162: 
+  163:     setEditingId(c.id);
+  164:     setShowForm(true);
+  165:   }
+  166: 
+  167:   // =======================
+  168:   // RESET
+  169:   // =======================
+  170:   function resetForm() {
+  171:     setFormData({
+  172:       case_number: "",
+  173:       title: "",
+  174:       client_id: "",
+  175:       status: "NEW",
+  176:       description: "",
+
+---- MATCH: Status | LINE: 175 | CONTEXT: 163 to 193 ----
+  163:     setEditingId(c.id);
+  164:     setShowForm(true);
+  165:   }
+  166: 
+  167:   // =======================
+  168:   // RESET
+  169:   // =======================
+  170:   function resetForm() {
+  171:     setFormData({
+  172:       case_number: "",
+  173:       title: "",
+  174:       client_id: "",
+  175:       status: "NEW",
+  176:       description: "",
+  177:       opened_date: ""
+  178:     });
+  179: 
+  180:     setEditingId(null);
+  181:     setShowForm(false);
+  182:   }
+  183: 
+  184:   if (loading) return <div>Loading...</div>;
+  185: 
+  186:   return (
+  187:     <div>
+  188: 
+  189:       {successMsg && <div>{successMsg}</div>}
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+
+---- MATCH: Status | LINE: 231 | CONTEXT: 219 to 249 ----
+  219: 
+  220:           <button type="submit" disabled={saving}>
+  221:             {saving ? "Saving..." : editingId ? "Update" : "Create"}
+  222:           </button>
+  223: 
+  224:         </form>
+  225:       )}
+  226: 
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>
+  240:               <td>{formatStatus(c.status)}</td>
+  241:               <td>
+  242:                 <button onClick={() => handleEdit(c)}>Edit</button>
+  243:                 <button onClick={() => handleDelete(c.id)}>Delete</button>
+  244:               </td>
+  245:             </tr>
+  246:           ))}
+  247:         </tbody>
+  248: 
+  249:       </table>
+
+---- MATCH: Status | LINE: 240 | CONTEXT: 228 to 254 ----
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>
+  240:               <td>{formatStatus(c.status)}</td>
+  241:               <td>
+  242:                 <button onClick={() => handleEdit(c)}>Edit</button>
+  243:                 <button onClick={() => handleDelete(c.id)}>Delete</button>
+  244:               </td>
+  245:             </tr>
+  246:           ))}
+  247:         </tbody>
+  248: 
+  249:       </table>
+  250: 
+  251:     </div>
+  252:   );
+  253: }
+  254: 
+
+---- MATCH: Actions | LINE: 232 | CONTEXT: 220 to 250 ----
+  220:           <button type="submit" disabled={saving}>
+  221:             {saving ? "Saving..." : editingId ? "Update" : "Create"}
+  222:           </button>
+  223: 
+  224:         </form>
+  225:       )}
+  226: 
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>
+  240:               <td>{formatStatus(c.status)}</td>
+  241:               <td>
+  242:                 <button onClick={() => handleEdit(c)}>Edit</button>
+  243:                 <button onClick={() => handleDelete(c.id)}>Delete</button>
+  244:               </td>
+  245:             </tr>
+  246:           ))}
+  247:         </tbody>
+  248: 
+  249:       </table>
+  250: 
+
+---- MATCH: cases | LINE: 9 | CONTEXT: 1 to 27 ----
+    1: import { assignCaseToStaff } from "../services/assignmentService";
+    2: import { fetchAllStaff } from "../services/staffService";
+    3: import { fetchAllClients } from "../services/clientService";
+    4: import { autoAssignCase } from "../rules/assignmentEngine";
+    5: 
+    6: import React, { useState, useEffect } from "react";
+    7: 
+    8: import {
+    9:   fetchAllCases,
+   10:   addCase,
+   11:   editCase,
+   12:   removeCase
+   13: } from "../services/caseService";
+   14: 
+   15: import { formatStatus } from "../utils/formatters";
+   16: 
+   17: export default function Cases() {
+   18: 
+   19:   const [cases, setCases] = useState([]);
+   20:   const [clients, setClients] = useState([]);
+   21:   const [staffList, setStaffList] = useState([]);
+   22: 
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+
+---- MATCH: cases | LINE: 13 | CONTEXT: 1 to 31 ----
+    1: import { assignCaseToStaff } from "../services/assignmentService";
+    2: import { fetchAllStaff } from "../services/staffService";
+    3: import { fetchAllClients } from "../services/clientService";
+    4: import { autoAssignCase } from "../rules/assignmentEngine";
+    5: 
+    6: import React, { useState, useEffect } from "react";
+    7: 
+    8: import {
+    9:   fetchAllCases,
+   10:   addCase,
+   11:   editCase,
+   12:   removeCase
+   13: } from "../services/caseService";
+   14: 
+   15: import { formatStatus } from "../utils/formatters";
+   16: 
+   17: export default function Cases() {
+   18: 
+   19:   const [cases, setCases] = useState([]);
+   20:   const [clients, setClients] = useState([]);
+   21:   const [staffList, setStaffList] = useState([]);
+   22: 
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+   28: 
+   29:   const [successMsg, setSuccessMsg] = useState(null);
+   30: 
+   31:   const [formData, setFormData] = useState({
+
+---- MATCH: cases | LINE: 17 | CONTEXT: 5 to 35 ----
+    5: 
+    6: import React, { useState, useEffect } from "react";
+    7: 
+    8: import {
+    9:   fetchAllCases,
+   10:   addCase,
+   11:   editCase,
+   12:   removeCase
+   13: } from "../services/caseService";
+   14: 
+   15: import { formatStatus } from "../utils/formatters";
+   16: 
+   17: export default function Cases() {
+   18: 
+   19:   const [cases, setCases] = useState([]);
+   20:   const [clients, setClients] = useState([]);
+   21:   const [staffList, setStaffList] = useState([]);
+   22: 
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+   28: 
+   29:   const [successMsg, setSuccessMsg] = useState(null);
+   30: 
+   31:   const [formData, setFormData] = useState({
+   32:     case_number: "",
+   33:     title: "",
+   34:     client_id: "",
+   35:     status: "NEW",
+
+---- MATCH: cases | LINE: 19 | CONTEXT: 7 to 37 ----
+    7: 
+    8: import {
+    9:   fetchAllCases,
+   10:   addCase,
+   11:   editCase,
+   12:   removeCase
+   13: } from "../services/caseService";
+   14: 
+   15: import { formatStatus } from "../utils/formatters";
+   16: 
+   17: export default function Cases() {
+   18: 
+   19:   const [cases, setCases] = useState([]);
+   20:   const [clients, setClients] = useState([]);
+   21:   const [staffList, setStaffList] = useState([]);
+   22: 
+   23:   const [loading, setLoading] = useState(true);
+   24:   const [saving, setSaving] = useState(false);
+   25: 
+   26:   const [showForm, setShowForm] = useState(false);
+   27:   const [editingId, setEditingId] = useState(null);
+   28: 
+   29:   const [successMsg, setSuccessMsg] = useState(null);
+   30: 
+   31:   const [formData, setFormData] = useState({
+   32:     case_number: "",
+   33:     title: "",
+   34:     client_id: "",
+   35:     status: "NEW",
+   36:     description: "",
+   37:     opened_date: ""
+
+---- MATCH: cases | LINE: 51 | CONTEXT: 39 to 69 ----
+   39: 
+   40:   // =======================
+   41:   // LOAD DATA
+   42:   // =======================
+   43:   useEffect(() => {
+   44:     loadData();
+   45:   }, []);
+   46: 
+   47:   async function loadData() {
+   48:     try {
+   49:       setLoading(true);
+   50: 
+   51:       const [casesData, staffData, clientsData] = await Promise.all([
+   52:         fetchAllCases(),
+   53:         fetchAllStaff(),
+   54:         fetchAllClients()
+   55:       ]);
+   56: 
+   57:       setCases(casesData);
+   58:       setStaffList(staffData);
+   59:       setClients(clientsData);
+   60: 
+   61:           console.error("Load error:", err);
+   62:     } finally {
+   63:       setLoading(false);
+   64:     }
+   65:   }
+   66: 
+   67:   // =======================
+   68:   // CLEAR MESSAGE
+   69:   // =======================
+
+---- MATCH: cases | LINE: 52 | CONTEXT: 40 to 70 ----
+   40:   // =======================
+   41:   // LOAD DATA
+   42:   // =======================
+   43:   useEffect(() => {
+   44:     loadData();
+   45:   }, []);
+   46: 
+   47:   async function loadData() {
+   48:     try {
+   49:       setLoading(true);
+   50: 
+   51:       const [casesData, staffData, clientsData] = await Promise.all([
+   52:         fetchAllCases(),
+   53:         fetchAllStaff(),
+   54:         fetchAllClients()
+   55:       ]);
+   56: 
+   57:       setCases(casesData);
+   58:       setStaffList(staffData);
+   59:       setClients(clientsData);
+   60: 
+   61:           console.error("Load error:", err);
+   62:     } finally {
+   63:       setLoading(false);
+   64:     }
+   65:   }
+   66: 
+   67:   // =======================
+   68:   // CLEAR MESSAGE
+   69:   // =======================
+   70:   useEffect(() => {
+
+---- MATCH: cases | LINE: 57 | CONTEXT: 45 to 75 ----
+   45:   }, []);
+   46: 
+   47:   async function loadData() {
+   48:     try {
+   49:       setLoading(true);
+   50: 
+   51:       const [casesData, staffData, clientsData] = await Promise.all([
+   52:         fetchAllCases(),
+   53:         fetchAllStaff(),
+   54:         fetchAllClients()
+   55:       ]);
+   56: 
+   57:       setCases(casesData);
+   58:       setStaffList(staffData);
+   59:       setClients(clientsData);
+   60: 
+   61:           console.error("Load error:", err);
+   62:     } finally {
+   63:       setLoading(false);
+   64:     }
+   65:   }
+   66: 
+   67:   // =======================
+   68:   // CLEAR MESSAGE
+   69:   // =======================
+   70:   useEffect(() => {
+   71:     if (!successMsg) return;
+   72:     const t = setTimeout(() => setSuccessMsg(null), 3000);
+   73:     return () => clearTimeout(t);
+   74:   }, [successMsg]);
+   75: 
+
+---- MATCH: cases | LINE: 237 | CONTEXT: 225 to 254 ----
+  225:       )}
+  226: 
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>
+  240:               <td>{formatStatus(c.status)}</td>
+  241:               <td>
+  242:                 <button onClick={() => handleEdit(c)}>Edit</button>
+  243:                 <button onClick={() => handleDelete(c.id)}>Delete</button>
+  244:               </td>
+  245:             </tr>
+  246:           ))}
+  247:         </tbody>
+  248: 
+  249:       </table>
+  250: 
+  251:     </div>
+  252:   );
+  253: }
+  254: 
+
+---- MATCH: create | LINE: 116 | CONTEXT: 104 to 134 ----
+  104:       client_id:
+  105:         formData.client_id === "" ? null : Number(formData.client_id)
+  106:     };
+  107: 
+  108:     let savedCase;
+  109: 
+  110:     if (editingId) {
+  111:       await editCase(editingId, payload);
+  112:       savedCase = { ...payload, id: editingId };
+  113:       setSuccessMsg("Case updated");
+  114:     } else {
+  115:       savedCase = await addCase(payload);
+  116:       setSuccessMsg("Case created");
+  117:     }
+  118: 
+  119:     const result = autoAssignCase(savedCase, staffList);
+  120: 
+  121:     if (result.assigned) {
+  122:       await assignCaseToStaff(savedCase.id, result.staff.id);
+  123:     }
+  124: 
+  125:     resetForm();
+  126: 
+  127:     // SAFE DELAYED REFRESH (CLEAN + CLOSED PROPERLY)
+  128:     setTimeout(() => {
+  129:       loadData();
+  130:     }, 300);
+  131: 
+  132:   } catch (err) {
+  133:     console.error("SUBMIT ERROR:", err);
+  134:   } finally {
+
+---- MATCH: create | LINE: 192 | CONTEXT: 180 to 210 ----
+  180:     setEditingId(null);
+  181:     setShowForm(false);
+  182:   }
+  183: 
+  184:   if (loading) return <div>Loading...</div>;
+  185: 
+  186:   return (
+  187:     <div>
+  188: 
+  189:       {successMsg && <div>{successMsg}</div>}
+  190: 
+  191:       <button onClick={() => setShowForm(true)}>
+  192:         Create Case
+  193:       </button>
+  194: 
+  195:       {showForm && (
+  196:         <form onSubmit={handleSubmit}>
+  197: 
+  198:           <input
+  199:             name="title"
+  200:             value={formData.title}
+  201:             onChange={handleChange}
+  202:             placeholder="Case Title"
+  203:           />
+  204: 
+  205:           <select
+  206:             name="client_id"
+  207:             value={formData.client_id}
+  208:             onChange={handleChange}
+  209:             required
+  210:           >
+
+---- MATCH: create | LINE: 221 | CONTEXT: 209 to 239 ----
+  209:             required
+  210:           >
+  211:             <option value="">Select Client</option>
+  212: 
+  213:             {clients.map(c => (
+  214:               <option key={c.id} value={c.id}>
+  215:                 {c.full_name}
+  216:               </option>
+  217:             ))}
+  218:           </select>
+  219: 
+  220:           <button type="submit" disabled={saving}>
+  221:             {saving ? "Saving..." : editingId ? "Update" : "Create"}
+  222:           </button>
+  223: 
+  224:         </form>
+  225:       )}
+  226: 
+  227:       <table>
+  228:         <thead>
+  229:           <tr>
+  230:             <th>Title</th>
+  231:             <th>Status</th>
+  232:             <th>Actions</th>
+  233:           </tr>
+  234:         </thead>
+  235: 
+  236:         <tbody>
+  237:           {cases.map(c => (
+  238:             <tr key={c.id}>
+  239:               <td>{c.title}</td>

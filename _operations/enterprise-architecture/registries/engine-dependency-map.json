@@ -1,0 +1,276 @@
+{
+  "registry": "engine-dependency-map",
+  "generatedAt": "2026-06-19T06:02:47.882Z",
+  "engines": [
+    {
+      "engine": "alertManager",
+      "file": "backend/src/automation/alertManager.js",
+      "dependencies": []
+    },
+    {
+      "engine": "autonomousOperationsEngine",
+      "file": "backend/src/automation/autonomousOperationsEngine.js",
+      "dependencies": [
+        "executiveCommandCentre",
+        "predictiveAnalyticsEngine",
+        "legalOperationsAssistant",
+        "notificationService",
+        "workflowEngine",
+        "courtOperationsEngine",
+        "documentLifecycleEngine",
+        "matterIntelligenceEngine"
+      ]
+    },
+    {
+      "engine": "backupRecoveryEngine",
+      "file": "backend/src/automation/backupRecoveryEngine.js",
+      "dependencies": [
+        "enterpriseHardeningEngine"
+      ]
+    },
+    {
+      "engine": "courtNavigationEngine",
+      "file": "backend/src/automation/courtNavigationEngine.js",
+      "dependencies": [
+        "courtOperationsEngine",
+        "documentLifecycleEngine",
+        "workflowEngine",
+        "notificationService"
+      ]
+    },
+    {
+      "engine": "courtOperationsEngine",
+      "file": "backend/src/automation/courtOperationsEngine.js",
+      "dependencies": [
+        "eventBus",
+        "notificationService",
+        "workflowEngine"
+      ]
+    },
+    {
+      "engine": "deploymentReadinessCentre",
+      "file": "backend/src/automation/deploymentReadinessCentre.js",
+      "dependencies": []
+    },
+    {
+      "engine": "documentLifecycleEngine",
+      "file": "backend/src/automation/documentLifecycleEngine.js",
+      "dependencies": [
+        "eventBus",
+        "notificationService",
+        "workflowEngine"
+      ]
+    },
+    {
+      "engine": "enterpriseGovernanceEngine",
+      "file": "backend/src/automation/enterpriseGovernanceEngine.js",
+      "dependencies": [
+        "notificationService",
+        "workflowEngine",
+        "matterIntelligenceEngine",
+        "autonomousOperationsEngine"
+      ]
+    },
+    {
+      "engine": "enterpriseHardeningEngine",
+      "file": "backend/src/automation/enterpriseHardeningEngine.js",
+      "dependencies": []
+    },
+    {
+      "engine": "enterpriseMonitoringEngine",
+      "file": "backend/src/automation/enterpriseMonitoringEngine.js",
+      "dependencies": [
+        "metricsCollector",
+        "alertManager"
+      ]
+    },
+    {
+      "engine": "environmentValidationEngine",
+      "file": "backend/src/automation/environmentValidationEngine.js",
+      "dependencies": []
+    },
+    {
+      "engine": "eventBus",
+      "file": "backend/src/automation/eventBus.js",
+      "dependencies": [
+        "handlerRegistry"
+      ]
+    },
+    {
+      "engine": "eventTypes",
+      "file": "backend/src/automation/eventTypes.js",
+      "dependencies": []
+    },
+    {
+      "engine": "executiveCommandCentre",
+      "file": "backend/src/automation/executiveCommandCentre.js",
+      "dependencies": [
+        "handlerRegistry",
+        "eventBus",
+        "notificationService",
+        "workflowEngine",
+        "documentLifecycleEngine",
+        "courtOperationsEngine",
+        "matterIntelligenceEngine"
+      ]
+    },
+    {
+      "engine": "handlerRegistry",
+      "file": "backend/src/automation/handlerRegistry.js",
+      "dependencies": [
+        "eventTypes",
+        "handlers/clientCreated",
+        "handlers/matterCreated",
+        "handlers/documentUploaded",
+        "handlers/taskCompleted",
+        "handlers/courtDateAdded",
+        "handlers/deadlineCreated",
+        "handlers/paymentReceived",
+        "handlers/invoiceCreated",
+        "handlers/userCreated",
+        "handlers/roleChanged"
+      ]
+    },
+    {
+      "engine": "clientCreated",
+      "file": "backend/src/automation/handlers/clientCreated.js",
+      "dependencies": []
+    },
+    {
+      "engine": "courtDateAdded",
+      "file": "backend/src/automation/handlers/courtDateAdded.js",
+      "dependencies": []
+    },
+    {
+      "engine": "deadlineCreated",
+      "file": "backend/src/automation/handlers/deadlineCreated.js",
+      "dependencies": []
+    },
+    {
+      "engine": "documentUploaded",
+      "file": "backend/src/automation/handlers/documentUploaded.js",
+      "dependencies": []
+    },
+    {
+      "engine": "invoiceCreated",
+      "file": "backend/src/automation/handlers/invoiceCreated.js",
+      "dependencies": []
+    },
+    {
+      "engine": "matterCreated",
+      "file": "backend/src/automation/handlers/matterCreated.js",
+      "dependencies": []
+    },
+    {
+      "engine": "paymentReceived",
+      "file": "backend/src/automation/handlers/paymentReceived.js",
+      "dependencies": []
+    },
+    {
+      "engine": "roleChanged",
+      "file": "backend/src/automation/handlers/roleChanged.js",
+      "dependencies": []
+    },
+    {
+      "engine": "taskCompleted",
+      "file": "backend/src/automation/handlers/taskCompleted.js",
+      "dependencies": []
+    },
+    {
+      "engine": "userCreated",
+      "file": "backend/src/automation/handlers/userCreated.js",
+      "dependencies": []
+    },
+    {
+      "engine": "legalOperationsAssistant",
+      "file": "backend/src/automation/legalOperationsAssistant.js",
+      "dependencies": [
+        "executiveCommandCentre",
+        "matterIntelligenceEngine",
+        "notificationService"
+      ]
+    },
+    {
+      "engine": "loadTestingEngine",
+      "file": "backend/src/automation/loadTestingEngine.js",
+      "dependencies": [
+        "enterpriseMonitoringEngine",
+        "enterpriseHardeningEngine",
+        "backupRecoveryEngine"
+      ]
+    },
+    {
+      "engine": "mapsIntegrationLayer",
+      "file": "backend/src/automation/mapsIntegrationLayer.js",
+      "dependencies": [
+        "courtNavigationEngine",
+        "courtOperationsEngine"
+      ]
+    },
+    {
+      "engine": "matterIntelligenceEngine",
+      "file": "backend/src/automation/matterIntelligenceEngine.js",
+      "dependencies": [
+        "notificationService",
+        "documentLifecycleEngine",
+        "courtOperationsEngine",
+        "workflowEngine"
+      ]
+    },
+    {
+      "engine": "metricsCollector",
+      "file": "backend/src/automation/metricsCollector.js",
+      "dependencies": []
+    },
+    {
+      "engine": "notificationService",
+      "file": "backend/src/automation/notificationService.js",
+      "dependencies": []
+    },
+    {
+      "engine": "performanceOptimizationEngine",
+      "file": "backend/src/automation/performanceOptimizationEngine.js",
+      "dependencies": [
+        "enterpriseMonitoringEngine",
+        "enterpriseHardeningEngine",
+        "backupRecoveryEngine"
+      ]
+    },
+    {
+      "engine": "predictiveAnalyticsEngine",
+      "file": "backend/src/automation/predictiveAnalyticsEngine.js",
+      "dependencies": [
+        "executiveCommandCentre",
+        "matterIntelligenceEngine",
+        "courtOperationsEngine",
+        "workflowEngine",
+        "documentLifecycleEngine",
+        "notificationService"
+      ]
+    },
+    {
+      "engine": "releaseValidatorEngine",
+      "file": "backend/src/automation/releaseValidatorEngine.js",
+      "dependencies": [
+        "deploymentReadinessCentre",
+        "environmentValidationEngine",
+        "enterpriseHardeningEngine",
+        "backupRecoveryEngine",
+        "enterpriseMonitoringEngine",
+        "performanceOptimizationEngine"
+      ]
+    },
+    {
+      "engine": "workflowEngine",
+      "file": "backend/src/automation/workflowEngine.js",
+      "dependencies": [
+        "eventBus",
+        "notificationService"
+      ]
+    }
+  ],
+  "totals": {
+    "engines": 35,
+    "dependencies": 73
+  }
+}

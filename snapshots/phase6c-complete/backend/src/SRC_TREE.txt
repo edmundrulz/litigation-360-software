@@ -1,0 +1,77 @@
+Folder PATH listing for volume Windows
+Volume serial number is 000000B8 F0B7:DAA5
+C:.
+¦   database.js
+¦   database_BACKUP_1.js
+¦   duplicateService.js
+¦   index.js
+¦   matterService.js
+¦   server.js
+¦   SRC_TREE.txt
+¦   
++---core
+¦       logger.js
+¦       systemScore.js
+¦       
++---jobs
+¦       systemScheduler.js
+¦       
++---logs
+¦       repair-history.log
+¦       
++---middleware
+¦       auth.js
+¦       authenticateToken.js
+¦       authorize.js
+¦       errorHandler.js
+¦       roles.js
+¦       
++---migrations
+¦       005_create_matters.js
+¦       
++---models
+¦       Client.js
+¦       Communication.js
+¦       Document.js
+¦       Firm.js
+¦       index.js
+¦       Invoice.js
+¦       Matter.js
+¦       Task.js
+¦       TimeEntry.js
+¦       User.js
+¦       
++---routes
+¦       auditLogs.js
+¦       auth.js
+¦       autoHeal.js
+¦       caseRoutes.js
+¦       cases.js
+¦       clients.js
+¦       dashboard.js
+¦       deadlines.js
+¦       debug.js
+¦       documents.js
+¦       errors.js
+¦       health.js
+¦       integrityScanner.js
+¦       invoices.js
+¦       matters.js
+¦       monitor.js
+¦       scheduler.js
+¦       staff.js
+¦       systemDiagnostic.js
+¦       systemReport.js
+¦       timeEntries.js
+¦       users.js
+¦       
++---services
+¦       autoHealService.js
+¦       
++---utils
+        apiGuard.js
+        auditLogger.js
+        errorBus.js
+        logger.js
+        matterNumberGenerator.js
+        

@@ -1,0 +1,960 @@
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6fa;
+  color: #1f2937;
+}
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 255px;
+  background: #111827;
+  color: white;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  text-align: left;
+  background: #1f2937;
+  color: #e5e7eb;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.sidebar button.active {
+  background: white;
+  color: #111827;
+}
+
+.main {
+  flex: 1;
+  padding: 28px;
+  overflow-x: hidden;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  background: white;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.15;
+}
+
+.topbar p {
+  margin: 8px 0 0;
+  color: #64748b;
+}
+
+.pill {
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.good {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.bad {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.hero, .card, .metric, .jsonbox {
+  background: white;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.hero h2 {
+  margin: 0 0 10px;
+  font-size: 30px;
+}
+
+.hero p, .card p {
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.actions button, .summary button {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 0;
+  background: #111827;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.grid, .summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.card strong {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #047857;
+}
+
+.badcard {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.badcard strong {
+  color: #be123c;
+}
+
+.metric span {
+  display: block;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.metric strong {
+  font-size: 24px;
+}
+
+.jsonbox {
+  margin-top: 24px;
+}
+
+.jsonbox pre {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 18px;
+  border-radius: 12px;
+  overflow: auto;
+  max-height: 520px;
+}
+
+@media (max-width: 850px) {
+  .shell { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .topbar { flex-direction: column; align-items: flex-start; }
+}
+
+/* Phase 10Y Stabilisation Enhancements */
+.card {
+  min-height: 165px;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.actions button:hover,
+.summary button:hover,
+.sidebar button:hover {
+  opacity: 0.9;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+  }
+}
+
+/* Phase 10ZE Final Safe Workspace Wiring */
+.clickable-card {
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.clickable-card:hover {
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+/* Phase 10ZF Navigation + LEOS Module Menu */
+.clickable-card {
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.clickable-card:hover {
+  transform: translateY(-2px);
+  transition: 0.15s ease;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.planned-card {
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.module-toolbar {
+  background: white;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.module-toolbar button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ============================================================
+   Table layout fix - prevents Actions column from being cropped
+   ============================================================ */
+
+.main {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.main table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  box-sizing: border-box;
+}
+
+.main th,
+.main td {
+  padding: 10px 12px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.main th:last-child,
+.main td:last-child {
+  min-width: 110px;
+  width: 110px;
+  text-align: center;
+  white-space: nowrap;
+  padding-right: 40px;
+}
+
+.main td:last-child button {
+  display: block;
+  min-width: 72px;
+  margin: 4px auto;
+}
+
+/* L360 TABLE WIDTH FIX START */
+/* Fix right-side cropping in module tables and make the app use the full browser width. */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: none !important;
+  min-width: 0;
+}
+
+body {
+  margin: 0;
+  overflow-x: auto;
+}
+
+#root {
+  box-sizing: border-box;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left;
+}
+
+main,
+section,
+.hero,
+.summary,
+.grid,
+.module-toolbar {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none !important;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+thead,
+tbody,
+tr {
+  width: 100%;
+}
+
+th,
+td {
+  box-sizing: border-box;
+  padding: 8px 10px;
+  vertical-align: top;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+th:last-child,
+td:last-child {
+  min-width: 90px;
+  padding-right: 16px;
+  white-space: nowrap;
+}
+
+td button,
+th button {
+  max-width: 100%;
+}
+
+/* Make action buttons stack neatly instead of getting chopped on the right. */
+td:last-child button {
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+/* L360 TABLE WIDTH FIX END */
+
+/* L360 ENHANCED CLIENT TABLE START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 ENHANCED CLIENT TABLE END */
+
+/* L360 CLIENT SAVE UI FIX START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-count-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.client-count-card span {
+  font-size: 0.95rem;
+  color: #566275;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-weight: 700;
+}
+
+.client-status-success {
+  border-color: #8fd19e;
+  background: #ecf9ef;
+  color: #145c25;
+}
+
+.client-status-warning {
+  border-color: #ffd27d;
+  background: #fff8e8;
+  color: #7a5200;
+}
+
+.client-status-error {
+  border-color: #f1a2a2;
+  background: #fff0f0;
+  color: #8a1111;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-count-card {
+    text-align: left;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 CLIENT SAVE UI FIX END */
+
+/* L360 CLIENT REGISTRATION V2 START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module h3 {
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-count-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.client-count-card span {
+  font-size: 0.95rem;
+  color: #566275;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-weight: 700;
+}
+
+.client-status-success {
+  border-color: #8fd19e;
+  background: #ecf9ef;
+  color: #145c25;
+}
+
+.client-status-warning {
+  border-color: #ffd27d;
+  background: #fff8e8;
+  color: #7a5200;
+}
+
+.client-status-error {
+  border-color: #f1a2a2;
+  background: #fff0f0;
+  color: #8a1111;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-document-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px dashed #9aa8ba;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-count-card {
+    text-align: left;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 CLIENT REGISTRATION V2 END */

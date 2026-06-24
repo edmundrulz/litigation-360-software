@@ -1,0 +1,30 @@
+﻿---
+description: Litigation 360 documentation and handover rules
+alwaysApply: true
+---
+
+# Documentation and Handover Rules
+
+After meaningful work, update:
+1. MASTER-SSOT-CURSOR-HANDOVER.md
+2. DECISION-LOG.md
+3. VARIATION-REGISTRY.md
+4. TIMELINE-CURRENCY-TRACKER.md
+5. AUDIT-LOG.md
+6. LIVE-STATUS.md
+7. LIVE-MONITOR.csv
+
+Documentation must include:
+- Exact file paths
+- Exact commands
+- Verification steps
+- Rollback steps
+- Risk level
+- Next action
+
+Do not write vague instructions such as:
+- figure it out
+- configure as needed
+- add later
+- placeholder
+- TBD

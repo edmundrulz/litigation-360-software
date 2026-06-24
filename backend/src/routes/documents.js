@@ -1,54 +1,43 @@
-const express = require('express');
-const { Document } = require('../models');
-const authMiddleware = require('../middleware/auth');
-const logger = require('../utils/logger');
-
+﻿const express = require("express");
 const router = express.Router();
+const db = require("../database");
+const authMiddleware = require("../middleware/auth");
+const { requireRole } = require("../middleware/roleMiddleware");
 
-// GET /api/documents
-router.get('/', authMiddleware, async (req, res) => {
+router.get("/", (req, res) => {
   try {
-    const { matterId, page = 1, limit = 50 } = req.query;
-    const offset = (page - 1) * limit;
-
-    const where = {};
-    if (matterId) where.matterId = matterId;
-
-    const { count, rows } = await Document.findAndCountAll({
-      where,
-      offset,
-      limit: parseInt(limit),
-      order: [['createdAt', 'DESC']]
-    });
-
-    res.json({
-      data: rows,
-      pagination: { page: parseInt(page), limit: parseInt(limit), total: count }
-    });
+    const documents = db.prepare("SELECT * FROM documents ORDER BY uploaded_at DESC").all();
+    res.json(documents);
   } catch (error) {
-    logger.error(`Get documents error: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
 });
 
-// POST /api/documents
-router.post('/', authMiddleware, async (req, res) => {
+router.post("/", authMiddleware, requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
   try {
-    const { filename, matterId, fileSize, mimeType, category } = req.body;
+    const body = req.body || {};
+    const file_name = body.file_name || body.fileName || body.name || body.title || "Untitled Document";
+    const file_path = body.file_path || body.filePath || "";
+    const case_id = body.case_id || body.caseId || body.matterId || null;
+    const document_type = body.document_type || body.documentType || body.type || "General";
 
-    const document = await Document.create({
-      filename,
-      matterId,
-      fileSize,
-      mimeType,
-      category,
-      s3Bucket: process.env.S3_BUCKET || 'litigation-360-docs'
-    });
+    const result = db.prepare(`
+      INSERT INTO documents (case_id, file_name, file_path, document_type)
+      VALUES (?, ?, ?, ?)
+    `).run(case_id, file_name, file_path, document_type);
 
-    logger.info(`Document created: ${document.id}`);
-    res.status(201).json(document);
+    const row = db.prepare("SELECT * FROM documents WHERE id = ?").get(result.lastInsertRowid);
+    res.status(201).json(row);
   } catch (error) {
-    logger.error(`Create document error: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete("/:id", authMiddleware, requireRole("admin", "Administrator"), (req, res) => {
+  try {
+    db.prepare("DELETE FROM documents WHERE id = ?").run(req.params.id);
+    res.json({ success: true });
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });

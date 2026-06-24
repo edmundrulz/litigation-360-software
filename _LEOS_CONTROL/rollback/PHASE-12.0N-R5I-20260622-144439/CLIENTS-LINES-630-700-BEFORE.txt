@@ -1,0 +1,71 @@
+ 630:   return String(kind || "").toLowerCase().includes("nric");
+ 631: }
+ 632: 
+ 633: function maskIdentification(value, kind) {
+ 634:   const raw = String(value || "").trim();
+ 635: 
+ 636:   if (!raw) {
+ 637:     return "-";
+ 638:   }
+ 639: 
+ 640:   if (isNricKind(kind)) {
+ 641:     return "************";
+ 642:   }
+ 643: 
+ 644:   if (raw.length <= 4) {
+ 645:     return "****";
+ 646:   }
+ 647: 
+ 648:   return raw.charAt(0) + "****" + raw.slice(-3);
+ 649: }
+ 650: 
+ 651: function deriveGenderFromIdentification(value, kind) {
+ 652:   if (!isNricKind(kind)) {
+ 653:     return "";
+ 654:   }
+ 655: 
+ 656:   const digits = String(value || "").replace(/\D/g, "");
+ 657: 
+ 658:   if (!digits) {
+ 659:     return "";
+ 660:   }
+ 661: 
+ 662:   const lastDigit = Number(digits.charAt(digits.length - 1));
+ 663: 
+ 664:   if (Number.isNaN(lastDigit)) {
+ 665:     return "";
+ 666:   }
+ 667: 
+ 668:   return lastDigit % 2 === 1 ? "Male" : "Female";
+ 669: }
+ 670: 
+ 671: function parseNricDob(value, kind) {
+ 672:   if (!isNricKind(kind)) {
+ 673:     return "";
+ 674:   }
+ 675: 
+ 676:   const digits = String(value || "").replace(/\D/g, "");
+ 677: 
+ 678:   if (digits.length < 6) {
+ 679:     return "";
+ 680:   }
+ 681: 
+ 682:   const yy = Number(digits.slice(0, 2));
+ 683:   const mm = Number(digits.slice(2, 4));
+ 684:   const dd = Number(digits.slice(4, 6));
+ 685: 
+ 686:   if (!Number.isInteger(yy) || !Number.isInteger(mm) || !Number.isInteger(dd)) {
+ 687:     return "";
+ 688:   }
+ 689: 
+ 690:   if (mm < 1 || mm > 12 || dd < 1 || dd > 31) {
+ 691:     return "";
+ 692:   }
+ 693: 
+ 694:   const now = new Date();
+ 695:   const currentYY = Number(String(now.getFullYear()).slice(-2));
+ 696:   const fullYear = yy <= currentYY ? 2000 + yy : 1900 + yy;
+ 697:   const date = new Date(fullYear, mm - 1, dd);
+ 698: 
+ 699:   if (
+ 700:     date.getFullYear() !== fullYear ||

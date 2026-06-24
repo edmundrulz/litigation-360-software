@@ -1,0 +1,309 @@
+﻿import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+
+import Clients from "./pages/Clients";
+import Cases from "./pages/Cases";
+import Matters from "./pages/Matters";
+import Deadlines from "./pages/Deadlines";
+import Documents from "./pages/Documents";
+import Staff from "./pages/Staff";
+
+const endpoints = [
+  ["Monitoring", "/api/enterprise/monitoring/health"],
+  ["Deployment Readiness", "/api/enterprise/deployment-centre/health"],
+  ["Backup Recovery", "/api/enterprise/backup-recovery/health"],
+  ["Performance", "/api/enterprise/performance/health"],
+  ["Governance", "/api/enterprise/governance/health"],
+  ["Maps", "/api/enterprise/maps/health"],
+  ["Navigation", "/api/enterprise/navigation/health"]
+];
+
+const leosModules = [
+  ["Clients", "OPEN", "Client records, contacts, onboarding and profile management."],
+  ["Cases", "OPEN", "Case files, parties, progress and litigation status."],
+  ["Matters", "OPEN", "Matter workspace and legal file tracking."],
+  ["Court Dates", "OPEN", "Hearings, mentions, deadlines and reminders."],
+  ["Documents", "OPEN", "Drafts, filings, templates, evidence and archives."],
+  ["Staff", "OPEN", "Staff records and internal team administration."],
+  ["Matter Intake", "OPEN", "Guided client-to-matter conveyor intake workflow."],
+
+  ["Tasks", "PLANNED", "Daily assignments, follow-ups and pending actions."],
+  ["Notifications", "PLANNED", "Alerts, reminders, escalations and updates."],
+  ["Court Navigation", "PLANNED", "Court location intelligence, travel planning and readiness."],
+  ["Reports", "PLANNED", "Matter summaries, workload reports and executive overview."],
+  ["Lawyer View", "PLANNED", "Hearings, active matters, pleadings, deadlines and court preparation."],
+  ["Clerk View", "PLANNED", "Filing tasks, service tracking, bundles and registry follow-ups."],
+  ["Admin View", "PLANNED", "Client intake, scheduling, reminders and office coordination."],
+  ["Finance View", "PLANNED", "Invoices, payments, disbursements and billing status."],
+  ["Partner View", "PLANNED", "Firm-wide performance, risk view and supervision."],
+  ["Legal AI", "PLANNED", "AI drafting, review, research and legal operations support."],
+  ["Knowledge Management", "PLANNED", "Precedents, templates, research notes and internal knowledge."],
+  ["Predictive Analytics", "PLANNED", "Matter risk, workload trend and outcome intelligence."],
+  ["Executive Command Centre", "PLANNED", "Leadership cockpit for firm-wide legal operations."],
+  ["Workflow Automation", "PLANNED", "Automated routing, reminders, escalation and process control."],
+  ["Government Integrations", "PLANNED", "Court, PERKESO, government and external registry integration layer."],
+  ["Client Portal", "PLANNED", "Client-facing secure matter, document and update portal."],
+  ["Mobile App", "PLANNED", "Mobile-ready legal operations access."],
+  ["Autonomous Operations", "PLANNED", "Self-monitoring, recovery, alerts and operational automation."],
+  ["Marketplace", "PLANNED", "Future ecosystem marketplace and API extension layer."]
+];
+
+export default function App() {
+  const [view, setView] = useState("workspace");
+  const [module, setModule] = useState("home");
+  const [results, setResults] = useState([]);
+  const [updated, setUpdated] = useState("Pending");
+
+  async function runChecks() {
+    const out = [];
+
+    for (const [name, path] of endpoints) {
+      const start = performance.now();
+
+      try {
+        const res = await fetch(path);
+        out.push({
+          name,
+          path,
+          ok: res.ok,
+          http: res.status,
+          ms: Math.round((performance.now() - start) * 10) / 10
+        });
+      } catch {
+        out.push({
+          name,
+          path,
+          ok: false,
+          http: "NETWORK_ERROR",
+          ms: Math.round((performance.now() - start) * 10) / 10
+        });
+      }
+    }
+
+    setResults(out);
+    setUpdated(new Date().toLocaleString());
+  }
+
+  useEffect(() => {
+    runChecks();
+    const timer = setInterval(runChecks, 30000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const passed = results.filter(r => r.ok).length;
+  const failed = results.length - passed;
+
+  function openWorkspace() {
+    setView("workspace");
+    setModule("home");
+  }
+
+  return (
+    <div className="shell">
+      <aside className="sidebar">
+        <div className="brand">Litigation 360</div>
+
+        <button className={view === "workspace" ? "active" : ""} onClick={openWorkspace}>
+          End User Workspace
+        </button>
+
+        <button className={view === "operations" ? "active" : ""} onClick={() => setView("operations")}>
+          Operations Centre
+        </button>
+
+        <button className={view === "admin" ? "active" : ""} onClick={() => setView("admin")}>
+          Admin Centre
+        </button>
+
+        <button className={view === "developer" ? "active" : ""} onClick={() => setView("developer")}>
+          Developer Centre
+        </button>
+      </aside>
+
+      <main className="main">
+        <header className="topbar">
+          <div>
+            <h1>{viewTitle(view, module)}</h1>
+            <p>Realtime legal operations interface. Last update: {updated}</p>
+          </div>
+
+          <span className={failed ? "pill bad" : "pill good"}>
+            {failed ? "BACKEND CHECK REQUIRED" : "SYSTEM HEALTHY"}
+          </span>
+        </header>
+
+        {view === "workspace" && (
+          <Workspace
+            module={module}
+            setModule={setModule}
+            results={results}
+            runChecks={runChecks}
+            passed={passed}
+            failed={failed}
+            updated={updated}
+          />
+        )}
+
+        {view === "operations" && <Operations results={results} run={runChecks} passed={passed} failed={failed} />}
+        {view === "admin" && <Admin />}
+        {view === "developer" && <Developer results={results} />}
+      </main>
+    </div>
+  );
+}
+
+function viewTitle(view, module) {
+  if (view === "workspace" && module !== "home") return "Workspace - " + module;
+
+  return {
+    workspace: "End User Legal Workspace - LEOS Module Command Grid",
+    operations: "Operations Centre",
+    admin: "Admin Centre",
+    developer: "Developer Centre"
+  }[view];
+}
+
+function Workspace({ module, setModule, results, runChecks, passed, failed, updated }) {
+  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule}><Clients /></ModuleFrame>;
+  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule}><Cases /></ModuleFrame>;
+  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule}><Matters /></ModuleFrame>;
+  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule}><Deadlines /></ModuleFrame>;
+  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule}><Documents /></ModuleFrame>;
+  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule}><Staff /></ModuleFrame>;
+  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule}><MatterIntakeWizard /></ModuleFrame>;
+
+  return (
+    <>
+      <section className="hero">
+        <h2>Litigation 360 LEOS Workspace</h2>
+        <p>Level 10/11 enterprise legal operating system command grid. Open modules are live. Planned modules are visible roadmap placeholders.</p>
+
+        <div className="actions">
+          <button onClick={() => setModule("Clients")}>New Client / Open Clients</button>
+          <button onClick={() => setModule("Matter Intake")}>Start New Matter Intake</button>
+          <button onClick={() => setModule("Matters")}>New Matter / Open Matters</button>
+          <button onClick={() => setModule("Matter Intake")}>Launch Intake Conveyor</button>
+          <button onClick={() => setModule("Documents")}>Upload Document / Open Documents</button>
+          <button onClick={() => setModule("Court Dates")}>Add Court Date / Open Court Dates</button>
+        </div>
+      </section>
+
+      <section className="summary">
+        <Metric label="Live Backend Modules" value={`${passed}/${results.length}`} />
+        <Metric label="Failed Checks" value={failed} />
+        <Metric label="Last Refresh" value={updated} />
+        <button onClick={runChecks}>Refresh Live Monitor</button>
+      </section>
+
+      <section className="grid">
+        {leosModules.map(([title, status, text]) => (
+          <button
+            key={title}
+            type="button"
+            className={status === "OPEN" ? "card clickable-card" : "card planned-card"}
+            onClick={() => status === "OPEN" && setModule(title)}
+            disabled={status !== "OPEN"}
+          >
+            <h3>{title}</h3>
+            <strong>{status}</strong>
+            <p>{text}</p>
+          </button>
+        ))}
+      </section>
+    </>
+  );
+}
+
+function ModuleFrame({ title, setModule, children }) {
+  return (
+    <>
+      <section className="module-toolbar">
+        <button onClick={() => setModule("home")}>← Back to Main Workspace</button>
+        <span>{title} module is open</span>
+      </section>
+
+      {children}
+    </>
+  );
+}
+
+function Operations({ results, run, passed, failed }) {
+  return (
+    <>
+      <section className="summary">
+        <Metric label="Modules Online" value={`${passed}/${results.length}`} />
+        <Metric label="Modules Failed" value={failed} />
+        <button onClick={run}>Refresh Now</button>
+      </section>
+
+      <section className="grid">
+        {results.map(r => (
+          <Card
+            key={r.name}
+            title={r.name}
+            status={r.ok ? "Healthy" : "Network Error"}
+            text={`HTTP: ${r.http} | ${r.ms} ms`}
+            bad={!r.ok}
+          />
+        ))}
+      </section>
+    </>
+  );
+}
+
+function Admin() {
+  return (
+    <section className="grid">
+      <Card title="Governance" status="Ready" text="Compliance, approvals, policies and audit readiness." />
+      <Card title="Backup Recovery" status="Ready" text="Backup status, restore planning and disaster readiness." />
+      <Card title="Deployment Readiness" status="Ready" text="Production readiness, blockers and release checks." />
+      <Card title="Audit Trail" status="Ready" text="System evidence and operational traceability." />
+    </section>
+  );
+}
+
+function Developer({ results }) {
+  return (
+    <>
+      <section className="grid">
+        {results.map(r => (
+          <Card
+            key={r.name}
+            title={r.name}
+            status={r.ok ? "PASS" : "FAIL"}
+            text={r.path}
+            bad={!r.ok}
+          />
+        ))}
+      </section>
+
+      <details className="jsonbox">
+        <summary>Developer Raw JSON Diagnostics</summary>
+        <pre>{JSON.stringify(results, null, 2)}</pre>
+      </details>
+    </>
+  );
+}
+
+function Card({ title, status, text, bad }) {
+  return (
+    <article className={bad ? "card badcard" : "card"}>
+      <h3>{title}</h3>
+      <strong>{status}</strong>
+      <p>{text}</p>
+    </article>
+  );
+}
+
+function Metric({ label, value }) {
+  return (
+    <div className="metric">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+
+

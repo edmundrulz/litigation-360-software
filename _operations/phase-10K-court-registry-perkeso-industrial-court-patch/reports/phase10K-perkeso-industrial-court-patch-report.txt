@@ -1,0 +1,12 @@
+L360 - PHASE 10K COURT REGISTRY PATCH REPORT
+============================================
+
+Timestamp: 2026-06-18T14:14:22.537Z
+Status: PASS
+Total Courts: 8
+
+PASS - Industrial Court of Malaysia Kuala Lumpur - Level 14, Wisma PERKESO, No.155, Jalan Tun Razak, 50400 Kuala Lumpur
+PASS - Mahkamah Perusahaan Malaysia Kuala Lumpur - Level 14, Wisma PERKESO, No.155, Jalan Tun Razak, 50400 Kuala Lumpur
+PASS - PERKESO Wilayah Persekutuan Kuala Lumpur - Wisma PERKESO, No.155, Jalan Tun Razak, 50400 Kuala Lumpur
+PASS - PERKESO Headquarters Jalan Ampang - Menara PERKESO, 281, Jalan Ampang, 50538 Kuala Lumpur
+PASS - SOCSO Headquarters Jalan Ampang - Menara PERKESO, 281, Jalan Ampang, 50538 Kuala Lumpur

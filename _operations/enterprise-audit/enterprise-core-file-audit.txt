@@ -1,0 +1,22 @@
+=== ENTERPRISE CORE FILE AUDIT ===
+
+[AUTOMATION BUS]
+automationBus.js
+
+[EVENT CATALOG]
+eventCatalog.js
+
+[SHARED SERVICES]
+sharedServicesRegistry.js
+
+[NOTIFICATION HUB]
+notificationHub.js
+
+[MONITORING]
+healthMonitor.js
+
+[RELIABILITY]
+reliabilityEngine.js
+
+[AUDIT]
+auditEngine.js

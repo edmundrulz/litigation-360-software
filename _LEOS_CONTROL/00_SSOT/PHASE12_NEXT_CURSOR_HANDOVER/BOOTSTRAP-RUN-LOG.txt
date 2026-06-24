@@ -1,0 +1,93 @@
+﻿2026-06-23 12:22:50 | SSOT bootstrap started.
+2026-06-23 12:22:50 | Project root confirmed: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+2026-06-23 12:22:50 | SSOT root confirmed: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER
+2026-06-23 12:22:50 | Safety mode: documentation/control-layer only.
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\MASTER-SSOT-CURSOR-HANDOVER.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\SSOT-CURRENT-AUTHORITY.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\TIMELINE-CURRENCY-TRACKER.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\DECISION-LOG.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\DECISION-LOG.csv
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\VARIATION-REGISTRY.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\VARIATION-REGISTRY.csv
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\ROADMAP-MILESTONES.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\SOP-SAFE-CURSOR-WORKFLOW.md
+2026-06-23 12:22:50 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\HANDOVER-NOTES-FOR-CURSOR.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\TESTING-VERIFICATION-CHECKLIST.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\ROLLBACK-PROTOCOL.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\COMPLIANCE-CHECKLIST.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\VERSION-CONTROL-UPDATE-PROTOCOL.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\AUDIT-LOG.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\AUDIT-LOG.csv
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\08_LIVE_MONITORING\LIVE-STATUS.md
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\08_LIVE_MONITORING\LIVE-MONITOR.csv
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules\00-litigation360-core-safety.mdc
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules\01-windows-powershell-automation.mdc
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules\02-documentation-handover.mdc
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.ps1
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.cmd
+2026-06-23 12:22:51 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.cmd
+2026-06-23 12:22:51 | SSOT bootstrap completed.
+2026-06-23 12:22:51 | Master SSOT: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\MASTER-SSOT-CURSOR-HANDOVER.md
+2026-06-23 12:22:51 | Verify script: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.ps1
+2026-06-23 12:22:51 | Live monitor script: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1
+2026-06-23 12:22:51 | Cursor rules folder: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules
+2026-06-23 12:23:51 | SSOT bootstrap started.
+2026-06-23 12:23:53 | Project root confirmed: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+2026-06-23 12:23:53 | SSOT root confirmed: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER
+2026-06-23 12:23:54 | Safety mode: documentation/control-layer only.
+2026-06-23 12:23:59 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\MASTER-SSOT-CURSOR-HANDOVER.md.20260623-122324.bak
+2026-06-23 12:23:59 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\MASTER-SSOT-CURSOR-HANDOVER.md
+2026-06-23 12:24:00 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\SSOT-CURRENT-AUTHORITY.md.20260623-122324.bak
+2026-06-23 12:24:00 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\SSOT-CURRENT-AUTHORITY.md
+2026-06-23 12:24:00 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\TIMELINE-CURRENCY-TRACKER.md.20260623-122324.bak
+2026-06-23 12:24:00 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\TIMELINE-CURRENCY-TRACKER.md
+2026-06-23 12:24:00 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\DECISION-LOG.md.20260623-122324.bak
+2026-06-23 12:24:00 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\DECISION-LOG.md
+2026-06-23 12:24:01 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\DECISION-LOG.csv.20260623-122324.bak
+2026-06-23 12:24:01 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\DECISION-LOG.csv
+2026-06-23 12:24:01 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\VARIATION-REGISTRY.md.20260623-122324.bak
+2026-06-23 12:24:01 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\VARIATION-REGISTRY.md
+2026-06-23 12:24:01 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\VARIATION-REGISTRY.csv.20260623-122324.bak
+2026-06-23 12:24:01 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\VARIATION-REGISTRY.csv
+2026-06-23 12:24:02 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\ROADMAP-MILESTONES.md.20260623-122324.bak
+2026-06-23 12:24:02 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\ROADMAP-MILESTONES.md
+2026-06-23 12:24:02 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\SOP-SAFE-CURSOR-WORKFLOW.md.20260623-122324.bak
+2026-06-23 12:24:02 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\SOP-SAFE-CURSOR-WORKFLOW.md
+2026-06-23 12:24:02 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\HANDOVER-NOTES-FOR-CURSOR.md.20260623-122324.bak
+2026-06-23 12:24:02 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\HANDOVER-NOTES-FOR-CURSOR.md
+2026-06-23 12:24:03 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\TESTING-VERIFICATION-CHECKLIST.md.20260623-122324.bak
+2026-06-23 12:24:03 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\TESTING-VERIFICATION-CHECKLIST.md
+2026-06-23 12:24:03 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\ROLLBACK-PROTOCOL.md.20260623-122324.bak
+2026-06-23 12:24:03 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\ROLLBACK-PROTOCOL.md
+2026-06-23 12:24:04 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\COMPLIANCE-CHECKLIST.md.20260623-122324.bak
+2026-06-23 12:24:04 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\COMPLIANCE-CHECKLIST.md
+2026-06-23 12:24:04 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\VERSION-CONTROL-UPDATE-PROTOCOL.md.20260623-122324.bak
+2026-06-23 12:24:04 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\VERSION-CONTROL-UPDATE-PROTOCOL.md
+2026-06-23 12:24:04 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\AUDIT-LOG.md.20260623-122324.bak
+2026-06-23 12:24:04 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\AUDIT-LOG.md
+2026-06-23 12:24:04 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\AUDIT-LOG.csv.20260623-122324.bak
+2026-06-23 12:24:04 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\AUDIT-LOG.csv
+2026-06-23 12:24:05 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\LIVE-STATUS.md.20260623-122324.bak
+2026-06-23 12:24:05 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\08_LIVE_MONITORING\LIVE-STATUS.md
+2026-06-23 12:24:05 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\LIVE-MONITOR.csv.20260623-122324.bak
+2026-06-23 12:24:05 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\08_LIVE_MONITORING\LIVE-MONITOR.csv
+2026-06-23 12:24:05 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\00-litigation360-core-safety.mdc.20260623-122324.bak
+2026-06-23 12:24:05 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules\00-litigation360-core-safety.mdc
+2026-06-23 12:24:06 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\01-windows-powershell-automation.mdc.20260623-122324.bak
+2026-06-23 12:24:06 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules\01-windows-powershell-automation.mdc
+2026-06-23 12:24:06 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\02-documentation-handover.mdc.20260623-122324.bak
+2026-06-23 12:24:06 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules\02-documentation-handover.mdc
+2026-06-23 12:24:07 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\RUN-SSOT-VERIFY.ps1.20260623-122324.bak
+2026-06-23 12:24:07 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.ps1
+2026-06-23 12:24:08 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\RUN-SSOT-LIVE-MONITOR.ps1.20260623-122324.bak
+2026-06-23 12:24:08 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1
+2026-06-23 12:24:08 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\RUN-SSOT-VERIFY.cmd.20260623-122324.bak
+2026-06-23 12:24:08 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.cmd
+2026-06-23 12:24:09 | BACKUP CREATED: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\99_BACKUPS\BACKUP-20260623-122324\RUN-SSOT-LIVE-MONITOR.cmd.20260623-122324.bak
+2026-06-23 12:24:09 | FILE WRITTEN: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.cmd
+2026-06-23 12:24:09 | SSOT bootstrap completed.
+2026-06-23 12:24:09 | Master SSOT: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\MASTER-SSOT-CURSOR-HANDOVER.md
+2026-06-23 12:24:09 | Verify script: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.ps1
+2026-06-23 12:24:09 | Live monitor script: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1
+2026-06-23 12:24:09 | Cursor rules folder: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules

@@ -1,0 +1,201 @@
+{
+  "registry": "backend_inventory",
+  "generatedAt": "2026-06-19T04:30:05.192Z",
+  "backendRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend",
+  "srcRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src",
+  "folders": {
+    "routes": {
+      "exists": true,
+      "files": [
+        "backend\\src\\routes\\auditLogs.js",
+        "backend\\src\\routes\\auth.js",
+        "backend\\src\\routes\\auth_POSTGRES_BACKUP_DO_NOT_DELETE.js",
+        "backend\\src\\routes\\autoHeal.js",
+        "backend\\src\\routes\\autonomousOperationsRoutes.js",
+        "backend\\src\\routes\\backupRecoveryRoutes.js",
+        "backend\\src\\routes\\caseRoutes.js",
+        "backend\\src\\routes\\cases.js",
+        "backend\\src\\routes\\cases.js.doctor-backup",
+        "backend\\src\\routes\\clientIdentity.js",
+        "backend\\src\\routes\\clients.js",
+        "backend\\src\\routes\\clients.js.doctor-backup",
+        "backend\\src\\routes\\conflictCheck.js",
+        "backend\\src\\routes\\courtDeadline.js",
+        "backend\\src\\routes\\courtNavigationRoutes.js",
+        "backend\\src\\routes\\courtOperationsRoutes.js",
+        "backend\\src\\routes\\dashboard.backup-before-8-5A.js",
+        "backend\\src\\routes\\dashboard.js",
+        "backend\\src\\routes\\deadlines.js",
+        "backend\\src\\routes\\deadlines.js.doctor-backup",
+        "backend\\src\\routes\\debug.js",
+        "backend\\src\\routes\\debug.js.doctor-backup",
+        "backend\\src\\routes\\documentLifecycleRoutes.js",
+        "backend\\src\\routes\\documents.js",
+        "backend\\src\\routes\\documents.js.doctor-backup",
+        "backend\\src\\routes\\enterpriseGovernanceRoutes.js",
+        "backend\\src\\routes\\enterpriseHardeningRoutes.js",
+        "backend\\src\\routes\\enterpriseMonitoringRoutes.js",
+        "backend\\src\\routes\\enterpriseRoutes.js",
+        "backend\\src\\routes\\errors.js",
+        "backend\\src\\routes\\errors.js.doctor-backup",
+        "backend\\src\\routes\\eventBusRoutes.js",
+        "backend\\src\\routes\\executiveCommandRoutes.js",
+        "backend\\src\\routes\\handlerRoutes.js",
+        "backend\\src\\routes\\health.js",
+        "backend\\src\\routes\\integrityScanner.js",
+        "backend\\src\\routes\\invoices.js",
+        "backend\\src\\routes\\legalOperationsAssistantRoutes.js",
+        "backend\\src\\routes\\mapsIntegrationRoutes.js",
+        "backend\\src\\routes\\matterIntake.js",
+        "backend\\src\\routes\\matterIntelligenceRoutes.js",
+        "backend\\src\\routes\\matterNumbering.js",
+        "backend\\src\\routes\\matters.js",
+        "backend\\src\\routes\\monitor.js",
+        "backend\\src\\routes\\notificationRoutes.js",
+        "backend\\src\\routes\\performanceOptimizationRoutes.js",
+        "backend\\src\\routes\\phase7_clients_route.txt",
+        "backend\\src\\routes\\phase7_deadlines_route.txt",
+        "backend\\src\\routes\\phase7_documents_route.txt",
+        "backend\\src\\routes\\phase7_matters_route.txt",
+        "backend\\src\\routes\\phase7_routes_inventory.txt",
+        "backend\\src\\routes\\phase7_staff_route.txt",
+        "backend\\src\\routes\\predictiveAnalyticsRoutes.js",
+        "backend\\src\\routes\\scheduler.js",
+        "backend\\src\\routes\\sqliteAuth.js",
+        "backend\\src\\routes\\staff.js",
+        "backend\\src\\routes\\staff.js.doctor-backup",
+        "backend\\src\\routes\\systemDiagnostic.js",
+        "backend\\src\\routes\\systemReport.js",
+        "backend\\src\\routes\\taskAutomation.js",
+        "backend\\src\\routes\\timeEntries.js",
+        "backend\\src\\routes\\users.js",
+        "backend\\src\\routes\\workflow.js",
+        "backend\\src\\routes\\workflowRoutes.js"
+      ],
+      "count": 64
+    },
+    "services": {
+      "exists": true,
+      "files": [
+        "backend\\src\\services\\autoHealService.js"
+      ],
+      "count": 1
+    },
+    "middleware": {
+      "exists": true,
+      "files": [
+        "backend\\src\\middleware\\auth.backup.js",
+        "backend\\src\\middleware\\auth.js",
+        "backend\\src\\middleware\\authenticateToken.backup.js",
+        "backend\\src\\middleware\\authenticateToken.js",
+        "backend\\src\\middleware\\authorize.js",
+        "backend\\src\\middleware\\errorHandler.js",
+        "backend\\src\\middleware\\roleMiddleware.js",
+        "backend\\src\\middleware\\roles.js"
+      ],
+      "count": 8
+    },
+    "automation": {
+      "exists": true,
+      "files": [
+        "backend\\src\\automation\\alertManager.js",
+        "backend\\src\\automation\\autonomousOperationsEngine.js",
+        "backend\\src\\automation\\backupRecoveryEngine.js",
+        "backend\\src\\automation\\courtNavigationEngine.js",
+        "backend\\src\\automation\\courtOperationsEngine.js",
+        "backend\\src\\automation\\documentLifecycleEngine.js",
+        "backend\\src\\automation\\enterpriseGovernanceEngine.js",
+        "backend\\src\\automation\\enterpriseHardeningEngine.js",
+        "backend\\src\\automation\\enterpriseMonitoringEngine.js",
+        "backend\\src\\automation\\eventBus.js",
+        "backend\\src\\automation\\eventTypes.js",
+        "backend\\src\\automation\\executiveCommandCentre.js",
+        "backend\\src\\automation\\handlerRegistry.js",
+        "backend\\src\\automation\\handlers\\clientCreated.js",
+        "backend\\src\\automation\\handlers\\courtDateAdded.js",
+        "backend\\src\\automation\\handlers\\deadlineCreated.js",
+        "backend\\src\\automation\\handlers\\documentUploaded.js",
+        "backend\\src\\automation\\handlers\\invoiceCreated.js",
+        "backend\\src\\automation\\handlers\\matterCreated.js",
+        "backend\\src\\automation\\handlers\\paymentReceived.js",
+        "backend\\src\\automation\\handlers\\roleChanged.js",
+        "backend\\src\\automation\\handlers\\taskCompleted.js",
+        "backend\\src\\automation\\handlers\\userCreated.js",
+        "backend\\src\\automation\\legalOperationsAssistant.js",
+        "backend\\src\\automation\\loadTestingEngine.js",
+        "backend\\src\\automation\\mapsIntegrationLayer.js",
+        "backend\\src\\automation\\matterIntelligenceEngine.js",
+        "backend\\src\\automation\\metricsCollector.js",
+        "backend\\src\\automation\\notificationService.js",
+        "backend\\src\\automation\\performanceOptimizationEngine.js",
+        "backend\\src\\automation\\predictiveAnalyticsEngine.js",
+        "backend\\src\\automation\\workflowEngine.js"
+      ],
+      "count": 32
+    },
+    "jobs": {
+      "exists": true,
+      "files": [
+        "backend\\src\\jobs\\systemScheduler.js"
+      ],
+      "count": 1
+    },
+    "database": {
+      "exists": false,
+      "files": [],
+      "count": 0
+    },
+    "migrations": {
+      "exists": true,
+      "files": [
+        "backend\\src\\migrations\\005_create_matters.js",
+        "backend\\src\\migrations\\023_create_roles_permissions.sql"
+      ],
+      "count": 2
+    },
+    "models": {
+      "exists": true,
+      "files": [
+        "backend\\src\\models\\Client.js",
+        "backend\\src\\models\\Communication.js",
+        "backend\\src\\models\\Document.js",
+        "backend\\src\\models\\Firm.js",
+        "backend\\src\\models\\index.js",
+        "backend\\src\\models\\Invoice.js",
+        "backend\\src\\models\\Matter.js",
+        "backend\\src\\models\\Task.js",
+        "backend\\src\\models\\TimeEntry.js",
+        "backend\\src\\models\\User.js"
+      ],
+      "count": 10
+    },
+    "utils": {
+      "exists": true,
+      "files": [
+        "backend\\src\\utils\\apiGuard.js",
+        "backend\\src\\utils\\auditLogger.js",
+        "backend\\src\\utils\\clientIdentityEngine.js",
+        "backend\\src\\utils\\conflictEngine.js",
+        "backend\\src\\utils\\courtDeadlineCalculator.js",
+        "backend\\src\\utils\\errorBus.js",
+        "backend\\src\\utils\\logger.js",
+        "backend\\src\\utils\\matterIntakeWizard.js",
+        "backend\\src\\utils\\matterNumberGenerator.js",
+        "backend\\src\\utils\\taskAutomationEngine.js",
+        "backend\\src\\utils\\workflowConveyor.js"
+      ],
+      "count": 11
+    },
+    "config": {
+      "exists": true,
+      "files": [],
+      "count": 0
+    }
+  },
+  "totals": {
+    "files": 288,
+    "jsFiles": 211,
+    "routeFiles": 64,
+    "automationFiles": 32
+  }
+}

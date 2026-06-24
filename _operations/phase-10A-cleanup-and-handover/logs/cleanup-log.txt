@@ -1,0 +1,52 @@
+[Thu 18/06/2026 17:35:45.38] ============================================================
+[Thu 18/06/2026 17:35:45.40] L360 SAFE CLEANUP START
+[Thu 18/06/2026 17:35:45.45] Mode: DRYRUN
+[Thu 18/06/2026 17:35:45.47] Creating pre-cleanup inventory
+[Thu 18/06/2026 17:35:51.15] Creating handover map
+[Thu 18/06/2026 17:35:51.20] Scanning known junk artifacts
+[Thu 18/06/2026 17:35:51.22] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\
+[Thu 18/06/2026 17:35:51.24] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\(
+[Thu 18/06/2026 17:35:51.26] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\clearInterval(timer)
+[Thu 18/06/2026 17:35:51.28] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('-'
+[Thu 18/06/2026 17:35:51.30] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('[CLEANUP]
+[Thu 18/06/2026 17:35:51.32] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log(`[CLEANUP]
+[Thu 18/06/2026 17:35:51.34] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\fs.existsSync(candidate))
+[Thu 18/06/2026 17:37:12.14] ============================================================
+[Thu 18/06/2026 17:37:12.15] L360 SAFE CLEANUP START
+[Thu 18/06/2026 17:37:12.21] Mode: DRYRUN
+[Thu 18/06/2026 17:37:12.23] Creating pre-cleanup inventory
+[Thu 18/06/2026 17:37:16.97] Creating handover map
+[Thu 18/06/2026 17:37:17.01] Scanning known junk artifacts
+[Thu 18/06/2026 17:37:17.03] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\
+[Thu 18/06/2026 17:37:17.05] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\(
+[Thu 18/06/2026 17:37:17.09] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\clearInterval(timer)
+[Thu 18/06/2026 17:37:17.10] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('-'
+[Thu 18/06/2026 17:37:17.13] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('[CLEANUP]
+[Thu 18/06/2026 17:37:17.15] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log(`[CLEANUP]
+[Thu 18/06/2026 17:37:17.22] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\fs.existsSync(candidate))
+[Thu 18/06/2026 17:39:08.83] ============================================================
+[Thu 18/06/2026 17:39:08.84] L360 SAFE CLEANUP START
+The system cannot find the file specified.
+[Thu 18/06/2026 17:39:08.87] MOVED DIR TO QUARANTINE: 
+[Thu 18/06/2026 17:39:08.90] Mode: APPLY
+[Thu 18/06/2026 17:39:08.93] Creating pre-cleanup inventory
+[Thu 18/06/2026 17:39:13.24] Creating handover map
+[Thu 18/06/2026 17:39:13.28] Scanning known junk artifacts
+[Thu 18/06/2026 17:39:13.30] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\(
+        1 file(s) moved.
+[Thu 18/06/2026 17:39:13.33] MOVED FILE TO QUARANTINE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\(
+[Thu 18/06/2026 17:39:13.41] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\clearInterval(timer)
+        1 file(s) moved.
+[Thu 18/06/2026 17:39:13.44] MOVED FILE TO QUARANTINE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\clearInterval(timer)
+[Thu 18/06/2026 17:39:13.47] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('-'
+        1 file(s) moved.
+[Thu 18/06/2026 17:39:13.50] MOVED FILE TO QUARANTINE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('-'
+[Thu 18/06/2026 17:39:13.51] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('[CLEANUP]
+        1 file(s) moved.
+[Thu 18/06/2026 17:39:13.60] MOVED FILE TO QUARANTINE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log('[CLEANUP]
+[Thu 18/06/2026 17:39:13.66] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log(`[CLEANUP]
+        1 file(s) moved.
+[Thu 18/06/2026 17:39:13.70] MOVED FILE TO QUARANTINE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\console.log(`[CLEANUP]
+[Thu 18/06/2026 17:39:13.72] FOUND FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\fs.existsSync(candidate))
+        1 file(s) moved.
+[Thu 18/06/2026 17:39:13.76] MOVED FILE TO QUARANTINE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\fs.existsSync(candidate))

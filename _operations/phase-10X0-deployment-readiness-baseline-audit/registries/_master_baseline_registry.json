@@ -1,0 +1,1904 @@
+{
+  "backend": {
+    "registry": "backend_inventory",
+    "generatedAt": "2026-06-19T04:30:05.192Z",
+    "backendRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend",
+    "srcRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src",
+    "folders": {
+      "routes": {
+        "exists": true,
+        "files": [
+          "backend\\src\\routes\\auditLogs.js",
+          "backend\\src\\routes\\auth.js",
+          "backend\\src\\routes\\auth_POSTGRES_BACKUP_DO_NOT_DELETE.js",
+          "backend\\src\\routes\\autoHeal.js",
+          "backend\\src\\routes\\autonomousOperationsRoutes.js",
+          "backend\\src\\routes\\backupRecoveryRoutes.js",
+          "backend\\src\\routes\\caseRoutes.js",
+          "backend\\src\\routes\\cases.js",
+          "backend\\src\\routes\\cases.js.doctor-backup",
+          "backend\\src\\routes\\clientIdentity.js",
+          "backend\\src\\routes\\clients.js",
+          "backend\\src\\routes\\clients.js.doctor-backup",
+          "backend\\src\\routes\\conflictCheck.js",
+          "backend\\src\\routes\\courtDeadline.js",
+          "backend\\src\\routes\\courtNavigationRoutes.js",
+          "backend\\src\\routes\\courtOperationsRoutes.js",
+          "backend\\src\\routes\\dashboard.backup-before-8-5A.js",
+          "backend\\src\\routes\\dashboard.js",
+          "backend\\src\\routes\\deadlines.js",
+          "backend\\src\\routes\\deadlines.js.doctor-backup",
+          "backend\\src\\routes\\debug.js",
+          "backend\\src\\routes\\debug.js.doctor-backup",
+          "backend\\src\\routes\\documentLifecycleRoutes.js",
+          "backend\\src\\routes\\documents.js",
+          "backend\\src\\routes\\documents.js.doctor-backup",
+          "backend\\src\\routes\\enterpriseGovernanceRoutes.js",
+          "backend\\src\\routes\\enterpriseHardeningRoutes.js",
+          "backend\\src\\routes\\enterpriseMonitoringRoutes.js",
+          "backend\\src\\routes\\enterpriseRoutes.js",
+          "backend\\src\\routes\\errors.js",
+          "backend\\src\\routes\\errors.js.doctor-backup",
+          "backend\\src\\routes\\eventBusRoutes.js",
+          "backend\\src\\routes\\executiveCommandRoutes.js",
+          "backend\\src\\routes\\handlerRoutes.js",
+          "backend\\src\\routes\\health.js",
+          "backend\\src\\routes\\integrityScanner.js",
+          "backend\\src\\routes\\invoices.js",
+          "backend\\src\\routes\\legalOperationsAssistantRoutes.js",
+          "backend\\src\\routes\\mapsIntegrationRoutes.js",
+          "backend\\src\\routes\\matterIntake.js",
+          "backend\\src\\routes\\matterIntelligenceRoutes.js",
+          "backend\\src\\routes\\matterNumbering.js",
+          "backend\\src\\routes\\matters.js",
+          "backend\\src\\routes\\monitor.js",
+          "backend\\src\\routes\\notificationRoutes.js",
+          "backend\\src\\routes\\performanceOptimizationRoutes.js",
+          "backend\\src\\routes\\phase7_clients_route.txt",
+          "backend\\src\\routes\\phase7_deadlines_route.txt",
+          "backend\\src\\routes\\phase7_documents_route.txt",
+          "backend\\src\\routes\\phase7_matters_route.txt",
+          "backend\\src\\routes\\phase7_routes_inventory.txt",
+          "backend\\src\\routes\\phase7_staff_route.txt",
+          "backend\\src\\routes\\predictiveAnalyticsRoutes.js",
+          "backend\\src\\routes\\scheduler.js",
+          "backend\\src\\routes\\sqliteAuth.js",
+          "backend\\src\\routes\\staff.js",
+          "backend\\src\\routes\\staff.js.doctor-backup",
+          "backend\\src\\routes\\systemDiagnostic.js",
+          "backend\\src\\routes\\systemReport.js",
+          "backend\\src\\routes\\taskAutomation.js",
+          "backend\\src\\routes\\timeEntries.js",
+          "backend\\src\\routes\\users.js",
+          "backend\\src\\routes\\workflow.js",
+          "backend\\src\\routes\\workflowRoutes.js"
+        ],
+        "count": 64
+      },
+      "services": {
+        "exists": true,
+        "files": [
+          "backend\\src\\services\\autoHealService.js"
+        ],
+        "count": 1
+      },
+      "middleware": {
+        "exists": true,
+        "files": [
+          "backend\\src\\middleware\\auth.backup.js",
+          "backend\\src\\middleware\\auth.js",
+          "backend\\src\\middleware\\authenticateToken.backup.js",
+          "backend\\src\\middleware\\authenticateToken.js",
+          "backend\\src\\middleware\\authorize.js",
+          "backend\\src\\middleware\\errorHandler.js",
+          "backend\\src\\middleware\\roleMiddleware.js",
+          "backend\\src\\middleware\\roles.js"
+        ],
+        "count": 8
+      },
+      "automation": {
+        "exists": true,
+        "files": [
+          "backend\\src\\automation\\alertManager.js",
+          "backend\\src\\automation\\autonomousOperationsEngine.js",
+          "backend\\src\\automation\\backupRecoveryEngine.js",
+          "backend\\src\\automation\\courtNavigationEngine.js",
+          "backend\\src\\automation\\courtOperationsEngine.js",
+          "backend\\src\\automation\\documentLifecycleEngine.js",
+          "backend\\src\\automation\\enterpriseGovernanceEngine.js",
+          "backend\\src\\automation\\enterpriseHardeningEngine.js",
+          "backend\\src\\automation\\enterpriseMonitoringEngine.js",
+          "backend\\src\\automation\\eventBus.js",
+          "backend\\src\\automation\\eventTypes.js",
+          "backend\\src\\automation\\executiveCommandCentre.js",
+          "backend\\src\\automation\\handlerRegistry.js",
+          "backend\\src\\automation\\handlers\\clientCreated.js",
+          "backend\\src\\automation\\handlers\\courtDateAdded.js",
+          "backend\\src\\automation\\handlers\\deadlineCreated.js",
+          "backend\\src\\automation\\handlers\\documentUploaded.js",
+          "backend\\src\\automation\\handlers\\invoiceCreated.js",
+          "backend\\src\\automation\\handlers\\matterCreated.js",
+          "backend\\src\\automation\\handlers\\paymentReceived.js",
+          "backend\\src\\automation\\handlers\\roleChanged.js",
+          "backend\\src\\automation\\handlers\\taskCompleted.js",
+          "backend\\src\\automation\\handlers\\userCreated.js",
+          "backend\\src\\automation\\legalOperationsAssistant.js",
+          "backend\\src\\automation\\loadTestingEngine.js",
+          "backend\\src\\automation\\mapsIntegrationLayer.js",
+          "backend\\src\\automation\\matterIntelligenceEngine.js",
+          "backend\\src\\automation\\metricsCollector.js",
+          "backend\\src\\automation\\notificationService.js",
+          "backend\\src\\automation\\performanceOptimizationEngine.js",
+          "backend\\src\\automation\\predictiveAnalyticsEngine.js",
+          "backend\\src\\automation\\workflowEngine.js"
+        ],
+        "count": 32
+      },
+      "jobs": {
+        "exists": true,
+        "files": [
+          "backend\\src\\jobs\\systemScheduler.js"
+        ],
+        "count": 1
+      },
+      "database": {
+        "exists": false,
+        "files": [],
+        "count": 0
+      },
+      "migrations": {
+        "exists": true,
+        "files": [
+          "backend\\src\\migrations\\005_create_matters.js",
+          "backend\\src\\migrations\\023_create_roles_permissions.sql"
+        ],
+        "count": 2
+      },
+      "models": {
+        "exists": true,
+        "files": [
+          "backend\\src\\models\\Client.js",
+          "backend\\src\\models\\Communication.js",
+          "backend\\src\\models\\Document.js",
+          "backend\\src\\models\\Firm.js",
+          "backend\\src\\models\\index.js",
+          "backend\\src\\models\\Invoice.js",
+          "backend\\src\\models\\Matter.js",
+          "backend\\src\\models\\Task.js",
+          "backend\\src\\models\\TimeEntry.js",
+          "backend\\src\\models\\User.js"
+        ],
+        "count": 10
+      },
+      "utils": {
+        "exists": true,
+        "files": [
+          "backend\\src\\utils\\apiGuard.js",
+          "backend\\src\\utils\\auditLogger.js",
+          "backend\\src\\utils\\clientIdentityEngine.js",
+          "backend\\src\\utils\\conflictEngine.js",
+          "backend\\src\\utils\\courtDeadlineCalculator.js",
+          "backend\\src\\utils\\errorBus.js",
+          "backend\\src\\utils\\logger.js",
+          "backend\\src\\utils\\matterIntakeWizard.js",
+          "backend\\src\\utils\\matterNumberGenerator.js",
+          "backend\\src\\utils\\taskAutomationEngine.js",
+          "backend\\src\\utils\\workflowConveyor.js"
+        ],
+        "count": 11
+      },
+      "config": {
+        "exists": true,
+        "files": [],
+        "count": 0
+      }
+    },
+    "totals": {
+      "files": 288,
+      "jsFiles": 211,
+      "routeFiles": 64,
+      "automationFiles": 32
+    }
+  },
+  "frontend": {
+    "registry": "frontend_inventory",
+    "generatedAt": "2026-06-19T04:30:05.672Z",
+    "frontendRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend",
+    "srcRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src",
+    "folders": {
+      "pages": {
+        "exists": true,
+        "files": [
+          "frontend\\src\\pages\\Cases.jsx",
+          "frontend\\src\\pages\\Clients.jsx",
+          "frontend\\src\\pages\\Dashboard.jsx",
+          "frontend\\src\\pages\\Deadlines.jsx",
+          "frontend\\src\\pages\\Documents.jsx",
+          "frontend\\src\\pages\\Matters.jsx",
+          "frontend\\src\\pages\\OperationsDashboard.backup.jsx",
+          "frontend\\src\\pages\\OperationsDashboard.jsx",
+          "frontend\\src\\pages\\ProjectDashboard.jsx",
+          "frontend\\src\\pages\\Staff.jsx",
+          "frontend\\src\\pages\\SystemDashboard.jsx"
+        ],
+        "count": 11
+      },
+      "components": {
+        "exists": true,
+        "files": [],
+        "count": 0
+      },
+      "hooks": {
+        "exists": false,
+        "files": [],
+        "count": 0
+      },
+      "api": {
+        "exists": false,
+        "files": [],
+        "count": 0
+      },
+      "services": {
+        "exists": true,
+        "files": [
+          "frontend\\src\\services\\api.js",
+          "frontend\\src\\services\\assignmentService.js",
+          "frontend\\src\\services\\caseService.js",
+          "frontend\\src\\services\\clientService.js",
+          "frontend\\src\\services\\staffService.js"
+        ],
+        "count": 5
+      },
+      "layouts": {
+        "exists": false,
+        "files": [],
+        "count": 0
+      },
+      "enterprise": {
+        "exists": true,
+        "files": [
+          "frontend\\src\\enterprise\\api\\connectivityValidatorApi.js",
+          "frontend\\src\\enterprise\\api\\enterpriseApi.js",
+          "frontend\\src\\enterprise\\components\\BackendConnectivityPanel.jsx",
+          "frontend\\src\\enterprise\\components\\EnterpriseStatusCard.jsx",
+          "frontend\\src\\enterprise\\pages\\EnterpriseOperationsDashboard.jsx",
+          "frontend\\src\\enterprise\\pages\\FrontendBackendConnectivityValidator.jsx"
+        ],
+        "count": 6
+      }
+    },
+    "totals": {
+      "files": 49,
+      "jsxFiles": 19,
+      "jsFiles": 15,
+      "enterpriseFiles": 6
+    }
+  },
+  "routes": {
+    "registry": "route_registry",
+    "generatedAt": "2026-06-19T04:30:05.815Z",
+    "mounts": [
+      {
+        "basePath": "/api/health",
+        "routeModule": "health",
+        "routeFile": "backend\\src\\routes\\health.js"
+      },
+      {
+        "basePath": "/api/auth",
+        "routeModule": "auth",
+        "routeFile": "backend\\src\\routes\\auth.js"
+      },
+      {
+        "basePath": "/api/cases",
+        "routeModule": "cases",
+        "routeFile": "backend\\src\\routes\\cases.js"
+      },
+      {
+        "basePath": "/api/clients",
+        "routeModule": "clients",
+        "routeFile": "backend\\src\\routes\\clients.js"
+      },
+      {
+        "basePath": "/api/staff",
+        "routeModule": "staff",
+        "routeFile": "backend\\src\\routes\\staff.js"
+      },
+      {
+        "basePath": "/api/matters",
+        "routeModule": "matters",
+        "routeFile": "backend\\src\\routes\\matters.js"
+      },
+      {
+        "basePath": "/api/time-entries",
+        "routeModule": "timeEntries",
+        "routeFile": "backend\\src\\routes\\timeEntries.js"
+      },
+      {
+        "basePath": "/api/deadlines",
+        "routeModule": "deadlines",
+        "routeFile": "backend\\src\\routes\\deadlines.js"
+      },
+      {
+        "basePath": "/api/documents",
+        "routeModule": "documents",
+        "routeFile": "backend\\src\\routes\\documents.js"
+      },
+      {
+        "basePath": "/api/audit-logs",
+        "routeModule": "auditLogs",
+        "routeFile": "backend\\src\\routes\\auditLogs.js"
+      },
+      {
+        "basePath": "/api/system-diagnostic",
+        "routeModule": "systemDiagnostic",
+        "routeFile": "backend\\src\\routes\\systemDiagnostic.js"
+      },
+      {
+        "basePath": "/api/debug",
+        "routeModule": "debug",
+        "routeFile": "backend\\src\\routes\\debug.js"
+      },
+      {
+        "basePath": "/api/monitor",
+        "routeModule": "monitor",
+        "routeFile": "backend\\src\\routes\\monitor.js"
+      },
+      {
+        "basePath": "/api/errors",
+        "routeModule": "errors",
+        "routeFile": "backend\\src\\routes\\errors.js"
+      },
+      {
+        "basePath": "/api/system-report",
+        "routeModule": "systemReport",
+        "routeFile": "backend\\src\\routes\\systemReport.js"
+      },
+      {
+        "basePath": "/api/integrity-scan",
+        "routeModule": "integrityScanner",
+        "routeFile": "backend\\src\\routes\\integrityScanner.js"
+      },
+      {
+        "basePath": "/api/auto-heal",
+        "routeModule": "autoHeal",
+        "routeFile": "backend\\src\\routes\\autoHeal.js"
+      },
+      {
+        "basePath": "/api/scheduler",
+        "routeModule": "scheduler",
+        "routeFile": "backend\\src\\routes\\scheduler.js"
+      },
+      {
+        "basePath": "/api/dashboard",
+        "routeModule": "dashboard",
+        "routeFile": "backend\\src\\routes\\dashboard.js"
+      },
+      {
+        "basePath": "/api/matter-number",
+        "routeModule": "matterNumbering",
+        "routeFile": "backend\\src\\routes\\matterNumbering.js"
+      },
+      {
+        "basePath": "/api/client-identity",
+        "routeModule": "clientIdentity",
+        "routeFile": "backend\\src\\routes\\clientIdentity.js"
+      },
+      {
+        "basePath": "/api/conflict-check",
+        "routeModule": "conflictCheck",
+        "routeFile": "backend\\src\\routes\\conflictCheck.js"
+      },
+      {
+        "basePath": "/api/matter-intake",
+        "routeModule": "matterIntake",
+        "routeFile": "backend\\src\\routes\\matterIntake.js"
+      },
+      {
+        "basePath": "/api/workflow",
+        "routeModule": "workflow",
+        "routeFile": "backend\\src\\routes\\workflow.js"
+      },
+      {
+        "basePath": "/api/task-automation",
+        "routeModule": "taskAutomation",
+        "routeFile": "backend\\src\\routes\\taskAutomation.js"
+      },
+      {
+        "basePath": "/api/court-deadline",
+        "routeModule": "courtDeadline",
+        "routeFile": "backend\\src\\routes\\courtDeadline.js"
+      },
+      {
+        "basePath": "/api/enterprise",
+        "routeModule": "enterpriseRoutes",
+        "routeFile": "backend\\src\\routes\\enterpriseRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/handlers",
+        "routeModule": "handlerRoutes",
+        "routeFile": "backend\\src\\routes\\handlerRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/events",
+        "routeModule": "eventBusRoutes",
+        "routeFile": "backend\\src\\routes\\eventBusRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/notifications",
+        "routeModule": "notificationRoutes",
+        "routeFile": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/workflows",
+        "routeModule": "workflowRoutes",
+        "routeFile": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/documents/lifecycle",
+        "routeModule": "documentLifecycleRoutes",
+        "routeFile": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/court-operations",
+        "routeModule": "courtOperationsRoutes",
+        "routeFile": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/matters/intelligence",
+        "routeModule": "matterIntelligenceRoutes",
+        "routeFile": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/command-centre",
+        "routeModule": "executiveCommandRoutes",
+        "routeFile": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/assistant",
+        "routeModule": "legalOperationsAssistantRoutes",
+        "routeFile": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/predictive",
+        "routeModule": "predictiveAnalyticsRoutes",
+        "routeFile": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/navigation",
+        "routeModule": "courtNavigationRoutes",
+        "routeFile": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/maps",
+        "routeModule": "mapsIntegrationRoutes",
+        "routeFile": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/autonomous",
+        "routeModule": "autonomousOperationsRoutes",
+        "routeFile": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/governance",
+        "routeModule": "enterpriseGovernanceRoutes",
+        "routeFile": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/hardening",
+        "routeModule": "enterpriseHardeningRoutes",
+        "routeFile": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/backup-recovery",
+        "routeModule": "backupRecoveryRoutes",
+        "routeFile": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/monitoring",
+        "routeModule": "enterpriseMonitoringRoutes",
+        "routeFile": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "basePath": "/api/enterprise/performance",
+        "routeModule": "performanceOptimizationRoutes",
+        "routeFile": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      }
+    ],
+    "extractedRoutes": [
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\auditLogs.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/register",
+        "file": "backend\\src\\routes\\auth.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/login",
+        "file": "backend\\src\\routes\\auth.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/me",
+        "file": "backend\\src\\routes\\auth.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/register",
+        "file": "backend\\src\\routes\\auth_POSTGRES_BACKUP_DO_NOT_DELETE.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/login",
+        "file": "backend\\src\\routes\\auth_POSTGRES_BACKUP_DO_NOT_DELETE.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/me",
+        "file": "backend\\src\\routes\\auth_POSTGRES_BACKUP_DO_NOT_DELETE.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\autoHeal.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/rules",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/actions",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/escalations",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/decisions",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/run",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/run",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/escalations/:id/resolve",
+        "file": "backend\\src\\routes\\autonomousOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/integrity",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/disaster-readiness",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/restore-plan",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/snapshot",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/snapshot",
+        "file": "backend\\src\\routes\\backupRecoveryRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\cases.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\cases.js"
+      },
+      {
+        "method": "PUT",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\cases.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\cases.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/assign",
+        "file": "backend\\src\\routes\\cases.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/check",
+        "file": "backend\\src\\routes\\clientIdentity.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\clients.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\clients.js"
+      },
+      {
+        "method": "PUT",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\clients.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\clients.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/check",
+        "file": "backend\\src\\routes\\conflictCheck.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/rules",
+        "file": "backend\\src\\routes\\courtDeadline.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/calculate",
+        "file": "backend\\src\\routes\\courtDeadline.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/courts",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/courts",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/courts/:courtName",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/travel-plan/:courtEventId",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/readiness/:matterId",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/dashboard",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/readiness",
+        "file": "backend\\src\\routes\\courtNavigationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/event-types",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/list",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/upcoming",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/overdue-deadlines",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/tasks",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/create",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/start-preparation",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/court-preparation",
+        "file": "backend\\src\\routes\\courtOperationsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\dashboard.backup-before-8-5A.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\dashboard.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\deadlines.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\deadlines.js"
+      },
+      {
+        "method": "PUT",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\deadlines.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\deadlines.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/errors",
+        "file": "backend\\src\\routes\\debug.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/errors",
+        "file": "backend\\src\\routes\\debug.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/states",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/list",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/orphaned",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/create",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/classify",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/assign",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/transition",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/start-review",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/document-review",
+        "file": "backend\\src\\routes\\documentLifecycleRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\documents.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\documents.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\documents.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/policies",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/approvals",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/approvals",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/approvals/:id/approve",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/approvals/:id/reject",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/evidence",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/evidence",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/compliance",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/compliance/run",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/violations",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/approval",
+        "file": "backend\\src\\routes\\enterpriseGovernanceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/healthscore",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/deployment/readiness",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/startup/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/configuration/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/database/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/routes/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/automation/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/security/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/performance/validate",
+        "file": "backend\\src\\routes\\enterpriseHardeningRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/alerts",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/readiness",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/alerts/:id/resolve",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/dashboard",
+        "file": "backend\\src\\routes\\enterpriseMonitoringRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\enterpriseRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/automation",
+        "file": "backend\\src\\routes\\enterpriseRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/events",
+        "file": "backend\\src\\routes\\enterpriseRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/deadletters",
+        "file": "backend\\src\\routes\\enterpriseRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\enterpriseRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\errors.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/clear",
+        "file": "backend\\src\\routes\\errors.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\eventBusRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\eventBusRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/recent",
+        "file": "backend\\src\\routes\\eventBusRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/emit",
+        "file": "backend\\src\\routes\\eventBusRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/:eventType",
+        "file": "backend\\src\\routes\\eventBusRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/summary",
+        "file": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/risk",
+        "file": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/dashboard",
+        "file": "backend\\src\\routes\\executiveCommandRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\handlerRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/list",
+        "file": "backend\\src\\routes\\handlerRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/check/:eventType",
+        "file": "backend\\src\\routes\\handlerRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\health.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\integrityScanner.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\invoices.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\invoices.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/daily-briefing",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/matter/:matterId",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/ask",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/ask",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/daily-briefing",
+        "file": "backend\\src\\routes\\legalOperationsAssistantRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/google",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/waze",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/court/:courtName",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/handoff/:courtEventId",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/google",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/court",
+        "file": "backend\\src\\routes\\mapsIntegrationRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/preview",
+        "file": "backend\\src\\routes\\matterIntake.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/summary",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/profile",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:matterId/profile",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:matterId",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:matterId/health-score",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:matterId/risk-flags",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:matterId/timeline",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/matter-brain",
+        "file": "backend\\src\\routes\\matterIntelligenceRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/preview",
+        "file": "backend\\src\\routes\\matterNumbering.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/generate",
+        "file": "backend\\src\\routes\\matterNumbering.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/sequences",
+        "file": "backend\\src\\routes\\matterNumbering.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\matters.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\matters.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\matters.js"
+      },
+      {
+        "method": "PUT",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\matters.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\monitor.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/list",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/create",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/read",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test-critical",
+        "file": "backend\\src\\routes\\notificationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/runtime",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/benchmark",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/recommendations",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/load/health",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/load/metrics",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/load/test",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/benchmark",
+        "file": "backend\\src\\routes\\performanceOptimizationRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/dashboard",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/matter/:matterId",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/deadlines",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/workload",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/capacity",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/dashboard",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/matter",
+        "file": "backend\\src\\routes\\predictiveAnalyticsRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\scheduler.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/register",
+        "file": "backend\\src\\routes\\sqliteAuth.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/login",
+        "file": "backend\\src\\routes\\sqliteAuth.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/me",
+        "file": "backend\\src\\routes\\sqliteAuth.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/logout",
+        "file": "backend\\src\\routes\\sqliteAuth.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\staff.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\staff.js"
+      },
+      {
+        "method": "PUT",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\staff.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\staff.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/search/:term",
+        "file": "backend\\src\\routes\\staff.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\systemDiagnostic.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\systemReport.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/generate",
+        "file": "backend\\src\\routes\\taskAutomation.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\timeEntries.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\timeEntries.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\users.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/",
+        "file": "backend\\src\\routes\\users.js"
+      },
+      {
+        "method": "DELETE",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\users.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/templates",
+        "file": "backend\\src\\routes\\workflow.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/preview",
+        "file": "backend\\src\\routes\\workflow.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/health",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/metrics",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/templates",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/list",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/:id",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/create",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/start",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/complete-step",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "POST",
+        "localPath": "/:id/fail",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      },
+      {
+        "method": "GET",
+        "localPath": "/test/new-client-intake",
+        "file": "backend\\src\\routes\\workflowRoutes.js"
+      }
+    ],
+    "totals": {
+      "routeFiles": 51,
+      "mounts": 45,
+      "extractedRoutes": 231
+    }
+  },
+  "enterprise": {
+    "registry": "enterprise_registry",
+    "generatedAt": "2026-06-19T04:30:05.843Z",
+    "modules": [
+      {
+        "name": "handlerRegistry",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\handlerRegistry.js"
+      },
+      {
+        "name": "eventBus",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\eventBus.js"
+      },
+      {
+        "name": "notificationService",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\notificationService.js"
+      },
+      {
+        "name": "workflowEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\workflowEngine.js"
+      },
+      {
+        "name": "documentLifecycleEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\documentLifecycleEngine.js"
+      },
+      {
+        "name": "courtOperationsEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\courtOperationsEngine.js"
+      },
+      {
+        "name": "matterIntelligenceEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\matterIntelligenceEngine.js"
+      },
+      {
+        "name": "executiveCommandCentre",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\executiveCommandCentre.js"
+      },
+      {
+        "name": "legalOperationsAssistant",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\legalOperationsAssistant.js"
+      },
+      {
+        "name": "predictiveAnalyticsEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\predictiveAnalyticsEngine.js"
+      },
+      {
+        "name": "courtNavigationEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\courtNavigationEngine.js"
+      },
+      {
+        "name": "mapsIntegrationLayer",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\mapsIntegrationLayer.js"
+      },
+      {
+        "name": "autonomousOperationsEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\autonomousOperationsEngine.js"
+      },
+      {
+        "name": "enterpriseGovernanceEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\enterpriseGovernanceEngine.js"
+      },
+      {
+        "name": "enterpriseHardeningEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\enterpriseHardeningEngine.js"
+      },
+      {
+        "name": "backupRecoveryEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\backupRecoveryEngine.js"
+      },
+      {
+        "name": "enterpriseMonitoringEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\enterpriseMonitoringEngine.js"
+      },
+      {
+        "name": "performanceOptimizationEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\performanceOptimizationEngine.js"
+      },
+      {
+        "name": "loadTestingEngine",
+        "expected": true,
+        "exists": true,
+        "path": "backend\\src\\automation\\loadTestingEngine.js"
+      }
+    ],
+    "automationFiles": [
+      "backend\\src\\automation\\alertManager.js",
+      "backend\\src\\automation\\autonomousOperationsEngine.js",
+      "backend\\src\\automation\\backupRecoveryEngine.js",
+      "backend\\src\\automation\\courtNavigationEngine.js",
+      "backend\\src\\automation\\courtOperationsEngine.js",
+      "backend\\src\\automation\\documentLifecycleEngine.js",
+      "backend\\src\\automation\\enterpriseGovernanceEngine.js",
+      "backend\\src\\automation\\enterpriseHardeningEngine.js",
+      "backend\\src\\automation\\enterpriseMonitoringEngine.js",
+      "backend\\src\\automation\\eventBus.js",
+      "backend\\src\\automation\\eventTypes.js",
+      "backend\\src\\automation\\executiveCommandCentre.js",
+      "backend\\src\\automation\\handlerRegistry.js",
+      "backend\\src\\automation\\handlers\\clientCreated.js",
+      "backend\\src\\automation\\handlers\\courtDateAdded.js",
+      "backend\\src\\automation\\handlers\\deadlineCreated.js",
+      "backend\\src\\automation\\handlers\\documentUploaded.js",
+      "backend\\src\\automation\\handlers\\invoiceCreated.js",
+      "backend\\src\\automation\\handlers\\matterCreated.js",
+      "backend\\src\\automation\\handlers\\paymentReceived.js",
+      "backend\\src\\automation\\handlers\\roleChanged.js",
+      "backend\\src\\automation\\handlers\\taskCompleted.js",
+      "backend\\src\\automation\\handlers\\userCreated.js",
+      "backend\\src\\automation\\legalOperationsAssistant.js",
+      "backend\\src\\automation\\loadTestingEngine.js",
+      "backend\\src\\automation\\mapsIntegrationLayer.js",
+      "backend\\src\\automation\\matterIntelligenceEngine.js",
+      "backend\\src\\automation\\metricsCollector.js",
+      "backend\\src\\automation\\notificationService.js",
+      "backend\\src\\automation\\performanceOptimizationEngine.js",
+      "backend\\src\\automation\\predictiveAnalyticsEngine.js",
+      "backend\\src\\automation\\workflowEngine.js"
+    ],
+    "enterpriseRoutes": [
+      "backend\\src\\routes\\enterpriseGovernanceRoutes.js",
+      "backend\\src\\routes\\enterpriseHardeningRoutes.js",
+      "backend\\src\\routes\\enterpriseMonitoringRoutes.js",
+      "backend\\src\\routes\\enterpriseRoutes.js",
+      "backend\\src\\routes\\eventBusRoutes.js",
+      "backend\\src\\routes\\executiveCommandRoutes.js"
+    ],
+    "totals": {
+      "expectedModules": 19,
+      "existingExpectedModules": 19,
+      "automationFiles": 32,
+      "enterpriseRoutes": 51
+    }
+  },
+  "database": {
+    "registry": "database_registry",
+    "generatedAt": "2026-06-19T04:30:05.985Z",
+    "databasePath": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\litigation360.db",
+    "databaseExists": true,
+    "databaseSizeBytes": 180224,
+    "sqliteAvailable": true,
+    "error": null,
+    "tables": [],
+    "indexes": [],
+    "views": [],
+    "triggers": [],
+    "totals": {
+      "tables": 0,
+      "indexes": 0,
+      "views": 0,
+      "triggers": 0
+    }
+  },
+  "deployment": {
+    "registry": "deployment_registry",
+    "generatedAt": "2026-06-19T04:30:05.987Z",
+    "environment": {
+      "nodeVersion": "v24.16.0",
+      "npmVersion": "11.13.0",
+      "platform": "win32",
+      "cwd": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software"
+    },
+    "backend": {
+      "packageExists": true,
+      "name": "litigation-360-backend",
+      "version": "1.0.0",
+      "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "db:migrate": "node src/database/migrate.js",
+        "db:seed": "node src/database/seed.js",
+        "lint": "eslint src/",
+        "lint:fix": "eslint src/ --fix",
+        "safe": "dev-safe.bat"
+      }
+    },
+    "frontend": {
+      "packageExists": true,
+      "name": "frontend",
+      "version": "0.0.0",
+      "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint .",
+        "preview": "vite preview"
+      },
+      "distExists": true
+    },
+    "database": {
+      "exists": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\litigation360.db"
+    },
+    "ports": {
+      "backendDefault": 5000,
+      "frontendDefault": 5173
+    }
+  }
+}

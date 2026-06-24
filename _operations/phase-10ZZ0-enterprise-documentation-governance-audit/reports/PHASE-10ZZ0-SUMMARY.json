@@ -1,0 +1,19 @@
+﻿{
+    "Phase":  "10ZZ.0",
+    "Status":  "PASS",
+    "Documents":  4068,
+    "Routes":  115,
+    "AutomationEngines":  57,
+    "FrontendItems":  40,
+    "PowerShellScripts":  216,
+    "ValidationItems":  284,
+    "TestItems":  1756,
+    "OperationsFolders":  536,
+    "SopDocs":  2,
+    "ProtocolDocs":  64,
+    "RunbookDocs":  0,
+    "GovernanceDocs":  30,
+    "DuplicateFilenameGroups":  163,
+    "GapOrPartialDomains":  8,
+    "GeneratedAt":  "2026-06-20T07:47:53.9757138+08:00"
+}

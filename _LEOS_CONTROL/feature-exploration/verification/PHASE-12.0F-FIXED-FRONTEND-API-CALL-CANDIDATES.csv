@@ -1,0 +1,9 @@
+﻿"File","Pattern","Line","Match"
+"frontend\src\pages\Matters.jsx","api\.(get|post|put|patch|delete)\(\s*[""'][^""']+[""']","8","api.get(""/matters"""
+"frontend\src\pages\OperationsDashboard.jsx","fetch\(\s*[""'][^""']+[""']","19","fetch(""/api/dashboard"""
+"frontend\src\pages\Staff.jsx","fetch\(\s*[""'][^""']+[""']","21","fetch(
+        'http://localhost:5000/api/staff'"
+"frontend\src\pages\Staff.jsx","fetch\(\s*[""'][^""']+[""']","35","fetch(
+        'http://localhost:5000/api/staff'"
+"frontend\src\pages\SystemDashboard.jsx","fetch\(\s*[""'][^""']+[""']","9","fetch(""/api/monitor"""
+"frontend\src\services\clientService.js","fetch\(\s*[""'][^""']+[""']","3","fetch('/api/clients'"

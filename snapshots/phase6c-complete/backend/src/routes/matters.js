@@ -1,0 +1,153 @@
+﻿const generateMatterNumber =
+require('../utils/matterNumberGenerator');
+const roleMiddleware = require('../middleware/roles');
+const express = require('express');
+const { Matter, Client, Document, TimeEntry } = require('../models');
+const authMiddleware = require('../middleware/auth');
+const logger = require('../utils/logger');
+const auditLog = require('../utils/auditLogger');
+
+const router = express.Router();
+
+// GET /api/matters
+router.get('/', authMiddleware, async (req, res) => {
+  try {
+    const { status, page = 1, limit = 50 } = req.query;
+    const offset = (page - 1) * limit;
+
+    const where = { firmId: req.user.firmId };
+    if (status) where.status = status;
+
+    const { count, rows } = await Matter.findAndCountAll({
+      where,
+      include: [{ model: Client, attributes: ['firstName', 'lastName'] }],
+      offset,
+      limit: parseInt(limit),
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.json({
+      data: rows,
+      pagination: { page: parseInt(page), limit: parseInt(limit), total: count }
+    });
+  } catch (error) {
+    logger.error(`Get matters error: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/matters
+router.post(
+  '/',
+  authMiddleware,
+  roleMiddleware(
+    'administrator',
+    'managing_partner',
+    'senior_lawyer',
+    'junior_lawyer'
+  ),
+  async (req,res) => {
+  try {
+    const duplicateMatter =
+await Matter.findOne({
+  where: {
+    caseNumber:
+      req.body.caseNumber,
+    courtName:
+      req.body.courtName
+  }
+});
+
+if(duplicateMatter){
+
+  return res.status(409).json({
+    warning:
+      'Possible duplicate matter detected'
+  });
+
+}
+
+const matter = await Matter.create({
+  ...req.body,
+  matterNumber:
+    generateMatterNumber(),
+  firmId:
+    req.user.firmId
+});
+
+    auditLog({
+      userEmail: req.user && req.user.email ? req.user.email : 'system',
+      action: 'CREATE_MATTER',
+      entityType: 'MATTER',
+      entityId: String(matter.id),
+      oldValue: null,
+      newValue: matter,
+      ipAddress: req.ip
+    });
+
+    logger.info(`Matter created: ${matter.id}`);
+    res.status(201).json(matter);
+  } catch (error) {
+    logger.error(`Create matter error: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// GET /api/matters/:id
+router.get('/:id', authMiddleware, async (req, res) => {
+  try {
+    const matter = await Matter.findByPk(req.params.id, {
+      include: [
+        { model: Client },
+        { model: Document, limit: 10 },
+        { model: TimeEntry, limit: 10 }
+      ]
+    });
+
+    if (!matter) {
+      return res.status(404).json({ error: 'Matter not found' });
+    }
+
+    res.json(matter);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// PUT /api/matters/:id
+router.put(
+  '/:id',
+  authMiddleware,
+  roleMiddleware(
+    'administrator',
+    'managing_partner',
+    'senior_lawyer',
+    'junior_lawyer'
+  ),
+  async (req, res) => {
+  try {
+    const matter = await Matter.findByPk(req.params.id);
+    if (!matter) {
+      return res.status(404).json({ error: 'Matter not found' });
+    }
+
+    const oldMatter = matter.toJSON ? matter.toJSON() : matter;
+    await matter.update(req.body);
+    auditLog({
+      userEmail: req.user && req.user.email ? req.user.email : 'system',
+      action: 'UPDATE_MATTER',
+      entityType: 'MATTER',
+      entityId: String(matter.id),
+      oldValue: oldMatter,
+      newValue: matter,
+      ipAddress: req.ip
+    });
+
+    logger.info(`Matter updated: ${matter.id}`);
+    res.json(matter);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+module.exports = router;

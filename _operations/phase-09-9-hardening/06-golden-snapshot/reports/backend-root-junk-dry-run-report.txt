@@ -1,0 +1,49 @@
+=====================================================
+LITIGATION 360 - PHASE 9.9C BACKEND ROOT JUNK REVIEW
+=====================================================
+Date: 2026-06-18T08:17:04.333Z
+Mode: LIVE QUARANTINE
+
+[KEEP] .env
+[KEEP] .env.example
+[KEEP] ARCHIVE_DOCTOR_BACKUPS
+[KEEP] backup
+[KEEP] backups
+[KEEP] database
+[KEEP] dev-safe.bat
+[KEEP] enterprise
+[KEEP] launch-dev.bat
+[KEEP] litigation360.db
+[KEEP] logs
+[KEEP] migrate-clients-auditlogger.js
+[KEEP] migrate-matters-auditlogger.js
+[KEEP] node_modules
+[KEEP] package-lock.json
+[KEEP] package.json
+[KEEP] patch-client-audit-approved.js
+[KEEP] patch-deadlines-audit-approved.js
+[KEEP] patch-delete-client-audit-only.js
+[KEEP] patch-delete-client-exact.js
+[KEEP] patch-documents-audit-approved.js
+[KEEP] patch-matters-audit-approved.js
+[KEEP] patch-matters-audit-linebased.js
+[KEEP] patch-shutdown.ps1
+[KEEP] phase7_backend_files_clean.txt
+[KEEP] PHASE8A-FINAL-INVENTORY.js
+[KEEP] phase8a2-list-tables.js
+[KEEP] README.md
+[KEEP] repair-clients-route-approved.js
+[KEEP] repair-documents-deadlines-audit.js
+[KEEP] RUN-PHASE8A2.bat
+[KEEP] safe-rbac-patch-approved.ps1
+[KEEP] scripts
+[KEEP] src
+[KEEP] start-safe.bat
+[KEEP] tools
+[KEEP] _operations
+
+SUMMARY
+Kept: 37
+Flagged: 0
+Moved: 0
+Status: PASS

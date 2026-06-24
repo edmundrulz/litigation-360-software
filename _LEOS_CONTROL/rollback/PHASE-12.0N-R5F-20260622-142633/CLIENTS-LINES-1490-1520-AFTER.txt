@@ -1,0 +1,31 @@
+1490:           next.identificationKind = "Singapore NRIC / FIN";
+1491:           next.documentType = "Citizen / PR Proof";
+1492:           next.phonecountryCode = "+65 Singapore";
+1493:           next.whatsappcountryCode = "+65 Singapore";
+1494:           next.country = "Singapore";
+1495:           next.continent = "Asia";
+1496:         } else if (value === "Foreigner") {
+1497:           next.identityCardColour = "Passport / Foreign Travel Document";
+1498:           next.identificationKind = "Passport";
+1499:           next.documentType = "Passport Bio Page";
+1500:         }
+1501:       }
+1502: 
+1503:       if (field === "identificationKind" || field === "nricPassportNumber") {
+1504:         const kind = field === "identificationKind" ? value : previous.identificationKind;
+1505:         const idValue = field === "nricPassportNumber" ? value : previous.nricPassportNumber;
+1506:         const suggestedGender = deriveGenderFromIdentification(idValue, kind);
+1507:         const derivedDob = parseNricDob(idValue, kind);
+1508:         const age = calculateAge(derivedDob);
+1509: 
+1510:         next.dateOfBirth = derivedDob;
+1511:         next.age = age;
+1512:         next.ageCategory = getAgeCategory(age);
+1513:         next.generation = getGeneration(derivedDob);
+1514:         next.stateOfBirth = getMalaysiaNricStateOfBirth(idValue, kind);
+1515: 
+1516:         if (previous.GenderSource !== "manual") {
+1517:           next.Gender * = suggestedGender;
+1518:           next.GenderSource = "auto";
+1519:         }
+1520:       }

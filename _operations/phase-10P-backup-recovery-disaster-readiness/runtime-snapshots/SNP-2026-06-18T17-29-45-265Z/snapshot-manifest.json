@@ -1,0 +1,82 @@
+{
+  "snapshotId": "SNP-2026-06-18T17-29-45-265Z",
+  "label": "phase-10P-validation",
+  "createdAt": "2026-06-18T17:29:45.266Z",
+  "projectRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software",
+  "backendRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend",
+  "files": [
+    {
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\litigation360.db",
+      "exists": true,
+      "size": 180224,
+      "modifiedAt": "2026-06-18T08:43:31.489Z",
+      "hash": "f2c219dfe08f37d6c1f0198e2031edd3a0ccee2e1bb5d305513cce417397fbfd"
+    },
+    {
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\package.json",
+      "exists": true,
+      "size": 1562,
+      "modifiedAt": "2026-06-14T09:10:23.329Z",
+      "hash": "65956cf01572dde4544afeaf03adb11403280821c3a67da3b099a6ba09efe92c"
+    },
+    {
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\package-lock.json",
+      "exists": true,
+      "size": 248405,
+      "modifiedAt": "2026-06-14T09:10:23.691Z",
+      "hash": "e6a3b03bc69cdda2cad39c25da25f0c4ef79b470fcbef1cd728ac1dcfa59c70e"
+    },
+    {
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\.env",
+      "exists": true,
+      "size": 211,
+      "modifiedAt": "2026-06-14T09:09:19.574Z",
+      "hash": "9e7dd3f31746f943462bd04496e6d3e156d40f67e8754730cf404a8d5a4427fd"
+    },
+    {
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\START-L360-CLEAN.bat",
+      "exists": true,
+      "size": 1802,
+      "modifiedAt": "2026-06-18T08:46:56.591Z",
+      "hash": "eda7c4af96672cad9e8f80bfe110a44bd85a1964ca196cc1b5cb3cfc1c643537"
+    },
+    {
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\STOP-L360.bat",
+      "exists": true,
+      "size": 138,
+      "modifiedAt": "2026-06-17T10:59:24.554Z",
+      "hash": "0a50796c7283c7b50d8fc9ff1d9630877f077190f8da90fb229abd17941453c2"
+    }
+  ],
+  "copiedFiles": [
+    {
+      "source": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\litigation360.db",
+      "destination": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10P-backup-recovery-disaster-readiness\\runtime-snapshots\\SNP-2026-06-18T17-29-45-265Z\\litigation360.db"
+    },
+    {
+      "source": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\package.json",
+      "destination": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10P-backup-recovery-disaster-readiness\\runtime-snapshots\\SNP-2026-06-18T17-29-45-265Z\\package.json"
+    },
+    {
+      "source": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\package-lock.json",
+      "destination": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10P-backup-recovery-disaster-readiness\\runtime-snapshots\\SNP-2026-06-18T17-29-45-265Z\\package-lock.json"
+    },
+    {
+      "source": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\.env",
+      "destination": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10P-backup-recovery-disaster-readiness\\runtime-snapshots\\SNP-2026-06-18T17-29-45-265Z\\.env"
+    },
+    {
+      "source": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\START-L360-CLEAN.bat",
+      "destination": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10P-backup-recovery-disaster-readiness\\runtime-snapshots\\SNP-2026-06-18T17-29-45-265Z\\START-L360-CLEAN.bat"
+    },
+    {
+      "source": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\STOP-L360.bat",
+      "destination": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10P-backup-recovery-disaster-readiness\\runtime-snapshots\\SNP-2026-06-18T17-29-45-265Z\\STOP-L360.bat"
+    }
+  ],
+  "notes": [
+    "This snapshot manifest records important files and copies critical small files.",
+    "node_modules is intentionally not copied.",
+    "Large backups should be handled by external drive/cloud backup policy."
+  ]
+}

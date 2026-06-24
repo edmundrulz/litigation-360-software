@@ -1,0 +1,120 @@
+   1: import { useEffect, useMemo, useState } from "react";
+   2: 
+   3: const API_URL = "/api/clients";
+   4: 
+   5: const LOCAL_STORAGE_KEYS = [
+   6:   "litigation360.clients.profile.v6",
+   7:   "litigation360.clients.profile.v5",
+   8:   "litigation360.clients.contactForm.v4",
+   9:   "litigation360.clients.contactForm.v3",
+  10:   "litigation360.clients.registration.v2",
+  11:   "litigation360.clients.localFallback.v1"
+  12: ];
+  13: 
+  14: const PRIMARY_LOCAL_STORAGE_KEY = LOCAL_STORAGE_KEYS[0];
+  15: 
+  16: const EMPTY_CLIENT = {
+  17:   id: "",
+  18: 
+  19:   titlePrefix: "",
+  20:   titleSuffix: "Not Applicable / N/A",
+  21:   titleGenderOverride: false,
+  22:   titleOverrideReason: "",
+  23: 
+  24:   givenName: "",
+  25:   surname: "",
+  26:   initials: "",
+  27: 
+  28:   gender: "",
+  29:   genderSource: "auto",
+  30:   dateOfBirth: "",
+  31:   age: "",
+  32:   ageCategory: "",
+  33:   generation: "",
+  34:   stateOfBirth: "",
+  35: 
+  36:   employmentStatus: "To be confirmed",
+  37:   maritalStatus: "To be confirmed",
+  38: 
+  39:   ethnicity: "",
+  40:   ethnicityOther: "",
+  41:   nationality: "",
+  42:   residencyStatus: "Malaysian Citizen",
+  43:   identificationKind: "Malaysian NRIC",
+  44:   identityCardColour: "Blue - Malaysian Citizen / MyKad",
+  45:   nricPassportNumber: "",
+  46: 
+  47:   email: "",
+  48: 
+  49:   phoneCountryCode: "+60 Malaysia",
+  50:   phoneNumber: "",
+  51:   backupPhoneCountryCode: "+60 Malaysia",
+  52:   backupPhoneNumber: "",
+  53:   phoneHistory: [],
+  54: 
+  55:   whatsappSameAsPhone: true,
+  56:   whatsappCountryCode: "+60 Malaysia",
+  57:   whatsappNumber: "",
+  58:   whatsappMessageTemplate: "General follow-up",
+  59:   whatsappCustomMessage: "",
+  60:   hasSecondWhatsapp: false,
+  61:   whatsapp2CountryCode: "+60 Malaysia",
+  62:   whatsapp2Number: "",
+  63: 
+  64:   preferredContact1: "WhatsApp Message",
+  65:   preferredContact2: "Phone Call",
+  66:   preferredContact3: "Email",
+  67:   preferredContactHoursFrom: "09:00",
+  68:   preferredContactHoursTo: "18:00",
+  69: 
+  70:   unavailableUntilDate: "",
+  71:   unavailableUntilTime: "",
+  72:   unavailableUntil: "",
+  73:   availabilityReason: "Not Applicable / N/A",
+  74:   availabilityReasonOther: "",
+  75:   communicationTimingNotes: "",
+  76: 
+  77:   emergencyContactName: "",
+  78:   emergencyContactRelationship: "",
+  79:   emergencyContactCountryCode: "+60 Malaysia",
+  80:   emergencyContactNumber: "",
+  81:   emergencyContactEmail: "",
+  82:   emergencyContactNotes: "",
+  83: 
+  84:   addressType: "Residential",
+  85:   country: "Malaysia",
+  86:   continent: "Asia",
+  87:   region: "Asia - Southeast Asia",
+  88:   buildingHouseNo: "",
+  89:   buildingHouseName: "",
+  90:   postcode: "",
+  91:   streetAddress: "",
+  92:   district: "",
+  93:   townCity: "",
+  94: 
+  95:   documentType: "NRIC",
+  96:   documentStatus: "Pending Verification",
+  97:   documentAttachmentNames: [],
+  98:   documentReferenceNotes: "",
+  99:   documentRelatedReferenceNotes: "",
+ 100: 
+ 101:   staffLawyerRemarks: "",
+ 102:   specialRemarksStaffLawyerNotes: "",
+ 103:   missingInformationNotes: "",
+ 104: 
+ 105:   verificationStatus: "Pending Review",
+ 106:   verificationFlags: [],
+ 107:   auditTrail: [],
+ 108: 
+ 109:   createdAt: "",
+ 110:   updatedAt: ""
+ 111: };
+ 112: 
+ 113: const TITLE_PREFIX_OPTIONS = [
+ 114:   "Not Applicable / N/A",
+ 115:   "Mr",
+ 116:   "Ms",
+ 117:   "Mrs",
+ 118:   "Miss",
+ 119:   "Mdm",
+ 120:   "Cik",

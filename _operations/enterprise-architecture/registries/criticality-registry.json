@@ -1,0 +1,1480 @@
+{
+  "registry": "criticality-registry",
+  "generatedAt": "2026-06-19T06:02:48.076Z",
+  "systemCriticality": {
+    "database": "CRITICAL",
+    "backend": "CRITICAL",
+    "frontend": "HIGH",
+    "monitoring": "CRITICAL",
+    "backups": "CRITICAL",
+    "maps": "HIGH",
+    "industrialCourtKualaLumpur": "HIGH",
+    "perkesoKualaLumpur": "HIGH",
+    "perkesoHeadquartersJalanAmpang": "HIGH"
+  },
+  "engines": [
+    {
+      "engine": "alertManager",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "autonomousOperationsEngine",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "backupRecoveryEngine",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "courtNavigationEngine",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "courtOperationsEngine",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "deploymentReadinessCentre",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "documentLifecycleEngine",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "enterpriseGovernanceEngine",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "enterpriseHardeningEngine",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "enterpriseMonitoringEngine",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "environmentValidationEngine",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "eventBus",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "eventTypes",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "executiveCommandCentre",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "handlerRegistry",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "clientCreated",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "courtDateAdded",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "deadlineCreated",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "documentUploaded",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "invoiceCreated",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "matterCreated",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "paymentReceived",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "roleChanged",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "taskCompleted",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "userCreated",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "legalOperationsAssistant",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "loadTestingEngine",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "mapsIntegrationLayer",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "matterIntelligenceEngine",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "metricsCollector",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "notificationService",
+      "criticality": "MEDIUM",
+      "reason": "Supporting enterprise function."
+    },
+    {
+      "engine": "performanceOptimizationEngine",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "predictiveAnalyticsEngine",
+      "criticality": "HIGH",
+      "reason": "Important for operations, visibility, navigation, or intelligence."
+    },
+    {
+      "engine": "releaseValidatorEngine",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    },
+    {
+      "engine": "workflowEngine",
+      "criticality": "CRITICAL",
+      "reason": "Required for deployment safety, governance, workflow, release, or recovery."
+    }
+  ],
+  "endpoints": [
+    {
+      "endpoint": "/api/audit-logs/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/auth/register",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/auth/login",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/auth/me",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/register",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/login",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/me",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/auto-heal/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/rules",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/actions",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/escalations",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/decisions",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/run",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/test/run",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/autonomous/escalations/:id/resolve",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/integrity",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/disaster-readiness",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/restore-plan",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/snapshot",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/backup-recovery/test/snapshot",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/cases/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/cases/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/cases/:id",
+      "method": "PUT",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/cases/:id",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/cases/assign",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/client-identity/check",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/clients/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/clients/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/clients/:id",
+      "method": "PUT",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/clients/:id",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/conflict-check/check",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/court-deadline/rules",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/court-deadline/calculate",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/courts",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/courts",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/courts/:courtName",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/travel-plan/:courtEventId",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/readiness/:matterId",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/test/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/navigation/test/readiness",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/metrics",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/event-types",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/list",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/upcoming",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/overdue-deadlines",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/tasks",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/:id",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/create",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/:id/start-preparation",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/court-operations/test/court-preparation",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/dashboard/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/deadlines/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/deadlines/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/deadlines/:id",
+      "method": "PUT",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/deadlines/:id",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/debug/errors",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/debug/errors",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/deployment-centre/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/deployment-centre/metrics",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/deployment-centre/baseline",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/deployment-centre/readiness",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/deployment-centre/dashboard",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/deployment-centre/executive-summary",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/states",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/list",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/orphaned",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/:id",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/create",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/:id/classify",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/:id/assign",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/:id/transition",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/:id/start-review",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/documents/lifecycle/test/document-review",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/documents/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/documents/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/documents/:id",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/policies",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/approvals",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/approvals",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/approvals/:id/approve",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/approvals/:id/reject",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/evidence",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/evidence",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/compliance",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/compliance/run",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/violations",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/governance/test/approval",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/healthscore",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/deployment/readiness",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/startup/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/configuration/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/database/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/routes/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/automation/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/security/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/hardening/performance/validate",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/alerts",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/readiness",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/alerts/:id/resolve",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/monitoring/test/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/automation",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/events",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/deadletters",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/report",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/summary",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/readiness",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/operating-system",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/runtime",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/backend",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/frontend",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/database",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/network",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/storage",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/environment/env",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/errors/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/errors/clear",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/events/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/events/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/events/recent",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/events/emit",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/events/test/:eventType",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/command-centre/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/command-centre/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/command-centre/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/command-centre/summary",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/command-centre/risk",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/command-centre/test/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/handlers/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/handlers/list",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/handlers/check/:eventType",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/health/",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/integrity-scan/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/daily-briefing",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/matter/:matterId",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/ask",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/ask",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/assistant/test/daily-briefing",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/metrics",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/dashboard",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/google",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/waze",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/court/:courtName",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/handoff/:courtEventId",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/test/google",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/maps/test/court",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/matter-intake/preview",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/summary",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/profile",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/:matterId/profile",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/:matterId",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/:matterId/health-score",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/:matterId/risk-flags",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/:matterId/timeline",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/matters/intelligence/test/matter-brain",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matter-number/preview",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matter-number/generate",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matter-number/sequences",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matters/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matters/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matters/:id",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/matters/:id",
+      "method": "PUT",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/monitor/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/list",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/create",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/:id/read",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/test",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/notifications/test-critical",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/runtime",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/benchmark",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/recommendations",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/load/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/load/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/load/test",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/performance/test/benchmark",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/metrics",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/matter/:matterId",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/deadlines",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/workload",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/capacity",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/test/dashboard",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/predictive/test/matter",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/enterprise/release/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/release/metrics",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/release/validate",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/release/summary",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/release/candidate",
+      "method": "POST",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/release/test/candidate",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/scheduler/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/register",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/login",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/me",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/logout",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/staff/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/staff/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/staff/:id",
+      "method": "PUT",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/staff/:id",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/staff/search/:term",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/system-diagnostic/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/system-report/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/task-automation/generate",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/time-entries/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/time-entries/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/",
+      "method": "POST",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/:id",
+      "method": "DELETE",
+      "criticality": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/workflow/templates",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/workflow/preview",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/health",
+      "method": "GET",
+      "criticality": "CRITICAL"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/metrics",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/templates",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/list",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/:id",
+      "method": "GET",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/create",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/:id/start",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/:id/complete-step",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/:id/fail",
+      "method": "POST",
+      "criticality": "HIGH"
+    },
+    {
+      "endpoint": "/api/enterprise/workflows/test/new-client-intake",
+      "method": "GET",
+      "criticality": "HIGH"
+    }
+  ],
+  "totals": {
+    "engines": 35,
+    "endpoints": 256,
+    "criticalEngines": 9,
+    "criticalEndpoints": 42
+  }
+}

@@ -1,0 +1,15 @@
+﻿# DECISION LOG
+
+Generated at:
+2026-06-23 12:22:50 +08:00
+
+| Decision ID | Decision | Rationale | Status |
+|---|---|---|---|
+| D001 | Use fixed project root | Prevents wrong folder placement | Active |
+| D002 | Use SSOT control root | Prevents uncontrolled duplication | Active |
+| D003 | Keep Phase 11 locked | Prevents unsafe production edits | Active |
+| D004 | Use Cursor as main coding cockpit | Strongest local AI coding workflow | Active |
+| D005 | Use PowerShell as automation layer | Best for Windows scripting and logs | Active |
+| D006 | Use documentation/control-layer first | Lowest-risk next step | Active |
+| D007 | Use synthetic data only | Protects real client information | Active |
+| D008 | Require verification and rollback | Prevents silent breakage | Active |

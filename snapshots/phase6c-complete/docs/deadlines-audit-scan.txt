@@ -1,0 +1,7 @@
+5:const auditLog = require('../utils/auditLogger');
+34:    auditLog({
+36:      action: 'CREATE_DEADLINE',
+73:    auditLog({
+75:      action: 'UPDATE_DEADLINE',
+98:    auditLog({
+100:      action: 'DELETE_DEADLINE',

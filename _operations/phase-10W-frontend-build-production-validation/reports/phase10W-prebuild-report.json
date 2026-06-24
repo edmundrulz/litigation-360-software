@@ -1,0 +1,75 @@
+{
+  "phase": "10W-PREBUILD",
+  "timestamp": "2026-06-19T04:18:02.820Z",
+  "status": "PASS",
+  "passed": 15,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "package.json exists",
+      "pass": true
+    },
+    {
+      "name": "src folder exists",
+      "pass": true
+    },
+    {
+      "name": "App file exists",
+      "pass": true
+    },
+    {
+      "name": "build script exists",
+      "pass": true
+    },
+    {
+      "name": "dev script exists",
+      "pass": true
+    },
+    {
+      "name": "Enterprise dashboard exists",
+      "pass": true
+    },
+    {
+      "name": "Connectivity validator exists",
+      "pass": true
+    },
+    {
+      "name": "Enterprise API exists",
+      "pass": true
+    },
+    {
+      "name": "Connectivity API exists",
+      "pass": true
+    },
+    {
+      "name": "App imports dashboard",
+      "pass": true
+    },
+    {
+      "name": "App imports connectivity",
+      "pass": true
+    },
+    {
+      "name": "Monitoring endpoint referenced",
+      "pass": true
+    },
+    {
+      "name": "Maps endpoint referenced",
+      "pass": true
+    },
+    {
+      "name": "Industrial Court visible",
+      "pass": true
+    },
+    {
+      "name": "PERKESO visible",
+      "pass": true
+    }
+  ],
+  "packageScripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  }
+}

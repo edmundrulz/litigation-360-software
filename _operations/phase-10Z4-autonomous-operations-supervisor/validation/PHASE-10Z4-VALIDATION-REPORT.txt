@@ -1,0 +1,20 @@
+﻿Autonomous Supervisor Exists: true
+Watchdog Exists: true
+Recovery Engine Exists: true
+Remediation Engine Exists: true
+Decision Engine Exists: true
+Route Exists: true
+Route Mounted: true
+Recovery Workflow Working: true
+Remediation Workflow Working: true
+Decision Workflow Working: true
+Watchdog Working: true
+Industrial Court Supervision Present: true
+PERKESO Supervision Present: true
+Deployment Supervision Present: true
+Executive Dashboard Generated: true
+Health Endpoint Present: true
+Metrics Endpoint Present: true
+Dashboard Endpoint Present: true
+Docs Generated: true
+Backups Folder Exists: true

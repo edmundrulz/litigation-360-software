@@ -1,0 +1,68 @@
+{
+  "status": "HEALTHY",
+  "phase": "10Z.1",
+  "service": "Enterprise Alert & Escalation Centre",
+  "score": 90,
+  "criticalOpen": 3,
+  "metrics": {
+    "phase": "10Z.1",
+    "generatedAt": "2026-06-19T09:02:43.393Z",
+    "totalAlerts": 6,
+    "openAlerts": 5,
+    "criticalAlerts": 3,
+    "highAlerts": 3,
+    "resolvedAlerts": 1,
+    "categoriesCovered": 15,
+    "severityLevels": [
+      "CRITICAL",
+      "HIGH",
+      "MEDIUM",
+      "LOW",
+      "INFO"
+    ],
+    "statusValues": [
+      "OPEN",
+      "ACKNOWLEDGED",
+      "ESCALATED",
+      "RESOLVED",
+      "CLOSED"
+    ],
+    "coverage": {
+      "industrialCourt": 5,
+      "perkeso": 6,
+      "deployment": 6,
+      "navigation": 3
+    }
+  },
+  "requiredCoverage": {
+    "industrialCourt": [
+      "Industrial Court Kuala Lumpur",
+      "Industrial Court hearing tomorrow",
+      "Industrial Court filing deadline",
+      "Industrial Court attendance reminder",
+      "Industrial Court navigation departure reminder"
+    ],
+    "perkeso": [
+      "PERKESO Kuala Lumpur / Jalan Tun Razak",
+      "PERKESO Headquarters / Jalan Ampang",
+      "PERKESO meeting reminder",
+      "PERKESO submission deadline",
+      "PERKESO appointment reminder",
+      "PERKESO navigation reminder"
+    ],
+    "deployment": [
+      "Gatekeeper rejected deployment",
+      "Release blocked",
+      "Environment critical",
+      "Hardening blocked",
+      "Backup failed",
+      "Performance failed"
+    ],
+    "navigation": [
+      "Google Maps readiness",
+      "Waze readiness",
+      "Court navigation readiness"
+    ]
+  },
+  "timestamp": "2026-06-19T09:02:43.393Z"
+}

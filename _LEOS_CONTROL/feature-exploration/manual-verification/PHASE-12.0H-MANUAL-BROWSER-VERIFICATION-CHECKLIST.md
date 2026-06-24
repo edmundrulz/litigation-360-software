@@ -1,0 +1,225 @@
+# PHASE 12.0H MANUAL BROWSER VERIFICATION CHECKLIST
+
+Generated: 2026-06-22 09:42:15
+
+Project Root:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+## Current Starting Position
+
+Phase 12.0G confirmed GET-only lab smoke pass candidates:
+
+- Workspace
+- Clients
+- Matters
+- Deadlines
+- Documents
+
+Phase 12.0G did NOT approve production unlock.
+
+Court Dates remains blocked.
+
+Authentication and RBAC require separate security-route verification because common guessed GET endpoints did not respond.
+
+---
+
+# 1. Safety Rule
+
+This phase is manual visual/browser verification only.
+
+Allowed:
+
+- Open pages
+- Observe whether page loads
+- Observe browser console
+- Observe backend terminal
+- Click navigation links
+- Use existing test/dev data if already visible
+
+Not allowed:
+
+- Create new client
+- Create new matter
+- Create new deadline
+- Upload document
+- Edit records
+- Delete records
+- Run migrations
+- Modify source code
+- Modify database
+- Unlock production
+- Start Phase 11
+
+---
+
+# 2. Start Servers
+
+Open PowerShell Window 1:
+
+cd "C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend"
+node server.js
+
+Open PowerShell Window 2:
+
+cd "C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend"
+npm run dev
+
+Expected active ports from Phase 12.0G:
+
+Frontend:
+http://localhost:5173
+
+Backend:
+http://localhost:5000
+
+---
+
+# 3. Manual Browser Pages To Open
+
+Open these one by one in Chrome:
+
+## Workspace
+
+http://localhost:5173/
+http://localhost:5173/dashboard
+
+PASS if:
+- Page opens
+- No white screen
+- Navigation/sidebar/header appears
+- No fatal browser console error
+- Backend terminal does not crash
+
+FAIL if:
+- White screen
+- Infinite loading
+- Fatal React error
+- Backend crash
+- Broken navigation
+
+## Clients
+
+http://localhost:5173/clients
+
+PASS if:
+- Clients page opens
+- Existing client list/table/card area appears OR empty-state appears properly
+- No fatal console error
+- No backend crash
+
+Do NOT create, edit, or delete a client yet.
+
+## Matters
+
+http://localhost:5173/cases
+http://localhost:5173/matters
+http://localhost:5173/matter-intake
+
+PASS if:
+- At least one matters/cases/intake page opens
+- No fatal console error
+- No backend crash
+- Intake page does not need final submit testing yet
+
+Do NOT submit a new matter yet.
+
+## Deadlines
+
+http://localhost:5173/deadlines
+
+PASS if:
+- Deadlines page opens
+- Existing list/table/empty-state appears properly
+- No fatal console error
+- No backend crash
+
+Do NOT create or edit a deadline yet.
+
+## Documents
+
+http://localhost:5173/documents
+
+PASS if:
+- Documents page opens
+- Existing list/table/empty-state appears properly
+- No fatal console error
+- No backend crash
+
+Do NOT upload a document yet.
+
+---
+
+# 4. Court Dates Rule
+
+Do not connect Court Dates yet.
+
+Reason:
+Phase 12.0F found backend evidence but no frontend file evidence.
+
+The Phase 12.0G frontend response for Court Dates may be only the React/Vite fallback page, not a real implemented Court Dates module.
+
+Current Court Dates status:
+BLOCKED / BACKEND ONLY / FRONTEND REQUIRED
+
+---
+
+# 5. Authentication / RBAC Rule
+
+Do not change Authentication or RBAC yet.
+
+Phase 12.0G common GET route guesses did not confirm Authentication/RBAC endpoints.
+
+This is not automatically a failure.
+
+It means the routes may be:
+
+- POST-only
+- mounted under a different path
+- protected
+- session/token based
+- not exposed as GET endpoints
+
+Next verification must inspect exact route definitions before testing Auth/RBAC.
+
+---
+
+# 6. Result Format To Paste Back
+
+Paste results in this format:
+
+Workspace:
+PASS / FAIL / PARTIAL
+Notes:
+
+Clients:
+PASS / FAIL / PARTIAL
+Notes:
+
+Matters:
+PASS / FAIL / PARTIAL
+Notes:
+
+Deadlines:
+PASS / FAIL / PARTIAL
+Notes:
+
+Documents:
+PASS / FAIL / PARTIAL
+Notes:
+
+Browser console errors:
+YES / NO
+Details:
+
+Backend terminal errors:
+YES / NO
+Details:
+
+Did you create/edit/delete/upload anything?
+NO
+
+Court Dates touched?
+NO
+
+Production unlocked?
+NO

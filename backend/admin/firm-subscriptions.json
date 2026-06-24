@@ -1,0 +1,22 @@
+{
+  "FIRM_GROUND_ZERO": {
+    "firm_name": "Fathers Firm Ground Zero",
+    "subscription_plan": "GROUND_ZERO",
+    "license_type": "UNLIMITED_FOUNDING_CLIENT",
+    "all_features_unlocked": true,
+    "status": "ACTIVE",
+    "billing_status": "EXEMPT",
+    "trial_active": false,
+    "trial_expired": false
+  },
+  "FIRM_STARTER_SAMPLE": {
+    "firm_name": "Starter Sample Firm",
+    "subscription_plan": "STARTER",
+    "license_type": "STANDARD_CLIENT",
+    "all_features_unlocked": false,
+    "status": "ACTIVE",
+    "billing_status": "PAID",
+    "trial_active": false,
+    "trial_expired": false
+  }
+}

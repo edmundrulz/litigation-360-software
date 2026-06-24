@@ -1,0 +1,165 @@
+﻿require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+
+const { logError } = require("./utils/errorBus");
+const { startScheduler } = require("./jobs/systemScheduler");
+
+const app = express();
+
+// GLOBAL SECURITY SHIELD
+app.use(helmet());
+app.use("/api/enterprise/alerts", require("./routes/alertRoutes"));
+
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many requests. Please slow down.",
+  },
+});
+
+app.use("/api", apiLimiter);
+
+/* =====================================================
+   CORE MIDDLEWARE
+===================================================== */
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:5173"
+  ],
+  credentials: true
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+/* =====================================================
+   BASIC SYSTEM ROUTES
+===================================================== */
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Backend running" });
+});
+
+app.use("/api/health", require("./routes/health"));
+
+/* =====================================================
+   MAIN APPLICATION ROUTES
+===================================================== */
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/cases", require("./routes/cases"));
+app.use("/api/clients", require("./routes/clients"));
+app.use("/api/staff", require("./routes/staff"));
+app.use("/api/matters", require("./routes/matters"));
+app.use("/api/time-entries", require("./routes/timeEntries"));
+app.use("/api/deadlines", require("./routes/deadlines"));
+app.use("/api/documents", require("./routes/documents"));
+app.use("/api/audit-logs", require("./routes/auditLogs"));
+
+/* =====================================================
+   OBSERVABILITY / DIAGNOSTIC ROUTES
+===================================================== */
+app.use("/api/system-diagnostic", require("./routes/systemDiagnostic"));
+app.use("/api/debug", require("./routes/debug"));
+app.use("/api/monitor", require("./routes/monitor"));
+app.use("/api/errors", require("./routes/errors"));
+app.use("/api/system-report", require("./routes/systemReport"));
+app.use("/api/integrity-scan", require("./routes/integrityScanner"));
+app.use("/api/auto-heal", require("./routes/autoHeal"));
+app.use("/api/scheduler", require("./routes/scheduler"));
+app.use("/api/dashboard", require("./routes/dashboard"));
+app.use("/api/matter-number", require("./routes/matterNumbering"));
+app.use("/api/client-identity", require("./routes/clientIdentity"));
+app.use("/api/conflict-check", require("./routes/conflictCheck"));
+app.use("/api/matter-intake", require("./routes/matterIntake"));
+app.use("/api/workflow", require("./routes/workflow"));
+app.use("/api/task-automation", require("./routes/taskAutomation"));
+app.use("/api/court-deadline", require("./routes/courtDeadline"));
+app.use("/api/enterprise", require("./routes/enterpriseRoutes"));
+app.use("/api/enterprise/handlers", require("./routes/handlerRoutes"));
+app.use("/api/enterprise/events", require("./routes/eventBusRoutes"));
+app.use("/api/enterprise/notifications", require("./routes/notificationRoutes"));
+app.use("/api/enterprise/workflows", require("./routes/workflowRoutes"));
+app.use("/api/enterprise/documents/lifecycle", require("./routes/documentLifecycleRoutes"));
+app.use("/api/enterprise/court-operations", require("./routes/courtOperationsRoutes"));
+app.use("/api/enterprise/matters/intelligence", require("./routes/matterIntelligenceRoutes"));
+app.use("/api/enterprise/command-centre", require("./routes/executiveCommandRoutes"));
+app.use("/api/enterprise/assistant", require("./routes/legalOperationsAssistantRoutes"));
+app.use("/api/enterprise/predictive", require("./routes/predictiveAnalyticsRoutes"));
+app.use("/api/enterprise/navigation", require("./routes/courtNavigationRoutes"));
+app.use("/api/enterprise/maps", require("./routes/mapsIntegrationRoutes"));
+app.use("/api/enterprise/autonomous", require("./routes/autonomousOperationsRoutes"));
+app.use("/api/enterprise/governance", require("./routes/enterpriseGovernanceRoutes"));
+app.use("/api/enterprise/hardening", require("./routes/enterpriseHardeningRoutes"));
+app.use("/api/enterprise/backup-recovery", require("./routes/backupRecoveryRoutes"));
+app.use("/api/enterprise/monitoring", require("./routes/enterpriseMonitoringRoutes"));
+app.use("/api/enterprise/performance", require("./routes/performanceOptimizationRoutes"));
+app.use("/api/enterprise/deployment-centre", require("./routes/deploymentReadinessCentreRoutes"));
+
+const PORT = process.env.PORT || 5000;
+
+startScheduler();
+
+const server = app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.log("");
+    console.log("====================================");
+    console.log("Litigation 360 Backend already running");
+    console.log("Port: " + PORT);
+    console.log("No action required.");
+    console.log("====================================");
+    process.exit(0);
+  }
+
+  throw err;
+});
+
+module.exports = app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.use("/api/enterprise/environment", require("./routes/environmentValidationRoutes"));
+app.use("/api/enterprise/release", require("./routes/releaseValidatorRoutes"));
+app.use("/api/enterprise/scoring", require("./routes/deploymentScoringRoutes"));
+app.use("/api/enterprise/executive-deployment", require("./routes/executiveDeploymentDashboardRoutes"));
+app.use("/api/enterprise/gatekeeper", require("./routes/deploymentGatekeeperRoutes"));
+app.use("/api/enterprise/operations", require("./routes/enterpriseOperationsRoutes"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+

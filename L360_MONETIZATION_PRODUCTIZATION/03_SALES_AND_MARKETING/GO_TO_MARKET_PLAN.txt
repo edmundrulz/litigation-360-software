@@ -1,0 +1,48 @@
+GO-TO-MARKET PLAN
+
+Positioning:
+"Malaysia-focused legal practice operating system for small and medium law firms."
+
+Main pain points:
+- Missed deadlines
+- Messy documents
+- Repeated manual work
+- Forgotten tasks
+- Weak reminders
+- No proper matter visibility
+- Too many tools
+- No single source of truth
+
+Launch strategy:
+
+Stage 1:
+Private beta
+Target: 3 to 5 friendly firms
+Price: Free or RM99
+
+Stage 2:
+Pilot
+Target: 10 to 20 firms
+Price: RM99
+
+Stage 3:
+Public launch
+Target: 50 firms
+Price: RM99 / RM199 / RM399
+
+Stage 4:
+Expansion
+Target: 100+ firms
+Introduce Enterprise pricing
+
+Key offer:
+"Try Litigation 360 for 30 days. No heavy setup. No long contract."
+
+Trust builders:
+- Free onboarding
+- Data backup explanation
+- Clear support channel
+- Simple pricing
+- Malaysian court workflow focus
+- Human approval gates
+- No AI pretending to be final legal advice

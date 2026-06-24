@@ -1,0 +1,286 @@
+﻿# LITIGATION 360 LEOS
+# NEXT-STEP SINGLE SOURCE OF TRUTH HANDOVER AND EXECUTION BLUEPRINT
+
+Generated at:
+2026-06-23 12:23:24 +08:00
+
+Project root:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+SSOT control root:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER
+
+## 1. Executive Summary
+
+This file is the active SSOT for Cursor continuation.
+
+Cursor must use this file as the controlling authority before making any project changes.
+
+Current approved work:
+- Documentation/control-layer consolidation
+- Safe handover
+- Cursor safety rules
+- Verification scripts
+- Monitoring logs
+- Progress tracking
+
+Current locked work:
+- Backend edits
+- Database edits
+- Authentication edits
+- RBAC edits
+- API route edits
+- Server edits
+- Package/dependency edits
+- Environment file edits
+- Production logic edits
+
+Immediate next action:
+Run the verification script, then open the project in Cursor and instruct Cursor to read this SSOT before doing anything else.
+
+## 2. Project Parameters and Protocols
+
+Non-negotiable rules:
+1. Do not delete existing files.
+2. Do not rename existing files.
+3. Do not move existing files.
+4. Do not edit backend, database, auth, RBAC, API routes, server files, or production logic without approval.
+5. Do not use real client data.
+6. Do not create uncontrolled handovers outside this SSOT root.
+7. Do not change ports without approval.
+8. Do not change package manager without approval.
+9. Every meaningful change must have verification.
+10. Every meaningful change must have rollback instructions.
+
+Safe zone:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL
+
+Cursor safety rule zone:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.cursor\rules
+
+Protected zones:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\server.js
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\src
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\routes
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\controllers
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\services
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\models
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\middleware
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\auth
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\database
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\prisma
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\migrations
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.env
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\.env.local
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\package.json
+
+## 3. Timeline and Currency Tracker
+
+Past:
+- Litigation 360 is treated as a LEOS project.
+- Phase 10 structural work is treated as structurally complete.
+- Phase 10 governance, validation, certification, and evidence confirmation remain active.
+- Phase 11 production development remains locked until governance and verification are ready.
+
+Present:
+- Build SSOT handover pack.
+- Create Cursor continuation blueprint.
+- Create monitoring and verification scripts.
+- Create documentation control files.
+- Create Cursor rules.
+
+Upcoming:
+1. Verify this SSOT pack.
+2. Open project root in Cursor.
+3. Ask Cursor to inspect only.
+4. Generate project inventory.
+5. Confirm run commands and ports.
+6. Confirm safe next development action.
+7. Continue only with approved scope.
+
+## 4. Decision Log
+
+Active decisions:
+- Project root is fixed as C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software.
+- SSOT root is fixed as C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER.
+- Cursor is the main coding cockpit.
+- PowerShell is the main automation layer.
+- Documentation/control-layer work comes before production changes.
+- Phase 11 production development is locked.
+- Synthetic data only.
+- Verification and rollback are required.
+
+Deprecated decisions:
+- Random handovers outside SSOT are deprecated.
+- Browser-only builders are not the main system.
+- Direct backend work before governance is deprecated.
+- Manual guessed folder creation is deprecated.
+
+## 5. Variation Registry
+
+Active:
+- Cursor + PowerShell + React + Node.js local workflow.
+- SSOT documentation and control-layer branch.
+- Live monitoring and verification branch.
+
+Secondary:
+- VS Code + GitHub Copilot as backup workflow.
+
+Prototype only:
+- Replit, Lovable, Bolt, v0.
+
+Locked:
+- Production backend/database/auth/RBAC/API/server changes.
+- Phase 11 implementation until governance unlock.
+
+## 6. Defined Path and Journey
+
+Milestone 1:
+SSOT control pack creation.
+
+Milestone 2:
+Cursor inspection only.
+
+Milestone 3:
+Evidence certification.
+
+Milestone 4:
+Controlled implementation after approval.
+
+Dependencies:
+- Project root must exist.
+- SSOT files must exist.
+- Cursor rules must exist.
+- Verification script must pass.
+- No production edits must occur in this phase.
+
+Current blockers:
+- Production development is blocked until verification and governance are complete.
+- Any missing file from the SSOT pack must be fixed before Cursor continues.
+
+Risk level:
+Low for current documentation/control-layer work.
+High for unapproved backend/database/auth/API/server edits.
+
+## 7. Documentation Pack
+
+Required documents:
+- MASTER-SSOT-CURSOR-HANDOVER.md
+- SSOT-CURRENT-AUTHORITY.md
+- TIMELINE-CURRENCY-TRACKER.md
+- DECISION-LOG.md
+- DECISION-LOG.csv
+- VARIATION-REGISTRY.md
+- VARIATION-REGISTRY.csv
+- ROADMAP-MILESTONES.md
+- SOP-SAFE-CURSOR-WORKFLOW.md
+- HANDOVER-NOTES-FOR-CURSOR.md
+- TESTING-VERIFICATION-CHECKLIST.md
+- ROLLBACK-PROTOCOL.md
+- COMPLIANCE-CHECKLIST.md
+- VERSION-CONTROL-UPDATE-PROTOCOL.md
+- AUDIT-LOG.md
+- AUDIT-LOG.csv
+- LIVE-STATUS.md
+- LIVE-MONITOR.csv
+
+## 8. Automation Scripts
+
+Required scripts:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.ps1
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.cmd
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.cmd
+
+## 9. Live Progress Monitoring
+
+Live status:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\08_LIVE_MONITORING\LIVE-STATUS.md
+
+Live CSV:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\08_LIVE_MONITORING\LIVE-MONITOR.csv
+
+Monitoring records:
+- Timestamp
+- Phase
+- Completion percentage
+- Status
+- Risk level
+- Blockers
+- Verification
+- Next action
+
+## 10. Testing and Verification
+
+PowerShell verification:
+powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-VERIFY.ps1"
+
+Live monitor one-time run:
+powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1" -Cycles 1
+
+Continuous monitor:
+powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\07_AUTOMATION_SCRIPTS\RUN-SSOT-LIVE-MONITOR.ps1" -Continuous -DelaySeconds 10
+
+Stop continuous monitor:
+CTRL + C
+
+## 11. Compliance Checklist
+
+Before any future Cursor work:
+- SSOT read.
+- Project root confirmed.
+- Target files listed.
+- Target zone classified.
+- Risk level stated.
+- Backup plan stated.
+- Verification command stated.
+- Rollback path stated.
+- Synthetic data only.
+- No production logic touched unless approved.
+
+## 12. Version Control and Update Protocol
+
+Update this SSOT instead of creating uncontrolled duplicate handovers.
+
+Every future change must update:
+- Decision Log
+- Variation Registry
+- Timeline Tracker
+- Audit Log
+- Live Monitor
+- Verification Checklist when relevant
+
+If older documents conflict with this SSOT, this SSOT controls unless the user explicitly says otherwise.
+
+## Cursor Opening Prompt
+
+Paste this into Cursor:
+
+You are continuing the Litigation 360 LEOS project.
+
+Read this SSOT first:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\MASTER-SSOT-CURSOR-HANDOVER.md
+
+Project root:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+Current allowed task:
+Inspection and documentation/control-layer continuation only.
+
+Do not edit backend, database, auth, RBAC, API routes, server files, package files, environment files, or production logic.
+
+First action:
+Inspect the SSOT control pack and project structure only.
+
+Then produce:
+1. Current project inventory
+2. Safe zones
+3. Locked zones
+4. Existing run commands from package.json
+5. Likely frontend command
+6. Likely backend command
+7. Known ports from scripts/configs
+8. Missing evidence
+9. Next safest action
+
+Do not edit any production source files.

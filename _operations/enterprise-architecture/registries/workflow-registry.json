@@ -1,0 +1,56 @@
+{
+  "registry": "workflow-registry",
+  "generatedAt": "2026-06-19T06:02:47.946Z",
+  "workflowEngineExists": true,
+  "knownWorkflows": [
+    {
+      "workflowType": "NEW_CLIENT_INTAKE",
+      "detectedInCode": true,
+      "criticality": "HIGH"
+    },
+    {
+      "workflowType": "MATTER_CREATION",
+      "detectedInCode": false,
+      "criticality": "HIGH"
+    },
+    {
+      "workflowType": "CONFLICT_CHECK",
+      "detectedInCode": false,
+      "criticality": "CRITICAL"
+    },
+    {
+      "workflowType": "COURT_PREPARATION",
+      "detectedInCode": false,
+      "criticality": "CRITICAL"
+    },
+    {
+      "workflowType": "DOCUMENT_REVIEW",
+      "detectedInCode": true,
+      "criticality": "HIGH"
+    },
+    {
+      "workflowType": "INVOICE_APPROVAL",
+      "detectedInCode": false,
+      "criticality": "HIGH"
+    },
+    {
+      "workflowType": "MATTER_CLOSURE",
+      "detectedInCode": false,
+      "criticality": "CRITICAL"
+    },
+    {
+      "workflowType": "PERKESO_VISIT",
+      "detectedInCode": false,
+      "criticality": "HIGH"
+    },
+    {
+      "workflowType": "INDUSTRIAL_COURT_PREPARATION",
+      "detectedInCode": false,
+      "criticality": "HIGH"
+    }
+  ],
+  "totals": {
+    "knownWorkflows": 9,
+    "detected": 2
+  }
+}

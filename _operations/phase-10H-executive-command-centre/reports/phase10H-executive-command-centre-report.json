@@ -1,0 +1,28 @@
+{
+  "phase": "10H",
+  "module": "Executive Command Centre",
+  "timestamp": "2026-06-18T13:06:03.833Z",
+  "files": {
+    "engineExists": true,
+    "routeExists": true,
+    "routeMountedInIndex": true
+  },
+  "dashboard": {
+    "enterpriseStatus": "HEALTHY",
+    "enterpriseScore": 100,
+    "moduleHealthPanels": 7,
+    "riskItems": 0,
+    "hasSummary": true,
+    "hasPanels": true
+  },
+  "health": {
+    "module": "Executive Command Centre",
+    "status": "HEALTHY",
+    "enterpriseScore": 100,
+    "dashboardGenerated": 2,
+    "lastGeneratedAt": "2026-06-18T13:06:03.833Z",
+    "riskItems": 0,
+    "timestamp": "2026-06-18T13:06:03.833Z"
+  },
+  "status": "PASS"
+}

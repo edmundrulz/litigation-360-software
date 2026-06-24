@@ -1,0 +1,8 @@
+﻿(
+clearInterval(timer)
+console.log('-'
+console.log('[CLEANUP]
+console.log(`[CLEANUP]
+fs.existsSync(candidate))
+''
+'`sql

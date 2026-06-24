@@ -1,104 +1,125 @@
-const express = require('express');
-const { Client, Matter } = require('../models');
-const authMiddleware = require('../middleware/auth');
-const logger = require('../utils/logger');
-
+﻿const auditLog = require('../utils/auditLogger');
+const express = require("express");
+const { requireRole } = require("../middleware/roleMiddleware");
+const authMiddleware = require("../middleware/auth");
 const router = express.Router();
+const db = require('../database');
 
-// GET /api/clients
-router.get('/', authMiddleware, async (req, res) => {
+// GET all clients
+router.get('/', (req, res) => {
   try {
-    const { page = 1, limit = 50, search } = req.query;
-    const offset = (page - 1) * limit;
+    const clients = db.prepare('SELECT * FROM clients ORDER BY created_at DESC').all();
+    res.json(clients);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-    const where = { firmId: req.user.firmId };
-    if (search) {
-      where[require('sequelize').Op.or] = [
-        { firstName: { [require('sequelize').Op.iLike]: `%${search}%` } },
-        { lastName: { [require('sequelize').Op.iLike]: `%${search}%` } },
-        { email: { [require('sequelize').Op.iLike]: `%${search}%` } }
-      ];
-    }
+// POST create client
+router.post("/", authMiddleware, requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+  try {
+    const { full_name, email, phone, address } = req.body;
 
-    const { count, rows } = await Client.findAndCountAll({
-      where,
-      offset,
-      limit: parseInt(limit),
-      order: [['createdAt', 'DESC']]
+    const result = db.prepare(
+      'INSERT INTO clients (full_name, email, phone, address) VALUES (?, ?, ?, ?)'
+    ).run(full_name, email, phone, address);
+
+    auditLog({
+      userEmail: 'system',
+      action: 'CREATE_CLIENT',
+      entityType: 'CLIENT',
+      entityId: result.lastInsertRowid,
+      newValue: {
+        full_name,
+        email,
+        phone,
+        address
+      },
+      ipAddress: req.ip
     });
 
     res.json({
-      data: rows,
-      pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
-        total: count,
-        pages: Math.ceil(count / limit)
-      }
-    });
-  } catch (error) {
-    logger.error(`Get clients error: ${error.message}`);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// POST /api/clients
-router.post('/', authMiddleware, async (req, res) => {
-  try {
-    const { firstName, lastName, email, phone, address, city, state, zipCode, clientType } = req.body;
-
-    const client = await Client.create({
-      firstName,
-      lastName,
+      id: result.lastInsertRowid,
+      full_name,
       email,
       phone,
-      address,
-      city,
-      state,
-      zipCode,
-      clientType,
-      firmId: req.user.firmId
+      address
     });
 
-    logger.info(`Client created: ${client.id}`);
-    res.status(201).json(client);
   } catch (error) {
-    logger.error(`Create client error: ${error.message}`);
+    res.status(500).json({
+      error: error.message
+    });
+  }
+});
+
+// PUT update client
+router.put("/:id", authMiddleware, requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+  try {
+    const existingClient = db.prepare('SELECT * FROM clients WHERE id = ?').get(req.params.id);
+
+    if (!existingClient) {
+      return res.status(404).json({ error: 'Client not found' });
+    }
+
+    const { full_name, email, phone, address } = req.body;
+
+    db.prepare(
+      'UPDATE clients SET full_name = ?, email = ?, phone = ?, address = ? WHERE id = ?'
+    ).run(full_name, email, phone, address, req.params.id);
+
+    auditLog({
+      userEmail: 'system',
+      action: 'UPDATE_CLIENT',
+      entityType: 'CLIENT',
+      entityId: req.params.id,
+      oldValue: existingClient,
+      newValue: {
+        full_name,
+        email,
+        phone,
+        address
+      },
+      ipAddress: req.ip
+    });
+
+    res.json({
+      id: req.params.id,
+      full_name,
+      email,
+      phone,
+      address
+    });
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// GET /api/clients/:id
-router.get('/:id', authMiddleware, async (req, res) => {
+// DELETE client
+router.delete("/:id", authMiddleware, requireRole("admin", "Administrator"), (req, res) => {
   try {
-    const client = await Client.findByPk(req.params.id, {
-      include: [{ model: Matter, as: 'Matters' }]
+    const existingClient = db.prepare('SELECT * FROM clients WHERE id = ?').get(req.params.id);
+
+    if (!existingClient) {
+      return res.status(404).json({ error: 'Client not found' });
+    }
+
+    auditLog({
+      userEmail: 'system',
+      action: 'DELETE_CLIENT',
+      entityType: 'CLIENT',
+      entityId: req.params.id,
+      oldValue: existingClient,
+      newValue: null,
+      ipAddress: req.ip
     });
 
-    if (!client) {
-      return res.status(404).json({ error: 'Client not found' });
-    }
-
-    res.json(client);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// PUT /api/clients/:id
-router.put('/:id', authMiddleware, async (req, res) => {
-  try {
-    const client = await Client.findByPk(req.params.id);
-    if (!client) {
-      return res.status(404).json({ error: 'Client not found' });
-    }
-
-    await client.update(req.body);
-    logger.info(`Client updated: ${client.id}`);
-    res.json(client);
+    db.prepare('DELETE FROM clients WHERE id = ?').run(req.params.id);
+    res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
 module.exports = router;
+

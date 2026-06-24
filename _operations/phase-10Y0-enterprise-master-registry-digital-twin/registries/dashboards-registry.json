@@ -1,0 +1,78 @@
+{
+  "registry": "dashboards-registry",
+  "generatedAt": "2026-06-19T07:51:04.812Z",
+  "dashboards": [
+    {
+      "name": "connectivityValidatorApi.js",
+      "file": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "apiReferences": [
+        "/api/enterprise/monitoring/health",
+        "/api/enterprise/hardening/deployment/readiness",
+        "/api/enterprise/backup-recovery/health",
+        "/api/enterprise/performance/health",
+        "/api/enterprise/governance/health",
+        "/api/enterprise/autonomous/health",
+        "/api/enterprise/maps/health",
+        "/api/enterprise/navigation/health",
+        "/api/enterprise/predictive/health",
+        "/api/enterprise/assistant/health",
+        "/api/enterprise/command-centre/health",
+        "/api/enterprise/documents/lifecycle/health",
+        "/api/enterprise/court-operations/health",
+        "/api/enterprise/matters/intelligence/health"
+      ]
+    },
+    {
+      "name": "deploymentDashboardApi.js",
+      "file": "frontend/src/enterprise/api/deploymentDashboardApi.js",
+      "apiReferences": [
+        "/api/enterprise/executive-deployment/dashboard",
+        "/api/enterprise/executive-deployment/summary",
+        "/api/enterprise/executive-deployment/health"
+      ]
+    },
+    {
+      "name": "EnterpriseOperationsDashboard.jsx",
+      "file": "frontend/src/enterprise/pages/EnterpriseOperationsDashboard.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "ExecutiveDeploymentDashboard.jsx",
+      "file": "frontend/src/enterprise/pages/ExecutiveDeploymentDashboard.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "FrontendBackendConnectivityValidator.jsx",
+      "file": "frontend/src/enterprise/pages/FrontendBackendConnectivityValidator.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "Dashboard.jsx",
+      "file": "frontend/src/pages/Dashboard.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "OperationsDashboard.backup.jsx",
+      "file": "frontend/src/pages/OperationsDashboard.backup.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "OperationsDashboard.jsx",
+      "file": "frontend/src/pages/OperationsDashboard.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "ProjectDashboard.jsx",
+      "file": "frontend/src/pages/ProjectDashboard.jsx",
+      "apiReferences": []
+    },
+    {
+      "name": "SystemDashboard.jsx",
+      "file": "frontend/src/pages/SystemDashboard.jsx",
+      "apiReferences": []
+    }
+  ],
+  "totals": {
+    "dashboards": 10
+  }
+}

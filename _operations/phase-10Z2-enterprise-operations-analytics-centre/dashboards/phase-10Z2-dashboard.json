@@ -1,0 +1,73 @@
+{
+  "title": "Enterprise Operations Analytics Centre",
+  "phase": "10Z.2",
+  "generatedAt": "2026-06-19T09:04:48.547Z",
+  "snapshot": {
+    "analyticsId": "ANA-1781859888547",
+    "generatedAt": "2026-06-19T09:04:48.547Z",
+    "categories": [
+      "SYSTEM",
+      "DATABASE",
+      "BACKEND",
+      "FRONTEND",
+      "WORKFLOW",
+      "DOCUMENT",
+      "COURT",
+      "INDUSTRIAL_COURT",
+      "PERKESO",
+      "NAVIGATION",
+      "DEPLOYMENT",
+      "SECURITY",
+      "PERFORMANCE",
+      "BACKUP",
+      "GATEKEEPER",
+      "ALERTS",
+      "ESCALATIONS"
+    ],
+    "operationsHealth": "HEALTHY",
+    "stabilityScore": 90,
+    "riskScore": 10,
+    "workflowSuccessRate": 100,
+    "alertLoadScore": 0,
+    "criticalAlertCount": 0,
+    "highAlertCount": 1,
+    "escalationCount": 0,
+    "backupFailureCount": 0,
+    "deploymentBlockCount": 0,
+    "performanceIncidentCount": 0,
+    "courtCoverage": [
+      "Industrial Court Kuala Lumpur",
+      "Industrial Court hearing analytics",
+      "Industrial Court filing deadline analytics",
+      "Industrial Court attendance reminder analytics",
+      "Industrial Court navigation departure analytics",
+      "PERKESO Kuala Lumpur / Jalan Tun Razak",
+      "PERKESO Headquarters / Jalan Ampang",
+      "PERKESO submission analytics",
+      "PERKESO appointment analytics",
+      "Google Maps readiness analytics",
+      "Waze readiness analytics"
+    ],
+    "recommendations": [
+      "Review HIGH alerts in operations dashboard and assign owner."
+    ]
+  },
+  "liveMonitoring": {
+    "refreshSeconds": 30,
+    "endpoints": [
+      "/api/enterprise/operations-analytics/health",
+      "/api/enterprise/operations-analytics/metrics",
+      "/api/enterprise/operations-analytics/dashboard",
+      "/api/enterprise/operations-analytics/performance",
+      "/api/enterprise/operations-analytics/courts",
+      "/api/enterprise/operations-analytics/deployment"
+    ]
+  },
+  "checksAndBalances": [
+    "Health score must remain above 85 for normal operations.",
+    "Critical alerts must be resolved or escalated before release activity.",
+    "Industrial Court and PERKESO coverage must remain visible in dashboard.",
+    "Backup and gatekeeper failures must block deployment readiness.",
+    "Performance incidents must be reviewed before executive status is marked healthy."
+  ]
+}

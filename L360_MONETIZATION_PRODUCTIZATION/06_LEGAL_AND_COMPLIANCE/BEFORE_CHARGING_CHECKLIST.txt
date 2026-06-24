@@ -1,0 +1,23 @@
+MINIMUM PRODUCT RULES BEFORE CHARGING CUSTOMERS
+
+Do not charge external firms until these work reliably:
+
+1. Login
+2. RBAC
+3. Matter creation
+4. Client creation
+5. Document upload
+6. Task creation
+7. Calendar/reminders
+8. Audit logs
+9. Backup
+10. Firm separation / tenant isolation
+11. Subscription plan control
+12. Admin dashboard
+13. Export capability
+14. Error logging
+15. Recovery procedure
+
+If these are not stable, use free beta only.
+
+No law firm should trust production client data to an unstable system.

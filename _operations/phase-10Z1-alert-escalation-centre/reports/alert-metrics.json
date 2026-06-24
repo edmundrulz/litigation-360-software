@@ -1,0 +1,30 @@
+{
+  "phase": "10Z.1",
+  "generatedAt": "2026-06-19T09:02:43.393Z",
+  "totalAlerts": 6,
+  "openAlerts": 5,
+  "criticalAlerts": 3,
+  "highAlerts": 3,
+  "resolvedAlerts": 1,
+  "categoriesCovered": 15,
+  "severityLevels": [
+    "CRITICAL",
+    "HIGH",
+    "MEDIUM",
+    "LOW",
+    "INFO"
+  ],
+  "statusValues": [
+    "OPEN",
+    "ACKNOWLEDGED",
+    "ESCALATED",
+    "RESOLVED",
+    "CLOSED"
+  ],
+  "coverage": {
+    "industrialCourt": 5,
+    "perkeso": 6,
+    "deployment": 6,
+    "navigation": 3
+  }
+}

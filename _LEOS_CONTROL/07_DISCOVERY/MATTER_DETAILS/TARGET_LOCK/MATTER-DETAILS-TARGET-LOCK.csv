@@ -1,0 +1,5 @@
+"Role","Path","Exists","SHA256","Action"
+"PRIMARY_UI_TARGET","C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx","True","0DEF17D456302273746E955B8EED54FC72A22448D125D34E8D73AA1F2137AB54","BACKUP_AND_INSPECT"
+"SUPPORTING_FRONTEND_API","C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js","True","39CA5E9D88C35AA0CA8962F305CC427062031711653805BBEE25B3192A76E894","BACKUP_AND_INSPECT"
+"ACTIVE_BACKEND_ROUTE","C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\routes\cases.js","True","C5B644ED7C77FEE93AA09D9A766758CF5B78690DF9E0981241516A00432F7519","BACKUP_AND_INSPECT"
+"DO_NOT_TOUCH_BACKUP_ROUTE","C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\routes_BACKUP_BEFORE_ROLE_HARDENING\cases.js","True","E9D9BD62431C3F3EFFF19C1938F5228F0820A507C632BBDBE96F440D326B4C47","CLASSIFY_ONLY_DO_NOT_EDIT"

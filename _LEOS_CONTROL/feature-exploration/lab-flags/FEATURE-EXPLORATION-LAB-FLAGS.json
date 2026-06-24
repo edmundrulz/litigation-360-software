@@ -1,0 +1,31 @@
+{
+    "GeneratedAt":  "2026-06-22 07:50:19",
+    "ProjectRoot":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software",
+    "Mode":  "FEATURE_EXPLORATION_LAB_ONLY",
+    "ProductionUnlock":  false,
+    "Phase11Unlock":  false,
+    "SourceCodeModification":  false,
+    "DatabaseModification":  false,
+    "DeleteRenameMove":  false,
+    "Explanation":  "This file is a governance/lab-control feature map only. It does not activate production features.",
+    "AllowedActions":  [
+                           "discover modules",
+                           "discover routes",
+                           "map feature dependencies",
+                           "create lab checklist",
+                           "record evidence",
+                           "prepare change requests",
+                           "test existing screens manually"
+                       ],
+    "BlockedActions":  [
+                           "unlock planned modules in production",
+                           "start Phase 11 development",
+                           "start Phase 11.1 security hardening",
+                           "direct production modification",
+                           "delete files",
+                           "rename files",
+                           "move folders",
+                           "database pruning",
+                           "uncontrolled deployment"
+                       ]
+}

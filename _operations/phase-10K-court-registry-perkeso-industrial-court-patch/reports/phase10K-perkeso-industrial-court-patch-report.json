@@ -1,0 +1,41 @@
+{
+  "phase": "10K-PATCH",
+  "module": "Court Registry PERKESO Industrial Court Patch",
+  "timestamp": "2026-06-18T14:14:22.537Z",
+  "totalCourts": 8,
+  "required": [
+    "Industrial Court of Malaysia Kuala Lumpur",
+    "Mahkamah Perusahaan Malaysia Kuala Lumpur",
+    "PERKESO Wilayah Persekutuan Kuala Lumpur",
+    "PERKESO Headquarters Jalan Ampang",
+    "SOCSO Headquarters Jalan Ampang"
+  ],
+  "found": [
+    {
+      "courtName": "Industrial Court of Malaysia Kuala Lumpur",
+      "exists": true,
+      "address": "Level 14, Wisma PERKESO, No.155, Jalan Tun Razak, 50400 Kuala Lumpur"
+    },
+    {
+      "courtName": "Mahkamah Perusahaan Malaysia Kuala Lumpur",
+      "exists": true,
+      "address": "Level 14, Wisma PERKESO, No.155, Jalan Tun Razak, 50400 Kuala Lumpur"
+    },
+    {
+      "courtName": "PERKESO Wilayah Persekutuan Kuala Lumpur",
+      "exists": true,
+      "address": "Wisma PERKESO, No.155, Jalan Tun Razak, 50400 Kuala Lumpur"
+    },
+    {
+      "courtName": "PERKESO Headquarters Jalan Ampang",
+      "exists": true,
+      "address": "Menara PERKESO, 281, Jalan Ampang, 50538 Kuala Lumpur"
+    },
+    {
+      "courtName": "SOCSO Headquarters Jalan Ampang",
+      "exists": true,
+      "address": "Menara PERKESO, 281, Jalan Ampang, 50538 Kuala Lumpur"
+    }
+  ],
+  "status": "PASS"
+}

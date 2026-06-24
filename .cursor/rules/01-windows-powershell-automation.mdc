@@ -1,0 +1,20 @@
+﻿---
+description: Litigation 360 Windows PowerShell automation rules
+globs: ["**/*.ps1", "**/*.cmd", "**/*.bat"]
+alwaysApply: false
+---
+
+# PowerShell and CMD Rules
+
+Use PowerShell first.
+
+Required script behavior:
+1. Use fixed project root when safety matters.
+2. Use Test-Path before file operations.
+3. Use New-Item -ItemType Directory -Force for folders.
+4. Back up existing files before overwriting.
+5. Write logs.
+6. Print status messages.
+7. Avoid destructive commands.
+8. Do not use Remove-Item -Recurse -Force without explicit approval.
+9. Do not modify production logic from automation scripts in this phase.

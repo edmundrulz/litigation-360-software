@@ -1,0 +1,74 @@
+{
+  "registry": "frontend_inventory",
+  "generatedAt": "2026-06-19T04:30:05.672Z",
+  "frontendRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend",
+  "srcRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src",
+  "folders": {
+    "pages": {
+      "exists": true,
+      "files": [
+        "frontend\\src\\pages\\Cases.jsx",
+        "frontend\\src\\pages\\Clients.jsx",
+        "frontend\\src\\pages\\Dashboard.jsx",
+        "frontend\\src\\pages\\Deadlines.jsx",
+        "frontend\\src\\pages\\Documents.jsx",
+        "frontend\\src\\pages\\Matters.jsx",
+        "frontend\\src\\pages\\OperationsDashboard.backup.jsx",
+        "frontend\\src\\pages\\OperationsDashboard.jsx",
+        "frontend\\src\\pages\\ProjectDashboard.jsx",
+        "frontend\\src\\pages\\Staff.jsx",
+        "frontend\\src\\pages\\SystemDashboard.jsx"
+      ],
+      "count": 11
+    },
+    "components": {
+      "exists": true,
+      "files": [],
+      "count": 0
+    },
+    "hooks": {
+      "exists": false,
+      "files": [],
+      "count": 0
+    },
+    "api": {
+      "exists": false,
+      "files": [],
+      "count": 0
+    },
+    "services": {
+      "exists": true,
+      "files": [
+        "frontend\\src\\services\\api.js",
+        "frontend\\src\\services\\assignmentService.js",
+        "frontend\\src\\services\\caseService.js",
+        "frontend\\src\\services\\clientService.js",
+        "frontend\\src\\services\\staffService.js"
+      ],
+      "count": 5
+    },
+    "layouts": {
+      "exists": false,
+      "files": [],
+      "count": 0
+    },
+    "enterprise": {
+      "exists": true,
+      "files": [
+        "frontend\\src\\enterprise\\api\\connectivityValidatorApi.js",
+        "frontend\\src\\enterprise\\api\\enterpriseApi.js",
+        "frontend\\src\\enterprise\\components\\BackendConnectivityPanel.jsx",
+        "frontend\\src\\enterprise\\components\\EnterpriseStatusCard.jsx",
+        "frontend\\src\\enterprise\\pages\\EnterpriseOperationsDashboard.jsx",
+        "frontend\\src\\enterprise\\pages\\FrontendBackendConnectivityValidator.jsx"
+      ],
+      "count": 6
+    }
+  },
+  "totals": {
+    "files": 49,
+    "jsxFiles": 19,
+    "jsFiles": 15,
+    "enterpriseFiles": 6
+  }
+}

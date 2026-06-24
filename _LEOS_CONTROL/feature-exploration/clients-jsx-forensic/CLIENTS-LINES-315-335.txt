@@ -1,0 +1,21 @@
+ 315:   "Americas - North America",
+ 316:   "Americas - Central America",
+ 317:   "Americas - South America",
+ 318:   "Americas - Caribbean",
+ 319:   "Oceania - Australia",
+ 320:   "Oceania - New Zealand",
+ 321:   "Oceania - Pacific Islands",
+ 322:   "Other / Unknown",
+ 323:   "Unknown",
+ 324:   "To be confirmed"
+ 325: ];
+ 326: const COUNTRY_TO_CONTINENT = {
+ 327:   Malaysia: "Asia",
+ 328:   Singapore: "Asia",
+ 329:   Brunei: "Asia",
+ 330:   Indonesia: "Asia",
+ 331:   Philippines: "Asia",
+ 332:   Thailand: "Asia",
+ 333:   Vietnam: "Asia",
+ 334:   India: "Asia",
+ 335:   Pakistan: "Asia",

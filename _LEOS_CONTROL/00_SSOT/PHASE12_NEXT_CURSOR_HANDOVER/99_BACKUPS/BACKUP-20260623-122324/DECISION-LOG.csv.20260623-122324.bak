@@ -1,0 +1,9 @@
+﻿DecisionID,Decision,Rationale,Owner,Status,State,Timestamp
+D001,Use fixed project root,Prevents wrong folder placement,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D002,Use SSOT control root,Prevents uncontrolled duplication,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D003,Keep Phase 11 locked,Prevents unsafe production edits,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D004,Use Cursor as main coding cockpit,Strong local AI coding workflow,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D005,Use PowerShell as automation layer,Best for Windows scripting and logs,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D006,Use documentation control layer first,Lowest risk next step,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D007,Use synthetic data only,Protects sensitive information,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00
+D008,Require verification and rollback,Prevents silent breakage,Project Owner,Active,Active,2026-06-23 12:22:50 +08:00

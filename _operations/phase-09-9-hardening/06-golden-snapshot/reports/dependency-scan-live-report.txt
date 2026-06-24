@@ -1,0 +1,41 @@
+=====================================================
+LITIGATION 360 - PHASE 9.9B.1 LIVE DEPENDENCY REPORT
+=====================================================
+Date: 2026-06-18T06:48:59.063Z
+Root: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+Scan mode: LIVE SYSTEM ONLY
+Scan roots: backend, frontend
+Ignored folders: node_modules, .git, dist, build, .next, coverage, _operations, backup, backups, snapshot, snapshots, archive, archives, old, legacy, deprecated
+
+Scanning: backend
+[MISSING LIVE LOCAL FILE] backend\migrate-clients-auditlogger.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\migrate-clients-auditlogger.js -> ../utils/logger
+[MISSING LIVE LOCAL FILE] backend\migrate-clients-auditlogger.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\migrate-matters-auditlogger.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\migrate-matters-auditlogger.js -> ../utils/logger
+[MISSING LIVE LOCAL FILE] backend\migrate-matters-auditlogger.js -> ../utils/logger
+[MISSING LIVE LOCAL FILE] backend\migrate-matters-auditlogger.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\patch-deadlines-audit-approved.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\patch-deadlines-audit-approved.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\patch-documents-audit-approved.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\patch-documents-audit-approved.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\repair-clients-route-approved.js -> ../utils/logger
+[MISSING LIVE LOCAL FILE] backend\repair-clients-route-approved.js -> ../middleware/roleMiddleware
+[MISSING LIVE LOCAL FILE] backend\repair-documents-deadlines-audit.js -> ../middleware/roleMiddleware
+[MISSING LIVE LOCAL FILE] backend\repair-documents-deadlines-audit.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\repair-documents-deadlines-audit.js -> ../middleware/roleMiddleware
+[MISSING LIVE LOCAL FILE] backend\repair-documents-deadlines-audit.js -> ../utils/auditLogger
+[MISSING LIVE LOCAL FILE] backend\src\duplicateService.js -> ../db
+[MISSING LIVE LOCAL FILE] backend\src\matterService.js -> ../db
+[MISSING LIVE LOCAL FILE] backend\src\matterService.js -> ./auditService
+[MISSING LIVE LOCAL FILE] backend\src\routes\users.js -> ../controllers/userController
+[MISSING LIVE LOCAL FILE] backend\src\routes_BACKUP_BEFORE_ROLE_HARDENING\users.js -> ../controllers/userController
+[MISSING LIVE LOCAL FILE] backend\tools\backend-doctor.js -> ../middleware/roleMiddleware
+Scanning: frontend
+
+SUMMARY
+Files scanned: 182
+External dependency references detected: 183
+Missing live local files: 23
+STATUS: FAIL

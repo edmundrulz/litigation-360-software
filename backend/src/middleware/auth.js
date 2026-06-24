@@ -1,21 +1,44 @@
-const jwt = require('jsonwebtoken');
-const logger = require('../utils/logger');
+const jwt = require("jsonwebtoken");
+const logger = require("../utils/logger");
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || "local-dev-secret";
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
+    const localDevBypass =
+      process.env.L360_LOCAL_DEV_BYPASS === "true" &&
+      process.env.NODE_ENV !== "production";
 
-    if (!token) {
-      return res.status(401).json({ error: 'No token provided' });
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      if (localDevBypass) {
+        req.user = {
+          userId: "local-dev-user",
+          email: "localdev@litigation360.local",
+          role: "administrator",
+          firmId: 1
+        };
+        return next();
+      }
+
+      return res.status(401).json({
+        success: false,
+        error: "Authorization token missing"
+      });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
+    const token = authHeader.split(" ")[1];
+    req.user = jwt.verify(token, JWT_SECRET, { algorithms: ["HS256"] });
     next();
+
   } catch (error) {
     logger.error(`Auth error: ${error.message}`);
-    res.status(401).json({ error: 'Invalid token' });
+    return res.status(401).json({
+      success: false,
+      error: "Invalid or expired token"
+    });
   }
 };
+
+

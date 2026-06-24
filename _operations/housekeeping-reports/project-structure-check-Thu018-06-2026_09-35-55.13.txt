@@ -1,0 +1,7 @@
+=== NODE PACKAGE CHECK ===
+FOUND: package.json
+MISSING: server.js
+MISSING: src folder
+FOUND: backend folder
+FOUND: frontend folder
+FOUND: node_modules

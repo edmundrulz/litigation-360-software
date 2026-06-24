@@ -1,0 +1,78 @@
+.leos-legal-dock {
+  position: fixed;
+  left: 18px;
+  top: 215px;
+  width: 235px;
+  z-index: 2147483000;
+  background: linear-gradient(180deg, #111827 0%, #17213a 100%);
+  color: #ffffff;
+  border: 1px solid rgba(201, 166, 70, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.35);
+  padding: 12px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.leos-legal-dock * { box-sizing: border-box; }
+.leos-legal-dock-header {
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  padding-bottom: 10px; margin-bottom: 10px;
+}
+.leos-legal-mark {
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 14px; background: rgba(201,166,70,0.18);
+  border: 1px solid rgba(201,166,70,0.65);
+  color: #f6d778; font-size: 25px;
+}
+.leos-legal-dock-title { display: grid; line-height: 1.1; }
+.leos-legal-dock-title strong { font-size: 13px; }
+.leos-legal-dock-title small { color: rgba(255,255,255,0.65); margin-top: 4px; font-size: 11px; }
+.leos-legal-dock button {
+  width: 100%; cursor: pointer; border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06); color: #ffffff;
+  border-radius: 11px; padding: 9px 10px; margin: 5px 0;
+  text-align: left; font-size: 12px; font-weight: 800; transition: 0.16s ease;
+}
+.leos-legal-dock button:hover, .leos-legal-dock button:focus {
+  outline: none; border-color: rgba(201,166,70,0.8);
+  background: rgba(201,166,70,0.20); transform: translateX(2px);
+}
+.leos-legal-drawer {
+  position: fixed; left: 278px; top: 72px;
+  width: min(680px, calc(100vw - 310px));
+  max-height: calc(100vh - 110px); overflow: auto;
+  z-index: 2147483001; background: #ffffff; color: #1f2937;
+  border: 1px solid #e5decf; border-radius: 22px;
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.32);
+  padding: 20px; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: none;
+}
+.leos-legal-drawer.leos-open { display: block; }
+.leos-legal-drawer-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 14px; border-bottom: 1px solid #ebe4d8; padding-bottom: 14px; margin-bottom: 16px;
+}
+.leos-legal-drawer-header h2 { margin: 0; color: #111827; font-size: 24px; }
+.leos-legal-drawer-header p { margin: 4px 0 0; color: #6b7280; font-size: 13px; }
+.leos-close-btn { cursor: pointer; border: none; border-radius: 999px; background: #111827; color: #fff; padding: 8px 11px; font-weight: 900; }
+.leos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.leos-card { border: 1px solid #e5decf; background: #fffdf8; border-radius: 16px; padding: 14px; display: grid; gap: 5px; }
+.leos-card strong { color: #111827; font-size: 14px; }
+.leos-card span, .leos-card small, .leos-card p { color: #64748b; font-size: 12px; line-height: 1.45; margin: 0; }
+.leos-search-input, .leos-form input, .leos-form textarea, .leos-form select {
+  width: 100%; border: 1px solid #d8d0c1; border-radius: 12px; padding: 11px 12px; margin-bottom: 10px; font: inherit;
+}
+.leos-form label { display: block; font-size: 12px; color: #475569; font-weight: 800; margin-bottom: 4px; }
+.leos-form-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.leos-action-btn { cursor: pointer; border: none; background: #111827; color: #fff; border-radius: 999px; padding: 10px 14px; font-weight: 900; }
+.leos-secondary-btn { cursor: pointer; border: 1px solid #c9a646; background: #fff8dd; color: #5b4614; border-radius: 999px; padding: 10px 14px; font-weight: 900; }
+.leos-news-link { color: inherit; text-decoration: none; }
+.leos-news-link:hover strong { text-decoration: underline; }
+.leos-status-pill { display: inline-flex; border-radius: 999px; background: #ecfdf5; color: #047857; font-weight: 900; padding: 4px 8px; font-size: 11px; width: fit-content; }
+.leos-warning-pill { display: inline-flex; border-radius: 999px; background: #fff7ed; color: #c2410c; font-weight: 900; padding: 4px 8px; font-size: 11px; width: fit-content; }
+@media (max-width: 900px) {
+  .leos-legal-dock { left: 10px; top: auto; bottom: 12px; width: calc(100vw - 20px); display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .leos-legal-dock-header { grid-column: 1 / -1; }
+  .leos-legal-dock button { margin: 0; }
+  .leos-legal-drawer { left: 10px; top: 10px; width: calc(100vw - 20px); max-height: calc(100vh - 20px); }
+}

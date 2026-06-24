@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-06-19T07:51:05.205Z",
+  "unusedOrPossiblyOrphanRoutes": [
+    "backend/src/routes/auth_POSTGRES_BACKUP_DO_NOT_DELETE.js",
+    "backend/src/routes/caseRoutes.js",
+    "backend/src/routes/dashboard.backup-before-8-5A.js",
+    "backend/src/routes/invoices.js",
+    "backend/src/routes/sqliteAuth.js",
+    "backend/src/routes/users.js"
+  ],
+  "duplicateEndpoints": [
+    {
+      "endpoint": "GET /",
+      "files": [
+        "backend/src/routes/dashboard.backup-before-8-5A.js",
+        "backend/src/routes/invoices.js"
+      ]
+    },
+    {
+      "endpoint": "POST /register",
+      "files": [
+        "backend/src/routes/auth_POSTGRES_BACKUP_DO_NOT_DELETE.js",
+        "backend/src/routes/sqliteAuth.js"
+      ]
+    },
+    {
+      "endpoint": "POST /login",
+      "files": [
+        "backend/src/routes/auth_POSTGRES_BACKUP_DO_NOT_DELETE.js",
+        "backend/src/routes/sqliteAuth.js"
+      ]
+    },
+    {
+      "endpoint": "GET /me",
+      "files": [
+        "backend/src/routes/auth_POSTGRES_BACKUP_DO_NOT_DELETE.js",
+        "backend/src/routes/sqliteAuth.js"
+      ]
+    },
+    {
+      "endpoint": "GET /",
+      "files": [
+        "backend/src/routes/dashboard.backup-before-8-5A.js",
+        "backend/src/routes/users.js"
+      ]
+    },
+    {
+      "endpoint": "POST /",
+      "files": [
+        "backend/src/routes/invoices.js",
+        "backend/src/routes/users.js"
+      ]
+    }
+  ],
+  "possiblyOrphanEngines": [
+    "backend/src/automation/alertManager.js",
+    "backend/src/automation/eventTypes.js",
+    "backend/src/automation/handlers/clientCreated.js",
+    "backend/src/automation/handlers/courtDateAdded.js",
+    "backend/src/automation/handlers/deadlineCreated.js",
+    "backend/src/automation/handlers/documentUploaded.js",
+    "backend/src/automation/handlers/invoiceCreated.js",
+    "backend/src/automation/handlers/matterCreated.js",
+    "backend/src/automation/handlers/paymentReceived.js",
+    "backend/src/automation/handlers/roleChanged.js",
+    "backend/src/automation/handlers/taskCompleted.js",
+    "backend/src/automation/handlers/userCreated.js",
+    "backend/src/automation/metricsCollector.js"
+  ],
+  "dashboardCount": 10,
+  "recommendations": [
+    "Review unmounted routes before deleting anything.",
+    "Do not delete backup, report, registry, or _operations folders without archive.",
+    "Route files without app.use mounts may still be manually imported elsewhere; verify before cleanup.",
+    "Engines with no dependencies may still be entry-point engines."
+  ]
+}

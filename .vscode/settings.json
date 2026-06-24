@@ -1,0 +1,23 @@
+{
+  "files.exclude": {
+    "**/build": true,
+    "**/dist": true,
+    "**/*.doctor-backup": true,
+    "**/*.backup": true,
+    "**/node_modules": true,
+    "**/*BACKUP*": true,
+    "**/*.log": true
+  },
+  "editor.formatOnSave": false,
+  "explorer.compactFolders": true,
+  "search.exclude": {
+    "**/build": true,
+    "**/dist": true,
+    "**/*.doctor-backup": true,
+    "**/*.backup": true,
+    "**/node_modules": true,
+    "**/*BACKUP*": true,
+    "**/*.log": true
+  },
+  "files.trimTrailingWhitespace": false
+}

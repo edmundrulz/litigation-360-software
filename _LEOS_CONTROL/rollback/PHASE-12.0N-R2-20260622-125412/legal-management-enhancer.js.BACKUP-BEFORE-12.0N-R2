@@ -1,0 +1,252 @@
+import "./legal-management-enhancer.css";
+
+(function installLeosLegalEnhancer() {
+  const ENHANCER_ID = "leos-legal-enhancer";
+  const DRAWER_ID = "leos-legal-drawer";
+
+  if (document.getElementById(ENHANCER_ID)) return;
+
+  const defaultProfile = {
+    firmName: "Your Law Firm Name",
+    shortName: "Legal 360",
+    tagline: "Justice â€¢ Integrity â€¢ Precision",
+    logoEmoji: "âš–ï¸",
+    address: "Configurable firm address",
+    email: "admin@example.com",
+    phone: "+60-00-000-0000",
+    website: "https://example.com",
+    partnerName: "Managing Partner Name",
+    partnerTitle: "Managing Partner / Owner",
+    partnerEmail: "partner@example.com",
+    partnerPhone: "+60-00-000-0000",
+    partnerCredentials: "LLB, Advocate & Solicitor, Professional Credentials",
+    partnerAvatar: "ðŸ‘¨â€âš–ï¸"
+  };
+
+  const repositoryItems = [
+    ["ðŸ“", "Client Files", "Client profiles, IDs, engagement letters, KYC and contact records."],
+    ["ðŸ“‚", "Matter Folders", "Case files, pleadings, court documents, status notes and progress records."],
+    ["ðŸ“„", "Documents", "Drafts, letters, affidavits, bundles, exhibits, templates and filings."],
+    ["â°", "Deadlines", "Limitation periods, hearing dates, filing deadlines and reminders."],
+    ["âš–ï¸", "Legal Research", "Authorities, statutes, legal notes, case summaries and research extracts."],
+    ["ðŸ§¾", "Billing / Finance", "Invoices, receipts, fee notes, disbursements and payment records."],
+    ["ðŸ›ï¸", "Court Operations", "Court locations, attendance plans, hearing preparation and registry follow-ups."],
+    ["ðŸ›¡ï¸", "Audit / Compliance", "Access logs, RBAC checks, compliance evidence and governance records."]
+  ];
+
+  const glossaryTerms = [
+    ["Affidavit", "A written statement confirmed by oath or affirmation for use as evidence."],
+    ["Cause Papers", "Court documents filed in a matter, including pleadings, applications and supporting documents."],
+    ["Client Due Diligence", "Checks used to verify identity, risk, authority and suitability before or during engagement."],
+    ["Limitation Period", "The legal time limit within which a claim or action must be started."],
+    ["Matter", "A legal file or case handled for a client."],
+    ["Retainer", "The engagement arrangement between the client and the legal practitioner or firm."],
+    ["Hearing", "A court session where a matter, application or issue is considered."],
+    ["Bundle", "A prepared set of documents arranged for court, hearing, filing or review."]
+  ];
+
+  const newsLinks = [
+    { icon: "ðŸ‡²ðŸ‡¾", title: "Malaysian Bar â€” Legal News", description: "Malaysia legal and general legal news.", url: "https://www.malaysianbar.org.my/list/news/legal-and-general-news/legal-news" },
+    { icon: "ðŸ‡²ðŸ‡¾", title: "Malaysian Bar â€” Court Judgments", description: "Court judgments and appellate highlights from the Malaysian Bar site.", url: "https://www.malaysianbar.org.my/" },
+    { icon: "ðŸ‡¸ðŸ‡¬", title: "Singapore Law Watch â€” Headlines", description: "Singapore legal headlines and legal-sector updates.", url: "https://www.singaporelawwatch.sg/Headlines/category/overview" },
+    { icon: "ðŸ‡¸ðŸ‡¬", title: "Singapore Ministry of Law â€” News", description: "Official Singapore legal-sector announcements, press releases and speeches.", url: "https://www.mlaw.gov.sg/news/press-releases/" },
+    { icon: "ðŸ›ï¸", title: "Singapore Courts â€” News", description: "Media releases, speeches and court news from Singapore Judiciary.", url: "https://www.judiciary.gov.sg/news-and-resources/news" }
+  ];
+
+  function getProfile() {
+    try { return { ...defaultProfile, ...(JSON.parse(localStorage.getItem("leosFirmProfile") || "{}")) }; }
+    catch { return { ...defaultProfile }; }
+  }
+
+  function saveProfile(profile) {
+    localStorage.setItem("leosFirmProfile", JSON.stringify(profile));
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function card(icon, title, description, extra = "") {
+    return `<article class="leos-card"><strong>${icon} ${escapeHtml(title)}</strong><span>${escapeHtml(description)}</span>${extra}</article>`;
+  }
+
+  function openDrawer(title, subtitle, html) {
+    const drawer = document.getElementById(DRAWER_ID);
+    drawer.innerHTML = `
+      <div class="leos-legal-drawer-header">
+        <div><h2>${title}</h2><p>${subtitle}</p></div>
+        <button class="leos-close-btn" type="button" data-leos-close>âœ•</button>
+      </div>${html}`;
+    drawer.classList.add("leos-open");
+    const close = drawer.querySelector("[data-leos-close]");
+    if (close) close.addEventListener("click", () => drawer.classList.remove("leos-open"));
+  }
+
+  function showSearch() {
+    const itemsHtml = repositoryItems.map(([icon, title, desc]) => card(icon, title, desc)).join("");
+    openDrawer("ðŸ”Ž Search Legal Repository", "Find documents, files, folders, client records, matter records and legal references.",
+      `<input class="leos-search-input" id="leos-search-input" placeholder="Search clients, matters, documents, deadlines, folders..." />
+       <div class="leos-grid" id="leos-search-results">${itemsHtml}</div>`);
+    const input = document.getElementById("leos-search-input");
+    const results = document.getElementById("leos-search-results");
+    input.addEventListener("input", () => {
+      const q = input.value.toLowerCase();
+      const filtered = repositoryItems.filter(([, title, desc]) => `${title} ${desc}`.toLowerCase().includes(q));
+      results.innerHTML = filtered.length
+        ? filtered.map(([icon, title, desc]) => card(icon, title, desc)).join("")
+        : `<article class="leos-card"><strong>ðŸ” No match</strong><span>No matching legal repository folder found.</span></article>`;
+    });
+  }
+
+  function showInstructions() {
+    openDrawer("ðŸ“˜ Instructions & User Guides", "Training, tutorials, SOPs and help documentation for staff.",
+      `<div class="leos-grid">
+        ${card("ðŸš€", "Getting Started Guide", "How to use the Legal 360 workspace safely.")}
+        ${card("ðŸ‘¤", "Client Intake Workflow", "Opening a client record, checking profile completeness and locating client files.")}
+        ${card("ðŸ’¼", "Matter Opening SOP", "How matters should be opened, labelled, linked and monitored.")}
+        ${card("ðŸ“„", "Document Handling Guide", "Document upload, naming, review, filing and archive practices.")}
+        ${card("â°", "Deadline Monitoring Guide", "How to check deadlines, reminders and court-related dates.")}
+        ${card("ðŸ›¡ï¸", "Security / RBAC / Audit SOP", "How access controls, user roles and audit logs should be reviewed.")}
+      </div>`);
+  }
+
+  function showGlossary() {
+    openDrawer("ðŸ“š Legal Glossary", "Common legal terms and internal terminology used in this system.",
+      `<div class="leos-grid">${glossaryTerms.map(([term, definition]) => card("âš–ï¸", term, definition)).join("")}</div>`);
+  }
+
+  function showNews() {
+    openDrawer("ðŸ“° Malaysia & Singapore Legal News", "Staff legal-awareness links. External sites open in a new tab.",
+      `<div class="leos-grid">${newsLinks.map(item => `
+        <a class="leos-card leos-news-link" href="${item.url}" target="_blank" rel="noreferrer">
+          <strong>${item.icon} ${escapeHtml(item.title)}</strong>
+          <small>${escapeHtml(item.description)}</small>
+          <span class="leos-status-pill">Open legal news</span>
+        </a>`).join("")}</div>`);
+  }
+
+  function showFirmProfile() {
+    const p = getProfile();
+    openDrawer("ðŸ¢ Firm Information", "Configurable firm name, logo, tagline and basic information.",
+      `<div class="leos-grid">
+        ${card(p.logoEmoji, p.firmName, p.tagline, `<small>${escapeHtml(p.address)}</small><small>${escapeHtml(p.email)} Â· ${escapeHtml(p.phone)}</small>`)}
+        ${card("ðŸŒ", "Website", p.website)}
+      </div>
+      <hr style="border:none;border-top:1px solid #ebe4d8;margin:16px 0;" />
+      <form class="leos-form" id="leos-firm-form">
+        <label>Firm Name</label><input name="firmName" value="${escapeHtml(p.firmName)}" />
+        <label>Short Name</label><input name="shortName" value="${escapeHtml(p.shortName)}" />
+        <label>Logo Emoji / Symbol</label><input name="logoEmoji" value="${escapeHtml(p.logoEmoji)}" />
+        <label>Tagline</label><input name="tagline" value="${escapeHtml(p.tagline)}" />
+        <label>Address</label><textarea name="address">${escapeHtml(p.address)}</textarea>
+        <label>Email</label><input name="email" value="${escapeHtml(p.email)}" />
+        <label>Phone</label><input name="phone" value="${escapeHtml(p.phone)}" />
+        <label>Website</label><input name="website" value="${escapeHtml(p.website)}" />
+        <div class="leos-form-actions">
+          <button class="leos-action-btn" type="submit">Save Firm Profile</button>
+          <button class="leos-secondary-btn" type="button" id="leos-reset-profile">Reset</button>
+        </div>
+      </form>`);
+    document.getElementById("leos-firm-form").addEventListener("submit", event => {
+      event.preventDefault();
+      saveProfile({ ...getProfile(), ...Object.fromEntries(new FormData(event.currentTarget).entries()) });
+      refreshDockTitle(); showFirmProfile();
+    });
+    document.getElementById("leos-reset-profile").addEventListener("click", () => {
+      localStorage.removeItem("leosFirmProfile"); refreshDockTitle(); showFirmProfile();
+    });
+  }
+
+  function showPartnerProfile() {
+    const p = getProfile();
+    openDrawer("ðŸ‘¨â€âš–ï¸ Owner / Managing Partner Details", "Editable owner or managing partner information.",
+      `<div class="leos-grid">
+        ${card(p.partnerAvatar, p.partnerName, p.partnerTitle, `<small>${escapeHtml(p.partnerEmail)} Â· ${escapeHtml(p.partnerPhone)}</small><small>${escapeHtml(p.partnerCredentials)}</small>`)}
+      </div>
+      <hr style="border:none;border-top:1px solid #ebe4d8;margin:16px 0;" />
+      <form class="leos-form" id="leos-partner-form">
+        <label>Name</label><input name="partnerName" value="${escapeHtml(p.partnerName)}" />
+        <label>Title / Role</label><input name="partnerTitle" value="${escapeHtml(p.partnerTitle)}" />
+        <label>Email</label><input name="partnerEmail" value="${escapeHtml(p.partnerEmail)}" />
+        <label>Phone</label><input name="partnerPhone" value="${escapeHtml(p.partnerPhone)}" />
+        <label>Credentials</label><textarea name="partnerCredentials">${escapeHtml(p.partnerCredentials)}</textarea>
+        <label>Avatar Emoji / Symbol</label><input name="partnerAvatar" value="${escapeHtml(p.partnerAvatar)}" />
+        <div class="leos-form-actions"><button class="leos-action-btn" type="submit">Save Partner Profile</button></div>
+      </form>`);
+    document.getElementById("leos-partner-form").addEventListener("submit", event => {
+      event.preventDefault();
+      saveProfile({ ...getProfile(), ...Object.fromEntries(new FormData(event.currentTarget).entries()) });
+      showPartnerProfile();
+    });
+  }
+
+  function showSettings() {
+    openDrawer("âš™ï¸ Settings & Configuration", "System-wide preferences and configuration areas.",
+      `<div class="leos-grid">
+        ${card("ðŸ‘¤", "User Preferences", "Default workspace, quick links, language and working style.")}
+        ${card("ðŸŽ¨", "Display Settings", "Theme, density, font size and layout preferences.")}
+        ${card("ðŸ””", "Notification Preferences", "Deadline reminders, alert escalation and staff notifications.")}
+        ${card("ðŸ›¡ï¸", "Access Controls", "Roles, permissions and module visibility. Backend RBAC remains controlled by the system.", `<span class="leos-warning-pill">Review only</span>`)}
+        ${card("ðŸ¢", "Firm Customization", "Firm profile, logo, tagline and contact details.")}
+        ${card("ðŸ§¾", "Audit & Compliance", "Audit logs, retention rules and compliance evidence.")}
+      </div>`);
+  }
+
+  function refreshDockTitle() {
+    const p = getProfile();
+    const firm = document.querySelector("[data-leos-firm]");
+    const short = document.querySelector("[data-leos-short]");
+    const mark = document.querySelector("[data-leos-mark]");
+    if (firm) firm.textContent = p.shortName || p.firmName;
+    if (short) short.textContent = p.tagline || "Legal Tools";
+    if (mark) mark.textContent = p.logoEmoji || "âš–ï¸";
+  }
+
+  function mount() {
+    const p = getProfile();
+    const dock = document.createElement("aside");
+    dock.id = ENHANCER_ID;
+    dock.className = "leos-legal-dock";
+    dock.innerHTML = `
+      <div class="leos-legal-dock-header">
+        <div class="leos-legal-mark" data-leos-mark>${escapeHtml(p.logoEmoji)}</div>
+        <div class="leos-legal-dock-title">
+          <strong data-leos-firm>${escapeHtml(p.shortName || p.firmName)}</strong>
+          <small data-leos-short>${escapeHtml(p.tagline)}</small>
+        </div>
+      </div>
+      <button type="button" data-leos-action="search">ðŸ”Ž Search</button>
+      <button type="button" data-leos-action="instructions">ðŸ“˜ Instructions</button>
+      <button type="button" data-leos-action="glossary">ðŸ“š Glossary</button>
+      <button type="button" data-leos-action="firm">ðŸ¢ Firm Info</button>
+      <button type="button" data-leos-action="partner">ðŸ‘¨â€âš–ï¸ Managing Partner</button>
+      <button type="button" data-leos-action="news">ðŸ“° MY/SG Legal News</button>
+      <button type="button" data-leos-action="settings">âš™ï¸ Settings</button>`;
+    const drawer = document.createElement("section");
+    drawer.id = DRAWER_ID;
+    drawer.className = "leos-legal-drawer";
+    drawer.setAttribute("aria-live", "polite");
+    document.body.appendChild(dock);
+    document.body.appendChild(drawer);
+    dock.addEventListener("click", event => {
+      const button = event.target.closest("[data-leos-action]");
+      if (!button) return;
+      const action = button.getAttribute("data-leos-action");
+      if (action === "search") showSearch();
+      if (action === "instructions") showInstructions();
+      if (action === "glossary") showGlossary();
+      if (action === "firm") showFirmProfile();
+      if (action === "partner") showPartnerProfile();
+      if (action === "news") showNews();
+      if (action === "settings") showSettings();
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();

@@ -1,0 +1,3 @@
+"RiskID","RiskTitle","Description","RiskLevel","Status","Mitigation","Owner","DueDate","VerificationStatus","LastUpdated"
+"RISK-0001","Phase 11 started before governance unlock","Feature development begins before verification, backup, monitoring, testing, documentation, rollback, approval and governance certification pass.","CRITICAL","ACTIVE","Keep Phase 11 LOCKED in dashboard and checklist.","Project Owner","2026-06-24","PENDING EVIDENCE","2026-06-23 12:18:21"
+"RISK-0002","Accidental cleanup or deletion","Duplicate or empty files are deleted before certification.","HIGH","ACTIVE","Read-only analysis only. No deletion, movement, rename or archive migration.","Project Owner","2026-06-24","PENDING EVIDENCE","2026-06-23 12:18:21"

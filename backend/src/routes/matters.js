@@ -1,85 +1,103 @@
-const express = require('express');
-const { Matter, Client, Document, TimeEntry } = require('../models');
-const authMiddleware = require('../middleware/auth');
-const logger = require('../utils/logger');
-
+﻿const express = require("express");
 const router = express.Router();
+const db = require("../database");
+const authMiddleware = require("../middleware/auth");
+const { requireRole } = require("../middleware/roleMiddleware");
 
-// GET /api/matters
-router.get('/', authMiddleware, async (req, res) => {
+function toMatter(row) {
+  return {
+    id: row.id,
+    matterNumber: row.case_number,
+    caseNumber: row.case_number,
+    title: row.title,
+    description: row.description,
+    status: row.status,
+    clientId: row.client_id,
+    client_id: row.client_id,
+    openedDate: row.opened_date,
+    opened_date: row.opened_date,
+    createdAt: row.created_at,
+    updatedAt: row.created_at
+  };
+}
+
+router.get("/", authMiddleware, (req, res) => {
   try {
-    const { status, page = 1, limit = 50 } = req.query;
-    const offset = (page - 1) * limit;
-
-    const where = { firmId: req.user.firmId };
-    if (status) where.status = status;
-
-    const { count, rows } = await Matter.findAndCountAll({
-      where,
-      include: [{ model: Client, attributes: ['firstName', 'lastName'] }],
-      offset,
-      limit: parseInt(limit),
-      order: [['createdAt', 'DESC']]
-    });
-
+    const rows = db.prepare("SELECT * FROM cases ORDER BY created_at DESC").all();
+    const data = rows.map(toMatter);
     res.json({
-      data: rows,
-      pagination: { page: parseInt(page), limit: parseInt(limit), total: count }
+      data,
+      pagination: {
+        page: 1,
+        limit: data.length,
+        total: data.length
+      }
     });
-  } catch (error) {
-    logger.error(`Get matters error: ${error.message}`);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// POST /api/matters
-router.post('/', authMiddleware, async (req, res) => {
-  try {
-    const matter = await Matter.create({
-      ...req.body,
-      firmId: req.user.firmId
-    });
-
-    logger.info(`Matter created: ${matter.id}`);
-    res.status(201).json(matter);
-  } catch (error) {
-    logger.error(`Create matter error: ${error.message}`);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// GET /api/matters/:id
-router.get('/:id', authMiddleware, async (req, res) => {
-  try {
-    const matter = await Matter.findByPk(req.params.id, {
-      include: [
-        { model: Client },
-        { model: Document, limit: 10 },
-        { model: TimeEntry, limit: 10 }
-      ]
-    });
-
-    if (!matter) {
-      return res.status(404).json({ error: 'Matter not found' });
-    }
-
-    res.json(matter);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// PUT /api/matters/:id
-router.put('/:id', authMiddleware, async (req, res) => {
+router.post("/", authMiddleware, requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
   try {
-    const matter = await Matter.findByPk(req.params.id);
-    if (!matter) {
-      return res.status(404).json({ error: 'Matter not found' });
-    }
+    const body = req.body || {};
+    const case_number = body.case_number || body.caseNumber || body.matterNumber || null;
+    const title = body.title || body.matterTitle || "Untitled Matter";
+    const client_id = body.client_id || body.clientId || null;
+    const status = body.status || "Active";
+    const description = body.description || "";
+    const opened_date = body.opened_date || body.openedDate || body.filingDate || null;
 
-    await matter.update(req.body);
-    logger.info(`Matter updated: ${matter.id}`);
-    res.json(matter);
+    const result = db.prepare(`
+      INSERT INTO cases (case_number, title, client_id, status, description, opened_date)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `).run(case_number, title, client_id, status, description, opened_date);
+
+    const row = db.prepare("SELECT * FROM cases WHERE id = ?").get(result.lastInsertRowid);
+    res.status(201).json(toMatter(row));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/:id", authMiddleware, (req, res) => {
+  try {
+    const row = db.prepare("SELECT * FROM cases WHERE id = ?").get(req.params.id);
+    if (!row) return res.status(404).json({ error: "Matter not found" });
+    res.json(toMatter(row));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put("/:id", authMiddleware, requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+  try {
+    const body = req.body || {};
+    db.prepare(`
+      UPDATE cases
+      SET case_number = ?, title = ?, client_id = ?, status = ?, description = ?, opened_date = ?
+      WHERE id = ?
+    `).run(
+      body.case_number || body.caseNumber || body.matterNumber || null,
+      body.title || body.matterTitle || "Untitled Matter",
+      body.client_id || body.clientId || null,
+      body.status || "Active",
+      body.description || "",
+      body.opened_date || body.openedDate || body.filingDate || null,
+      req.params.id
+    );
+
+    const row = db.prepare("SELECT * FROM cases WHERE id = ?").get(req.params.id);
+    res.json(toMatter(row));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete("/:id", authMiddleware, requireRole("admin", "Administrator"), (req, res) => {
+  try {
+    db.prepare("DELETE FROM cases WHERE id = ?").run(req.params.id);
+    res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

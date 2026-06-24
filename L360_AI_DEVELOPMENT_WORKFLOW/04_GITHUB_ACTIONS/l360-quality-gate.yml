@@ -1,0 +1,36 @@
+name: L360 Quality Gate
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ develop ]
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Backend install and test
+        if: hashFiles('backend/package.json') != ''
+        working-directory: backend
+        run: |
+          npm ci || npm install
+          npm test --if-present
+          npm run build --if-present
+
+      - name: Frontend install and build
+        if: hashFiles('frontend/package.json') != ''
+        working-directory: frontend
+        run: |
+          npm ci || npm install
+          npm test --if-present
+          npm run build

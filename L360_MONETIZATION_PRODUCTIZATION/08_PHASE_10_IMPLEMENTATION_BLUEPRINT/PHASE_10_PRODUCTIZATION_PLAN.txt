@@ -1,0 +1,62 @@
+PRODUCTIZATION PLAN
+
+Phase 10A:
+Package the product.
+
+Deliverables:
+- Pricing table
+- Feature comparison
+- Demo script
+- Landing page wording
+- Trial registration flow
+- Subscription rules
+
+Phase 10B:
+Create subscription logic.
+
+Required database concepts:
+- firms
+- subscriptions
+- plans
+- plan_features
+- invoices
+- payments
+- usage_limits
+
+Phase 10C:
+Create admin billing dashboard.
+
+Admin must see:
+- Active firms
+- Trial firms
+- Expired trials
+- Paying firms
+- Cancelled firms
+- Monthly recurring revenue
+- Failed payments
+
+Phase 10D:
+Create onboarding system.
+
+New firm onboarding:
+1. Register firm
+2. Create admin user
+3. Select plan
+4. Start trial
+5. Create sample matter
+6. Show setup checklist
+7. Invite staff
+8. Add first real matter
+9. Upgrade to paid plan
+
+Phase 10E:
+Create sales assets.
+
+Required:
+- One-page product summary
+- Feature list
+- Pricing sheet
+- Demo checklist
+- FAQ
+- Support terms
+- Data protection summary
