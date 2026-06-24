@@ -1,0 +1,39 @@
+API BLUEPRINT
+
+Conversations:
+GET    /api/conversations
+POST   /api/conversations
+GET    /api/conversations/:id
+PATCH  /api/conversations/:id
+POST   /api/conversations/:id/archive
+
+Messages:
+GET    /api/conversations/:id/messages
+POST   /api/conversations/:id/messages
+PATCH  /api/messages/:id
+DELETE /api/messages/:id
+
+Attachments:
+POST   /api/messages/:id/attachments
+GET    /api/attachments/:id/download
+
+Presence:
+GET    /api/presence
+PATCH  /api/presence
+
+Notifications:
+GET    /api/notifications
+PATCH  /api/notifications/:id/read
+POST   /api/notifications/mark-all-read
+
+Feedback:
+POST   /api/feedback
+GET    /api/feedback
+GET    /api/feedback/:id
+PATCH  /api/feedback/:id
+POST   /api/feedback/:id/attachments
+POST   /api/feedback/:id/admin-note
+
+Ratings:
+POST   /api/client-service-ratings
+GET    /api/client-service-ratings

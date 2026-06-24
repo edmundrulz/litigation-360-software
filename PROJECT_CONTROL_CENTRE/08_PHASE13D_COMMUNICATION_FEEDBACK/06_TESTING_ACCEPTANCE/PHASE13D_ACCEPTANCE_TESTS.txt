@@ -1,0 +1,32 @@
+ACCEPTANCE TESTS
+
+Feature 1:
+[ ] Staff can direct message
+[ ] Staff can create group channel
+[ ] Staff can upload file
+[ ] Staff can search message history
+[ ] Presence appears correctly
+[ ] RBAC blocks unauthorized staff
+
+Feature 2:
+[ ] Client can message assigned staff
+[ ] Staff can reply
+[ ] Client can upload file
+[ ] Read receipt works
+[ ] Client cannot see internal staff chat
+[ ] Client can rate support
+
+Feature 3:
+[ ] User can submit feedback
+[ ] User can attach screenshot
+[ ] Admin receives notification
+[ ] Admin can update status
+[ ] Admin can add internal notes
+[ ] User can view status
+
+Global:
+[ ] Audit logs created
+[ ] File upload protected
+[ ] Mobile responsive
+[ ] No console errors
+[ ] No broken navigation

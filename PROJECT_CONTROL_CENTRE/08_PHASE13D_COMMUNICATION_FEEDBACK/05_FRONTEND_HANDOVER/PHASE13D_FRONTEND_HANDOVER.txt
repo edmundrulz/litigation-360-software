@@ -1,0 +1,33 @@
+FRONTEND HANDOVER
+
+Pages / Components Required:
+
+1. Staff Communication Centre
+- Direct messages
+- Group channels
+- Matter channels
+- Announcements
+- Mentions
+
+2. Client Contact Portal
+- Matter chat
+- Shared documents
+- Appointment requests
+- Conversation history
+- Feedback rating
+
+3. Admin Feedback Desk
+- New submissions
+- Under review
+- In progress
+- Completed
+- Declined
+
+Shared UI:
+- Conversation list
+- Message panel
+- Attachment uploader
+- Search bar
+- Presence indicator
+- Notification badge
+- Read receipt display

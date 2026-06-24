@@ -1,0 +1,20 @@
+DATABASE TABLES REQUIRED
+
+1. conversations
+2. conversation_participants
+3. messages
+4. message_attachments
+5. message_receipts
+6. user_presence
+7. notifications
+8. feedback_requests
+9. feedback_attachments
+10. client_service_ratings
+
+Do not implement until existing DB structure is confirmed.
+
+Required checks before implementation:
+- Active database confirmed
+- Migration strategy confirmed
+- Rollback plan created
+- Backup taken

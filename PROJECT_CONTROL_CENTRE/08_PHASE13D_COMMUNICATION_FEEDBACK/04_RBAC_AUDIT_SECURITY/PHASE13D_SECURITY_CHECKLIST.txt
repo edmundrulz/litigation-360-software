@@ -1,0 +1,29 @@
+RBAC / AUDIT / SECURITY CHECKLIST
+
+RBAC:
+[ ] Staff cannot see client-private conversations unless assigned
+[ ] Clients cannot see internal staff conversations
+[ ] Auditors only see approved communication records
+[ ] Admin can access feedback desk
+[ ] Tenant isolation enforced
+
+Audit:
+[ ] Message sent
+[ ] Message edited
+[ ] Message deleted
+[ ] File uploaded
+[ ] File downloaded
+[ ] Feedback submitted
+[ ] Feedback status changed
+[ ] Client rating submitted
+[ ] Unauthorized access attempt
+
+Security:
+[ ] Authentication required
+[ ] Authorization required
+[ ] File type allowlist
+[ ] File size limits
+[ ] Stored filename randomized
+[ ] No public direct file paths
+[ ] Rate limiting
+[ ] Soft delete only
