@@ -1,0 +1,15 @@
+﻿{
+    "ScanDate":  {
+                     "value":  "\/Date(1781865235241)\/",
+                     "DisplayHint":  2,
+                     "DateTime":  "Friday, 19 June, 2026 6:33:55 PM"
+                 },
+    "TotalFiles":  65026,
+    "JavaScriptFiles":  33050,
+    "ReactFiles":  87,
+    "PowerShellFiles":  215,
+    "DocumentationFiles":  3749,
+    "BackendRoutes":  38,
+    "AutomationEngines":  77,
+    "OperationsFolders":  62
+}

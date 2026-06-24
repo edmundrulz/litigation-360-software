@@ -1,0 +1,30 @@
+{
+  "phase": "10L-RESTORE",
+  "timestamp": "2026-06-18T16:29:36.952Z",
+  "files": {
+    "engineExists": true,
+    "routeExists": true,
+    "routeMountedInIndex": true
+  },
+  "tests": {
+    "googleLinkGenerated": true,
+    "wazeLinkGenerated": true,
+    "courtMapGenerated": false,
+    "dashboardGenerated": true,
+    "healthGenerated": true
+  },
+  "health": {
+    "module": "Maps Integration Layer",
+    "status": "ATTENTION",
+    "registeredCourts": 8,
+    "upcomingCourtEvents": 0,
+    "handoffsGenerated": 0,
+    "googleLinksGenerated": 1,
+    "wazeLinksGenerated": 1,
+    "courtLinksGenerated": 0,
+    "missingCourtLocations": 1,
+    "lastGeneratedAt": "2026-06-18T16:29:36.937Z",
+    "timestamp": "2026-06-18T16:29:36.952Z"
+  },
+  "status": "FAIL"
+}

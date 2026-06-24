@@ -1,0 +1,254 @@
+{
+  "title": "Enterprise Alert & Escalation Centre",
+  "phase": "10Z.1",
+  "status": "OPERATIONAL",
+  "generatedAt": "2026-06-19T09:02:43.393Z",
+  "health": {
+    "status": "HEALTHY",
+    "phase": "10Z.1",
+    "service": "Enterprise Alert & Escalation Centre",
+    "score": 90,
+    "criticalOpen": 3,
+    "metrics": {
+      "phase": "10Z.1",
+      "generatedAt": "2026-06-19T09:02:43.393Z",
+      "totalAlerts": 6,
+      "openAlerts": 5,
+      "criticalAlerts": 3,
+      "highAlerts": 3,
+      "resolvedAlerts": 1,
+      "categoriesCovered": 15,
+      "severityLevels": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "INFO"
+      ],
+      "statusValues": [
+        "OPEN",
+        "ACKNOWLEDGED",
+        "ESCALATED",
+        "RESOLVED",
+        "CLOSED"
+      ],
+      "coverage": {
+        "industrialCourt": 5,
+        "perkeso": 6,
+        "deployment": 6,
+        "navigation": 3
+      }
+    },
+    "requiredCoverage": {
+      "industrialCourt": [
+        "Industrial Court Kuala Lumpur",
+        "Industrial Court hearing tomorrow",
+        "Industrial Court filing deadline",
+        "Industrial Court attendance reminder",
+        "Industrial Court navigation departure reminder"
+      ],
+      "perkeso": [
+        "PERKESO Kuala Lumpur / Jalan Tun Razak",
+        "PERKESO Headquarters / Jalan Ampang",
+        "PERKESO meeting reminder",
+        "PERKESO submission deadline",
+        "PERKESO appointment reminder",
+        "PERKESO navigation reminder"
+      ],
+      "deployment": [
+        "Gatekeeper rejected deployment",
+        "Release blocked",
+        "Environment critical",
+        "Hardening blocked",
+        "Backup failed",
+        "Performance failed"
+      ],
+      "navigation": [
+        "Google Maps readiness",
+        "Waze readiness",
+        "Court navigation readiness"
+      ]
+    },
+    "timestamp": "2026-06-19T09:02:43.393Z"
+  },
+  "metrics": {
+    "phase": "10Z.1",
+    "generatedAt": "2026-06-19T09:02:43.393Z",
+    "totalAlerts": 6,
+    "openAlerts": 5,
+    "criticalAlerts": 3,
+    "highAlerts": 3,
+    "resolvedAlerts": 1,
+    "categoriesCovered": 15,
+    "severityLevels": [
+      "CRITICAL",
+      "HIGH",
+      "MEDIUM",
+      "LOW",
+      "INFO"
+    ],
+    "statusValues": [
+      "OPEN",
+      "ACKNOWLEDGED",
+      "ESCALATED",
+      "RESOLVED",
+      "CLOSED"
+    ],
+    "coverage": {
+      "industrialCourt": 5,
+      "perkeso": 6,
+      "deployment": 6,
+      "navigation": 3
+    }
+  },
+  "openAlerts": [
+    {
+      "alertId": "ALT-SEED-001",
+      "severity": "CRITICAL",
+      "category": "DATABASE",
+      "title": "Database unavailable",
+      "message": "Database health check failed",
+      "status": "OPEN",
+      "source": "SYSTEM",
+      "createdAt": "2026-06-19T09:02:43.389Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-SEED-002",
+      "severity": "HIGH",
+      "category": "INDUSTRIAL_COURT",
+      "title": "Industrial Court filing deadline",
+      "message": "Industrial Court filing deadline requires operator verification.",
+      "status": "OPEN",
+      "source": "COURT",
+      "createdAt": "2026-06-19T09:02:43.390Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-SEED-003",
+      "severity": "HIGH",
+      "category": "PERKESO",
+      "title": "PERKESO submission deadline",
+      "message": "PERKESO submission deadline requires operator verification.",
+      "status": "OPEN",
+      "source": "PERKESO",
+      "createdAt": "2026-06-19T09:02:43.390Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-SEED-004",
+      "severity": "CRITICAL",
+      "category": "DEPLOYMENT",
+      "title": "Gatekeeper rejected deployment",
+      "message": "Deployment gatekeeper rejected release and blocked promotion.",
+      "status": "OPEN",
+      "source": "GATEKEEPER",
+      "createdAt": "2026-06-19T09:02:43.390Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-000005",
+      "severity": "CRITICAL",
+      "category": "DATABASE",
+      "title": "Validation critical alert",
+      "message": "Critical alert validation flow.",
+      "status": "ESCALATED",
+      "source": "VALIDATION",
+      "createdAt": "2026-06-19T09:02:43.392Z",
+      "updatedAt": "2026-06-19T09:02:43.393Z",
+      "resolvedAt": null
+    }
+  ],
+  "criticalAlerts": [
+    {
+      "alertId": "ALT-SEED-001",
+      "severity": "CRITICAL",
+      "category": "DATABASE",
+      "title": "Database unavailable",
+      "message": "Database health check failed",
+      "status": "OPEN",
+      "source": "SYSTEM",
+      "createdAt": "2026-06-19T09:02:43.389Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-SEED-004",
+      "severity": "CRITICAL",
+      "category": "DEPLOYMENT",
+      "title": "Gatekeeper rejected deployment",
+      "message": "Deployment gatekeeper rejected release and blocked promotion.",
+      "status": "OPEN",
+      "source": "GATEKEEPER",
+      "createdAt": "2026-06-19T09:02:43.390Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-000005",
+      "severity": "CRITICAL",
+      "category": "DATABASE",
+      "title": "Validation critical alert",
+      "message": "Critical alert validation flow.",
+      "status": "ESCALATED",
+      "source": "VALIDATION",
+      "createdAt": "2026-06-19T09:02:43.392Z",
+      "updatedAt": "2026-06-19T09:02:43.393Z",
+      "resolvedAt": null
+    }
+  ],
+  "highAlerts": [
+    {
+      "alertId": "ALT-SEED-002",
+      "severity": "HIGH",
+      "category": "INDUSTRIAL_COURT",
+      "title": "Industrial Court filing deadline",
+      "message": "Industrial Court filing deadline requires operator verification.",
+      "status": "OPEN",
+      "source": "COURT",
+      "createdAt": "2026-06-19T09:02:43.390Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-SEED-003",
+      "severity": "HIGH",
+      "category": "PERKESO",
+      "title": "PERKESO submission deadline",
+      "message": "PERKESO submission deadline requires operator verification.",
+      "status": "OPEN",
+      "source": "PERKESO",
+      "createdAt": "2026-06-19T09:02:43.390Z",
+      "updatedAt": "2026-06-19T09:02:43.390Z",
+      "resolvedAt": null
+    },
+    {
+      "alertId": "ALT-000006",
+      "severity": "HIGH",
+      "category": "INDUSTRIAL_COURT",
+      "title": "Industrial Court hearing tomorrow",
+      "message": "Industrial Court hearing tomorrow validation flow.",
+      "status": "RESOLVED",
+      "source": "VALIDATION",
+      "createdAt": "2026-06-19T09:02:43.392Z",
+      "updatedAt": "2026-06-19T09:02:43.393Z",
+      "resolvedAt": "2026-06-19T09:02:43.393Z",
+      "resolution": {
+        "resolvedBy": "VALIDATION",
+        "notes": "High alert validation resolved.",
+        "checksCompleted": true
+      }
+    }
+  ],
+  "checksAndBalances": [
+    "Severity must be classified before escalation.",
+    "Critical alerts must be escalated to executive level.",
+    "Resolution requires operator notes.",
+    "Court, Industrial Court, PERKESO, navigation and deployment coverage must remain present.",
+    "Placeholder channels must not send real SMS, WhatsApp or email in Phase 10Z.1."
+  ]
+}

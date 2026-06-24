@@ -1,0 +1,59 @@
+# MASTER ROUTE REGISTRY
+
+Total Route Files: 54
+Mounted Routes: 48
+
+- /api/audit-logs -> backend/src/routes/auditLogs.js -> engines: none
+- /api/auth -> backend/src/routes/auth.js -> engines: none
+- (unmounted) -> backend/src/routes/auth_POSTGRES_BACKUP_DO_NOT_DELETE.js -> engines: none
+- /api/auto-heal -> backend/src/routes/autoHeal.js -> engines: none
+- /api/enterprise/autonomous -> backend/src/routes/autonomousOperationsRoutes.js -> engines: autonomousOperationsEngine
+- /api/enterprise/backup-recovery -> backend/src/routes/backupRecoveryRoutes.js -> engines: backupRecoveryEngine
+- (unmounted) -> backend/src/routes/caseRoutes.js -> engines: none
+- /api/cases -> backend/src/routes/cases.js -> engines: none
+- /api/client-identity -> backend/src/routes/clientIdentity.js -> engines: none
+- /api/clients -> backend/src/routes/clients.js -> engines: none
+- /api/conflict-check -> backend/src/routes/conflictCheck.js -> engines: none
+- /api/court-deadline -> backend/src/routes/courtDeadline.js -> engines: none
+- /api/enterprise/navigation -> backend/src/routes/courtNavigationRoutes.js -> engines: courtNavigationEngine
+- /api/enterprise/court-operations -> backend/src/routes/courtOperationsRoutes.js -> engines: courtOperationsEngine
+- (unmounted) -> backend/src/routes/dashboard.backup-before-8-5A.js -> engines: none
+- /api/dashboard -> backend/src/routes/dashboard.js -> engines: none
+- /api/deadlines -> backend/src/routes/deadlines.js -> engines: none
+- /api/debug -> backend/src/routes/debug.js -> engines: none
+- /api/enterprise/deployment-centre -> backend/src/routes/deploymentReadinessCentreRoutes.js -> engines: deploymentReadinessCentre
+- /api/enterprise/documents/lifecycle -> backend/src/routes/documentLifecycleRoutes.js -> engines: documentLifecycleEngine
+- /api/documents -> backend/src/routes/documents.js -> engines: none
+- /api/enterprise/governance -> backend/src/routes/enterpriseGovernanceRoutes.js -> engines: enterpriseGovernanceEngine
+- /api/enterprise/hardening -> backend/src/routes/enterpriseHardeningRoutes.js -> engines: enterpriseHardeningEngine
+- /api/enterprise/monitoring -> backend/src/routes/enterpriseMonitoringRoutes.js -> engines: enterpriseMonitoringEngine, alertManager
+- /api/enterprise -> backend/src/routes/enterpriseRoutes.js -> engines: automationDashboard
+- /api/enterprise/environment -> backend/src/routes/environmentValidationRoutes.js -> engines: environmentValidationEngine
+- /api/errors -> backend/src/routes/errors.js -> engines: none
+- /api/enterprise/events -> backend/src/routes/eventBusRoutes.js -> engines: eventBus
+- /api/enterprise/command-centre -> backend/src/routes/executiveCommandRoutes.js -> engines: executiveCommandCentre
+- /api/enterprise/handlers -> backend/src/routes/handlerRoutes.js -> engines: handlerRegistry
+- /api/health -> backend/src/routes/health.js -> engines: none
+- /api/integrity-scan -> backend/src/routes/integrityScanner.js -> engines: none
+- (unmounted) -> backend/src/routes/invoices.js -> engines: none
+- /api/enterprise/assistant -> backend/src/routes/legalOperationsAssistantRoutes.js -> engines: legalOperationsAssistant
+- /api/enterprise/maps -> backend/src/routes/mapsIntegrationRoutes.js -> engines: mapsIntegrationLayer
+- /api/matter-intake -> backend/src/routes/matterIntake.js -> engines: none
+- /api/enterprise/matters/intelligence -> backend/src/routes/matterIntelligenceRoutes.js -> engines: matterIntelligenceEngine
+- /api/matter-number -> backend/src/routes/matterNumbering.js -> engines: none
+- /api/matters -> backend/src/routes/matters.js -> engines: none
+- /api/monitor -> backend/src/routes/monitor.js -> engines: none
+- /api/enterprise/notifications -> backend/src/routes/notificationRoutes.js -> engines: notificationService
+- /api/enterprise/performance -> backend/src/routes/performanceOptimizationRoutes.js -> engines: performanceOptimizationEngine, loadTestingEngine
+- /api/enterprise/predictive -> backend/src/routes/predictiveAnalyticsRoutes.js -> engines: predictiveAnalyticsEngine
+- /api/enterprise/release -> backend/src/routes/releaseValidatorRoutes.js -> engines: releaseValidatorEngine
+- /api/scheduler -> backend/src/routes/scheduler.js -> engines: none
+- (unmounted) -> backend/src/routes/sqliteAuth.js -> engines: none
+- /api/staff -> backend/src/routes/staff.js -> engines: none
+- /api/system-diagnostic -> backend/src/routes/systemDiagnostic.js -> engines: none
+- /api/system-report -> backend/src/routes/systemReport.js -> engines: none
+- /api/task-automation -> backend/src/routes/taskAutomation.js -> engines: none
+- /api/time-entries -> backend/src/routes/timeEntries.js -> engines: none
+- (unmounted) -> backend/src/routes/users.js -> engines: none
+- /api/workflow -> backend/src/routes/workflow.js -> engines: none
+- /api/enterprise/workflows -> backend/src/routes/workflowRoutes.js -> engines: workflowEngine

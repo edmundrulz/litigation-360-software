@@ -1,0 +1,19 @@
+{
+  "firmName": "Your Law Firm Name",
+  "shortName": "YLF",
+  "firmLogoEmoji": "\u2696\ufe0f",
+  "tagline": "Justice \u2022 Integrity \u2022 Precision",
+  "address": "Configurable firm address goes here",
+  "phone": "+60-00-000-0000",
+  "email": "admin@example.com",
+  "website": "https://example.com",
+  "managingPartner": {
+    "name": "Managing Partner Name",
+    "title": "Managing Partner / Owner",
+    "email": "partner@example.com",
+    "phone": "+60-00-000-0000",
+    "credentials": "LLB, Advocate & Solicitor, Professional Credentials",
+    "avatarEmoji": "\ud83d\udc68\u200d\u2696\ufe0f",
+    "bio": "Editable professional profile summary."
+  }
+}

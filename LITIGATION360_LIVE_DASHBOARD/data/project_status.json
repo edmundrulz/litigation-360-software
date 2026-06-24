@@ -1,0 +1,104 @@
+{
+  "project": "Litigation 360 Enterprise Platform",
+  "mode": "ECC v2 Live Scanner",
+  "last_scanned": "18/06/2026, 9:20:00 pm",
+  "current_phase": "Phase 10B - Executive Command Centre v2",
+  "overall_progress": 66,
+  "health_score": 83.5,
+  "readiness_score": 66,
+  "risk_score": 34,
+  "integrity_score": 100,
+  "metrics": {
+    "total_files": 1005,
+    "js_files": 450,
+    "sql_files": 7,
+    "markdown_files": 116,
+    "test_files": 54,
+    "backend_files": 548,
+    "frontend_files": 90,
+    "enterprise_files": 43,
+    "ai_phase_files": 11
+  },
+  "ports": {
+    "backend_5100": "OFF",
+    "frontend_5173": "RUNNING",
+    "dashboard_8787": "RUNNING"
+  },
+  "git": {
+    "branch": "main",
+    "commits": "7",
+    "changed_files": 212
+  },
+  "modules": [
+    {
+      "name": "Core Platform",
+      "progress": 85,
+      "status": "Strong"
+    },
+    {
+      "name": "Backend",
+      "progress": 82,
+      "status": "Strong"
+    },
+    {
+      "name": "Frontend",
+      "progress": 75,
+      "status": "In Progress"
+    },
+    {
+      "name": "Database",
+      "progress": 80,
+      "status": "Strong"
+    },
+    {
+      "name": "Security / RBAC",
+      "progress": 78,
+      "status": "In Progress"
+    },
+    {
+      "name": "Monitoring",
+      "progress": 82,
+      "status": "Strong"
+    },
+    {
+      "name": "Automation Bus",
+      "progress": 72,
+      "status": "In Progress"
+    },
+    {
+      "name": "Notification Hub",
+      "progress": 65,
+      "status": "In Progress"
+    },
+    {
+      "name": "Workflow Engine",
+      "progress": 60,
+      "status": "In Progress"
+    },
+    {
+      "name": "Document Lifecycle",
+      "progress": 58,
+      "status": "In Progress"
+    },
+    {
+      "name": "AI Knowledge Center",
+      "progress": 38,
+      "status": "Needs Work"
+    },
+    {
+      "name": "Testing",
+      "progress": 55,
+      "status": "In Progress"
+    },
+    {
+      "name": "Documentation",
+      "progress": 65,
+      "status": "In Progress"
+    },
+    {
+      "name": "Mobile / Desktop",
+      "progress": 25,
+      "status": "Needs Work"
+    }
+  ]
+}

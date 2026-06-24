@@ -1,0 +1,31 @@
+﻿---
+description: Litigation 360 core safety rules
+alwaysApply: true
+---
+
+# Litigation 360 Core Safety Rules
+
+Project root:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+Current SSOT:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\MASTER-SSOT-CURSOR-HANDOVER.md
+
+Always follow these rules:
+
+1. Read the SSOT before making changes.
+2. Do not delete files unless explicitly instructed.
+3. Do not rename files unless explicitly instructed.
+4. Do not move files unless explicitly instructed.
+5. Do not edit backend, database, auth, RBAC, API routes, server files, package files, environment files, or production logic without approval.
+6. Prefer documentation/control-layer work unless explicit approval is given.
+7. Use synthetic data only.
+8. Do not use real client data.
+9. Before editing, inspect relevant files.
+10. Before large changes, explain the plan.
+11. List exact files to change.
+12. State risk level.
+13. Provide verification commands.
+14. Provide rollback steps.
+15. Keep code beginner-readable.
+16. Use PowerShell for Windows automation.

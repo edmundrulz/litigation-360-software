@@ -1,0 +1,21 @@
+{
+  "confidence_thresholds": {
+    "auto_file_minimum": 0.92,
+    "human_review_minimum": 0.70,
+    "reject_below": 0.70
+  },
+  "allowed_stages": [
+    "INTAKE",
+    "DRAFT",
+    "REVIEW",
+    "APPROVED",
+    "FILED",
+    "SERVED",
+    "ARCHIVED"
+  ],
+  "safety": {
+    "never_delete_original": true,
+    "require_audit_log": true,
+    "require_human_review_for_low_confidence": true
+  }
+}

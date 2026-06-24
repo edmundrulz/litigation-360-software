@@ -1,0 +1,23 @@
+﻿# MASTER SOP REGISTRY
+
+- FOUNDATION-OPERATIONS-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\FOUNDATION-OPERATIONS-SOP.md
+- RBAC-ACCESS-CONTROL-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\RBAC-ACCESS-CONTROL-SOP.md
+- CLIENT-INTAKE-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\CLIENT-INTAKE-SOP.md
+- MATTER-MANAGEMENT-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\MATTER-MANAGEMENT-SOP.md
+- DOCUMENT-LIFECYCLE-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\DOCUMENT-LIFECYCLE-SOP.md
+- COURT-OPERATIONS-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\COURT-OPERATIONS-SOP.md
+- INDUSTRIAL-COURT-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\INDUSTRIAL-COURT-SOP.md
+- PERKESO-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\PERKESO-SOP.md
+- COURT-NAVIGATION-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\COURT-NAVIGATION-SOP.md
+- BILLING-FINANCE-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\BILLING-FINANCE-SOP.md
+- EXECUTIVE-OPERATIONS-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\EXECUTIVE-OPERATIONS-SOP.md
+- DEPLOYMENT-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\DEPLOYMENT-SOP.md
+- MONITORING-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\MONITORING-SOP.md
+- ALERT-ESCALATION-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\ALERT-ESCALATION-SOP.md
+- ANALYTICS-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\ANALYTICS-SOP.md
+- PREDICTIVE-INTELLIGENCE-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\PREDICTIVE-INTELLIGENCE-SOP.md
+- SECURITY-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\SECURITY-SOP.md
+- TESTING-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\TESTING-SOP.md
+- VALIDATION-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\VALIDATION-SOP.md
+- TRAINING-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\TRAINING-SOP.md
+- GOVERNANCE-SOP.md | Status: GENERATED | Owner: Governance | Evidence: sops\GOVERNANCE-SOP.md

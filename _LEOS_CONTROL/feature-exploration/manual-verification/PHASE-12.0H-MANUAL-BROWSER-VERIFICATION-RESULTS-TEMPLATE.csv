@@ -1,0 +1,13 @@
+Feature,FrontendURL,ManualResult,PageLoaded,WhiteScreen,ConsoleError,BackendCrash,Notes,ProductionUnlockAllowed
+Workspace,http://localhost:5173/,PENDING,,,,,,NO
+Workspace,http://localhost:5173/dashboard,PENDING,,,,,,NO
+Clients,http://localhost:5173/clients,PENDING,,,,,,NO
+Matters,http://localhost:5173/cases,PENDING,,,,,,NO
+Matters,http://localhost:5173/matters,PENDING,,,,,,NO
+Matters,http://localhost:5173/matter-intake,PENDING,,,,,,NO
+Deadlines,http://localhost:5173/deadlines,PENDING,,,,,,NO
+Documents,http://localhost:5173/documents,PENDING,,,,,,NO
+Court Dates,http://localhost:5173/court-dates,BLOCKED,,,,,Do not connect yet,NO
+Authentication,N/A,SECURITY VERIFY LATER,,,,,Common GET paths not confirmed,NO
+RBAC,N/A,SECURITY VERIFY LATER,,,,,Common GET paths not confirmed,NO
+Audit Logging,N/A,BACKEND FOUNDATION VERIFY LATER,,,,,Backend responded but no frontend page required yet,NO

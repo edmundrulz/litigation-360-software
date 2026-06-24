@@ -1,0 +1,14 @@
+﻿# VARIATION REGISTRY
+
+Generated at:
+2026-06-23 12:23:24 +08:00
+
+| Variation ID | Variation | SSOT Relationship | Status |
+|---|---|---|---|
+| V001 | Cursor + PowerShell + React + Node.js | Main workflow | Active |
+| V002 | VS Code + GitHub Copilot | Backup workflow | Secondary |
+| V003 | Replit / Lovable / Bolt / v0 | Prototype/UI idea tools only | Not main |
+| V004 | Documentation/control-layer work | Current approved branch | Active |
+| V005 | Live monitoring and logs | Approved control support | Active |
+| V006 | Production backend/API/database changes | Future branch only | Locked |
+| V007 | Phase 11 implementation | Future branch only | Locked |

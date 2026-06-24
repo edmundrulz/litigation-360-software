@@ -1,0 +1,45 @@
+Folder PATH listing for volume Windows
+Volume serial number is 00000178 F0B7:DAA5
+C:\USERS\JEP_EDMUNDRULZ\LITIGATION-360-WORKSPACE\LITIGATION-360-SOFTWARE\PHASE-10ZZD-COMMERCIALISATION-FRAMEWORK
+ª   COMMERCIALISATION-READINESS-CHECKLIST.md
+ª   
++---commercial-governance
+ª       COMMERCIAL-GOVERNANCE-CHARTER.md
+ª       
++---commercial-risk
+ª       COMMERCIAL-RISK-REGISTER.md
+ª       
++---customer-success
+ª       CUSTOMER-SUCCESS-FRAMEWORK.md
+ª       
++---deployment
+ª       CLIENT-DEPLOYMENT-PLAYBOOK.md
+ª       
++---licensing
+ª       LICENSING-FRAMEWORK.md
+ª       
++---market-expansion
+ª       MARKET-EXPANSION-PLAN.md
+ª       
++---onboarding
+ª       CLIENT-ONBOARDING-PROCESS.md
+ª       
++---partner-program
+ª       PARTNER-CHANNEL-FRAMEWORK.md
+ª       
++---pricing
+ª       PRICING-MODEL.md
+ª       
++---product-packaging
+ª       PRODUCT-EDITIONS.md
+ª       
++---product-roadmap
+ª       PRODUCT-ROADMAP.md
+ª       
++---renewals
+ª       RENEWAL-PROCESS.md
+ª       
++---sales
++---support
+        SUPPORT-SERVICE-MODEL.md
+        

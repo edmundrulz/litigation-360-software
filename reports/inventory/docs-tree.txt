@@ -1,0 +1,84 @@
+Folder PATH listing for volume Windows
+Volume serial number is 000001D0 F0B7:DAA5
+C:\USERS\JEP_EDMUNDRULZ\LITIGATION-360-WORKSPACE\LITIGATION-360-SOFTWARE\DOCS
+¦   01-user-roles.md
+¦   02-workflow-phases.md
+¦   03-database-schema.md
+¦   04-api-endpoints.md
+¦   05-security-compliance.md
+¦   06-integrations.md
+¦   07-mobile-strategy.md
+¦   AUDIT_TRAIL_SPEC.md
+¦   BACKUP_RECOVERY_SOP.md
+¦   clients-audit-scan.txt
+¦   deadlines-audit-scan.txt
+¦   documents-audit-scan.txt
+¦   EVENING_CLOSEOUT_14JUNE2026.md
+¦   matters-audit-scan.txt
+¦   PHASE_6C_COMPLETION_REPORT.md
+¦   RBAC_PERMISSION_MATRIX.md
+¦   ROUTE_SECURITY_MATRIX.md
+¦   staff-audit-scan.txt
+¦   TODAY_PHASE6_PROGRESS.md
+¦   
++---deployment
+¦       DEPLOYMENT_CHECKLIST.md
+¦       
++---MASTER-HANDBOOK
+¦       00-MASTER-INDEX.md
+¦       01-EXECUTIVE-SUMMARY.md
+¦       02-VISION-MISSION.md
+¦       03-PHASE-10-COMPLETION-MAP.md
+¦       04-PROTOCOLS-CHECKS-VERIFICATION.md
+¦       05-SYSTEM-ARCHITECTURE.md
+¦       06-MODULE-CATALOG.md
+¦       07-OPERATIONS-MANUAL.md
+¦       08-TESTING-MANUAL.md
+¦       09-TROUBLESHOOTING.md
+¦       10-SECURITY-MANUAL.md
+¦       11-DEPLOYMENT-MANUAL.md
+¦       12-BACKUP-RECOVERY-MANUAL.md
+¦       13-DATA-GOVERNANCE-MANUAL.md
+¦       14-API-CATALOG.md
+¦       15-TRAINING-GUIDE.md
+¦       16-COMMERCIAL-READINESS.md
+¦       17-PHASE-ROADMAP.md
+¦       18-GLOSSARY.md
+¦       19-PHASE-10-FINAL-CONSOLIDATION-CHECKLIST.md
+¦       20-MASTER-HANDBOOK-CLOSEOUT.md
+¦       21-GOVERNANCE-CHARTER.md
+¦       22-ROLES-RESPONSIBILITIES.md
+¦       23-CHANGE-MANAGEMENT.md
+¦       24-DECISION-REGISTER.md
+¦       25-RISK-REGISTER.md
+¦       26-RELEASE-GOVERNANCE.md
+¦       27-APPROVAL-MATRIX.md
+¦       28-VERSION-CONTROL.md
+¦       29-ISSUE-ESCALATION.md
+¦       30-GOVERNANCE-CLOSEOUT.md
+¦       99-PHASE-10M-PROGRESS-TRACKER.md
+¦       
++---phase-10-crm
+¦       README.md
+¦       
++---phase-10ZE
+¦       PHASE-10ZE-FRONTEND-WIRING-PROTOCOL.md
+¦       
++---phase-10ZF
+¦       PHASE-10ZF-NAVIGATION-MODULE-MENU-PROTOCOL.md
+¦       
++---phase-10ZG
+¦       PHASE-10ZG-DASHBOARD-BLUEPRINT.md
+¦       
++---phase-9.5-enterprise-core
+¦       README.md
+¦       
++---protocols
+¦       MASTER_PROTOCOLS.md
+¦       
++---recovery
+¦       RECOVERY_GUIDE.md
+¦       
++---testing
+        TESTING_PLAN.md
+        

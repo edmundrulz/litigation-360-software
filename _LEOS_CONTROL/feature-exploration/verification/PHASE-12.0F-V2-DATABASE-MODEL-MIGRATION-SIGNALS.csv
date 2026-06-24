@@ -1,0 +1,40 @@
+﻿"File","Pattern","Line","Match"
+"backend\src\models\Client.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Client'"
+"backend\src\models\Client.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\Communication.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Communication'"
+"backend\src\models\Communication.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\Document.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Document'"
+"backend\src\models\Document.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\Firm.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Firm'"
+"backend\src\models\Firm.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\index.js","module\.exports\s*=","64","module.exports ="
+"backend\src\models\Invoice.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Invoice'"
+"backend\src\models\Invoice.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\Matter.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Matter'"
+"backend\src\models\Matter.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\Task.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('Task'"
+"backend\src\models\Task.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\TimeEntry.js","sequelize\.define\(\s*[""'][^""']+[""']","4","sequelize.define('TimeEntry'"
+"backend\src\models\TimeEntry.js","module\.exports\s*=","3","module.exports ="
+"backend\src\models\User.js","sequelize\.define\(\s*[""'][^""']+[""']","5","sequelize.define('User'"
+"backend\src\models\User.js","module\.exports\s*=","4","module.exports ="
+"backend\src\migrations\005_create_matters.js","knex\.schema\.createTable\(\s*[""'][^""']+[""']","2","knex.schema.createTable('clients'"
+"backend\src\migrations\005_create_matters.js","knex\.schema\.createTable\(\s*[""'][^""']+[""']","22","knex.schema.createTable('matters'"
+"backend\src\migrations\023_create_roles_permissions.sql","CREATE\s+TABLE\s+[^;]+","1","CREATE TABLE IF NOT EXISTS roles (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT UNIQUE NOT NULL,
+  description TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)"
+"backend\src\migrations\023_create_roles_permissions.sql","CREATE\s+TABLE\s+[^;]+","8","CREATE TABLE IF NOT EXISTS permissions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT UNIQUE NOT NULL,
+  description TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)"
+"backend\src\migrations\023_create_roles_permissions.sql","CREATE\s+TABLE\s+[^;]+","15","CREATE TABLE IF NOT EXISTS role_permissions (
+  role_id INTEGER NOT NULL,
+  permission_id INTEGER NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (role_id, permission_id),
+  FOREIGN KEY (rol"

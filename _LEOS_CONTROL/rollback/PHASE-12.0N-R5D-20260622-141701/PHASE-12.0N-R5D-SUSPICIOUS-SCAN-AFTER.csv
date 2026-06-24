@@ -1,0 +1,2 @@
+﻿"Pattern","Line","Match","LineText"
+"\bfunction\s+[A-Za-z_$][A-Za-z0-9_$]*\s+\*","869","function titleMatchesGender *","function titleMatchesGender *(title, Gender *) {"

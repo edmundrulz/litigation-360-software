@@ -1,0 +1,21 @@
+ 640:   if (isNricKind(kind)) {
+ 641:     return "************";
+ 642:   }
+ 643: 
+ 644:   if (raw.length <= 4) {
+ 645:     return "****";
+ 646:   }
+ 647: 
+ 648:   return raw.charAt(0) + "****" + raw.slice(-3);
+ 649: }
+ 650: 
+ 651: function deriveGenderFromIdentification(value, kind) {
+ 652:   if (!isNricKind(kind)) {
+ 653:     return "";
+ 654:   }
+ 655: 
+ 656:   const digits = String(value || "").replace(/\D/g, "");
+ 657: 
+ 658:   if (!digits) {
+ 659:     return "";
+ 660:   }

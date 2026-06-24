@@ -1,0 +1,30 @@
+Folder PATH listing for volume Windows
+Volume serial number is 00000232 F0B7:DAA5
+C:\USERS\JEP_EDMUNDRULZ\LITIGATION-360-WORKSPACE\LITIGATION-360-SOFTWARE\SCRIPTS
+¦   BUILD-FRONTEND.bat
+¦   CHECK-BACKEND-HEALTH.bat
+¦   DAILY-START-BACKEND.bat
+¦   DEPLOY-PHASE-10ZG.ps1
+¦   install-ai-prompts-and-safety-policy.bat
+¦   ROLLBACK-PHASE-10ZF.bat
+¦   ROLLBACK-PHASE-10ZG.bat
+¦   START-BACKEND-SAFE.bat
+¦   START-BACKEND.bat
+¦   START-FRONTEND.bat
+¦   STOP-ALL-NODE-SERVERS.bat
+¦   VERIFY-PHASE-10ZF.bat
+¦   VERIFY-PHASE-10ZG.bat
+¦   
++---backup
++---monitoring
+¦       live_monitor.bat
+¦       
++---phase-09-5
+¦       health-check-phase-09-5.bat
+¦       safe-housekeeping-scan.bat
+¦       
++---repair
++---setup
++---testing
+        run_basic_checks.bat
+        

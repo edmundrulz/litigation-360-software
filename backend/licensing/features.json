@@ -1,0 +1,21 @@
+{
+  "TASKS": { "name": "Tasks", "status": "PLANNED" },
+  "NOTIFICATIONS": { "name": "Notifications", "status": "PLANNED" },
+  "COURT_NAVIGATION": { "name": "Court Navigation", "status": "PLANNED" },
+  "REPORTS": { "name": "Reports", "status": "PLANNED" },
+  "LAWYER_VIEW": { "name": "Lawyer View", "status": "PLANNED" },
+  "CLERK_VIEW": { "name": "Clerk View", "status": "PLANNED" },
+  "ADMIN_VIEW": { "name": "Admin View", "status": "PLANNED" },
+  "FINANCE_VIEW": { "name": "Finance View", "status": "PLANNED" },
+  "PARTNER_VIEW": { "name": "Partner View", "status": "PLANNED" },
+  "LEGAL_AI": { "name": "Legal AI", "status": "PLANNED" },
+  "KNOWLEDGE_MANAGEMENT": { "name": "Knowledge Management", "status": "PLANNED" },
+  "PREDICTIVE_ANALYTICS": { "name": "Predictive Analytics", "status": "PLANNED" },
+  "EXECUTIVE_COMMAND_CENTRE": { "name": "Executive Command Centre", "status": "PLANNED" },
+  "WORKFLOW_AUTOMATION": { "name": "Workflow Automation", "status": "PLANNED" },
+  "GOVERNMENT_INTEGRATIONS": { "name": "Government Integrations", "status": "PLANNED" },
+  "CLIENT_PORTAL": { "name": "Client Portal", "status": "PLANNED" },
+  "MOBILE_APP": { "name": "Mobile App", "status": "PLANNED" },
+  "AUTONOMOUS_OPERATIONS": { "name": "Autonomous Operations", "status": "PLANNED" },
+  "MARKETPLACE": { "name": "Marketplace", "status": "PLANNED" }
+}

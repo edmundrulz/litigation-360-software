@@ -1,0 +1,31 @@
+1330:     responseData.client ||
+1331:       responseData.data ||
+1332:       responseData.record ||
+1333:       responseData.result ||
+1334:       responseData
+1335:   );
+1336: }
+1337: 
+1338: function RequiredMark() {
+1339:   return <span className="field-required">*</span>;
+1340: }
+1341: function FieldLabel({ children, required = false }) {
+1342:   return (
+1343:     <span className="field-label-line">
+1344:       {children}
+1345:       {required && <span className="leos-required-marker">*</span>}
+1346:     </span>
+1347:   );
+1348: }
+1349: 
+1350: export default function Clients() {
+1351:   const [clients, setClients] = useState([]);
+1352:   const [form, setForm] = useState(EMPTY_CLIENT);
+1353:   const [editingId, setEditingId] = useState("");
+1354:   const [searchTerm, setSearchTerm] = useState("");
+1355:   const [status, setStatus] = useState("");
+1356:   const [statusType, setStatusType] = useState("info");
+1357:   const [isSaving, setIsSaving] = useState(false);
+1358:   const [validationErrors, setValidationErrors] = useState([]);
+1359: 
+1360:   const showNationalityField =

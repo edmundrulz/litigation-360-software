@@ -1,0 +1,1187 @@
+============================================================
+FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src\routes\cases.js
+EXTRACTED: 2026-06-22 23:54:56
+============================================================
+
+---- MATCH: CREATE CASE | LINE: 34 | CONTEXT: 22 to 52 ----
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+
+---- MATCH: CREATE CASE | LINE: 132 | CONTEXT: 120 to 150 ----
+  120:         client_id
+  121:       },
+  122:       ipAddress: req.ip
+  123:     });
+  124: 
+  125:     res.json({
+  126:       success: true,
+  127:       id: caseId
+  128:     });
+  129: 
+  130:   } catch (error) {
+  131: 
+  132:     console.error('CREATE CASE ERROR:', error);
+  133: 
+  134:     if (error.message === 'DUPLICATE_CASE') {
+  135:       return res.status(409).json({
+  136:         error: 'Possible duplicate case detected'
+  137:       });
+  138:     }
+  139: 
+  140:     res.status(500).json({
+  141:       error: error.message
+  142:     });
+  143:   }
+  144: });
+  145: 
+  146: 
+  147: // ========================================
+  148: // UPDATE CASE (SAFE)
+  149: // ========================================
+  150: 
+
+---- MATCH: Create Case | LINE: 34 | CONTEXT: 22 to 52 ----
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+
+---- MATCH: Create Case | LINE: 132 | CONTEXT: 120 to 150 ----
+  120:         client_id
+  121:       },
+  122:       ipAddress: req.ip
+  123:     });
+  124: 
+  125:     res.json({
+  126:       success: true,
+  127:       id: caseId
+  128:     });
+  129: 
+  130:   } catch (error) {
+  131: 
+  132:     console.error('CREATE CASE ERROR:', error);
+  133: 
+  134:     if (error.message === 'DUPLICATE_CASE') {
+  135:       return res.status(409).json({
+  136:         error: 'Possible duplicate case detected'
+  137:       });
+  138:     }
+  139: 
+  140:     res.status(500).json({
+  141:       error: error.message
+  142:     });
+  143:   }
+  144: });
+  145: 
+  146: 
+  147: // ========================================
+  148: // UPDATE CASE (SAFE)
+  149: // ========================================
+  150: 
+
+---- MATCH: create case | LINE: 34 | CONTEXT: 22 to 52 ----
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+
+---- MATCH: create case | LINE: 132 | CONTEXT: 120 to 150 ----
+  120:         client_id
+  121:       },
+  122:       ipAddress: req.ip
+  123:     });
+  124: 
+  125:     res.json({
+  126:       success: true,
+  127:       id: caseId
+  128:     });
+  129: 
+  130:   } catch (error) {
+  131: 
+  132:     console.error('CREATE CASE ERROR:', error);
+  133: 
+  134:     if (error.message === 'DUPLICATE_CASE') {
+  135:       return res.status(409).json({
+  136:         error: 'Possible duplicate case detected'
+  137:       });
+  138:     }
+  139: 
+  140:     res.status(500).json({
+  141:       error: error.message
+  142:     });
+  143:   }
+  144: });
+  145: 
+  146: 
+  147: // ========================================
+  148: // UPDATE CASE (SAFE)
+  149: // ========================================
+  150: 
+
+---- MATCH: router.post | LINE: 37 | CONTEXT: 25 to 55 ----
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+   53:   const missingFields = [];
+   54: 
+   55:   if (!title) missingFields.push('title');
+
+---- MATCH: router.post | LINE: 239 | CONTEXT: 227 to 257 ----
+  227:   } catch (error) {
+  228:     console.error('DELETE CASE ERROR:', error);
+  229: 
+  230:     res.status(500).json({ error: error.message });
+  231:   }
+  232: });
+  233: 
+  234: 
+  235: // ========================================
+  236: // ASSIGN CASE TO STAFF (HARDENED)
+  237: // ========================================
+  238: 
+  239: router.post("/assign", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+  240: 
+  241:   const body = req.body || {};
+  242: 
+  243:   const { case_id, staff_id } = body;
+  244: 
+  245:   if (!case_id || !staff_id) {
+  246:     return res.status(400).json({
+  247:       error: 'case_id and staff_id are required',
+  248:       received: body
+  249:     });
+  250:   }
+  251: 
+  252:   const transaction = db.transaction(() => {
+  253: 
+  254:     // Assign case
+  255:     db.prepare(`
+  256:       UPDATE cases
+  257:       SET assigned_staff_id = ?
+
+---- MATCH: router.get | LINE: 12 | CONTEXT: 1 to 30 ----
+    1: const express = require("express");
+    2: const { requireRole } = require("../middleware/roleMiddleware");
+    3: const router = express.Router();
+    4: const db = require('../database');
+    5: const auditLog = require('../utils/auditLogger');
+    6: 
+    7: 
+    8: // ========================================
+    9: // GET ALL CASES
+   10: // ========================================
+   11: 
+   12: router.get('/', (req, res) => {
+   13:   try {
+   14: 
+   15:     const cases = db.prepare(`
+   16:       SELECT *
+   17:       FROM cases
+   18:       ORDER BY created_at DESC
+   19:     `).all();
+   20: 
+   21:     res.json(cases);
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+
+---- MATCH: cases | LINE: 9 | CONTEXT: 1 to 27 ----
+    1: const express = require("express");
+    2: const { requireRole } = require("../middleware/roleMiddleware");
+    3: const router = express.Router();
+    4: const db = require('../database');
+    5: const auditLog = require('../utils/auditLogger');
+    6: 
+    7: 
+    8: // ========================================
+    9: // GET ALL CASES
+   10: // ========================================
+   11: 
+   12: router.get('/', (req, res) => {
+   13:   try {
+   14: 
+   15:     const cases = db.prepare(`
+   16:       SELECT *
+   17:       FROM cases
+   18:       ORDER BY created_at DESC
+   19:     `).all();
+   20: 
+   21:     res.json(cases);
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+
+---- MATCH: cases | LINE: 15 | CONTEXT: 3 to 33 ----
+    3: const router = express.Router();
+    4: const db = require('../database');
+    5: const auditLog = require('../utils/auditLogger');
+    6: 
+    7: 
+    8: // ========================================
+    9: // GET ALL CASES
+   10: // ========================================
+   11: 
+   12: router.get('/', (req, res) => {
+   13:   try {
+   14: 
+   15:     const cases = db.prepare(`
+   16:       SELECT *
+   17:       FROM cases
+   18:       ORDER BY created_at DESC
+   19:     `).all();
+   20: 
+   21:     res.json(cases);
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+
+---- MATCH: cases | LINE: 17 | CONTEXT: 5 to 35 ----
+    5: const auditLog = require('../utils/auditLogger');
+    6: 
+    7: 
+    8: // ========================================
+    9: // GET ALL CASES
+   10: // ========================================
+   11: 
+   12: router.get('/', (req, res) => {
+   13:   try {
+   14: 
+   15:     const cases = db.prepare(`
+   16:       SELECT *
+   17:       FROM cases
+   18:       ORDER BY created_at DESC
+   19:     `).all();
+   20: 
+   21:     res.json(cases);
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+
+---- MATCH: cases | LINE: 21 | CONTEXT: 9 to 39 ----
+    9: // GET ALL CASES
+   10: // ========================================
+   11: 
+   12: router.get('/', (req, res) => {
+   13:   try {
+   14: 
+   15:     const cases = db.prepare(`
+   16:       SELECT *
+   17:       FROM cases
+   18:       ORDER BY created_at DESC
+   19:     `).all();
+   20: 
+   21:     res.json(cases);
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+
+---- MATCH: cases | LINE: 24 | CONTEXT: 12 to 42 ----
+   12: router.get('/', (req, res) => {
+   13:   try {
+   14: 
+   15:     const cases = db.prepare(`
+   16:       SELECT *
+   17:       FROM cases
+   18:       ORDER BY created_at DESC
+   19:     `).all();
+   20: 
+   21:     res.json(cases);
+   22: 
+   23:   } catch (error) {
+   24:     console.error('GET CASES ERROR:', error);
+   25: 
+   26:     res.status(500).json({
+   27:       error: error.message
+   28:     });
+   29:   }
+   30: });
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+
+---- MATCH: cases | LINE: 73 | CONTEXT: 61 to 91 ----
+   61:       missingFields,
+   62:       received: body
+   63:     });
+   64:   }
+   65: 
+   66:   const transaction = db.transaction(() => {
+   67: 
+   68:     // ===============================
+   69:     // DUPLICATE CHECK
+   70:     // ===============================
+   71:     if (case_number) {
+   72:       const existingCase = db.prepare(`
+   73:         SELECT id FROM cases WHERE case_number = ?
+   74:       `).get(case_number);
+   75: 
+   76:       if (existingCase) {
+   77:         throw new Error('DUPLICATE_CASE');
+   78:       }
+   79:     }
+   80: 
+   81:     // ===============================
+   82:     // INSERT CASE
+   83:     // ===============================
+   84:     const result = db.prepare(`
+   85:       INSERT INTO cases
+   86:       (
+   87:         case_number,
+   88:         title,
+   89:         client_id,
+   90:         status,
+   91:         description,
+
+---- MATCH: cases | LINE: 85 | CONTEXT: 73 to 103 ----
+   73:         SELECT id FROM cases WHERE case_number = ?
+   74:       `).get(case_number);
+   75: 
+   76:       if (existingCase) {
+   77:         throw new Error('DUPLICATE_CASE');
+   78:       }
+   79:     }
+   80: 
+   81:     // ===============================
+   82:     // INSERT CASE
+   83:     // ===============================
+   84:     const result = db.prepare(`
+   85:       INSERT INTO cases
+   86:       (
+   87:         case_number,
+   88:         title,
+   89:         client_id,
+   90:         status,
+   91:         description,
+   92:         opened_date
+   93:       )
+   94:       VALUES
+   95:       (?, ?, ?, ?, ?, ?)
+   96:     `).run(
+   97:       case_number || null,
+   98:       title,
+   99:       client_id,
+  100:       status || 'NEW',
+  101:       description || '',
+  102:       opened_date || null
+  103:     );
+
+---- MATCH: cases | LINE: 167 | CONTEXT: 155 to 185 ----
+  155:     const body = req.body || {};
+  156: 
+  157:     const {
+  158:       case_number,
+  159:       title,
+  160:       client_id,
+  161:       status,
+  162:       description,
+  163:       opened_date
+  164:     } = body;
+  165: 
+  166:     db.prepare(`
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+  178:       title,
+  179:       client_id,
+  180:       status,
+  181:       description,
+  182:       opened_date,
+  183:       req.params.id
+  184:     );
+  185: 
+
+---- MATCH: cases | LINE: 214 | CONTEXT: 202 to 232 ----
+  202: });
+  203: 
+  204: 
+  205: // ========================================
+  206: // DELETE CASE
+  207: // ========================================
+  208: 
+  209: router.delete("/:id", requireRole("admin", "Administrator"), (req, res) => {
+  210: 
+  211:   try {
+  212: 
+  213:     db.prepare(`
+  214:       DELETE FROM cases WHERE id = ?
+  215:     `).run(req.params.id);
+  216: 
+  217:     auditLog({
+  218:       userEmail: 'system',
+  219:       action: 'DELETE_CASE',
+  220:       entityType: 'CASE',
+  221:       entityId: req.params.id,
+  222:       ipAddress: req.ip
+  223:     });
+  224: 
+  225:     res.json({ success: true });
+  226: 
+  227:   } catch (error) {
+  228:     console.error('DELETE CASE ERROR:', error);
+  229: 
+  230:     res.status(500).json({ error: error.message });
+  231:   }
+  232: });
+
+---- MATCH: cases | LINE: 256 | CONTEXT: 244 to 274 ----
+  244: 
+  245:   if (!case_id || !staff_id) {
+  246:     return res.status(400).json({
+  247:       error: 'case_id and staff_id are required',
+  248:       received: body
+  249:     });
+  250:   }
+  251: 
+  252:   const transaction = db.transaction(() => {
+  253: 
+  254:     // Assign case
+  255:     db.prepare(`
+  256:       UPDATE cases
+  257:       SET assigned_staff_id = ?
+  258:       WHERE id = ?
+  259:     `).run(staff_id, case_id);
+  260: 
+  261:     // Increment workload safely
+  262:     db.prepare(`
+  263:       UPDATE staff
+  264:       SET workload = COALESCE(workload, 0) + 1
+  265:       WHERE id = ?
+  266:     `).run(staff_id);
+  267:   });
+  268: 
+  269:   try {
+  270: 
+  271:     transaction();
+  272: 
+  273:     auditLog({
+  274:       userEmail: 'system',
+
+---- MATCH: title | LINE: 43 | CONTEXT: 31 to 61 ----
+   31: 
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+   53:   const missingFields = [];
+   54: 
+   55:   if (!title) missingFields.push('title');
+   56:   if (!client_id) missingFields.push('client_id');
+   57: 
+   58:   if (missingFields.length > 0) {
+   59:     return res.status(400).json({
+   60:       error: 'Missing required fields',
+   61:       missingFields,
+
+---- MATCH: title | LINE: 55 | CONTEXT: 43 to 73 ----
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+   53:   const missingFields = [];
+   54: 
+   55:   if (!title) missingFields.push('title');
+   56:   if (!client_id) missingFields.push('client_id');
+   57: 
+   58:   if (missingFields.length > 0) {
+   59:     return res.status(400).json({
+   60:       error: 'Missing required fields',
+   61:       missingFields,
+   62:       received: body
+   63:     });
+   64:   }
+   65: 
+   66:   const transaction = db.transaction(() => {
+   67: 
+   68:     // ===============================
+   69:     // DUPLICATE CHECK
+   70:     // ===============================
+   71:     if (case_number) {
+   72:       const existingCase = db.prepare(`
+   73:         SELECT id FROM cases WHERE case_number = ?
+
+---- MATCH: title | LINE: 88 | CONTEXT: 76 to 106 ----
+   76:       if (existingCase) {
+   77:         throw new Error('DUPLICATE_CASE');
+   78:       }
+   79:     }
+   80: 
+   81:     // ===============================
+   82:     // INSERT CASE
+   83:     // ===============================
+   84:     const result = db.prepare(`
+   85:       INSERT INTO cases
+   86:       (
+   87:         case_number,
+   88:         title,
+   89:         client_id,
+   90:         status,
+   91:         description,
+   92:         opened_date
+   93:       )
+   94:       VALUES
+   95:       (?, ?, ?, ?, ?, ?)
+   96:     `).run(
+   97:       case_number || null,
+   98:       title,
+   99:       client_id,
+  100:       status || 'NEW',
+  101:       description || '',
+  102:       opened_date || null
+  103:     );
+  104: 
+  105:     return result.lastInsertRowid;
+  106:   });
+
+---- MATCH: title | LINE: 98 | CONTEXT: 86 to 116 ----
+   86:       (
+   87:         case_number,
+   88:         title,
+   89:         client_id,
+   90:         status,
+   91:         description,
+   92:         opened_date
+   93:       )
+   94:       VALUES
+   95:       (?, ?, ?, ?, ?, ?)
+   96:     `).run(
+   97:       case_number || null,
+   98:       title,
+   99:       client_id,
+  100:       status || 'NEW',
+  101:       description || '',
+  102:       opened_date || null
+  103:     );
+  104: 
+  105:     return result.lastInsertRowid;
+  106:   });
+  107: 
+  108:   try {
+  109: 
+  110:     const caseId = transaction();
+  111: 
+  112:     auditLog({
+  113:       userEmail: 'system',
+  114:       action: 'CREATE_CASE',
+  115:       entityType: 'CASE',
+  116:       entityId: caseId,
+
+---- MATCH: title | LINE: 119 | CONTEXT: 107 to 137 ----
+  107: 
+  108:   try {
+  109: 
+  110:     const caseId = transaction();
+  111: 
+  112:     auditLog({
+  113:       userEmail: 'system',
+  114:       action: 'CREATE_CASE',
+  115:       entityType: 'CASE',
+  116:       entityId: caseId,
+  117:       newValue: {
+  118:         case_number,
+  119:         title,
+  120:         client_id
+  121:       },
+  122:       ipAddress: req.ip
+  123:     });
+  124: 
+  125:     res.json({
+  126:       success: true,
+  127:       id: caseId
+  128:     });
+  129: 
+  130:   } catch (error) {
+  131: 
+  132:     console.error('CREATE CASE ERROR:', error);
+  133: 
+  134:     if (error.message === 'DUPLICATE_CASE') {
+  135:       return res.status(409).json({
+  136:         error: 'Possible duplicate case detected'
+  137:       });
+
+---- MATCH: title | LINE: 159 | CONTEXT: 147 to 177 ----
+  147: // ========================================
+  148: // UPDATE CASE (SAFE)
+  149: // ========================================
+  150: 
+  151: router.put("/:id", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+  152: 
+  153:   try {
+  154: 
+  155:     const body = req.body || {};
+  156: 
+  157:     const {
+  158:       case_number,
+  159:       title,
+  160:       client_id,
+  161:       status,
+  162:       description,
+  163:       opened_date
+  164:     } = body;
+  165: 
+  166:     db.prepare(`
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+
+---- MATCH: title | LINE: 170 | CONTEXT: 158 to 188 ----
+  158:       case_number,
+  159:       title,
+  160:       client_id,
+  161:       status,
+  162:       description,
+  163:       opened_date
+  164:     } = body;
+  165: 
+  166:     db.prepare(`
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+  178:       title,
+  179:       client_id,
+  180:       status,
+  181:       description,
+  182:       opened_date,
+  183:       req.params.id
+  184:     );
+  185: 
+  186:     auditLog({
+  187:       userEmail: 'system',
+  188:       action: 'UPDATE_CASE',
+
+---- MATCH: title | LINE: 178 | CONTEXT: 166 to 196 ----
+  166:     db.prepare(`
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+  178:       title,
+  179:       client_id,
+  180:       status,
+  181:       description,
+  182:       opened_date,
+  183:       req.params.id
+  184:     );
+  185: 
+  186:     auditLog({
+  187:       userEmail: 'system',
+  188:       action: 'UPDATE_CASE',
+  189:       entityType: 'CASE',
+  190:       entityId: req.params.id,
+  191:       newValue: { case_number, title, status },
+  192:       ipAddress: req.ip
+  193:     });
+  194: 
+  195:     res.json({ success: true });
+  196: 
+
+---- MATCH: title | LINE: 191 | CONTEXT: 179 to 209 ----
+  179:       client_id,
+  180:       status,
+  181:       description,
+  182:       opened_date,
+  183:       req.params.id
+  184:     );
+  185: 
+  186:     auditLog({
+  187:       userEmail: 'system',
+  188:       action: 'UPDATE_CASE',
+  189:       entityType: 'CASE',
+  190:       entityId: req.params.id,
+  191:       newValue: { case_number, title, status },
+  192:       ipAddress: req.ip
+  193:     });
+  194: 
+  195:     res.json({ success: true });
+  196: 
+  197:   } catch (error) {
+  198:     console.error('UPDATE CASE ERROR:', error);
+  199: 
+  200:     res.status(500).json({ error: error.message });
+  201:   }
+  202: });
+  203: 
+  204: 
+  205: // ========================================
+  206: // DELETE CASE
+  207: // ========================================
+  208: 
+  209: router.delete("/:id", requireRole("admin", "Administrator"), (req, res) => {
+
+---- MATCH: client | LINE: 44 | CONTEXT: 32 to 62 ----
+   32: 
+   33: // ========================================
+   34: // CREATE CASE (HARDENED + TRANSACTION SAFE)
+   35: // ========================================
+   36: 
+   37: router.post("/", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+   38: 
+   39:   const body = req.body || {};
+   40: 
+   41:   const {
+   42:     case_number,
+   43:     title,
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+   53:   const missingFields = [];
+   54: 
+   55:   if (!title) missingFields.push('title');
+   56:   if (!client_id) missingFields.push('client_id');
+   57: 
+   58:   if (missingFields.length > 0) {
+   59:     return res.status(400).json({
+   60:       error: 'Missing required fields',
+   61:       missingFields,
+   62:       received: body
+
+---- MATCH: client | LINE: 56 | CONTEXT: 44 to 74 ----
+   44:     client_id,
+   45:     status,
+   46:     description,
+   47:     opened_date
+   48:   } = body;
+   49: 
+   50:   // ===============================
+   51:   // VALIDATION
+   52:   // ===============================
+   53:   const missingFields = [];
+   54: 
+   55:   if (!title) missingFields.push('title');
+   56:   if (!client_id) missingFields.push('client_id');
+   57: 
+   58:   if (missingFields.length > 0) {
+   59:     return res.status(400).json({
+   60:       error: 'Missing required fields',
+   61:       missingFields,
+   62:       received: body
+   63:     });
+   64:   }
+   65: 
+   66:   const transaction = db.transaction(() => {
+   67: 
+   68:     // ===============================
+   69:     // DUPLICATE CHECK
+   70:     // ===============================
+   71:     if (case_number) {
+   72:       const existingCase = db.prepare(`
+   73:         SELECT id FROM cases WHERE case_number = ?
+   74:       `).get(case_number);
+
+---- MATCH: client | LINE: 89 | CONTEXT: 77 to 107 ----
+   77:         throw new Error('DUPLICATE_CASE');
+   78:       }
+   79:     }
+   80: 
+   81:     // ===============================
+   82:     // INSERT CASE
+   83:     // ===============================
+   84:     const result = db.prepare(`
+   85:       INSERT INTO cases
+   86:       (
+   87:         case_number,
+   88:         title,
+   89:         client_id,
+   90:         status,
+   91:         description,
+   92:         opened_date
+   93:       )
+   94:       VALUES
+   95:       (?, ?, ?, ?, ?, ?)
+   96:     `).run(
+   97:       case_number || null,
+   98:       title,
+   99:       client_id,
+  100:       status || 'NEW',
+  101:       description || '',
+  102:       opened_date || null
+  103:     );
+  104: 
+  105:     return result.lastInsertRowid;
+  106:   });
+  107: 
+
+---- MATCH: client | LINE: 99 | CONTEXT: 87 to 117 ----
+   87:         case_number,
+   88:         title,
+   89:         client_id,
+   90:         status,
+   91:         description,
+   92:         opened_date
+   93:       )
+   94:       VALUES
+   95:       (?, ?, ?, ?, ?, ?)
+   96:     `).run(
+   97:       case_number || null,
+   98:       title,
+   99:       client_id,
+  100:       status || 'NEW',
+  101:       description || '',
+  102:       opened_date || null
+  103:     );
+  104: 
+  105:     return result.lastInsertRowid;
+  106:   });
+  107: 
+  108:   try {
+  109: 
+  110:     const caseId = transaction();
+  111: 
+  112:     auditLog({
+  113:       userEmail: 'system',
+  114:       action: 'CREATE_CASE',
+  115:       entityType: 'CASE',
+  116:       entityId: caseId,
+  117:       newValue: {
+
+---- MATCH: client | LINE: 120 | CONTEXT: 108 to 138 ----
+  108:   try {
+  109: 
+  110:     const caseId = transaction();
+  111: 
+  112:     auditLog({
+  113:       userEmail: 'system',
+  114:       action: 'CREATE_CASE',
+  115:       entityType: 'CASE',
+  116:       entityId: caseId,
+  117:       newValue: {
+  118:         case_number,
+  119:         title,
+  120:         client_id
+  121:       },
+  122:       ipAddress: req.ip
+  123:     });
+  124: 
+  125:     res.json({
+  126:       success: true,
+  127:       id: caseId
+  128:     });
+  129: 
+  130:   } catch (error) {
+  131: 
+  132:     console.error('CREATE CASE ERROR:', error);
+  133: 
+  134:     if (error.message === 'DUPLICATE_CASE') {
+  135:       return res.status(409).json({
+  136:         error: 'Possible duplicate case detected'
+  137:       });
+  138:     }
+
+---- MATCH: client | LINE: 160 | CONTEXT: 148 to 178 ----
+  148: // UPDATE CASE (SAFE)
+  149: // ========================================
+  150: 
+  151: router.put("/:id", requireRole("admin", "Administrator", "manager", "Manager"), (req, res) => {
+  152: 
+  153:   try {
+  154: 
+  155:     const body = req.body || {};
+  156: 
+  157:     const {
+  158:       case_number,
+  159:       title,
+  160:       client_id,
+  161:       status,
+  162:       description,
+  163:       opened_date
+  164:     } = body;
+  165: 
+  166:     db.prepare(`
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+  178:       title,
+
+---- MATCH: client | LINE: 171 | CONTEXT: 159 to 189 ----
+  159:       title,
+  160:       client_id,
+  161:       status,
+  162:       description,
+  163:       opened_date
+  164:     } = body;
+  165: 
+  166:     db.prepare(`
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+  178:       title,
+  179:       client_id,
+  180:       status,
+  181:       description,
+  182:       opened_date,
+  183:       req.params.id
+  184:     );
+  185: 
+  186:     auditLog({
+  187:       userEmail: 'system',
+  188:       action: 'UPDATE_CASE',
+  189:       entityType: 'CASE',
+
+---- MATCH: client | LINE: 179 | CONTEXT: 167 to 197 ----
+  167:       UPDATE cases
+  168:       SET
+  169:         case_number = ?,
+  170:         title = ?,
+  171:         client_id = ?,
+  172:         status = ?,
+  173:         description = ?,
+  174:         opened_date = ?
+  175:       WHERE id = ?
+  176:     `).run(
+  177:       case_number,
+  178:       title,
+  179:       client_id,
+  180:       status,
+  181:       description,
+  182:       opened_date,
+  183:       req.params.id
+  184:     );
+  185: 
+  186:     auditLog({
+  187:       userEmail: 'system',
+  188:       action: 'UPDATE_CASE',
+  189:       entityType: 'CASE',
+  190:       entityId: req.params.id,
+  191:       newValue: { case_number, title, status },
+  192:       ipAddress: req.ip
+  193:     });
+  194: 
+  195:     res.json({ success: true });
+  196: 
+  197:   } catch (error) {

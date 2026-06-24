@@ -1,0 +1,39 @@
+{
+  "phase": "10Z.0",
+  "module": "Enterprise Operations Command Centre",
+  "timestamp": "2026-06-19T08:19:59.312Z",
+  "files": {
+    "commandCentreExists": true,
+    "routeExists": true,
+    "routeMountedInIndex": true,
+    "frontendApiExists": true,
+    "frontendPageExists": true
+  },
+  "tests": {
+    "operationsDashboardGenerated": true,
+    "courtPanelPresent": true,
+    "industrialCourtPanelPresent": true,
+    "perkesoPanelPresent": true,
+    "deploymentPanelPresent": true,
+    "executiveAlertsPresent": true,
+    "realtimeRefreshPresent": true,
+    "healthGenerated": true,
+    "alertsGenerated": true
+  },
+  "health": {
+    "module": "Enterprise Operations Command Centre",
+    "status": "ACTIVE",
+    "operationalStatus": "ACTIVE",
+    "deploymentApproved": true,
+    "monitoringStatus": "HEALTHY",
+    "performanceStatus": "HEALTHY",
+    "industrialCourtStatus": "MONITORED",
+    "perkesoStatus": "MONITORED",
+    "alertCount": 1,
+    "dashboardsGenerated": 3,
+    "alertsGenerated": 3,
+    "lastGeneratedAt": "2026-06-19T08:19:59.310Z",
+    "timestamp": "2026-06-19T08:19:59.311Z"
+  },
+  "status": "PASS"
+}

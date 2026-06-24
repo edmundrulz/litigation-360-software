@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-06-19T07:51:05.203Z",
+  "rules": [
+    {
+      "ifRemoved": "mapsIntegrationLayer",
+      "affected": [
+        "Court Navigation",
+        "Industrial Court Navigation",
+        "PERKESO Navigation",
+        "Executive Dashboard",
+        "Operations Command Centre"
+      ]
+    },
+    {
+      "ifRemoved": "deploymentGatekeeperEngine",
+      "affected": [
+        "Deployment Approval",
+        "Release Control",
+        "Executive Deployment Dashboard",
+        "Governance Stack"
+      ]
+    },
+    {
+      "ifRemoved": "workflowEngine",
+      "affected": [
+        "Client Intake",
+        "Matter Creation",
+        "Court Preparation",
+        "Document Review",
+        "Task Progress"
+      ]
+    },
+    {
+      "ifRemoved": "backupRecoveryEngine",
+      "affected": [
+        "Disaster Recovery",
+        "Deployment Safety",
+        "Gatekeeper Approval",
+        "Recovery Protocol"
+      ]
+    },
+    {
+      "ifRemoved": "litigation360.db",
+      "affected": [
+        "Clients",
+        "Matters",
+        "Cases",
+        "Documents",
+        "Workflows",
+        "Reports"
+      ]
+    }
+  ]
+}

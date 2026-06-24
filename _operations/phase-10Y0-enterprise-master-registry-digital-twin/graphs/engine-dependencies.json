@@ -1,0 +1,422 @@
+{
+  "graph": "engine-dependencies",
+  "generatedAt": "2026-06-19T07:51:05.196Z",
+  "nodes": [
+    "alertManager",
+    "autonomousOperationsEngine",
+    "backupRecoveryEngine",
+    "courtNavigationEngine",
+    "courtOperationsEngine",
+    "deploymentGatekeeperEngine",
+    "deploymentReadinessCentre",
+    "deploymentScoringEngine",
+    "documentLifecycleEngine",
+    "enterpriseGovernanceEngine",
+    "enterpriseHardeningEngine",
+    "enterpriseMonitoringEngine",
+    "environmentValidationEngine",
+    "eventBus",
+    "eventTypes",
+    "executiveCommandCentre",
+    "executiveDeploymentDashboardEngine",
+    "handlerRegistry",
+    "clientCreated",
+    "courtDateAdded",
+    "deadlineCreated",
+    "documentUploaded",
+    "invoiceCreated",
+    "matterCreated",
+    "paymentReceived",
+    "roleChanged",
+    "taskCompleted",
+    "userCreated",
+    "legalOperationsAssistant",
+    "loadTestingEngine",
+    "mapsIntegrationLayer",
+    "matterIntelligenceEngine",
+    "metricsCollector",
+    "notificationService",
+    "performanceOptimizationEngine",
+    "predictiveAnalyticsEngine",
+    "releaseValidatorEngine",
+    "workflowEngine"
+  ],
+  "edges": [
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./executiveCommandCentre"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./predictiveAnalyticsEngine"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./legalOperationsAssistant"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./courtOperationsEngine"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./documentLifecycleEngine"
+    },
+    {
+      "from": "autonomousOperationsEngine",
+      "to": "./matterIntelligenceEngine"
+    },
+    {
+      "from": "backupRecoveryEngine",
+      "to": "./enterpriseHardeningEngine"
+    },
+    {
+      "from": "courtNavigationEngine",
+      "to": "./courtOperationsEngine"
+    },
+    {
+      "from": "courtNavigationEngine",
+      "to": "./documentLifecycleEngine"
+    },
+    {
+      "from": "courtNavigationEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "courtNavigationEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "courtOperationsEngine",
+      "to": "./eventBus"
+    },
+    {
+      "from": "courtOperationsEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "courtOperationsEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./deploymentScoringEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./releaseValidatorEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./environmentValidationEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./enterpriseHardeningEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./enterpriseMonitoringEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./backupRecoveryEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./performanceOptimizationEngine"
+    },
+    {
+      "from": "deploymentGatekeeperEngine",
+      "to": "./executiveDeploymentDashboardEngine"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./deploymentReadinessCentre"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./environmentValidationEngine"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./releaseValidatorEngine"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./enterpriseMonitoringEngine"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./enterpriseHardeningEngine"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./backupRecoveryEngine"
+    },
+    {
+      "from": "deploymentScoringEngine",
+      "to": "./performanceOptimizationEngine"
+    },
+    {
+      "from": "documentLifecycleEngine",
+      "to": "./eventBus"
+    },
+    {
+      "from": "documentLifecycleEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "documentLifecycleEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "enterpriseGovernanceEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "enterpriseGovernanceEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "enterpriseGovernanceEngine",
+      "to": "./matterIntelligenceEngine"
+    },
+    {
+      "from": "enterpriseGovernanceEngine",
+      "to": "./autonomousOperationsEngine"
+    },
+    {
+      "from": "enterpriseMonitoringEngine",
+      "to": "./metricsCollector"
+    },
+    {
+      "from": "enterpriseMonitoringEngine",
+      "to": "./alertManager"
+    },
+    {
+      "from": "eventBus",
+      "to": "./handlerRegistry"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./handlerRegistry"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./eventBus"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./notificationService"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./documentLifecycleEngine"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./courtOperationsEngine"
+    },
+    {
+      "from": "executiveCommandCentre",
+      "to": "./matterIntelligenceEngine"
+    },
+    {
+      "from": "executiveDeploymentDashboardEngine",
+      "to": "./deploymentScoringEngine"
+    },
+    {
+      "from": "executiveDeploymentDashboardEngine",
+      "to": "./deploymentReadinessCentre"
+    },
+    {
+      "from": "executiveDeploymentDashboardEngine",
+      "to": "./environmentValidationEngine"
+    },
+    {
+      "from": "executiveDeploymentDashboardEngine",
+      "to": "./releaseValidatorEngine"
+    },
+    {
+      "from": "executiveDeploymentDashboardEngine",
+      "to": "./enterpriseMonitoringEngine"
+    },
+    {
+      "from": "executiveDeploymentDashboardEngine",
+      "to": "./performanceOptimizationEngine"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./eventTypes"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/clientCreated"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/matterCreated"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/documentUploaded"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/taskCompleted"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/courtDateAdded"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/deadlineCreated"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/paymentReceived"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/invoiceCreated"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/userCreated"
+    },
+    {
+      "from": "handlerRegistry",
+      "to": "./handlers/roleChanged"
+    },
+    {
+      "from": "legalOperationsAssistant",
+      "to": "./executiveCommandCentre"
+    },
+    {
+      "from": "legalOperationsAssistant",
+      "to": "./matterIntelligenceEngine"
+    },
+    {
+      "from": "legalOperationsAssistant",
+      "to": "./notificationService"
+    },
+    {
+      "from": "loadTestingEngine",
+      "to": "./enterpriseMonitoringEngine"
+    },
+    {
+      "from": "loadTestingEngine",
+      "to": "./enterpriseHardeningEngine"
+    },
+    {
+      "from": "loadTestingEngine",
+      "to": "./backupRecoveryEngine"
+    },
+    {
+      "from": "mapsIntegrationLayer",
+      "to": "./courtNavigationEngine"
+    },
+    {
+      "from": "mapsIntegrationLayer",
+      "to": "./courtOperationsEngine"
+    },
+    {
+      "from": "matterIntelligenceEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "matterIntelligenceEngine",
+      "to": "./documentLifecycleEngine"
+    },
+    {
+      "from": "matterIntelligenceEngine",
+      "to": "./courtOperationsEngine"
+    },
+    {
+      "from": "matterIntelligenceEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "performanceOptimizationEngine",
+      "to": "./enterpriseMonitoringEngine"
+    },
+    {
+      "from": "performanceOptimizationEngine",
+      "to": "./enterpriseHardeningEngine"
+    },
+    {
+      "from": "performanceOptimizationEngine",
+      "to": "./backupRecoveryEngine"
+    },
+    {
+      "from": "predictiveAnalyticsEngine",
+      "to": "./executiveCommandCentre"
+    },
+    {
+      "from": "predictiveAnalyticsEngine",
+      "to": "./matterIntelligenceEngine"
+    },
+    {
+      "from": "predictiveAnalyticsEngine",
+      "to": "./courtOperationsEngine"
+    },
+    {
+      "from": "predictiveAnalyticsEngine",
+      "to": "./workflowEngine"
+    },
+    {
+      "from": "predictiveAnalyticsEngine",
+      "to": "./documentLifecycleEngine"
+    },
+    {
+      "from": "predictiveAnalyticsEngine",
+      "to": "./notificationService"
+    },
+    {
+      "from": "releaseValidatorEngine",
+      "to": "./deploymentReadinessCentre"
+    },
+    {
+      "from": "releaseValidatorEngine",
+      "to": "./environmentValidationEngine"
+    },
+    {
+      "from": "releaseValidatorEngine",
+      "to": "./enterpriseHardeningEngine"
+    },
+    {
+      "from": "releaseValidatorEngine",
+      "to": "./backupRecoveryEngine"
+    },
+    {
+      "from": "releaseValidatorEngine",
+      "to": "./enterpriseMonitoringEngine"
+    },
+    {
+      "from": "releaseValidatorEngine",
+      "to": "./performanceOptimizationEngine"
+    },
+    {
+      "from": "workflowEngine",
+      "to": "./eventBus"
+    },
+    {
+      "from": "workflowEngine",
+      "to": "./notificationService"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+=====================================================
+LITIGATION 360 - PHASE 9.9B.2 RUNTIME DEPENDENCY REPORT
+=====================================================
+Date: 2026-06-18T06:52:37.358Z
+Root: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+Scan mode: RUNTIME CODE ONLY
+Scan roots: backend/src, backend/routes, backend/services, backend/middleware, backend/utils, backend/controllers, backend/tools, frontend/src
+
+Scanning: backend/src
+[MISSING RUNTIME LOCAL FILE] backend\src\duplicateService.js -> ../db
+[MISSING RUNTIME LOCAL FILE] backend\src\matterService.js -> ../db
+[MISSING RUNTIME LOCAL FILE] backend\src\matterService.js -> ./auditService
+[MISSING RUNTIME LOCAL FILE] backend\src\routes\users.js -> ../controllers/userController
+Scanning: backend/routes
+[SKIPPED MISSING SCAN ROOT] backend\routes
+Scanning: backend/services
+[SKIPPED MISSING SCAN ROOT] backend\services
+Scanning: backend/middleware
+[SKIPPED MISSING SCAN ROOT] backend\middleware
+Scanning: backend/utils
+[SKIPPED MISSING SCAN ROOT] backend\utils
+Scanning: backend/controllers
+[SKIPPED MISSING SCAN ROOT] backend\controllers
+Scanning: backend/tools
+[MISSING RUNTIME LOCAL FILE] backend\tools\backend-doctor.js -> ../middleware/roleMiddleware
+Scanning: frontend/src
+
+SUMMARY
+Files scanned: 112
+External dependency references detected: 106
+Missing runtime local files: 5
+STATUS: FAIL

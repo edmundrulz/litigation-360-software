@@ -1,0 +1,23 @@
+{
+  "trial_defaults": {
+    "trial_days": 30,
+    "trial_unlocks_all_standard_features": true,
+    "trial_excludes": [
+      "GOVERNMENT_INTEGRATIONS",
+      "MARKETPLACE"
+    ]
+  },
+  "active_trials": {
+    "FIRM_STARTER_SAMPLE": {
+      "firmId": "FIRM_STARTER_SAMPLE",
+      "trial_active": false,
+      "trial_expired": true,
+      "trial_start": "2026-06-21T00:35:44.955Z",
+      "trial_end": "2026-07-21T00:35:44.955Z",
+      "trial_days": 30,
+      "trial_status": "ENDED",
+      "ended_at": "2026-06-21T00:35:45.120Z",
+      "end_reason": "OWNER_TEST_END"
+    }
+  }
+}

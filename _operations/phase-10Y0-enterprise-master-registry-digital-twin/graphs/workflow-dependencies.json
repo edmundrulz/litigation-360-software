@@ -1,0 +1,58 @@
+{
+  "graph": "workflow-dependencies",
+  "generatedAt": "2026-06-19T07:51:05.196Z",
+  "nodes": [
+    "NEW_CLIENT_INTAKE",
+    "MATTER_CREATION",
+    "CONFLICT_CHECK",
+    "COURT_PREPARATION",
+    "DOCUMENT_REVIEW",
+    "INVOICE_APPROVAL",
+    "MATTER_CLOSURE",
+    "INDUSTRIAL_COURT_PREPARATION",
+    "PERKESO_VISIT",
+    "DEPLOYMENT_APPROVAL"
+  ],
+  "edges": [
+    {
+      "from": "NEW_CLIENT_INTAKE",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "MATTER_CREATION",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "CONFLICT_CHECK",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "COURT_PREPARATION",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "DOCUMENT_REVIEW",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "INVOICE_APPROVAL",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "MATTER_CLOSURE",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "INDUSTRIAL_COURT_PREPARATION",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "PERKESO_VISIT",
+      "to": "workflowEngine"
+    },
+    {
+      "from": "DEPLOYMENT_APPROVAL",
+      "to": "workflowEngine"
+    }
+  ]
+}

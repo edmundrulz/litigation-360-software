@@ -1,0 +1,32 @@
+{
+  "projectName": "Litigation 360 Enterprise Platform",
+  "classification": "Legal Enterprise Operating System",
+  "projectRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software",
+  "pmoRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_LEOS_CONTROL\\PMO_TRACKING",
+  "currentPhase": "PHASE 12.0A - MASTER SSOT DEPLOYMENT AND CONTROL STRUCTURE CREATION",
+  "currentGate": "PRE-PHASE 11.0 ENTERPRISE CHANGE CONTROL FOUNDATION",
+  "phase11Status": "LOCKED",
+  "productionApproval": "NOT APPROVED",
+  "clientRollout": "BLOCKED",
+  "databaseAuthority": "SQLite",
+  "forbiddenWork": [
+    "Phase 11 feature expansion",
+    "Production deployment",
+    "Client rollout",
+    "Bulk deletion",
+    "Recursive cleanup",
+    "Route removal",
+    "Database pruning",
+    "Feature activation without validation"
+  ],
+  "requiredUnlockChecks": [
+    "Pre-Phase 11 Verification PASS",
+    "Backup PASS",
+    "Monitoring PASS",
+    "Testing PASS",
+    "Documentation PASS",
+    "Rollback PASS",
+    "Approval PASS",
+    "Governance Certification PASS"
+  ]
+}

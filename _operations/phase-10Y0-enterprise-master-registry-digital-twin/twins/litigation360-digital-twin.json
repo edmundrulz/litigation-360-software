@@ -1,0 +1,63 @@
+{
+  "system": "Litigation360",
+  "classification": "Legal Enterprise Operating System",
+  "generatedAt": "2026-06-19T07:51:05.207Z",
+  "projectRoot": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software",
+  "phase": "10Y.0",
+  "counts": {
+    "engines": 38,
+    "routes": 57,
+    "endpoints": 279,
+    "workflows": 10,
+    "dashboards": 10,
+    "documents": 271,
+    "integrations": 6,
+    "courts": 6,
+    "industrialCourts": 1,
+    "perkesoOffices": 2
+  },
+  "criticalSystems": [
+    "deploymentGatekeeperEngine",
+    "deploymentScoringEngine",
+    "releaseValidatorEngine",
+    "environmentValidationEngine",
+    "enterpriseMonitoringEngine",
+    "enterpriseHardeningEngine",
+    "backupRecoveryEngine",
+    "workflowEngine",
+    "eventBus",
+    "litigation360.db"
+  ],
+  "operationalCoverage": {
+    "industrialCourtKualaLumpur": true,
+    "perkesoKualaLumpurJalanTunRazak": true,
+    "perkesoHeadquartersJalanAmpang": true,
+    "mapsNavigation": true,
+    "deploymentGovernance": true,
+    "executiveDashboard": true
+  },
+  "deployment": {
+    "registry": "deployment-registry",
+    "generatedAt": "2026-06-19T07:51:05.170Z",
+    "scoringAvailable": true,
+    "gatekeeperAvailable": true,
+    "governanceAvailable": true,
+    "latestScore": 100,
+    "latestGrade": "A+",
+    "latestRisk": "LOW",
+    "gatekeeperStatus": "APPROVED",
+    "deploymentApproved": true
+  },
+  "graphSummary": {
+    "engineEdges": 94,
+    "routeEdges": 166,
+    "workflowEdges": 10,
+    "deploymentEdges": 7
+  },
+  "impactRules": 5,
+  "technicalDebt": {
+    "unmountedRoutes": 6,
+    "duplicateEndpoints": 6,
+    "possibleOrphanEngines": 13
+  }
+}

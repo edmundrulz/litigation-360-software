@@ -1,0 +1,3 @@
+=== NODE PROJECT STRUCTURE CHECK === 
+FOUND: package.json 
+FOUND: node_modules 

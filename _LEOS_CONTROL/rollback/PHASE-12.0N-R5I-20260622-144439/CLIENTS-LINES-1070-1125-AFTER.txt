@@ -1,0 +1,56 @@
+1070:   const surname = source.surname || source.lastName || legacyName.surname || "";
+1071: 
+1072:   const identificationKind =
+1073:     source.identificationKind ||
+1074:     source.idType ||
+1075:     source.documentIdType ||
+1076:     (source.passportNumber ? "Passport" : "Malaysian NRIC");
+1077: 
+1078:   const nricPassportNumber =
+1079:     source.nricPassportNumber ||
+1080:     source.identificationNumber ||
+1081:     source.icNumber ||
+1082:     source.icNo ||
+1083:     source.ic ||
+1084:     source.passportNumber ||
+1085:     source.passport ||
+1086:     "";
+1087: 
+1088:   const derivedDob = parseNricDob(nricPassportNumber, identificationKind);
+1089:   const dateOfBirth = source.dateOfBirth || derivedDob;
+1090:   const age = source.age || calculateAge(dateOfBirth);
+1091:   const ageCategory = source.ageCategory || getAgeCategory(age);
+1092:   const generation = source.generation || getGeneration(dateOfBirth);
+1093:   const gender = source.gender || deriveGenderFromIdentification(nricPassportNumber, identificationKind);
+1094:   const country = source.country || "Malaysia";
+1095:   const stateOfBirth = source.stateOfBirth || getMalaysiaNricStateOfBirth(nricPassportNumber, identificationKind);
+1096:   const region = source.region || getDefaultRegion(country, source.continent || COUNTRY_TO_CONTINENT[country] || "");
+1097:   const availability = splitAvailability(source.unavailableUntil || source.availabilityUntil || source.unreachableTo || "");
+1098: 
+1099:   return {
+1100:     ...EMPTY_CLIENT,
+1101:     ...source,
+1102:     id: getClientId(source) || source.id || "",
+1103: 
+1104:     titlePrefix: source.titlePrefix || "",
+1105:     titleSuffix: source.titleSuffix || "Not Applicable / N/A",
+1106:     titleGenderOverride: Boolean(source.titleGenderOverride),
+1107:     titleOverrideReason: source.titleOverrideReason || "",
+1108: 
+1109:     givenName,
+1110:     surname,
+1111:     initials: source.initials || makeInitials(givenName, surname),
+1112: 
+1113:     gender,
+1114:     genderSource: source.genderSource || source["GenderSource"] || (source.gender ? "manual" : "auto"),
+1115:     dateOfBirth,
+1116:     age,
+1117:     ageCategory,
+1118:     generation,
+1119:     stateOfBirth,
+1120: 
+1121:     employmentStatus: source.employmentStatus || "To be confirmed",
+1122:     maritalStatus: source.maritalStatus || "To be confirmed",
+1123: 
+1124:     ethnicity: source.ethnicity || "",
+1125:     ethnicityOther: source.ethnicityOther || "",

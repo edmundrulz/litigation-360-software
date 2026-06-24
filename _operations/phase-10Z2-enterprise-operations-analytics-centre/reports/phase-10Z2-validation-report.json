@@ -1,0 +1,394 @@
+{
+  "snapshot": {
+    "analyticsId": "ANA-1781859888545",
+    "generatedAt": "2026-06-19T09:04:48.545Z",
+    "categories": [
+      "SYSTEM",
+      "DATABASE",
+      "BACKEND",
+      "FRONTEND",
+      "WORKFLOW",
+      "DOCUMENT",
+      "COURT",
+      "INDUSTRIAL_COURT",
+      "PERKESO",
+      "NAVIGATION",
+      "DEPLOYMENT",
+      "SECURITY",
+      "PERFORMANCE",
+      "BACKUP",
+      "GATEKEEPER",
+      "ALERTS",
+      "ESCALATIONS"
+    ],
+    "operationsHealth": "HEALTHY",
+    "stabilityScore": 90,
+    "riskScore": 10,
+    "workflowSuccessRate": 100,
+    "alertLoadScore": 0,
+    "criticalAlertCount": 0,
+    "highAlertCount": 1,
+    "escalationCount": 0,
+    "backupFailureCount": 0,
+    "deploymentBlockCount": 0,
+    "performanceIncidentCount": 0,
+    "courtCoverage": [
+      "Industrial Court Kuala Lumpur",
+      "Industrial Court hearing analytics",
+      "Industrial Court filing deadline analytics",
+      "Industrial Court attendance reminder analytics",
+      "Industrial Court navigation departure analytics",
+      "PERKESO Kuala Lumpur / Jalan Tun Razak",
+      "PERKESO Headquarters / Jalan Ampang",
+      "PERKESO submission analytics",
+      "PERKESO appointment analytics",
+      "Google Maps readiness analytics",
+      "Waze readiness analytics"
+    ],
+    "recommendations": [
+      "Review HIGH alerts in operations dashboard and assign owner."
+    ]
+  },
+  "metricOutput": {
+    "generatedAt": "2026-06-19T09:04:48.547Z",
+    "registry": [
+      {
+        "key": "operationsHealth",
+        "label": "Operations Health",
+        "type": "status"
+      },
+      {
+        "key": "stabilityScore",
+        "label": "Stability Score",
+        "type": "percentage"
+      },
+      {
+        "key": "riskScore",
+        "label": "Risk Score",
+        "type": "percentage"
+      },
+      {
+        "key": "workflowSuccessRate",
+        "label": "Workflow Success Rate",
+        "type": "percentage"
+      },
+      {
+        "key": "criticalAlertCount",
+        "label": "Critical Alerts",
+        "type": "count"
+      },
+      {
+        "key": "highAlertCount",
+        "label": "High Alerts",
+        "type": "count"
+      },
+      {
+        "key": "escalationCount",
+        "label": "Escalations",
+        "type": "count"
+      },
+      {
+        "key": "backupFailureCount",
+        "label": "Backup Failures",
+        "type": "count"
+      },
+      {
+        "key": "deploymentBlockCount",
+        "label": "Deployment Blocks",
+        "type": "count"
+      },
+      {
+        "key": "performanceIncidentCount",
+        "label": "Performance Incidents",
+        "type": "count"
+      }
+    ],
+    "values": [
+      {
+        "key": "operationsHealth",
+        "label": "Operations Health",
+        "type": "status",
+        "value": "HEALTHY"
+      },
+      {
+        "key": "stabilityScore",
+        "label": "Stability Score",
+        "type": "percentage",
+        "value": 90
+      },
+      {
+        "key": "riskScore",
+        "label": "Risk Score",
+        "type": "percentage",
+        "value": 10
+      },
+      {
+        "key": "workflowSuccessRate",
+        "label": "Workflow Success Rate",
+        "type": "percentage",
+        "value": 100
+      },
+      {
+        "key": "criticalAlertCount",
+        "label": "Critical Alerts",
+        "type": "count",
+        "value": 0
+      },
+      {
+        "key": "highAlertCount",
+        "label": "High Alerts",
+        "type": "count",
+        "value": 1
+      },
+      {
+        "key": "escalationCount",
+        "label": "Escalations",
+        "type": "count",
+        "value": 0
+      },
+      {
+        "key": "backupFailureCount",
+        "label": "Backup Failures",
+        "type": "count",
+        "value": 0
+      },
+      {
+        "key": "deploymentBlockCount",
+        "label": "Deployment Blocks",
+        "type": "count",
+        "value": 0
+      },
+      {
+        "key": "performanceIncidentCount",
+        "label": "Performance Incidents",
+        "type": "count",
+        "value": 0
+      }
+    ],
+    "thresholds": {
+      "stabilityScore": {
+        "pass": 85,
+        "watch": 70,
+        "fail": 50
+      },
+      "riskScore": {
+        "passBelow": 15,
+        "watchBelow": 30,
+        "failAtOrAbove": 50
+      },
+      "workflowSuccessRate": {
+        "pass": 95,
+        "watch": 90,
+        "failBelow": 80
+      },
+      "criticalAlertCount": {
+        "pass": 0,
+        "failAbove": 0
+      },
+      "backupFailureCount": {
+        "pass": 0,
+        "failAbove": 0
+      },
+      "deploymentBlockCount": {
+        "pass": 0,
+        "failAbove": 0
+      }
+    }
+  },
+  "evaluation": {
+    "generatedAt": "2026-06-19T09:04:48.548Z",
+    "status": "PASS",
+    "failures": [],
+    "metrics": {
+      "generatedAt": "2026-06-19T09:04:48.548Z",
+      "registry": [
+        {
+          "key": "operationsHealth",
+          "label": "Operations Health",
+          "type": "status"
+        },
+        {
+          "key": "stabilityScore",
+          "label": "Stability Score",
+          "type": "percentage"
+        },
+        {
+          "key": "riskScore",
+          "label": "Risk Score",
+          "type": "percentage"
+        },
+        {
+          "key": "workflowSuccessRate",
+          "label": "Workflow Success Rate",
+          "type": "percentage"
+        },
+        {
+          "key": "criticalAlertCount",
+          "label": "Critical Alerts",
+          "type": "count"
+        },
+        {
+          "key": "highAlertCount",
+          "label": "High Alerts",
+          "type": "count"
+        },
+        {
+          "key": "escalationCount",
+          "label": "Escalations",
+          "type": "count"
+        },
+        {
+          "key": "backupFailureCount",
+          "label": "Backup Failures",
+          "type": "count"
+        },
+        {
+          "key": "deploymentBlockCount",
+          "label": "Deployment Blocks",
+          "type": "count"
+        },
+        {
+          "key": "performanceIncidentCount",
+          "label": "Performance Incidents",
+          "type": "count"
+        }
+      ],
+      "values": [
+        {
+          "key": "operationsHealth",
+          "label": "Operations Health",
+          "type": "status",
+          "value": "HEALTHY"
+        },
+        {
+          "key": "stabilityScore",
+          "label": "Stability Score",
+          "type": "percentage",
+          "value": 90
+        },
+        {
+          "key": "riskScore",
+          "label": "Risk Score",
+          "type": "percentage",
+          "value": 10
+        },
+        {
+          "key": "workflowSuccessRate",
+          "label": "Workflow Success Rate",
+          "type": "percentage",
+          "value": 100
+        },
+        {
+          "key": "criticalAlertCount",
+          "label": "Critical Alerts",
+          "type": "count",
+          "value": 0
+        },
+        {
+          "key": "highAlertCount",
+          "label": "High Alerts",
+          "type": "count",
+          "value": 1
+        },
+        {
+          "key": "escalationCount",
+          "label": "Escalations",
+          "type": "count",
+          "value": 0
+        },
+        {
+          "key": "backupFailureCount",
+          "label": "Backup Failures",
+          "type": "count",
+          "value": 0
+        },
+        {
+          "key": "deploymentBlockCount",
+          "label": "Deployment Blocks",
+          "type": "count",
+          "value": 0
+        },
+        {
+          "key": "performanceIncidentCount",
+          "label": "Performance Incidents",
+          "type": "count",
+          "value": 0
+        }
+      ],
+      "thresholds": {
+        "stabilityScore": {
+          "pass": 85,
+          "watch": 70,
+          "fail": 50
+        },
+        "riskScore": {
+          "passBelow": 15,
+          "watchBelow": 30,
+          "failAtOrAbove": 50
+        },
+        "workflowSuccessRate": {
+          "pass": 95,
+          "watch": 90,
+          "failBelow": 80
+        },
+        "criticalAlertCount": {
+          "pass": 0,
+          "failAbove": 0
+        },
+        "backupFailureCount": {
+          "pass": 0,
+          "failAbove": 0
+        },
+        "deploymentBlockCount": {
+          "pass": 0,
+          "failAbove": 0
+        }
+      }
+    }
+  },
+  "perfOutput": {
+    "generatedAt": "2026-06-19T09:04:48.548Z",
+    "parameters": {
+      "backendLatencyMs": {
+        "good": 250,
+        "watch": 750,
+        "critical": 1500
+      },
+      "frontendLoadMs": {
+        "good": 1000,
+        "watch": 2500,
+        "critical": 5000
+      },
+      "memoryUsagePercent": {
+        "good": 70,
+        "watch": 85,
+        "critical": 95
+      },
+      "errorRatePercent": {
+        "good": 1,
+        "watch": 3,
+        "critical": 5
+      },
+      "uptimePercent": {
+        "good": 99,
+        "watch": 95,
+        "critical": 90
+      }
+    },
+    "data": {
+      "backendLatencyMs": 120,
+      "frontendLoadMs": 900,
+      "memoryUsagePercent": 45,
+      "errorRatePercent": 0,
+      "uptimePercent": 100
+    },
+    "results": {
+      "backendLatency": "GOOD",
+      "frontendLoad": "GOOD",
+      "memoryUsage": "GOOD",
+      "errorRate": "GOOD",
+      "uptime": "GOOD"
+    }
+  },
+  "failed": []
+}

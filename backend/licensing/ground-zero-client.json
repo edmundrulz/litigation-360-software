@@ -1,0 +1,26 @@
+{
+  "GROUND_ZERO_CLIENT": {
+    "firm_name": "Fathers Firm Ground Zero",
+    "license_type": "UNLIMITED_FOUNDING_CLIENT",
+    "subscription_plan": "GROUND_ZERO",
+    "all_features_unlocked": true,
+    "feature_limitations": false,
+    "usage_limits": false,
+    "trial_expiry": null,
+    "billing_lock": false,
+    "ai_limit": "UNLIMITED",
+    "storage_limit": "UNLIMITED",
+    "user_limit": "UNLIMITED",
+    "matter_limit": "UNLIMITED",
+    "document_limit": "UNLIMITED",
+    "special_privileges": [
+      "FULL_PLATFORM_ACCESS",
+      "BETA_FEATURE_ACCESS",
+      "EXPERIMENTAL_FEATURE_ACCESS",
+      "EARLY_RELEASE_ACCESS",
+      "NO_SUBSCRIPTION_RESTRICTIONS",
+      "NO_FEATURE_LOCKS",
+      "NO_USAGE_THROTTLING"
+    ]
+  }
+}

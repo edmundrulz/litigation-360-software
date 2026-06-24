@@ -1,0 +1,17 @@
+=====================================================
+LITIGATION 360 - PHASE 9.9B.4 ACTIVE RUNTIME REPORT
+=====================================================
+Date: 2026-06-18T07:10:00.562Z
+Root: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+Scan mode: ACTIVE STARTUP DEPENDENCY TREE ONLY
+Entry files: backend/src/index.js, backend/src/server.js
+
+Scanning entry: backend/src/index.js
+Scanning entry: backend/src/server.js
+
+SUMMARY
+Files scanned: 57
+External dependency references detected: 57
+Missing active local files: 0
+STATUS: PASS

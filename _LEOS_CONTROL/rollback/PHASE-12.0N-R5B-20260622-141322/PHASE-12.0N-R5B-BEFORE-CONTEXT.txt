@@ -1,0 +1,107 @@
+---- Context around line 731 ----
+ 728: }
+ 729: 
+ 730: function getDefaultRegion(<FieldLabel required>Country</FieldLabel>, continent) {
+ 731:   const safe<FieldLabel required>Country</FieldLabel> = String(<FieldLabel required>Country</FieldLabel> || "");
+ 732:   const safeContinent = String(continent || "");
+ 733: 
+ 734:   if (
+
+---- Context around line 886 ----
+ 883: }
+ 884: 
+ 885: function normalizePhoneForLinks(<FieldLabel required>Country</FieldLabel>Code, number) {
+ 886:   const code = clean<FieldLabel required>Country</FieldLabel>Code(<FieldLabel required>Country</FieldLabel>Code).replace(/\D/g, "");
+ 887:   let digits = String(number || "").replace(/\D/g, "");
+ 888: 
+ 889:   if (!code || !digits) {
+
+---- Context around line 905 ----
+ 902: }
+ 903: 
+ 904: function formatPhone(<FieldLabel required>Country</FieldLabel>Code, number) {
+ 905:   const normalized = normalizePhoneForLinks(<FieldLabel required>Country</FieldLabel>Code, number);
+ 906:   return normalized ? "+" + normalized : "-";
+ 907: }
+ 908: 
+
+---- Context around line 910 ----
+ 907: }
+ 908: 
+ 909: function formatPhoneDisplay(<FieldLabel required>Country</FieldLabel>Code, number) {
+ 910:   const code = clean<FieldLabel required>Country</FieldLabel>Code(<FieldLabel required>Country</FieldLabel>Code);
+ 911:   const digits = String(number || "").replace(/\D/g, "");
+ 912: 
+ 913:   if (!code || !digits) {
+
+---- Context around line 1094 ----
+1091:   const ageCategory = source.ageCategory || getAgeCategory(age);
+1092:   const generation = source.generation || getGeneration(dateOfBirth);
+1093:   const Gender * = source.Gender * || deriveGender *FromIdentification(nricPassportNumber, identificationKind);
+1094:   const COUNTRY = source.<FieldLabel required>Country</FieldLabel> || "Malaysia";
+1095:   const stateOfBirth = source.stateOfBirth || getMalaysiaNricStateOfBirth(nricPassportNumber, identificationKind);
+1096:   const region = source.region || getDefaultRegion(<FieldLabel required>Country</FieldLabel>, source.continent || <FieldLabel required>Country</FieldLabel>_TO_CONTINENT[<FieldLabel required>Country</FieldLabel>] || "");
+1097:   const availability = splitAvailability(source.unavailableUntil || source.availabilityUntil || source.unreachableTo || "");
+
+---- Context around line 1096 ----
+1093:   const Gender * = source.Gender * || deriveGender *FromIdentification(nricPassportNumber, identificationKind);
+1094:   const COUNTRY = source.<FieldLabel required>Country</FieldLabel> || "Malaysia";
+1095:   const stateOfBirth = source.stateOfBirth || getMalaysiaNricStateOfBirth(nricPassportNumber, identificationKind);
+1096:   const region = source.region || getDefaultRegion(<FieldLabel required>Country</FieldLabel>, source.continent || <FieldLabel required>Country</FieldLabel>_TO_CONTINENT[<FieldLabel required>Country</FieldLabel>] || "");
+1097:   const availability = splitAvailability(source.unavailableUntil || source.availabilityUntil || source.unreachableTo || "");
+1098: 
+1099:   return {
+
+---- Context around line 1205 ----
+1202: }
+1203: 
+1204: function makeWhatsappLink(<FieldLabel required>Country</FieldLabel>Code, number, message) {
+1205:   const normalized = normalizePhoneForLinks(<FieldLabel required>Country</FieldLabel>Code, number);
+1206: 
+1207:   if (!normalized) {
+1208:     return "";
+
+---- Context around line 2710 ----
+2707:             {filteredClients.map((client) => {
+2708:               const normalized = normalizeClient(client);
+2709:               const id = getClientId(normalized);
+2710:               const phoneForLinks = normalizePhoneForLinks(normalized.phone<FieldLabel required>Country</FieldLabel>Code, normalized.phoneNumber);
+2711:               const backupPhoneForLinks = normalizePhoneForLinks(normalized.backupPhone<FieldLabel required>Country</FieldLabel>Code, normalized.backupPhoneNumber);
+2712:               const whatsappForLinks = normalizePhoneForLinks(normalized.whatsapp<FieldLabel required>Country</FieldLabel>Code, normalized.whatsappNumber);
+2713:               const emergencyPhoneForLinks = normalizePhoneForLinks(normalized.emergencyContact<FieldLabel required>Country</FieldLabel>Code, normalized.emergencyContactNumber);
+
+---- Context around line 2711 ----
+2708:               const normalized = normalizeClient(client);
+2709:               const id = getClientId(normalized);
+2710:               const phoneForLinks = normalizePhoneForLinks(normalized.phone<FieldLabel required>Country</FieldLabel>Code, normalized.phoneNumber);
+2711:               const backupPhoneForLinks = normalizePhoneForLinks(normalized.backupPhone<FieldLabel required>Country</FieldLabel>Code, normalized.backupPhoneNumber);
+2712:               const whatsappForLinks = normalizePhoneForLinks(normalized.whatsapp<FieldLabel required>Country</FieldLabel>Code, normalized.whatsappNumber);
+2713:               const emergencyPhoneForLinks = normalizePhoneForLinks(normalized.emergencyContact<FieldLabel required>Country</FieldLabel>Code, normalized.emergencyContactNumber);
+2714:               const mailTo = normalized.email ? "mailto:" + normalized.email : "";
+
+---- Context around line 2712 ----
+2709:               const id = getClientId(normalized);
+2710:               const phoneForLinks = normalizePhoneForLinks(normalized.phone<FieldLabel required>Country</FieldLabel>Code, normalized.phoneNumber);
+2711:               const backupPhoneForLinks = normalizePhoneForLinks(normalized.backupPhone<FieldLabel required>Country</FieldLabel>Code, normalized.backupPhoneNumber);
+2712:               const whatsappForLinks = normalizePhoneForLinks(normalized.whatsapp<FieldLabel required>Country</FieldLabel>Code, normalized.whatsappNumber);
+2713:               const emergencyPhoneForLinks = normalizePhoneForLinks(normalized.emergencyContact<FieldLabel required>Country</FieldLabel>Code, normalized.emergencyContactNumber);
+2714:               const mailTo = normalized.email ? "mailto:" + normalized.email : "";
+2715:               const telLink = phoneForLinks ? "tel:+" + phoneForLinks : "";
+
+---- Context around line 2713 ----
+2710:               const phoneForLinks = normalizePhoneForLinks(normalized.phone<FieldLabel required>Country</FieldLabel>Code, normalized.phoneNumber);
+2711:               const backupPhoneForLinks = normalizePhoneForLinks(normalized.backupPhone<FieldLabel required>Country</FieldLabel>Code, normalized.backupPhoneNumber);
+2712:               const whatsappForLinks = normalizePhoneForLinks(normalized.whatsapp<FieldLabel required>Country</FieldLabel>Code, normalized.whatsappNumber);
+2713:               const emergencyPhoneForLinks = normalizePhoneForLinks(normalized.emergencyContact<FieldLabel required>Country</FieldLabel>Code, normalized.emergencyContactNumber);
+2714:               const mailTo = normalized.email ? "mailto:" + normalized.email : "";
+2715:               const telLink = phoneForLinks ? "tel:+" + phoneForLinks : "";
+2716:               const backupTelLink = backupPhoneForLinks ? "tel:+" + backupPhoneForLinks : "";
+
+---- Context around line 2717 ----
+2714:               const mailTo = normalized.email ? "mailto:" + normalized.email : "";
+2715:               const telLink = phoneForLinks ? "tel:+" + phoneForLinks : "";
+2716:               const backupTelLink = backupPhoneForLinks ? "tel:+" + backupPhoneForLinks : "";
+2717:               const whatsappDraftLink = makeWhatsappLink(normalized.whatsapp<FieldLabel required>Country</FieldLabel>Code, normalized.whatsappNumber, makeWhatsappMessage(normalized));
+2718:               const emergencyTelLink = emergencyPhoneForLinks ? "tel:+" + emergencyPhoneForLinks : "";
+2719:               const address = [
+2720:                 normalized.buildingHouseNo,

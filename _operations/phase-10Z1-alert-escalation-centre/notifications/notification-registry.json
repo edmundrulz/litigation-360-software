@@ -1,0 +1,8 @@
+﻿{
+  "phase": "10Z.1",
+  "registryType": "NOTIFICATION_REGISTRY",
+  "createdAt": "2026-06-19T17:02:42.9740631+08:00",
+  "channels": ["DASHBOARD","LOG","EMAIL_PLACEHOLDER","SMS_PLACEHOLDER","WHATSAPP_PLACEHOLDER"],
+  "realSendingEnabled": false,
+  "note": "Real SMS, WhatsApp and email are placeholders only in Phase 10Z.1."
+}

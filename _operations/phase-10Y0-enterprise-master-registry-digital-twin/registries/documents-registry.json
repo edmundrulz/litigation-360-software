@@ -1,0 +1,1908 @@
+{
+  "registry": "documents-registry",
+  "generatedAt": "2026-06-19T07:51:05.166Z",
+  "documents": [
+    {
+      "name": "MASTER-ARCHITECTURE-DIAGRAM.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-ARCHITECTURE-DIAGRAM.md",
+      "type": ".md",
+      "sizeBytes": 442,
+      "modifiedAt": "2026-06-19T06:02:48.102Z"
+    },
+    {
+      "name": "MASTER-AUTOMATION-REGISTRY.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-AUTOMATION-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 1003,
+      "modifiedAt": "2026-06-19T06:02:48.101Z"
+    },
+    {
+      "name": "MASTER-CRITICALITY-REGISTRY.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-CRITICALITY-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 587,
+      "modifiedAt": "2026-06-19T06:02:48.102Z"
+    },
+    {
+      "name": "MASTER-ENDPOINT-REGISTRY.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-ENDPOINT-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 21855,
+      "modifiedAt": "2026-06-19T06:02:48.095Z"
+    },
+    {
+      "name": "MASTER-ENGINE-REGISTRY.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-ENGINE-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 5327,
+      "modifiedAt": "2026-06-19T06:02:48.095Z"
+    },
+    {
+      "name": "MASTER-ROUTE-REGISTRY.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-ROUTE-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 4854,
+      "modifiedAt": "2026-06-19T06:02:48.095Z"
+    },
+    {
+      "name": "MASTER-WORKFLOW-REGISTRY.md",
+      "file": "_operations/enterprise-architecture/docs/MASTER-WORKFLOW-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 681,
+      "modifiedAt": "2026-06-19T06:02:48.095Z"
+    },
+    {
+      "name": "PHASE10X3A-ENTERPRISE-ARCHITECTURE-REGISTRY-PROTOCOL.md",
+      "file": "_operations/enterprise-architecture/docs/PHASE10X3A-ENTERPRISE-ARCHITECTURE-REGISTRY-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1096,
+      "modifiedAt": "2026-06-19T06:02:47.762Z"
+    },
+    {
+      "name": "automation-registry.json",
+      "file": "_operations/enterprise-architecture/registries/automation-registry.json",
+      "type": ".json",
+      "sizeBytes": 3017,
+      "modifiedAt": "2026-06-19T06:02:48.090Z"
+    },
+    {
+      "name": "criticality-registry.json",
+      "file": "_operations/enterprise-architecture/registries/criticality-registry.json",
+      "type": ".json",
+      "sizeBytes": 36668,
+      "modifiedAt": "2026-06-19T06:02:48.090Z"
+    },
+    {
+      "name": "endpoint-registry.json",
+      "file": "_operations/enterprise-architecture/registries/endpoint-registry.json",
+      "type": ".json",
+      "sizeBytes": 89519,
+      "modifiedAt": "2026-06-19T06:02:48.088Z"
+    },
+    {
+      "name": "engine-dependency-map.json",
+      "file": "_operations/enterprise-architecture/registries/engine-dependency-map.json",
+      "type": ".json",
+      "sizeBytes": 7583,
+      "modifiedAt": "2026-06-19T06:02:48.078Z"
+    },
+    {
+      "name": "enterprise-architecture-master-registry.json",
+      "file": "_operations/enterprise-architecture/registries/enterprise-architecture-master-registry.json",
+      "type": ".json",
+      "sizeBytes": 207726,
+      "modifiedAt": "2026-06-19T06:02:48.095Z"
+    },
+    {
+      "name": "frontend-backend-map.json",
+      "file": "_operations/enterprise-architecture/registries/frontend-backend-map.json",
+      "type": ".json",
+      "sizeBytes": 6197,
+      "modifiedAt": "2026-06-19T06:02:48.090Z"
+    },
+    {
+      "name": "route-engine-map.json",
+      "file": "_operations/enterprise-architecture/registries/route-engine-map.json",
+      "type": ".json",
+      "sizeBytes": 49734,
+      "modifiedAt": "2026-06-19T06:02:48.078Z"
+    },
+    {
+      "name": "workflow-registry.json",
+      "file": "_operations/enterprise-architecture/registries/workflow-registry.json",
+      "type": ".json",
+      "sizeBytes": 1243,
+      "modifiedAt": "2026-06-19T06:02:48.090Z"
+    },
+    {
+      "name": "enterprise-core-content-audit.txt",
+      "file": "_operations/enterprise-audit/enterprise-core-content-audit.txt",
+      "type": ".txt",
+      "sizeBytes": 1346,
+      "modifiedAt": "2026-06-18T01:52:56.787Z"
+    },
+    {
+      "name": "enterprise-core-file-audit.txt",
+      "file": "_operations/enterprise-audit/enterprise-core-file-audit.txt",
+      "type": ".txt",
+      "sizeBytes": 300,
+      "modifiedAt": "2026-06-18T01:51:45.824Z"
+    },
+    {
+      "name": "PHASE-09-5B-AUTOMATION-PIPELINE-VERIFICATION.md",
+      "file": "_operations/enterprise-audit/PHASE-09-5B-AUTOMATION-PIPELINE-VERIFICATION.md",
+      "type": ".md",
+      "sizeBytes": 637,
+      "modifiedAt": "2026-06-18T03:41:44.284Z"
+    },
+    {
+      "name": "PHASE-09-5B-CONSUMER-ENGINE-VERIFICATION.md",
+      "file": "_operations/enterprise-audit/PHASE-09-5B-CONSUMER-ENGINE-VERIFICATION.md",
+      "type": ".md",
+      "sizeBytes": 412,
+      "modifiedAt": "2026-06-18T03:22:11.018Z"
+    },
+    {
+      "name": "PHASE-09-5BC-FINAL-VERIFICATION.md",
+      "file": "_operations/enterprise-audit/PHASE-09-5BC-FINAL-VERIFICATION.md",
+      "type": ".md",
+      "sizeBytes": 653,
+      "modifiedAt": "2026-06-18T04:03:02.863Z"
+    },
+    {
+      "name": "MASTER-DEPLOYMENT-CHECKLIST.md",
+      "file": "_operations/enterprise-governance/checklists/MASTER-DEPLOYMENT-CHECKLIST.md",
+      "type": ".md",
+      "sizeBytes": 363,
+      "modifiedAt": "2026-06-19T07:28:38.829Z"
+    },
+    {
+      "name": "MASTER-HANDOVER-CHECKLIST.md",
+      "file": "_operations/enterprise-governance/checklists/MASTER-HANDOVER-CHECKLIST.md",
+      "type": ".md",
+      "sizeBytes": 343,
+      "modifiedAt": "2026-06-19T07:28:38.829Z"
+    },
+    {
+      "name": "MASTER-BACKEND-REGISTRY.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-BACKEND-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 218,
+      "modifiedAt": "2026-06-19T07:28:38.827Z"
+    },
+    {
+      "name": "MASTER-DATABASE-REGISTRY.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-DATABASE-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 208,
+      "modifiedAt": "2026-06-19T07:28:38.827Z"
+    },
+    {
+      "name": "MASTER-DEPLOYMENT-PROTOCOL.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-DEPLOYMENT-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 640,
+      "modifiedAt": "2026-06-19T07:28:38.816Z"
+    },
+    {
+      "name": "MASTER-ENDPOINT-REGISTRY.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-ENDPOINT-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 569,
+      "modifiedAt": "2026-06-19T07:28:38.823Z"
+    },
+    {
+      "name": "MASTER-ENGINE-REGISTRY.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-ENGINE-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 390,
+      "modifiedAt": "2026-06-19T07:28:38.824Z"
+    },
+    {
+      "name": "MASTER-FRONTEND-REGISTRY.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-FRONTEND-REGISTRY.md",
+      "type": ".md",
+      "sizeBytes": 269,
+      "modifiedAt": "2026-06-19T07:28:38.825Z"
+    },
+    {
+      "name": "MASTER-OPERATIONS-HANDBOOK.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-OPERATIONS-HANDBOOK.md",
+      "type": ".md",
+      "sizeBytes": 2035,
+      "modifiedAt": "2026-06-19T07:28:38.816Z"
+    },
+    {
+      "name": "MASTER-RECOVERY-PROTOCOL.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-RECOVERY-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 388,
+      "modifiedAt": "2026-06-19T07:28:38.823Z"
+    },
+    {
+      "name": "MASTER-ROLLBACK-PROTOCOL.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-ROLLBACK-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 465,
+      "modifiedAt": "2026-06-19T07:28:38.822Z"
+    },
+    {
+      "name": "MASTER-TESTING-PROTOCOL.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-TESTING-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 474,
+      "modifiedAt": "2026-06-19T07:28:38.822Z"
+    },
+    {
+      "name": "MASTER-VALIDATION-PROTOCOL.md",
+      "file": "_operations/enterprise-governance/docs/MASTER-VALIDATION-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1517,
+      "modifiedAt": "2026-06-19T07:28:38.818Z"
+    },
+    {
+      "name": "MASTER-GOVERNANCE-REGISTRY.json",
+      "file": "_operations/enterprise-governance/registries/MASTER-GOVERNANCE-REGISTRY.json",
+      "type": ".json",
+      "sizeBytes": 1863,
+      "modifiedAt": "2026-06-19T07:28:38.814Z"
+    },
+    {
+      "name": "phase10X7-master-governance-docs-report.json",
+      "file": "_operations/enterprise-governance/reports/phase10X7-master-governance-docs-report.json",
+      "type": ".json",
+      "sizeBytes": 2912,
+      "modifiedAt": "2026-06-19T07:28:38.832Z"
+    },
+    {
+      "name": "phase10X7-validation-report.json",
+      "file": "_operations/enterprise-governance/reports/phase10X7-validation-report.json",
+      "type": ".json",
+      "sizeBytes": 987,
+      "modifiedAt": "2026-06-19T07:28:38.965Z"
+    },
+    {
+      "name": "all-filenames-sorted-Thu018-06-2026_09-35-55.13.txt",
+      "file": "_operations/housekeeping-reports/all-filenames-sorted-Thu018-06-2026_09-35-55.13.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T01:36:21.896Z"
+    },
+    {
+      "name": "cleanup-candidates-Thu018-06-2026_09-35-55.13.txt",
+      "file": "_operations/housekeeping-reports/cleanup-candidates-Thu018-06-2026_09-35-55.13.txt",
+      "type": ".txt",
+      "sizeBytes": 11700,
+      "modifiedAt": "2026-06-18T01:36:30.237Z"
+    },
+    {
+      "name": "file-inventory-SAFE-SCAN.txt",
+      "file": "_operations/housekeeping-reports/file-inventory-SAFE-SCAN.txt",
+      "type": ".txt",
+      "sizeBytes": 10512235,
+      "modifiedAt": "2026-06-18T01:45:42.048Z"
+    },
+    {
+      "name": "file-inventory-Thu018-06-2026_09-35-55.13.txt",
+      "file": "_operations/housekeeping-reports/file-inventory-Thu018-06-2026_09-35-55.13.txt",
+      "type": ".txt",
+      "sizeBytes": 10510335,
+      "modifiedAt": "2026-06-18T01:36:15.054Z"
+    },
+    {
+      "name": "folder-tree-SAFE-SCAN.txt",
+      "file": "_operations/housekeeping-reports/folder-tree-SAFE-SCAN.txt",
+      "type": ".txt",
+      "sizeBytes": 3116442,
+      "modifiedAt": "2026-06-18T01:45:38.267Z"
+    },
+    {
+      "name": "folder-tree-Thu018-06-2026_09-35-55.13.txt",
+      "file": "_operations/housekeeping-reports/folder-tree-Thu018-06-2026_09-35-55.13.txt",
+      "type": ".txt",
+      "sizeBytes": 3115733,
+      "modifiedAt": "2026-06-18T01:36:08.832Z"
+    },
+    {
+      "name": "project-structure-check-SAFE-SCAN.txt",
+      "file": "_operations/housekeeping-reports/project-structure-check-SAFE-SCAN.txt",
+      "type": ".txt",
+      "sizeBytes": 83,
+      "modifiedAt": "2026-06-18T01:45:46.157Z"
+    },
+    {
+      "name": "project-structure-check-Thu018-06-2026_09-35-55.13.txt",
+      "file": "_operations/housekeeping-reports/project-structure-check-Thu018-06-2026_09-35-55.13.txt",
+      "type": ".txt",
+      "sizeBytes": 158,
+      "modifiedAt": "2026-06-18T01:36:41.031Z"
+    },
+    {
+      "name": "size-report-SAFE-SCAN.txt",
+      "file": "_operations/housekeeping-reports/size-report-SAFE-SCAN.txt",
+      "type": ".txt",
+      "sizeBytes": 6058210,
+      "modifiedAt": "2026-06-18T01:45:46.118Z"
+    },
+    {
+      "name": "size-report-Thu018-06-2026_09-35-55.13.txt",
+      "file": "_operations/housekeeping-reports/size-report-Thu018-06-2026_09-35-55.13.txt",
+      "type": ".txt",
+      "sizeBytes": 6057184,
+      "modifiedAt": "2026-06-18T01:36:21.870Z"
+    },
+    {
+      "name": "dependency-scan-active-runtime-report.txt",
+      "file": "_operations/phase-09-9-hardening/02-dependency-scanner/dependency-scan-active-runtime-report.txt",
+      "type": ".txt",
+      "sizeBytes": 564,
+      "modifiedAt": "2026-06-18T07:10:00.754Z"
+    },
+    {
+      "name": "dependency-scan-live-report.txt",
+      "file": "_operations/phase-09-9-hardening/02-dependency-scanner/dependency-scan-live-report.txt",
+      "type": ".txt",
+      "sizeBytes": 2693,
+      "modifiedAt": "2026-06-18T06:48:59.456Z"
+    },
+    {
+      "name": "dependency-scan-report.txt",
+      "file": "_operations/phase-09-9-hardening/02-dependency-scanner/dependency-scan-report.txt",
+      "type": ".txt",
+      "sizeBytes": 18229,
+      "modifiedAt": "2026-06-18T06:44:05.753Z"
+    },
+    {
+      "name": "dependency-scan-runtime-report.txt",
+      "file": "_operations/phase-09-9-hardening/02-dependency-scanner/dependency-scan-runtime-report.txt",
+      "type": ".txt",
+      "sizeBytes": 1389,
+      "modifiedAt": "2026-06-18T06:52:37.510Z"
+    },
+    {
+      "name": "backend-root-junk-dry-run-report.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/backend-root-junk-dry-run-report.txt",
+      "type": ".txt",
+      "sizeBytes": 1254,
+      "modifiedAt": "2026-06-18T08:17:04.336Z"
+    },
+    {
+      "name": "backend-tree.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/backend-tree.txt",
+      "type": ".txt",
+      "sizeBytes": 1160868,
+      "modifiedAt": "2026-06-18T07:45:45.673Z"
+    },
+    {
+      "name": "empty-folders.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/empty-folders.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T07:33:49.147Z"
+    },
+    {
+      "name": "full-file-inventory.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/full-file-inventory.txt",
+      "type": ".txt",
+      "sizeBytes": 10525127,
+      "modifiedAt": "2026-06-18T07:34:14.546Z"
+    },
+    {
+      "name": "housekeeping-report.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/housekeeping-report.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T07:33:47.171Z"
+    },
+    {
+      "name": "suspicious-files.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/suspicious-files.txt",
+      "type": ".txt",
+      "sizeBytes": 110768,
+      "modifiedAt": "2026-06-18T07:36:23.792Z"
+    },
+    {
+      "name": "zero-byte-files.txt",
+      "file": "_operations/phase-09-9-hardening/03-housekeeping/zero-byte-files.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T07:44:59.913Z"
+    },
+    {
+      "name": "integrity-report.txt",
+      "file": "_operations/phase-09-9-hardening/04-integrity-scanner/integrity-report.txt",
+      "type": ".txt",
+      "sizeBytes": 1074,
+      "modifiedAt": "2026-06-18T08:59:09.526Z"
+    },
+    {
+      "name": "recovery-report.txt",
+      "file": "_operations/phase-09-9-hardening/05-recovery-center/recovery-report.txt",
+      "type": ".txt",
+      "sizeBytes": 634,
+      "modifiedAt": "2026-06-18T08:55:45.495Z"
+    },
+    {
+      "name": "golden-config.json",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/configs/golden-config.json",
+      "type": ".json",
+      "sizeBytes": 501,
+      "modifiedAt": "2026-06-18T09:01:33.577Z"
+    },
+    {
+      "name": "backend-root-junk-dry-run-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/backend-root-junk-dry-run-report.txt",
+      "type": ".txt",
+      "sizeBytes": 1254,
+      "modifiedAt": "2026-06-18T08:17:04.336Z"
+    },
+    {
+      "name": "backend-tree.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/backend-tree.txt",
+      "type": ".txt",
+      "sizeBytes": 1160868,
+      "modifiedAt": "2026-06-18T07:45:45.673Z"
+    },
+    {
+      "name": "dependency-scan-active-runtime-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/dependency-scan-active-runtime-report.txt",
+      "type": ".txt",
+      "sizeBytes": 564,
+      "modifiedAt": "2026-06-18T07:10:00.754Z"
+    },
+    {
+      "name": "dependency-scan-live-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/dependency-scan-live-report.txt",
+      "type": ".txt",
+      "sizeBytes": 2693,
+      "modifiedAt": "2026-06-18T06:48:59.456Z"
+    },
+    {
+      "name": "dependency-scan-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/dependency-scan-report.txt",
+      "type": ".txt",
+      "sizeBytes": 18229,
+      "modifiedAt": "2026-06-18T06:44:05.753Z"
+    },
+    {
+      "name": "dependency-scan-runtime-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/dependency-scan-runtime-report.txt",
+      "type": ".txt",
+      "sizeBytes": 1389,
+      "modifiedAt": "2026-06-18T06:52:37.510Z"
+    },
+    {
+      "name": "empty-folders.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/empty-folders.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T07:33:49.147Z"
+    },
+    {
+      "name": "full-file-inventory.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/full-file-inventory.txt",
+      "type": ".txt",
+      "sizeBytes": 10525127,
+      "modifiedAt": "2026-06-18T07:34:14.546Z"
+    },
+    {
+      "name": "housekeeping-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/housekeeping-report.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T07:33:47.171Z"
+    },
+    {
+      "name": "integrity-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/integrity-report.txt",
+      "type": ".txt",
+      "sizeBytes": 1074,
+      "modifiedAt": "2026-06-18T08:59:09.526Z"
+    },
+    {
+      "name": "recovery-report.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/recovery-report.txt",
+      "type": ".txt",
+      "sizeBytes": 634,
+      "modifiedAt": "2026-06-18T08:55:45.495Z"
+    },
+    {
+      "name": "suspicious-files.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/suspicious-files.txt",
+      "type": ".txt",
+      "sizeBytes": 110768,
+      "modifiedAt": "2026-06-18T07:36:23.792Z"
+    },
+    {
+      "name": "zero-byte-files.txt",
+      "file": "_operations/phase-09-9-hardening/06-golden-snapshot/reports/zero-byte-files.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T07:44:59.913Z"
+    },
+    {
+      "name": "PHASE-09-9-STATUS.txt",
+      "file": "_operations/phase-09-9-hardening/PHASE-09-9-STATUS.txt",
+      "type": ".txt",
+      "sizeBytes": 112,
+      "modifiedAt": "2026-06-18T05:30:01.173Z"
+    },
+    {
+      "name": "MASTER-HANDOVER-PATH-MAP.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover/handover/MASTER-HANDOVER-PATH-MAP.txt",
+      "type": ".txt",
+      "sizeBytes": 1536,
+      "modifiedAt": "2026-06-18T09:39:13.262Z"
+    },
+    {
+      "name": "NEXT-THREAD-OPENING-PROMPT.md",
+      "file": "_operations/phase-10A-cleanup-and-handover/handover/NEXT-THREAD-OPENING-PROMPT.md",
+      "type": ".md",
+      "sizeBytes": 1101,
+      "modifiedAt": "2026-06-18T09:39:13.273Z"
+    },
+    {
+      "name": "cleanup-log.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover/logs/cleanup-log.txt",
+      "type": ".txt",
+      "sizeBytes": 4858,
+      "modifiedAt": "2026-06-18T09:39:13.786Z"
+    },
+    {
+      "name": "full-tree-before-cleanup.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover/reports/full-tree-before-cleanup.txt",
+      "type": ".txt",
+      "sizeBytes": 6085081,
+      "modifiedAt": "2026-06-18T09:39:13.235Z"
+    },
+    {
+      "name": "root-before-cleanup.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover/reports/root-before-cleanup.txt",
+      "type": ".txt",
+      "sizeBytes": 6154,
+      "modifiedAt": "2026-06-18T09:39:08.947Z"
+    },
+    {
+      "name": "MASTER-HANDOVER-PATH-MAP.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/handover/MASTER-HANDOVER-PATH-MAP.txt",
+      "type": ".txt",
+      "sizeBytes": 1093,
+      "modifiedAt": "2026-06-18T09:47:00.959Z"
+    },
+    {
+      "name": "NEXT-THREAD-OPENING-PROMPT.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/handover/NEXT-THREAD-OPENING-PROMPT.txt",
+      "type": ".txt",
+      "sizeBytes": 950,
+      "modifiedAt": "2026-06-18T09:47:00.961Z"
+    },
+    {
+      "name": "cleanup-v3-log.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/logs/cleanup-v3-log.txt",
+      "type": ".txt",
+      "sizeBytes": 20128,
+      "modifiedAt": "2026-06-18T09:47:02.248Z"
+    },
+    {
+      "name": "apply-errors.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/apply-errors.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T09:47:02.119Z"
+    },
+    {
+      "name": "apply-moved-items.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/apply-moved-items.txt",
+      "type": ".txt",
+      "sizeBytes": 5369,
+      "modifiedAt": "2026-06-18T09:47:02.113Z"
+    },
+    {
+      "name": "dryrun-would-move.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/dryrun-would-move.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-18T09:47:02.096Z"
+    },
+    {
+      "name": "files-before-cleanup.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/files-before-cleanup.txt",
+      "type": ".txt",
+      "sizeBytes": 6575,
+      "modifiedAt": "2026-06-18T09:47:00.953Z"
+    },
+    {
+      "name": "folders-before-cleanup.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/folders-before-cleanup.txt",
+      "type": ".txt",
+      "sizeBytes": 7647,
+      "modifiedAt": "2026-06-18T09:47:00.933Z"
+    },
+    {
+      "name": "missing-known-junk.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/missing-known-junk.txt",
+      "type": ".txt",
+      "sizeBytes": 131,
+      "modifiedAt": "2026-06-18T09:47:02.122Z"
+    },
+    {
+      "name": "quarantine-inventory.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/quarantine-inventory.txt",
+      "type": ".txt",
+      "sizeBytes": 2329,
+      "modifiedAt": "2026-06-18T09:47:02.208Z"
+    },
+    {
+      "name": "root-after-cleanup.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/root-after-cleanup.txt",
+      "type": ".txt",
+      "sizeBytes": 6015,
+      "modifiedAt": "2026-06-18T09:47:02.139Z"
+    },
+    {
+      "name": "root-before-cleanup.txt",
+      "file": "_operations/phase-10A-cleanup-and-handover-v3/reports/root-before-cleanup.txt",
+      "type": ".txt",
+      "sizeBytes": 9473,
+      "modifiedAt": "2026-06-18T09:47:00.909Z"
+    },
+    {
+      "name": "phase-10A-deployment-log.txt",
+      "file": "_operations/phase-10A-handler-registry/logs/phase-10A-deployment-log.txt",
+      "type": ".txt",
+      "sizeBytes": 4368,
+      "modifiedAt": "2026-06-18T09:28:36.166Z"
+    },
+    {
+      "name": "PHASE10A-FINISHER-PROTOCOL.md",
+      "file": "_operations/phase-10A-handler-registry-finisher/docs/PHASE10A-FINISHER-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 749,
+      "modifiedAt": "2026-06-18T10:17:19.478Z"
+    },
+    {
+      "name": "phase-10A-finisher-log.txt",
+      "file": "_operations/phase-10A-handler-registry-finisher/logs/phase-10A-finisher-log.txt",
+      "type": ".txt",
+      "sizeBytes": 882,
+      "modifiedAt": "2026-06-18T10:17:19.541Z"
+    },
+    {
+      "name": "phase10A-finisher-report.json",
+      "file": "_operations/phase-10A-handler-registry-finisher/reports/phase10A-finisher-report.json",
+      "type": ".json",
+      "sizeBytes": 638,
+      "modifiedAt": "2026-06-18T10:17:19.445Z"
+    },
+    {
+      "name": "phase10A-finisher-report.txt",
+      "file": "_operations/phase-10A-handler-registry-finisher/reports/phase10A-finisher-report.txt",
+      "type": ".txt",
+      "sizeBytes": 343,
+      "modifiedAt": "2026-06-18T10:17:19.447Z"
+    },
+    {
+      "name": "PHASE10B-EVENT-BUS-PROTOCOL.md",
+      "file": "_operations/phase-10B-universal-event-bus/docs/PHASE10B-EVENT-BUS-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1017,
+      "modifiedAt": "2026-06-18T10:51:02.264Z"
+    },
+    {
+      "name": "phase-10B-event-bus-log.txt",
+      "file": "_operations/phase-10B-universal-event-bus/logs/phase-10B-event-bus-log.txt",
+      "type": ".txt",
+      "sizeBytes": 564,
+      "modifiedAt": "2026-06-18T10:51:02.574Z"
+    },
+    {
+      "name": "phase10B-event-bus-report.json",
+      "file": "_operations/phase-10B-universal-event-bus/reports/phase10B-event-bus-report.json",
+      "type": ".json",
+      "sizeBytes": 843,
+      "modifiedAt": "2026-06-18T10:51:02.446Z"
+    },
+    {
+      "name": "phase10B-event-bus-report.txt",
+      "file": "_operations/phase-10B-universal-event-bus/reports/phase10B-event-bus-report.txt",
+      "type": ".txt",
+      "sizeBytes": 396,
+      "modifiedAt": "2026-06-18T10:51:02.492Z"
+    },
+    {
+      "name": "PHASE10C-NOTIFICATION-FRAMEWORK-PROTOCOL.md",
+      "file": "_operations/phase-10C-notification-framework/docs/PHASE10C-NOTIFICATION-FRAMEWORK-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1338,
+      "modifiedAt": "2026-06-18T10:59:40.190Z"
+    },
+    {
+      "name": "phase-10C-notification-framework-log.txt",
+      "file": "_operations/phase-10C-notification-framework/logs/phase-10C-notification-framework-log.txt",
+      "type": ".txt",
+      "sizeBytes": 596,
+      "modifiedAt": "2026-06-18T10:59:40.475Z"
+    },
+    {
+      "name": "phase10C-notification-framework-report.json",
+      "file": "_operations/phase-10C-notification-framework/reports/phase10C-notification-framework-report.json",
+      "type": ".json",
+      "sizeBytes": 876,
+      "modifiedAt": "2026-06-18T10:59:40.345Z"
+    },
+    {
+      "name": "phase10C-notification-framework-report.txt",
+      "file": "_operations/phase-10C-notification-framework/reports/phase10C-notification-framework-report.txt",
+      "type": ".txt",
+      "sizeBytes": 431,
+      "modifiedAt": "2026-06-18T10:59:40.347Z"
+    },
+    {
+      "name": "PHASE10D-WORKFLOW-ENGINE-PROTOCOL.md",
+      "file": "_operations/phase-10D-workflow-automation-engine/docs/PHASE10D-WORKFLOW-ENGINE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1515,
+      "modifiedAt": "2026-06-18T11:14:35.019Z"
+    },
+    {
+      "name": "phase-10D-workflow-engine-log.txt",
+      "file": "_operations/phase-10D-workflow-automation-engine/logs/phase-10D-workflow-engine-log.txt",
+      "type": ".txt",
+      "sizeBytes": 582,
+      "modifiedAt": "2026-06-18T11:14:35.281Z"
+    },
+    {
+      "name": "phase10D-workflow-engine-report.json",
+      "file": "_operations/phase-10D-workflow-automation-engine/reports/phase10D-workflow-engine-report.json",
+      "type": ".json",
+      "sizeBytes": 827,
+      "modifiedAt": "2026-06-18T11:14:35.211Z"
+    },
+    {
+      "name": "phase10D-workflow-engine-report.txt",
+      "file": "_operations/phase-10D-workflow-automation-engine/reports/phase10D-workflow-engine-report.txt",
+      "type": ".txt",
+      "sizeBytes": 469,
+      "modifiedAt": "2026-06-18T11:14:35.214Z"
+    },
+    {
+      "name": "PHASE10E-DOCUMENT-LIFECYCLE-PROTOCOL.md",
+      "file": "_operations/phase-10E-document-lifecycle-engine/docs/PHASE10E-DOCUMENT-LIFECYCLE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1772,
+      "modifiedAt": "2026-06-18T11:36:24.340Z"
+    },
+    {
+      "name": "phase-10E-document-lifecycle-log.txt",
+      "file": "_operations/phase-10E-document-lifecycle-engine/logs/phase-10E-document-lifecycle-log.txt",
+      "type": ".txt",
+      "sizeBytes": 611,
+      "modifiedAt": "2026-06-18T11:36:26.134Z"
+    },
+    {
+      "name": "phase10E-document-lifecycle-report.json",
+      "file": "_operations/phase-10E-document-lifecycle-engine/reports/phase10E-document-lifecycle-report.json",
+      "type": ".json",
+      "sizeBytes": 1151,
+      "modifiedAt": "2026-06-18T11:36:26.024Z"
+    },
+    {
+      "name": "phase10E-document-lifecycle-report.txt",
+      "file": "_operations/phase-10E-document-lifecycle-engine/reports/phase10E-document-lifecycle-report.txt",
+      "type": ".txt",
+      "sizeBytes": 530,
+      "modifiedAt": "2026-06-18T11:36:26.024Z"
+    },
+    {
+      "name": "PHASE10F-COURT-OPERATIONS-PROTOCOL.md",
+      "file": "_operations/phase-10F-court-operations-engine/docs/PHASE10F-COURT-OPERATIONS-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1636,
+      "modifiedAt": "2026-06-18T11:51:14.849Z"
+    },
+    {
+      "name": "phase-10F-court-operations-log.txt",
+      "file": "_operations/phase-10F-court-operations-engine/logs/phase-10F-court-operations-log.txt",
+      "type": ".txt",
+      "sizeBytes": 603,
+      "modifiedAt": "2026-06-18T11:51:15.195Z"
+    },
+    {
+      "name": "phase10F-court-operations-report.json",
+      "file": "_operations/phase-10F-court-operations-engine/reports/phase10F-court-operations-report.json",
+      "type": ".json",
+      "sizeBytes": 1092,
+      "modifiedAt": "2026-06-18T11:51:15.036Z"
+    },
+    {
+      "name": "phase10F-court-operations-report.txt",
+      "file": "_operations/phase-10F-court-operations-engine/reports/phase10F-court-operations-report.txt",
+      "type": ".txt",
+      "sizeBytes": 596,
+      "modifiedAt": "2026-06-18T11:51:15.036Z"
+    },
+    {
+      "name": "PHASE10G-MATTER-INTELLIGENCE-PROTOCOL.md",
+      "file": "_operations/phase-10G-matter-intelligence-engine/docs/PHASE10G-MATTER-INTELLIGENCE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1629,
+      "modifiedAt": "2026-06-18T12:47:20.386Z"
+    },
+    {
+      "name": "phase-10G-matter-intelligence-log.txt",
+      "file": "_operations/phase-10G-matter-intelligence-engine/logs/phase-10G-matter-intelligence-log.txt",
+      "type": ".txt",
+      "sizeBytes": 615,
+      "modifiedAt": "2026-06-18T12:47:20.613Z"
+    },
+    {
+      "name": "phase10G-matter-intelligence-report.json",
+      "file": "_operations/phase-10G-matter-intelligence-engine/reports/phase10G-matter-intelligence-report.json",
+      "type": ".json",
+      "sizeBytes": 1035,
+      "modifiedAt": "2026-06-18T12:47:20.540Z"
+    },
+    {
+      "name": "phase10G-matter-intelligence-report.txt",
+      "file": "_operations/phase-10G-matter-intelligence-engine/reports/phase10G-matter-intelligence-report.txt",
+      "type": ".txt",
+      "sizeBytes": 547,
+      "modifiedAt": "2026-06-18T12:47:20.540Z"
+    },
+    {
+      "name": "PHASE10H-EXECUTIVE-COMMAND-CENTRE-PROTOCOL.md",
+      "file": "_operations/phase-10H-executive-command-centre/docs/PHASE10H-EXECUTIVE-COMMAND-CENTRE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1059,
+      "modifiedAt": "2026-06-18T13:06:03.693Z"
+    },
+    {
+      "name": "phase-10H-executive-command-centre-log.txt",
+      "file": "_operations/phase-10H-executive-command-centre/logs/phase-10H-executive-command-centre-log.txt",
+      "type": ".txt",
+      "sizeBytes": 416,
+      "modifiedAt": "2026-06-18T13:06:03.891Z"
+    },
+    {
+      "name": "phase10H-executive-command-centre-report.json",
+      "file": "_operations/phase-10H-executive-command-centre/reports/phase10H-executive-command-centre-report.json",
+      "type": ".json",
+      "sizeBytes": 662,
+      "modifiedAt": "2026-06-18T13:06:03.835Z"
+    },
+    {
+      "name": "phase10H-executive-command-centre-report.txt",
+      "file": "_operations/phase-10H-executive-command-centre/reports/phase10H-executive-command-centre-report.txt",
+      "type": ".txt",
+      "sizeBytes": 348,
+      "modifiedAt": "2026-06-18T13:06:03.836Z"
+    },
+    {
+      "name": "PHASE10I-LEGAL-OPERATIONS-ASSISTANT-PROTOCOL.md",
+      "file": "_operations/phase-10I-legal-operations-assistant-core/docs/PHASE10I-LEGAL-OPERATIONS-ASSISTANT-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1086,
+      "modifiedAt": "2026-06-18T13:14:26.029Z"
+    },
+    {
+      "name": "phase-10I-legal-operations-assistant-log.txt",
+      "file": "_operations/phase-10I-legal-operations-assistant-core/logs/phase-10I-legal-operations-assistant-log.txt",
+      "type": ".txt",
+      "sizeBytes": 418,
+      "modifiedAt": "2026-06-18T13:14:26.218Z"
+    },
+    {
+      "name": "phase10I-legal-operations-assistant-report.json",
+      "file": "_operations/phase-10I-legal-operations-assistant-core/reports/phase10I-legal-operations-assistant-report.json",
+      "type": ".json",
+      "sizeBytes": 672,
+      "modifiedAt": "2026-06-18T13:14:26.172Z"
+    },
+    {
+      "name": "phase10I-legal-operations-assistant-report.txt",
+      "file": "_operations/phase-10I-legal-operations-assistant-core/reports/phase10I-legal-operations-assistant-report.txt",
+      "type": ".txt",
+      "sizeBytes": 371,
+      "modifiedAt": "2026-06-18T13:14:26.172Z"
+    },
+    {
+      "name": "PHASE10J-PREDICTIVE-ANALYTICS-PROTOCOL.md",
+      "file": "_operations/phase-10J-predictive-litigation-analytics/docs/PHASE10J-PREDICTIVE-ANALYTICS-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1068,
+      "modifiedAt": "2026-06-18T13:53:57.370Z"
+    },
+    {
+      "name": "phase-10J-predictive-analytics-log.txt",
+      "file": "_operations/phase-10J-predictive-litigation-analytics/logs/phase-10J-predictive-analytics-log.txt",
+      "type": ".txt",
+      "sizeBytes": 429,
+      "modifiedAt": "2026-06-18T13:53:57.593Z"
+    },
+    {
+      "name": "phase10J-predictive-analytics-report.json",
+      "file": "_operations/phase-10J-predictive-litigation-analytics/reports/phase10J-predictive-analytics-report.json",
+      "type": ".json",
+      "sizeBytes": 842,
+      "modifiedAt": "2026-06-18T13:53:57.542Z"
+    },
+    {
+      "name": "phase10J-predictive-analytics-report.txt",
+      "file": "_operations/phase-10J-predictive-litigation-analytics/reports/phase10J-predictive-analytics-report.txt",
+      "type": ".txt",
+      "sizeBytes": 434,
+      "modifiedAt": "2026-06-18T13:53:57.542Z"
+    },
+    {
+      "name": "PHASE10K-COURT-NAVIGATION-PROTOCOL.md",
+      "file": "_operations/phase-10K-court-navigation-intelligence/docs/PHASE10K-COURT-NAVIGATION-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1151,
+      "modifiedAt": "2026-06-18T14:07:40.935Z"
+    },
+    {
+      "name": "phase-10K-court-navigation-log.txt",
+      "file": "_operations/phase-10K-court-navigation-intelligence/logs/phase-10K-court-navigation-log.txt",
+      "type": ".txt",
+      "sizeBytes": 423,
+      "modifiedAt": "2026-06-18T14:07:41.135Z"
+    },
+    {
+      "name": "phase10K-court-navigation-report.json",
+      "file": "_operations/phase-10K-court-navigation-intelligence/reports/phase10K-court-navigation-report.json",
+      "type": ".json",
+      "sizeBytes": 732,
+      "modifiedAt": "2026-06-18T14:07:41.092Z"
+    },
+    {
+      "name": "phase10K-court-navigation-report.txt",
+      "file": "_operations/phase-10K-court-navigation-intelligence/reports/phase10K-court-navigation-report.txt",
+      "type": ".txt",
+      "sizeBytes": 365,
+      "modifiedAt": "2026-06-18T14:07:41.092Z"
+    },
+    {
+      "name": "PHASE10K-PERKESO-INDUSTRIAL-COURT-PATCH-PROTOCOL.md",
+      "file": "_operations/phase-10K-court-registry-perkeso-industrial-court-patch/docs/PHASE10K-PERKESO-INDUSTRIAL-COURT-PATCH-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1012,
+      "modifiedAt": "2026-06-18T14:14:22.379Z"
+    },
+    {
+      "name": "phase-10K-perkeso-industrial-court-patch-log.txt",
+      "file": "_operations/phase-10K-court-registry-perkeso-industrial-court-patch/logs/phase-10K-perkeso-industrial-court-patch-log.txt",
+      "type": ".txt",
+      "sizeBytes": 462,
+      "modifiedAt": "2026-06-18T14:14:22.590Z"
+    },
+    {
+      "name": "phase10K-perkeso-industrial-court-patch-report.json",
+      "file": "_operations/phase-10K-court-registry-perkeso-industrial-court-patch/reports/phase10K-perkeso-industrial-court-patch-report.json",
+      "type": ".json",
+      "sizeBytes": 1309,
+      "modifiedAt": "2026-06-18T14:14:22.539Z"
+    },
+    {
+      "name": "phase10K-perkeso-industrial-court-patch-report.txt",
+      "file": "_operations/phase-10K-court-registry-perkeso-industrial-court-patch/reports/phase10K-perkeso-industrial-court-patch-report.txt",
+      "type": ".txt",
+      "sizeBytes": 697,
+      "modifiedAt": "2026-06-18T14:14:22.541Z"
+    },
+    {
+      "name": "court-registry-fix-log.txt",
+      "file": "_operations/phase-10L-maps-court-registry-fix/logs/court-registry-fix-log.txt",
+      "type": ".txt",
+      "sizeBytes": 406,
+      "modifiedAt": "2026-06-18T16:50:33.108Z"
+    },
+    {
+      "name": "phase10L-court-registry-fix-report.json",
+      "file": "_operations/phase-10L-maps-court-registry-fix/reports/phase10L-court-registry-fix-report.json",
+      "type": ".json",
+      "sizeBytes": 788,
+      "modifiedAt": "2026-06-18T16:50:33.285Z"
+    },
+    {
+      "name": "restore-log.txt",
+      "file": "_operations/phase-10L-maps-restore/logs/restore-log.txt",
+      "type": ".txt",
+      "sizeBytes": 273,
+      "modifiedAt": "2026-06-18T16:29:36.771Z"
+    },
+    {
+      "name": "phase10L-restore-report.json",
+      "file": "_operations/phase-10L-maps-restore/reports/phase10L-restore-report.json",
+      "type": ".json",
+      "sizeBytes": 754,
+      "modifiedAt": "2026-06-18T16:29:36.944Z"
+    },
+    {
+      "name": "PHASE10M-AUTONOMOUS-OPERATIONS-PROTOCOL.md",
+      "file": "_operations/phase-10M-autonomous-operations-engine/docs/PHASE10M-AUTONOMOUS-OPERATIONS-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1105,
+      "modifiedAt": "2026-06-18T14:48:20.968Z"
+    },
+    {
+      "name": "phase-10M-autonomous-operations-log.txt",
+      "file": "_operations/phase-10M-autonomous-operations-engine/logs/phase-10M-autonomous-operations-log.txt",
+      "type": ".txt",
+      "sizeBytes": 427,
+      "modifiedAt": "2026-06-18T14:48:21.177Z"
+    },
+    {
+      "name": "phase10M-autonomous-operations-report.json",
+      "file": "_operations/phase-10M-autonomous-operations-engine/reports/phase10M-autonomous-operations-report.json",
+      "type": ".json",
+      "sizeBytes": 1166,
+      "modifiedAt": "2026-06-18T14:48:21.125Z"
+    },
+    {
+      "name": "phase10M-autonomous-operations-report.txt",
+      "file": "_operations/phase-10M-autonomous-operations-engine/reports/phase10M-autonomous-operations-report.txt",
+      "type": ".txt",
+      "sizeBytes": 429,
+      "modifiedAt": "2026-06-18T14:48:21.128Z"
+    },
+    {
+      "name": "PHASE10N-ENTERPRISE-GOVERNANCE-PROTOCOL.md",
+      "file": "_operations/phase-10N-enterprise-governance/docs/PHASE10N-ENTERPRISE-GOVERNANCE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1310,
+      "modifiedAt": "2026-06-18T16:07:45.267Z"
+    },
+    {
+      "name": "phase-10N-governance-log.txt",
+      "file": "_operations/phase-10N-enterprise-governance/logs/phase-10N-governance-log.txt",
+      "type": ".txt",
+      "sizeBytes": 409,
+      "modifiedAt": "2026-06-18T16:07:45.481Z"
+    },
+    {
+      "name": "phase10N-governance-report.json",
+      "file": "_operations/phase-10N-enterprise-governance/reports/phase10N-governance-report.json",
+      "type": ".json",
+      "sizeBytes": 1212,
+      "modifiedAt": "2026-06-18T16:07:45.440Z"
+    },
+    {
+      "name": "phase10N-governance-report.txt",
+      "file": "_operations/phase-10N-enterprise-governance/reports/phase10N-governance-report.txt",
+      "type": ".txt",
+      "sizeBytes": 433,
+      "modifiedAt": "2026-06-18T16:07:45.440Z"
+    },
+    {
+      "name": "PHASE10O-HARDENING-PROTOCOL.md",
+      "file": "_operations/phase-10O-enterprise-hardening/docs/PHASE10O-HARDENING-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1054,
+      "modifiedAt": "2026-06-18T17:06:59.986Z"
+    },
+    {
+      "name": "phase-10O-hardening-log.txt",
+      "file": "_operations/phase-10O-enterprise-hardening/logs/phase-10O-hardening-log.txt",
+      "type": ".txt",
+      "sizeBytes": 281,
+      "modifiedAt": "2026-06-18T17:06:59.949Z"
+    },
+    {
+      "name": "phase10O-hardening-report.json",
+      "file": "_operations/phase-10O-enterprise-hardening/reports/phase10O-hardening-report.json",
+      "type": ".json",
+      "sizeBytes": 31982,
+      "modifiedAt": "2026-06-18T17:07:00.159Z"
+    },
+    {
+      "name": "phase10O-hardening-report.txt",
+      "file": "_operations/phase-10O-enterprise-hardening/reports/phase10O-hardening-report.txt",
+      "type": ".txt",
+      "sizeBytes": 343,
+      "modifiedAt": "2026-06-18T17:07:00.160Z"
+    },
+    {
+      "name": "path-fix-log.txt",
+      "file": "_operations/phase-10O-hardening-path-fix/logs/path-fix-log.txt",
+      "type": ".txt",
+      "sizeBytes": 414,
+      "modifiedAt": "2026-06-18T17:16:50.628Z"
+    },
+    {
+      "name": "phase10O-path-fix-report.json",
+      "file": "_operations/phase-10O-hardening-path-fix/reports/phase10O-path-fix-report.json",
+      "type": ".json",
+      "sizeBytes": 308,
+      "modifiedAt": "2026-06-18T17:16:50.825Z"
+    },
+    {
+      "name": "PHASE10P-BACKUP-RECOVERY-PROTOCOL.md",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/docs/PHASE10P-BACKUP-RECOVERY-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 742,
+      "modifiedAt": "2026-06-18T17:29:45.128Z"
+    },
+    {
+      "name": "phase-10P-backup-recovery-log.txt",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/logs/phase-10P-backup-recovery-log.txt",
+      "type": ".txt",
+      "sizeBytes": 295,
+      "modifiedAt": "2026-06-18T17:29:45.091Z"
+    },
+    {
+      "name": "phase10P-backup-recovery-report.json",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/reports/phase10P-backup-recovery-report.json",
+      "type": ".json",
+      "sizeBytes": 3987,
+      "modifiedAt": "2026-06-18T17:29:45.337Z"
+    },
+    {
+      "name": "phase10P-backup-recovery-report.txt",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/reports/phase10P-backup-recovery-report.txt",
+      "type": ".txt",
+      "sizeBytes": 386,
+      "modifiedAt": "2026-06-18T17:29:45.337Z"
+    },
+    {
+      "name": "package-lock.json",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/runtime-snapshots/SNP-2026-06-18T17-29-45-265Z/package-lock.json",
+      "type": ".json",
+      "sizeBytes": 248405,
+      "modifiedAt": "2026-06-14T09:10:23.691Z"
+    },
+    {
+      "name": "package.json",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/runtime-snapshots/SNP-2026-06-18T17-29-45-265Z/package.json",
+      "type": ".json",
+      "sizeBytes": 1562,
+      "modifiedAt": "2026-06-14T09:10:23.329Z"
+    },
+    {
+      "name": "snapshot-manifest.json",
+      "file": "_operations/phase-10P-backup-recovery-disaster-readiness/runtime-snapshots/SNP-2026-06-18T17-29-45-265Z/snapshot-manifest.json",
+      "type": ".json",
+      "sizeBytes": 4528,
+      "modifiedAt": "2026-06-18T17:29:45.287Z"
+    },
+    {
+      "name": "latest-monitoring-dashboard.json",
+      "file": "_operations/phase-10Q-enterprise-monitoring/dashboards/latest-monitoring-dashboard.json",
+      "type": ".json",
+      "sizeBytes": 6193,
+      "modifiedAt": "2026-06-18T23:52:40.936Z"
+    },
+    {
+      "name": "PHASE10Q-MONITORING-PROTOCOL.md",
+      "file": "_operations/phase-10Q-enterprise-monitoring/docs/PHASE10Q-MONITORING-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1272,
+      "modifiedAt": "2026-06-18T23:52:40.496Z"
+    },
+    {
+      "name": "phase-10Q-monitoring-log.txt",
+      "file": "_operations/phase-10Q-enterprise-monitoring/logs/phase-10Q-monitoring-log.txt",
+      "type": ".txt",
+      "sizeBytes": 282,
+      "modifiedAt": "2026-06-18T23:52:40.381Z"
+    },
+    {
+      "name": "phase10Q-monitoring-report.json",
+      "file": "_operations/phase-10Q-enterprise-monitoring/reports/phase10Q-monitoring-report.json",
+      "type": ".json",
+      "sizeBytes": 1425,
+      "modifiedAt": "2026-06-18T23:52:40.938Z"
+    },
+    {
+      "name": "phase10Q-monitoring-report.txt",
+      "file": "_operations/phase-10Q-enterprise-monitoring/reports/phase10Q-monitoring-report.txt",
+      "type": ".txt",
+      "sizeBytes": 520,
+      "modifiedAt": "2026-06-18T23:52:40.940Z"
+    },
+    {
+      "name": "latest-load-test.json",
+      "file": "_operations/phase-10R-performance-optimization/benchmarks/latest-load-test.json",
+      "type": ".json",
+      "sizeBytes": 747,
+      "modifiedAt": "2026-06-19T00:43:39.926Z"
+    },
+    {
+      "name": "latest-performance-benchmark.json",
+      "file": "_operations/phase-10R-performance-optimization/benchmarks/latest-performance-benchmark.json",
+      "type": ".json",
+      "sizeBytes": 1142,
+      "modifiedAt": "2026-06-19T00:43:39.876Z"
+    },
+    {
+      "name": "PHASE10R-PERFORMANCE-PROTOCOL.md",
+      "file": "_operations/phase-10R-performance-optimization/docs/PHASE10R-PERFORMANCE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 576,
+      "modifiedAt": "2026-06-19T00:43:37.575Z"
+    },
+    {
+      "name": "phase-10R-log.txt",
+      "file": "_operations/phase-10R-performance-optimization/logs/phase-10R-log.txt",
+      "type": ".txt",
+      "sizeBytes": 263,
+      "modifiedAt": "2026-06-19T00:43:37.413Z"
+    },
+    {
+      "name": "phase10R-performance-report.json",
+      "file": "_operations/phase-10R-performance-optimization/reports/phase10R-performance-report.json",
+      "type": ".json",
+      "sizeBytes": 681,
+      "modifiedAt": "2026-06-19T00:43:39.927Z"
+    },
+    {
+      "name": "PHASE10S-FRONTEND-DASHBOARD-V2-FIX.md",
+      "file": "_operations/phase-10S-frontend-dashboard-v2-fix/docs/PHASE10S-FRONTEND-DASHBOARD-V2-FIX.md",
+      "type": ".md",
+      "sizeBytes": 669,
+      "modifiedAt": "2026-06-19T01:55:45.305Z"
+    },
+    {
+      "name": "phase10S-v2-fix-report.json",
+      "file": "_operations/phase-10S-frontend-dashboard-v2-fix/reports/phase10S-v2-fix-report.json",
+      "type": ".json",
+      "sizeBytes": 360,
+      "modifiedAt": "2026-06-19T01:55:46.733Z"
+    },
+    {
+      "name": "PHASE10S-FRONTEND-DASHBOARD-PROTOCOL.md",
+      "file": "_operations/phase-10S-frontend-operations-dashboard/docs/PHASE10S-FRONTEND-DASHBOARD-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1240,
+      "modifiedAt": "2026-06-19T01:34:58.237Z"
+    },
+    {
+      "name": "PHASE10T-FRONTEND-APP-INTEGRATION.md",
+      "file": "_operations/phase-10T-frontend-app-integration/docs/PHASE10T-FRONTEND-APP-INTEGRATION.md",
+      "type": ".md",
+      "sizeBytes": 513,
+      "modifiedAt": "2026-06-19T02:22:23.385Z"
+    },
+    {
+      "name": "phase-10T-log.txt",
+      "file": "_operations/phase-10T-frontend-app-integration/logs/phase-10T-log.txt",
+      "type": ".txt",
+      "sizeBytes": 262,
+      "modifiedAt": "2026-06-19T02:22:23.355Z"
+    },
+    {
+      "name": "phase10T-frontend-app-integration-report.json",
+      "file": "_operations/phase-10T-frontend-app-integration/reports/phase10T-frontend-app-integration-report.json",
+      "type": ".json",
+      "sizeBytes": 311,
+      "modifiedAt": "2026-06-19T02:22:23.660Z"
+    },
+    {
+      "name": "phase10U-app-wiring-fix-report.json",
+      "file": "_operations/phase-10U-app-wiring-fix/reports/phase10U-app-wiring-fix-report.json",
+      "type": ".json",
+      "sizeBytes": 392,
+      "modifiedAt": "2026-06-19T03:19:42.494Z"
+    },
+    {
+      "name": "PHASE10U-CONNECTIVITY-VALIDATOR.md",
+      "file": "_operations/phase-10U-frontend-backend-connectivity-validator/docs/PHASE10U-CONNECTIVITY-VALIDATOR.md",
+      "type": ".md",
+      "sizeBytes": 1048,
+      "modifiedAt": "2026-06-19T03:12:41.839Z"
+    },
+    {
+      "name": "phase10U-connectivity-validator-report.json",
+      "file": "_operations/phase-10U-frontend-backend-connectivity-validator/reports/phase10U-connectivity-validator-report.json",
+      "type": ".json",
+      "sizeBytes": 453,
+      "modifiedAt": "2026-06-19T03:12:42.042Z"
+    },
+    {
+      "name": "phase10V-v2-fix-report.json",
+      "file": "_operations/phase-10V-frontend-smoke-test-v2-fix/reports/phase10V-v2-fix-report.json",
+      "type": ".json",
+      "sizeBytes": 169,
+      "modifiedAt": "2026-06-19T03:43:46.680Z"
+    },
+    {
+      "name": "PHASE10V-FRONTEND-SMOKE-TESTING.md",
+      "file": "_operations/phase-10V-frontend-smoke-testing/docs/PHASE10V-FRONTEND-SMOKE-TESTING.md",
+      "type": ".md",
+      "sizeBytes": 679,
+      "modifiedAt": "2026-06-19T03:34:12.303Z"
+    },
+    {
+      "name": "phase10V-deployment-validation-report.json",
+      "file": "_operations/phase-10V-frontend-smoke-testing/reports/phase10V-deployment-validation-report.json",
+      "type": ".json",
+      "sizeBytes": 305,
+      "modifiedAt": "2026-06-19T03:34:12.477Z"
+    },
+    {
+      "name": "phase10V-frontend-smoke-test-report.json",
+      "file": "_operations/phase-10V-frontend-smoke-testing/reports/phase10V-frontend-smoke-test-report.json",
+      "type": ".json",
+      "sizeBytes": 3097,
+      "modifiedAt": "2026-06-19T03:43:46.828Z"
+    },
+    {
+      "name": "npm-build-error.txt",
+      "file": "_operations/phase-10W-frontend-build-production-validation/build-reports/npm-build-error.txt",
+      "type": ".txt",
+      "sizeBytes": 0,
+      "modifiedAt": "2026-06-19T03:53:44.157Z"
+    },
+    {
+      "name": "npm-build-output.txt",
+      "file": "_operations/phase-10W-frontend-build-production-validation/build-reports/npm-build-output.txt",
+      "type": ".txt",
+      "sizeBytes": 422,
+      "modifiedAt": "2026-06-19T03:53:46.513Z"
+    },
+    {
+      "name": "PHASE10W-FRONTEND-BUILD-PROTOCOL.md",
+      "file": "_operations/phase-10W-frontend-build-production-validation/docs/PHASE10W-FRONTEND-BUILD-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 914,
+      "modifiedAt": "2026-06-19T04:18:03.018Z"
+    },
+    {
+      "name": "phase10W-frontend-build-report.json",
+      "file": "_operations/phase-10W-frontend-build-production-validation/reports/phase10W-frontend-build-report.json",
+      "type": ".json",
+      "sizeBytes": 817,
+      "modifiedAt": "2026-06-19T04:18:02.981Z"
+    },
+    {
+      "name": "phase10W-prebuild-report.json",
+      "file": "_operations/phase-10W-frontend-build-production-validation/reports/phase10W-prebuild-report.json",
+      "type": ".json",
+      "sizeBytes": 1343,
+      "modifiedAt": "2026-06-19T04:18:02.823Z"
+    },
+    {
+      "name": "PHASE10X_GUI_REPLACEMENT_REPORT.md",
+      "file": "_operations/phase-10X-gui-replacement/reports/PHASE10X_GUI_REPLACEMENT_REPORT.md",
+      "type": ".md",
+      "sizeBytes": 281,
+      "modifiedAt": "2026-06-19T04:26:39.180Z"
+    },
+    {
+      "name": "PHASE10X0-BASELINE-AUDIT-PROTOCOL.md",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/docs/PHASE10X0-BASELINE-AUDIT-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1832,
+      "modifiedAt": "2026-06-19T04:30:04.914Z"
+    },
+    {
+      "name": "_backend_inventory.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_backend_inventory.json",
+      "type": ".json",
+      "sizeBytes": 8340,
+      "modifiedAt": "2026-06-19T04:30:05.656Z"
+    },
+    {
+      "name": "_database_registry.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_database_registry.json",
+      "type": ".json",
+      "sizeBytes": 195,
+      "modifiedAt": "2026-06-19T06:04:01.376Z"
+    },
+    {
+      "name": "_deployment_registry.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_deployment_registry.json",
+      "type": ".json",
+      "sizeBytes": 1267,
+      "modifiedAt": "2026-06-19T04:30:07.125Z"
+    },
+    {
+      "name": "_enterprise_registry.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_enterprise_registry.json",
+      "type": ".json",
+      "sizeBytes": 5629,
+      "modifiedAt": "2026-06-19T04:30:05.905Z"
+    },
+    {
+      "name": "_frontend_inventory.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_frontend_inventory.json",
+      "type": ".json",
+      "sizeBytes": 2264,
+      "modifiedAt": "2026-06-19T04:30:05.715Z"
+    },
+    {
+      "name": "_master_baseline_registry.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_master_baseline_registry.json",
+      "type": ".json",
+      "sizeBytes": 58953,
+      "modifiedAt": "2026-06-19T04:30:07.128Z"
+    },
+    {
+      "name": "_route_registry.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/registries/_route_registry.json",
+      "type": ".json",
+      "sizeBytes": 37100,
+      "modifiedAt": "2026-06-19T04:30:05.819Z"
+    },
+    {
+      "name": "phase10X0-baseline-audit-summary.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/reports/phase10X0-baseline-audit-summary.json",
+      "type": ".json",
+      "sizeBytes": 1019,
+      "modifiedAt": "2026-06-19T04:30:07.177Z"
+    },
+    {
+      "name": "phase10X0-baseline-audit-summary.txt",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/reports/phase10X0-baseline-audit-summary.txt",
+      "type": ".txt",
+      "sizeBytes": 570,
+      "modifiedAt": "2026-06-19T04:30:07.180Z"
+    },
+    {
+      "name": "phase10X0-validation-report.json",
+      "file": "_operations/phase-10X0-deployment-readiness-baseline-audit/reports/phase10X0-validation-report.json",
+      "type": ".json",
+      "sizeBytes": 2258,
+      "modifiedAt": "2026-06-19T04:30:07.418Z"
+    },
+    {
+      "name": "latest-deployment-readiness-dashboard.json",
+      "file": "_operations/phase-10X1-deployment-readiness-centre/dashboards/latest-deployment-readiness-dashboard.json",
+      "type": ".json",
+      "sizeBytes": 5204,
+      "modifiedAt": "2026-06-19T05:00:18.546Z"
+    },
+    {
+      "name": "PHASE10X1-DEPLOYMENT-READINESS-CENTRE.md",
+      "file": "_operations/phase-10X1-deployment-readiness-centre/docs/PHASE10X1-DEPLOYMENT-READINESS-CENTRE.md",
+      "type": ".md",
+      "sizeBytes": 1078,
+      "modifiedAt": "2026-06-19T05:00:18.399Z"
+    },
+    {
+      "name": "phase10X1-deployment-readiness-centre-report.json",
+      "file": "_operations/phase-10X1-deployment-readiness-centre/reports/phase10X1-deployment-readiness-centre-report.json",
+      "type": ".json",
+      "sizeBytes": 5755,
+      "modifiedAt": "2026-06-19T05:00:18.557Z"
+    },
+    {
+      "name": "latest-environment-validation-report.json",
+      "file": "_operations/phase-10X2-environment-validation-engine/dashboards/latest-environment-validation-report.json",
+      "type": ".json",
+      "sizeBytes": 6311,
+      "modifiedAt": "2026-06-19T07:14:51.011Z"
+    },
+    {
+      "name": "PHASE10X2-ENVIRONMENT-VALIDATION.md",
+      "file": "_operations/phase-10X2-environment-validation-engine/docs/PHASE10X2-ENVIRONMENT-VALIDATION.md",
+      "type": ".md",
+      "sizeBytes": 921,
+      "modifiedAt": "2026-06-19T05:19:31.269Z"
+    },
+    {
+      "name": "phase10X2-environment-validation-report.json",
+      "file": "_operations/phase-10X2-environment-validation-engine/reports/phase10X2-environment-validation-report.json",
+      "type": ".json",
+      "sizeBytes": 1042,
+      "modifiedAt": "2026-06-19T05:19:42.008Z"
+    },
+    {
+      "name": "PHASE10X3-RELEASE-VALIDATOR.md",
+      "file": "_operations/phase-10X3-release-validator/docs/PHASE10X3-RELEASE-VALIDATOR.md",
+      "type": ".md",
+      "sizeBytes": 738,
+      "modifiedAt": "2026-06-19T05:28:44.692Z"
+    },
+    {
+      "name": "latest-release-candidate.json",
+      "file": "_operations/phase-10X3-release-validator/release-candidates/latest-release-candidate.json",
+      "type": ".json",
+      "sizeBytes": 5698,
+      "modifiedAt": "2026-06-19T05:28:56.944Z"
+    },
+    {
+      "name": "RC-2026-06-19T05-28-56-935Z.json",
+      "file": "_operations/phase-10X3-release-validator/release-candidates/RC-2026-06-19T05-28-56-935Z.json",
+      "type": ".json",
+      "sizeBytes": 5698,
+      "modifiedAt": "2026-06-19T05:28:56.944Z"
+    },
+    {
+      "name": "phase10X3-release-validator-report.json",
+      "file": "_operations/phase-10X3-release-validator/reports/phase10X3-release-validator-report.json",
+      "type": ".json",
+      "sizeBytes": 6336,
+      "modifiedAt": "2026-06-19T05:28:56.944Z"
+    },
+    {
+      "name": "phase10X3A-enterprise-architecture-registry-report.json",
+      "file": "_operations/phase-10X3A-enterprise-architecture-registry/reports/phase10X3A-enterprise-architecture-registry-report.json",
+      "type": ".json",
+      "sizeBytes": 916,
+      "modifiedAt": "2026-06-19T06:02:48.105Z"
+    },
+    {
+      "name": "phase10X3A-validation-report.json",
+      "file": "_operations/phase-10X3A-enterprise-architecture-registry/reports/phase10X3A-validation-report.json",
+      "type": ".json",
+      "sizeBytes": 1474,
+      "modifiedAt": "2026-06-19T06:02:48.217Z"
+    },
+    {
+      "name": "latest-deployment-scoring-report.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/dashboards/latest-deployment-scoring-report.json",
+      "type": ".json",
+      "sizeBytes": 56218,
+      "modifiedAt": "2026-06-19T07:14:44.664Z"
+    },
+    {
+      "name": "ENTERPRISE-DEPLOYMENT-CRITERIA.md",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/docs/ENTERPRISE-DEPLOYMENT-CRITERIA.md",
+      "type": ".md",
+      "sizeBytes": 256,
+      "modifiedAt": "2026-06-19T06:12:52.685Z"
+    },
+    {
+      "name": "ENTERPRISE-GRADE-MODEL.md",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/docs/ENTERPRISE-GRADE-MODEL.md",
+      "type": ".md",
+      "sizeBytes": 122,
+      "modifiedAt": "2026-06-19T06:12:52.675Z"
+    },
+    {
+      "name": "ENTERPRISE-RISK-MODEL.md",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/docs/ENTERPRISE-RISK-MODEL.md",
+      "type": ".md",
+      "sizeBytes": 149,
+      "modifiedAt": "2026-06-19T06:12:52.680Z"
+    },
+    {
+      "name": "ENTERPRISE-SCORING-PROTOCOL.md",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/docs/ENTERPRISE-SCORING-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 394,
+      "modifiedAt": "2026-06-19T06:12:52.675Z"
+    },
+    {
+      "name": "phase10X4-deployment-scoring-report.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/reports/phase10X4-deployment-scoring-report.json",
+      "type": ".json",
+      "sizeBytes": 1348,
+      "modifiedAt": "2026-06-19T06:13:15.953Z"
+    },
+    {
+      "name": "latest-score.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/latest-score.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:44.664Z"
+    },
+    {
+      "name": "score-2026-06-19T06-12-57-335Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-12-57-335Z.json",
+      "type": ".json",
+      "sizeBytes": 169,
+      "modifiedAt": "2026-06-19T06:12:57.335Z"
+    },
+    {
+      "name": "score-2026-06-19T06-13-02-500Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-13-02-500Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:13:02.511Z"
+    },
+    {
+      "name": "score-2026-06-19T06-13-06-869Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-13-06-869Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:13:06.872Z"
+    },
+    {
+      "name": "score-2026-06-19T06-13-11-499Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-13-11-499Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:13:11.503Z"
+    },
+    {
+      "name": "score-2026-06-19T06-13-15-942Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-13-15-942Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:13:15.947Z"
+    },
+    {
+      "name": "score-2026-06-19T06-35-20-659Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-35-20-659Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:35:20.662Z"
+    },
+    {
+      "name": "score-2026-06-19T06-35-25-640Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-35-25-640Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:35:25.644Z"
+    },
+    {
+      "name": "score-2026-06-19T06-35-35-028Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-35-35-028Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:35:35.031Z"
+    },
+    {
+      "name": "score-2026-06-19T06-35-39-826Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-35-39-826Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:35:39.829Z"
+    },
+    {
+      "name": "score-2026-06-19T06-35-49-214Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-35-49-214Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:35:49.218Z"
+    },
+    {
+      "name": "score-2026-06-19T06-35-54-724Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T06-35-54-724Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T06:35:54.724Z"
+    },
+    {
+      "name": "score-2026-06-19T07-11-40-226Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-11-40-226Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:11:40.244Z"
+    },
+    {
+      "name": "score-2026-06-19T07-11-46-765Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-11-46-765Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:11:46.780Z"
+    },
+    {
+      "name": "score-2026-06-19T07-11-58-033Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-11-58-033Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:11:58.050Z"
+    },
+    {
+      "name": "score-2026-06-19T07-12-05-112Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-12-05-112Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:12:05.172Z"
+    },
+    {
+      "name": "score-2026-06-19T07-12-17-294Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-12-17-294Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:12:17.310Z"
+    },
+    {
+      "name": "score-2026-06-19T07-12-23-455Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-12-23-455Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:12:23.471Z"
+    },
+    {
+      "name": "score-2026-06-19T07-12-35-658Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-12-35-658Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:12:35.659Z"
+    },
+    {
+      "name": "score-2026-06-19T07-12-41-595Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-12-41-595Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:12:41.606Z"
+    },
+    {
+      "name": "score-2026-06-19T07-12-54-831Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-12-54-831Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:12:54.844Z"
+    },
+    {
+      "name": "score-2026-06-19T07-13-02-893Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-13-02-893Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:13:02.903Z"
+    },
+    {
+      "name": "score-2026-06-19T07-13-16-333Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-13-16-333Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:13:16.344Z"
+    },
+    {
+      "name": "score-2026-06-19T07-13-23-484Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-13-23-484Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:13:23.493Z"
+    },
+    {
+      "name": "score-2026-06-19T07-13-36-935Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-13-36-935Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:13:36.938Z"
+    },
+    {
+      "name": "score-2026-06-19T07-13-46-317Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-13-46-317Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:13:46.321Z"
+    },
+    {
+      "name": "score-2026-06-19T07-14-01-583Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-14-01-583Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:01.585Z"
+    },
+    {
+      "name": "score-2026-06-19T07-14-08-316Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-14-08-316Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:08.318Z"
+    },
+    {
+      "name": "score-2026-06-19T07-14-20-737Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-14-20-737Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:20.740Z"
+    },
+    {
+      "name": "score-2026-06-19T07-14-27-387Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-14-27-387Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:27.435Z"
+    },
+    {
+      "name": "score-2026-06-19T07-14-39-029Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-14-39-029Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:39.033Z"
+    },
+    {
+      "name": "score-2026-06-19T07-14-44-667Z.json",
+      "file": "_operations/phase-10X4-deployment-scoring-engine/trends/score-2026-06-19T07-14-44-667Z.json",
+      "type": ".json",
+      "sizeBytes": 166,
+      "modifiedAt": "2026-06-19T07:14:44.664Z"
+    },
+    {
+      "name": "latest-executive-deployment-dashboard.json",
+      "file": "_operations/phase-10X5-executive-deployment-dashboard/dashboards/latest-executive-deployment-dashboard.json",
+      "type": ".json",
+      "sizeBytes": 77733,
+      "modifiedAt": "2026-06-19T07:14:51.134Z"
+    },
+    {
+      "name": "PHASE10X5-EXECUTIVE-DEPLOYMENT-DASHBOARD.md",
+      "file": "_operations/phase-10X5-executive-deployment-dashboard/docs/PHASE10X5-EXECUTIVE-DEPLOYMENT-DASHBOARD.md",
+      "type": ".md",
+      "sizeBytes": 749,
+      "modifiedAt": "2026-06-19T06:35:15.326Z"
+    },
+    {
+      "name": "phase10X5-executive-deployment-dashboard-report.json",
+      "file": "_operations/phase-10X5-executive-deployment-dashboard/reports/phase10X5-executive-deployment-dashboard-report.json",
+      "type": ".json",
+      "sizeBytes": 1319,
+      "modifiedAt": "2026-06-19T06:36:01.147Z"
+    },
+    {
+      "name": "DG-2026-06-19T07-14-51-134Z-07b285f43ffa2.json",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/decisions/DG-2026-06-19T07-14-51-134Z-07b285f43ffa2.json",
+      "type": ".json",
+      "sizeBytes": 78524,
+      "modifiedAt": "2026-06-19T07:14:51.136Z"
+    },
+    {
+      "name": "latest-decision.json",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/decisions/latest-decision.json",
+      "type": ".json",
+      "sizeBytes": 78524,
+      "modifiedAt": "2026-06-19T07:14:51.136Z"
+    },
+    {
+      "name": "DEPLOYMENT-APPROVAL-RULES.md",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/docs/DEPLOYMENT-APPROVAL-RULES.md",
+      "type": ".md",
+      "sizeBytes": 263,
+      "modifiedAt": "2026-06-19T07:11:33.655Z"
+    },
+    {
+      "name": "DEPLOYMENT-DECISION-HISTORY.md",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/docs/DEPLOYMENT-DECISION-HISTORY.md",
+      "type": ".md",
+      "sizeBytes": 359,
+      "modifiedAt": "2026-06-19T07:11:33.710Z"
+    },
+    {
+      "name": "DEPLOYMENT-GATEKEEPER-PROTOCOL.md",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/docs/DEPLOYMENT-GATEKEEPER-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 824,
+      "modifiedAt": "2026-06-19T07:11:33.650Z"
+    },
+    {
+      "name": "DEPLOYMENT-OVERRIDE-PROTOCOL.md",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/docs/DEPLOYMENT-OVERRIDE-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 312,
+      "modifiedAt": "2026-06-19T07:11:33.702Z"
+    },
+    {
+      "name": "DEPLOYMENT-REJECTION-RULES.md",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/docs/DEPLOYMENT-REJECTION-RULES.md",
+      "type": ".md",
+      "sizeBytes": 252,
+      "modifiedAt": "2026-06-19T07:11:33.700Z"
+    },
+    {
+      "name": "latest-gatekeeper-report.json",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/reports/latest-gatekeeper-report.json",
+      "type": ".json",
+      "sizeBytes": 290,
+      "modifiedAt": "2026-06-19T07:14:14.795Z"
+    },
+    {
+      "name": "phase10X6-deployment-gatekeeper-report.json",
+      "file": "_operations/phase-10X6-deployment-gatekeeper/reports/phase10X6-deployment-gatekeeper-report.json",
+      "type": ".json",
+      "sizeBytes": 79606,
+      "modifiedAt": "2026-06-19T07:14:51.136Z"
+    },
+    {
+      "name": "PHASE10Y_DOCUMENTATION.md",
+      "file": "_operations/phase-10Y-gui-stabilisation/docs/PHASE10Y_DOCUMENTATION.md",
+      "type": ".md",
+      "sizeBytes": 500,
+      "modifiedAt": "2026-06-19T04:32:48.106Z"
+    },
+    {
+      "name": "PHASE10Y_VERIFICATION_CHECKLIST.md",
+      "file": "_operations/phase-10Y-gui-stabilisation/reports/PHASE10Y_VERIFICATION_CHECKLIST.md",
+      "type": ".md",
+      "sizeBytes": 377,
+      "modifiedAt": "2026-06-19T04:32:48.113Z"
+    },
+    {
+      "name": "PHASE10Y0-MASTER-REGISTRY-DIGITAL-TWIN-PROTOCOL.md",
+      "file": "_operations/phase-10Y0-enterprise-master-registry-digital-twin/docs/PHASE10Y0-MASTER-REGISTRY-DIGITAL-TWIN-PROTOCOL.md",
+      "type": ".md",
+      "sizeBytes": 1372,
+      "modifiedAt": "2026-06-19T07:51:04.513Z"
+    }
+  ],
+  "totals": {
+    "documents": 271,
+    "markdown": 67,
+    "json": 106
+  }
+}

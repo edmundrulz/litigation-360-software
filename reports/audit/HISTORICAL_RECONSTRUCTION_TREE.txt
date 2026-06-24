@@ -1,0 +1,14 @@
+Folder PATH listing for volume Windows
+Volume serial number is 00000249 F0B7:DAA5
+C:\USERS\JEP_EDMUNDRULZ\LITIGATION-360-WORKSPACE\LITIGATION-360-SOFTWARE\DOCS\HISTORICAL-RECONSTRUCTION
++---evidence
++---matrices
++---phase1
++---phase2
++---phase3
++---phase4
++---phase5
++---phase6
++---phase7
++---registries
++---timelines

@@ -1,0 +1,236 @@
+{
+  "releaseCandidateId": "RC-2026-06-19T05-28-56-935Z",
+  "label": "validation",
+  "validation": {
+    "module": "Release Validator Engine",
+    "status": "RELEASE_CANDIDATE_READY",
+    "releaseReady": true,
+    "releaseScore": 100,
+    "risk": "LOW",
+    "blockers": [],
+    "blockerCount": 0,
+    "warnings": [],
+    "warningCount": 0,
+    "blocks": [
+      {
+        "name": "Deployment Centre",
+        "weight": 20,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Deployment centre generated score",
+            "pass": true,
+            "value": 96
+          },
+          {
+            "name": "Deployment score >= 75",
+            "pass": true,
+            "value": 96
+          },
+          {
+            "name": "Blocking issues below 5",
+            "pass": true,
+            "value": 1
+          }
+        ]
+      },
+      {
+        "name": "Environment",
+        "weight": 15,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Environment score generated",
+            "pass": true,
+            "value": 100
+          },
+          {
+            "name": "Environment score >= 75",
+            "pass": true,
+            "value": 100
+          },
+          {
+            "name": "Environment risk not critical",
+            "pass": true,
+            "value": "LOW"
+          }
+        ]
+      },
+      {
+        "name": "Hardening",
+        "weight": 15,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Hardening score generated",
+            "pass": true,
+            "value": 100
+          },
+          {
+            "name": "Hardening score >= 75",
+            "pass": true,
+            "value": 100
+          },
+          {
+            "name": "Hardening blocking issues below 5",
+            "pass": true,
+            "value": 0
+          }
+        ]
+      },
+      {
+        "name": "Backup Recovery",
+        "weight": 10,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Backup recovery health generated",
+            "pass": true,
+            "value": "HEALTHY"
+          },
+          {
+            "name": "Backup recovery not failed",
+            "pass": true,
+            "value": "HEALTHY"
+          },
+          {
+            "name": "Backup recovery engine available",
+            "pass": true
+          }
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "weight": 10,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Monitoring health generated",
+            "pass": true,
+            "value": "HEALTHY"
+          },
+          {
+            "name": "Monitoring score generated",
+            "pass": true,
+            "value": 100
+          },
+          {
+            "name": "Monitoring not critical",
+            "pass": true,
+            "value": "HEALTHY"
+          }
+        ]
+      },
+      {
+        "name": "Performance",
+        "weight": 10,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Performance health generated",
+            "pass": true,
+            "value": "HEALTHY"
+          },
+          {
+            "name": "Performance not failed",
+            "pass": true,
+            "value": "HEALTHY"
+          },
+          {
+            "name": "Benchmark max under 5000ms",
+            "pass": true,
+            "value": 8.88
+          }
+        ]
+      },
+      {
+        "name": "Build Artifacts",
+        "weight": 10,
+        "status": "PASS",
+        "score": 100,
+        "passed": 4,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Frontend dist exists",
+            "pass": true
+          },
+          {
+            "name": "Frontend index.html exists",
+            "pass": true
+          },
+          {
+            "name": "Backend package exists",
+            "pass": true
+          },
+          {
+            "name": "Frontend package exists",
+            "pass": true
+          }
+        ]
+      },
+      {
+        "name": "Version Registry",
+        "weight": 10,
+        "status": "PASS",
+        "score": 100,
+        "passed": 3,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "Backend package name present",
+            "pass": true,
+            "value": "litigation-360-backend"
+          },
+          {
+            "name": "Frontend package name present",
+            "pass": true,
+            "value": "frontend"
+          },
+          {
+            "name": "Node runtime hash inputs available",
+            "pass": true,
+            "value": "v24.16.0"
+          }
+        ]
+      }
+    ],
+    "versions": {
+      "backend": {
+        "name": "litigation-360-backend",
+        "version": "1.0.0"
+      },
+      "frontend": {
+        "name": "frontend",
+        "version": "0.0.0"
+      },
+      "node": "v24.16.0"
+    },
+    "hashes": {
+      "backendPackage": "65956cf01572dde4544afeaf03adb11403280821c3a67da3b099a6ba09efe92c",
+      "frontendPackage": "094abc6f0a456f673a980ddc2a286147331d662c02718352f34224d4962f6090",
+      "frontendIndex": "bd737d39591dc59de021ab70b2698280d09046c423355d7854160c372d5219ef",
+      "database": "f2c219dfe08f37d6c1f0198e2031edd3a0ccee2e1bb5d305513cce417397fbfd"
+    },
+    "generatedAt": "2026-06-19T05:28:56.934Z"
+  },
+  "generatedAt": "2026-06-19T05:28:56.935Z"
+}

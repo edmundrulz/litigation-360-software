@@ -1,0 +1,233 @@
+﻿[
+    {
+        "Check":  "Project Root Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software"
+    },
+    {
+        "Check":  "Backend Root Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend"
+    },
+    {
+        "Check":  "Backend Source Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src"
+    },
+    {
+        "Check":  "Backend index.js Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\index.js"
+    },
+    {
+        "Check":  "10Z.0 Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\enterpriseOperationsCommandCentre.js"
+    },
+    {
+        "Check":  "10Z.0 Route Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\routes\\enterpriseOperationsRoutes.js"
+    },
+    {
+        "Check":  "10Z.0 Route Mounted",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\index.js"
+    },
+    {
+        "Check":  "10Z.0 Ops Folder Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10Z0-enterprise-operations-command-centre"
+    },
+    {
+        "Check":  "10Z.1 Alert Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\alertEngine.js"
+    },
+    {
+        "Check":  "10Z.1 Escalation Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\escalationEngine.js"
+    },
+    {
+        "Check":  "10Z.1 Notification Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\notificationEngine.js"
+    },
+    {
+        "Check":  "10Z.1 Alert Route Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\routes\\alertRoutes.js"
+    },
+    {
+        "Check":  "10Z.1 Route Mounted",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\index.js"
+    },
+    {
+        "Check":  "10Z.1 Ops Folder Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10Z1-alert-escalation-centre"
+    },
+    {
+        "Check":  "10Z.2 Analytics Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\operationsAnalyticsEngine.js"
+    },
+    {
+        "Check":  "10Z.2 Analytics Route Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\routes\\operationsAnalyticsRoutes.js"
+    },
+    {
+        "Check":  "10Z.2 Route Mounted",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\index.js"
+    },
+    {
+        "Check":  "10Z.2 Ops Folder Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10Z2-enterprise-operations-analytics-centre"
+    },
+    {
+        "Check":  "10Z.3 Predictive Engine Exists",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\predictiveIntelligenceEngine.js"
+    },
+    {
+        "Check":  "10Z.3 Risk Engine Exists",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\riskScoringEngine.js"
+    },
+    {
+        "Check":  "10Z.3 Trend Engine Exists",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\trendAnalysisEngine.js"
+    },
+    {
+        "Check":  "10Z.3 Forecast Engine Exists",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\forecastEngine.js"
+    },
+    {
+        "Check":  "10Z.3 Predictive Route Exists",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\routes\\predictiveRoutes.js"
+    },
+    {
+        "Check":  "10Z.3 Route Mounted",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\index.js"
+    },
+    {
+        "Check":  "10Z.3 Ops Folder Exists",
+        "Result":  false,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10Z3-predictive-intelligence-engine"
+    },
+    {
+        "Check":  "10Z.4 Autonomous Supervisor Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\autonomousSupervisor.js"
+    },
+    {
+        "Check":  "10Z.4 Watchdog Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\watchdogEngine.js"
+    },
+    {
+        "Check":  "10Z.4 Recovery Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\recoveryEngine.js"
+    },
+    {
+        "Check":  "10Z.4 Remediation Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\remediationEngine.js"
+    },
+    {
+        "Check":  "10Z.4 Decision Engine Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\automation\\decisionEngine.js"
+    },
+    {
+        "Check":  "10Z.4 Autonomous Route Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\routes\\autonomousRoutes.js"
+    },
+    {
+        "Check":  "10Z.4 Route Mounted",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\src\\index.js"
+    },
+    {
+        "Check":  "10Z.4 Ops Folder Exists",
+        "Result":  true,
+        "Path":  "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\_operations\\phase-10Z4-autonomous-operations-supervisor"
+    },
+    {
+        "Check":  "Google Maps Readiness Present",
+        "Result":  true,
+        "Path":  "backend\\src recursive JS search",
+        "Detail":  "Google Maps"
+    },
+    {
+        "Check":  "PERKESO Jalan Tun Razak Coverage Present",
+        "Result":  true,
+        "Path":  "backend\\src recursive JS search",
+        "Detail":  "PERKESO Kuala Lumpur"
+    },
+    {
+        "Check":  "Court Navigation Readiness Present",
+        "Result":  true,
+        "Path":  "backend\\src recursive JS search",
+        "Detail":  "navigation"
+    },
+    {
+        "Check":  "Industrial Court Kuala Lumpur Coverage Present",
+        "Result":  true,
+        "Path":  "backend\\src recursive JS search",
+        "Detail":  "Industrial Court Kuala Lumpur"
+    },
+    {
+        "Check":  "PERKESO Headquarters Jalan Ampang Coverage Present",
+        "Result":  true,
+        "Path":  "backend\\src recursive JS search",
+        "Detail":  "PERKESO Headquarters"
+    },
+    {
+        "Check":  "Waze Readiness Present",
+        "Result":  true,
+        "Path":  "backend\\src recursive JS search",
+        "Detail":  "Waze"
+    },
+    {
+        "Check":  "Live 10Z.0 Operations Health Endpoint",
+        "Result":  false,
+        "Path":  "http://localhost:5100/api/enterprise/operations/health",
+        "Detail":  "Unable to connect to the remote server"
+    },
+    {
+        "Check":  "Live 10Z.1 Alerts Health Endpoint",
+        "Result":  false,
+        "Path":  "http://localhost:5100/api/enterprise/alerts/health",
+        "Detail":  "Unable to connect to the remote server"
+    },
+    {
+        "Check":  "Live 10Z.2 Analytics Health Endpoint",
+        "Result":  false,
+        "Path":  "http://localhost:5100/api/enterprise/analytics/health",
+        "Detail":  "Unable to connect to the remote server"
+    },
+    {
+        "Check":  "Live 10Z.3 Predictive Health Endpoint",
+        "Result":  false,
+        "Path":  "http://localhost:5100/api/enterprise/predictive/health",
+        "Detail":  "Unable to connect to the remote server"
+    },
+    {
+        "Check":  "Live 10Z.4 Autonomous Health Endpoint",
+        "Result":  false,
+        "Path":  "http://localhost:5100/api/enterprise/autonomous/health",
+        "Detail":  "Unable to connect to the remote server"
+    }
+]

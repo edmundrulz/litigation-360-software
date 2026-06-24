@@ -1,0 +1,1319 @@
+============================================================
+FILE: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js
+EXTRACTED: 2026-06-22 23:54:56
+============================================================
+
+---- MATCH: create case | LINE: 93 | CONTEXT: 81 to 111 ----
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+  107:     });
+  108:     if (!response.ok) throw new Error('Failed to update case');
+  109:     return await response.json();
+  110:   } catch (error) {
+  111:     console.error('updateCase error:', error);
+
+---- MATCH: Create Case | LINE: 93 | CONTEXT: 81 to 111 ----
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+  107:     });
+  108:     if (!response.ok) throw new Error('Failed to update case');
+  109:     return await response.json();
+  110:   } catch (error) {
+  111:     console.error('updateCase error:', error);
+
+---- MATCH: cases | LINE: 74 | CONTEXT: 62 to 92 ----
+   62:     const response = await fetch(`${API_URL}/clients/${clientId}`, {
+   63:       method: 'DELETE',
+   64:       headers: authHeaders()
+   65:     });
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+
+---- MATCH: cases | LINE: 75 | CONTEXT: 63 to 93 ----
+   63:       method: 'DELETE',
+   64:       headers: authHeaders()
+   65:     });
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+
+---- MATCH: cases | LINE: 77 | CONTEXT: 65 to 95 ----
+   65:     });
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+
+---- MATCH: cases | LINE: 78 | CONTEXT: 66 to 96 ----
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+
+---- MATCH: cases | LINE: 81 | CONTEXT: 69 to 99 ----
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+
+---- MATCH: cases | LINE: 88 | CONTEXT: 76 to 106 ----
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+
+---- MATCH: cases | LINE: 103 | CONTEXT: 91 to 121 ----
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+  107:     });
+  108:     if (!response.ok) throw new Error('Failed to update case');
+  109:     return await response.json();
+  110:   } catch (error) {
+  111:     console.error('updateCase error:', error);
+  112:     throw error;
+  113:   }
+  114: }
+  115: 
+  116: export async function deleteCase(caseId) {
+  117:   try {
+  118:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  119:       method: 'DELETE',
+  120:       headers: authHeaders()
+  121:     });
+
+---- MATCH: cases | LINE: 118 | CONTEXT: 106 to 136 ----
+  106:       body: JSON.stringify(caseData)
+  107:     });
+  108:     if (!response.ok) throw new Error('Failed to update case');
+  109:     return await response.json();
+  110:   } catch (error) {
+  111:     console.error('updateCase error:', error);
+  112:     throw error;
+  113:   }
+  114: }
+  115: 
+  116: export async function deleteCase(caseId) {
+  117:   try {
+  118:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  119:       method: 'DELETE',
+  120:       headers: authHeaders()
+  121:     });
+  122:     if (!response.ok) throw new Error('Failed to delete case');
+  123:     return { success: true };
+  124:   } catch (error) {
+  125:     console.error('deleteCase error:', error);
+  126:     throw error;
+  127:   }
+  128: }
+  129: 
+  130: // ===== DEADLINES =====
+  131: export async function getDeadlines() {
+  132:   try {
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+
+---- MATCH: post | LINE: 33 | CONTEXT: 21 to 51 ----
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+   23:     return await response.json();
+   24:   } catch (error) {
+   25:     console.error('getClients error:', error);
+   26:     return [];
+   27:   }
+   28: }
+   29: 
+   30: export async function createClient(clientData) {
+   31:   try {
+   32:     const response = await fetch(`${API_URL}/clients`, {
+   33:       method: 'POST',
+   34:       headers: authHeaders(),
+   35:       body: JSON.stringify(clientData)
+   36:     });
+   37:     if (!response.ok) throw new Error('Failed to create client');
+   38:     return await response.json();
+   39:   } catch (error) {
+   40:     console.error('createClient error:', error);
+   41:     throw error;
+   42:   }
+   43: }
+   44: 
+   45: export async function updateClient(clientId, clientData) {
+   46:   try {
+   47:     const response = await fetch(`${API_URL}/clients/${clientId}`, {
+   48:       method: 'PUT',
+   49:       headers: authHeaders(),
+   50:       body: JSON.stringify(clientData)
+   51:     });
+
+---- MATCH: post | LINE: 89 | CONTEXT: 77 to 107 ----
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+  107:     });
+
+---- MATCH: post | LINE: 145 | CONTEXT: 133 to 163 ----
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+  137:     console.error('getDeadlines error:', error);
+  138:     return [];
+  139:   }
+  140: }
+  141: 
+  142: export async function createDeadline(deadlineData) {
+  143:   try {
+  144:     const response = await fetch(`${API_URL}/deadlines`, {
+  145:       method: 'POST',
+  146:       headers: authHeaders(),
+  147:       body: JSON.stringify(deadlineData)
+  148:     });
+  149:     if (!response.ok) throw new Error('Failed to create deadline');
+  150:     return await response.json();
+  151:   } catch (error) {
+  152:     console.error('createDeadline error:', error);
+  153:     throw error;
+  154:   }
+  155: }
+  156: 
+  157: export async function updateDeadline(deadlineId, deadlineData) {
+  158:   try {
+  159:     const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+  160:       method: 'PUT',
+  161:       headers: authHeaders(),
+  162:       body: JSON.stringify(deadlineData)
+  163:     });
+
+---- MATCH: post | LINE: 201 | CONTEXT: 189 to 219 ----
+  189:     const response = await fetch(`${API_URL}/documents`);
+  190:     if (!response.ok) throw new Error('Failed to fetch documents');
+  191:     return await response.json();
+  192:   } catch (error) {
+  193:     console.error('getDocuments error:', error);
+  194:     return [];
+  195:   }
+  196: }
+  197: 
+  198: export async function createDocument(documentData) {
+  199:   try {
+  200:     const response = await fetch(`${API_URL}/documents`, {
+  201:       method: 'POST',
+  202:       headers: authHeaders(),
+  203:       body: JSON.stringify(documentData)
+  204:     });
+  205:     if (!response.ok) throw new Error('Failed to create document');
+  206:     return await response.json();
+  207:   } catch (error) {
+  208:     console.error('createDocument error:', error);
+  209:     throw error;
+  210:   }
+  211: }
+  212: 
+  213: export async function deleteDocument(documentId) {
+  214:   try {
+  215:     const response = await fetch(`${API_URL}/documents/${documentId}`, {
+  216:       method: 'DELETE',
+  217:       headers: authHeaders()
+  218:     });
+  219:     if (!response.ok) throw new Error('Failed to delete document');
+
+---- MATCH: get | LINE: 7 | CONTEXT: 1 to 25 ----
+    1: // api.js - Backend API connection layer
+    2: // All requests go through here for consistency and error handling
+    3: 
+    4: const API_URL = 'http://localhost:5000/api';
+    5: 
+    6: function authHeaders() {
+    7:   const token = localStorage.getItem("token");
+    8:   const headers = { "Content-Type": "application/json" };
+    9: 
+   10:   if (token) {
+   11:     headers.Authorization = `Bearer ${token}`;
+   12:   }
+   13: 
+   14:   return headers;
+   15: }
+   16: 
+   17: 
+   18: // ===== CLIENTS =====
+   19: export async function getClients() {
+   20:   try {
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+   23:     return await response.json();
+   24:   } catch (error) {
+   25:     console.error('getClients error:', error);
+
+---- MATCH: get | LINE: 19 | CONTEXT: 7 to 37 ----
+    7:   const token = localStorage.getItem("token");
+    8:   const headers = { "Content-Type": "application/json" };
+    9: 
+   10:   if (token) {
+   11:     headers.Authorization = `Bearer ${token}`;
+   12:   }
+   13: 
+   14:   return headers;
+   15: }
+   16: 
+   17: 
+   18: // ===== CLIENTS =====
+   19: export async function getClients() {
+   20:   try {
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+   23:     return await response.json();
+   24:   } catch (error) {
+   25:     console.error('getClients error:', error);
+   26:     return [];
+   27:   }
+   28: }
+   29: 
+   30: export async function createClient(clientData) {
+   31:   try {
+   32:     const response = await fetch(`${API_URL}/clients`, {
+   33:       method: 'POST',
+   34:       headers: authHeaders(),
+   35:       body: JSON.stringify(clientData)
+   36:     });
+   37:     if (!response.ok) throw new Error('Failed to create client');
+
+---- MATCH: get | LINE: 25 | CONTEXT: 13 to 43 ----
+   13: 
+   14:   return headers;
+   15: }
+   16: 
+   17: 
+   18: // ===== CLIENTS =====
+   19: export async function getClients() {
+   20:   try {
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+   23:     return await response.json();
+   24:   } catch (error) {
+   25:     console.error('getClients error:', error);
+   26:     return [];
+   27:   }
+   28: }
+   29: 
+   30: export async function createClient(clientData) {
+   31:   try {
+   32:     const response = await fetch(`${API_URL}/clients`, {
+   33:       method: 'POST',
+   34:       headers: authHeaders(),
+   35:       body: JSON.stringify(clientData)
+   36:     });
+   37:     if (!response.ok) throw new Error('Failed to create client');
+   38:     return await response.json();
+   39:   } catch (error) {
+   40:     console.error('createClient error:', error);
+   41:     throw error;
+   42:   }
+   43: }
+
+---- MATCH: get | LINE: 75 | CONTEXT: 63 to 93 ----
+   63:       method: 'DELETE',
+   64:       headers: authHeaders()
+   65:     });
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+
+---- MATCH: get | LINE: 81 | CONTEXT: 69 to 99 ----
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+
+---- MATCH: get | LINE: 131 | CONTEXT: 119 to 149 ----
+  119:       method: 'DELETE',
+  120:       headers: authHeaders()
+  121:     });
+  122:     if (!response.ok) throw new Error('Failed to delete case');
+  123:     return { success: true };
+  124:   } catch (error) {
+  125:     console.error('deleteCase error:', error);
+  126:     throw error;
+  127:   }
+  128: }
+  129: 
+  130: // ===== DEADLINES =====
+  131: export async function getDeadlines() {
+  132:   try {
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+  137:     console.error('getDeadlines error:', error);
+  138:     return [];
+  139:   }
+  140: }
+  141: 
+  142: export async function createDeadline(deadlineData) {
+  143:   try {
+  144:     const response = await fetch(`${API_URL}/deadlines`, {
+  145:       method: 'POST',
+  146:       headers: authHeaders(),
+  147:       body: JSON.stringify(deadlineData)
+  148:     });
+  149:     if (!response.ok) throw new Error('Failed to create deadline');
+
+---- MATCH: get | LINE: 137 | CONTEXT: 125 to 155 ----
+  125:     console.error('deleteCase error:', error);
+  126:     throw error;
+  127:   }
+  128: }
+  129: 
+  130: // ===== DEADLINES =====
+  131: export async function getDeadlines() {
+  132:   try {
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+  137:     console.error('getDeadlines error:', error);
+  138:     return [];
+  139:   }
+  140: }
+  141: 
+  142: export async function createDeadline(deadlineData) {
+  143:   try {
+  144:     const response = await fetch(`${API_URL}/deadlines`, {
+  145:       method: 'POST',
+  146:       headers: authHeaders(),
+  147:       body: JSON.stringify(deadlineData)
+  148:     });
+  149:     if (!response.ok) throw new Error('Failed to create deadline');
+  150:     return await response.json();
+  151:   } catch (error) {
+  152:     console.error('createDeadline error:', error);
+  153:     throw error;
+  154:   }
+  155: }
+
+---- MATCH: get | LINE: 187 | CONTEXT: 175 to 205 ----
+  175:       method: 'DELETE',
+  176:       headers: authHeaders()
+  177:     });
+  178:     if (!response.ok) throw new Error('Failed to delete deadline');
+  179:     return { success: true };
+  180:   } catch (error) {
+  181:     console.error('deleteDeadline error:', error);
+  182:     throw error;
+  183:   }
+  184: }
+  185: 
+  186: // ===== DOCUMENTS =====
+  187: export async function getDocuments() {
+  188:   try {
+  189:     const response = await fetch(`${API_URL}/documents`);
+  190:     if (!response.ok) throw new Error('Failed to fetch documents');
+  191:     return await response.json();
+  192:   } catch (error) {
+  193:     console.error('getDocuments error:', error);
+  194:     return [];
+  195:   }
+  196: }
+  197: 
+  198: export async function createDocument(documentData) {
+  199:   try {
+  200:     const response = await fetch(`${API_URL}/documents`, {
+  201:       method: 'POST',
+  202:       headers: authHeaders(),
+  203:       body: JSON.stringify(documentData)
+  204:     });
+  205:     if (!response.ok) throw new Error('Failed to create document');
+
+---- MATCH: get | LINE: 193 | CONTEXT: 181 to 211 ----
+  181:     console.error('deleteDeadline error:', error);
+  182:     throw error;
+  183:   }
+  184: }
+  185: 
+  186: // ===== DOCUMENTS =====
+  187: export async function getDocuments() {
+  188:   try {
+  189:     const response = await fetch(`${API_URL}/documents`);
+  190:     if (!response.ok) throw new Error('Failed to fetch documents');
+  191:     return await response.json();
+  192:   } catch (error) {
+  193:     console.error('getDocuments error:', error);
+  194:     return [];
+  195:   }
+  196: }
+  197: 
+  198: export async function createDocument(documentData) {
+  199:   try {
+  200:     const response = await fetch(`${API_URL}/documents`, {
+  201:       method: 'POST',
+  202:       headers: authHeaders(),
+  203:       body: JSON.stringify(documentData)
+  204:     });
+  205:     if (!response.ok) throw new Error('Failed to create document');
+  206:     return await response.json();
+  207:   } catch (error) {
+  208:     console.error('createDocument error:', error);
+  209:     throw error;
+  210:   }
+  211: }
+
+---- MATCH: api | LINE: 1 | CONTEXT: 1 to 19 ----
+    1: // api.js - Backend API connection layer
+    2: // All requests go through here for consistency and error handling
+    3: 
+    4: const API_URL = 'http://localhost:5000/api';
+    5: 
+    6: function authHeaders() {
+    7:   const token = localStorage.getItem("token");
+    8:   const headers = { "Content-Type": "application/json" };
+    9: 
+   10:   if (token) {
+   11:     headers.Authorization = `Bearer ${token}`;
+   12:   }
+   13: 
+   14:   return headers;
+   15: }
+   16: 
+   17: 
+   18: // ===== CLIENTS =====
+   19: export async function getClients() {
+
+---- MATCH: api | LINE: 4 | CONTEXT: 1 to 22 ----
+    1: // api.js - Backend API connection layer
+    2: // All requests go through here for consistency and error handling
+    3: 
+    4: const API_URL = 'http://localhost:5000/api';
+    5: 
+    6: function authHeaders() {
+    7:   const token = localStorage.getItem("token");
+    8:   const headers = { "Content-Type": "application/json" };
+    9: 
+   10:   if (token) {
+   11:     headers.Authorization = `Bearer ${token}`;
+   12:   }
+   13: 
+   14:   return headers;
+   15: }
+   16: 
+   17: 
+   18: // ===== CLIENTS =====
+   19: export async function getClients() {
+   20:   try {
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+
+---- MATCH: api | LINE: 21 | CONTEXT: 9 to 39 ----
+    9: 
+   10:   if (token) {
+   11:     headers.Authorization = `Bearer ${token}`;
+   12:   }
+   13: 
+   14:   return headers;
+   15: }
+   16: 
+   17: 
+   18: // ===== CLIENTS =====
+   19: export async function getClients() {
+   20:   try {
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+   23:     return await response.json();
+   24:   } catch (error) {
+   25:     console.error('getClients error:', error);
+   26:     return [];
+   27:   }
+   28: }
+   29: 
+   30: export async function createClient(clientData) {
+   31:   try {
+   32:     const response = await fetch(`${API_URL}/clients`, {
+   33:       method: 'POST',
+   34:       headers: authHeaders(),
+   35:       body: JSON.stringify(clientData)
+   36:     });
+   37:     if (!response.ok) throw new Error('Failed to create client');
+   38:     return await response.json();
+   39:   } catch (error) {
+
+---- MATCH: api | LINE: 32 | CONTEXT: 20 to 50 ----
+   20:   try {
+   21:     const response = await fetch(`${API_URL}/clients`);
+   22:     if (!response.ok) throw new Error('Failed to fetch clients');
+   23:     return await response.json();
+   24:   } catch (error) {
+   25:     console.error('getClients error:', error);
+   26:     return [];
+   27:   }
+   28: }
+   29: 
+   30: export async function createClient(clientData) {
+   31:   try {
+   32:     const response = await fetch(`${API_URL}/clients`, {
+   33:       method: 'POST',
+   34:       headers: authHeaders(),
+   35:       body: JSON.stringify(clientData)
+   36:     });
+   37:     if (!response.ok) throw new Error('Failed to create client');
+   38:     return await response.json();
+   39:   } catch (error) {
+   40:     console.error('createClient error:', error);
+   41:     throw error;
+   42:   }
+   43: }
+   44: 
+   45: export async function updateClient(clientId, clientData) {
+   46:   try {
+   47:     const response = await fetch(`${API_URL}/clients/${clientId}`, {
+   48:       method: 'PUT',
+   49:       headers: authHeaders(),
+   50:       body: JSON.stringify(clientData)
+
+---- MATCH: api | LINE: 47 | CONTEXT: 35 to 65 ----
+   35:       body: JSON.stringify(clientData)
+   36:     });
+   37:     if (!response.ok) throw new Error('Failed to create client');
+   38:     return await response.json();
+   39:   } catch (error) {
+   40:     console.error('createClient error:', error);
+   41:     throw error;
+   42:   }
+   43: }
+   44: 
+   45: export async function updateClient(clientId, clientData) {
+   46:   try {
+   47:     const response = await fetch(`${API_URL}/clients/${clientId}`, {
+   48:       method: 'PUT',
+   49:       headers: authHeaders(),
+   50:       body: JSON.stringify(clientData)
+   51:     });
+   52:     if (!response.ok) throw new Error('Failed to update client');
+   53:     return await response.json();
+   54:   } catch (error) {
+   55:     console.error('updateClient error:', error);
+   56:     throw error;
+   57:   }
+   58: }
+   59: 
+   60: export async function deleteClient(clientId) {
+   61:   try {
+   62:     const response = await fetch(`${API_URL}/clients/${clientId}`, {
+   63:       method: 'DELETE',
+   64:       headers: authHeaders()
+   65:     });
+
+---- MATCH: api | LINE: 62 | CONTEXT: 50 to 80 ----
+   50:       body: JSON.stringify(clientData)
+   51:     });
+   52:     if (!response.ok) throw new Error('Failed to update client');
+   53:     return await response.json();
+   54:   } catch (error) {
+   55:     console.error('updateClient error:', error);
+   56:     throw error;
+   57:   }
+   58: }
+   59: 
+   60: export async function deleteClient(clientId) {
+   61:   try {
+   62:     const response = await fetch(`${API_URL}/clients/${clientId}`, {
+   63:       method: 'DELETE',
+   64:       headers: authHeaders()
+   65:     });
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+
+---- MATCH: api | LINE: 77 | CONTEXT: 65 to 95 ----
+   65:     });
+   66:     if (!response.ok) throw new Error('Failed to delete client');
+   67:     return { success: true };
+   68:   } catch (error) {
+   69:     console.error('deleteClient error:', error);
+   70:     throw error;
+   71:   }
+   72: }
+   73: 
+   74: // ===== CASES/MATTERS =====
+   75: export async function getCases() {
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+
+---- MATCH: api | LINE: 88 | CONTEXT: 76 to 106 ----
+   76:   try {
+   77:     const response = await fetch(`${API_URL}/cases`);
+   78:     if (!response.ok) throw new Error('Failed to fetch cases');
+   79:     return await response.json();
+   80:   } catch (error) {
+   81:     console.error('getCases error:', error);
+   82:     return [];
+   83:   }
+   84: }
+   85: 
+   86: export async function createCase(caseData) {
+   87:   try {
+   88:     const response = await fetch(`${API_URL}/cases`, {
+   89:       method: 'POST',
+   90:       headers: authHeaders(),
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+
+---- MATCH: api | LINE: 103 | CONTEXT: 91 to 121 ----
+   91:       body: JSON.stringify(caseData)
+   92:     });
+   93:     if (!response.ok) throw new Error('Failed to create case');
+   94:     return await response.json();
+   95:   } catch (error) {
+   96:     console.error('createCase error:', error);
+   97:     throw error;
+   98:   }
+   99: }
+  100: 
+  101: export async function updateCase(caseId, caseData) {
+  102:   try {
+  103:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  104:       method: 'PUT',
+  105:       headers: authHeaders(),
+  106:       body: JSON.stringify(caseData)
+  107:     });
+  108:     if (!response.ok) throw new Error('Failed to update case');
+  109:     return await response.json();
+  110:   } catch (error) {
+  111:     console.error('updateCase error:', error);
+  112:     throw error;
+  113:   }
+  114: }
+  115: 
+  116: export async function deleteCase(caseId) {
+  117:   try {
+  118:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  119:       method: 'DELETE',
+  120:       headers: authHeaders()
+  121:     });
+
+---- MATCH: api | LINE: 118 | CONTEXT: 106 to 136 ----
+  106:       body: JSON.stringify(caseData)
+  107:     });
+  108:     if (!response.ok) throw new Error('Failed to update case');
+  109:     return await response.json();
+  110:   } catch (error) {
+  111:     console.error('updateCase error:', error);
+  112:     throw error;
+  113:   }
+  114: }
+  115: 
+  116: export async function deleteCase(caseId) {
+  117:   try {
+  118:     const response = await fetch(`${API_URL}/cases/${caseId}`, {
+  119:       method: 'DELETE',
+  120:       headers: authHeaders()
+  121:     });
+  122:     if (!response.ok) throw new Error('Failed to delete case');
+  123:     return { success: true };
+  124:   } catch (error) {
+  125:     console.error('deleteCase error:', error);
+  126:     throw error;
+  127:   }
+  128: }
+  129: 
+  130: // ===== DEADLINES =====
+  131: export async function getDeadlines() {
+  132:   try {
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+
+---- MATCH: api | LINE: 133 | CONTEXT: 121 to 151 ----
+  121:     });
+  122:     if (!response.ok) throw new Error('Failed to delete case');
+  123:     return { success: true };
+  124:   } catch (error) {
+  125:     console.error('deleteCase error:', error);
+  126:     throw error;
+  127:   }
+  128: }
+  129: 
+  130: // ===== DEADLINES =====
+  131: export async function getDeadlines() {
+  132:   try {
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+  137:     console.error('getDeadlines error:', error);
+  138:     return [];
+  139:   }
+  140: }
+  141: 
+  142: export async function createDeadline(deadlineData) {
+  143:   try {
+  144:     const response = await fetch(`${API_URL}/deadlines`, {
+  145:       method: 'POST',
+  146:       headers: authHeaders(),
+  147:       body: JSON.stringify(deadlineData)
+  148:     });
+  149:     if (!response.ok) throw new Error('Failed to create deadline');
+  150:     return await response.json();
+  151:   } catch (error) {
+
+---- MATCH: api | LINE: 144 | CONTEXT: 132 to 162 ----
+  132:   try {
+  133:     const response = await fetch(`${API_URL}/deadlines`);
+  134:     if (!response.ok) throw new Error('Failed to fetch deadlines');
+  135:     return await response.json();
+  136:   } catch (error) {
+  137:     console.error('getDeadlines error:', error);
+  138:     return [];
+  139:   }
+  140: }
+  141: 
+  142: export async function createDeadline(deadlineData) {
+  143:   try {
+  144:     const response = await fetch(`${API_URL}/deadlines`, {
+  145:       method: 'POST',
+  146:       headers: authHeaders(),
+  147:       body: JSON.stringify(deadlineData)
+  148:     });
+  149:     if (!response.ok) throw new Error('Failed to create deadline');
+  150:     return await response.json();
+  151:   } catch (error) {
+  152:     console.error('createDeadline error:', error);
+  153:     throw error;
+  154:   }
+  155: }
+  156: 
+  157: export async function updateDeadline(deadlineId, deadlineData) {
+  158:   try {
+  159:     const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+  160:       method: 'PUT',
+  161:       headers: authHeaders(),
+  162:       body: JSON.stringify(deadlineData)
+
+---- MATCH: api | LINE: 159 | CONTEXT: 147 to 177 ----
+  147:       body: JSON.stringify(deadlineData)
+  148:     });
+  149:     if (!response.ok) throw new Error('Failed to create deadline');
+  150:     return await response.json();
+  151:   } catch (error) {
+  152:     console.error('createDeadline error:', error);
+  153:     throw error;
+  154:   }
+  155: }
+  156: 
+  157: export async function updateDeadline(deadlineId, deadlineData) {
+  158:   try {
+  159:     const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+  160:       method: 'PUT',
+  161:       headers: authHeaders(),
+  162:       body: JSON.stringify(deadlineData)
+  163:     });
+  164:     if (!response.ok) throw new Error('Failed to update deadline');
+  165:     return await response.json();
+  166:   } catch (error) {
+  167:     console.error('updateDeadline error:', error);
+  168:     throw error;
+  169:   }
+  170: }
+  171: 
+  172: export async function deleteDeadline(deadlineId) {
+  173:   try {
+  174:     const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+  175:       method: 'DELETE',
+  176:       headers: authHeaders()
+  177:     });
+
+---- MATCH: api | LINE: 174 | CONTEXT: 162 to 192 ----
+  162:       body: JSON.stringify(deadlineData)
+  163:     });
+  164:     if (!response.ok) throw new Error('Failed to update deadline');
+  165:     return await response.json();
+  166:   } catch (error) {
+  167:     console.error('updateDeadline error:', error);
+  168:     throw error;
+  169:   }
+  170: }
+  171: 
+  172: export async function deleteDeadline(deadlineId) {
+  173:   try {
+  174:     const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+  175:       method: 'DELETE',
+  176:       headers: authHeaders()
+  177:     });
+  178:     if (!response.ok) throw new Error('Failed to delete deadline');
+  179:     return { success: true };
+  180:   } catch (error) {
+  181:     console.error('deleteDeadline error:', error);
+  182:     throw error;
+  183:   }
+  184: }
+  185: 
+  186: // ===== DOCUMENTS =====
+  187: export async function getDocuments() {
+  188:   try {
+  189:     const response = await fetch(`${API_URL}/documents`);
+  190:     if (!response.ok) throw new Error('Failed to fetch documents');
+  191:     return await response.json();
+  192:   } catch (error) {
+
+---- MATCH: api | LINE: 189 | CONTEXT: 177 to 207 ----
+  177:     });
+  178:     if (!response.ok) throw new Error('Failed to delete deadline');
+  179:     return { success: true };
+  180:   } catch (error) {
+  181:     console.error('deleteDeadline error:', error);
+  182:     throw error;
+  183:   }
+  184: }
+  185: 
+  186: // ===== DOCUMENTS =====
+  187: export async function getDocuments() {
+  188:   try {
+  189:     const response = await fetch(`${API_URL}/documents`);
+  190:     if (!response.ok) throw new Error('Failed to fetch documents');
+  191:     return await response.json();
+  192:   } catch (error) {
+  193:     console.error('getDocuments error:', error);
+  194:     return [];
+  195:   }
+  196: }
+  197: 
+  198: export async function createDocument(documentData) {
+  199:   try {
+  200:     const response = await fetch(`${API_URL}/documents`, {
+  201:       method: 'POST',
+  202:       headers: authHeaders(),
+  203:       body: JSON.stringify(documentData)
+  204:     });
+  205:     if (!response.ok) throw new Error('Failed to create document');
+  206:     return await response.json();
+  207:   } catch (error) {
+
+---- MATCH: api | LINE: 200 | CONTEXT: 188 to 218 ----
+  188:   try {
+  189:     const response = await fetch(`${API_URL}/documents`);
+  190:     if (!response.ok) throw new Error('Failed to fetch documents');
+  191:     return await response.json();
+  192:   } catch (error) {
+  193:     console.error('getDocuments error:', error);
+  194:     return [];
+  195:   }
+  196: }
+  197: 
+  198: export async function createDocument(documentData) {
+  199:   try {
+  200:     const response = await fetch(`${API_URL}/documents`, {
+  201:       method: 'POST',
+  202:       headers: authHeaders(),
+  203:       body: JSON.stringify(documentData)
+  204:     });
+  205:     if (!response.ok) throw new Error('Failed to create document');
+  206:     return await response.json();
+  207:   } catch (error) {
+  208:     console.error('createDocument error:', error);
+  209:     throw error;
+  210:   }
+  211: }
+  212: 
+  213: export async function deleteDocument(documentId) {
+  214:   try {
+  215:     const response = await fetch(`${API_URL}/documents/${documentId}`, {
+  216:       method: 'DELETE',
+  217:       headers: authHeaders()
+  218:     });
+
+---- MATCH: api | LINE: 215 | CONTEXT: 203 to 233 ----
+  203:       body: JSON.stringify(documentData)
+  204:     });
+  205:     if (!response.ok) throw new Error('Failed to create document');
+  206:     return await response.json();
+  207:   } catch (error) {
+  208:     console.error('createDocument error:', error);
+  209:     throw error;
+  210:   }
+  211: }
+  212: 
+  213: export async function deleteDocument(documentId) {
+  214:   try {
+  215:     const response = await fetch(`${API_URL}/documents/${documentId}`, {
+  216:       method: 'DELETE',
+  217:       headers: authHeaders()
+  218:     });
+  219:     if (!response.ok) throw new Error('Failed to delete document');
+  220:     return { success: true };
+  221:   } catch (error) {
+  222:     console.error('deleteDocument error:', error);
+  223:     throw error;
+  224:   }
+  225: }
+  226: 
+  227: // ===== HEALTH CHECK =====
+  228: export async function healthCheck() {
+  229:   try {
+  230:     const response = await fetch(`${API_URL}/health`);
+  231:     return response.ok;
+  232:   } catch (error) {
+  233:     return false;
+
+---- MATCH: api | LINE: 230 | CONTEXT: 218 to 237 ----
+  218:     });
+  219:     if (!response.ok) throw new Error('Failed to delete document');
+  220:     return { success: true };
+  221:   } catch (error) {
+  222:     console.error('deleteDocument error:', error);
+  223:     throw error;
+  224:   }
+  225: }
+  226: 
+  227: // ===== HEALTH CHECK =====
+  228: export async function healthCheck() {
+  229:   try {
+  230:     const response = await fetch(`${API_URL}/health`);
+  231:     return response.ok;
+  232:   } catch (error) {
+  233:     return false;
+  234:   }
+  235: }
+  236: 
+  237: 

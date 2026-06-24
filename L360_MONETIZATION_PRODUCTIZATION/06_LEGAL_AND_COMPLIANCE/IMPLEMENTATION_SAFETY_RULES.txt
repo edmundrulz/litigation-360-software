@@ -1,0 +1,29 @@
+IMPLEMENTATION SAFETY RULES
+
+Do not directly modify existing production logic.
+
+Safe sequence:
+
+1. Create monetization documents
+2. Create subscription database schema draft
+3. Create feature matrix
+4. Create pricing table
+5. Create admin billing dashboard mockup
+6. Create trial system
+7. Create usage limits
+8. Create payment integration later
+9. Test internally
+10. Pilot with friendly firms
+
+No payment gateway should be added before:
+- user accounts are stable
+- firm isolation is stable
+- audit logs are stable
+- backups are stable
+- billing rules are confirmed
+
+Preferred future payment options:
+- Billplz
+- Stripe if available
+- Manual invoice first
+- FPX later

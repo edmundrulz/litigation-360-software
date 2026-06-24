@@ -1,0 +1,15 @@
+{
+  "phase": "10ZZG.5",
+  "name": "Trial Management API Hardening",
+  "status": "DEPLOYED",
+  "start_trial_endpoint": "ACTIVE",
+  "end_trial_endpoint": "ACTIVE",
+  "trial_status_endpoint": "ACTIVE",
+  "trial_list_endpoint": "ACTIVE",
+  "refresh_expiries_endpoint": "ACTIVE",
+  "trial_day_validation": "ACTIVE",
+  "approval_matrix_enforced": true,
+  "ground_zero_protection": true,
+  "audit_logging": true,
+  "live_tests": "PENDING"
+}

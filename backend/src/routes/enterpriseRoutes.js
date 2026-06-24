@@ -1,0 +1,12 @@
+const express = require("express");
+const Database = require("better-sqlite3");
+const { createAutomationDashboard } = require("../../enterprise/automation-dashboard/automationDashboard");
+const router = express.Router();
+const db = new Database("litigation360.db");
+const dashboard = createAutomationDashboard(db);
+router.get("/health", function(req, res) { res.json({ status: "OK", module: "Enterprise Operations API", timestamp: new Date().toISOString() }); });
+router.get("/automation", function(req, res) { res.json(dashboard.getMetrics()); });
+router.get("/events", function(req, res) { const rows = db.prepare("SELECT event_id,event_type,source_module,priority,status,retry_count,max_retries,created_at,updated_at,processed_at FROM automation_events ORDER BY id DESC LIMIT 50").all(); res.json({ count: rows.length, events: rows }); });
+router.get("/deadletters", function(req, res) { const rows = db.prepare("SELECT event_id,event_type,source_module,failure_reason,retry_count,created_at,resolved_at FROM automation_dead_letters ORDER BY id DESC LIMIT 50").all(); res.json({ count: rows.length, deadLetters: rows }); });
+router.get("/metrics", function(req, res) { const metrics = dashboard.getMetrics(); const health = metrics.failed === 0 ? "HEALTHY" : "DEGRADED"; res.json({ health: health, automation: metrics, timestamp: new Date().toISOString() }); });
+module.exports = router;

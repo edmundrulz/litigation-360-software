@@ -1,0 +1,3 @@
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\litigation360.db
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\snapshots\phase6c-complete\backend\litigation360.db
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\snapshots\phase7b-security-complete\backend\litigation360.db

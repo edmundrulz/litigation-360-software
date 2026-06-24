@@ -1,0 +1,86 @@
+1590:     ];
+1591: 
+1592:     requiredFieldChecks.forEach(([fieldName, label]) => {
+1593:       const value = String(payload[fieldName] || "").trim();
+1594: 
+1595:       if (
+1596:         !value ||
+1597:         value === "Not Applicable / N/A" ||
+1598:         value === "Unknown" ||
+1599:         value === "To be confirmed"
+1600:       ) {
+1601:         errors.push(label + " is mandatory for a complete legal client profile.");
+1602:       }
+1603:     });
+1604: 
+1605:     if (isNricKind(payload.identificationKind) && !String(payload.gender || "").trim()) {
+1606:       errors.push("Gender is mandatory for NRIC records and should auto-populate from the final NRIC digit.");
+1607:     }
+1608: 
+1609:     const flags = [];
+1610:     // V8_2_MANDATORY_VALIDATION_START
+1611:     const isBlank = (value) => String(value || "").trim() === "";
+1612:     const missingMandatory = [];
+1613: 
+1614:     if (isBlank(payload.titlePrefix)) {
+1615:       missingMandatory.push("Title Prefix");
+1616:     }
+1617: 
+1618:     if (isBlank(payload.givenName)) {
+1619:       missingMandatory.push("Given Name");
+1620:     }
+1621: 
+1622:     if (isBlank(payload.gender)) {
+1623:       missingMandatory.push("Gender");
+1624:     }
+1625: 
+1626:     if (isBlank(payload.residencyStatus)) {
+1627:       missingMandatory.push("Immigration / Documented Status");
+1628:     }
+1629: 
+1630:     if (isBlank(payload.identificationKind)) {
+1631:       missingMandatory.push("ID Type");
+1632:     }
+1633: 
+1634:     if (isBlank(payload.identityCardColour)) {
+1635:       missingMandatory.push("Identity Card Colour / Document Class");
+1636:     }
+1637: 
+1638:     if (isBlank(payload.nricPassportNumber)) {
+1639:       missingMandatory.push("NRIC No. / Passport No.");
+1640:     }
+1641: 
+1642:     if (isBlank(payload.email) && isBlank(payload.phoneNumber)) {
+1643:       missingMandatory.push("Email Address or Primary Phone Number");
+1644:     }
+1645: 
+1646:     if (isBlank(payload.country)) {
+1647:       missingMandatory.push("Country");
+1648:     }
+1649: 
+1650:     if (missingMandatory.length > 0) {
+1651:       errors.push("Mandatory client intake fields missing: " + missingMandatory.join(", ") + ".");
+1652:     }
+1653: 
+1654:     if (!isBlank(payload.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+1655:       errors.push("Email Address format is invalid. Example: client@example.com.");
+1656:     }
+1657:     // V8_2_MANDATORY_VALIDATION_END
+1658: 
+1659:     function isBlank(value) {
+1660:       return !String(value || "").trim();
+1661:     }
+1662: 
+1663:     function isUnavailablePlaceholder(value) {
+1664:       const safeValue = String(value || "").trim();
+1665:       return (
+1666:         !safeValue ||
+1667:         safeValue === "Not Applicable / N/A" ||
+1668:         safeValue === "Unknown" ||
+1669:         safeValue === "To be confirmed" ||
+1670:         safeValue === "Auto / Select"
+1671:       );
+1672:     }
+1673: 
+1674:     function requireMandatory(label, value) {
+1675:       if (isUnavailablePlaceholder(value)) {

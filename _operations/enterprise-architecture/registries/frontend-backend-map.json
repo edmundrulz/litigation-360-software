@@ -1,0 +1,190 @@
+{
+  "registry": "frontend-backend-map",
+  "generatedAt": "2026-06-19T06:02:48.075Z",
+  "references": [
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/monitoring/health",
+      "area": "Monitoring"
+    },
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/hardening/deployment/readiness",
+      "area": "Deployment"
+    },
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/backup-recovery/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/performance/health",
+      "area": "Performance"
+    },
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/governance/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/maps/health",
+      "area": "Maps"
+    },
+    {
+      "frontendFile": "frontend/src/App.jsx",
+      "endpoint": "/api/enterprise/navigation/health",
+      "area": "Navigation"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/monitoring/health",
+      "area": "Monitoring"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/hardening/deployment/readiness",
+      "area": "Deployment"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/backup-recovery/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/performance/health",
+      "area": "Performance"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/governance/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/autonomous/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/maps/health",
+      "area": "Maps"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/navigation/health",
+      "area": "Navigation"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/predictive/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/assistant/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/command-centre/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/documents/lifecycle/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/court-operations/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/connectivityValidatorApi.js",
+      "endpoint": "/api/enterprise/matters/intelligence/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/monitoring/health",
+      "area": "Monitoring"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/monitoring/dashboard",
+      "area": "Monitoring"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/hardening/deployment/readiness",
+      "area": "Deployment"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/backup-recovery/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/performance/health",
+      "area": "Performance"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/governance/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/autonomous/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/maps/health",
+      "area": "Maps"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/navigation/health",
+      "area": "Navigation"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/predictive/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/assistant/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/command-centre/health",
+      "area": "Enterprise"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/monitoring/dashboard",
+      "area": "Monitoring"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/performance/benchmark",
+      "area": "Performance"
+    },
+    {
+      "frontendFile": "frontend/src/enterprise/api/enterpriseApi.js",
+      "endpoint": "/api/enterprise/hardening/deployment/readiness",
+      "area": "Deployment"
+    }
+  ],
+  "totals": {
+    "frontendFilesScanned": 32,
+    "enterpriseApiReferences": 36
+  }
+}

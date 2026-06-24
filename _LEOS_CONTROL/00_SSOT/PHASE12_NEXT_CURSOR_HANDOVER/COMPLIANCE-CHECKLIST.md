@@ -1,0 +1,30 @@
+﻿# COMPLIANCE CHECKLIST
+
+Generated at:
+2026-06-23 12:23:24 +08:00
+
+## New Work Acceptance Criteria
+
+Before any new work is accepted:
+
+- [ ] Exact project root is stated.
+- [ ] Exact target files are stated.
+- [ ] Target zone is classified.
+- [ ] Risk level is stated.
+- [ ] Backup plan is stated.
+- [ ] Verification command is stated.
+- [ ] Rollback instructions are stated.
+- [ ] Real client data is not used.
+- [ ] Existing working behavior is preserved.
+- [ ] Decision log is updated if decision changes.
+- [ ] Variation registry is updated if a branch/option is introduced.
+- [ ] Audit log is updated.
+- [ ] Live monitor status is updated.
+
+## Current Phase Compliance
+
+Current approved phase:
+Documentation/control-layer only.
+
+Production changes:
+Locked.

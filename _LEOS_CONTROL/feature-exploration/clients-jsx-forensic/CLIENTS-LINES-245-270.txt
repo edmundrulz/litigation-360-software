@@ -1,0 +1,26 @@
+ 245:   "Foreigner",
+ 246:   "South Asian",
+ 247:   "Southeast Asian",
+ 248:   "East Asian",
+ 249:   "Arab / Middle Eastern",
+ 250:   "European / Caucasian",
+ 251:   "African",
+ 252:   "Mixed / Multi-ethnic",
+ 253:   "Other / Self Describe",
+ 254:   "Unknown",
+ 255:   "To be confirmed"
+ 256: ];
+ 257: 
+ 258: const COUNTRY_OPTIONS = [
+ 259:   "Not Applicable / N/A",
+ 260:   "Malaysia",
+ 261:   "Singapore",
+ 262:   "Australia",
+ 263:   "Bangladesh",
+ 264:   "Brunei",
+ 265:   "Canada",
+ 266:   "China",
+ 267:   "France",
+ 268:   "Germany",
+ 269:   "India",
+ 270:   "Indonesia",

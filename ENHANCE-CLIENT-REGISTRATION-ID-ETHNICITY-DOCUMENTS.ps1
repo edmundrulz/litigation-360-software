@@ -1,0 +1,1898 @@
+# ============================================================
+# LITIGATION 360
+# CLIENT REGISTRATION: ETHNICITY + ID/PASSPORT + DOCUMENT METADATA + ADDRESS ENHANCEMENT
+#
+# Purpose:
+#   Replaces frontend\src\pages\Clients.jsx with a safer enhanced
+#   client registration interface that supports:
+#   - Malaysian/Singapore/common ethnicity selection with Foreigner option
+#   - Nationality field when Foreigner or non-Malaysian status is selected
+#   - NRIC / Passport / PR / visa status metadata
+#   - Document attachment metadata matched to client record
+#   - Structured phone/WhatsApp country code formatting
+#   - Structured address fields including continent
+#   - Client search across initials/gender/name/surname/ID/passport/phone
+#   - IC/NRIC masked in table display
+#   - Gender auto-suggest from final Malaysian NRIC digit, manually adjustable
+#
+# Safety:
+#   - Backs up Clients.jsx first
+#   - Backs up CSS first
+#   - Modifies frontend only
+#   - Does NOT modify App.jsx
+#   - Does NOT modify backend
+#   - Does NOT modify database
+#   - Does NOT delete files
+#
+# Privacy:
+#   This UI records selected document metadata/file names for matching.
+#   It does NOT store scanned NRIC/passport file contents in localStorage.
+#   Full secure document upload/storage needs a backend upload endpoint later.
+# ============================================================
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+function Write-Step {
+    param([string]$Message)
+    Write-Host "[CLIENT REGISTRATION ENHANCEMENT] $Message" -ForegroundColor Cyan
+}
+
+function Write-Pass {
+    param([string]$Message)
+    Write-Host "[PASS] $Message" -ForegroundColor Green
+}
+
+function Write-Warn {
+    param([string]$Message)
+    Write-Host "[WARN] $Message" -ForegroundColor Yellow
+}
+
+function Fail {
+    param([string]$Message)
+    throw "[FAIL] $Message"
+}
+
+$ProjectRoot = "C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software"
+
+if (!(Test-Path -LiteralPath $ProjectRoot -PathType Container)) {
+    $ProjectRoot = (Get-Location).Path
+}
+
+$ClientsPath = Join-Path $ProjectRoot "frontend\src\pages\Clients.jsx"
+$FrontendSrc = Join-Path $ProjectRoot "frontend\src"
+$AppCss = Join-Path $FrontendSrc "App.css"
+$IndexCss = Join-Path $FrontendSrc "index.css"
+$Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
+
+if (!(Test-Path -LiteralPath $ClientsPath -PathType Leaf)) {
+    Fail "Could not find Clients.jsx at: $ClientsPath"
+}
+
+if (Test-Path -LiteralPath $AppCss -PathType Leaf) {
+    $CssPath = $AppCss
+} elseif (Test-Path -LiteralPath $IndexCss -PathType Leaf) {
+    $CssPath = $IndexCss
+} else {
+    Fail "Could not find App.css or index.css in frontend\src"
+}
+
+Write-Step "Target Clients.jsx:"
+Write-Host $ClientsPath -ForegroundColor Green
+
+$ClientsBackup = "$ClientsPath.BACKUP_BEFORE_CLIENT_REGISTRATION_ENHANCEMENT_$Stamp"
+Copy-Item -LiteralPath $ClientsPath -Destination $ClientsBackup -Force
+Write-Pass "Clients.jsx backup created:"
+Write-Host $ClientsBackup -ForegroundColor Green
+
+$CssBackup = "$CssPath.BACKUP_BEFORE_CLIENT_REGISTRATION_ENHANCEMENT_$Stamp"
+Copy-Item -LiteralPath $CssPath -Destination $CssBackup -Force
+Write-Pass "CSS backup created:"
+Write-Host $CssBackup -ForegroundColor Green
+
+$ClientsCode = @'
+import { useEffect, useMemo, useState } from "react";
+
+const API_URL = "/api/clients";
+const LOCAL_STORAGE_KEY = "litigation360.clients.registration.v2";
+
+const EMPTY_CLIENT = {
+  id: "",
+  givenName: "",
+  surname: "",
+  initials: "",
+  gender: "",
+  genderSource: "auto",
+  ethnicity: "",
+  ethnicityOther: "",
+  nationality: "",
+  residencyStatus: "Malaysian Citizen",
+  identificationKind: "Malaysian NRIC",
+  nricPassportNumber: "",
+  email: "",
+  phoneCountryCode: "+60",
+  phoneNumber: "",
+  whatsappCountryCode: "+60",
+  whatsappNumber: "",
+  addressType: "Residential",
+  country: "Malaysia",
+  continent: "Asia",
+  townCity: "",
+  district: "",
+  streetAddress: "",
+  buildingHouseNo: "",
+  buildingHouseName: "",
+  postcode: "",
+  documentType: "NRIC",
+  documentStatus: "Pending Verification",
+  documentAttachmentNames: [],
+  documentReferenceNote: "",
+  createdAt: "",
+  updatedAt: ""
+};
+
+const MALAYSIA_ETHNICITY_OPTIONS = [
+  "Malay",
+  "Chinese Malaysian",
+  "Indian Malaysian",
+  "Orang Asli",
+  "Negrito",
+  "Senoi",
+  "Proto-Malay / Aboriginal Malay",
+  "Iban",
+  "Bidayuh",
+  "Kadazan-Dusun",
+  "Bajau",
+  "Murut",
+  "Rungus",
+  "Melanau",
+  "Kayan",
+  "Kenyah",
+  "Kelabit",
+  "Lun Bawang / Lundayeh",
+  "Penan",
+  "Bisaya",
+  "Kedayan",
+  "Brunei Malay",
+  "Other Bumiputera Sabah",
+  "Other Bumiputera Sarawak",
+  "Sikh / Punjabi Malaysian",
+  "Eurasian Malaysian",
+  "Portuguese Eurasian",
+  "Peranakan / Baba Nyonya",
+  "Chitty",
+  "Jawi Peranakan",
+  "Thai Malaysian",
+  "Bugis",
+  "Javanese",
+  "Minangkabau",
+  "Acehnese",
+  "Banjar",
+  "Other Malaysian Ethnicity"
+];
+
+const SINGAPORE_ETHNICITY_OPTIONS = [
+  "Chinese Singaporean",
+  "Malay Singaporean",
+  "Indian Singaporean",
+  "Eurasian Singaporean",
+  "Peranakan Singaporean",
+  "Hokkien",
+  "Teochew",
+  "Cantonese",
+  "Hakka",
+  "Hainanese",
+  "Foochow",
+  "Tamil",
+  "Malayalee",
+  "Punjabi / Sikh Singaporean",
+  "Bengali Singaporean",
+  "Sri Lankan / Ceylonese",
+  "Javanese Singaporean",
+  "Boyanese / Baweanese",
+  "Arab Singaporean",
+  "Other Singapore Ethnicity"
+];
+
+const WORLD_ETHNICITY_OPTIONS = [
+  "Foreigner",
+  "African",
+  "Arab / Middle Eastern",
+  "Central Asian",
+  "East Asian",
+  "European / Caucasian",
+  "Indigenous / Native",
+  "Latino / Hispanic",
+  "Mixed / Multi-ethnic",
+  "Pacific Islander",
+  "South Asian",
+  "Southeast Asian",
+  "Other / Self Describe"
+];
+
+const ETHNICITY_OPTIONS = [
+  ...MALAYSIA_ETHNICITY_OPTIONS,
+  ...SINGAPORE_ETHNICITY_OPTIONS,
+  ...WORLD_ETHNICITY_OPTIONS
+];
+
+const COUNTRY_OPTIONS = [
+  "Malaysia",
+  "Singapore",
+  "Indonesia",
+  "Thailand",
+  "Brunei",
+  "Philippines",
+  "Vietnam",
+  "Cambodia",
+  "Laos",
+  "Myanmar",
+  "India",
+  "Pakistan",
+  "Bangladesh",
+  "Sri Lanka",
+  "China",
+  "Japan",
+  "South Korea",
+  "Australia",
+  "New Zealand",
+  "United Kingdom",
+  "Ireland",
+  "United States",
+  "Canada",
+  "United Arab Emirates",
+  "Saudi Arabia",
+  "Qatar",
+  "Kuwait",
+  "Bahrain",
+  "Oman",
+  "Germany",
+  "France",
+  "Italy",
+  "Spain",
+  "Netherlands",
+  "Switzerland",
+  "Sweden",
+  "Norway",
+  "Denmark",
+  "South Africa",
+  "Nigeria",
+  "Egypt",
+  "Kenya",
+  "Brazil",
+  "Mexico",
+  "Argentina"
+];
+
+const CONTINENT_OPTIONS = [
+  "Asia",
+  "Europe",
+  "Africa",
+  "North America",
+  "South America",
+  "Oceania / Australia",
+  "Antarctica",
+  "Other / Unknown"
+];
+
+const COUNTRY_TO_CONTINENT = {
+  Malaysia: "Asia",
+  Singapore: "Asia",
+  Indonesia: "Asia",
+  Thailand: "Asia",
+  Brunei: "Asia",
+  Philippines: "Asia",
+  Vietnam: "Asia",
+  Cambodia: "Asia",
+  Laos: "Asia",
+  Myanmar: "Asia",
+  India: "Asia",
+  Pakistan: "Asia",
+  Bangladesh: "Asia",
+  "Sri Lanka": "Asia",
+  China: "Asia",
+  Japan: "Asia",
+  "South Korea": "Asia",
+  "United Arab Emirates": "Asia",
+  "Saudi Arabia": "Asia",
+  Qatar: "Asia",
+  Kuwait: "Asia",
+  Bahrain: "Asia",
+  Oman: "Asia",
+  Australia: "Oceania / Australia",
+  "New Zealand": "Oceania / Australia",
+  "United Kingdom": "Europe",
+  Ireland: "Europe",
+  Germany: "Europe",
+  France: "Europe",
+  Italy: "Europe",
+  Spain: "Europe",
+  Netherlands: "Europe",
+  Switzerland: "Europe",
+  Sweden: "Europe",
+  Norway: "Europe",
+  Denmark: "Europe",
+  "United States": "North America",
+  Canada: "North America",
+  Mexico: "North America",
+  Brazil: "South America",
+  Argentina: "South America",
+  "South Africa": "Africa",
+  Nigeria: "Africa",
+  Egypt: "Africa",
+  Kenya: "Africa"
+};
+
+const RESIDENCY_STATUS_OPTIONS = [
+  "Malaysian Citizen",
+  "Malaysia Permanent Resident",
+  "Singapore Citizen",
+  "Singapore Permanent Resident",
+  "Foreigner",
+  "Employment Pass",
+  "Work Permit",
+  "Professional Visit Pass",
+  "Student Pass",
+  "Dependent Pass",
+  "Long Term Social Visit Pass",
+  "MM2H / Long Stay",
+  "Refugee / UNHCR Documented",
+  "Other Immigration / Documented Status"
+];
+
+const IDENTIFICATION_KIND_OPTIONS = [
+  "Malaysian NRIC",
+  "Singapore NRIC / FIN",
+  "Passport",
+  "Permanent Resident Document",
+  "Work Visa / Work Permit",
+  "Student Pass",
+  "Dependent Pass",
+  "Other Official ID"
+];
+
+const DOCUMENT_TYPE_OPTIONS = [
+  "NRIC",
+  "NRIC Front",
+  "NRIC Back",
+  "Passport Bio Page",
+  "Passport Visa Page",
+  "Permanent Resident Document",
+  "Citizen / PR Proof",
+  "Work Visa / Work Permit",
+  "Student Pass",
+  "Dependent Pass",
+  "Address Proof",
+  "Other Supporting Document"
+];
+
+const DOCUMENT_STATUS_OPTIONS = [
+  "Pending Verification",
+  "Verified",
+  "Rejected / Needs Resubmission",
+  "Expired",
+  "Not Required"
+];
+
+const ADDRESS_TYPE_OPTIONS = [
+  "Residential",
+  "Commercial",
+  "Registered Office",
+  "Correspondence",
+  "International",
+  "Temporary",
+  "Other"
+];
+
+const COUNTRY_CODE_OPTIONS = [
+  "+60 Malaysia",
+  "+65 Singapore",
+  "+62 Indonesia",
+  "+66 Thailand",
+  "+673 Brunei",
+  "+63 Philippines",
+  "+84 Vietnam",
+  "+91 India",
+  "+92 Pakistan",
+  "+880 Bangladesh",
+  "+94 Sri Lanka",
+  "+86 China",
+  "+81 Japan",
+  "+82 South Korea",
+  "+61 Australia",
+  "+64 New Zealand",
+  "+44 United Kingdom",
+  "+1 United States / Canada",
+  "+971 United Arab Emirates",
+  "+966 Saudi Arabia",
+  "+974 Qatar",
+  "+965 Kuwait",
+  "+973 Bahrain",
+  "+968 Oman"
+];
+
+function makeId() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+
+  return "client-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+}
+
+function getClientId(client) {
+  return client.id || client._id || "";
+}
+
+function splitLegacyName(name) {
+  const safeName = String(name || "").trim();
+
+  if (!safeName) {
+    return { givenName: "", surname: "" };
+  }
+
+  const parts = safeName.split(/\s+/);
+
+  if (parts.length === 1) {
+    return { givenName: parts[0], surname: "" };
+  }
+
+  return {
+    givenName: parts.slice(0, -1).join(" "),
+    surname: parts[parts.length - 1]
+  };
+}
+
+function makeInitials(givenName, surname) {
+  const first = String(givenName || "").trim().charAt(0);
+  const last = String(surname || "").trim().charAt(0);
+  return (first + last).toUpperCase();
+}
+
+function isNricKind(kind) {
+  return String(kind || "").toLowerCase().includes("nric");
+}
+
+function maskIdentification(value, kind) {
+  const raw = String(value || "").trim();
+
+  if (!raw) {
+    return "-";
+  }
+
+  if (isNricKind(kind)) {
+    return "******-**-****";
+  }
+
+  if (raw.length <= 4) {
+    return "****";
+  }
+
+  return "******" + raw.slice(-4);
+}
+
+function deriveGenderFromIdentification(value, kind) {
+  if (!isNricKind(kind)) {
+    return "";
+  }
+
+  const digits = String(value || "").replace(/\D/g, "");
+
+  if (!digits) {
+    return "";
+  }
+
+  const lastDigit = Number(digits.charAt(digits.length - 1));
+
+  if (Number.isNaN(lastDigit)) {
+    return "";
+  }
+
+  return lastDigit % 2 === 1 ? "Male" : "Female";
+}
+
+function cleanCountryCode(value) {
+  const raw = String(value || "").trim();
+  const match = raw.match(/\+\d+/);
+  return match ? match[0] : raw || "+60";
+}
+
+function normalizePhoneForLinks(countryCode, number) {
+  const code = cleanCountryCode(countryCode).replace(/\D/g, "");
+  let digits = String(number || "").replace(/\D/g, "");
+
+  if (!digits) {
+    return "";
+  }
+
+  if (digits.startsWith(code)) {
+    return digits;
+  }
+
+  if (digits.startsWith("0")) {
+    digits = digits.slice(1);
+  }
+
+  return code + digits;
+}
+
+function formatPhone(countryCode, number) {
+  const normalized = normalizePhoneForLinks(countryCode, number);
+
+  if (!normalized) {
+    return "-";
+  }
+
+  return "+" + normalized;
+}
+
+function formatDateTime(value) {
+  if (!value) {
+    return "-";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleString();
+}
+
+function formatAddress(client) {
+  const parts = [
+    client.addressType,
+    client.buildingHouseNo,
+    client.buildingHouseName,
+    client.streetAddress,
+    client.district,
+    client.townCity,
+    client.postcode,
+    client.country,
+    client.continent
+  ].filter(Boolean);
+
+  return parts.length ? parts.join(", ") : "-";
+}
+
+function normalizeDocumentNames(value) {
+  if (Array.isArray(value)) {
+    return value.filter(Boolean);
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  return [String(value)];
+}
+
+function readLocalClients() {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+    if (!raw) {
+      return [];
+    }
+
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.map(normalizeClient) : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function writeLocalClients(list) {
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list.map(normalizeClient)));
+  } catch (error) {
+    console.warn("Local client fallback could not be written.", error);
+  }
+}
+
+function mergeClients(primaryList, secondaryList) {
+  const map = new Map();
+
+  [...secondaryList, ...primaryList].forEach((client) => {
+    const normalized = normalizeClient(client);
+    const key =
+      getClientId(normalized) ||
+      normalized.email ||
+      normalized.phoneNumber ||
+      normalized.nricPassportNumber ||
+      makeId();
+
+    map.set(key, {
+      ...normalized,
+      id: normalized.id || key
+    });
+  });
+
+  return Array.from(map.values());
+}
+
+function normalizeClient(rawClient) {
+  const source = rawClient || {};
+  const legacyName = splitLegacyName(source.name);
+  const givenName = source.givenName || source.firstName || legacyName.givenName || "";
+  const surname = source.surname || source.lastName || legacyName.surname || "";
+  const identificationKind =
+    source.identificationKind ||
+    source.idType ||
+    source.documentIdType ||
+    (source.passportNumber ? "Passport" : "Malaysian NRIC");
+
+  const nricPassportNumber =
+    source.nricPassportNumber ||
+    source.identificationNumber ||
+    source.icNumber ||
+    source.icNo ||
+    source.ic ||
+    source.passportNumber ||
+    source.passport ||
+    "";
+
+  const gender = source.gender || deriveGenderFromIdentification(nricPassportNumber, identificationKind);
+
+  return {
+    ...EMPTY_CLIENT,
+    ...source,
+    id: getClientId(source) || source.id || "",
+    givenName,
+    surname,
+    initials: source.initials || makeInitials(givenName, surname),
+    gender,
+    genderSource: source.genderSource || (source.gender ? "manual" : "auto"),
+    ethnicity: source.ethnicity || "",
+    ethnicityOther: source.ethnicityOther || "",
+    nationality: source.nationality || "",
+    residencyStatus: source.residencyStatus || source.immigrationStatus || "Malaysian Citizen",
+    identificationKind,
+    nricPassportNumber,
+    icNumber: nricPassportNumber,
+    passportNumber: source.passportNumber || (identificationKind === "Passport" ? nricPassportNumber : ""),
+    email: source.email || "",
+    phoneCountryCode: source.phoneCountryCode || "+60",
+    phoneNumber: source.phoneNumber || source.phone || "",
+    whatsappCountryCode: source.whatsappCountryCode || source.phoneCountryCode || "+60",
+    whatsappNumber: source.whatsappNumber || source.whatsapp || source.phoneNumber || source.phone || "",
+    addressType: source.addressType || "Residential",
+    country: source.country || "Malaysia",
+    continent: source.continent || COUNTRY_TO_CONTINENT[source.country] || "Asia",
+    townCity: source.townCity || source.city || source.town || "",
+    district: source.district || "",
+    streetAddress: source.streetAddress || source.address || "",
+    buildingHouseNo: source.buildingHouseNo || source.houseNo || "",
+    buildingHouseName: source.buildingHouseName || source.buildingName || "",
+    postcode: source.postcode || source.postalCode || "",
+    documentType: source.documentType || "NRIC",
+    documentStatus: source.documentStatus || "Pending Verification",
+    documentAttachmentNames: normalizeDocumentNames(source.documentAttachmentNames || source.documentAttachmentName),
+    documentReferenceNote: source.documentReferenceNote || "",
+    createdAt: source.createdAt || source.createdOn || source.created || "",
+    updatedAt: source.updatedAt || source.modifiedOn || source.changedOn || source.editedOn || ""
+  };
+}
+
+function buildPayload(form, existingClient) {
+  const now = new Date().toISOString();
+  const givenName = String(form.givenName || "").trim();
+  const surname = String(form.surname || "").trim();
+  const fullName = [givenName, surname].filter(Boolean).join(" ");
+  const existing = existingClient ? normalizeClient(existingClient) : null;
+  const identificationKind = form.identificationKind || "Malaysian NRIC";
+  const nricPassportNumber = String(form.nricPassportNumber || "").trim();
+  const gender = form.gender || deriveGenderFromIdentification(nricPassportNumber, identificationKind);
+  const initials = makeInitials(givenName, surname);
+
+  return {
+    ...(existing || {}),
+    ...form,
+    id: existing ? getClientId(existing) : form.id || makeId(),
+    name: fullName,
+    givenName,
+    firstName: givenName,
+    surname,
+    lastName: surname,
+    initials,
+    gender,
+    genderSource: form.genderSource || "manual",
+    identificationKind,
+    nricPassportNumber,
+    identificationNumber: nricPassportNumber,
+    icNumber: identificationKind.includes("NRIC") ? nricPassportNumber : "",
+    icMasked: maskIdentification(nricPassportNumber, identificationKind),
+    passportNumber: identificationKind === "Passport" ? nricPassportNumber : form.passportNumber || "",
+    phone: formatPhone(form.phoneCountryCode, form.phoneNumber),
+    phoneNumber: form.phoneNumber,
+    whatsapp: formatPhone(form.whatsappCountryCode, form.whatsappNumber),
+    whatsappNumber: form.whatsappNumber,
+    address: formatAddress(form),
+    createdAt: existing && existing.createdAt ? existing.createdAt : now,
+    updatedAt: now
+  };
+}
+
+function extractSavedClient(responseData, fallbackPayload) {
+  if (!responseData) {
+    return fallbackPayload;
+  }
+
+  if (Array.isArray(responseData)) {
+    return fallbackPayload;
+  }
+
+  return normalizeClient(
+    responseData.client ||
+      responseData.data ||
+      responseData.record ||
+      responseData.result ||
+      responseData
+  );
+}
+
+export default function Clients() {
+  const [clients, setClients] = useState([]);
+  const [form, setForm] = useState(EMPTY_CLIENT);
+  const [editingId, setEditingId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState("info");
+  const [isSaving, setIsSaving] = useState(false);
+
+  const showNationalityField =
+    form.ethnicity === "Foreigner" ||
+    form.residencyStatus !== "Malaysian Citizen";
+
+  function showStatus(message, type = "info") {
+    setStatus(message);
+    setStatusType(type);
+  }
+
+  async function loadClients() {
+    const localClients = readLocalClients();
+
+    try {
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        throw new Error("Unable to load clients");
+      }
+
+      const data = await response.json();
+      const list = Array.isArray(data) ? data : data.clients || data.data || [];
+      const merged = mergeClients(list, localClients);
+
+      setClients(merged);
+      writeLocalClients(merged);
+
+      if (merged.length === 0) {
+        showStatus("No clients have been added yet.", "info");
+      } else {
+        showStatus("Client list loaded.", "success");
+      }
+    } catch (error) {
+      setClients(localClients);
+
+      if (localClients.length > 0) {
+        showStatus("Showing locally saved clients. Backend client list could not be loaded.", "warning");
+      } else {
+        showStatus("No clients loaded. Backend /api/clients may be unavailable.", "warning");
+      }
+    }
+  }
+
+  useEffect(() => {
+    loadClients();
+  }, []);
+
+  function updateForm(field, value) {
+    setForm((previous) => {
+      const next = {
+        ...previous,
+        [field]: value
+      };
+
+      if (field === "givenName" || field === "surname") {
+        next.initials = makeInitials(
+          field === "givenName" ? value : previous.givenName,
+          field === "surname" ? value : previous.surname
+        );
+      }
+
+      if (field === "residencyStatus") {
+        if (value === "Malaysian Citizen") {
+          next.identificationKind = "Malaysian NRIC";
+          next.documentType = "NRIC";
+          next.phoneCountryCode = "+60";
+          next.whatsappCountryCode = "+60";
+          next.country = "Malaysia";
+          next.continent = "Asia";
+        } else if (value === "Singapore Citizen" || value === "Singapore Permanent Resident") {
+          next.identificationKind = "Singapore NRIC / FIN";
+          next.documentType = "Citizen / PR Proof";
+          next.phoneCountryCode = "+65";
+          next.whatsappCountryCode = "+65";
+          next.country = "Singapore";
+          next.continent = "Asia";
+        } else {
+          next.identificationKind = "Passport";
+          next.documentType = "Passport Bio Page";
+        }
+      }
+
+      if (field === "identificationKind" || field === "nricPassportNumber") {
+        const kind = field === "identificationKind" ? value : previous.identificationKind;
+        const idValue = field === "nricPassportNumber" ? value : previous.nricPassportNumber;
+        const suggestedGender = deriveGenderFromIdentification(idValue, kind);
+
+        if (previous.genderSource !== "manual") {
+          next.gender = suggestedGender;
+          next.genderSource = "auto";
+        }
+      }
+
+      if (field === "gender") {
+        next.genderSource = "manual";
+      }
+
+      if (field === "country") {
+        next.continent = COUNTRY_TO_CONTINENT[value] || previous.continent || "";
+      }
+
+      if (field === "ethnicity" && value === "Foreigner" && !previous.nationality) {
+        next.nationality = "";
+      }
+
+      return next;
+    });
+  }
+
+  function updateDocumentFiles(event) {
+    const files = Array.from(event.target.files || []);
+    const names = files.map((file) => file.name);
+
+    setForm((previous) => ({
+      ...previous,
+      documentAttachmentNames: names
+    }));
+
+    if (names.length > 0) {
+      showStatus(
+        "Document selected and matched to this client form: " + names.join(", ") + ". File contents require secure backend upload storage.",
+        "info"
+      );
+    }
+  }
+
+  function resetForm() {
+    setForm(EMPTY_CLIENT);
+    setEditingId("");
+  }
+
+  function upsertClientInUi(savedClient) {
+    const normalizedSaved = normalizeClient(savedClient);
+    const savedId = getClientId(normalizedSaved);
+
+    setClients((previousClients) => {
+      const exists = previousClients.some((client) => getClientId(client) === savedId);
+      const nextClients = exists
+        ? previousClients.map((client) => (getClientId(client) === savedId ? normalizedSaved : client))
+        : [normalizedSaved, ...previousClients];
+
+      writeLocalClients(nextClients);
+      return nextClients;
+    });
+  }
+
+  async function saveClient(event) {
+    event.preventDefault();
+
+    if (!form.givenName.trim()) {
+      showStatus("Given Name is required before adding a client.", "error");
+      return;
+    }
+
+    if (!form.nricPassportNumber.trim()) {
+      showStatus("NRIC No.# / Passport No.# is required before adding a client.", "error");
+      return;
+    }
+
+    if (showNationalityField && !form.nationality.trim()) {
+      showStatus("Nationality / country of origin is required for foreign or non-Malaysian status.", "error");
+      return;
+    }
+
+    setIsSaving(true);
+
+    const existingClient = clients.find((client) => getClientId(client) === editingId);
+    const payload = buildPayload(form, existingClient);
+
+    try {
+      const response = await fetch(editingId ? API_URL + "/" + editingId : API_URL, {
+        method: editingId ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let responseData = null;
+
+      try {
+        responseData = await response.json();
+      } catch (jsonError) {
+        responseData = null;
+      }
+
+      if (!response.ok) {
+        throw new Error("Save failed");
+      }
+
+      const savedClient = extractSavedClient(responseData, payload);
+      const normalizedSaved = {
+        ...payload,
+        ...savedClient,
+        id: getClientId(savedClient) || getClientId(payload)
+      };
+
+      upsertClientInUi(normalizedSaved);
+      resetForm();
+
+      showStatus(
+        editingId
+          ? "Client registration successfully modified and saved."
+          : "Client registration successfully entered, received and saved.",
+        "success"
+      );
+    } catch (error) {
+      upsertClientInUi(payload);
+      resetForm();
+
+      showStatus(
+        editingId
+          ? "Client modified in the interface and saved locally. Backend database save needs checking."
+          : "Client added to the interface and saved locally. Backend database save needs checking.",
+        "warning"
+      );
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  function editClient(client) {
+    const normalized = normalizeClient(client);
+
+    setEditingId(getClientId(normalized));
+    setForm({
+      ...EMPTY_CLIENT,
+      ...normalized,
+      genderSource: normalized.gender ? "manual" : "auto"
+    });
+    showStatus("Editing selected client. Modify the details and click Save Modified Client.", "info");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  async function deleteClient(client) {
+    const normalized = normalizeClient(client);
+    const id = getClientId(normalized);
+
+    if (!id) {
+      showStatus("Cannot delete client because the record has no id.", "error");
+      return;
+    }
+
+    const confirmed = window.confirm("Delete this client record?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    const nextClients = clients.filter((item) => getClientId(item) !== id);
+    setClients(nextClients);
+    writeLocalClients(nextClients);
+
+    try {
+      const response = await fetch(API_URL + "/" + id, {
+        method: "DELETE"
+      });
+
+      if (!response.ok) {
+        throw new Error("Delete failed");
+      }
+
+      showStatus("Client deleted.", "success");
+    } catch (error) {
+      showStatus("Client removed from this interface. Backend delete needs checking.", "warning");
+    }
+  }
+
+  const filteredClients = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+
+    if (!query) {
+      return clients;
+    }
+
+    return clients.filter((client) => {
+      const normalized = normalizeClient(client);
+      const searchable = [
+        normalized.initials,
+        normalized.gender,
+        normalized.givenName,
+        normalized.surname,
+        normalized.name,
+        normalized.ethnicity,
+        normalized.ethnicityOther,
+        normalized.nationality,
+        normalized.residencyStatus,
+        normalized.identificationKind,
+        normalized.nricPassportNumber,
+        maskIdentification(normalized.nricPassportNumber, normalized.identificationKind),
+        normalized.email,
+        normalized.phoneCountryCode,
+        normalized.phoneNumber,
+        formatPhone(normalized.phoneCountryCode, normalized.phoneNumber),
+        normalized.whatsappCountryCode,
+        normalized.whatsappNumber,
+        normalized.addressType,
+        normalized.country,
+        normalized.continent,
+        normalized.townCity,
+        normalized.district,
+        normalized.streetAddress,
+        normalized.buildingHouseNo,
+        normalized.buildingHouseName,
+        normalized.postcode,
+        normalized.documentType,
+        normalized.documentStatus,
+        normalized.documentAttachmentNames.join(" ")
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return searchable.includes(query);
+    });
+  }, [clients, searchTerm]);
+
+  return (
+    <section className="client-module">
+      <div className="client-module-header">
+        <div>
+          <h2>Client Registration / Client Details</h2>
+          <p>
+            Searchable by initials, gender, given name, surname, NRIC/passport,
+            ethnicity, nationality, phone, WhatsApp, email and address.
+          </p>
+        </div>
+
+        <div className="client-count-card">
+          <strong>All Clients ({clients.length})</strong>
+          <span>Showing {filteredClients.length} of {clients.length}</span>
+        </div>
+      </div>
+
+      {status && (
+        <p className={"client-status client-status-" + statusType}>
+          {status}
+        </p>
+      )}
+
+      <form className="client-form" onSubmit={saveClient}>
+        <h3>Identity, Ethnicity and Contact Details</h3>
+
+        <div className="client-form-grid">
+          <label>
+            Given Name
+            <input
+              value={form.givenName}
+              onChange={(event) => updateForm("givenName", event.target.value)}
+              placeholder="Given name"
+              required
+            />
+          </label>
+
+          <label>
+            Surname
+            <input
+              value={form.surname}
+              onChange={(event) => updateForm("surname", event.target.value)}
+              placeholder="Surname"
+            />
+          </label>
+
+          <label>
+            Initials
+            <input value={form.initials} readOnly placeholder="Auto" />
+          </label>
+
+          <label>
+            Ethnicity
+            <input
+              list="client-ethnicity-options"
+              value={form.ethnicity}
+              onChange={(event) => updateForm("ethnicity", event.target.value)}
+              placeholder="Search/select ethnicity"
+            />
+            <datalist id="client-ethnicity-options">
+              {ETHNICITY_OPTIONS.map((ethnicity) => (
+                <option key={ethnicity} value={ethnicity} />
+              ))}
+            </datalist>
+            <small>Malaysia options appear first, followed by Singapore and global options.</small>
+          </label>
+
+          {(form.ethnicity === "Other / Self Describe" || form.ethnicity === "Other Malaysian Ethnicity" || form.ethnicity === "Other Singapore Ethnicity") && (
+            <label>
+              Other Ethnicity Description
+              <input
+                value={form.ethnicityOther}
+                onChange={(event) => updateForm("ethnicityOther", event.target.value)}
+                placeholder="Describe ethnicity"
+              />
+            </label>
+          )}
+
+          <label>
+            Immigration / Documented Status
+            <select
+              value={form.residencyStatus}
+              onChange={(event) => updateForm("residencyStatus", event.target.value)}
+            >
+              {RESIDENCY_STATUS_OPTIONS.map((statusOption) => (
+                <option key={statusOption} value={statusOption}>
+                  {statusOption}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {showNationalityField && (
+            <label>
+              Nationality / Country of Origin
+              <input
+                list="client-country-options"
+                value={form.nationality}
+                onChange={(event) => updateForm("nationality", event.target.value)}
+                placeholder="Search or type nationality"
+                required
+              />
+            </label>
+          )}
+
+          <label>
+            ID Type
+            <select
+              value={form.identificationKind}
+              onChange={(event) => updateForm("identificationKind", event.target.value)}
+            >
+              {IDENTIFICATION_KIND_OPTIONS.map((kind) => (
+                <option key={kind} value={kind}>
+                  {kind}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            NRIC No.# / Passport No.#
+            <input
+              value={form.nricPassportNumber}
+              onChange={(event) => updateForm("nricPassportNumber", event.target.value)}
+              placeholder="Enter NRIC or Passport No.#"
+              required
+            />
+            <small>NRIC is masked in the table. Passport is partially masked.</small>
+          </label>
+
+          <label>
+            Gender
+            <select
+              value={form.gender}
+              onChange={(event) => updateForm("gender", event.target.value)}
+            >
+              <option value="">Auto / Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Not specified">Not specified</option>
+            </select>
+            <small>For NRIC, final odd digit suggests Male; even digit suggests Female. Staff can adjust before saving.</small>
+          </label>
+
+          <label>
+            Email Address
+            <input
+              type="email"
+              value={form.email}
+              onChange={(event) => updateForm("email", event.target.value)}
+              placeholder="client@example.com"
+            />
+          </label>
+
+          <label>
+            Phone Country Code
+            <input
+              list="client-country-code-options"
+              value={form.phoneCountryCode}
+              onChange={(event) => updateForm("phoneCountryCode", event.target.value)}
+              placeholder="+60"
+            />
+          </label>
+
+          <label>
+            Phone Number
+            <input
+              value={form.phoneNumber}
+              onChange={(event) => updateForm("phoneNumber", event.target.value)}
+              placeholder="Malaysian mobile example: 0123456789"
+            />
+          </label>
+
+          <label>
+            WhatsApp Country Code
+            <input
+              list="client-country-code-options"
+              value={form.whatsappCountryCode}
+              onChange={(event) => updateForm("whatsappCountryCode", event.target.value)}
+              placeholder="+60"
+            />
+          </label>
+
+          <label>
+            WhatsApp Number
+            <input
+              value={form.whatsappNumber}
+              onChange={(event) => updateForm("whatsappNumber", event.target.value)}
+              placeholder="WhatsApp number"
+            />
+          </label>
+        </div>
+
+        <h3>Address Details</h3>
+
+        <div className="client-form-grid">
+          <label>
+            Address Type
+            <select
+              value={form.addressType}
+              onChange={(event) => updateForm("addressType", event.target.value)}
+            >
+              {ADDRESS_TYPE_OPTIONS.map((addressType) => (
+                <option key={addressType} value={addressType}>
+                  {addressType}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Building / House No.#
+            <input
+              value={form.buildingHouseNo}
+              onChange={(event) => updateForm("buildingHouseNo", event.target.value)}
+              placeholder="Building / house no."
+            />
+          </label>
+
+          <label>
+            Building / House Name
+            <input
+              value={form.buildingHouseName}
+              onChange={(event) => updateForm("buildingHouseName", event.target.value)}
+              placeholder="Building / house name, if any"
+            />
+          </label>
+
+          <label>
+            Postcode No.#
+            <input
+              value={form.postcode}
+              onChange={(event) => updateForm("postcode", event.target.value)}
+              placeholder="Postcode"
+            />
+          </label>
+
+          <label>
+            Street Address
+            <input
+              value={form.streetAddress}
+              onChange={(event) => updateForm("streetAddress", event.target.value)}
+              placeholder="Street address"
+            />
+          </label>
+
+          <label>
+            District
+            <input
+              value={form.district}
+              onChange={(event) => updateForm("district", event.target.value)}
+              placeholder="District"
+            />
+          </label>
+
+          <label>
+            Town / City
+            <input
+              value={form.townCity}
+              onChange={(event) => updateForm("townCity", event.target.value)}
+              placeholder="Town / City"
+            />
+          </label>
+
+          <label>
+            Country
+            <input
+              list="client-country-options"
+              value={form.country}
+              onChange={(event) => updateForm("country", event.target.value)}
+              placeholder="Search or type country"
+            />
+            <datalist id="client-country-options">
+              {COUNTRY_OPTIONS.map((country) => (
+                <option key={country} value={country} />
+              ))}
+            </datalist>
+          </label>
+
+          <label>
+            Continent
+            <input
+              list="client-continent-options"
+              value={form.continent}
+              onChange={(event) => updateForm("continent", event.target.value)}
+              placeholder="Continent"
+            />
+            <datalist id="client-continent-options">
+              {CONTINENT_OPTIONS.map((continent) => (
+                <option key={continent} value={continent} />
+              ))}
+            </datalist>
+          </label>
+        </div>
+
+        <h3>Identification Document Verification</h3>
+
+        <div className="client-form-grid">
+          <label>
+            Document Type
+            <select
+              value={form.documentType}
+              onChange={(event) => updateForm("documentType", event.target.value)}
+            >
+              {DOCUMENT_TYPE_OPTIONS.map((documentType) => (
+                <option key={documentType} value={documentType}>
+                  {documentType}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Document Status
+            <select
+              value={form.documentStatus}
+              onChange={(event) => updateForm("documentStatus", event.target.value)}
+            >
+              {DOCUMENT_STATUS_OPTIONS.map((documentStatus) => (
+                <option key={documentStatus} value={documentStatus}>
+                  {documentStatus}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Attach Scanned Copy / Digital Copy
+            <input
+              type="file"
+              multiple
+              accept=".pdf,.png,.jpg,.jpeg,.webp"
+              onChange={updateDocumentFiles}
+            />
+            <small>File name is matched to the client record. Secure file storage requires backend upload support.</small>
+          </label>
+
+          <label>
+            Document Reference Note
+            <input
+              value={form.documentReferenceNote}
+              onChange={(event) => updateForm("documentReferenceNote", event.target.value)}
+              placeholder="Example: NRIC front/back received, passport page pending"
+            />
+          </label>
+        </div>
+
+        {form.documentAttachmentNames.length > 0 && (
+          <p className="client-document-note">
+            Selected document(s): {form.documentAttachmentNames.join(", ")}
+          </p>
+        )}
+
+        <datalist id="client-country-code-options">
+          {COUNTRY_CODE_OPTIONS.map((countryCode) => (
+            <option key={countryCode} value={countryCode} />
+          ))}
+        </datalist>
+
+        <div className="client-form-actions">
+          <button type="submit" disabled={isSaving}>
+            {isSaving
+              ? "Saving..."
+              : editingId
+                ? "Save Modified Client"
+                : "Add Client"}
+          </button>
+
+          <button type="button" onClick={resetForm}>
+            Clear Form
+          </button>
+        </div>
+      </form>
+
+      <div className="client-search-row">
+        <label>
+          Client Search
+          <input
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder="Search initials, gender, name, surname, NRIC/passport, ethnicity, nationality, phone, WhatsApp or email"
+          />
+        </label>
+      </div>
+
+      <div className="client-table-wrap">
+        <table className="client-table">
+          <thead>
+            <tr>
+              <th>Given Name</th>
+              <th>Surname</th>
+              <th>Initials</th>
+              <th>Gender</th>
+              <th>Ethnicity</th>
+              <th>Nationality</th>
+              <th>Status</th>
+              <th>IC No.# / Passport No.#</th>
+              <th>Email Address</th>
+              <th>Phone Number</th>
+              <th>WhatsApp Number</th>
+              <th>Address Type</th>
+              <th>Country</th>
+              <th>Continent</th>
+              <th>Town / City</th>
+              <th>District</th>
+              <th>Street Address</th>
+              <th>Building / House No.#</th>
+              <th>Building / House Name</th>
+              <th>Postcode</th>
+              <th>Document Status</th>
+              <th>Attached Document(s)</th>
+              <th>Initially Created On</th>
+              <th>Modified On</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredClients.length === 0 && (
+              <tr>
+                <td colSpan="25">
+                  {clients.length === 0
+                    ? "No clients have been added yet."
+                    : "No matching clients found. Clear Client Search to show all clients."}
+                </td>
+              </tr>
+            )}
+
+            {filteredClients.map((client) => {
+              const normalized = normalizeClient(client);
+              const id = getClientId(normalized);
+              const phoneForLinks = normalizePhoneForLinks(normalized.phoneCountryCode, normalized.phoneNumber);
+              const whatsappForLinks = normalizePhoneForLinks(normalized.whatsappCountryCode, normalized.whatsappNumber);
+              const mailTo = normalized.email ? "mailto:" + normalized.email : "";
+              const telLink = phoneForLinks ? "tel:+" + phoneForLinks : "";
+              const whatsappLink = whatsappForLinks ? "https://wa.me/" + whatsappForLinks : "";
+              const ethnicityDisplay =
+                normalized.ethnicity === "Other / Self Describe" ||
+                normalized.ethnicity === "Other Malaysian Ethnicity" ||
+                normalized.ethnicity === "Other Singapore Ethnicity"
+                  ? normalized.ethnicityOther || normalized.ethnicity
+                  : normalized.ethnicity;
+
+              return (
+                <tr key={id || normalized.email || normalized.phoneNumber || normalized.nricPassportNumber}>
+                  <td>{normalized.givenName || "-"}</td>
+                  <td>{normalized.surname || "-"}</td>
+                  <td>{normalized.initials || "-"}</td>
+                  <td>{normalized.gender || "-"}</td>
+                  <td>{ethnicityDisplay || "-"}</td>
+                  <td>{normalized.nationality || "-"}</td>
+                  <td>{normalized.residencyStatus || "-"}</td>
+                  <td>{maskIdentification(normalized.nricPassportNumber, normalized.identificationKind)}</td>
+                  <td>
+                    {normalized.email ? (
+                      <a href={mailTo}>{normalized.email}</a>
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td>
+                    {normalized.phoneNumber ? (
+                      <a href={telLink}>{formatPhone(normalized.phoneCountryCode, normalized.phoneNumber)}</a>
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td>
+                    {whatsappForLinks ? (
+                      <div className="client-contact-actions">
+                        <a href={whatsappLink} target="_blank" rel="noreferrer">
+                          WhatsApp Message
+                        </a>
+                        <a href={telLink}>Phone Call</a>
+                      </div>
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td>{normalized.addressType || "-"}</td>
+                  <td>{normalized.country || "-"}</td>
+                  <td>{normalized.continent || "-"}</td>
+                  <td>{normalized.townCity || "-"}</td>
+                  <td>{normalized.district || "-"}</td>
+                  <td>{normalized.streetAddress || "-"}</td>
+                  <td>{normalized.buildingHouseNo || "-"}</td>
+                  <td>{normalized.buildingHouseName || "-"}</td>
+                  <td>{normalized.postcode || "-"}</td>
+                  <td>{normalized.documentStatus || "-"}</td>
+                  <td>{normalized.documentAttachmentNames.length ? normalized.documentAttachmentNames.join(", ") : "-"}</td>
+                  <td>{formatDateTime(normalized.createdAt)}</td>
+                  <td>{formatDateTime(normalized.updatedAt)}</td>
+                  <td>
+                    <div className="client-row-actions">
+                      <button type="button" onClick={() => editClient(normalized)}>
+                        Edit
+                      </button>
+                      <button type="button" onClick={() => deleteClient(normalized)}>
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="client-footnote">
+        NRIC / IC numbers are masked in the table for privacy. Passport numbers are partially masked.
+        Gender is auto-suggested from the final NRIC digit and can still be manually adjusted before saving.
+        Attached document file names are matched to the client record; scanned file storage requires secure backend upload support.
+      </p>
+    </section>
+  );
+}
+'@
+
+[System.IO.File]::WriteAllText($ClientsPath, $ClientsCode, (New-Object System.Text.UTF8Encoding($false)))
+Write-Pass "Clients.jsx replaced with enhanced registration interface."
+
+$Css = [System.IO.File]::ReadAllText($CssPath)
+
+$MarkerStart = "/* L360 CLIENT REGISTRATION V2 START */"
+$MarkerEnd = "/* L360 CLIENT REGISTRATION V2 END */"
+
+$CssBlock = @'
+
+/* L360 CLIENT REGISTRATION V2 START */
+
+.client-module {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.client-module h3 {
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.client-module-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.client-count-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.client-count-card span {
+  font-size: 0.95rem;
+  color: #566275;
+}
+
+.client-status {
+  padding: 10px 12px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+  font-weight: 700;
+}
+
+.client-status-success {
+  border-color: #8fd19e;
+  background: #ecf9ef;
+  color: #145c25;
+}
+
+.client-status-warning {
+  border-color: #ffd27d;
+  background: #fff8e8;
+  color: #7a5200;
+}
+
+.client-status-error {
+  border-color: #f1a2a2;
+  background: #fff0f0;
+  color: #8a1111;
+}
+
+.client-form {
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.client-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.client-form-grid label,
+.client-search-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.client-form-grid input,
+.client-form-grid select,
+.client-search-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #cbd3df;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.client-form-grid small {
+  font-weight: 400;
+  color: #566275;
+}
+
+.client-document-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px dashed #9aa8ba;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.client-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.client-search-row {
+  margin: 16px 0;
+}
+
+.client-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.client-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.client-table th,
+.client-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e9f0;
+  vertical-align: top;
+  text-align: left;
+}
+
+.client-table th {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-weight: 800;
+}
+
+.client-table td {
+  max-width: 260px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.client-table th:nth-last-child(3),
+.client-table td:nth-last-child(3),
+.client-table th:nth-last-child(2),
+.client-table td:nth-last-child(2),
+.client-table th:last-child,
+.client-table td:last-child {
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.client-contact-actions,
+.client-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.client-contact-actions a {
+  display: inline-block;
+}
+
+.client-row-actions button {
+  width: 100%;
+}
+
+.client-footnote {
+  margin-top: 12px;
+  color: #566275;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) {
+  .client-form-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .client-module-header {
+    flex-direction: column;
+  }
+
+  .client-count-card {
+    text-align: left;
+  }
+
+  .client-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* L360 CLIENT REGISTRATION V2 END */
+'@
+
+if ($Css.Contains($MarkerStart)) {
+    Write-Warn "Existing client registration V2 CSS found. Replacing old block."
+    $Pattern = [regex]::Escape($MarkerStart) + "(?s).*?" + [regex]::Escape($MarkerEnd)
+    $Css = [regex]::Replace($Css, $Pattern, $CssBlock.Trim())
+} else {
+    $Css = $Css.TrimEnd() + "`r`n" + $CssBlock
+}
+
+[System.IO.File]::WriteAllText($CssPath, $Css, (New-Object System.Text.UTF8Encoding($false)))
+Write-Pass "Client registration CSS applied."
+
+$ReportFolder = Join-Path $ProjectRoot "_LEOS_CONTROL\reports"
+New-Item -ItemType Directory -Path $ReportFolder -Force | Out-Null
+
+$ReportPath = Join-Path $ReportFolder "CLIENT-REGISTRATION-ENHANCEMENT-REPORT-$Stamp.md"
+
+$Report = @"
+# Client Registration Enhancement Report
+
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+
+Modified:
+$ClientsPath
+$CssPath
+
+Backups:
+$ClientsBackup
+$CssBackup
+
+## Implemented
+
+- Ethnicity selection with Malaysian options first, then Singapore, then global/Foreigner options.
+- Foreigner / non-Malaysian status reveals Nationality / Country of Origin.
+- NRIC No.# / Passport No.# structured field.
+- Identification type selection.
+- Immigration / documented status selection.
+- Document type and document status fields.
+- Scanned copy file selector with selected file-name metadata matched to client form.
+- No sensitive document file contents stored in localStorage.
+- Phone country code formatting.
+- WhatsApp country code formatting.
+- Structured address fields:
+  - Building / House No.#
+  - Building / House Name
+  - Postcode No.#
+  - Street Address
+  - District
+  - Town / City
+  - Country
+  - Continent
+- Final table fields:
+  - IC No.# / Passport No.#
+  - Email Address
+  - Phone Number
+  - WhatsApp Number
+  - Address Type
+  - Country
+  - Town / City
+  - District
+  - Street Address
+  - Building / House No.#
+  - Postcode
+- Client search across initials, gender, name, surname, ID/passport, ethnicity, nationality, phone, WhatsApp and email.
+- NRIC/IC masked in table.
+- Passport partially masked in table.
+- Gender auto-suggest from final Malaysian NRIC digit and manual adjustment retained.
+
+## Safety
+
+App.jsx modified: NO
+Backend modified: NO
+Database modified: NO
+Files deleted: NO
+
+## Important
+
+Actual scanned NRIC/passport upload and encrypted document storage requires backend upload endpoint and secure storage design.
+This frontend patch stores attachment file names/metadata only.
+"@
+
+[System.IO.File]::WriteAllText($ReportPath, $Report, (New-Object System.Text.UTF8Encoding($false)))
+
+Write-Host ""
+Write-Pass "CLIENT REGISTRATION ENHANCEMENT COMPLETE"
+Write-Host ""
+Write-Host "Modified Clients.jsx:" -ForegroundColor Cyan
+Write-Host $ClientsPath
+Write-Host ""
+Write-Host "Modified CSS:" -ForegroundColor Cyan
+Write-Host $CssPath
+Write-Host ""
+Write-Host "Backups:" -ForegroundColor Cyan
+Write-Host $ClientsBackup
+Write-Host $CssBackup
+Write-Host ""
+Write-Host "Report:" -ForegroundColor Cyan
+Write-Host $ReportPath
+Write-Host ""
+Write-Host "Next:" -ForegroundColor Yellow
+Write-Host "cd `"$ProjectRoot\frontend`""
+Write-Host "npm run dev"
+Write-Host "Then hard refresh browser with Ctrl + F5"

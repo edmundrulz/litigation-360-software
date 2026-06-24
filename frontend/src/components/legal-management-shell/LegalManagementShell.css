@@ -1,0 +1,332 @@
+:root {
+  --legal-navy: #17213a;
+  --legal-blue: #263d63;
+  --legal-gold: #c9a646;
+  --legal-cream: #f8f5ed;
+  --legal-paper: #ffffff;
+  --legal-border: #ded6c7;
+  --legal-text: #1f2937;
+  --legal-muted: #6b7280;
+  --legal-shadow: 0 18px 40px rgba(23, 33, 58, 0.14);
+}
+
+.legal-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background: linear-gradient(135deg, #f8f5ed 0%, #eef2f7 100%);
+  color: var(--legal-text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.legal-sidebar {
+  background: var(--legal-navy);
+  color: white;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-right: 4px solid var(--legal-gold);
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+}
+
+.brand-logo,
+.mini-logo,
+.justice-mark {
+  display: grid;
+  place-items: center;
+  background: rgba(201,166,70,0.18);
+  border: 1px solid rgba(201,166,70,0.55);
+  color: var(--legal-gold);
+  border-radius: 16px;
+}
+
+.brand-logo {
+  width: 54px;
+  height: 54px;
+  font-size: 30px;
+}
+
+.brand-block strong,
+.brand-block small {
+  display: block;
+}
+
+.brand-block small {
+  opacity: 0.75;
+  margin-top: 3px;
+}
+
+.side-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.side-nav button {
+  cursor: pointer;
+  text-align: left;
+  color: white;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-weight: 700;
+  transition: 0.18s ease;
+}
+
+.side-nav button:hover,
+.side-nav button:focus {
+  outline: none;
+  background: rgba(201,166,70,0.22);
+  border-color: rgba(201,166,70,0.7);
+  transform: translateX(3px);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: grid;
+  gap: 4px;
+  color: rgba(255,255,255,0.82);
+  font-size: 13px;
+}
+
+.legal-main {
+  padding: 28px;
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
+.top-bar,
+.profile-grid,
+.panel-card {
+  width: min(1180px, 100%);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--legal-paper);
+  border: 1px solid var(--legal-border);
+  box-shadow: var(--legal-shadow);
+  border-radius: 24px;
+  padding: 22px 24px;
+}
+
+.top-bar h1,
+.panel-card h2,
+.firm-card h2,
+.partner-card h2 {
+  margin: 0;
+  color: var(--legal-navy);
+}
+
+.top-bar p,
+.panel-card p,
+.firm-card p,
+.partner-card p {
+  margin: 6px 0 0;
+  color: var(--legal-muted);
+}
+
+.settings-pill,
+.hero-actions button {
+  cursor: pointer;
+  border: none;
+  background: var(--legal-navy);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.firm-card,
+.partner-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid var(--legal-border);
+  border-radius: 22px;
+  padding: 18px;
+}
+
+.mini-logo,
+.avatar {
+  width: 62px;
+  height: 62px;
+  flex: 0 0 auto;
+  font-size: 34px;
+  border-radius: 18px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+}
+
+.partner-card small {
+  display: block;
+  color: var(--legal-muted);
+  margin-top: 3px;
+}
+
+.panel-card {
+  background: var(--legal-paper);
+  border: 1px solid var(--legal-border);
+  border-radius: 26px;
+  padding: 24px;
+  box-shadow: var(--legal-shadow);
+}
+
+.panel-header {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.panel-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--legal-cream);
+  border: 1px solid var(--legal-border);
+  border-radius: 16px;
+  font-size: 26px;
+}
+
+.hero-panel {
+  text-align: center;
+  padding: 46px 30px;
+}
+
+.justice-mark {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 18px;
+  font-size: 56px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.legal-search-input {
+  width: 100%;
+  border: 1px solid var(--legal-border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.folder-grid,
+.news-grid,
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.folder-card,
+.news-card,
+.settings-card,
+.glossary-item,
+.instruction-list button {
+  border: 1px solid var(--legal-border);
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  display: grid;
+  gap: 7px;
+}
+
+.folder-card,
+.instruction-list button {
+  cursor: pointer;
+}
+
+.folder-card:hover,
+.instruction-list button:hover,
+.news-card:hover {
+  border-color: var(--legal-gold);
+  box-shadow: 0 10px 22px rgba(23, 33, 58, 0.10);
+}
+
+.folder-icon {
+  font-size: 28px;
+}
+
+.news-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-card span {
+  font-size: 28px;
+}
+
+.instruction-list,
+.glossary-list {
+  display: grid;
+  gap: 12px;
+}
+
+.instruction-list button {
+  font-weight: 800;
+}
+
+.settings-card strong,
+.news-card strong,
+.folder-card strong {
+  color: var(--legal-navy);
+}
+
+.settings-card span,
+.news-card small,
+.folder-card small {
+  color: var(--legal-muted);
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .legal-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .legal-sidebar {
+    position: static;
+  }
+
+  .profile-grid,
+  .top-bar {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

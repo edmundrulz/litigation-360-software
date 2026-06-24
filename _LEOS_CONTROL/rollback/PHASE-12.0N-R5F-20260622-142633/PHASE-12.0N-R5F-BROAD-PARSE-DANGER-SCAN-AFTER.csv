@@ -1,0 +1,6 @@
+﻿"PatternName","Line","Match","LineText"
+"identifier star before equals","1517","Gender * =","          next.Gender * = suggestedGender;"
+"dot property star","1517",".Gender *","          next.Gender * = suggestedGender;"
+"dot property star","1881",".Gender *","      GenderSource: normalized.Gender * ? ""manual"" : ""auto"""
+"dot property star","1946",".Gender *","        normalized.Gender *,"
+"dot property star","2734",".Gender *","                  <td>{normalized.Gender * || ""-""}</td>"

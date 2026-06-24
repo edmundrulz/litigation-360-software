@@ -1,0 +1,265 @@
+{
+  "module": "Enterprise Operations Command Centre",
+  "status": "ACTIVE",
+  "system": {
+    "monitoring": {
+      "module": "Enterprise Monitoring Engine",
+      "status": "HEALTHY",
+      "healthScore": 100,
+      "backend": "ONLINE",
+      "database": "ONLINE",
+      "workflows": "HEALTHY",
+      "notifications": "HEALTHY",
+      "courtOperations": "HEALTHY",
+      "maps": "HEALTHY",
+      "governance": "HEALTHY",
+      "backupRecovery": "HEALTHY",
+      "openAlerts": 0,
+      "timestamp": "2026-06-19T08:18:59.935Z"
+    },
+    "environment": {
+      "module": "Environment Validation Engine",
+      "status": "READY",
+      "deploymentReady": true,
+      "environmentScore": 100,
+      "risk": "LOW",
+      "blockingIssuesCount": 0,
+      "reportsGenerated": 45,
+      "readinessChecksGenerated": 45,
+      "summariesGenerated": 0,
+      "lastGeneratedAt": "2026-06-19T08:19:02.730Z",
+      "timestamp": "2026-06-19T08:19:02.731Z"
+    },
+    "release": {
+      "module": "Release Validator Engine",
+      "status": "RELEASE_CANDIDATE_READY",
+      "releaseReady": true,
+      "releaseScore": 100,
+      "risk": "LOW",
+      "blockerCount": 0,
+      "warningCount": 0,
+      "validationsRun": 23,
+      "candidatesGenerated": 0,
+      "lastGeneratedAt": "2026-06-19T08:19:05.120Z",
+      "timestamp": "2026-06-19T08:19:05.121Z"
+    },
+    "performance": {
+      "module": "Performance Optimization Engine",
+      "status": "HEALTHY",
+      "avgMs": 4.96,
+      "maxMs": 7.71,
+      "failedChecks": 0,
+      "slowChecks": 0,
+      "heapUsedMB": 7.71,
+      "databaseSizeMB": 0.17,
+      "timestamp": "2026-06-19T08:19:05.151Z"
+    },
+    "backupRecovery": {
+      "module": "Backup Recovery Engine",
+      "status": "HEALTHY",
+      "snapshotsCreated": 0,
+      "restorePlansGenerated": 0,
+      "disasterChecksRun": 0,
+      "integrityChecksRun": 272,
+      "lastSnapshotAt": null,
+      "lastCheckAt": "2026-06-19T08:19:05.151Z",
+      "timestamp": "2026-06-19T08:19:05.153Z"
+    },
+    "generatedAt": "2026-06-19T08:19:05.153Z"
+  },
+  "deployment": {
+    "scoring": {
+      "module": "Deployment Scoring Engine",
+      "status": "READY",
+      "overallScore": 100,
+      "enterpriseGrade": "A+",
+      "risk": "LOW",
+      "deploymentReady": true,
+      "releaseApproved": true,
+      "reportsGenerated": 15,
+      "dashboardsGenerated": 0,
+      "readinessChecksGenerated": 9,
+      "trendsGenerated": 0,
+      "lastGeneratedAt": "2026-06-19T08:19:10.090Z",
+      "timestamp": "2026-06-19T08:19:10.094Z"
+    },
+    "gatekeeper": {
+      "module": "Enterprise Deployment Gatekeeper",
+      "status": "APPROVED",
+      "deploymentApproved": true,
+      "overallScore": 100,
+      "enterpriseGrade": "A+",
+      "risk": "LOW",
+      "blockerCount": 0,
+      "warningCount": 0,
+      "evaluationsRun": 3,
+      "approvalsIssued": 0,
+      "rejectionsIssued": 0,
+      "reportsGenerated": 0,
+      "lastDecisionAt": null,
+      "lastEvaluationAt": "2026-06-19T08:19:39.954Z",
+      "timestamp": "2026-06-19T08:19:39.954Z"
+    },
+    "executiveDeployment": {
+      "module": "Executive Deployment Dashboard Engine",
+      "status": "APPROVED_FOR_DEPLOYMENT",
+      "overallScore": 100,
+      "enterpriseGrade": "A+",
+      "risk": "LOW",
+      "deploymentReady": true,
+      "releaseApproved": true,
+      "dashboardsGenerated": 6,
+      "summariesGenerated": 6,
+      "lastGeneratedAt": "2026-06-19T08:19:59.308Z",
+      "timestamp": "2026-06-19T08:19:59.309Z"
+    },
+    "generatedAt": "2026-06-19T08:19:59.309Z"
+  },
+  "workflows": {
+    "module": "Workflow Operations",
+    "status": "MONITORED",
+    "activeWorkflows": 0,
+    "pendingWorkflows": 0,
+    "failedWorkflows": 0,
+    "completedWorkflows": 0,
+    "knownWorkflows": 10,
+    "workflows": [
+      {
+        "name": "NEW_CLIENT_INTAKE",
+        "detected": true,
+        "criticality": "HIGH"
+      },
+      {
+        "name": "MATTER_CREATION",
+        "detected": false,
+        "criticality": "HIGH"
+      },
+      {
+        "name": "CONFLICT_CHECK",
+        "detected": false,
+        "criticality": "CRITICAL"
+      },
+      {
+        "name": "COURT_PREPARATION",
+        "detected": false,
+        "criticality": "CRITICAL"
+      },
+      {
+        "name": "DOCUMENT_REVIEW",
+        "detected": true,
+        "criticality": "HIGH"
+      },
+      {
+        "name": "INVOICE_APPROVAL",
+        "detected": false,
+        "criticality": "HIGH"
+      },
+      {
+        "name": "MATTER_CLOSURE",
+        "detected": false,
+        "criticality": "CRITICAL"
+      },
+      {
+        "name": "INDUSTRIAL_COURT_PREPARATION",
+        "detected": false,
+        "criticality": "CRITICAL"
+      },
+      {
+        "name": "PERKESO_VISIT",
+        "detected": false,
+        "criticality": "HIGH"
+      },
+      {
+        "name": "DEPLOYMENT_APPROVAL",
+        "detected": false,
+        "criticality": "CRITICAL"
+      }
+    ],
+    "generatedAt": "2026-06-19T08:19:59.310Z"
+  },
+  "courts": {
+    "module": "Court Operations",
+    "status": "MONITORED",
+    "todayHearings": [],
+    "upcomingHearings": [],
+    "courtAttendance": [],
+    "preparationStatus": "NO_ACTIVE_HEARING_DATA_CONNECTED",
+    "courts": [
+      "Federal Court",
+      "Court of Appeal",
+      "High Court",
+      "Sessions Court",
+      "Magistrates Court"
+    ],
+    "generatedAt": "2026-06-19T08:19:59.310Z"
+  },
+  "industrialCourt": {
+    "module": "Industrial Court Operations",
+    "status": "MONITORED",
+    "location": "Industrial Court Kuala Lumpur",
+    "cases": [],
+    "hearings": [],
+    "deadlines": [],
+    "attendance": [],
+    "navigationStatus": "READY_FOR_MAP_LINK_GENERATION",
+    "generatedAt": "2026-06-19T08:19:59.310Z"
+  },
+  "perkeso": {
+    "module": "PERKESO Operations",
+    "status": "MONITORED",
+    "offices": [
+      "PERKESO Kuala Lumpur - Jalan Tun Razak",
+      "PERKESO Headquarters - Jalan Ampang"
+    ],
+    "meetings": [],
+    "submissions": [],
+    "appointments": [],
+    "attendance": [],
+    "navigationStatus": "READY_FOR_MAP_LINK_GENERATION",
+    "generatedAt": "2026-06-19T08:19:59.310Z"
+  },
+  "navigation": {
+    "module": "Navigation Centre",
+    "status": "READY",
+    "destinations": [
+      {
+        "name": "Industrial Court Kuala Lumpur",
+        "type": "INDUSTRIAL_COURT",
+        "googleMapsReady": true,
+        "wazeReady": true
+      },
+      {
+        "name": "PERKESO Kuala Lumpur - Jalan Tun Razak",
+        "type": "PERKESO",
+        "googleMapsReady": true,
+        "wazeReady": true
+      },
+      {
+        "name": "PERKESO Headquarters - Jalan Ampang",
+        "type": "PERKESO",
+        "googleMapsReady": true,
+        "wazeReady": true
+      }
+    ],
+    "generatedAt": "2026-06-19T08:19:59.310Z"
+  },
+  "generatedAt": "2026-06-19T08:19:59.310Z",
+  "executiveAlerts": [
+    {
+      "severity": "INFO",
+      "category": "OPERATIONS",
+      "message": "Industrial Court Kuala Lumpur and PERKESO operational coverage present.",
+      "createdAt": "2026-06-19T08:19:59.310Z"
+    }
+  ],
+  "summary": {
+    "operationalStatus": "ACTIVE",
+    "deploymentStatus": "APPROVED",
+    "deploymentApproved": true,
+    "monitoringStatus": "HEALTHY",
+    "performanceStatus": "HEALTHY",
+    "industrialCourtStatus": "MONITORED",
+    "perkesoStatus": "MONITORED",
+    "alertCount": 1
+  }
+}

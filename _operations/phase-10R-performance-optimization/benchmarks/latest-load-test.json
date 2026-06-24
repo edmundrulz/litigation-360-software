@@ -1,0 +1,43 @@
+{
+  "module": "Load Testing Engine",
+  "status": "PASS",
+  "iterations": 5,
+  "failedIterations": 0,
+  "avgMs": 22.92,
+  "minMs": 20.32,
+  "maxMs": 27.33,
+  "totalDurationMs": 114.91,
+  "results": [
+    {
+      "iteration": 1,
+      "ok": true,
+      "durationMs": 20.32,
+      "error": null
+    },
+    {
+      "iteration": 2,
+      "ok": true,
+      "durationMs": 26.02,
+      "error": null
+    },
+    {
+      "iteration": 3,
+      "ok": true,
+      "durationMs": 20.52,
+      "error": null
+    },
+    {
+      "iteration": 4,
+      "ok": true,
+      "durationMs": 20.4,
+      "error": null
+    },
+    {
+      "iteration": 5,
+      "ok": true,
+      "durationMs": 27.33,
+      "error": null
+    }
+  ],
+  "generatedAt": "2026-06-19T00:43:39.841Z"
+}

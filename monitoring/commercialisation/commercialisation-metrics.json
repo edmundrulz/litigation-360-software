@@ -1,0 +1,14 @@
+{
+  "active_clients": 0,
+  "trial_clients": 0,
+  "paid_clients": 0,
+  "monthly_recurring_revenue_rm": 0,
+  "annual_recurring_revenue_rm": 0,
+  "churn_rate_percent": 0,
+  "support_tickets_open": 0,
+  "deployment_success_rate_percent": 100,
+  "training_completion_percent": 0,
+  "upgrade_adoption_percent": 0,
+  "customer_satisfaction_score": 0,
+  "ground_zero_status": "FULL_ACCESS_UNLIMITED"
+}

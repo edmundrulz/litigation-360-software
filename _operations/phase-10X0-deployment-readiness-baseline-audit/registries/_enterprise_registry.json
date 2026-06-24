@@ -1,0 +1,168 @@
+{
+  "registry": "enterprise_registry",
+  "generatedAt": "2026-06-19T04:30:05.843Z",
+  "modules": [
+    {
+      "name": "handlerRegistry",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\handlerRegistry.js"
+    },
+    {
+      "name": "eventBus",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\eventBus.js"
+    },
+    {
+      "name": "notificationService",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\notificationService.js"
+    },
+    {
+      "name": "workflowEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\workflowEngine.js"
+    },
+    {
+      "name": "documentLifecycleEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\documentLifecycleEngine.js"
+    },
+    {
+      "name": "courtOperationsEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\courtOperationsEngine.js"
+    },
+    {
+      "name": "matterIntelligenceEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\matterIntelligenceEngine.js"
+    },
+    {
+      "name": "executiveCommandCentre",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\executiveCommandCentre.js"
+    },
+    {
+      "name": "legalOperationsAssistant",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\legalOperationsAssistant.js"
+    },
+    {
+      "name": "predictiveAnalyticsEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\predictiveAnalyticsEngine.js"
+    },
+    {
+      "name": "courtNavigationEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\courtNavigationEngine.js"
+    },
+    {
+      "name": "mapsIntegrationLayer",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\mapsIntegrationLayer.js"
+    },
+    {
+      "name": "autonomousOperationsEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\autonomousOperationsEngine.js"
+    },
+    {
+      "name": "enterpriseGovernanceEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\enterpriseGovernanceEngine.js"
+    },
+    {
+      "name": "enterpriseHardeningEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\enterpriseHardeningEngine.js"
+    },
+    {
+      "name": "backupRecoveryEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\backupRecoveryEngine.js"
+    },
+    {
+      "name": "enterpriseMonitoringEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\enterpriseMonitoringEngine.js"
+    },
+    {
+      "name": "performanceOptimizationEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\performanceOptimizationEngine.js"
+    },
+    {
+      "name": "loadTestingEngine",
+      "expected": true,
+      "exists": true,
+      "path": "backend\\src\\automation\\loadTestingEngine.js"
+    }
+  ],
+  "automationFiles": [
+    "backend\\src\\automation\\alertManager.js",
+    "backend\\src\\automation\\autonomousOperationsEngine.js",
+    "backend\\src\\automation\\backupRecoveryEngine.js",
+    "backend\\src\\automation\\courtNavigationEngine.js",
+    "backend\\src\\automation\\courtOperationsEngine.js",
+    "backend\\src\\automation\\documentLifecycleEngine.js",
+    "backend\\src\\automation\\enterpriseGovernanceEngine.js",
+    "backend\\src\\automation\\enterpriseHardeningEngine.js",
+    "backend\\src\\automation\\enterpriseMonitoringEngine.js",
+    "backend\\src\\automation\\eventBus.js",
+    "backend\\src\\automation\\eventTypes.js",
+    "backend\\src\\automation\\executiveCommandCentre.js",
+    "backend\\src\\automation\\handlerRegistry.js",
+    "backend\\src\\automation\\handlers\\clientCreated.js",
+    "backend\\src\\automation\\handlers\\courtDateAdded.js",
+    "backend\\src\\automation\\handlers\\deadlineCreated.js",
+    "backend\\src\\automation\\handlers\\documentUploaded.js",
+    "backend\\src\\automation\\handlers\\invoiceCreated.js",
+    "backend\\src\\automation\\handlers\\matterCreated.js",
+    "backend\\src\\automation\\handlers\\paymentReceived.js",
+    "backend\\src\\automation\\handlers\\roleChanged.js",
+    "backend\\src\\automation\\handlers\\taskCompleted.js",
+    "backend\\src\\automation\\handlers\\userCreated.js",
+    "backend\\src\\automation\\legalOperationsAssistant.js",
+    "backend\\src\\automation\\loadTestingEngine.js",
+    "backend\\src\\automation\\mapsIntegrationLayer.js",
+    "backend\\src\\automation\\matterIntelligenceEngine.js",
+    "backend\\src\\automation\\metricsCollector.js",
+    "backend\\src\\automation\\notificationService.js",
+    "backend\\src\\automation\\performanceOptimizationEngine.js",
+    "backend\\src\\automation\\predictiveAnalyticsEngine.js",
+    "backend\\src\\automation\\workflowEngine.js"
+  ],
+  "enterpriseRoutes": [
+    "backend\\src\\routes\\enterpriseGovernanceRoutes.js",
+    "backend\\src\\routes\\enterpriseHardeningRoutes.js",
+    "backend\\src\\routes\\enterpriseMonitoringRoutes.js",
+    "backend\\src\\routes\\enterpriseRoutes.js",
+    "backend\\src\\routes\\eventBusRoutes.js",
+    "backend\\src\\routes\\executiveCommandRoutes.js"
+  ],
+  "totals": {
+    "expectedModules": 19,
+    "existingExpectedModules": 19,
+    "automationFiles": 32,
+    "enterpriseRoutes": 51
+  }
+}

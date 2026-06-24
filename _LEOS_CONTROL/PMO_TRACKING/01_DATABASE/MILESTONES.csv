@@ -1,0 +1,4 @@
+"MilestoneID","MilestoneName","Phase","Status","PercentComplete","TargetDate","VerificationStatus","EvidencePath","Owner","LastUpdated"
+"MS-0001","Master SSOT Consolidation","PHASE 12.0A","DOCUMENTED","80","2026-06-24","PENDING PHYSICAL DEPLOYMENT","","Project Owner","2026-06-23 12:18:21"
+"MS-0002","PMO Tracking System Deployment","PHASE 12.0A","IN_PROGRESS","0","2026-06-24","PENDING EVIDENCE","","Project Owner","2026-06-23 12:18:21"
+"MS-0003","Phase 11 Unlock Readiness","PRE-PHASE 11.0","LOCKED","0","2026-07-07","LOCKED UNTIL ALL PASS","","Project Owner","2026-06-23 12:18:21"

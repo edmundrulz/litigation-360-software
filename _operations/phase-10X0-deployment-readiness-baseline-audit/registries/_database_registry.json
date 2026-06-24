@@ -1,0 +1,10 @@
+{
+  "databaseExists": true,
+  "databaseSizeBytes": 180224,
+  "sqliteAvailable": true,
+  "totals": {
+    "tables": 1,
+    "indexes": 1
+  },
+  "generatedAt": "2026-06-19T00:00:00.000Z"
+}

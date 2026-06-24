@@ -1,0 +1,37 @@
+[
+  {
+    "country": "Malaysia",
+    "icon": "\ud83c\uddf2\ud83c\uddfe",
+    "title": "Malaysian Bar - Legal & General News",
+    "description": "Malaysia legal news, Bar updates, press statements, judgments and legal/general news.",
+    "url": "https://www.malaysianbar.org.my/list/news/legal-and-general-news"
+  },
+  {
+    "country": "Malaysia",
+    "icon": "\u2696\ufe0f",
+    "title": "Malaysian Bar - Court Judgments & Highlights",
+    "description": "Court judgments and appellate-court highlights from the Malaysian Bar site.",
+    "url": "https://www.malaysianbar.org.my/"
+  },
+  {
+    "country": "Singapore",
+    "icon": "\ud83c\uddf8\ud83c\uddec",
+    "title": "Singapore Law Watch - Headlines",
+    "description": "Singapore legal headlines, judgments and legal developments.",
+    "url": "https://www.singaporelawwatch.sg/Headlines/category/overview"
+  },
+  {
+    "country": "Singapore",
+    "icon": "\ud83c\udfdb\ufe0f",
+    "title": "Singapore Ministry of Law - News",
+    "description": "Official Singapore legal-sector press releases, speeches and announcements.",
+    "url": "https://www.mlaw.gov.sg/news/press-releases/"
+  },
+  {
+    "country": "Singapore",
+    "icon": "\ud83d\udcf0",
+    "title": "Singapore Law Gazette",
+    "description": "Official publication of the Law Society of Singapore.",
+    "url": "https://lawgazette.com.sg/"
+  }
+]

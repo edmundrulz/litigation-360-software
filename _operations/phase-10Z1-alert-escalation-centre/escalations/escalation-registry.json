@@ -1,0 +1,14 @@
+﻿{
+  "phase": "10Z.1",
+  "registryType": "ESCALATION_REGISTRY",
+  "createdAt": "2026-06-19T17:02:42.9602191+08:00",
+  "levels": ["OPERATIONS","MANAGER","EXECUTIVE","URGENT"],
+  "statuses": ["ACTIVE","COMPLETED","CANCELLED"],
+  "rules": [
+    { "severity": "CRITICAL", "defaultLevel": "EXECUTIVE" },
+    { "severity": "HIGH", "defaultLevel": "MANAGER" },
+    { "severity": "MEDIUM", "defaultLevel": "OPERATIONS" },
+    { "severity": "LOW", "defaultLevel": "OPERATIONS" },
+    { "severity": "INFO", "defaultLevel": "OPERATIONS" }
+  ]
+}

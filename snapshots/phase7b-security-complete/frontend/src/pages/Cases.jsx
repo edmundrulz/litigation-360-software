@@ -1,0 +1,253 @@
+import { assignCaseToStaff } from "../services/assignmentService";
+import { fetchAllStaff } from "../services/staffService";
+import { fetchAllClients } from "../services/clientService";
+import { autoAssignCase } from "../rules/assignmentEngine";
+
+import React, { useState, useEffect } from "react";
+
+import {
+  fetchAllCases,
+  addCase,
+  editCase,
+  removeCase
+} from "../services/caseService";
+
+import { formatStatus } from "../utils/formatters";
+
+export default function Cases() {
+
+  const [cases, setCases] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [staffList, setStaffList] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+
+  const [successMsg, setSuccessMsg] = useState(null);
+
+  const [formData, setFormData] = useState({
+    case_number: "",
+    title: "",
+    client_id: "",
+    status: "NEW",
+    description: "",
+    opened_date: ""
+  });
+
+  // =======================
+  // LOAD DATA
+  // =======================
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  async function loadData() {
+    try {
+      setLoading(true);
+
+      const [casesData, staffData, clientsData] = await Promise.all([
+        fetchAllCases(),
+        fetchAllStaff(),
+        fetchAllClients()
+      ]);
+
+      setCases(casesData);
+      setStaffList(staffData);
+      setClients(clientsData);
+
+          console.error("Load error:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // =======================
+  // CLEAR MESSAGE
+  // =======================
+  useEffect(() => {
+    if (!successMsg) return;
+    const t = setTimeout(() => setSuccessMsg(null), 3000);
+    return () => clearTimeout(t);
+  }, [successMsg]);
+
+  // =======================
+  // INPUT HANDLER
+  // =======================
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormData(prev => ({
+      ...prev,
+      [name]:
+        name === "client_id"
+          ? (value === "" ? "" : Number(value))
+          : value
+    }));
+  }
+
+  // =======================
+  // SUBMIT
+  // =======================
+  async function handleSubmit(e) {
+  e.preventDefault();
+
+  if (saving) return;
+
+  try {
+    setSaving(true);
+
+    const payload = {
+      ...formData,
+      client_id:
+        formData.client_id === "" ? null : Number(formData.client_id)
+    };
+
+    let savedCase;
+
+    if (editingId) {
+      await editCase(editingId, payload);
+      savedCase = { ...payload, id: editingId };
+      setSuccessMsg("Case updated");
+    } else {
+      savedCase = await addCase(payload);
+      setSuccessMsg("Case created");
+    }
+
+    const result = autoAssignCase(savedCase, staffList);
+
+    if (result.assigned) {
+      await assignCaseToStaff(savedCase.id, result.staff.id);
+    }
+
+    resetForm();
+
+    // SAFE DELAYED REFRESH (CLEAN + CLOSED PROPERLY)
+    setTimeout(() => {
+      loadData();
+    }, 300);
+
+  } catch (err) {
+    console.error("SUBMIT ERROR:", err);
+  } finally {
+    setSaving(false);
+  }
+}
+
+  // =======================
+  // DELETE
+  // =======================
+  async function handleDelete(id) {
+    if (!window.confirm("Delete this case?")) return;
+
+    await removeCase(id);
+    setSuccessMsg("Case deleted");
+    await loadData();
+  }
+
+  // =======================
+  // EDIT
+  // =======================
+  function handleEdit(c) {
+    setFormData({
+      case_number: c.case_number || "",
+      title: c.title || "",
+      client_id: c.client_id || "",
+      status: c.status || "NEW",
+      description: c.description || "",
+      opened_date: c.opened_date || ""
+    });
+
+    setEditingId(c.id);
+    setShowForm(true);
+  }
+
+  // =======================
+  // RESET
+  // =======================
+  function resetForm() {
+    setFormData({
+      case_number: "",
+      title: "",
+      client_id: "",
+      status: "NEW",
+      description: "",
+      opened_date: ""
+    });
+
+    setEditingId(null);
+    setShowForm(false);
+  }
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div>
+
+      {successMsg && <div>{successMsg}</div>}
+
+      <button onClick={() => setShowForm(true)}>
+        Create Case
+      </button>
+
+      {showForm && (
+        <form onSubmit={handleSubmit}>
+
+          <input
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder="Case Title"
+          />
+
+          <select
+            name="client_id"
+            value={formData.client_id}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Client</option>
+
+            {clients.map(c => (
+              <option key={c.id} value={c.id}>
+                {c.full_name}
+              </option>
+            ))}
+          </select>
+
+          <button type="submit" disabled={saving}>
+            {saving ? "Saving..." : editingId ? "Update" : "Create"}
+          </button>
+
+        </form>
+      )}
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {cases.map(c => (
+            <tr key={c.id}>
+              <td>{c.title}</td>
+              <td>{formatStatus(c.status)}</td>
+              <td>
+                <button onClick={() => handleEdit(c)}>Edit</button>
+                <button onClick={() => handleDelete(c.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+
+      </table>
+
+    </div>
+  );
+}

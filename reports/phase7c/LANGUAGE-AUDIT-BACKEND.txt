@@ -1,0 +1,6 @@
+backend\src\models\TimeEntry.js:25:    utbmsCode: DataTypes.STRING(10),
+backend\src\models\TimeEntry.js:29:      type: DataTypes.ENUM('draft', 'submitted', 'approved', 'billed'),
+backend\src\routes\timeEntries.js:43:    const { matterId, hoursWorked, dateWorked, billable, utbmsCode, description } = req.body;
+backend\src\routes\timeEntries.js:51:      utbmsCode,
+backend\src\routes_BACKUP_BEFORE_ROLE_HARDENING\timeEntries.js:38:    const { matterId, hoursWorked, dateWorked, billable, utbmsCode, description } = req.body;
+backend\src\routes_BACKUP_BEFORE_ROLE_HARDENING\timeEntries.js:46:      utbmsCode,

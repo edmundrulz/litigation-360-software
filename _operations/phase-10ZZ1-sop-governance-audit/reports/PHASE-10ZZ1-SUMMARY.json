@@ -1,0 +1,11 @@
+﻿{
+    "Phase":  "10ZZ.1",
+    "Status":  "PASS",
+    "ExistingSopDocuments":  2,
+    "RequiredSopDomains":  24,
+    "StrongSopDomains":  3,
+    "PartialSopDomains":  0,
+    "MissingSopDomains":  21,
+    "SkeletonSopsGenerated":  21,
+    "GeneratedAt":  "2026-06-20T11:09:36.4706712+08:00"
+}

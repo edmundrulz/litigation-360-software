@@ -1,0 +1,28 @@
+﻿# TIMELINE AND CURRENCY TRACKER
+
+Generated at:
+2026-06-23 12:23:24 +08:00
+
+## Past
+
+- Litigation 360 treated as LEOS.
+- Phase 10 structural work treated as structurally complete.
+- Governance, validation, certification, and evidence confirmation remain active.
+- Phase 11 production development remains locked.
+
+## Present
+
+- Current action is SSOT control pack creation.
+- Work is documentation/control-layer only.
+- Cursor rules are being created.
+- Verification and monitoring scripts are being created.
+
+## Upcoming
+
+1. Run verification script.
+2. Run live monitor once.
+3. Open project root in Cursor.
+4. Paste Cursor opening prompt.
+5. Ask Cursor to inspect only.
+6. Generate project inventory.
+7. Confirm safe next task.

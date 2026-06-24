@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Litigation 360 Live Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Arial; background:#0f172a; color:#e5e7eb; margin:0; padding:20px; }
+h1 { color:#38bdf8; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+.card { background:#111827; padding:18px; border-radius:14px; box-shadow:0 0 10px #000; }
+.big { font-size:38px; font-weight:bold; color:#22c55e; }
+.bar { background:#374151; border-radius:20px; overflow:hidden; height:22px; margin-top:8px; }
+.fill { height:100%; background:linear-gradient(90deg,#22c55e,#38bdf8); text-align:right; padding-right:8px; font-size:13px; color:#000; font-weight:bold; }
+.status { color:#facc15; }
+canvas { background:#020617; border-radius:12px; padding:10px; }
+</style>
+</head>
+<body>
+
+<h1>⚖️ Litigation 360 Live Project Command Centre</h1>
+<p>Auto-refreshes every 10 seconds from local project data.</p>
+
+<div class="grid">
+  <div class="card"><h2>Overall Progress</h2><div class="big" id="overall">--%</div></div>
+  <div class="card"><h2>Health Score</h2><div class="big" id="health">--%</div></div>
+  <div class="card"><h2>Integrity Score</h2><div class="big" id="integrity">--%</div></div>
+  <div class="card"><h2>Current Phase</h2><div class="status" id="phase">Loading...</div></div>
+</div>
+
+<div class="grid" style="margin-top:20px;">
+  <div class="card"><h2>Module Progress Bars</h2><div id="modules"></div></div>
+  <div class="card"><h2>Progress Pie Chart</h2><canvas id="pieChart"></canvas></div>
+  <div class="card"><h2>Progress Bar Chart</h2><canvas id="barChart"></canvas></div>
+</div>
+
+<script>
+let pieChart, barChart;
+
+async function loadDashboard() {
+  const res = await fetch('data/project_status.json?x=' + Date.now());
+  const data = await res.json();
+
+  document.getElementById('overall').innerText = data.overall_progress + '%';
+  document.getElementById('health').innerText = data.health_score + '%';
+  document.getElementById('integrity').innerText = data.integrity_score + '%';
+  document.getElementById('phase').innerText = data.current_phase;
+
+  let html = '';
+  data.modules.forEach(m => {
+    html += `<p><b>${m.name}</b> - ${m.status}</p>
+    <div class="bar"><div class="fill" style="width:${m.progress}%">${m.progress}%</div></div>`;
+  });
+  document.getElementById('modules').innerHTML = html;
+
+  const labels = data.modules.map(m => m.name);
+  const values = data.modules.map(m => m.progress);
+
+  if (pieChart) pieChart.destroy();
+  pieChart = new Chart(document.getElementById('pieChart'), {
+    type: 'pie',
+    data: { labels: labels, datasets: [{ data: values }] }
+  });
+
+  if (barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: { labels: labels, datasets: [{ label: 'Progress %', data: values }] },
+    options: { scales: { y: { beginAtZero:true, max:100 } } }
+  });
+}
+
+loadDashboard();
+setInterval(loadDashboard, 10000);
+</script>
+
+</body>
+</html>

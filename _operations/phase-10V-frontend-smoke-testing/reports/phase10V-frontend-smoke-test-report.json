@@ -1,0 +1,102 @@
+{
+  "phase": "10V",
+  "module": "Frontend Smoke Testing",
+  "timestamp": "2026-06-19T03:43:46.827Z",
+  "status": "PASS",
+  "passed": 21,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "frontend package.json exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\package.json"
+    },
+    {
+      "name": "App file exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\App.jsx"
+    },
+    {
+      "name": "Enterprise dashboard page exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\enterprise\\pages\\EnterpriseOperationsDashboard.jsx"
+    },
+    {
+      "name": "Connectivity validator page exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\enterprise\\pages\\FrontendBackendConnectivityValidator.jsx"
+    },
+    {
+      "name": "Enterprise API exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\enterprise\\api\\enterpriseApi.js"
+    },
+    {
+      "name": "Connectivity API exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\enterprise\\api\\connectivityValidatorApi.js"
+    },
+    {
+      "name": "Status card component exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\enterprise\\components\\EnterpriseStatusCard.jsx"
+    },
+    {
+      "name": "Connectivity panel component exists",
+      "pass": true,
+      "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\frontend\\src\\enterprise\\components\\BackendConnectivityPanel.jsx"
+    },
+    {
+      "name": "App imports EnterpriseOperationsDashboard",
+      "pass": true
+    },
+    {
+      "name": "App imports FrontendBackendConnectivityValidator",
+      "pass": true
+    },
+    {
+      "name": "App has Enterprise Dashboard button",
+      "pass": true
+    },
+    {
+      "name": "App has Connectivity Validator button",
+      "pass": true
+    },
+    {
+      "name": "Dashboard has 15s auto refresh",
+      "pass": true
+    },
+    {
+      "name": "Connectivity has 30s auto refresh",
+      "pass": true
+    },
+    {
+      "name": "Enterprise API has monitoring endpoint",
+      "pass": true
+    },
+    {
+      "name": "Enterprise API has performance endpoint",
+      "pass": true
+    },
+    {
+      "name": "Connectivity API has maps endpoint",
+      "pass": true
+    },
+    {
+      "name": "Connectivity API has documents endpoint",
+      "pass": true
+    },
+    {
+      "name": "Connectivity API has court operations endpoint",
+      "pass": true
+    },
+    {
+      "name": "Industrial Court present in UI",
+      "pass": true
+    },
+    {
+      "name": "PERKESO present in UI",
+      "pass": true
+    }
+  ]
+}

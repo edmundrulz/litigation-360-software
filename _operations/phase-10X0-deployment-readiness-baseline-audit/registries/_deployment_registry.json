@@ -1,0 +1,47 @@
+{
+  "registry": "deployment_registry",
+  "generatedAt": "2026-06-19T04:30:05.987Z",
+  "environment": {
+    "nodeVersion": "v24.16.0",
+    "npmVersion": "11.13.0",
+    "platform": "win32",
+    "cwd": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software"
+  },
+  "backend": {
+    "packageExists": true,
+    "name": "litigation-360-backend",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "node src/index.js",
+      "dev": "nodemon src/index.js",
+      "test": "jest",
+      "test:watch": "jest --watch",
+      "test:coverage": "jest --coverage",
+      "db:migrate": "node src/database/migrate.js",
+      "db:seed": "node src/database/seed.js",
+      "lint": "eslint src/",
+      "lint:fix": "eslint src/ --fix",
+      "safe": "dev-safe.bat"
+    }
+  },
+  "frontend": {
+    "packageExists": true,
+    "name": "frontend",
+    "version": "0.0.0",
+    "scripts": {
+      "dev": "vite",
+      "build": "vite build",
+      "lint": "eslint .",
+      "preview": "vite preview"
+    },
+    "distExists": true
+  },
+  "database": {
+    "exists": true,
+    "path": "C:\\Users\\jep_edmundrulz\\litigation-360-workspace\\litigation-360-software\\backend\\litigation360.db"
+  },
+  "ports": {
+    "backendDefault": 5000,
+    "frontendDefault": 5173
+  }
+}

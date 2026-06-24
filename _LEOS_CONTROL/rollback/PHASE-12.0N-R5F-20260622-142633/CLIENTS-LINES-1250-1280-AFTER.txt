@@ -1,0 +1,31 @@
+1250: function buildPayload(form, existingClient) {
+1251:   const now = new Date().toISOString();
+1252:   const givenName = String(form.givenName || "").trim();
+1253:   const surname = String(form.surname || "").trim();
+1254:   const fullName = [givenName, surname].filter(Boolean).join(" ");
+1255:   const existing = existingClient ? normalizeClient(existingClient) : null;
+1256:   const identificationKind = form.identificationKind || "Malaysian NRIC";
+1257:   const nricPassportNumber = String(form.nricPassportNumber || "").trim();
+1258: 
+1259:   const derivedDob = parseNricDob(nricPassportNumber, identificationKind);
+1260:   const dateOfBirth = derivedDob || form.dateOfBirth;
+1261:   const age = calculateAge(dateOfBirth);
+1262:   const ageCategory = getAgeCategory(age);
+1263:   const generation = getGeneration(dateOfBirth);
+1264:   const gender = form.gender || deriveGenderFromIdentification(nricPassportNumber, identificationKind);
+1265:   const stateOfBirth = getMalaysiaNricStateOfBirth(nricPassportNumber, identificationKind);
+1266:   const initials = makeInitials(givenName, surname);
+1267: 
+1268:   let phoneHistory = normalizePhoneHistory(form.phoneHistory);
+1269: 
+1270:   if (existing && existing.phoneNumber && existing.phoneNumber !== form.phoneNumber) {
+1271:     phoneHistory = [
+1272:       {
+1273:         CountryCode: existing.phonecountryCode,
+1274:         number: existing.phoneNumber,
+1275:         archivedAt: now,
+1276:         reason: "Primary phone number changed"
+1277:       },
+1278:       ...phoneHistory
+1279:     ];
+1280:   }

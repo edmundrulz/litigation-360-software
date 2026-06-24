@@ -1,0 +1,35 @@
+LITIGATION 360 - MASTER HANDOVER PATH MAP
+==========================================
+
+Project Root:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software
+
+Backend:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend
+
+Backend Source:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\backend\src
+
+Frontend:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend
+
+Operations:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations
+
+Phase 9.9 Golden Snapshot:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-09-9-hardening\06-golden-snapshot
+
+Phase 10A Handler Registry:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-handler-registry
+
+Phase 10A Cleanup + Handover:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_operations\phase-10A-cleanup-and-handover
+
+Common Active Scripts:
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\START-L360-CLEAN.bat
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\START-L360.bat
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\STOP-L360.bat
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\CHECK-L360-STATUS.bat
+
+Important Rule:
+Do not delete unknown files. Quarantine first. Verify system. Delete later only after confidence.

@@ -1,0 +1,14 @@
+{
+  "registry": "industrial-court-registry",
+  "generatedAt": "2026-06-19T07:51:05.168Z",
+  "courts": [
+    {
+      "name": "Industrial Court Kuala Lumpur",
+      "monitored": true,
+      "criticality": "HIGH"
+    }
+  ],
+  "totals": {
+    "industrialCourts": 1
+  }
+}

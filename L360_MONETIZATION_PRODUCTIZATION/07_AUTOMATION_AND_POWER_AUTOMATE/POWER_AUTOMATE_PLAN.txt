@@ -1,0 +1,26 @@
+POWER AUTOMATE MONETIZATION USE CASES
+
+Power Automate shall be treated as an integration feature.
+
+Recommended tier placement:
+- Starter: Not included
+- Professional: Limited templates
+- Business: Included
+- Enterprise: Advanced
+- Enterprise Plus: Custom workflows
+
+Use cases:
+1. Save Outlook attachments into Litigation 360 matter folder
+2. Create Outlook calendar event from court date
+3. Send Teams notification for urgent matter
+4. Convert Word to PDF
+5. Save signed Adobe document to matter
+6. Trigger invoice reminder
+7. Alert admin on failed backup
+8. Export monthly billing report to Excel
+9. Notify lawyer when matter assigned
+10. Notify clerk when filing deadline approaches
+
+Rule:
+Power Automate must not replace core Litigation 360 logic.
+It only connects external Microsoft tools.

@@ -1,0 +1,24 @@
+{
+  "phase": "10L-COURT-REGISTRY-FIX",
+  "timestamp": "2026-06-18T16:50:33.284Z",
+  "tests": {
+    "industrialCourtExists": true,
+    "perkesoKLExists": true,
+    "perkesoHQExists": true,
+    "courtMapGenerated": true,
+    "googleMapGenerated": true,
+    "wazeGenerated": true
+  },
+  "courtsCount": 12,
+  "courtMap": {
+    "ok": true,
+    "courtName": "Industrial Court Kuala Lumpur",
+    "address": "Level 14, Wisma PERKESO, No.155 Jalan Tun Razak, Kuala Lumpur",
+    "latitude": 3.1652,
+    "longitude": 101.7183,
+    "googleMaps": "https://www.google.com/maps/dir/?api=1&destination=3.1652%2C101.7183&origin=Petaling%20Jaya&travelmode=driving",
+    "waze": "https://waze.com/ul?ll=3.1652%2C101.7183&navigate=yes",
+    "generatedAt": "2026-06-18T16:50:33.284Z"
+  },
+  "status": "PASS"
+}

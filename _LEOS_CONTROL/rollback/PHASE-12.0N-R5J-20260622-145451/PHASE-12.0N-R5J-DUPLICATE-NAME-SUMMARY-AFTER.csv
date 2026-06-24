@@ -1,0 +1,5 @@
+﻿"Name","ConstCount","FunctionCount","Total"
+"isBlank","1","0","1"
+"isUnavailablePlaceholder","0","1","1"
+"requireMandatory","0","1","1"
+"validateClientForm","0","1","1"

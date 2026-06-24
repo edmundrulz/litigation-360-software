@@ -1,0 +1,45 @@
+{
+  "registry": "integrations-registry",
+  "generatedAt": "2026-06-19T07:51:05.168Z",
+  "integrations": [
+    {
+      "name": "Google Maps",
+      "type": "navigation",
+      "status": "PLANNED_OR_LINK_BASED",
+      "criticality": "HIGH"
+    },
+    {
+      "name": "Waze",
+      "type": "navigation",
+      "status": "PLANNED_OR_LINK_BASED",
+      "criticality": "HIGH"
+    },
+    {
+      "name": "Industrial Court Kuala Lumpur",
+      "type": "court-agency",
+      "status": "REGISTERED",
+      "criticality": "HIGH"
+    },
+    {
+      "name": "PERKESO Kuala Lumpur Jalan Tun Razak",
+      "type": "agency",
+      "status": "REGISTERED",
+      "criticality": "HIGH"
+    },
+    {
+      "name": "PERKESO HQ Jalan Ampang",
+      "type": "agency",
+      "status": "REGISTERED",
+      "criticality": "HIGH"
+    },
+    {
+      "name": "SQLite litigation360.db",
+      "type": "database",
+      "status": "ACTIVE",
+      "criticality": "CRITICAL"
+    }
+  ],
+  "totals": {
+    "integrations": 6
+  }
+}

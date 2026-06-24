@@ -1,0 +1,729 @@
+{
+  "graph": "route-dependencies",
+  "generatedAt": "2026-06-19T07:51:05.196Z",
+  "nodes": [
+    "auditLogs",
+    "auth",
+    "auth_POSTGRES_BACKUP_DO_NOT_DELETE",
+    "autoHeal",
+    "autonomousOperationsRoutes",
+    "backupRecoveryRoutes",
+    "caseRoutes",
+    "cases",
+    "clientIdentity",
+    "clients",
+    "conflictCheck",
+    "courtDeadline",
+    "courtNavigationRoutes",
+    "courtOperationsRoutes",
+    "dashboard.backup-before-8-5A",
+    "dashboard",
+    "deadlines",
+    "debug",
+    "deploymentGatekeeperRoutes",
+    "deploymentReadinessCentreRoutes",
+    "deploymentScoringRoutes",
+    "documentLifecycleRoutes",
+    "documents",
+    "enterpriseGovernanceRoutes",
+    "enterpriseHardeningRoutes",
+    "enterpriseMonitoringRoutes",
+    "enterpriseRoutes",
+    "environmentValidationRoutes",
+    "errors",
+    "eventBusRoutes",
+    "executiveCommandRoutes",
+    "executiveDeploymentDashboardRoutes",
+    "handlerRoutes",
+    "health",
+    "integrityScanner",
+    "invoices",
+    "legalOperationsAssistantRoutes",
+    "mapsIntegrationRoutes",
+    "matterIntake",
+    "matterIntelligenceRoutes",
+    "matterNumbering",
+    "matters",
+    "monitor",
+    "notificationRoutes",
+    "performanceOptimizationRoutes",
+    "predictiveAnalyticsRoutes",
+    "releaseValidatorRoutes",
+    "scheduler",
+    "sqliteAuth",
+    "staff",
+    "systemDiagnostic",
+    "systemReport",
+    "taskAutomation",
+    "timeEntries",
+    "users",
+    "workflow",
+    "workflowRoutes"
+  ],
+  "edges": [
+    {
+      "from": "auditLogs",
+      "to": "express"
+    },
+    {
+      "from": "auditLogs",
+      "to": "../database"
+    },
+    {
+      "from": "auditLogs",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "auth",
+      "to": "express"
+    },
+    {
+      "from": "auth",
+      "to": "jsonwebtoken"
+    },
+    {
+      "from": "auth",
+      "to": "../models"
+    },
+    {
+      "from": "auth",
+      "to": "../middleware/auth"
+    },
+    {
+      "from": "auth",
+      "to": "../utils/logger"
+    },
+    {
+      "from": "auth_POSTGRES_BACKUP_DO_NOT_DELETE",
+      "to": "express"
+    },
+    {
+      "from": "auth_POSTGRES_BACKUP_DO_NOT_DELETE",
+      "to": "jsonwebtoken"
+    },
+    {
+      "from": "auth_POSTGRES_BACKUP_DO_NOT_DELETE",
+      "to": "../models"
+    },
+    {
+      "from": "auth_POSTGRES_BACKUP_DO_NOT_DELETE",
+      "to": "../middleware/auth"
+    },
+    {
+      "from": "auth_POSTGRES_BACKUP_DO_NOT_DELETE",
+      "to": "../utils/logger"
+    },
+    {
+      "from": "autoHeal",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "autoHeal",
+      "to": "express"
+    },
+    {
+      "from": "autoHeal",
+      "to": "../services/autoHealService"
+    },
+    {
+      "from": "autonomousOperationsRoutes",
+      "to": "express"
+    },
+    {
+      "from": "autonomousOperationsRoutes",
+      "to": "../automation/autonomousOperationsEngine"
+    },
+    {
+      "from": "backupRecoveryRoutes",
+      "to": "express"
+    },
+    {
+      "from": "backupRecoveryRoutes",
+      "to": "../automation/backupRecoveryEngine"
+    },
+    {
+      "from": "cases",
+      "to": "express"
+    },
+    {
+      "from": "cases",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "cases",
+      "to": "../database"
+    },
+    {
+      "from": "cases",
+      "to": "../utils/auditLogger"
+    },
+    {
+      "from": "clientIdentity",
+      "to": "express"
+    },
+    {
+      "from": "clientIdentity",
+      "to": "better-sqlite3"
+    },
+    {
+      "from": "clientIdentity",
+      "to": "../utils/clientIdentityEngine"
+    },
+    {
+      "from": "clients",
+      "to": "../utils/auditLogger"
+    },
+    {
+      "from": "clients",
+      "to": "express"
+    },
+    {
+      "from": "clients",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "clients",
+      "to": "../database"
+    },
+    {
+      "from": "conflictCheck",
+      "to": "express"
+    },
+    {
+      "from": "conflictCheck",
+      "to": "better-sqlite3"
+    },
+    {
+      "from": "conflictCheck",
+      "to": "../utils/conflictEngine"
+    },
+    {
+      "from": "courtDeadline",
+      "to": "express"
+    },
+    {
+      "from": "courtDeadline",
+      "to": "../utils/courtDeadlineCalculator"
+    },
+    {
+      "from": "courtNavigationRoutes",
+      "to": "express"
+    },
+    {
+      "from": "courtNavigationRoutes",
+      "to": "../automation/courtNavigationEngine"
+    },
+    {
+      "from": "courtOperationsRoutes",
+      "to": "express"
+    },
+    {
+      "from": "courtOperationsRoutes",
+      "to": "../automation/courtOperationsEngine"
+    },
+    {
+      "from": "dashboard.backup-before-8-5A",
+      "to": "express"
+    },
+    {
+      "from": "dashboard.backup-before-8-5A",
+      "to": "../database"
+    },
+    {
+      "from": "dashboard.backup-before-8-5A",
+      "to": "../utils/errorBus"
+    },
+    {
+      "from": "dashboard.backup-before-8-5A",
+      "to": "../jobs/systemScheduler"
+    },
+    {
+      "from": "dashboard",
+      "to": "express"
+    },
+    {
+      "from": "dashboard",
+      "to": "../database"
+    },
+    {
+      "from": "dashboard",
+      "to": "../utils/errorBus"
+    },
+    {
+      "from": "dashboard",
+      "to": "../jobs/systemScheduler"
+    },
+    {
+      "from": "deadlines",
+      "to": "express"
+    },
+    {
+      "from": "deadlines",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "deadlines",
+      "to": "../database"
+    },
+    {
+      "from": "deadlines",
+      "to": "../utils/auditLogger"
+    },
+    {
+      "from": "debug",
+      "to": "express"
+    },
+    {
+      "from": "debug",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "debug",
+      "to": "../utils/errorBus"
+    },
+    {
+      "from": "deploymentGatekeeperRoutes",
+      "to": "express"
+    },
+    {
+      "from": "deploymentGatekeeperRoutes",
+      "to": "../automation/deploymentGatekeeperEngine"
+    },
+    {
+      "from": "deploymentReadinessCentreRoutes",
+      "to": "express"
+    },
+    {
+      "from": "deploymentReadinessCentreRoutes",
+      "to": "../automation/deploymentReadinessCentre"
+    },
+    {
+      "from": "deploymentScoringRoutes",
+      "to": "express"
+    },
+    {
+      "from": "deploymentScoringRoutes",
+      "to": "../automation/deploymentScoringEngine"
+    },
+    {
+      "from": "documentLifecycleRoutes",
+      "to": "express"
+    },
+    {
+      "from": "documentLifecycleRoutes",
+      "to": "../automation/documentLifecycleEngine"
+    },
+    {
+      "from": "documents",
+      "to": "express"
+    },
+    {
+      "from": "documents",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "documents",
+      "to": "../database"
+    },
+    {
+      "from": "documents",
+      "to": "../utils/auditLogger"
+    },
+    {
+      "from": "enterpriseGovernanceRoutes",
+      "to": "express"
+    },
+    {
+      "from": "enterpriseGovernanceRoutes",
+      "to": "../automation/enterpriseGovernanceEngine"
+    },
+    {
+      "from": "enterpriseHardeningRoutes",
+      "to": "express"
+    },
+    {
+      "from": "enterpriseHardeningRoutes",
+      "to": "../automation/enterpriseHardeningEngine"
+    },
+    {
+      "from": "enterpriseMonitoringRoutes",
+      "to": "express"
+    },
+    {
+      "from": "enterpriseMonitoringRoutes",
+      "to": "../automation/enterpriseMonitoringEngine"
+    },
+    {
+      "from": "enterpriseMonitoringRoutes",
+      "to": "../automation/alertManager"
+    },
+    {
+      "from": "enterpriseRoutes",
+      "to": "express"
+    },
+    {
+      "from": "enterpriseRoutes",
+      "to": "better-sqlite3"
+    },
+    {
+      "from": "enterpriseRoutes",
+      "to": "../../enterprise/automation-dashboard/automationDashboard"
+    },
+    {
+      "from": "environmentValidationRoutes",
+      "to": "express"
+    },
+    {
+      "from": "environmentValidationRoutes",
+      "to": "../automation/environmentValidationEngine"
+    },
+    {
+      "from": "errors",
+      "to": "express"
+    },
+    {
+      "from": "errors",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "errors",
+      "to": "../utils/errorBus"
+    },
+    {
+      "from": "eventBusRoutes",
+      "to": "express"
+    },
+    {
+      "from": "eventBusRoutes",
+      "to": "../automation/eventBus"
+    },
+    {
+      "from": "executiveCommandRoutes",
+      "to": "express"
+    },
+    {
+      "from": "executiveCommandRoutes",
+      "to": "../automation/executiveCommandCentre"
+    },
+    {
+      "from": "executiveDeploymentDashboardRoutes",
+      "to": "express"
+    },
+    {
+      "from": "executiveDeploymentDashboardRoutes",
+      "to": "../automation/executiveDeploymentDashboardEngine"
+    },
+    {
+      "from": "handlerRoutes",
+      "to": "express"
+    },
+    {
+      "from": "handlerRoutes",
+      "to": "../automation/handlerRegistry"
+    },
+    {
+      "from": "health",
+      "to": "express"
+    },
+    {
+      "from": "health",
+      "to": "../database"
+    },
+    {
+      "from": "integrityScanner",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "integrityScanner",
+      "to": "express"
+    },
+    {
+      "from": "integrityScanner",
+      "to": "../database"
+    },
+    {
+      "from": "invoices",
+      "to": "express"
+    },
+    {
+      "from": "invoices",
+      "to": "../models"
+    },
+    {
+      "from": "invoices",
+      "to": "../middleware/auth"
+    },
+    {
+      "from": "invoices",
+      "to": "../middleware/roles"
+    },
+    {
+      "from": "invoices",
+      "to": "../utils/logger"
+    },
+    {
+      "from": "legalOperationsAssistantRoutes",
+      "to": "express"
+    },
+    {
+      "from": "legalOperationsAssistantRoutes",
+      "to": "../automation/legalOperationsAssistant"
+    },
+    {
+      "from": "mapsIntegrationRoutes",
+      "to": "express"
+    },
+    {
+      "from": "mapsIntegrationRoutes",
+      "to": "../automation/mapsIntegrationLayer"
+    },
+    {
+      "from": "matterIntake",
+      "to": "express"
+    },
+    {
+      "from": "matterIntake",
+      "to": "better-sqlite3"
+    },
+    {
+      "from": "matterIntake",
+      "to": "../utils/clientIdentityEngine"
+    },
+    {
+      "from": "matterIntake",
+      "to": "../utils/conflictEngine"
+    },
+    {
+      "from": "matterIntake",
+      "to": "../utils/matterNumberGenerator"
+    },
+    {
+      "from": "matterIntake",
+      "to": "../utils/matterIntakeWizard"
+    },
+    {
+      "from": "matterIntelligenceRoutes",
+      "to": "express"
+    },
+    {
+      "from": "matterIntelligenceRoutes",
+      "to": "../automation/matterIntelligenceEngine"
+    },
+    {
+      "from": "matterNumbering",
+      "to": "express"
+    },
+    {
+      "from": "matterNumbering",
+      "to": "better-sqlite3"
+    },
+    {
+      "from": "matterNumbering",
+      "to": "../utils/matterNumberGenerator"
+    },
+    {
+      "from": "matters",
+      "to": "../utils/matterNumberGenerator"
+    },
+    {
+      "from": "matters",
+      "to": "../middleware/roles"
+    },
+    {
+      "from": "matters",
+      "to": "express"
+    },
+    {
+      "from": "matters",
+      "to": "../models"
+    },
+    {
+      "from": "matters",
+      "to": "../middleware/auth"
+    },
+    {
+      "from": "matters",
+      "to": "../utils/logger"
+    },
+    {
+      "from": "matters",
+      "to": "../utils/auditLogger"
+    },
+    {
+      "from": "monitor",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "monitor",
+      "to": "express"
+    },
+    {
+      "from": "monitor",
+      "to": "../utils/errorBus"
+    },
+    {
+      "from": "notificationRoutes",
+      "to": "express"
+    },
+    {
+      "from": "notificationRoutes",
+      "to": "../automation/notificationService"
+    },
+    {
+      "from": "performanceOptimizationRoutes",
+      "to": "express"
+    },
+    {
+      "from": "performanceOptimizationRoutes",
+      "to": "../automation/performanceOptimizationEngine"
+    },
+    {
+      "from": "performanceOptimizationRoutes",
+      "to": "../automation/loadTestingEngine"
+    },
+    {
+      "from": "predictiveAnalyticsRoutes",
+      "to": "express"
+    },
+    {
+      "from": "predictiveAnalyticsRoutes",
+      "to": "../automation/predictiveAnalyticsEngine"
+    },
+    {
+      "from": "releaseValidatorRoutes",
+      "to": "express"
+    },
+    {
+      "from": "releaseValidatorRoutes",
+      "to": "../automation/releaseValidatorEngine"
+    },
+    {
+      "from": "scheduler",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "scheduler",
+      "to": "express"
+    },
+    {
+      "from": "scheduler",
+      "to": "../jobs/systemScheduler"
+    },
+    {
+      "from": "sqliteAuth",
+      "to": "express"
+    },
+    {
+      "from": "sqliteAuth",
+      "to": "jsonwebtoken"
+    },
+    {
+      "from": "sqliteAuth",
+      "to": "bcryptjs"
+    },
+    {
+      "from": "sqliteAuth",
+      "to": "../database"
+    },
+    {
+      "from": "staff",
+      "to": "express"
+    },
+    {
+      "from": "staff",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "staff",
+      "to": "../database"
+    },
+    {
+      "from": "staff",
+      "to": "../utils/auditLogger"
+    },
+    {
+      "from": "systemDiagnostic",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "systemDiagnostic",
+      "to": "express"
+    },
+    {
+      "from": "systemDiagnostic",
+      "to": "../database"
+    },
+    {
+      "from": "systemReport",
+      "to": "../middleware/roleMiddleware"
+    },
+    {
+      "from": "systemReport",
+      "to": "express"
+    },
+    {
+      "from": "systemReport",
+      "to": "../utils/errorBus"
+    },
+    {
+      "from": "taskAutomation",
+      "to": "express"
+    },
+    {
+      "from": "taskAutomation",
+      "to": "../utils/taskAutomationEngine"
+    },
+    {
+      "from": "timeEntries",
+      "to": "express"
+    },
+    {
+      "from": "timeEntries",
+      "to": "../models"
+    },
+    {
+      "from": "timeEntries",
+      "to": "../middleware/auth"
+    },
+    {
+      "from": "timeEntries",
+      "to": "../middleware/roles"
+    },
+    {
+      "from": "timeEntries",
+      "to": "../utils/logger"
+    },
+    {
+      "from": "users",
+      "to": "express"
+    },
+    {
+      "from": "users",
+      "to": "../middleware/authenticateToken"
+    },
+    {
+      "from": "users",
+      "to": "../middleware/authorize"
+    },
+    {
+      "from": "users",
+      "to": "../controllers/userController"
+    },
+    {
+      "from": "workflow",
+      "to": "express"
+    },
+    {
+      "from": "workflow",
+      "to": "../utils/workflowConveyor"
+    },
+    {
+      "from": "workflowRoutes",
+      "to": "express"
+    },
+    {
+      "from": "workflowRoutes",
+      "to": "../automation/workflowEngine"
+    }
+  ]
+}

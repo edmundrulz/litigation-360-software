@@ -1,0 +1,17 @@
+{
+  "phase": "10S",
+  "module": "Frontend Operations Dashboard",
+  "timestamp": "2026-06-19T01:34:58.382Z",
+  "files": {
+    "apiExists": false,
+    "cardExists": false,
+    "pageExists": false
+  },
+  "content": {
+    "apiHasMonitoringEndpoint": false,
+    "pageHasAutoRefresh": false,
+    "pageHasIndustrialCourt": false,
+    "pageHasPERKESO": false
+  },
+  "status": "FAIL"
+}
