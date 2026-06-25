@@ -118,6 +118,22 @@ const PORT = process.env.PORT || 5000;
 
 startScheduler();
 
+// L360_V3K2_SAFE_GOOGLE_CONTACTS_PLACEHOLDER_ROUTE
+app.get("/api/google-contacts/search", (req, res) => {
+  const query = String(req.query.q || "").trim();
+
+  res.json({
+    ok: true,
+    source: "placeholder",
+    connector: "google-contacts",
+    query,
+    contacts: [],
+    message:
+      "Google Contacts backend placeholder route exists. OAuth/Google People API integration is not configured yet."
+  });
+});
+
+
 const server = app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
 });

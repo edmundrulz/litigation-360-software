@@ -1,6 +1,56 @@
-﻿import { useEffect, useMemo, useState } from "react";
-
+import { useEffect, useMemo, useState } from "react";
 const API_URL = "/api/clients";
+const CLIENT_DIRECTORY_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+const DEFAULT_CLIENT_TAG_OPTIONS = [
+  "General",
+  "Important",
+  "Urgent",
+  "VIP",
+  "Pending Documents",
+  "Pending Verification",
+  "Court Matter",
+  "Employment Matter",
+  "Medical Matter",
+  "Police / Authority Matter",
+  "Billing / Invoice Matter",
+  "Follow Up Required",
+  "Archived / Dormant"
+];
+
+function getClientDirectoryName(client) {
+  const source = client || {};
+  return (
+    [source.givenName, source.surname].filter(Boolean).join(" ") ||
+    source.name ||
+    source.full_name ||
+    source.fullName ||
+    source.email ||
+    source.phoneNumber ||
+    "Unnamed client"
+  );
+}
+
+function getClientDirectoryInitial(client) {
+  const name = getClientDirectoryName(client).trim();
+  const first = name.charAt(0).toUpperCase();
+  return /^[A-Z]$/.test(first) ? first : "#";
+}
+
+function normalizeClientTagList(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item || "").trim()).filter(Boolean);
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  return String(value)
+    .split(/[;,|]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
 const LOCAL_STORAGE_KEYS = [
   "litigation360.clients.profile.v6",
@@ -63,9 +113,9 @@ const EMPTY_CLIENT = {
 
   preferredContact1: "WhatsApp Message",
   preferredContact2: "Phone Call",
-  preferredContact3: "Email",
-  preferredContact4: "SMS",
-  preferredContact5: "Email",
+  preferredContact3: "Not Applicable / N/A",
+  preferredContact4: "Not Applicable / N/A",
+  preferredContact5: "Not Applicable / N/A",
   preferredContactDetail1: "",
   preferredContactDetail2: "",
   preferredContactDetail3: "",
@@ -103,6 +153,9 @@ const EMPTY_CLIENT = {
   municipality: "",
   council: "",
   borough: "",
+  secondaryAdministrativeCategory: "",
+  secondaryAdministrativeName: "",
+  manualAdministrativeLocation: "",
   locationAdminType: "",
   locationAdminTypeManual: "",
   locationAdminTypeIsManual: false,
@@ -127,6 +180,8 @@ const EMPTY_CLIENT = {
 
   verificationStatus: "Pending Review",
   verificationFlags: [],
+  clientCategory: "General",
+  clientTags: [],
   auditTrail: [],
 
   createdAt: "",
@@ -1210,9 +1265,9 @@ function normalizeClient(rawClient) {
 
     preferredContact1: source.preferredContact1 || "WhatsApp Message",
     preferredContact2: source.preferredContact2 || "Phone Call",
-    preferredContact3: source.preferredContact3 || "Email",
-    preferredContact4: source.preferredContact4 || "SMS",
-    preferredContact5: source.preferredContact5 || "Email",
+    preferredContact3: source.preferredContact3 || "Not Applicable / N/A",
+    preferredContact4: source.preferredContact4 || "Not Applicable / N/A",
+    preferredContact5: source.preferredContact5 || "Not Applicable / N/A",
     preferredContactDetail1: source.preferredContactDetail1 || "",
     preferredContactDetail2: source.preferredContactDetail2 || "",
     preferredContactDetail3: source.preferredContactDetail3 || "",
@@ -1249,6 +1304,9 @@ function normalizeClient(rawClient) {
     municipality: source.municipality || "",
     council: source.council || "",
     borough: source.borough || "",
+    secondaryAdministrativeCategory: source.secondaryAdministrativeCategory || "",
+    secondaryAdministrativeName: source.secondaryAdministrativeName || "",
+    manualAdministrativeLocation: source.manualAdministrativeLocation || "",
     locationAdminType: source.locationAdminType || "",
     locationAdminTypeManual: source.locationAdminTypeManual || "",
     locationAdminTypeIsManual: Boolean(source.locationAdminTypeIsManual),
@@ -1271,6 +1329,8 @@ function normalizeClient(rawClient) {
 
     verificationStatus: source.verificationStatus || "Pending Review",
     verificationFlags: normalizeFlags(source.verificationFlags),
+    clientCategory: source.clientCategory || "General",
+    clientTags: normalizeClientTagList(source.clientTags || source.tags),
     auditTrail: normalizeAuditTrail(source.auditTrail),
 
     createdAt: source.createdAt || source.createdOn || source.created || "",
@@ -1278,7 +1338,16 @@ function normalizeClient(rawClient) {
   };
 }
 
-function makeWhatsappMessage(client) {
+
+function isAdditionalContactChoiceEnabled(value) {
+  const safeValue = String(value || "").trim();
+  return Boolean(
+    safeValue &&
+    safeValue !== "Not Applicable / N/A" &&
+    safeValue !== "Unknown" &&
+    safeValue !== "To be confirmed"
+  );
+}function makeWhatsappMessage(client) {
   if (client.whatsappMessageTemplate === "Custom message") {
     return client.whatsappCustomMessage || "";
   }
@@ -1437,10 +1506,18 @@ export default function Clients() {
   const [form, setForm] = useState(EMPTY_CLIENT);
   const [editingId, setEditingId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [clientLookupSearchBy, setClientLookupSearchBy] = useState("All Fields");
   const [status, setStatus] = useState("");
   const [statusType, setStatusType] = useState("info");
   const [isSaving, setIsSaving] = useState(false);
-  const [validationErrors, setValidationErrors] = useState([]);  const [fieldErrors, setFieldErrors] = useState({});
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [showExtendedContactChoices, setShowExtendedContactChoices] = useState(false);
+  const [viewingClientProfile, setViewingClientProfile] = useState(null);
+  const [showClientProfileForm, setShowClientProfileForm] = useState(false);
+  const [activeAlphabetFilter, setActiveAlphabetFilter] = useState("All");
+  const [clientSearchHistory, setClientSearchHistory] = useState([]);
+  const [selectedClientTagFilter, setSelectedClientTagFilter] = useState("All");
+  const [manualClientTagSearch, setManualClientTagSearch] = useState("");  const [fieldErrors, setFieldErrors] = useState({});
   const [numericWarnings, setNumericWarnings] = useState({});
   const [contactDatabaseSearch, setContactDatabaseSearch] = useState("");
   const [googleContactSearch, setGoogleContactSearch] = useState("");
@@ -1502,6 +1579,39 @@ export default function Clients() {
     setStatus(message);
     setStatusType(type);
   }
+  function openNewClientProfile() {
+    resetForm();
+    setShowClientProfileForm(true);
+    window.setTimeout(() => {
+      document.querySelector(".client-form-v6")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  }
+
+  function closeClientProfileForm() {
+    setShowClientProfileForm(false);
+    setEditingId("");
+    setValidationErrors([]);
+  }
+
+  function handleDirectorySearchChange(event) {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    const trimmed = value.trim();
+    if (trimmed.length >= 2) {
+      setClientSearchHistory((previous) => [trimmed, ...previous.filter((item) => item !== trimmed)].slice(0, 8));
+    }
+  }
+
+  function selectClientFromDirectory(client) {
+    viewClientProfile(client);
+  }
+
+  function clearDirectoryFilters() {
+    setSearchTerm("");
+    setActiveAlphabetFilter("All");
+    setSelectedClientTagFilter("All");
+  }
   function isPhoneLikeContactMethod(method) {
     return ["WhatsApp Message", "WhatsApp Call", "Phone Call", "SMS"].includes(method);
   }
@@ -1532,6 +1642,25 @@ export default function Clients() {
     if (isBlank(payload.country)) nextErrors.country = "Country is required.";
     if (isBlank(payload.buildingHouseNo)) nextErrors.buildingHouseNo = "Building / House No. is required.";
     if (isBlank(payload.postcode)) nextErrors.postcode = "Postcode No. is required.";
+
+    const hasPrimaryAdminCategory = !isBlank(payload.administrativeCategory);
+    const hasPrimaryAdminName = !isBlank(payload.municipality) || !isBlank(payload.council) || !isBlank(payload.borough) || !isBlank(payload.district);
+
+    if (hasPrimaryAdminCategory && !hasPrimaryAdminName) {
+      nextErrors.administrativeCategory = "Primary admin category requires a matching admin name.";
+    }
+
+    if (!hasPrimaryAdminCategory && hasPrimaryAdminName) {
+      nextErrors.administrativeCategory = "Primary admin name requires a matching admin category.";
+    }
+
+    if (!isBlank(payload.secondaryAdministrativeCategory) && isBlank(payload.secondaryAdministrativeName)) {
+      nextErrors.secondaryAdministrativeName = "Secondary admin category requires a secondary admin name.";
+    }
+
+    if (isBlank(payload.secondaryAdministrativeCategory) && !isBlank(payload.secondaryAdministrativeName)) {
+      nextErrors.secondaryAdministrativeCategory = "Secondary admin name requires a secondary admin category.";
+    }
     if (isBlank(payload.townCity)) nextErrors.townCity = "Town / City is required.";
 
     [1, 2, 3, 4, 5].forEach((rank) => {
@@ -2088,7 +2217,23 @@ function isUnavailablePlaceholder(value) {
     }
   }
 
+  function viewClientProfile(client) {
+    const normalized = normalizeClient(client);
+    setViewingClientProfile(normalized);
+    window.setTimeout(() => {
+      document.querySelector(".client-profile-view-card")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 50);
+  }
+
+  function closeClientProfileView() {
+    setViewingClientProfile(null);
+  }
   function editClient(client) {
+    /* L360_DASHBOARD_V3C_EDIT_REVEAL */
+    setShowClientProfileForm(true);
     const normalized = normalizeClient(client);
 
     setEditingId(getClientId(normalized));
@@ -2224,13 +2369,312 @@ function isUnavailablePlaceholder(value) {
         .join(" ")
         .toLowerCase();
 
-      return searchable.includes(query);
+      return getClientLookupFieldText(normalized, clientLookupSearchBy).includes(query);
     });
-  }, [clients, searchTerm]);
+  }, [clients, searchTerm, clientLookupSearchBy]);
+  const clientNameSuggestions = useMemo(() => {
+    return Array.from(new Set(clients.map(getClientDirectoryName).filter(Boolean))).sort((a, b) => a.localeCompare(b));
+  }, [clients]);
+
+  const clientTagOptions = useMemo(() => {
+    const collected = new Set(DEFAULT_CLIENT_TAG_OPTIONS);
+    clients.forEach((client) => {
+      normalizeClientTagList(client.clientTags || client.tags).forEach((tag) => collected.add(tag));
+      if (client.clientCategory) collected.add(client.clientCategory);
+      if (client.verificationStatus) collected.add(client.verificationStatus);
+    });
+    return Array.from(collected).filter(Boolean).sort((a, b) => a.localeCompare(b));
+  }, [clients]);
+
+
+  function getClientLookupFieldText(client, mode = "All Fields") {
+    const normalized = normalizeClient(client);
+    const addressText = [
+      normalized.buildingHouseNo,
+      normalized.buildingHouseName,
+      normalized.streetAddress,
+      normalized.postcode,
+      normalized.district,
+      normalized.townCity,
+      normalized.stateProvinceTerritory || normalized.state,
+      normalized.municipality,
+      normalized.council,
+      normalized.borough,
+      normalized.locationAdminCategoryType,
+      normalized.country
+    ].filter(Boolean).join(" ");
+
+    const tagText = Array.isArray(normalized.clientTags)
+      ? normalized.clientTags.join(" ")
+      : String(normalized.clientTags || "");
+
+    const fields = {
+      "All Fields": [
+        normalized.titlePrefix,
+        normalized.givenName,
+        normalized.surname,
+        normalized.initials,
+        normalized.gender,
+        normalized.ethnicity,
+        normalized.ethnicityOther,
+        normalized.nationality,
+        normalized.residencyStatus,
+        normalized.identificationKind,
+        normalized.identityCardColour,
+        normalized.nricPassportNumber,
+        normalized.dateOfBirth,
+        normalized.stateOfBirth,
+        normalized.email,
+        normalized.phoneNumber,
+        normalized.backupPhoneNumber,
+        normalized.whatsappNumber,
+        normalized.documentType,
+        normalized.documentStatus,
+        normalized.verificationStatus,
+        normalized.clientCategory,
+        tagText,
+        addressText,
+        normalized.specialRemarksStaffLawyerNotes,
+        normalized.staffLawyerRemarks,
+        normalized.missingInformationNotes,
+        Array.isArray(normalized.verificationFlags) ? normalized.verificationFlags.join(" ") : ""
+      ],
+      "Client Name": [normalized.titlePrefix, normalized.givenName, normalized.surname, normalized.initials],
+      "Phone / WhatsApp": [normalized.phoneNumber, normalized.backupPhoneNumber, normalized.whatsappNumber, formatPhoneDisplay(normalized.phoneCountryCode, normalized.phoneNumber)],
+      "Email": [normalized.email],
+      "NRIC / Passport": [normalized.nricPassportNumber, normalized.identificationKind, normalized.identityCardColour],
+      "Date of Birth": [normalized.dateOfBirth],
+      "State of Birth": [normalized.stateOfBirth],
+      "Gender": [normalized.gender],
+      "Ethnicity": [normalized.ethnicity, normalized.ethnicityOther],
+      "Nationality / Residency": [normalized.nationality, normalized.residencyStatus],
+      "Document Status": [normalized.documentType, normalized.documentStatus, normalized.verificationStatus],
+      "Postcode": [normalized.postcode],
+      "Administrative Location": [normalized.district, normalized.townCity, normalized.stateProvinceTerritory || normalized.state, normalized.municipality, normalized.council, normalized.borough, normalized.locationAdminCategoryType],
+      "Category / Tag": [normalized.clientCategory, tagText],
+      "Remarks / Notes": [normalized.specialRemarksStaffLawyerNotes, normalized.staffLawyerRemarks, normalized.missingInformationNotes, Array.isArray(normalized.verificationFlags) ? normalized.verificationFlags.join(" ") : ""]
+    };
+
+    return (fields[mode] || fields["All Fields"]).filter(Boolean).join(" ").toLowerCase();
+  }
+  const filteredDirectoryClients = useMemo(() => {
+    return [...filteredClients]
+      .filter((client) => activeAlphabetFilter === "All" || getClientDirectoryInitial(client) === activeAlphabetFilter)
+      .filter((client) => {
+        if (selectedClientTagFilter === "All") return true;
+        const tags = normalizeClientTagList(client.clientTags || client.tags);
+        return tags.includes(selectedClientTagFilter) || client.clientCategory === selectedClientTagFilter || client.verificationStatus === selectedClientTagFilter;
+      })
+      .filter((client) => {
+        const manualTagQuery = manualClientTagSearch.trim().toLowerCase();
+        if (!manualTagQuery) return true;
+        const tagText = [
+          client.clientCategory,
+          client.verificationStatus,
+          ...normalizeClientTagList(client.clientTags || client.tags)
+        ].filter(Boolean).join(" ").toLowerCase();
+        return tagText.includes(manualTagQuery);
+      })
+      .sort((a, b) => getClientDirectoryName(a).localeCompare(getClientDirectoryName(b)));
+  }, [filteredClients, activeAlphabetFilter, selectedClientTagFilter, manualClientTagSearch]);
 
   return (
-    <section className="client-module client-v6">      <style>{`
+    <section className={"client-module client-v6 " + (showClientProfileForm ? "client-profile-form-open" : "client-profile-form-closed")}>      <style>{`
+        /* L360_DASHBOARD_V3G2_FINAL_SEARCH_VIEW_CLEANUP */
+        .client-contact-search-panel,
+        .client-search-row {
+          display: none !important;
+        }
+        .client-alphabet-filter.two-rows {
+          display: grid;
+          gap: 6px;
+          justify-items: center;
+        }
+        .client-alphabet-filter.two-rows .alphabet-action-row {
+          display: contents;
+        }
+        .client-alphabet-filter.two-rows .alphabet-row {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 6px;
+          width: 100%;
+        }
+        .client-alphabet-filter.two-rows button {
+          flex: 0 0 auto;
+          min-width: 42px;
+          width: auto;
+          max-width: 190px;
+          white-space: nowrap;
+        }
+        .client-alphabet-filter.two-rows .show-all-clients-chip {
+          min-width: 140px;
+          max-width: 190px;
+        }
+        .client-contact-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px 12px;
+          align-items: center;
+        }
+        .client-directory-mini-card-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-top: 10px;
+        }
+        .client-profile-view-card {
+          border: 1px solid rgba(148, 163, 184, 0.45);
+          border-radius: 16px;
+          background: #ffffff;
+          padding: 16px;
+          margin: 16px 0;
+        }
+        .client-profile-view-header {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          margin-bottom: 12px;
+        }
+        .client-profile-view-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 10px;
+        }
+        .client-profile-view-grid > div {
+          border: 1px solid rgba(226, 232, 240, 0.95);
+          border-radius: 12px;
+          padding: 10px;
+          background: rgba(248, 250, 252, 0.72);
+        }
+        .client-profile-view-grid strong,
+        .client-profile-view-grid span {
+          display: block;
+        }
+        .client-profile-view-grid .full {
+          grid-column: 1 / -1;
+        }
+        /* L360_DASHBOARD_V3E_FINAL_CLEANUP */
+        .client-profile-form-closed .client-form-v6,
+        .client-profile-form-closed .client-validation-box {
+          display: none !important;
+        }
+
+        .client-directory-control-panel {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 10px !important;
+        }
+
+        .client-directory-summary-row {
+          order: 2 !important;
+        }
+
+        .client-directory-mini-list {
+          order: 3 !important;
+        }
+
+        .client-alphabet-filter {
+          order: 4 !important;
+        }
+
+        .client-alphabet-filter.two-rows {
+          display: grid !important;
+          gap: 6px !important;
+          margin: 10px 0 !important;
+        }
+
+        .client-alphabet-filter.two-rows .alphabet-action-row {
+          display: flex !important;
+          gap: 6px !important;
+          justify-content: flex-start !important;
+        }
+
+        .client-alphabet-filter.two-rows .alphabet-row {
+          display: grid !important;
+          grid-template-columns: repeat(13, minmax(20px, 1fr)) !important;
+          gap: 4px !important;
+        }
+
+        .client-alphabet-filter.two-rows button {
+          min-width: 0 !important;
+          width: 100% !important;
+          padding: 4px 0 !important;
+          font-size: 11px !important;
+          text-align: center !important;
+        }
+
+        .client-directory-mini-card span,
+        .client-contact-result-card span {
+          white-space: normal !important;
+          line-height: 1.25 !important;
+        }
+
+        .client-directory-mini-card {
+          min-height: auto !important;
+        }
+
+        .client-form-v6 label.full > button.btn-small {
+          margin-top: 8px;
+        }
         /* L360_SURGICAL_CLIENT_PATCH_V2_STYLE */
+        /* L360_DASHBOARD_V3F_BUILD_FIX_UI_REFINEMENT */
+        .extended-contact-choices {
+          display: contents;
+        }
+        .client-alphabet-filter.two-rows {
+          align-items: center;
+          justify-items: center;
+        }
+        .client-alphabet-filter.two-rows .alphabet-action-row,
+        .client-alphabet-filter.two-rows .alphabet-row {
+          display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+          gap: 6px !important;
+          width: 100%;
+        }
+        .client-alphabet-filter.two-rows .alphabet-action-row button,
+        .client-alphabet-filter.two-rows button {
+          width: auto !important;
+          flex: 0 0 auto !important;
+          min-width: 42px;
+          max-width: 180px;
+          white-space: nowrap;
+        }
+        .client-alphabet-filter.two-rows .alphabet-action-row button {
+          min-width: 130px;
+        }
+        .client-directory-result-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .client-profile-preview-card {
+          border: 1px solid rgba(15, 23, 42, 0.14);
+          border-radius: 14px;
+          padding: 14px;
+          margin: 14px 0;
+          background: #ffffff;
+          box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+        }
+        .client-profile-preview-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+        .client-profile-preview-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 10px;
+          margin-bottom: 12px;
+        }
         .client-form-has-errors input:required:invalid,
         .client-form-has-errors select:required:invalid,
         .field-input-error {
@@ -2267,13 +2711,73 @@ function isUnavailablePlaceholder(value) {
           border-radius: 12px;
           background: #ffffff;
         }
+        /* L360_CLIENT_DIRECTORY_V3C_STYLE */
+        .client-directory-control-panel {
+          border: 1px solid rgba(148, 163, 184, 0.45);
+          border-radius: 16px;
+          padding: 16px;
+          margin: 16px 0;
+          background: rgba(255, 255, 255, 0.94);
+        }
+        .client-directory-header-row,
+        .client-directory-summary-row {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+        .client-directory-actions {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .client-alphabet-filter,
+        .client-search-history {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin: 12px 0;
+        }
+        .client-alphabet-filter button,
+        .client-search-history button {
+          border: 1px solid rgba(148, 163, 184, 0.55);
+          border-radius: 999px;
+          padding: 5px 10px;
+          background: #fff;
+          cursor: pointer;
+        }
+        .client-alphabet-filter button.active {
+          font-weight: 800;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+        }
+        .client-directory-mini-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 10px;
+          margin-top: 12px;
+        }
+        .client-directory-mini-card {
+          text-align: left;
+          border: 1px solid rgba(148, 163, 184, 0.45);
+          border-radius: 12px;
+          padding: 10px;
+          background: #fff;
+          cursor: pointer;
+        }
+        .client-directory-mini-card span {
+          display: block;
+          margin-top: 4px;
+          font-size: 0.86rem;
+          opacity: 0.78;
+        }
       `}</style>
       <div className="client-module-header">
         <div>
           <h2>Client Registration / Client Profile</h2>
           <p>
-            Malaysian and Singaporean client profile with legal verification,
-            document classification, audit notes and communication records.
+            Client database, directory and profile management.
           </p>
         </div>
 
@@ -2288,8 +2792,219 @@ function isUnavailablePlaceholder(value) {
           {status}
         </p>
       )}
+      <div className="client-directory-control-panel">
+        <div className="client-directory-header-row">
+          <div>
+            <h3>Client Directory / Index</h3>
+            <p className="mandatory-note">Saved clients are searchable, alphabetically indexed, and filterable without opening the full client profile form. Google Contacts can be included only when contacts are imported into Litigation 360 or when a backend Google Contacts connector endpoint is active.</p>
+          </div>
+          <div className="client-directory-actions">
+            <button type="button" className="btn btn-primary" onClick={openNewClientProfile}>
+              + Add Client Profile / Create New Client
+            </button>
+            {showClientProfileForm && (
+              <button type="button" className="btn btn-secondary" onClick={closeClientProfileForm}>
+                Hide Client Profile Form
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="inline-fields four-even">
+          <label>
+            Search By
+            <select value={clientLookupSearchBy} onChange={(event) => setClientLookupSearchBy(event.target.value)}>
+              {[
+                "All Fields",
+                "Client Name",
+                "Phone / WhatsApp",
+                "Email",
+                "NRIC / Passport",
+                "Date of Birth",
+                "State of Birth",
+                "Gender",
+                "Ethnicity",
+                "Nationality / Residency",
+                "Document Status",
+                "Postcode",
+                "Administrative Location",
+                "Category / Tag",
+                "Remarks / Notes"
+              ].map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            Search Clients
+            <input
+              list="client-directory-name-suggestions"
+              value={searchTerm}
+              onChange={handleDirectorySearchChange}
+              placeholder="Search as you type: name, phone, WhatsApp, email, NRIC/passport, postcode, town/city, district, municipality, council, borough, state, tags or remarks"
+            />
+            <datalist id="client-directory-name-suggestions">
+              {clientNameSuggestions.map((name) => <option key={name} value={name} />)}
+            </datalist>
+          </label>
+
+          <label>
+            Manual Client Selection
+            <select
+              value=""
+              onChange={(event) => {
+                const selected = clients.find((client) => getClientId(client) === event.target.value);
+                if (selected) selectClientFromDirectory(selected);
+              }}
+            >
+              <option value="">Select existing client</option>
+              {clients
+                .slice()
+                .sort((a, b) => getClientDirectoryName(a).localeCompare(getClientDirectoryName(b)))
+                .map((client) => (
+                  <option key={getClientId(client) || getClientDirectoryName(client)} value={getClientId(client)}>
+                    {getClientDirectoryName(client)}
+                  </option>
+                ))}
+            </select>
+          </label>
+
+          <label>
+            Category / Tag
+            <select value={selectedClientTagFilter} onChange={(event) => setSelectedClientTagFilter(event.target.value)}>
+              <option value="All">All Tags / Categories</option>
+              {clientTagOptions.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
+            </select>
+            <input
+              value={manualClientTagSearch}
+              onChange={(event) => setManualClientTagSearch(event.target.value)}
+              placeholder="Type tag/category manually"
+            />
+          </label>
+        </div>
+
+        <div className="client-alphabet-filter two-rows" aria-label="Client alphabet filter">
+          <div className="alphabet-action-row">
+            <button type="button" className={"show-all-clients-chip " + (activeAlphabetFilter === "All" ? "active" : "")} onClick={() => setActiveAlphabetFilter("All")}>Show All Clients</button>
+          </div>
+          <div className="alphabet-row">
+            {CLIENT_DIRECTORY_ALPHABET.slice(0, 13).map((letter) => (
+              <button
+                type="button"
+                key={letter}
+                className={activeAlphabetFilter === letter ? "active" : ""}
+                onClick={() => setActiveAlphabetFilter(letter)}
+              >
+                {letter}
+              </button>
+            ))}
+          </div>
+          <div className="alphabet-row">
+            {CLIENT_DIRECTORY_ALPHABET.slice(13).map((letter) => (
+              <button
+                type="button"
+                key={letter}
+                className={activeAlphabetFilter === letter ? "active" : ""}
+                onClick={() => setActiveAlphabetFilter(letter)}
+              >
+                {letter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {clientSearchHistory.length > 0 && (
+          <div className="client-search-history">
+            <strong>Recent searches:</strong>
+            {clientSearchHistory.map((item) => (
+              <button type="button" key={item} onClick={() => setSearchTerm(item)}>{item}</button>
+            ))}
+            <button type="button" onClick={() => setClientSearchHistory([])}>Clear History</button>
+          </div>
+        )}
+
+        <div className="client-directory-summary-row">
+          <span>Directory Results: {filteredDirectoryClients.length}</span>
+          <button type="button" className="btn btn-secondary btn-small" onClick={clearDirectoryFilters}>Clear Filters</button>
+        </div>
+
+        <div className="client-directory-mini-list">
+          {filteredDirectoryClients.slice(0, 26).map((client) => (
+            <button
+              type="button"
+              className="client-directory-mini-card"
+              key={getClientId(client) || getClientDirectoryName(client)}
+              onClick={() => selectClientFromDirectory(client)}
+            >
+              <strong>{getClientDirectoryName(client)}</strong>
+              <span className="client-contact-meta">
+                <span>{client.email || "No email"}</span>
+                <span>{formatPhoneDisplay(client.phoneCountryCode, client.phoneNumber) || "No phone"}</span>
+                <span>{client.townCity || "No town/city"}</span>
+              </span>
+            </button>
+          ))}
+          {filteredDirectoryClients.length === 0 && <p className="mandatory-note">No clients match the current search/filter.</p>}
+
+          {viewingClientProfile && (
+            <div className="client-profile-preview-card" style={{ display: "none" }}>
+              <div className="client-profile-preview-header">
+                <h3>View Client Profile</h3>
+                <button type="button" className="btn btn-secondary btn-small" onClick={closeClientProfileView}>Close View</button>
+              </div>
+              <div className="client-profile-preview-grid">
+                <span><strong>Client ID</strong><br />{getClientId(viewingClientProfile) || "Not assigned"}</span>
+                <span><strong>Name</strong><br />{[viewingClientProfile.titlePrefix, viewingClientProfile.givenName, viewingClientProfile.surname].filter(Boolean).join(" ") || viewingClientProfile.name || "Unnamed client"}</span>
+                <span><strong>Email</strong><br />{viewingClientProfile.email || "No email recorded"}</span>
+                <span><strong>Phone</strong><br />{formatPhoneDisplay(viewingClientProfile.phoneCountryCode, viewingClientProfile.phoneNumber) || "No phone recorded"}</span>
+                <span><strong>Town / City</strong><br />{viewingClientProfile.townCity || "Not recorded"}</span>
+                <span><strong>Status</strong><br />{viewingClientProfile.verificationStatus || viewingClientProfile.documentStatus || "To be reviewed"}</span>
+              </div>
+              <div className="client-directory-result-actions">
+                <button type="button" className="btn btn-secondary btn-small" onClick={() => editClient(viewingClientProfile)}>Edit / Amend</button>
+                <button type="button" className="btn btn-secondary btn-small" onClick={() => deleteClient(viewingClientProfile)}>Delete</button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* L360_DASHBOARD_V3G2_VIEW_PROFILE_PANEL */}
+      {viewingClientProfile && (
+        <section className="client-profile-view-card">
+          <div className="client-profile-view-header">
+            <div>
+              <h3>View Client Profile</h3>
+              <p className="mandatory-note">Read-only client profile view. Use Edit / Amend to change details.</p>
+            </div>
+            <div className="client-directory-actions">
+              <button type="button" className="btn btn-secondary btn-small" onClick={() => editClient(viewingClientProfile)}>
+                Edit / Amend
+              </button>
+              <button type="button" className="btn btn-secondary btn-small" onClick={closeClientProfileView}>
+                Close View
+              </button>
+            </div>
+          </div>
+
+          <div className="client-profile-view-grid">
+            <div><strong>Client ID</strong><span>{getClientId(viewingClientProfile) || "Not assigned"}</span></div>
+            <div><strong>Name</strong><span>{getClientDirectoryName(viewingClientProfile)}</span></div>
+            <div><strong>Email</strong><span>{viewingClientProfile.email || "No email"}</span></div>
+            <div><strong>Phone / WhatsApp</strong><span>{formatPhoneDisplay(viewingClientProfile.phoneCountryCode, viewingClientProfile.phoneNumber) || viewingClientProfile.phoneNumber || "No phone"}</span></div>
+            <div><strong>NRIC / Passport</strong><span>{viewingClientProfile.nricPassportNumber || "Not recorded"}</span></div>
+            <div><strong>Gender / Ethnicity</strong><span>{[viewingClientProfile.gender, viewingClientProfile.ethnicity].filter(Boolean).join(" / ") || "Not recorded"}</span></div>
+            <div><strong>Date / State of Birth</strong><span>{[viewingClientProfile.dateOfBirth, viewingClientProfile.stateOfBirth].filter(Boolean).join(" / ") || "Not recorded"}</span></div>
+            <div><strong>Document Status</strong><span>{[viewingClientProfile.documentType, viewingClientProfile.documentStatus, viewingClientProfile.verificationStatus].filter(Boolean).join(" / ") || "Not recorded"}</span></div>
+            <div className="full"><strong>Address</strong><span>{[viewingClientProfile.buildingHouseNo, viewingClientProfile.postcode, viewingClientProfile.district, viewingClientProfile.townCity, viewingClientProfile.stateProvinceTerritory || viewingClientProfile.state, viewingClientProfile.country].filter(Boolean).join(", ") || "No address recorded"}</span></div>
+            <div className="full"><strong>Emergency Contact / Next of Kin</strong><span>{[viewingClientProfile.emergencyContactName, viewingClientProfile.emergencyContactRelationship, viewingClientProfile.emergencyContactNumber].filter(Boolean).join(" / ") || "Not recorded"}</span></div>
+            <div className="full"><strong>Remarks / Notes</strong><span>{viewingClientProfile.specialRemarksStaffLawyerNotes || viewingClientProfile.staffLawyerRemarks || viewingClientProfile.missingInformationNotes || "No remarks recorded"}</span></div>
+          </div>
+        </section>
+      )}
       <div className="client-contact-search-panel">
-        <h3>Search Existing Client / Contact Database</h3>
+        <h3>Client Search / Contact Lookup</h3>
         <p className="mandatory-note">
           Search by name, phone, WhatsApp, email, NRIC/passport, postcode, town, district, municipality, council, borough, state, or remarks before creating a duplicate profile.
         </p>
@@ -2313,9 +3028,17 @@ function isUnavailablePlaceholder(value) {
               <div className="client-contact-result-card" key={getClientId(client) || client.email || client.phoneNumber}>
                 <span>
                   <strong>{[client.givenName, client.surname].filter(Boolean).join(" ") || client.name || "Unnamed client"}</strong><br />
-                  {client.email || "No email"} Â· {formatPhoneDisplay(client.phoneCountryCode, client.phoneNumber)} Â· {client.townCity || "No town/city"}
+                  <span className="client-contact-meta">
+                    <span>{client.email || "No email"}</span>
+                    <span>{formatPhoneDisplay(client.phoneCountryCode, client.phoneNumber) || "No phone"}</span>
+                    <span>{client.townCity || "No town/city"}</span>
+                  </span>
                 </span>
-                <button type="button" className="btn btn-secondary btn-small" onClick={() => editClient(client)}>Edit / Load</button>
+                                <div className="client-directory-result-actions">
+                  <button type="button" className="btn btn-secondary btn-small" onClick={(event) => { event.stopPropagation(); viewClientProfile(client); }}>View Client Profile</button>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={(event) => { event.stopPropagation(); editClient(client); }}>Edit / Amend</button>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={(event) => { event.stopPropagation(); deleteClient(client); }}>Delete</button>
+                </div>
               </div>
             ))}
           </div>
@@ -2333,7 +3056,7 @@ function isUnavailablePlaceholder(value) {
         </div>
       )}
 
-      <form className={"client-form client-form-v6" + (validationErrors.length > 0 ? " client-form-has-errors" : "")} onSubmit={saveClient}>
+      <form className={"client-form client-form-v6" + (validationErrors.length > 0 ? " client-form-has-errors" : "")} onSubmit={saveClient} style={{ display: showClientProfileForm ? undefined : "none" }}>
                 <div className="form-section">
           <h3>Client Profile Details</h3>
 
@@ -2687,70 +3410,91 @@ function isUnavailablePlaceholder(value) {
               </select>
             </label>
 
-            <label>
-              3rd Contact Choice
-              <select value={form.preferredContact3} onChange={(event) => updateForm("preferredContact3", event.target.value)}>
-                {CONTACT_METHOD_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
+            <label className="full">
+              Additional Contact Choices
+              <button
+                type="button"
+                className="btn btn-secondary btn-small"
+                onClick={() => setShowExtendedContactChoices((value) => !value)}
+              >
+                {showExtendedContactChoices ? "Hide 3rd / 4th / 5th Contact Choices" : "Show 3rd / 4th / 5th Contact Choices"}
+              </button>
             </label>
-            <label>
-              3rd Contact Detail
-              <input
-                className={inputClass("preferredContactDetail3")}
-                value={form.preferredContactDetail3}
-                onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
-                placeholder="Phone, email, or contact detail for 3rd choice"
-              />
-              {renderInlineError("preferredContactDetail3")}
-              {renderNumericWarning("preferredContactDetail3")}
-            </label>
+            {showExtendedContactChoices && (
+              <div className="extended-contact-choices">
+                <label>
+                  3rd Contact Choice
+                  <select value={form.preferredContact3} onChange={(event) => updateForm("preferredContact3", event.target.value)}>
+                    {CONTACT_METHOD_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                {isAdditionalContactChoiceEnabled(form.preferredContact3) && (
+                  <label>
+                    3rd Contact Detail
+                    <input
+                      className={inputClass("preferredContactDetail3")}
+                      value={form.preferredContactDetail3}
+                      onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
+                      placeholder="Phone, email, or contact detail for 3rd choice"
+                    />
+                    {renderInlineError("preferredContactDetail3")}
+                    {renderNumericWarning("preferredContactDetail3")}
+                  </label>
+                )}
+
+                <label>
+                  4th Contact Choice
+                  <select value={form.preferredContact4} onChange={(event) => updateForm("preferredContact4", event.target.value)}>
+                    {CONTACT_METHOD_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                {isAdditionalContactChoiceEnabled(form.preferredContact4) && (
+                  <label>
+                    4th Contact Detail
+                    <input
+                      className={inputClass("preferredContactDetail4")}
+                      value={form.preferredContactDetail4}
+                      onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
+                      placeholder="Phone, email, or contact detail for 4th choice"
+                    />
+                    {renderInlineError("preferredContactDetail4")}
+                    {renderNumericWarning("preferredContactDetail4")}
+                  </label>
+                )}
+
+                <label>
+                  5th Contact Choice
+                  <select value={form.preferredContact5} onChange={(event) => updateForm("preferredContact5", event.target.value)}>
+                    {CONTACT_METHOD_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                {isAdditionalContactChoiceEnabled(form.preferredContact5) && (
+                  <label>
+                    5th Contact Detail
+                    <input
+                      className={inputClass("preferredContactDetail5")}
+                      value={form.preferredContactDetail5}
+                      onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
+                      placeholder="Phone, email, or contact detail for 5th choice"
+                    />
+                    {renderInlineError("preferredContactDetail5")}
+                    {renderNumericWarning("preferredContactDetail5")}
+                  </label>
+                )}
+              </div>
+            )}
 
             <label>
-              4th Contact Choice
-              <select value={form.preferredContact4} onChange={(event) => updateForm("preferredContact4", event.target.value)}>
-                {CONTACT_METHOD_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              4th Contact Detail
-              <input
-                className={inputClass("preferredContactDetail4")}
-                value={form.preferredContactDetail4}
-                onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
-                placeholder="Phone, email, or contact detail for 4th choice"
-              />
-              {renderInlineError("preferredContactDetail4")}
-              {renderNumericWarning("preferredContactDetail4")}
-            </label>
-
-            <label>
-              5th Contact Choice
-              <select value={form.preferredContact5} onChange={(event) => updateForm("preferredContact5", event.target.value)}>
-                {CONTACT_METHOD_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              5th Contact Detail
-              <input
-                className={inputClass("preferredContactDetail5")}
-                value={form.preferredContactDetail5}
-                onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
-                placeholder="Phone, email, or contact detail for 5th choice"
-              />
-              {renderInlineError("preferredContactDetail5")}
-              {renderNumericWarning("preferredContactDetail5")}
-            </label>
-
-            <label>
-              Contact Hours
+              Contactable Hours
               <div className="inline-fields two-even">
                 <input type="time" value={form.preferredContactHoursFrom} onChange={(event) => updateForm("preferredContactHoursFrom", event.target.value)} />
                 <input type="time" value={form.preferredContactHoursTo} onChange={(event) => updateForm("preferredContactHoursTo", event.target.value)} />
@@ -2839,7 +3583,7 @@ function isUnavailablePlaceholder(value) {
             </label>
 
             <label className="full">
-              Building / House No. and Postcode No.
+              Building / House No.
               <div className="inline-fields two-even">
                 <input
                   className="single-line-input"
@@ -2883,17 +3627,16 @@ function isUnavailablePlaceholder(value) {
               Street Address
               <input value={form.streetAddress} onChange={(event) => updateForm("streetAddress", event.target.value)} placeholder="Street address" />
             </label>
-
-            <label>
-              District
-              <input value={form.district} onChange={(event) => updateForm("district", event.target.value)} placeholder="District" />
+            <label style={{ display: "none" }}>
+              Primary Admin Name / District / Mukim / County / Shire
+              <input value={form.district} onChange={(event) => updateForm("district", event.target.value)} placeholder="Primary admin area name: district, mukim, county, parish, shire, etc." />
             </label>
 
-            <label>
-              Town / City
-              <input value={form.townCity} onChange={(event) => updateForm("townCity", event.target.value)} placeholder="Town / City" />
+            <label style={{ display: "none" }}>
+              Town / City / Locality
+              <input value={form.townCity} onChange={(event) => updateForm("townCity", event.target.value)} placeholder="Town, city, village, township or locality" />
             </label>
-            <label>
+            <label style={{ display: "none" }}>
               State / Province / Territory
               <input
                 list="l360-state-location-options"
@@ -2905,43 +3648,48 @@ function isUnavailablePlaceholder(value) {
               {renderInlineError("state")}
             </label>
 
-            <label>
-              Municipality
+            <label style={{ display: "none" }}>
+              Municipality / Local Authority Name
               <input
                 list="l360-municipality-options"
                 value={form.municipality}
                 onChange={(event) => updateForm("municipality", event.target.value)}
-                placeholder="Municipality"
+                placeholder="Municipality or local authority name"
               />
             </label>
 
-            <label>
-              Council
+            <label style={{ display: "none" }}>
+              Council / Local Council Name
               <input
                 list="l360-council-options"
                 value={form.council}
                 onChange={(event) => updateForm("council", event.target.value)}
-                placeholder="Council"
+                placeholder="Council or local council name"
               />
             </label>
 
-            <label>
-              Borough
+            <label style={{ display: "none" }}>
+              Borough / County / Parish / Shire Name
               <input
                 list="l360-borough-options"
                 value={form.borough}
                 onChange={(event) => updateForm("borough", event.target.value)}
-                placeholder="Borough"
+                placeholder="Borough, county, parish or shire name"
               />
             </label>
 
-            <label>
-              Location / Admin Category Type
+            
+            {/* L360_CLIENTS_V3J7_LOCATION_CONSISTENCY_NOTE */}
+            <div className="full mandatory-note">
+              <strong>Location / Administrative Classification:</strong> Country, state/province/territory, postcode, town/locality and administrative authority should match the same real-world jurisdiction. Use the admin category/name fields for municipality, council, borough, district, county, parish, shire, mukim or other local authority structures.
+            </div>
+<label style={{ display: "none" }}>
+              Primary / Secondary Location Admin Category Type
               <input
                 list="l360-location-admin-type-options"
                 value={form.locationAdminType}
                 onChange={(event) => updateForm("locationAdminType", event.target.value)}
-                placeholder="Municipality, Council, Borough, District, County, Parish, Shire, Mukim, etc."
+                placeholder="Search/type admin category: municipality, council, borough, district, county, parish, shire, mukim, etc."
               />
             </label>
 
@@ -2952,7 +3700,7 @@ function isUnavailablePlaceholder(value) {
                   className={inputClass("locationAdminTypeManual")}
                   value={form.locationAdminTypeManual}
                   onChange={(event) => updateForm("locationAdminTypeManual", event.target.value)}
-                  placeholder="Enter official local category, e.g. Mukim, Parish, County, Shire, Borough, Council, Municipality."
+                  placeholder="Manual fallback: enter official local category or extra admin detail when not listed."
                 />
                 {renderInlineError("locationAdminTypeManual")}
               </label>
@@ -2976,7 +3724,7 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
 <div className="form-section">
-          <h3>Emergency Contact Details</h3>
+          <h3>Emergency Contact / Next of Kin Details</h3>
 
           <div className="smart-grid two">
             <label>
@@ -2985,7 +3733,7 @@ function isUnavailablePlaceholder(value) {
             </label>
 
             <label>
-              Relationship to Client / Emergency Contact
+              Relationship to Client (Emergency Contact / Next of Kin)
               <input
                 list="client-relationship-options"
                 value={form.emergencyContactRelationship}
@@ -3161,7 +3909,7 @@ function isUnavailablePlaceholder(value) {
               <th>WhatsApp</th>
               <th>Availability</th>
               <th>Address</th>
-              <th>Emergency Contact</th>
+              <th>Emergency / Next of Kin</th>
               <th>Review Status</th>
               <th>Notes / Flags</th>
               <th>Created On</th>
@@ -3244,8 +3992,9 @@ function isUnavailablePlaceholder(value) {
                   <td>{formatDateTime(normalized.updatedAt)}</td>
                   <td>
                     <div className="client-row-actions">
-                      <button type="button" onClick={() => editClient(normalized)}>Edit</button>
-                      <button type="button" onClick={() => deleteClient(normalized)}>Delete</button>
+                      <button type="button" onClick={(event) => { event.stopPropagation(); viewClientProfile(normalized); }}>View Client Profile</button>
+                      <button type="button" onClick={(event) => { event.stopPropagation(); editClient(normalized); }}>Edit / Amend</button>
+                      <button type="button" onClick={(event) => { event.stopPropagation(); deleteClient(normalized); }}>Delete</button>
                     </div>
                   </td>
                 </tr>
@@ -3262,3 +4011,18 @@ function isUnavailablePlaceholder(value) {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
