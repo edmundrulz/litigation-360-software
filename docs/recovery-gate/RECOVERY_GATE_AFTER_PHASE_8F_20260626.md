@@ -68,9 +68,9 @@ Forbidden areas remain untouched unless separately verified otherwise:
 
 ## Gate Decision
 
-Recovery Gate Status: PENDING
+Recovery Gate Status: PASS
 
-Phase 13B.2 Unlock Status: LOCKED PENDING GATE PASS
+Phase 13B.2 Unlock Status: ELIGIBLE FOR SEPARATE UNLOCK DECISION
 
 ## Final Rule
 
