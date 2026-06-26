@@ -1,0 +1,117 @@
+
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:1::root {
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:2:  --legal-navy: #17213a;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:3:  --legal-blue: #263d63;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:4:  --legal-gold: #c9a646;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:5:  --legal-cream: #f8f5ed;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:10:  --legal-shadow: 0 18px 40px rgba(23, 33, 58, 0.14);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:11:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:12:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:13:.legal-shell {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:14:  min-height: 100vh;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:15:  display: grid;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:16:  grid-template-columns: 280px 1fr;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:19:  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:20:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:21:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:22:.legal-sidebar {
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:23:  background: var(--legal-navy);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:24:  color: white;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:25:  padding: 22px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:26:  display: flex;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:66:  margin-top: 3px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:67:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:68:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:69:.side-nav {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:70:  display: grid;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:71:  gap: 10px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:72:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:73:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:74:.side-nav button {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:75:  cursor: pointer;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:76:  text-align: left;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:77:  color: white;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:83:  transition: 0.18s ease;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:84:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:85:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:86:.side-nav button:hover,
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:87:.side-nav button:focus {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:88:  outline: none;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:89:  background: rgba(201,166,70,0.22);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:90:  border-color: rgba(201,166,70,0.7);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:91:  transform: translateX(3px);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:92:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:93:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:94:.sidebar-footer {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:95:  margin-top: auto;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:96:  display: grid;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:97:  gap: 4px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:128:.firm-card h2,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:129:.partner-card h2 {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:130:  margin: 0;
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:131:  color: var(--legal-navy);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:132:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:133:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:134:.top-bar p,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:140:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:141:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:142:.settings-pill,
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:143:.hero-actions button {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:144:  cursor: pointer;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:145:  border: none;
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:146:  background: var(--legal-navy);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:147:  color: white;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:148:  padding: 12px 16px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:149:  border-radius: 999px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:197:  box-shadow: var(--legal-shadow);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:198:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:199:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:200:.panel-header {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:201:  display: flex;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:202:  gap: 14px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:203:  align-items: flex-start;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:256:.news-card,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:257:.settings-card,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:258:.glossary-item,
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:259:.instruction-list button {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:260:  border: 1px solid var(--legal-border);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:261:  background: #fff;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:262:  border-radius: 18px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:267:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:268:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:269:.folder-card,
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:270:.instruction-list button {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:271:  cursor: pointer;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:272:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:273:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:274:.folder-card:hover,
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:275:.instruction-list button:hover,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:276:.news-card:hover {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:277:  border-color: var(--legal-gold);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:278:  box-shadow: 0 10px 22px rgba(23, 33, 58, 0.10);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:297:  gap: 12px;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:298:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:299:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:300:.instruction-list button {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:301:  font-weight: 800;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:302:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:303:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:304:.settings-card strong,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:305:.news-card strong,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:306:.folder-card strong {
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:307:  color: var(--legal-navy);
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:308:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:309:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:310:.settings-card span,
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:315:}
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:316:
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:317:@media (max-width: 900px) {
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:318:  .legal-shell {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:319:    grid-template-columns: 1fr;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:320:  }
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:321:
+> frontend\src\components\legal-management-shell\LegalManagementShell.css:322:  .legal-sidebar {
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:323:    position: static;
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:324:  }
+  frontend\src\components\legal-management-shell\LegalManagementShell.css:325:
+

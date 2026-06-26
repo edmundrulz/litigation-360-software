@@ -1,0 +1,209 @@
+
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:8: * Lab-safe legal management interface shell.
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:9: *
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:10: * Purpose:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:11: * - Left sidebar navigation
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:12: * - Search / Instructions / Glossary / Settings
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:13: * - Firm branding panel
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:14: * - Owner / Managing Partner profile
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:22:  const [query, setQuery] = useState("");
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:23:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:24:  const searchFolders = useMemo(() => {
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:25:    return [
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:26:      { icon: "ðŸ“", title: "Client Files", description: "Client profiles, IDs, engagement letters, contact details." },
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:27:      { icon: "ðŸ“‚", title: "Matter Folders", description: "Case records, pleadings, status notes, court timelines." },
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:28:      { icon: "ðŸ“„", title: "Documents", description: "Drafts, templates, letters, affidavits, bundles and exhibits." },
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:34:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:35:  const filteredFolders = searchFolders.filter((item) => {
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:36:    const haystack = `${item.title} ${item.description}`.toLowerCase();
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:37:    return haystack.includes(query.toLowerCase());
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:38:  });
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:39:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:40:  const glossaryTerms = [
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:49:  function renderPanel() {
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:50:    switch (activePanel) {
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:51:      case "search":
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:52:        return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:53:          <section className="panel-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:54:            <div className="panel-header">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:55:              <span className="panel-icon">ðŸ”Ž</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:56:              <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:57:                <h2>Search Legal Repository</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:58:                <p>Find documents, files, folders, client records, matter records and legal references.</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:60:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:61:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:62:            <input
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:63:              className="legal-search-input"
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:64:              value={query}
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:65:              onChange={(event) => setQuery(event.target.value)}
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:66:              placeholder="Search clients, matters, documents, deadlines, folders..."
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:67:              aria-label="Search legal repository"
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:68:            />
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:69:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:70:            <div className="folder-grid">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:71:              {filteredFolders.map((item) => (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:72:                <button key={item.title} className="folder-card" type="button">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:73:                  <span className="folder-icon">{item.icon}</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:74:                  <strong>{item.title}</strong>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:75:                  <small>{item.description}</small>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:76:                </button>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:77:              ))}
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:78:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:79:          </section>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:80:        );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:81:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:82:      case "instructions":
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:83:        return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:84:          <section className="panel-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:85:            <div className="panel-header">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:86:              <span className="panel-icon">ðŸ“˜</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:87:              <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:88:                <h2>Instructions & User Guides</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:89:                <p>Training, tutorials, SOPs and help documentation for staff.</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:90:              </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:91:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:92:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:93:            <div className="instruction-list">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:94:              <button type="button">ðŸš€ Getting Started Guide</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:95:              <button type="button">ðŸ‘¤ Client Intake Workflow</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:96:              <button type="button">ðŸ’¼ Matter Opening SOP</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:97:              <button type="button">ðŸ“„ Document Upload & Review Guide</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:98:              <button type="button">â° Deadline Monitoring Guide</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:99:              <button type="button">ðŸ›¡ï¸ Security, RBAC & Audit SOP</button>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:100:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:101:          </section>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:102:        );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:103:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:104:      case "glossary":
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:105:        return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:106:          <section className="panel-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:107:            <div className="panel-header">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:108:              <span className="panel-icon">ðŸ“š</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:109:              <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:110:                <h2>Legal Glossary</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:111:                <p>Common legal terms and internal terminology used in this system.</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:112:              </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:113:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:114:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:115:            <div className="glossary-list">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:116:              {glossaryTerms.map((item) => (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:117:                <article key={item.term} className="glossary-item">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:118:                  <strong>{item.term}</strong>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:119:                  <p>{item.definition}</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:120:                </article>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:124:        );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:125:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:126:      case "settings":
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:127:        return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:128:          <section className="panel-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:129:            <div className="panel-header">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:130:              <span className="panel-icon">âš™ï¸</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:131:              <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:132:                <h2>System Settings & Configuration</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:133:                <p>System-wide preferences and administrative controls.</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:134:              </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:135:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:136:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:137:            <div className="settings-grid">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:138:              <div className="settings-card"><strong>ðŸ‘¤ User Preferences</strong><span>Language, default dashboard, quick links.</span></div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:139:              <div className="settings-card"><strong>ðŸŽ¨ Display Settings</strong><span>Theme, density, font size, layout mode.</span></div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:140:              <div className="settings-card"><strong>ðŸ”” Notifications</strong><span>Email, in-app alerts, deadline reminders.</span></div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:141:              <div className="settings-card"><strong>ðŸ›¡ï¸ Access Controls</strong><span>Roles, permissions, module visibility, RBAC.</span></div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:142:              <div className="settings-card"><strong>ðŸ›ï¸ Firm Profile</strong><span>Firm name, logo, tagline and contact details.</span></div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:143:              <div className="settings-card"><strong>ðŸ§¾ Audit & Compliance</strong><span>Logs, retention rules, review controls.</span></div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:144:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:145:          </section>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:146:        );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:147:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:148:      case "news":
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:149:        return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:150:          <section className="panel-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:151:            <div className="panel-header">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:152:              <span className="panel-icon">ðŸ“°</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:153:              <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:154:                <h2>Malaysia & Singapore Legal News</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:155:                <p>Staff legal-awareness links for Malaysia and Singapore.</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:156:              </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:157:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:158:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:159:            <div className="news-grid">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:160:              {legalNewsLinks.map((item) => (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:161:                <a key={item.url} className="news-card" href={item.url} target="_blank" rel="noreferrer">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:162:                  <span>{item.icon}</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:163:                  <strong>{item.title}</strong>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:164:                  <small>{item.description}</small>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:169:        );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:170:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:171:      default:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:172:        return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:173:          <section className="panel-card hero-panel">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:174:            <div className="justice-mark">âš–ï¸</div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:175:            <h1>{firmProfile.firmName}</h1>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:176:            <p>{firmProfile.tagline}</p>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:177:            <div className="hero-actions">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:178:              <button type="button" onClick={() => setActivePanel("search")}>ðŸ”Ž Search Repository</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:179:              <button type="button" onClick={() => setActivePanel("clients")}>ðŸ’¼ Open Workspace</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:180:              <button type="button" onClick={() => setActivePanel("news")}>ðŸ“° Legal News</button>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:181:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:182:          </section>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:183:        );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:184:    }
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:185:  }
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:186:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:187:  return (
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:188:    <div className="legal-shell">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:189:      <aside className="legal-sidebar" aria-label="Legal management navigation">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:190:        <div className="brand-block">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:191:          <div className="brand-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:192:          <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:193:            <strong>{firmProfile.firmName}</strong>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:194:            <small>{firmProfile.shortName}</small>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:195:          </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:196:        </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:197:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:198:        <nav className="side-nav">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:199:          <button type="button" onClick={() => setActivePanel("workspace")}>âš–ï¸ Workspace</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:200:          <button type="button" onClick={() => setActivePanel("search")}>ðŸ”Ž Search</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:201:          <button type="button" onClick={() => setActivePanel("instructions")}>ðŸ“˜ Instructions</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:202:          <button type="button" onClick={() => setActivePanel("glossary")}>ðŸ“š Glossary</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:203:          <button type="button" onClick={() => setActivePanel("news")}>ðŸ“° MY/SG Legal News</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:204:          <button type="button" onClick={() => setActivePanel("settings")}>âš™ï¸ Settings</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:205:        </nav>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:206:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:207:        <div className="sidebar-footer">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:208:          <span>ðŸ›ï¸ Legal Operations</span>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:209:          <small>Lab UI Prototype</small>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:210:        </div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:211:      </aside>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:212:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:213:      <main className="legal-main">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:214:        <header className="top-bar">
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:215:          <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:216:            <h1>Legal Management System</h1>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:217:            <p>Professional legal workspace for matters, clients, documents and governance.</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:218:          </div>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:219:          <button className="settings-pill" type="button" onClick={() => setActivePanel("settings")}>âš™ï¸ Configure</button>
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:220:        </header>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:221:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:222:        <section className="profile-grid">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:223:          <article className="firm-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:224:            <div className="mini-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:225:            <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:226:              <h2>{firmProfile.firmName}</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:227:              <p>{firmProfile.tagline}</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:229:            </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:230:          </article>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:231:
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:232:          <article className="partner-card">
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:233:            <div className="avatar">{firmProfile.managingPartner.avatarEmoji || "ðŸ‘¨â€âš–ï¸"}</div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:234:            <div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:235:              <h2>{firmProfile.managingPartner.name}</h2>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:236:              <p>{firmProfile.managingPartner.title}</p>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:241:        </section>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:242:
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:243:        {renderPanel()}
+> frontend\src\components\legal-management-shell\LegalManagementShell.jsx:244:      </main>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:245:    </div>
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:246:  );
+  frontend\src\components\legal-management-shell\LegalManagementShell.jsx:247:}
+

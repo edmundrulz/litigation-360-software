@@ -1,0 +1,67 @@
+            </div>
+          </section>
+        );
+    }
+  }
+
+  return (
+    <div className="legal-shell">
+      <aside className="legal-sidebar" aria-label="Legal management navigation">
+        <div className="brand-block">
+          <div className="brand-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
+          <div>
+            <strong>{firmProfile.firmName}</strong>
+            <small>{firmProfile.shortName}</small>
+          </div>
+        </div>
+
+        <nav className="side-nav">
+          <button type="button" onClick={() => setActivePanel("workspace")}>âš–ï¸ Workspace</button>
+          <button type="button" onClick={() => setActivePanel("search")}>ðŸ”Ž Search</button>
+          <button type="button" onClick={() => setActivePanel("instructions")}>ðŸ“˜ Instructions</button>
+          <button type="button" onClick={() => setActivePanel("glossary")}>ðŸ“š Glossary</button>
+          <button type="button" onClick={() => setActivePanel("news")}>ðŸ“° MY/SG Legal News</button>
+          <button type="button" onClick={() => setActivePanel("settings")}>âš™ï¸ Settings</button>
+        </nav>
+
+        <div className="sidebar-footer">
+          <span>ðŸ›ï¸ Legal Operations</span>
+          <small>Lab UI Prototype</small>
+        </div>
+      </aside>
+
+      <main className="legal-main">
+        <header className="top-bar">
+          <div>
+            <h1>Legal Management System</h1>
+            <p>Professional legal workspace for matters, clients, documents and governance.</p>
+          </div>
+          <button className="settings-pill" type="button" onClick={() => setActivePanel("settings")}>âš™ï¸ Configure</button>
+        </header>
+
+        <section className="profile-grid">
+          <article className="firm-card">
+            <div className="mini-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
+            <div>
+              <h2>{firmProfile.firmName}</h2>
+              <p>{firmProfile.tagline}</p>
+              <small>{firmProfile.address}</small>
+            </div>
+          </article>
+
+          <article className="partner-card">
+            <div className="avatar">{firmProfile.managingPartner.avatarEmoji || "ðŸ‘¨â€âš–ï¸"}</div>
+            <div>
+              <h2>{firmProfile.managingPartner.name}</h2>
+              <p>{firmProfile.managingPartner.title}</p>
+              <small>{firmProfile.managingPartner.email} Â· {firmProfile.managingPartner.phone}</small>
+              <small>{firmProfile.managingPartner.credentials}</small>
+            </div>
+          </article>
+        </section>
+
+        {renderPanel()}
+      </main>
+    </div>
+  );
+}
