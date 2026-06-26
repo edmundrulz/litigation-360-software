@@ -299,3 +299,52 @@ button:disabled {
 .contact-choice-guard-panel small + small {
   margin-top: 6px;
 }
+
+
+/* L360_PHASE_8F_S_CANONICAL_REUSE_AND_ADDRESS_SYNC
+   Reuses canonical contact values and makes residential/correspondence address state visible.
+*/
+.canonical-contact-display,
+.client-form input.canonical-contact-display {
+  background: #f3f4f6 !important;
+  color: #4b5563 !important;
+  cursor: not-allowed;
+}
+
+.address-sync-panel,
+.canonical-address-display {
+  grid-column: 1 / -1;
+  border: 1px solid #d9e2ec;
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.address-sync-panel strong,
+.address-sync-panel small,
+.canonical-address-display strong,
+.canonical-address-display small {
+  display: block;
+}
+
+.address-sync-panel strong,
+.canonical-address-display strong {
+  color: var(--text-h);
+  margin-bottom: 4px;
+}
+
+.address-sync-panel small + small,
+.canonical-address-display small + small {
+  margin-top: 6px;
+}
+
+.address-match-ok {
+  color: #146c2e;
+  font-weight: 700;
+}
+
+.address-match-warning {
+  color: #8a5a00;
+  font-weight: 700;
+}

@@ -152,6 +152,21 @@ const EMPTY_CLIENT = {
   buildingHouseName: "",
   postcode: "",
   streetAddress: "",
+
+  correspondenceSameAsResidential: true,
+  correspondenceDifferenceConfirmed: false,
+  correspondenceAddressType: "Correspondence",
+  correspondenceCountry: "Malaysia",
+  correspondenceContinent: "Asia",
+  correspondenceRegion: "Asia - Southeast Asia",
+  correspondenceBuildingHouseNo: "",
+  correspondenceBuildingHouseName: "",
+  correspondencePostcode: "",
+  correspondenceStreetAddress: "",
+  correspondenceTownCity: "",
+  correspondenceState: "",
+  correspondenceNotes: "",
+
   district: "",
   townCity: "",
   state: "",
@@ -1371,6 +1386,23 @@ function normalizeClient(rawClient) {
     buildingHouseName: source.buildingHouseName || source.buildingName || "",
     postcode: source.postcode || source.postalCode || "",
     streetAddress: source.streetAddress || source.address || "",
+
+    correspondenceSameAsResidential: source.correspondenceSameAsResidential !== undefined
+      ? Boolean(source.correspondenceSameAsResidential)
+      : true,
+    correspondenceDifferenceConfirmed: Boolean(source.correspondenceDifferenceConfirmed),
+    correspondenceAddressType: source.correspondenceAddressType || "Correspondence",
+    correspondenceCountry: source.correspondenceCountry || source.country || country,
+    correspondenceContinent: source.correspondenceContinent || source.continent || COUNTRY_TO_CONTINENT[country] || "Asia",
+    correspondenceRegion: source.correspondenceRegion || source.region || region,
+    correspondenceBuildingHouseNo: source.correspondenceBuildingHouseNo || source.buildingHouseNo || source.houseNo || "",
+    correspondenceBuildingHouseName: source.correspondenceBuildingHouseName || source.buildingHouseName || source.buildingName || "",
+    correspondencePostcode: source.correspondencePostcode || source.postcode || source.postalCode || "",
+    correspondenceStreetAddress: source.correspondenceStreetAddress || source.streetAddress || source.address || "",
+    correspondenceTownCity: source.correspondenceTownCity || source.townCity || source.city || source.town || "",
+    correspondenceState: source.correspondenceState || source.state || source.province || source.territory || "",
+    correspondenceNotes: source.correspondenceNotes || "",
+
     district: source.district || "",
     townCity: source.townCity || source.city || source.town || "",
     state: source.state || source.province || source.territory || "",
@@ -1489,7 +1521,7 @@ function getClientFormCompletionProgress(form) {
     ["Gender", form.gender],
     ["Date of Birth / Age", form.dateOfBirth || form.ageCategory],
     ["ID / Passport", form.nricPassportNumber],
-    ["Email or Phone", form.email || form.phoneNumber],
+    ["Primary Phone", form.phoneNumber],
     ["Primary Contact Choice", form.preferredContact1],
     ["Address", form.streetAddress || form.townCity || form.country],
     ["Emergency Contact", form.emergencyContactName || form.emergencyContactNumber],
@@ -1649,6 +1681,209 @@ function FieldLabel({ children, required = false }) {
   );
 }
 
+const MINIMUM_CONTACT_DIGITS = 9;
+
+const CANONICAL_CONTACT_METHODS = new Set([
+  "Email",
+  "WhatsApp Message",
+  "WhatsApp Call",
+  "Phone Call",
+  "SMS"
+]);
+
+const RESIDENTIAL_TO_CORRESPONDENCE_FIELD_MAP = {
+  addressType: "correspondenceAddressType",
+  country: "correspondenceCountry",
+  continent: "correspondenceContinent",
+  region: "correspondenceRegion",
+  buildingHouseNo: "correspondenceBuildingHouseNo",
+  buildingHouseName: "correspondenceBuildingHouseName",
+  postcode: "correspondencePostcode",
+  streetAddress: "correspondenceStreetAddress",
+  townCity: "correspondenceTownCity",
+  state: "correspondenceState"
+};
+
+const CORRESPONDENCE_REQUIRED_FIELDS = [
+  ["correspondenceCountry", "Correspondence Country"],
+  ["correspondenceBuildingHouseNo", "Correspondence Building / House No."],
+  ["correspondencePostcode", "Correspondence Postcode"],
+  ["correspondenceStreetAddress", "Correspondence Street Address"],
+  ["correspondenceTownCity", "Correspondence Town / City"]
+];
+
+function normalizeDigits(value) {
+  return String(value || "").replace(/\D/g, "");
+}
+
+function hasMinimumContactDigits(value) {
+  return normalizeDigits(value).length >= MINIMUM_CONTACT_DIGITS;
+}
+
+function getContactDisplayNumber(countryCode, number) {
+  return hasMinimumContactDigits(number) ? formatPhoneDisplay(countryCode, number) : "";
+}
+
+function getCanonicalContactDetail(method, source) {
+  const safeMethod = String(method || "");
+
+  if (safeMethod === "Email") {
+    const value = String(source.email || "").trim();
+
+    return {
+      isCanonical: true,
+      value,
+      sourceField: "email",
+      sourceLabel: "Email Address",
+      helper: value
+        ? "Email Address already captured above. No duplicate entry required."
+        : "Enter the Email Address above; duplicate entry is not required here.",
+      missingMessage: "Email Address is required when Email is selected as a preferred contact choice."
+    };
+  }
+
+  if (safeMethod === "WhatsApp Message" || safeMethod === "WhatsApp Call") {
+    const usePrimaryPhone = Boolean(source.whatsappSameAsPhone);
+    const sourceField = usePrimaryPhone ? "phoneNumber" : "whatsappNumber";
+    const sourceLabel = usePrimaryPhone ? "Primary Phone Number" : "WhatsApp Number";
+    const countryCode = usePrimaryPhone ? source.phoneCountryCode : source.whatsappCountryCode;
+    const number = usePrimaryPhone ? source.phoneNumber : source.whatsappNumber;
+    const primaryValue = getContactDisplayNumber(countryCode, number);
+
+    if (primaryValue) {
+      return {
+        isCanonical: true,
+        value: primaryValue,
+        sourceField,
+        sourceLabel,
+        helper: sourceLabel + " already captured above. No duplicate entry required.",
+        missingMessage: sourceLabel + " must contain at least " + MINIMUM_CONTACT_DIGITS + " digits before " + safeMethod + " can reuse it."
+      };
+    }
+
+    if (!usePrimaryPhone && source.hasSecondWhatsapp && hasMinimumContactDigits(source.whatsapp2Number)) {
+      return {
+        isCanonical: true,
+        value: getContactDisplayNumber(source.whatsapp2CountryCode, source.whatsapp2Number),
+        sourceField: "whatsapp2Number",
+        sourceLabel: "Second WhatsApp Number",
+        helper: "Second WhatsApp Number is enabled and captured above. No duplicate entry required.",
+        missingMessage: "Second WhatsApp Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits."
+      };
+    }
+
+    return {
+      isCanonical: true,
+      value: "",
+      sourceField,
+      sourceLabel,
+      helper: "Complete " + sourceLabel + " above; duplicate entry is not required here.",
+      missingMessage: sourceLabel + " must contain at least " + MINIMUM_CONTACT_DIGITS + " digits before " + safeMethod + " can reuse it."
+    };
+  }
+
+  if (safeMethod === "Phone Call" || safeMethod === "SMS") {
+    if (hasMinimumContactDigits(source.phoneNumber)) {
+      return {
+        isCanonical: true,
+        value: getContactDisplayNumber(source.phoneCountryCode, source.phoneNumber),
+        sourceField: "phoneNumber",
+        sourceLabel: "Primary Phone Number",
+        helper: "Primary Phone Number already captured above. No duplicate entry required.",
+        missingMessage: "Primary Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits."
+      };
+    }
+
+    if (source.hasBackupPhone && hasMinimumContactDigits(source.backupPhoneNumber)) {
+      return {
+        isCanonical: true,
+        value: getContactDisplayNumber(source.backupPhoneCountryCode, source.backupPhoneNumber),
+        sourceField: "backupPhoneNumber",
+        sourceLabel: "Secondary / Backup Phone Number",
+        helper: "Secondary / Backup Phone Number is enabled and captured above. No duplicate entry required.",
+        missingMessage: "Secondary / Backup Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits."
+      };
+    }
+
+    return {
+      isCanonical: true,
+      value: "",
+      sourceField: "phoneNumber",
+      sourceLabel: "Primary Phone Number",
+      helper: "Complete Primary Phone Number above; duplicate entry is not required here.",
+      missingMessage: "Primary Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits before " + safeMethod + " can reuse it."
+    };
+  }
+
+  return {
+    isCanonical: false,
+    value: "",
+    sourceField: "",
+    sourceLabel: "",
+    helper: "",
+    missingMessage: ""
+  };
+}
+
+function fillCanonicalPreferredContactDetails(source) {
+  const next = { ...source };
+
+  [1, 2, 3, 4, 5].forEach((rank) => {
+    const method = next["preferredContact" + rank];
+    const canonical = getCanonicalContactDetail(method, next);
+
+    if (canonical.isCanonical && canonical.value) {
+      next["preferredContactDetail" + rank] = canonical.value;
+    }
+  });
+
+  return next;
+}
+
+function getCorrespondenceAddressUpdatesFromResidential(source) {
+  const updates = {
+    correspondenceSameAsResidential: true,
+    correspondenceDifferenceConfirmed: false
+  };
+
+  Object.entries(RESIDENTIAL_TO_CORRESPONDENCE_FIELD_MAP).forEach(([residentialField, correspondenceField]) => {
+    updates[correspondenceField] = residentialField === "addressType"
+      ? "Correspondence"
+      : source[residentialField] || "";
+  });
+
+  return updates;
+}
+
+function normalizeAddressValue(value) {
+  return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function doResidentialAndCorrespondenceAddressesMatch(source) {
+  if (source.correspondenceSameAsResidential) {
+    return true;
+  }
+
+  return Object.entries(RESIDENTIAL_TO_CORRESPONDENCE_FIELD_MAP)
+    .filter(([residentialField]) => residentialField !== "addressType")
+    .every(([residentialField, correspondenceField]) => (
+      normalizeAddressValue(source[residentialField]) === normalizeAddressValue(source[correspondenceField])
+    ));
+}
+
+function prepareClientFormForValidation(source) {
+  const withCanonicalContacts = fillCanonicalPreferredContactDetails(source);
+
+  if (withCanonicalContacts.correspondenceSameAsResidential) {
+    return {
+      ...withCanonicalContacts,
+      ...getCorrespondenceAddressUpdatesFromResidential(withCanonicalContacts)
+    };
+  }
+
+  return withCanonicalContacts;
+}
+
 export default function Clients() {
   const [clients, setClients] = useState([]);
   const [form, setForm] = useState(EMPTY_CLIENT);
@@ -1726,6 +1961,8 @@ export default function Clients() {
     form.whatsappNumber,
     makeWhatsappMessage(form)
   );
+
+  const addressMatchStatus = doResidentialAndCorrespondenceAddressesMatch(form);
 
   const CONTACT_CHOICE_FIELDS = [1, 2, 3, 4, 5];
   const CONTACT_CHOICE_RANK_LABELS = {
@@ -1862,7 +2099,28 @@ export default function Clients() {
     if (isBlank(payload.titlePrefix)) nextErrors.titlePrefix = "Title Prefix is required.";
     if (isBlank(payload.givenName)) nextErrors.givenName = "Given Name is required.";
     if (isBlank(payload.nricPassportNumber)) nextErrors.nricPassportNumber = "NRIC No. / Passport No. is required.";
-    if (isBlank(payload.email) && isBlank(payload.phoneNumber)) nextErrors.phoneNumber = "Email Address or Primary Phone Number is required.";
+    if (isBlank(payload.phoneNumber)) {
+      nextErrors.phoneNumber = "Primary Phone Number is required for client profile completion.";
+    } else if (!hasMinimumContactDigits(payload.phoneNumber)) {
+      nextErrors.phoneNumber = "Enter at least " + MINIMUM_CONTACT_DIGITS + " digits.";
+    }
+
+    if (payload.hasBackupPhone) {
+      if (isBlank(payload.backupPhoneNumber)) {
+        nextErrors.backupPhoneNumber = "Secondary / Backup Phone Number is enabled. Enter at least " + MINIMUM_CONTACT_DIGITS + " digits or untick the backup number option.";
+      } else if (!hasMinimumContactDigits(payload.backupPhoneNumber)) {
+        nextErrors.backupPhoneNumber = "Enter at least " + MINIMUM_CONTACT_DIGITS + " digits.";
+      }
+    }
+
+    if (!payload.whatsappSameAsPhone && !isBlank(payload.whatsappNumber) && !hasMinimumContactDigits(payload.whatsappNumber)) {
+      nextErrors.whatsappNumber = "Enter at least " + MINIMUM_CONTACT_DIGITS + " digits.";
+    }
+
+    if (payload.hasSecondWhatsapp && !isBlank(payload.whatsapp2Number) && !hasMinimumContactDigits(payload.whatsapp2Number)) {
+      nextErrors.whatsapp2Number = "Enter at least " + MINIMUM_CONTACT_DIGITS + " digits.";
+    }
+
     if (!isBlank(payload.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(payload.email).trim())) nextErrors.email = "Invalid email format.";
     if (isBlank(payload.country)) nextErrors.country = "Country is required.";
     if (isBlank(payload.buildingHouseNo)) nextErrors.buildingHouseNo = "Building / House No. is required.";
@@ -1900,10 +2158,18 @@ export default function Clients() {
       }
 
       if (!isBlank(method) && !["Not Applicable / N/A", "Unknown", "To be confirmed"].includes(method)) {
-        const isEmailMethod = method === "Email";
-        const hasMainEmail = !isBlank(payload.email);
+        const canonicalDetail = getCanonicalContactDetail(method, payload);
 
-        if (!(isEmailMethod && hasMainEmail) && isBlank(detail)) {
+        if (canonicalDetail.isCanonical) {
+          if (!canonicalDetail.value) {
+            nextErrors[canonicalDetail.sourceField] = canonicalDetail.missingMessage;
+            nextErrors[detailField] = canonicalDetail.missingMessage;
+          }
+
+          return;
+        }
+
+        if (isBlank(detail)) {
           nextErrors[detailField] = rank + " Contact Detail is required when a method is selected.";
         }
       }
@@ -1915,6 +2181,18 @@ export default function Clients() {
 
     if (payload.locationAdminType === "Other / Manual" && isBlank(payload.locationAdminTypeManual)) {
       nextErrors.locationAdminTypeManual = "Manual location/admin category is required when Other / Manual is selected.";
+    }
+
+    if (!payload.correspondenceSameAsResidential) {
+      CORRESPONDENCE_REQUIRED_FIELDS.forEach(([fieldName, label]) => {
+        if (isBlank(payload[fieldName])) {
+          nextErrors[fieldName] = label + " is required when correspondence address differs from residential address.";
+        }
+      });
+
+      if (!payload.correspondenceDifferenceConfirmed) {
+        nextErrors.correspondenceDifferenceConfirmed = "Confirm that the correspondence address is intentionally different from the residential address.";
+      }
     }
 
     return nextErrors;
@@ -2118,6 +2396,44 @@ export default function Clients() {
       .filter(Boolean);
   }
 
+  function renderPreferredContactDetailField(rank) {
+    const method = form["preferredContact" + rank];
+    const detailField = "preferredContactDetail" + rank;
+    const canonicalDetail = getCanonicalContactDetail(method, form);
+    const ordinalLabel = getContactChoiceLabel(rank).replace(" Choice", " Detail");
+
+    if (canonicalDetail.isCanonical) {
+      return (
+        <label>
+          {ordinalLabel}
+          <input
+            className="canonical-contact-display"
+            value={canonicalDetail.value || ""}
+            readOnly
+            placeholder={canonicalDetail.sourceLabel + " will be reused from above"}
+          />
+          <small>{canonicalDetail.helper}</small>
+          {!canonicalDetail.value && <small className="field-warning-message">{canonicalDetail.missingMessage}</small>}
+          {renderInlineError(detailField)}
+        </label>
+      );
+    }
+
+    return (
+      <label>
+        {ordinalLabel}
+        <input
+          className={inputClass(detailField)}
+          value={form[detailField]}
+          onChange={(event) => updateForm(detailField, event.target.value)}
+          placeholder={"Phone, email, or contact detail for " + rank + " choice"}
+        />
+        {renderInlineError(detailField)}
+        {renderNumericWarning(detailField)}
+      </label>
+    );
+  }
+
   function updateForm(field, value) {
     let safeValue = value;
 
@@ -2212,6 +2528,19 @@ export default function Clients() {
         const checked = Boolean(value);
         next.enableCommunicationTimingNotes = checked;
         if (!checked) next.communicationTimingNotes = "";
+      }
+
+      if (field === "correspondenceSameAsResidential") {
+        const checked = Boolean(value);
+        next.correspondenceSameAsResidential = checked;
+
+        if (checked) {
+          Object.assign(next, getCorrespondenceAddressUpdatesFromResidential(next));
+        }
+      }
+
+      if (field === "correspondenceDifferenceConfirmed") {
+        next.correspondenceDifferenceConfirmed = Boolean(value);
       }
 
       if (field === "givenName" || field === "surname") {
@@ -2342,6 +2671,10 @@ export default function Clients() {
         next.availabilityReasonOther = "";
       }
 
+      if (next.correspondenceSameAsResidential) {
+        Object.assign(next, getCorrespondenceAddressUpdatesFromResidential(next));
+      }
+
       return next;
     });
   }
@@ -2364,9 +2697,7 @@ export default function Clients() {
       ["identificationKind", "ID Type"],
       ["identityCardColour", "Identity Card Colour / Document Class"],
       ["nricPassportNumber", "NRIC No. / Passport No."],
-      ["email", "Email Address"],
       ["phoneCountryCode", "Primary Phone Country Code"],
-      ["phoneNumber", "Primary Phone Number"],
       ["addressType", "Address Type"],
       ["country", "Country"],
       ["buildingHouseNo", "Building / House No."],
@@ -2428,8 +2759,8 @@ export default function Clients() {
       missingMandatory.push("NRIC No. / Passport No.");
     }
 
-    if (isBlank(payload.email) && isBlank(payload.phoneNumber)) {
-      missingMandatory.push("Email Address or Primary Phone Number");
+    if (isBlank(payload.phoneNumber)) {
+      missingMandatory.push("Primary Phone Number");
     }
 
     if (isBlank(payload.country)) {
@@ -2474,8 +2805,18 @@ function isUnavailablePlaceholder(value) {
     if (!payload.documentationVerificationCompleted) requireMandatory("Document Status", payload.documentStatus);
     if (!payload.documentationVerificationCompleted) requireMandatory("Verification / Review Status", payload.verificationStatus);
 
-    if (isBlank(payload.email) && isBlank(payload.phoneNumber)) {
-      errors.push("At least one contact method is mandatory: Email Address or Primary Phone Number.");
+    if (isBlank(payload.phoneNumber)) {
+      errors.push("Primary Phone Number is required for client profile completion.");
+    } else if (!hasMinimumContactDigits(payload.phoneNumber)) {
+      errors.push("Primary Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits.");
+    }
+
+    if (payload.hasBackupPhone) {
+      if (isBlank(payload.backupPhoneNumber)) {
+        errors.push("Secondary / Backup Phone Number is enabled. Enter at least " + MINIMUM_CONTACT_DIGITS + " digits or untick the backup number option.");
+      } else if (!hasMinimumContactDigits(payload.backupPhoneNumber)) {
+        errors.push("Secondary / Backup Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits.");
+      }
     }
 
     CONTACT_CHOICE_FIELDS.forEach((rank) => {
@@ -2485,7 +2826,24 @@ function isUnavailablePlaceholder(value) {
       if (duplicateRank && duplicateRank < rank) {
         errors.push(getDuplicateContactChoiceMessage(method, rank, duplicateRank));
       }
+
+      const canonicalDetail = getCanonicalContactDetail(method, payload);
+      if (canonicalDetail.isCanonical && !canonicalDetail.value) {
+        errors.push(getContactChoiceLabel(rank) + " cannot be completed yet. " + canonicalDetail.missingMessage);
+      }
     });
+
+    if (!payload.correspondenceSameAsResidential) {
+      CORRESPONDENCE_REQUIRED_FIELDS.forEach(([fieldName, label]) => {
+        if (isBlank(payload[fieldName])) {
+          errors.push(label + " is required when correspondence address differs from residential address.");
+        }
+      });
+
+      if (!payload.correspondenceDifferenceConfirmed) {
+        errors.push("Confirm that the correspondence address is intentionally different from the residential address.");
+      }
+    }
 
     if (payload.hasDependents && isBlank(payload.dependentsCount)) {
       errors.push("Number of Dependents is required when Has Dependents is selected.");
@@ -2564,12 +2922,12 @@ function isUnavailablePlaceholder(value) {
       flags.push("Document type is Passport but ID type is NRIC.");
     }
 
-    if (payload.phoneNumber && isMalaysiaCountryCode(payload.phoneCountryCode) && !isValidMalaysiaMobile(payload.phoneNumber)) {
-      errors.push("Primary Malaysian phone number should be digits only and start with 01, example 0123456789.");
+    if (payload.phoneNumber && !hasMinimumContactDigits(payload.phoneNumber)) {
+      errors.push("Primary Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits.");
     }
 
-    if (payload.backupPhoneNumber && isMalaysiaCountryCode(payload.backupPhoneCountryCode) && !isValidMalaysiaMobile(payload.backupPhoneNumber)) {
-      errors.push("Backup Malaysian phone number should be digits only and start with 01, example 0123456789.");
+    if (payload.backupPhoneNumber && !hasMinimumContactDigits(payload.backupPhoneNumber)) {
+      errors.push("Backup Phone Number must contain at least " + MINIMUM_CONTACT_DIGITS + " digits.");
     }
 
     if (payload.unavailableUntilDate && !payload.unavailableUntilTime) {
@@ -2601,22 +2959,25 @@ function isUnavailablePlaceholder(value) {
   async function saveClient(event) {
     event.preventDefault();
 
-    const { errors, flags } = validateClientForm(form);
-    const nextFieldErrors = deriveFieldErrors(form);
+    const preparedForm = prepareClientFormForValidation(form);
+    setForm(preparedForm);
+
+    const { errors, flags } = validateClientForm(preparedForm);
+    const nextFieldErrors = deriveFieldErrors(preparedForm);
     const mergedErrors = Array.from(new Set([...errors, ...Object.values(nextFieldErrors).filter(Boolean)]));
     setFieldErrors(nextFieldErrors);
     setValidationErrors(mergedErrors);
 
     if (mergedErrors.length > 0) {
-      window.alert("Client profile validation failed. Please correct the highlighted issues before saving.");
-      showStatus("Please fix the missing, inconsistent, or invalid client profile details before saving.", "error");
+      window.alert("We couldn’t save yet. Please correct the highlighted fields.");
+      showStatus("We couldn’t save yet. Please correct the highlighted fields.", "error");
       return;
     }
 
     let formForSave = {
-      ...form,
+      ...preparedForm,
       verificationFlags: flags,
-      verificationStatus: flags.length > 0 ? "Review Required" : form.verificationStatus
+      verificationStatus: flags.length > 0 ? "Review Required" : preparedForm.verificationStatus
     };
 
     if (flags.length > 0) {
@@ -3985,7 +4346,7 @@ function isUnavailablePlaceholder(value) {
         </div>
         <div className="form-section">
           <h3>4. Contact Information and Communication Preferences</h3>
-          <p className="mandatory-note">At least one contact method is mandatory: Email Address or Primary Phone Number.</p>
+          <p className="mandatory-note">Primary Phone Number is mandatory for client profile completion. Reused contact details are auto-captured from the canonical fields above.</p>
 
           <div className="smart-grid two">
             <label className="full">
@@ -4015,7 +4376,7 @@ function isUnavailablePlaceholder(value) {
                   placeholder="0123456789"
                 />
               </div>
-              <small>Display format: +60 0123456789. Digits only, no spaces or dashes.</small>
+              <small>Display format: +60 0123456789. Digits only, no spaces or dashes. Minimum 9 digits required.</small>
               {renderInlineError("phoneNumber")}
               {renderNumericWarning("phoneNumber")}
               {malaysiaPhoneWarning && <small className="field-warning">Check format: Malaysian mobile numbers should start with 01.</small>}
@@ -4135,26 +4496,7 @@ function isUnavailablePlaceholder(value) {
               {renderInlineError("preferredContact1")}
             </label>
 
-            <label>
-              1st Contact Detail
-              {form.preferredContact1 === "Email" && form.email ? (
-                <>
-                  <input value={form.email} readOnly />
-                  <small>Using main Email Address above.</small>
-                </>
-              ) : (
-                <>
-                  <input
-                    className={inputClass("preferredContactDetail1")}
-                    value={form.preferredContactDetail1}
-                    onChange={(event) => updateForm("preferredContactDetail1", event.target.value)}
-                    placeholder="Phone, email, or contact detail for 1st choice"
-                  />
-                  {renderInlineError("preferredContactDetail1")}
-                  {renderNumericWarning("preferredContactDetail1")}
-                </>
-              )}
-            </label>
+            {renderPreferredContactDetailField(1)}
 
             <label>
               2nd Contact Choice
@@ -4168,26 +4510,7 @@ function isUnavailablePlaceholder(value) {
               {renderInlineError("preferredContact2")}
             </label>
 
-            <label>
-              2nd Contact Detail
-              {form.preferredContact2 === "Email" && form.email ? (
-                <>
-                  <input value={form.email} readOnly />
-                  <small>Using main Email Address above.</small>
-                </>
-              ) : (
-                <>
-                  <input
-                    className={inputClass("preferredContactDetail2")}
-                    value={form.preferredContactDetail2}
-                    onChange={(event) => updateForm("preferredContactDetail2", event.target.value)}
-                    placeholder="Phone, email, or contact detail for 2nd choice"
-                  />
-                  {renderInlineError("preferredContactDetail2")}
-                  {renderNumericWarning("preferredContactDetail2")}
-                </>
-              )}
-            </label>
+            {renderPreferredContactDetailField(2)}
 
             <label className="full">
               Additional Contact Choices
@@ -4214,26 +4537,7 @@ function isUnavailablePlaceholder(value) {
                   {renderInlineError("preferredContact3")}
                 </label>
 
-                <label>
-                  3rd Contact Detail
-                  {form.preferredContact3 === "Email" && form.email ? (
-                    <>
-                      <input value={form.email} readOnly />
-                      <small>Using main Email Address above.</small>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        className={inputClass("preferredContactDetail3")}
-                        value={form.preferredContactDetail3}
-                        onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
-                        placeholder="Phone, email, or contact detail for 3rd choice"
-                      />
-                      {renderInlineError("preferredContactDetail3")}
-                      {renderNumericWarning("preferredContactDetail3")}
-                    </>
-                  )}
-                </label>
+                {renderPreferredContactDetailField(3)}
 
                 <label>
                   4th Contact Choice
@@ -4247,26 +4551,7 @@ function isUnavailablePlaceholder(value) {
                   {renderInlineError("preferredContact4")}
                 </label>
 
-                <label>
-                  4th Contact Detail
-                  {form.preferredContact4 === "Email" && form.email ? (
-                    <>
-                      <input value={form.email} readOnly />
-                      <small>Using main Email Address above.</small>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        className={inputClass("preferredContactDetail4")}
-                        value={form.preferredContactDetail4}
-                        onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
-                        placeholder="Phone, email, or contact detail for 4th choice"
-                      />
-                      {renderInlineError("preferredContactDetail4")}
-                      {renderNumericWarning("preferredContactDetail4")}
-                    </>
-                  )}
-                </label>
+                {renderPreferredContactDetailField(4)}
 
                 <label>
                   5th Contact Choice
@@ -4280,26 +4565,7 @@ function isUnavailablePlaceholder(value) {
                   {renderInlineError("preferredContact5")}
                 </label>
 
-                <label>
-                  5th Contact Detail
-                  {form.preferredContact5 === "Email" && form.email ? (
-                    <>
-                      <input value={form.email} readOnly />
-                      <small>Using main Email Address above.</small>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        className={inputClass("preferredContactDetail5")}
-                        value={form.preferredContactDetail5}
-                        onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
-                        placeholder="Phone, email, or contact detail for 5th choice"
-                      />
-                      {renderInlineError("preferredContactDetail5")}
-                      {renderNumericWarning("preferredContactDetail5")}
-                    </>
-                  )}
-                </label>
+                {renderPreferredContactDetailField(5)}
               </>
             )}
 
@@ -4465,6 +4731,134 @@ function isUnavailablePlaceholder(value) {
               Street Address
               <input value={form.streetAddress} onChange={(event) => updateForm("streetAddress", event.target.value)} placeholder="Street address" />
             </label>
+
+            <div className="address-sync-panel full" role="status" aria-live="polite">
+              <strong>Correspondence Address Synchronization</strong>
+              <small>
+                Correspondence Address is the same as Residential Address by default. Untick only when the correspondence / service address is intentionally different.
+              </small>
+              <small className={addressMatchStatus ? "address-match-ok" : "address-match-warning"}>
+                {addressMatchStatus ? "✓ Addresses match or are set to auto-sync." : "⚠ Addresses differ — confirmation required before saving."}
+              </small>
+            </div>
+
+            <label className="checkbox-tile full">
+              <input
+                type="checkbox"
+                checked={Boolean(form.correspondenceSameAsResidential)}
+                onChange={(event) => updateForm("correspondenceSameAsResidential", event.target.checked)}
+              />
+              Same as residential address
+            </label>
+
+            {form.correspondenceSameAsResidential ? (
+              <div className="canonical-address-display full">
+                <strong>Correspondence Address</strong>
+                <small>Already captured from the residential address above. No duplicate address entry is required.</small>
+                <small>
+                  {[form.buildingHouseNo, form.buildingHouseName, form.streetAddress, form.postcode, form.townCity, form.state, form.country]
+                    .filter(Boolean)
+                    .join(", ") || "Complete the residential address fields above."}
+                </small>
+              </div>
+            ) : (
+              <>
+                <label>
+                  Correspondence Country
+                  <input
+                    className={inputClass("correspondenceCountry")}
+                    list="client-country-options"
+                    value={form.correspondenceCountry}
+                    onChange={(event) => updateForm("correspondenceCountry", event.target.value)}
+                    placeholder="Search or type country"
+                  />
+                  {renderInlineError("correspondenceCountry")}
+                </label>
+
+                <div className="full inline-fields two-even">
+                  <label>
+                    Correspondence Building / House No.
+                    <input
+                      className={inputClass("correspondenceBuildingHouseNo")}
+                      value={form.correspondenceBuildingHouseNo}
+                      onChange={(event) => updateForm("correspondenceBuildingHouseNo", event.target.value)}
+                      placeholder="Correspondence house / unit no."
+                    />
+                    {renderInlineError("correspondenceBuildingHouseNo")}
+                  </label>
+
+                  <label>
+                    Correspondence Postcode
+                    <input
+                      className={inputClass("correspondencePostcode")}
+                      value={form.correspondencePostcode}
+                      onChange={(event) => updateForm("correspondencePostcode", event.target.value)}
+                      placeholder="Correspondence postcode"
+                    />
+                    {renderInlineError("correspondencePostcode")}
+                  </label>
+                </div>
+
+                <label>
+                  Correspondence Building / House Name
+                  <input
+                    value={form.correspondenceBuildingHouseName}
+                    onChange={(event) => updateForm("correspondenceBuildingHouseName", event.target.value)}
+                    placeholder="Correspondence building / house name, if any"
+                  />
+                </label>
+
+                <label>
+                  Correspondence Town / City
+                  <input
+                    className={inputClass("correspondenceTownCity")}
+                    value={form.correspondenceTownCity}
+                    onChange={(event) => updateForm("correspondenceTownCity", event.target.value)}
+                    placeholder="Correspondence town / city"
+                  />
+                  {renderInlineError("correspondenceTownCity")}
+                </label>
+
+                <label className="full">
+                  Correspondence Street Address
+                  <input
+                    className={inputClass("correspondenceStreetAddress")}
+                    value={form.correspondenceStreetAddress}
+                    onChange={(event) => updateForm("correspondenceStreetAddress", event.target.value)}
+                    placeholder="Correspondence street address"
+                  />
+                  {renderInlineError("correspondenceStreetAddress")}
+                </label>
+
+                <label>
+                  Correspondence State
+                  <input
+                    value={form.correspondenceState}
+                    onChange={(event) => updateForm("correspondenceState", event.target.value)}
+                    placeholder="Correspondence state / province"
+                  />
+                </label>
+
+                <label className="full">
+                  Correspondence Notes
+                  <textarea
+                    value={form.correspondenceNotes}
+                    onChange={(event) => updateForm("correspondenceNotes", event.target.value)}
+                    placeholder="Example: different mailing address, courier address, office address, service address, or temporary overseas correspondence address."
+                  />
+                </label>
+
+                <label className="checkbox-tile full">
+                  <input
+                    type="checkbox"
+                    checked={Boolean(form.correspondenceDifferenceConfirmed)}
+                    onChange={(event) => updateForm("correspondenceDifferenceConfirmed", event.target.checked)}
+                  />
+                  I confirm the correspondence address is intentionally different from the residential address.
+                </label>
+                {renderInlineError("correspondenceDifferenceConfirmed")}
+              </>
+            )}
 
             <div className="full mandatory-note">
               <strong>Location / Administrative Classification — Combined:</strong> Select the administrative category/type, then enter the actual area, authority or locality details. Use this for postcode area, town, state, municipality, council, borough, district, county, parish, shire, mukim or other local authority structures.
