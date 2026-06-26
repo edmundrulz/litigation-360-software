@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import "./LegalManagementShell.css";
 import firmProfile from "./firmProfile.config.json";
 import legalNewsLinks from "./legalNewsLinks.config.json";
+import { MenuPlatform } from "../../features/menu-platform";
 
 /**
  * LegalManagementShell
@@ -187,6 +188,24 @@ export default function LegalManagementShell() {
   return (
     <div className="legal-shell">
       <aside className="legal-sidebar" aria-label="Legal management navigation">
+        <div className="legal-sidebar-menu-platform" aria-label="Application menu hub">
+          <MenuPlatform
+            context="sidebar"
+            triggerLabel="App Menu"
+            triggerVariant="sidebar"
+            appVersion="0.0.0"
+            onNavigate={(target) => {
+              if (target === "home") {
+                setActivePanel("home");
+              }
+            }}
+            onAction={(item) => {
+              if (item.id === "home") {
+                setActivePanel("home");
+              }
+            }}
+          />
+        </div>
         <div className="brand-block">
           <div className="brand-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
           <div>
@@ -245,3 +264,4 @@ export default function LegalManagementShell() {
     </div>
   );
 }
+

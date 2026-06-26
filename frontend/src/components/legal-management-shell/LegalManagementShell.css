@@ -330,3 +330,32 @@
     align-items: stretch;
   }
 }
+
+/* Phase 13B.2B - Menu Platform sidebar integration */
+.legal-sidebar-menu-platform {
+  position: relative;
+  z-index: 50;
+  margin: 0.75rem 0 1rem;
+}
+
+.legal-sidebar-menu-platform .mp-root {
+  display: block;
+  width: 100%;
+}
+
+.legal-sidebar-menu-platform .mp-trigger {
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 14px;
+}
+
+.legal-sidebar-menu-platform .mp-dropdown-shell {
+  left: 0;
+  top: calc(100% + 0.5rem);
+}
+
+@media (max-width: 860px) {
+  .legal-sidebar-menu-platform .mp-dropdown-shell {
+    left: 0;
+  }
+}
