@@ -1,6 +1,7 @@
 import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { MenuPlatform } from "./features/menu-platform";
 
 import Clients from "./pages/Clients";
 import Cases from "./pages/Cases";
@@ -131,6 +132,25 @@ export default function App() {
     <div className="shell">
       <aside className="sidebar">
         <div className="brand">Litigation 360</div>
+
+        <div className="sidebar-menu-platform" aria-label="Application menu hub">
+          <MenuPlatform
+            context="sidebar"
+            triggerLabel="App Menu"
+            triggerVariant="sidebar"
+            appVersion="0.0.0"
+            onNavigate={(target) => {
+              if (target === "home") {
+                openWorkspace();
+              }
+            }}
+            onAction={(item) => {
+              if (item.id === "home") {
+                openWorkspace();
+              }
+            }}
+          />
+        </div>
 
         <button className={view === "workspace" ? "active" : ""} onClick={openWorkspace}>
           End User Workspace
@@ -447,6 +467,7 @@ function Metric({ label, value }) {
     </div>
   );
 }
+
 
 
 

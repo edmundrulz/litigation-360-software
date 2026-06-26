@@ -42,3 +42,23 @@ No backend, database, auth/RBAC, API, server, or package files were changed.
 Phase 13B.2B Browser QA: PASS
 Phase 13B.2B Integration: READY FOR CLOSEOUT
 
+
+---
+
+## Correction Added After Route Verification
+
+Status Correction: SUPERSEDED BY PHASE 13B.2C
+
+The Phase 13B.2B QA PASS record was premature.
+
+Reason:
+- Phase 13B.2B integrated MenuPlatform into LegalManagementShell.
+- Later route inspection showed the visible running application shell is App.jsx.
+- App.jsx renders its own <aside className="sidebar">.
+- Therefore visible browser QA must be repeated after Phase 13B.2C integrates MenuPlatform into App.jsx.
+
+Corrected status:
+- Phase 13B.2B code integration: committed
+- Phase 13B.2B visible browser QA: superseded
+- Phase 13B.2C visible App.jsx sidebar integration: required
+
