@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { menuSections as defaultMenuSections } from "./menuConfig";
 import {
-  collectFavoriteItems,
   filterMenuItems,
   isMenuItemEnabled,
 } from "./menuSchema";
@@ -228,10 +227,6 @@ export function MenuPlatform({
   const searchRef = useRef(null);
   const shellRef = useRef(null);
 
-  const favorites = useMemo(
-    () => collectFavoriteItems(sections, { context, featureFlags }),
-    [sections, context, featureFlags]
-  );
 
   const searchResults = useMemo(
     () => filterMenuItems(sections, query, { context, featureFlags }),
@@ -373,20 +368,6 @@ export function MenuPlatform({
                   />
                 </label>
 
-                {!query && favorites.length > 0 ? (
-                  <div className="mp-favorites" aria-label="Pinned favorites">
-                    <div className="mp-section-title">Pinned</div>
-                    {favorites.map((item) => (
-                      <MenuItemButton
-                        key={item.id}
-                        item={item}
-                        active={activePanelId === item.id}
-                        disabled={!isMenuItemEnabled(item, featureFlags)}
-                        onSelect={handleSelect}
-                      />
-                    ))}
-                  </div>
-                ) : null}
 
                 {query ? (
                   <div className="mp-search-results">
@@ -453,3 +434,4 @@ export function MenuPlatform({
     </div>
   );
 }
+

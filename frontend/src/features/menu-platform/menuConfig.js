@@ -5,16 +5,6 @@ export const menuSections = [
     priority: 1,
     items: [
       {
-        id: "home",
-        label: "Home",
-        type: "action",
-        icon: "home",
-        shortcut: "Alt+H",
-        favorite: true,
-        keywords: ["dashboard", "landing", "main"],
-        context: ["sidebar", "primary-action", "global"],
-      },
-      {
         id: "file",
         label: "File",
         type: "submenu",
@@ -74,7 +64,6 @@ export const menuSections = [
         type: "panel",
         icon: "settings",
         shortcut: "Alt+,",
-        favorite: true,
         keywords: ["preferences", "customize", "theme", "account"],
       },
     ],
@@ -89,7 +78,6 @@ export const menuSections = [
         label: "FAQ",
         type: "panel",
         icon: "help-circle",
-        favorite: true,
         keywords: ["help", "common issues", "question", "guide"],
       },
       {
@@ -98,7 +86,6 @@ export const menuSections = [
         type: "panel",
         icon: "message-square",
         badge: "Recommended",
-        favorite: true,
         keywords: ["support", "ticket", "bug", "feedback", "screenshot", "crash"],
       },
       {
