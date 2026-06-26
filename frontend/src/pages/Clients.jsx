@@ -85,6 +85,9 @@ const EMPTY_CLIENT = {
 
   employmentStatus: "To be confirmed",
   maritalStatus: "To be confirmed",
+  hasDependents: false,
+  dependentsCount: "",
+  dependentNotes: "",
 
   ethnicity: "",
   ethnicityOther: "",
@@ -131,6 +134,8 @@ const EMPTY_CLIENT = {
   availabilityReason: "Not Applicable / N/A",
   availabilityReasonOther: "",
   communicationTimingNotes: "",
+  isClientUnavailable: false,
+  enableCommunicationTimingNotes: false,
 
   emergencyContactName: "",
   emergencyContactRelationship: "",
@@ -179,6 +184,26 @@ const EMPTY_CLIENT = {
   missingInformationNotes: "",
 
   verificationStatus: "Pending Review",
+  documentationVerificationCompleted: false,
+
+  willStatus: "Unknown",
+  willReferenceNotes: "",
+  willRestrictedAccess: false,
+  willAuthorizedParties: [],
+
+  clientSince: "",
+  totalMattersCount: "",
+  clientValueTier: "Medium",
+  clientValueNotes: "",
+
+  clientRoleInMatter: "Plaintiff",
+  caseOriginType: "New Direct Client",
+  previousFirmName: "",
+  coCounselNotes: "",
+
+  healthDisabilityStatus: "None",
+  accommodationRequired: false,
+  accommodationNotes: "",
   verificationFlags: [],
   clientCategory: "General",
   clientTags: [],
@@ -594,6 +619,45 @@ const ADDRESS_TYPE_OPTIONS = [
   "Other",
   "Unknown",
   "To be confirmed"
+];
+
+const WILL_STATUS_OPTIONS = ["Unknown", "No", "Yes"];
+
+const WILL_AUTHORIZED_PARTY_OPTIONS = [
+  "Lawyer",
+  "Client",
+  "Next of Kin",
+  "Executor",
+  "Court-Ordered Access"
+];
+
+const CLIENT_VALUE_TIER_OPTIONS = [
+  "Low",
+  "Medium",
+  "High",
+  "Strategic"
+];
+
+const CLIENT_ROLE_IN_MATTER_OPTIONS = [
+  "Plaintiff",
+  "Defendant",
+  "Applicant",
+  "Respondent",
+  "Witness",
+  "Other"
+];
+
+const CASE_ORIGIN_TYPE_OPTIONS = [
+  "New Direct Client",
+  "Inherited / Taken Over from Another Firm",
+  "Joint Representation / Multi-firm Action"
+];
+
+const HEALTH_DISABILITY_STATUS_OPTIONS = [
+  "None",
+  "OKU / Disability",
+  "Medical Sensitivity",
+  "Prefer Not to Disclose"
 ];
 
 const DOCUMENT_TYPE_OPTIONS = [
@@ -1237,6 +1301,9 @@ function normalizeClient(rawClient) {
 
     employmentStatus: source.employmentStatus || "To be confirmed",
     maritalStatus: source.maritalStatus || "To be confirmed",
+    hasDependents: Boolean(source.hasDependents),
+    dependentsCount: source.dependentsCount || "",
+    dependentNotes: source.dependentNotes || "",
 
     ethnicity: source.ethnicity || "",
     ethnicityOther: source.ethnicityOther || "",
@@ -1282,6 +1349,12 @@ function normalizeClient(rawClient) {
     availabilityReason: source.availabilityReason || "Not Applicable / N/A",
     availabilityReasonOther: source.availabilityReasonOther || "",
     communicationTimingNotes: source.communicationTimingNotes || source.whatsappNotes || source.preferredContactTimeNote || "",
+    isClientUnavailable: source.isClientUnavailable !== undefined
+      ? Boolean(source.isClientUnavailable)
+      : Boolean(source.unavailableUntilDate || source.unavailableUntilTime || source.unavailableUntil),
+    enableCommunicationTimingNotes: source.enableCommunicationTimingNotes !== undefined
+      ? Boolean(source.enableCommunicationTimingNotes)
+      : Boolean(source.communicationTimingNotes),
 
     emergencyContactName: source.emergencyContactName || "",
     emergencyContactRelationship: source.emergencyContactRelationship || "",
@@ -1328,6 +1401,26 @@ function normalizeClient(rawClient) {
     missingInformationNotes: source.missingInformationNotes || "",
 
     verificationStatus: source.verificationStatus || "Pending Review",
+    documentationVerificationCompleted: Boolean(source.documentationVerificationCompleted),
+
+    willStatus: source.willStatus || "Unknown",
+    willReferenceNotes: source.willReferenceNotes || "",
+    willRestrictedAccess: Boolean(source.willRestrictedAccess),
+    willAuthorizedParties: normalizeFlags(source.willAuthorizedParties),
+
+    clientSince: source.clientSince || "",
+    totalMattersCount: source.totalMattersCount || "",
+    clientValueTier: source.clientValueTier || "Medium",
+    clientValueNotes: source.clientValueNotes || "",
+
+    clientRoleInMatter: source.clientRoleInMatter || "Plaintiff",
+    caseOriginType: source.caseOriginType || "New Direct Client",
+    previousFirmName: source.previousFirmName || "",
+    coCounselNotes: source.coCounselNotes || "",
+
+    healthDisabilityStatus: source.healthDisabilityStatus || "None",
+    accommodationRequired: Boolean(source.accommodationRequired),
+    accommodationNotes: source.accommodationNotes || "",
     verificationFlags: normalizeFlags(source.verificationFlags),
     clientCategory: source.clientCategory || "General",
     clientTags: normalizeClientTagList(source.clientTags || source.tags),
@@ -1339,15 +1432,7 @@ function normalizeClient(rawClient) {
 }
 
 
-function isAdditionalContactChoiceEnabled(value) {
-  const safeValue = String(value || "").trim();
-  return Boolean(
-    safeValue &&
-    safeValue !== "Not Applicable / N/A" &&
-    safeValue !== "Unknown" &&
-    safeValue !== "To be confirmed"
-  );
-}function makeWhatsappMessage(client) {
+function makeWhatsappMessage(client) {
   if (client.whatsappMessageTemplate === "Custom message") {
     return client.whatsappCustomMessage || "";
   }
@@ -1364,6 +1449,69 @@ function makeWhatsappLink(countryCode, number, message) {
 
   const text = message ? "?text=" + encodeURIComponent(message) : "";
   return "https://wa.me/" + normalized + text;
+}
+
+function getRelationshipDurationLabel(clientSince) {
+  if (!clientSince) return "Not recorded";
+
+  const start = new Date(clientSince);
+  if (Number.isNaN(start.getTime())) return "Invalid date";
+
+  const now = new Date();
+  let months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+
+  if (now.getDate() < start.getDate()) {
+    months -= 1;
+  }
+
+  if (months < 1) return "Less than 1 month";
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  const parts = [];
+
+  if (years > 0) parts.push(years + " year" + (years === 1 ? "" : "s"));
+  if (remainingMonths > 0) parts.push(remainingMonths + " month" + (remainingMonths === 1 ? "" : "s"));
+
+  return parts.join(" ");
+}
+
+function isCompletionValuePresent(value) {
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === "boolean") return value;
+  return String(value || "").trim() !== "";
+}
+
+function getClientFormCompletionProgress(form) {
+  const checks = [
+    ["Given Name", form.givenName],
+    ["Surname", form.surname],
+    ["Gender", form.gender],
+    ["Date of Birth / Age", form.dateOfBirth || form.ageCategory],
+    ["ID / Passport", form.nricPassportNumber],
+    ["Email or Phone", form.email || form.phoneNumber],
+    ["Primary Contact Choice", form.preferredContact1],
+    ["Address", form.streetAddress || form.townCity || form.country],
+    ["Emergency Contact", form.emergencyContactName || form.emergencyContactNumber],
+    ["Documentation", form.documentationVerificationCompleted || form.documentType || form.documentStatus],
+    ["Family / Marital", form.maritalStatus],
+    ["Matter Context", form.clientRoleInMatter || form.caseOriginType],
+    ["Client Tenure / Value", form.clientSince || form.clientValueTier],
+    ["Health / Accommodation", form.healthDisabilityStatus || form.accommodationRequired],
+    ["Will / Estate", form.willStatus]
+  ];
+
+  const completed = checks.filter(([, value]) => isCompletionValuePresent(value)).length;
+  const total = checks.length;
+  const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const missing = checks.filter(([, value]) => !isCompletionValuePresent(value)).map(([label]) => label);
+
+  return {
+    completed,
+    total,
+    percentage,
+    missing
+  };
 }
 
 function buildAuditTrail(form, existingClient, now) {
@@ -1518,6 +1666,10 @@ export default function Clients() {
   const [clientSearchHistory, setClientSearchHistory] = useState([]);
   const [selectedClientTagFilter, setSelectedClientTagFilter] = useState("All");
   const [manualClientTagSearch, setManualClientTagSearch] = useState("");  const [fieldErrors, setFieldErrors] = useState({});
+  const CLIENT_ONBOARDING_DRAFT_KEY = "l360.clientOnboardingDraft.v1";
+  const [draftSaveStatus, setDraftSaveStatus] = useState("Draft not saved yet.");
+  const [lastDraftSavedAt, setLastDraftSavedAt] = useState("");
+  const [hasRecoverableDraft, setHasRecoverableDraft] = useState(false);
   const [numericWarnings, setNumericWarnings] = useState({});
   const [contactDatabaseSearch, setContactDatabaseSearch] = useState("");
   const [googleContactSearch, setGoogleContactSearch] = useState("");
@@ -1572,9 +1724,6 @@ export default function Clients() {
     form.whatsappNumber,
     makeWhatsappMessage(form)
   );
-
-  const unavailabilityIsSet = Boolean(form.unavailableUntilDate);
-
   function showStatus(message, type = "info") {
     setStatus(message);
     setStatusType(type);
@@ -1604,14 +1753,74 @@ export default function Clients() {
   }
 
   function selectClientFromDirectory(client) {
-    viewClientProfile(client);
+    const normalized = normalizeClient(client);
+    const directoryName = getClientDirectoryName(normalized);
+    const initial = getClientDirectoryInitial(normalized);
+
+    setSearchTerm(directoryName);
+    setClientLookupSearchBy("Client Name");
+    setActiveAlphabetFilter(initial || "All");
+    setSelectedClientTagFilter("All");
+    setManualClientTagSearch("");
+    setViewingClientProfile(normalized);
+
+    showStatus("Manual client selection applied to the shared directory filter context.", "info");
+
+    window.setTimeout(() => {
+      document.querySelector(".client-directory-table")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
   }
 
   function clearDirectoryFilters() {
     setSearchTerm("");
+    setClientLookupSearchBy("All Fields");
     setActiveAlphabetFilter("All");
     setSelectedClientTagFilter("All");
+    setManualClientTagSearch("");
+    setViewingClientProfile(null);
+    showStatus("All client directory filters cleared. Showing all clients.", "info");
   }
+
+  function getClientDirectoryActiveFilterSummary() {
+    const filters = [];
+
+    if (String(searchTerm || "").trim()) {
+      filters.push("Search: " + String(searchTerm || "").trim());
+    }
+
+    if (clientLookupSearchBy && clientLookupSearchBy !== "All Fields") {
+      filters.push("Search By: " + clientLookupSearchBy);
+    }
+
+    if (activeAlphabetFilter && activeAlphabetFilter !== "All") {
+      filters.push("A-Z: " + activeAlphabetFilter);
+    }
+
+    if (selectedClientTagFilter && selectedClientTagFilter !== "All") {
+      filters.push("Category / Tag: " + selectedClientTagFilter);
+    }
+
+    if (String(manualClientTagSearch || "").trim()) {
+      filters.push("Manual Tag: " + String(manualClientTagSearch || "").trim());
+    }
+
+    return filters;
+  }
+
+  function getClientDirectoryEmptyStateMessage() {
+    if (clients.length === 0) {
+      return "No clients have been added yet.";
+    }
+
+    const activeFilters = getClientDirectoryActiveFilterSummary();
+
+    if (activeFilters.length === 0) {
+      return "No matching clients found. Use Show All Clients to refresh the full directory.";
+    }
+
+    return "No matching clients found for active filters (" + activeFilters.join(" | ") + "). Use Show All Clients to clear filters and return to the full directory.";
+  }
+
   function isPhoneLikeContactMethod(method) {
     return ["WhatsApp Message", "WhatsApp Call", "Phone Call", "SMS"].includes(method);
   }
@@ -1662,15 +1871,22 @@ export default function Clients() {
       nextErrors.secondaryAdministrativeCategory = "Secondary admin name requires a secondary admin category.";
     }
     if (isBlank(payload.townCity)) nextErrors.townCity = "Town / City is required.";
-
     [1, 2, 3, 4, 5].forEach((rank) => {
       const method = payload["preferredContact" + rank];
       const detailField = "preferredContactDetail" + rank;
       const detail = payload[detailField];
+
       if (rank === 1 && isBlank(method)) nextErrors.preferredContact1 = "1st Contact Choice is required.";
-      if (!isBlank(method) && !["Not Applicable / N/A", "Unknown", "To be confirmed"].includes(method) && isBlank(detail)) {
-        nextErrors[detailField] = rank + " Contact Detail is required when a method is selected.";
+
+      if (!isBlank(method) && !["Not Applicable / N/A", "Unknown", "To be confirmed"].includes(method)) {
+        const isEmailMethod = method === "Email";
+        const hasMainEmail = !isBlank(payload.email);
+
+        if (!(isEmailMethod && hasMainEmail) && isBlank(detail)) {
+          nextErrors[detailField] = rank + " Contact Detail is required when a method is selected.";
+        }
       }
+
       if (method === "Email" && !isBlank(detail) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(detail).trim())) {
         nextErrors[detailField] = "Invalid email format for contact detail.";
       }
@@ -1695,6 +1911,88 @@ export default function Clients() {
     return numericWarnings[field] ? <small className="field-warning-message">{numericWarnings[field]}</small> : null;
   }
 
+
+  function saveClientDraftSilently(message = "Draft saved at") {
+    try {
+      const savedAt = new Date().toISOString();
+      window.localStorage.setItem(CLIENT_ONBOARDING_DRAFT_KEY, JSON.stringify({ savedAt, form }));
+      setLastDraftSavedAt(savedAt);
+      setDraftSaveStatus(message + " " + new Date(savedAt).toLocaleString());
+      setHasRecoverableDraft(true);
+    } catch (error) {
+      setDraftSaveStatus("Draft save failed. Browser local storage may be unavailable.");
+    }
+  }
+
+  function saveClientDraftManually() {
+    saveClientDraftSilently("Draft saved manually at");
+  }
+
+  function restoreClientDraft() {
+    try {
+      const rawDraft = window.localStorage.getItem(CLIENT_ONBOARDING_DRAFT_KEY);
+      if (!rawDraft) {
+        setDraftSaveStatus("No saved draft found.");
+        setHasRecoverableDraft(false);
+        return;
+      }
+      const draftPayload = JSON.parse(rawDraft);
+      if (!draftPayload || !draftPayload.form) {
+        setDraftSaveStatus("Saved draft could not be read safely.");
+        return;
+      }
+      setForm((previous) => ({ ...previous, ...draftPayload.form }));
+      setLastDraftSavedAt(draftPayload.savedAt || "");
+      setDraftSaveStatus("Draft restored from local browser storage.");
+      setFieldErrors({});
+      setValidationErrors([]);
+    } catch (error) {
+      setDraftSaveStatus("Draft restore failed. Saved draft may be corrupted.");
+    }
+  }
+
+  function clearClientDraft() {
+    try {
+      window.localStorage.removeItem(CLIENT_ONBOARDING_DRAFT_KEY);
+      setHasRecoverableDraft(false);
+      setLastDraftSavedAt("");
+      setDraftSaveStatus("Saved draft cleared.");
+    } catch (error) {
+      setDraftSaveStatus("Draft clear failed. Browser local storage may be unavailable.");
+    }
+  }
+
+  useEffect(() => {
+    try {
+      const rawDraft = window.localStorage.getItem(CLIENT_ONBOARDING_DRAFT_KEY);
+      if (rawDraft) {
+        const draftPayload = JSON.parse(rawDraft);
+        setHasRecoverableDraft(true);
+        setLastDraftSavedAt(draftPayload.savedAt || "");
+        setDraftSaveStatus(draftPayload.savedAt ? "Recoverable draft saved at " + new Date(draftPayload.savedAt).toLocaleString() : "Recoverable draft found.");
+      }
+    } catch (error) {
+      setHasRecoverableDraft(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showClientProfileForm) return undefined;
+    const autoSaveTimer = window.setTimeout(() => {
+      saveClientDraftSilently("Auto-saved draft at");
+    }, 7000);
+    return () => window.clearTimeout(autoSaveTimer);
+  }, [form, showClientProfileForm]);
+
+  useEffect(() => {
+    function handleBeforeUnload(event) {
+      if (!showClientProfileForm) return;
+      event.preventDefault();
+      event.returnValue = "";
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [showClientProfileForm]);
   async function searchGoogleContacts() {
     const query = googleContactSearch.trim();
     if (!query) {
@@ -1750,8 +2048,32 @@ export default function Clients() {
     loadClients();
   }, []);
 
+  function isPlaceholderContactChoice(value) {
+    return ["", "Not Applicable / N/A", "Unknown", "To be confirmed"].includes(String(value || ""));
+  }
+
+  function isDuplicateContactChoice(nextChoice, rank, currentForm) {
+    if (isPlaceholderContactChoice(nextChoice)) return false;
+
+    for (let i = 1; i <= 5; i += 1) {
+      if (i === rank) continue;
+      if (currentForm["preferredContact" + i] === nextChoice) return true;
+    }
+
+    return false;
+  }
+
   function updateForm(field, value) {
     let safeValue = value;
+
+    const contactRankMatch = String(field).match(/^preferredContact([1-5])$/);
+    if (contactRankMatch) {
+      const rank = Number(contactRankMatch[1]);
+      if (isDuplicateContactChoice(value, rank, form)) {
+        window.alert("This contact choice has already been selected. Please select something else.");
+        return;
+      }
+    }
 
     if (shouldSanitizeNumericField(field, form)) {
       const digitsOnly = String(value || "").replace(/\D/g, "");
@@ -1772,6 +2094,55 @@ export default function Clients() {
         ...previous,
         [field]: safeValue
       };
+      if (field === "hasDependents") {
+        const checked = Boolean(value);
+        next.hasDependents = checked;
+        if (!checked) {
+          next.dependentsCount = "";
+          next.dependentNotes = "";
+        }
+      }
+
+      if (field === "willStatus" && value !== "Yes") {
+        next.willReferenceNotes = "";
+        next.willRestrictedAccess = false;
+        next.willAuthorizedParties = [];
+      }
+
+      if (field === "caseOriginType" && value !== "Inherited / Taken Over from Another Firm") {
+        next.previousFirmName = "";
+      }
+
+      if (field === "caseOriginType" && value !== "Joint Representation / Multi-firm Action") {
+        next.coCounselNotes = "";
+      }
+
+      if (field === "accommodationRequired") {
+        const checked = Boolean(value);
+        next.accommodationRequired = checked;
+        if (!checked) next.accommodationNotes = "";
+      }
+
+      if (field === "healthDisabilityStatus" && value === "None") {
+        next.accommodationRequired = false;
+        next.accommodationNotes = "";
+      }
+      if (field === "isClientUnavailable") {
+        const checked = Boolean(value);
+        next.isClientUnavailable = checked;
+        if (!checked) {
+          next.unavailableUntilDate = "";
+          next.unavailableUntilTime = "";
+          next.availabilityReason = "Not Applicable / N/A";
+          next.availabilityReasonOther = "";
+        }
+      }
+
+      if (field === "enableCommunicationTimingNotes") {
+        const checked = Boolean(value);
+        next.enableCommunicationTimingNotes = checked;
+        if (!checked) next.communicationTimingNotes = "";
+      }
 
       if (field === "givenName" || field === "surname") {
         next.initials = makeInitials(
@@ -2028,12 +2399,24 @@ function isUnavailablePlaceholder(value) {
     requireMandatory("Identity Card Colour / Document Class", payload.identityCardColour);
     requireMandatory("NRIC No. / Passport No.", payload.nricPassportNumber);
     requireMandatory("Country", payload.country);
-    requireMandatory("Document Type", payload.documentType);
-    requireMandatory("Document Status", payload.documentStatus);
-    requireMandatory("Verification / Review Status", payload.verificationStatus);
+    if (!payload.documentationVerificationCompleted) requireMandatory("Document Type", payload.documentType);
+    if (!payload.documentationVerificationCompleted) requireMandatory("Document Status", payload.documentStatus);
+    if (!payload.documentationVerificationCompleted) requireMandatory("Verification / Review Status", payload.verificationStatus);
 
     if (isBlank(payload.email) && isBlank(payload.phoneNumber)) {
       errors.push("At least one contact method is mandatory: Email Address or Primary Phone Number.");
+    }
+
+    if (payload.hasDependents && isBlank(payload.dependentsCount)) {
+      errors.push("Number of Dependents is required when Has Dependents is selected.");
+    }
+
+    if (payload.dependentsCount && Number(payload.dependentsCount) < 0) {
+      errors.push("Number of Dependents cannot be negative.");
+    }
+
+    if (payload.totalMattersCount && Number(payload.totalMattersCount) < 0) {
+      errors.push("Total Matters / Cases Count cannot be negative.");
     }
 
     if (!isBlank(payload.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(payload.email).trim())) {
@@ -2783,7 +3166,7 @@ function isUnavailablePlaceholder(value) {
 
         <div className="client-count-card">
           <strong>All Clients ({clients.length})</strong>
-          <span>Showing {filteredClients.length} of {clients.length}</span>
+          <span>Showing {filteredDirectoryClients.length} of {clients.length}</span>
         </div>
       </div>
 
@@ -2886,7 +3269,7 @@ function isUnavailablePlaceholder(value) {
 
         <div className="client-alphabet-filter two-rows" aria-label="Client alphabet filter">
           <div className="alphabet-action-row">
-            <button type="button" className={"show-all-clients-chip " + (activeAlphabetFilter === "All" ? "active" : "")} onClick={() => setActiveAlphabetFilter("All")}>Show All Clients</button>
+            <button type="button" className={"show-all-clients-chip " + (activeAlphabetFilter === "All" ? "active" : "")} onClick={clearDirectoryFilters}>Show All Clients</button>
           </div>
           <div className="alphabet-row">
             {CLIENT_DIRECTORY_ALPHABET.slice(0, 13).map((letter) => (
@@ -3057,6 +3440,39 @@ function isUnavailablePlaceholder(value) {
       )}
 
       <form className={"client-form client-form-v6" + (validationErrors.length > 0 ? " client-form-has-errors" : "")} onSubmit={saveClient} style={{ display: showClientProfileForm ? undefined : "none" }}>
+        <div className="client-draft-save-panel">
+          <div>
+            <strong>Draft Protection</strong>
+            <small>{draftSaveStatus}</small>
+            {lastDraftSavedAt && (
+              <small>Last saved: {new Date(lastDraftSavedAt).toLocaleString()}</small>
+            )}
+          </div>
+          <div className="inline-actions">
+            <button type="button" className="btn btn-secondary btn-small" onClick={saveClientDraftManually}>Manual Save Draft</button>
+            <button type="button" className="btn btn-secondary btn-small" onClick={restoreClientDraft} disabled={!hasRecoverableDraft}>Restore Draft</button>
+            <button type="button" className="btn btn-secondary btn-small" onClick={clearClientDraft} disabled={!hasRecoverableDraft}>Clear Draft</button>
+          </div>
+          <small className="field-warning-message">Drafts are saved locally in this browser to protect against refresh, accidental navigation, browser crash, or timeout.</small>
+        </div>
+        {(() => {
+          const progress = getClientFormCompletionProgress(form);
+          return (
+            <div className="form-section client-form-progress-card">
+              <h3>Client Form Completion Progress</h3>
+              <p className="mandatory-note">
+                {progress.percentage}% completed ({progress.completed} of {progress.total} key sections captured).
+              </p>
+              <div className="client-form-progress-track" aria-label="Client form completion progress">
+                <div className="client-form-progress-fill" style={{ width: progress.percentage + "%" }} />
+              </div>
+              {progress.missing.length > 0 && (
+                <small>Missing / incomplete: {progress.missing.slice(0, 6).join(", ")}{progress.missing.length > 6 ? "..." : ""}</small>
+              )}
+            </div>
+          );
+        })()}
+
                 <div className="form-section">
           <h3>Client Profile Details</h3>
 
@@ -3249,7 +3665,6 @@ function isUnavailablePlaceholder(value) {
             </label>
           </div>
         </div>
-
         <div className="form-section">
           <h3>Family and Marital Details</h3>
 
@@ -3262,14 +3677,238 @@ function isUnavailablePlaceholder(value) {
                 ))}
               </select>
             </label>
+
+            <label className="checkbox-tile">
+              <input
+                type="checkbox"
+                checked={Boolean(form.hasDependents)}
+                onChange={(event) => updateForm("hasDependents", event.target.checked)}
+              />
+              Has Dependents?
+            </label>
+
+            {form.hasDependents && (
+              <>
+                <label>
+                  Number of Dependents
+                  <input
+                    type="number"
+                    min="0"
+                    value={form.dependentsCount}
+                    onChange={(event) => updateForm("dependentsCount", event.target.value)}
+                    placeholder="Example: 2"
+                  />
+                </label>
+
+                <label className="full">
+                  Dependent Notes
+                  <textarea
+                    value={form.dependentNotes}
+                    onChange={(event) => updateForm("dependentNotes", event.target.value)}
+                    placeholder="Example: minor children, elderly parent, caregiver responsibility, financial dependents."
+                  />
+                </label>
+              </>
+            )}
           </div>
         </div>
 
         <div className="form-section">
+          <h3>Matter Context and Case Origin</h3>
+          <p className="mandatory-note">Frontend metadata only. Linkage to actual matters/cases should be enforced in a future backend matter module.</p>
+
+          <div className="smart-grid two">
+            <label>
+              Client Role in Matter
+              <select value={form.clientRoleInMatter} onChange={(event) => updateForm("clientRoleInMatter", event.target.value)}>
+                {CLIENT_ROLE_IN_MATTER_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Case Origin
+              <select value={form.caseOriginType} onChange={(event) => updateForm("caseOriginType", event.target.value)}>
+                {CASE_ORIGIN_TYPE_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            {form.caseOriginType === "Inherited / Taken Over from Another Firm" && (
+              <label className="full">
+                Previous Firm
+                <input
+                  value={form.previousFirmName}
+                  onChange={(event) => updateForm("previousFirmName", event.target.value)}
+                  placeholder="Previous firm name, if known"
+                />
+              </label>
+            )}
+
+            {form.caseOriginType === "Joint Representation / Multi-firm Action" && (
+              <label className="full">
+                Co-counsel / Partner Firm Notes
+                <textarea
+                  value={form.coCounselNotes}
+                  onChange={(event) => updateForm("coCounselNotes", event.target.value)}
+                  placeholder="Example: joint representation, co-counsel, merged client group, shared litigation strategy."
+                />
+              </label>
+            )}
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h3>Client Tenure and Value Indicators</h3>
+          <p className="mandatory-note">Frontend-only indicators. No backend revenue computation is performed here.</p>
+
+          <div className="smart-grid two">
+            <label>
+              Client Since
+              <input
+                type="date"
+                value={form.clientSince}
+                onChange={(event) => updateForm("clientSince", event.target.value)}
+              />
+              <small>Relationship duration: {getRelationshipDurationLabel(form.clientSince)}</small>
+            </label>
+
+            <label>
+              Total Matters / Cases Count
+              <input
+                type="number"
+                min="0"
+                value={form.totalMattersCount}
+                onChange={(event) => updateForm("totalMattersCount", event.target.value)}
+                placeholder="Manual count if backend matter records are unavailable"
+              />
+            </label>
+
+            <label>
+              Estimated Client Value Tier
+              <select value={form.clientValueTier} onChange={(event) => updateForm("clientValueTier", event.target.value)}>
+                {CLIENT_VALUE_TIER_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="full">
+              Revenue / Value Notes
+              <textarea
+                value={form.clientValueNotes}
+                onChange={(event) => updateForm("clientValueNotes", event.target.value)}
+                placeholder="Manual notes only. Example: repeat client, multiple matters, strategic client, high-touch account."
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h3>Will / Estate Handling Metadata</h3>
+          <p className="mandatory-note">Frontend indicator only; enforce access via backend RBAC in future phase.</p>
+
+          <div className="smart-grid two">
+            <label>
+              Will Status
+              <select value={form.willStatus} onChange={(event) => updateForm("willStatus", event.target.value)}>
+                {WILL_STATUS_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            {form.willStatus === "Yes" && (
+              <>
+                <label className="full">
+                  Will Reference Notes
+                  <textarea
+                    value={form.willReferenceNotes}
+                    onChange={(event) => updateForm("willReferenceNotes", event.target.value)}
+                    placeholder="Example: will exists, held by client, executor named, copy requested, court access may be required."
+                  />
+                </label>
+
+                <label className="checkbox-tile full">
+                  <input
+                    type="checkbox"
+                    checked={Boolean(form.willRestrictedAccess)}
+                    onChange={(event) => updateForm("willRestrictedAccess", event.target.checked)}
+                  />
+                  Restricted to authorized legal parties only
+                </label>
+
+                <div className="full">
+                  <span className="field-label-text">Authorized Parties</span>
+                  <div className="checkbox-grid">
+                    {WILL_AUTHORIZED_PARTY_OPTIONS.map((option) => {
+                      const selectedParties = normalizeFlags(form.willAuthorizedParties);
+                      return (
+                        <label key={option} className="checkbox-tile">
+                          <input
+                            type="checkbox"
+                            checked={selectedParties.includes(option)}
+                            onChange={(event) => {
+                              const nextParties = event.target.checked
+                                ? Array.from(new Set([...selectedParties, option]))
+                                : selectedParties.filter((item) => item !== option);
+                              updateForm("willAuthorizedParties", nextParties);
+                            }}
+                          />
+                          {option}
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h3>Health / OKU / Disability and Accommodation Metadata</h3>
+          <p className="mandatory-note">Use respectful, neutral wording. Treat accommodation details as sensitive frontend metadata.</p>
+
+          <div className="smart-grid two">
+            <label>
+              Health / Disability Status
+              <select value={form.healthDisabilityStatus} onChange={(event) => updateForm("healthDisabilityStatus", event.target.value)}>
+                {HEALTH_DISABILITY_STATUS_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="checkbox-tile">
+              <input
+                type="checkbox"
+                checked={Boolean(form.accommodationRequired)}
+                onChange={(event) => updateForm("accommodationRequired", event.target.checked)}
+              />
+              Communication Accommodation Required
+            </label>
+
+            {(form.accommodationRequired || form.healthDisabilityStatus !== "None") && (
+              <label className="full">
+                Accommodation Notes
+                <textarea
+                  value={form.accommodationNotes}
+                  onChange={(event) => updateForm("accommodationNotes", event.target.value)}
+                  placeholder="Example: prefers written communication, mobility access, hearing/visual support, medical sensitivity, appointment timing needs."
+                />
+              </label>
+            )}
+          </div>
+        </div>
+        <div className="form-section">
           <h3>4. Contact Information and Communication Preferences</h3>
           <p className="mandatory-note">At least one contact method is mandatory: Email Address or Primary Phone Number.</p>
 
-          <div className="smart-grid two">            <label className="full">
+          <div className="smart-grid two">
+            <label className="full">
               Email Address
               <input
                 type="email"
@@ -3277,9 +3916,8 @@ function isUnavailablePlaceholder(value) {
                 onChange={(event) => updateForm("email", event.target.value)}
                 placeholder="client@example.com"
               />
+              {renderInlineError("email")}
             </label>
-
-
 
             <label className="full">
               Primary Phone Number
@@ -3291,12 +3929,14 @@ function isUnavailablePlaceholder(value) {
                   placeholder="+60 Malaysia"
                 />
                 <input
+                  className={inputClass("phoneNumber")}
                   value={form.phoneNumber}
                   onChange={(event) => updateForm("phoneNumber", event.target.value)}
                   placeholder="0123456789"
                 />
               </div>
-              <small>Display format: +60 0123456789. Digits only, no spaces or dashes.</small>              {renderInlineError("phoneNumber")}
+              <small>Display format: +60 0123456789. Digits only, no spaces or dashes.</small>
+              {renderInlineError("phoneNumber")}
               {renderNumericWarning("phoneNumber")}
               {malaysiaPhoneWarning && <small className="field-warning">Check format: Malaysian mobile numbers should start with 01.</small>}
             </label>
@@ -3420,8 +4060,9 @@ function isUnavailablePlaceholder(value) {
                 {showExtendedContactChoices ? "Hide 3rd / 4th / 5th Contact Choices" : "Show 3rd / 4th / 5th Contact Choices"}
               </button>
             </label>
+
             {showExtendedContactChoices && (
-              <div className="extended-contact-choices">
+              <>
                 <label>
                   3rd Contact Choice
                   <select value={form.preferredContact3} onChange={(event) => updateForm("preferredContact3", event.target.value)}>
@@ -3431,19 +4072,26 @@ function isUnavailablePlaceholder(value) {
                   </select>
                 </label>
 
-                {isAdditionalContactChoiceEnabled(form.preferredContact3) && (
-                  <label>
-                    3rd Contact Detail
-                    <input
-                      className={inputClass("preferredContactDetail3")}
-                      value={form.preferredContactDetail3}
-                      onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
-                      placeholder="Phone, email, or contact detail for 3rd choice"
-                    />
-                    {renderInlineError("preferredContactDetail3")}
-                    {renderNumericWarning("preferredContactDetail3")}
-                  </label>
-                )}
+                <label>
+                  3rd Contact Detail
+                  {form.preferredContact3 === "Email" && form.email ? (
+                    <>
+                      <input value={form.email} readOnly />
+                      <small>Using main Email Address above.</small>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        className={inputClass("preferredContactDetail3")}
+                        value={form.preferredContactDetail3}
+                        onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
+                        placeholder="Phone, email, or contact detail for 3rd choice"
+                      />
+                      {renderInlineError("preferredContactDetail3")}
+                      {renderNumericWarning("preferredContactDetail3")}
+                    </>
+                  )}
+                </label>
 
                 <label>
                   4th Contact Choice
@@ -3454,19 +4102,26 @@ function isUnavailablePlaceholder(value) {
                   </select>
                 </label>
 
-                {isAdditionalContactChoiceEnabled(form.preferredContact4) && (
-                  <label>
-                    4th Contact Detail
-                    <input
-                      className={inputClass("preferredContactDetail4")}
-                      value={form.preferredContactDetail4}
-                      onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
-                      placeholder="Phone, email, or contact detail for 4th choice"
-                    />
-                    {renderInlineError("preferredContactDetail4")}
-                    {renderNumericWarning("preferredContactDetail4")}
-                  </label>
-                )}
+                <label>
+                  4th Contact Detail
+                  {form.preferredContact4 === "Email" && form.email ? (
+                    <>
+                      <input value={form.email} readOnly />
+                      <small>Using main Email Address above.</small>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        className={inputClass("preferredContactDetail4")}
+                        value={form.preferredContactDetail4}
+                        onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
+                        placeholder="Phone, email, or contact detail for 4th choice"
+                      />
+                      {renderInlineError("preferredContactDetail4")}
+                      {renderNumericWarning("preferredContactDetail4")}
+                    </>
+                  )}
+                </label>
 
                 <label>
                   5th Contact Choice
@@ -3477,20 +4132,27 @@ function isUnavailablePlaceholder(value) {
                   </select>
                 </label>
 
-                {isAdditionalContactChoiceEnabled(form.preferredContact5) && (
-                  <label>
-                    5th Contact Detail
-                    <input
-                      className={inputClass("preferredContactDetail5")}
-                      value={form.preferredContactDetail5}
-                      onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
-                      placeholder="Phone, email, or contact detail for 5th choice"
-                    />
-                    {renderInlineError("preferredContactDetail5")}
-                    {renderNumericWarning("preferredContactDetail5")}
-                  </label>
-                )}
-              </div>
+                <label>
+                  5th Contact Detail
+                  {form.preferredContact5 === "Email" && form.email ? (
+                    <>
+                      <input value={form.email} readOnly />
+                      <small>Using main Email Address above.</small>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        className={inputClass("preferredContactDetail5")}
+                        value={form.preferredContactDetail5}
+                        onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
+                        placeholder="Phone, email, or contact detail for 5th choice"
+                      />
+                      {renderInlineError("preferredContactDetail5")}
+                      {renderNumericWarning("preferredContactDetail5")}
+                    </>
+                  )}
+                </label>
+              </>
             )}
 
             <label>
@@ -3501,16 +4163,28 @@ function isUnavailablePlaceholder(value) {
               </div>
             </label>
 
-            <label className="full">
-              Unavailable Until
-              <div className="inline-fields two-even">
-                <input type="date" value={form.unavailableUntilDate} onChange={(event) => updateForm("unavailableUntilDate", event.target.value)} />
-                <input type="time" value={form.unavailableUntilTime} onChange={(event) => updateForm("unavailableUntilTime", event.target.value)} />
-              </div>
-              <small>{getUnavailableStatus(form)}</small>
+            <label className="checkbox-tile full">
+              <input
+                type="checkbox"
+                checked={Boolean(form.isClientUnavailable)}
+                onChange={(event) => updateForm("isClientUnavailable", event.target.checked)}
+              />
+              Client is away / unavailable / overseas
             </label>
 
-            {unavailabilityIsSet && (
+            {form.isClientUnavailable && (
+              <label className="full">
+                Unavailable Until
+                <div className="inline-fields two-even">
+                  <input type="date" value={form.unavailableUntilDate} onChange={(event) => updateForm("unavailableUntilDate", event.target.value)} />
+                  <input type="time" value={form.unavailableUntilTime} onChange={(event) => updateForm("unavailableUntilTime", event.target.value)} />
+                </div>
+                <small>Date format: dd/mm/yyyy where applicable.</small>
+                <small>{getUnavailableStatus(form)}</small>
+              </label>
+            )}
+
+            {form.isClientUnavailable && (
               <label className="full">
                 Reason for Unavailability
                 <select value={form.availabilityReason} onChange={(event) => updateForm("availabilityReason", event.target.value)}>
@@ -3521,7 +4195,7 @@ function isUnavailablePlaceholder(value) {
               </label>
             )}
 
-            {unavailabilityIsSet && form.availabilityReason === "Other" && (
+            {form.isClientUnavailable && form.availabilityReason === "Other" && (
               <label className="full">
                 Other Unavailability Reason
                 <input
@@ -3532,14 +4206,25 @@ function isUnavailablePlaceholder(value) {
               </label>
             )}
 
-            <label className="full">
-              Contact / Communication Timing Notes
-              <textarea
-                value={form.communicationTimingNotes}
-                onChange={(event) => updateForm("communicationTimingNotes", event.target.value)}
-                placeholder="Example: reachable after 6pm, WhatsApp only, overseas number active on weekends."
+            <label className="checkbox-tile full">
+              <input
+                type="checkbox"
+                checked={Boolean(form.enableCommunicationTimingNotes)}
+                onChange={(event) => updateForm("enableCommunicationTimingNotes", event.target.checked)}
               />
+              Add Additional Contact / Communication Timing Notes / Comments
             </label>
+
+            {form.enableCommunicationTimingNotes && (
+              <label className="full">
+                Additional Contact / Communication Timing Notes / Comments
+                <textarea
+                  value={form.communicationTimingNotes}
+                  onChange={(event) => updateForm("communicationTimingNotes", event.target.value)}
+                  placeholder="Example: reachable after 6pm, WhatsApp only, overseas number active on weekends."
+                />
+              </label>
+            )}
           </div>
         </div>
 
@@ -3640,11 +4325,11 @@ function isUnavailablePlaceholder(value) {
             {/* L360_ADMIN_AREA_PROGRESSIVE_WIZARD_FINAL */}
             <div className="full l360-admin-wizard">
               <div className="mandatory-note">
-                <strong>Hierarchical administrative areas:</strong> Add one recognised administrative area at a time. Complete the current level before adding the next. Maximum 5 levels.
+                <strong>Administrative area details:</strong> Add one recognised administrative area at a time. Add another section only when an additional recognised area is required.
               </div>
 
               <div className="l360-admin-progress">
-                Administrative Area Level {Number(form.administrativeAreaActiveLevel || 1)} of 5
+                Administrative Area Details
               </div>
 
               {form.locationAdminType && form.manualAdministrativeLocation && Number(form.administrativeAreaActiveLevel || 1) !== 1 && (
@@ -3732,21 +4417,21 @@ function isUnavailablePlaceholder(value) {
 
               {Number(form.administrativeAreaActiveLevel || 1) === 1 && (
                 <div className="l360-admin-active-card">
-                  <div className="l360-admin-level-title">Now editing: 1st Administrative Area</div>
+                  <div className="l360-admin-level-title">Administrative Area Details</div>
                   <div className="l360-admin-area-row">
                     <label>
-                      1st Location / Administrative Area — All-in-One
+                      Location / Administrative Area — All-in-One
                       <input
                         list="l360-location-admin-type-options"
                         value={form.locationAdminType}
                         onChange={(event) => updateForm("locationAdminType", event.target.value)}
-                        placeholder="Select or type first administrative category/type"
+                        placeholder="Select or type administrative category/type"
                         title="Examples: state, province, municipality, council, borough, district, county, parish, shire, mukim, locality, postcode area."
                       />
                     </label>
 
                     <label>
-                      First Administrative Area Details
+                      Administrative Area Details
                       <input
                         value={form.manualAdministrativeLocation || ""}
                         onChange={(event) => {
@@ -3755,7 +4440,7 @@ function isUnavailablePlaceholder(value) {
                           updateForm("townCity", value);
                           updateForm("district", value);
                         }}
-                        placeholder="Enter first admin area/name/details"
+                        placeholder="Enter administrative area/name/details"
                         title="Example: Selangor, Petaling Jaya, MBPJ, Mukim Damansara or 47300."
                       />
                     </label>
@@ -3774,24 +4459,24 @@ function isUnavailablePlaceholder(value) {
 
               {Number(form.administrativeAreaActiveLevel || 1) === 2 && (
                 <div className="l360-admin-active-card">
-                  <div className="l360-admin-level-title">Now editing: 2nd Administrative Area</div>
+                  <div className="l360-admin-level-title">Administrative Area Details</div>
                   <div className="l360-admin-area-row">
                     <label>
-                      2nd Location / Administrative Area — All-in-One
+                      Location / Administrative Area — All-in-One
                       <input
                         list="l360-location-admin-type-options"
                         value={form.secondaryAdministrativeCategory || ""}
                         onChange={(event) => updateForm("secondaryAdministrativeCategory", event.target.value)}
-                        placeholder="Select or type second administrative category/type"
+                        placeholder="Select or type administrative category/type"
                       />
                     </label>
 
                     <label>
-                      Second Administrative Area Details
+                      Administrative Area Details
                       <input
                         value={form.secondaryAdministrativeName || ""}
                         onChange={(event) => updateForm("secondaryAdministrativeName", event.target.value)}
-                        placeholder="Enter second admin area/name/details"
+                        placeholder="Enter administrative area/name/details"
                       />
                     </label>
                   </div>
@@ -3820,24 +4505,24 @@ function isUnavailablePlaceholder(value) {
 
               {Number(form.administrativeAreaActiveLevel || 1) === 3 && (
                 <div className="l360-admin-active-card">
-                  <div className="l360-admin-level-title">Now editing: 3rd Administrative Area</div>
+                  <div className="l360-admin-level-title">Administrative Area Details</div>
                   <div className="l360-admin-area-row">
                     <label>
-                      3rd Location / Administrative Area — All-in-One
+                      Location / Administrative Area — All-in-One
                       <input
                         list="l360-location-admin-type-options"
                         value={form.thirdAdministrativeCategory || ""}
                         onChange={(event) => updateForm("thirdAdministrativeCategory", event.target.value)}
-                        placeholder="Select or type third administrative category/type"
+                        placeholder="Select or type administrative category/type"
                       />
                     </label>
 
                     <label>
-                      Third Administrative Area Details
+                      Administrative Area Details
                       <input
                         value={form.thirdAdministrativeLocation || ""}
                         onChange={(event) => updateForm("thirdAdministrativeLocation", event.target.value)}
-                        placeholder="Enter third admin area/name/details"
+                        placeholder="Enter administrative area/name/details"
                       />
                     </label>
                   </div>
@@ -3866,24 +4551,24 @@ function isUnavailablePlaceholder(value) {
 
               {Number(form.administrativeAreaActiveLevel || 1) === 4 && (
                 <div className="l360-admin-active-card">
-                  <div className="l360-admin-level-title">Now editing: 4th Administrative Area</div>
+                  <div className="l360-admin-level-title">Administrative Area Details</div>
                   <div className="l360-admin-area-row">
                     <label>
-                      4th Location / Administrative Area — All-in-One
+                      Location / Administrative Area — All-in-One
                       <input
                         list="l360-location-admin-type-options"
                         value={form.fourthAdministrativeCategory || ""}
                         onChange={(event) => updateForm("fourthAdministrativeCategory", event.target.value)}
-                        placeholder="Select or type fourth administrative category/type"
+                        placeholder="Select or type administrative category/type"
                       />
                     </label>
 
                     <label>
-                      Fourth Administrative Area Details
+                      Administrative Area Details
                       <input
                         value={form.fourthAdministrativeLocation || ""}
                         onChange={(event) => updateForm("fourthAdministrativeLocation", event.target.value)}
-                        placeholder="Enter fourth admin area/name/details"
+                        placeholder="Enter administrative area/name/details"
                       />
                     </label>
                   </div>
@@ -3912,30 +4597,30 @@ function isUnavailablePlaceholder(value) {
 
               {Number(form.administrativeAreaActiveLevel || 1) === 5 && (
                 <div className="l360-admin-active-card">
-                  <div className="l360-admin-level-title">Now editing: 5th Administrative Area</div>
+                  <div className="l360-admin-level-title">Administrative Area Details</div>
                   <div className="l360-admin-area-row">
                     <label>
-                      5th Location / Administrative Area — All-in-One
+                      Location / Administrative Area — All-in-One
                       <input
                         list="l360-location-admin-type-options"
                         value={form.fifthAdministrativeCategory || ""}
                         onChange={(event) => updateForm("fifthAdministrativeCategory", event.target.value)}
-                        placeholder="Select or type fifth administrative category/type"
+                        placeholder="Select or type administrative category/type"
                       />
                     </label>
 
                     <label>
-                      Fifth Administrative Area Details / Notes
+                      Administrative Area Details
                       <input
                         value={form.fifthAdministrativeLocation || ""}
                         onChange={(event) => updateForm("fifthAdministrativeLocation", event.target.value)}
-                        placeholder="Enter fifth admin area/name/details or notes"
+                        placeholder="Enter administrative area/name/details or notes"
                       />
                     </label>
                   </div>
 
                   <small className="field-hint">
-                    Maximum of 5 administrative area levels reached. Submit/save the client if no further level is needed.
+                    No further administrative area sections can be added. Submit/save the client if no further section is needed.
                   </small>
                   <button
                     type="button"
@@ -3979,7 +4664,7 @@ function isUnavailablePlaceholder(value) {
             </label>
 
             <label>
-              Relationship to Client (Emergency Contact / Next of Kin)
+              Relationship to Client
               <input
                 list="client-relationship-options"
                 value={form.emergencyContactRelationship}
@@ -4022,48 +4707,64 @@ function isUnavailablePlaceholder(value) {
           <h3>Documentation Verification Status</h3>
           <p className="mandatory-note">Tracks document type, document receipt status, verification status and digital copy handling.</p>
 
-          <div className="smart-grid two">
-            <label>
-              Document Type *
-              <select value={form.documentType} onChange={(event) => updateForm("documentType", event.target.value)}>
-                {DOCUMENT_TYPE_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              Document Status *
-              <select value={form.documentStatus} onChange={(event) => updateForm("documentStatus", event.target.value)}>
-                {DOCUMENT_STATUS_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              Verification / Review Status *
-              <select value={form.verificationStatus} onChange={(event) => updateForm("verificationStatus", event.target.value)}>
-                {REVIEW_STATUS_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
-
+                    <div className="smart-grid two">
             <label className="full">
-              Attach Scanned Copy / Digital Copy
-              <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp" onChange={updateDocumentFiles} />
-              <small>File names are matched to the client record. Actual secure document storage needs backend upload support.</small>
+              Documentation Verification Completion
+              <select
+                value={form.documentationVerificationCompleted ? "done" : "not_done"}
+                onChange={(event) => updateForm("documentationVerificationCompleted", event.target.value === "done")}
+              >
+                <option value="not_done">Not Yet / Not Completed ❌</option>
+                <option value="done">Documentation Verification Status Done ✅</option>
+              </select>
             </label>
 
-            <label className="full">
-              Document Related Reference Notes
-              <textarea
-                value={form.documentRelatedReferenceNotes}
-                onChange={(event) => updateForm("documentRelatedReferenceNotes", event.target.value)}
-                placeholder="Example: NRIC front/back received, passport page pending, certified true copy required."
-              />
-            </label>
+            {!form.documentationVerificationCompleted && (
+              <>
+                <label>
+                  Document Type *
+                  <select value={form.documentType} onChange={(event) => updateForm("documentType", event.target.value)}>
+                    {DOCUMENT_TYPE_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label>
+                  Document Status *
+                  <select value={form.documentStatus} onChange={(event) => updateForm("documentStatus", event.target.value)}>
+                    {DOCUMENT_STATUS_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label>
+                  Verification / Review Status *
+                  <select value={form.verificationStatus} onChange={(event) => updateForm("verificationStatus", event.target.value)}>
+                    {REVIEW_STATUS_OPTIONS.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="full">
+                  Attach Scanned Copy / Digital Copy
+                  <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp" onChange={updateDocumentFiles} />
+                  <small>File names are matched to the client record. Actual secure document storage needs backend upload support.</small>
+                </label>
+
+                <label className="full">
+                  Document Related Reference Notes
+                  <textarea
+                    value={form.documentRelatedReferenceNotes}
+                    onChange={(event) => updateForm("documentRelatedReferenceNotes", event.target.value)}
+                    placeholder="Example: NRIC front/back received, passport page pending, certified true copy required."
+                  />
+                </label>
+              </>
+            )}
+
 
             <label className="full important-notes">
               Internal Remarks and Staff Notes
@@ -4129,7 +4830,7 @@ function isUnavailablePlaceholder(value) {
           Client Search
           <input
             value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
+            onChange={handleDirectorySearchChange}
             placeholder="Search name, title, NRIC/passport, document class, phone, email, status, remarks or verification flags"
           />
         </label>
@@ -4165,15 +4866,15 @@ function isUnavailablePlaceholder(value) {
           </thead>
 
           <tbody>
-            {filteredClients.length === 0 && (
+            {filteredDirectoryClients.length === 0 && (
               <tr>
                 <td colSpan="22">
-                  {clients.length === 0 ? "No clients have been added yet." : "No matching clients found. Clear Client Search to show all clients."}
+                  {getClientDirectoryEmptyStateMessage()}
                 </td>
               </tr>
             )}
 
-            {filteredClients.map((client) => {
+            {filteredDirectoryClients.map((client) => {
               const normalized = normalizeClient(client);
               const id = getClientId(normalized);
               const phoneForLinks = normalizePhoneForLinks(normalized.phoneCountryCode, normalized.phoneNumber);

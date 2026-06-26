@@ -189,3 +189,87 @@ input[type="checkbox"] {
     flex-direction: column;
   }
 }
+
+/* L360 CLIENT ONBOARDING HARDENING UI */
+.field-input-error,
+.client-form input.field-input-error,
+.client-form select.field-input-error,
+.client-form textarea.field-input-error {
+  border: 2px solid #d93025 !important;
+  background: #fff5f5 !important;
+  box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.12) !important;
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 8px;
+  border-left: 4px solid #d93025;
+  background: #fff5f5;
+  color: #9b1c1c;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.field-warning-message {
+  display: block;
+  margin-top: 6px;
+  color: #8a5a00;
+  font-weight: 600;
+}
+
+.client-form-has-errors {
+  border-top: 4px solid #d93025;
+}
+
+.client-onboarding-progress,
+.client-draft-save-panel {
+  grid-column: 1 / -1;
+  border: 1px solid #d9e2ec;
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 14px;
+  margin: 10px 0;
+}
+
+.client-onboarding-progress .progress-header,
+.client-draft-save-panel > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.client-onboarding-progress progress {
+  width: 100%;
+  height: 18px;
+  margin: 8px 0;
+}
+
+.client-draft-save-panel small,
+.client-onboarding-progress small {
+  display: block;
+  margin-top: 6px;
+}
+
+.inline-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.client-form-actions button:disabled,
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  filter: grayscale(0.3);
+}
+
+.client-form-actions button[type="submit"]:disabled {
+  border: 1px solid #b8c2cc;
+  background: #e5e7eb;
+  color: #4b5563;
+}
