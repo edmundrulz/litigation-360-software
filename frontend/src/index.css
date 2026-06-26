@@ -273,3 +273,29 @@ button:disabled {
   background: #e5e7eb;
   color: #4b5563;
 }
+
+/* L360_PHASE_8F_R_CONTACT_CHOICE_DUPLICATE_GUARD
+   Prevents repeated preferred contact methods from being missed visually.
+*/
+.contact-choice-guard-panel {
+  grid-column: 1 / -1;
+  border: 1px solid #d9e2ec;
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.contact-choice-guard-panel strong,
+.contact-choice-guard-panel small {
+  display: block;
+}
+
+.contact-choice-guard-panel strong {
+  color: var(--text-h);
+  margin-bottom: 4px;
+}
+
+.contact-choice-guard-panel small + small {
+  margin-top: 6px;
+}

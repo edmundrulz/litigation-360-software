@@ -1665,12 +1665,14 @@ export default function Clients() {
   const [activeAlphabetFilter, setActiveAlphabetFilter] = useState("All");
   const [clientSearchHistory, setClientSearchHistory] = useState([]);
   const [selectedClientTagFilter, setSelectedClientTagFilter] = useState("All");
-  const [manualClientTagSearch, setManualClientTagSearch] = useState("");  const [fieldErrors, setFieldErrors] = useState({});
+  const [manualClientTagSearch, setManualClientTagSearch] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const CLIENT_ONBOARDING_DRAFT_KEY = "l360.clientOnboardingDraft.v1";
   const [draftSaveStatus, setDraftSaveStatus] = useState("Draft not saved yet.");
   const [lastDraftSavedAt, setLastDraftSavedAt] = useState("");
   const [hasRecoverableDraft, setHasRecoverableDraft] = useState(false);
   const [numericWarnings, setNumericWarnings] = useState({});
+  const [contactChoiceNotice, setContactChoiceNotice] = useState("");
   const [contactDatabaseSearch, setContactDatabaseSearch] = useState("");
   const [googleContactSearch, setGoogleContactSearch] = useState("");
   const [googleContactStatus, setGoogleContactStatus] = useState("");
@@ -1724,6 +1726,20 @@ export default function Clients() {
     form.whatsappNumber,
     makeWhatsappMessage(form)
   );
+
+  const CONTACT_CHOICE_FIELDS = [1, 2, 3, 4, 5];
+  const CONTACT_CHOICE_RANK_LABELS = {
+    1: "1st Contact Choice",
+    2: "2nd Contact Choice",
+    3: "3rd Contact Choice",
+    4: "4th Contact Choice",
+    5: "5th Contact Choice"
+  };
+
+  function getContactChoiceLabel(rank) {
+    return CONTACT_CHOICE_RANK_LABELS[rank] || rank + " Contact Choice";
+  }
+
   function showStatus(message, type = "info") {
     setStatus(message);
     setStatusType(type);
@@ -1878,6 +1894,11 @@ export default function Clients() {
 
       if (rank === 1 && isBlank(method)) nextErrors.preferredContact1 = "1st Contact Choice is required.";
 
+      const duplicateRank = findDuplicateContactChoiceRank(method, rank, payload);
+      if (duplicateRank) {
+        nextErrors["preferredContact" + rank] = getDuplicateContactChoiceMessage(method, rank, duplicateRank);
+      }
+
       if (!isBlank(method) && !["Not Applicable / N/A", "Unknown", "To be confirmed"].includes(method)) {
         const isEmailMethod = method === "Email";
         const hasMainEmail = !isBlank(payload.email);
@@ -1946,6 +1967,7 @@ export default function Clients() {
       setDraftSaveStatus("Draft restored from local browser storage.");
       setFieldErrors({});
       setValidationErrors([]);
+      setContactChoiceNotice("");
     } catch (error) {
       setDraftSaveStatus("Draft restore failed. Saved draft may be corrupted.");
     }
@@ -2052,15 +2074,48 @@ export default function Clients() {
     return ["", "Not Applicable / N/A", "Unknown", "To be confirmed"].includes(String(value || ""));
   }
 
-  function isDuplicateContactChoice(nextChoice, rank, currentForm) {
-    if (isPlaceholderContactChoice(nextChoice)) return false;
+  function findDuplicateContactChoiceRank(nextChoice, rank, currentForm) {
+    if (isPlaceholderContactChoice(nextChoice)) return null;
 
     for (let i = 1; i <= 5; i += 1) {
       if (i === rank) continue;
-      if (currentForm["preferredContact" + i] === nextChoice) return true;
+      if (currentForm["preferredContact" + i] === nextChoice) return i;
     }
 
-    return false;
+    return null;
+  }
+
+  function getDuplicateContactChoiceMessage(nextChoice, rank, duplicateRank) {
+    return (
+      getContactChoiceLabel(rank) +
+      ' cannot reuse "' +
+      nextChoice +
+      '" because it is already selected as ' +
+      getContactChoiceLabel(duplicateRank) +
+      ". Please choose a different contact method."
+    );
+  }
+
+  function renderContactMethodOptions(rank) {
+    return CONTACT_METHOD_OPTIONS.map((option) => {
+      const duplicateRank = findDuplicateContactChoiceRank(option, rank, form);
+      const isDisabled = Boolean(duplicateRank);
+
+      return (
+        <option key={option} value={option} disabled={isDisabled}>
+          {option}{isDisabled ? " (already selected as " + getContactChoiceLabel(duplicateRank) + ")" : ""}
+        </option>
+      );
+    });
+  }
+
+  function getActiveContactChoiceSummary() {
+    return CONTACT_CHOICE_FIELDS
+      .map((rank) => {
+        const value = form["preferredContact" + rank];
+        return isPlaceholderContactChoice(value) ? "" : getContactChoiceLabel(rank) + ": " + value;
+      })
+      .filter(Boolean);
   }
 
   function updateForm(field, value) {
@@ -2069,10 +2124,25 @@ export default function Clients() {
     const contactRankMatch = String(field).match(/^preferredContact([1-5])$/);
     if (contactRankMatch) {
       const rank = Number(contactRankMatch[1]);
-      if (isDuplicateContactChoice(value, rank, form)) {
-        window.alert("This contact choice has already been selected. Please select something else.");
+      const duplicateRank = findDuplicateContactChoiceRank(value, rank, form);
+
+      if (duplicateRank) {
+        const message = getDuplicateContactChoiceMessage(value, rank, duplicateRank);
+        setContactChoiceNotice(message);
+        setFieldErrors((previous) => ({
+          ...previous,
+          [field]: message
+        }));
+        showStatus(message, "warning");
+
+        if (typeof window !== "undefined" && typeof window.alert === "function") {
+          window.alert(message);
+        }
+
         return;
       }
+
+      setContactChoiceNotice("");
     }
 
     if (shouldSanitizeNumericField(field, form)) {
@@ -2281,6 +2351,7 @@ export default function Clients() {
     setValidationErrors([]);
     setFieldErrors({});
     setNumericWarnings({});
+    setContactChoiceNotice("");
     setEditingId("");
   }
 
@@ -2406,6 +2477,15 @@ function isUnavailablePlaceholder(value) {
     if (isBlank(payload.email) && isBlank(payload.phoneNumber)) {
       errors.push("At least one contact method is mandatory: Email Address or Primary Phone Number.");
     }
+
+    CONTACT_CHOICE_FIELDS.forEach((rank) => {
+      const method = payload["preferredContact" + rank];
+      const duplicateRank = findDuplicateContactChoiceRank(method, rank, payload);
+
+      if (duplicateRank && duplicateRank < rank) {
+        errors.push(getDuplicateContactChoiceMessage(method, rank, duplicateRank));
+      }
+    });
 
     if (payload.hasDependents && isBlank(payload.dependentsCount)) {
       errors.push("Number of Dependents is required when Has Dependents is selected.");
@@ -4032,22 +4112,81 @@ function isUnavailablePlaceholder(value) {
               </label>
             )}
 
+            <div className="contact-choice-guard-panel full" role="status" aria-live="polite">
+              <strong>Preferred contact choice guard</strong>
+              <small>
+                Each contact method may be selected once only. Already-used choices are disabled in the next dropdowns to prevent accidental duplicate selections.
+              </small>
+              {getActiveContactChoiceSummary().length > 0 && (
+                <small>Active choices: {getActiveContactChoiceSummary().join(" | ")}</small>
+              )}
+              {contactChoiceNotice && <small className="field-warning-message">{contactChoiceNotice}</small>}
+            </div>
+
             <label>
               1st Contact Choice
-              <select value={form.preferredContact1} onChange={(event) => updateForm("preferredContact1", event.target.value)}>
-                {CONTACT_METHOD_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
+              <select
+                className={inputClass("preferredContact1")}
+                value={form.preferredContact1}
+                onChange={(event) => updateForm("preferredContact1", event.target.value)}
+              >
+                {renderContactMethodOptions(1)}
               </select>
+              {renderInlineError("preferredContact1")}
+            </label>
+
+            <label>
+              1st Contact Detail
+              {form.preferredContact1 === "Email" && form.email ? (
+                <>
+                  <input value={form.email} readOnly />
+                  <small>Using main Email Address above.</small>
+                </>
+              ) : (
+                <>
+                  <input
+                    className={inputClass("preferredContactDetail1")}
+                    value={form.preferredContactDetail1}
+                    onChange={(event) => updateForm("preferredContactDetail1", event.target.value)}
+                    placeholder="Phone, email, or contact detail for 1st choice"
+                  />
+                  {renderInlineError("preferredContactDetail1")}
+                  {renderNumericWarning("preferredContactDetail1")}
+                </>
+              )}
             </label>
 
             <label>
               2nd Contact Choice
-              <select value={form.preferredContact2} onChange={(event) => updateForm("preferredContact2", event.target.value)}>
-                {CONTACT_METHOD_OPTIONS.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
+              <select
+                className={inputClass("preferredContact2")}
+                value={form.preferredContact2}
+                onChange={(event) => updateForm("preferredContact2", event.target.value)}
+              >
+                {renderContactMethodOptions(2)}
               </select>
+              {renderInlineError("preferredContact2")}
+            </label>
+
+            <label>
+              2nd Contact Detail
+              {form.preferredContact2 === "Email" && form.email ? (
+                <>
+                  <input value={form.email} readOnly />
+                  <small>Using main Email Address above.</small>
+                </>
+              ) : (
+                <>
+                  <input
+                    className={inputClass("preferredContactDetail2")}
+                    value={form.preferredContactDetail2}
+                    onChange={(event) => updateForm("preferredContactDetail2", event.target.value)}
+                    placeholder="Phone, email, or contact detail for 2nd choice"
+                  />
+                  {renderInlineError("preferredContactDetail2")}
+                  {renderNumericWarning("preferredContactDetail2")}
+                </>
+              )}
             </label>
 
             <label className="full">
@@ -4065,11 +4204,14 @@ function isUnavailablePlaceholder(value) {
               <>
                 <label>
                   3rd Contact Choice
-                  <select value={form.preferredContact3} onChange={(event) => updateForm("preferredContact3", event.target.value)}>
-                    {CONTACT_METHOD_OPTIONS.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
+                  <select
+                    className={inputClass("preferredContact3")}
+                    value={form.preferredContact3}
+                    onChange={(event) => updateForm("preferredContact3", event.target.value)}
+                  >
+                    {renderContactMethodOptions(3)}
                   </select>
+                  {renderInlineError("preferredContact3")}
                 </label>
 
                 <label>
@@ -4095,11 +4237,14 @@ function isUnavailablePlaceholder(value) {
 
                 <label>
                   4th Contact Choice
-                  <select value={form.preferredContact4} onChange={(event) => updateForm("preferredContact4", event.target.value)}>
-                    {CONTACT_METHOD_OPTIONS.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
+                  <select
+                    className={inputClass("preferredContact4")}
+                    value={form.preferredContact4}
+                    onChange={(event) => updateForm("preferredContact4", event.target.value)}
+                  >
+                    {renderContactMethodOptions(4)}
                   </select>
+                  {renderInlineError("preferredContact4")}
                 </label>
 
                 <label>
@@ -4125,11 +4270,14 @@ function isUnavailablePlaceholder(value) {
 
                 <label>
                   5th Contact Choice
-                  <select value={form.preferredContact5} onChange={(event) => updateForm("preferredContact5", event.target.value)}>
-                    {CONTACT_METHOD_OPTIONS.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
+                  <select
+                    className={inputClass("preferredContact5")}
+                    value={form.preferredContact5}
+                    onChange={(event) => updateForm("preferredContact5", event.target.value)}
+                  >
+                    {renderContactMethodOptions(5)}
                   </select>
+                  {renderInlineError("preferredContact5")}
                 </label>
 
                 <label>
