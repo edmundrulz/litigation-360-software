@@ -3264,10 +3264,13 @@ Section labels/icons may remain gold.
 
 /* L360-SIDEBAR-ACTIVE-FORCE-V2-END */
 
-/* Phase 13B.2C - Visible App.jsx sidebar menu integration */
+
+
+/* Phase 13B.2E - Visible sidebar menu trigger only.
+   Menu overlay layout is owned by MenuPlatform.css via React portal. */
 .sidebar-menu-platform {
   position: relative;
-  z-index: 80;
+  z-index: 2;
   margin: 0.75rem 0 1rem;
 }
 
@@ -3279,17 +3282,5 @@ Section labels/icons may remain gold.
 .sidebar-menu-platform .mp-trigger {
   width: 100%;
   justify-content: flex-start;
-  border-radius: 14px;
-}
-
-.sidebar-menu-platform .mp-dropdown-shell {
-  left: calc(100% + 0.75rem);
-  top: 0;
-}
-
-@media (max-width: 860px) {
-  .sidebar-menu-platform .mp-dropdown-shell {
-    left: 0;
-    top: 5vh;
-  }
+  border-radius: 12px;
 }

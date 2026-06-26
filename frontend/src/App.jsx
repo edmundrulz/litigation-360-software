@@ -468,7 +468,3 @@ function Metric({ label, value }) {
   );
 }
 
-
-
-
-

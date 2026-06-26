@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { menuSections as defaultMenuSections } from "./menuConfig";
 import {
   collectFavoriteItems,
@@ -78,10 +79,12 @@ function MenuItemButton({
 
   function handleClick() {
     if (disabled) return;
+
     if (isSubmenu) {
       onToggle?.(item.id);
       return;
     }
+
     onSelect?.(item);
   }
 
@@ -92,7 +95,6 @@ function MenuItemButton({
   return (
     <button
       type="button"
-      role="menuitem"
       data-menu-row="true"
       className={`mp-menu-item ${active ? "is-active" : ""}`}
       style={{ "--mp-depth": depth }}
@@ -109,7 +111,9 @@ function MenuItemButton({
       <span className="mp-item-main">
         <span className="mp-item-label">{item.label}</span>
         {item.trail?.length > 1 ? (
-          <small className="mp-item-trail">{item.trail.slice(0, -1).join(" / ")}</small>
+          <small className="mp-item-trail">
+            {item.trail.slice(0, -1).join(" / ")}
+          </small>
         ) : null}
       </span>
 
@@ -182,7 +186,10 @@ function PanelHost({ panelId, appVersion }) {
     return (
       <section className="mp-panel mp-panel-placeholder">
         <h2>Menu Hub</h2>
-        <p>Select a panel item such as FAQ, Settings, About App, or Submit Query / Request.</p>
+        <p>
+          Select FAQ, Settings, About App, About System, or Submit Query /
+          Request from the left menu.
+        </p>
       </section>
     );
   }
@@ -219,6 +226,7 @@ export function MenuPlatform({
   const rootRef = useRef(null);
   const triggerRef = useRef(null);
   const searchRef = useRef(null);
+  const shellRef = useRef(null);
 
   const favorites = useMemo(
     () => collectFavoriteItems(sections, { context, featureFlags }),
@@ -246,15 +254,14 @@ export function MenuPlatform({
   }, [open]);
 
   useEffect(() => {
-    function handleOutsidePointer(event) {
-      if (!open) return;
-      if (!rootRef.current?.contains(event.target)) {
-        setOpen(false);
-      }
-    }
+    if (!open) return;
 
-    document.addEventListener("mousedown", handleOutsidePointer);
-    return () => document.removeEventListener("mousedown", handleOutsidePointer);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [open]);
 
   function closeMenu() {
@@ -280,6 +287,7 @@ export function MenuPlatform({
     if (item.id === "home") {
       onNavigate?.("home");
       setAnnouncement("Home selected.");
+      closeMenu();
       return;
     }
 
@@ -288,7 +296,7 @@ export function MenuPlatform({
   }
 
   function getRows() {
-    return Array.from(rootRef.current?.querySelectorAll("[data-menu-row='true']") || []).filter(
+    return Array.from(shellRef.current?.querySelectorAll("[data-menu-row='true']") || []).filter(
       (row) => !row.disabled
     );
   }
@@ -327,13 +335,104 @@ export function MenuPlatform({
           document.activeElement.click();
         }
         break;
-      case "Tab":
-        setOpen(false);
-        break;
       default:
         break;
     }
   }
+
+  const overlay =
+    open && typeof document !== "undefined"
+      ? createPortal(
+          <>
+            <button
+              type="button"
+              className="mp-backdrop"
+              aria-label="Close application menu"
+              onClick={closeMenu}
+              tabIndex={-1}
+            />
+
+            <section
+              id="mp-dropdown-shell"
+              ref={shellRef}
+              className="mp-dropdown-shell"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Application menu"
+              onKeyDown={handleKeyDown}
+            >
+              <div className="mp-menu-column">
+                <label className="mp-search">
+                  <span className="mp-visually-hidden">Search menu</span>
+                  <input
+                    ref={searchRef}
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search menu, settings, FAQ..."
+                    aria-label="Search menu, settings, FAQ, and support topics"
+                  />
+                </label>
+
+                {!query && favorites.length > 0 ? (
+                  <div className="mp-favorites" aria-label="Pinned favorites">
+                    <div className="mp-section-title">Pinned</div>
+                    {favorites.map((item) => (
+                      <MenuItemButton
+                        key={item.id}
+                        item={item}
+                        active={activePanelId === item.id}
+                        disabled={!isMenuItemEnabled(item, featureFlags)}
+                        onSelect={handleSelect}
+                      />
+                    ))}
+                  </div>
+                ) : null}
+
+                {query ? (
+                  <div className="mp-search-results">
+                    <div className="mp-section-title">Search Results</div>
+                    {searchResults.length > 0 ? (
+                      searchResults.map((item) => (
+                        <MenuItemButton
+                          key={`${item.sectionId}-${item.id}`}
+                          item={item}
+                          active={activePanelId === item.id}
+                          disabled={!isMenuItemEnabled(item, featureFlags)}
+                          onSelect={handleSelect}
+                        />
+                      ))
+                    ) : (
+                      <p className="mp-empty">No matching menu item found.</p>
+                    )}
+                  </div>
+                ) : (
+                  orderedSections.map((section) => (
+                    <section className="mp-section" key={section.id}>
+                      <div className="mp-section-title">{section.title}</div>
+                      <MenuTree
+                        items={section.items}
+                        expandedIds={expandedIds}
+                        setExpandedIds={setExpandedIds}
+                        onSelect={handleSelect}
+                        featureFlags={featureFlags}
+                      />
+                    </section>
+                  ))
+                )}
+              </div>
+
+              <div className="mp-panel-column">
+                <PanelHost panelId={activePanelId} appVersion={appVersion} />
+              </div>
+
+              <div className="mp-live-region" aria-live="polite">
+                {announcement}
+              </div>
+            </section>
+          </>,
+          document.body
+        )
+      : null;
 
   return (
     <div className={`mp-root mp-trigger-${triggerVariant}`} ref={rootRef}>
@@ -341,7 +440,7 @@ export function MenuPlatform({
         type="button"
         ref={triggerRef}
         className="mp-trigger"
-        aria-haspopup="menu"
+        aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls="mp-dropdown-shell"
         onClick={() => setOpen((current) => !current)}
@@ -350,83 +449,7 @@ export function MenuPlatform({
         <span>{triggerLabel}</span>
       </button>
 
-      {open ? (
-        <div
-          id="mp-dropdown-shell"
-          className="mp-dropdown-shell"
-          role="menu"
-          aria-label="Application menu"
-          onKeyDown={handleKeyDown}
-        >
-          <div className="mp-menu-column">
-            <label className="mp-search">
-              <span className="mp-visually-hidden">Search menu</span>
-              <input
-                ref={searchRef}
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search menu, settings, FAQ..."
-                aria-label="Search menu, settings, FAQ, and support topics"
-              />
-            </label>
-
-            {!query && favorites.length > 0 ? (
-              <div className="mp-favorites" aria-label="Pinned favorites">
-                <div className="mp-section-title">Pinned</div>
-                {favorites.map((item) => (
-                  <MenuItemButton
-                    key={item.id}
-                    item={item}
-                    active={activePanelId === item.id}
-                    disabled={!isMenuItemEnabled(item, featureFlags)}
-                    onSelect={handleSelect}
-                  />
-                ))}
-              </div>
-            ) : null}
-
-            {query ? (
-              <div className="mp-search-results">
-                <div className="mp-section-title">Search Results</div>
-                {searchResults.length > 0 ? (
-                  searchResults.map((item) => (
-                    <MenuItemButton
-                      key={`${item.sectionId}-${item.id}`}
-                      item={item}
-                      active={activePanelId === item.id}
-                      disabled={!isMenuItemEnabled(item, featureFlags)}
-                      onSelect={handleSelect}
-                    />
-                  ))
-                ) : (
-                  <p className="mp-empty">No matching menu item found.</p>
-                )}
-              </div>
-            ) : (
-              orderedSections.map((section) => (
-                <section className="mp-section" key={section.id}>
-                  <div className="mp-section-title">{section.title}</div>
-                  <MenuTree
-                    items={section.items}
-                    expandedIds={expandedIds}
-                    setExpandedIds={setExpandedIds}
-                    onSelect={handleSelect}
-                    featureFlags={featureFlags}
-                  />
-                </section>
-              ))
-            )}
-          </div>
-
-          <div className="mp-panel-column">
-            <PanelHost panelId={activePanelId} appVersion={appVersion} />
-          </div>
-
-          <div className="mp-live-region" aria-live="polite">
-            {announcement}
-          </div>
-        </div>
-      ) : null}
+      {overlay}
     </div>
   );
 }
