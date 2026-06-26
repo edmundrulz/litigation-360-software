@@ -2924,12 +2924,12 @@ function isUnavailablePlaceholder(value) {
           </div>
         )}
 
-        <div className="client-directory-summary-row">
+        <div className="client-directory-summary-row" style={{ display: "none" }}>
           <span>Directory Results: {filteredDirectoryClients.length}</span>
           <button type="button" className="btn btn-secondary btn-small" onClick={clearDirectoryFilters}>Clear Filters</button>
         </div>
 
-        <div className="client-directory-mini-list">
+        <div className="client-directory-mini-list" style={{ display: "none" }}>
           {filteredDirectoryClients.slice(0, 26).map((client) => (
             <button
               type="button"
@@ -3558,6 +3558,7 @@ function isUnavailablePlaceholder(value) {
             GPS Latitude / GPS Longitude auto-population should be implemented in a later Google Maps API-safe phase without overwriting the typed legal address.
           </p>
           <div className="smart-grid two address-grid">
+            {/* L360_FINAL_ADDRESS_LOCATION_CONTROL_AREA_REPLACEMENT */}
             <label>
               Address Type
               <select value={form.addressType} onChange={(event) => updateForm("addressType", event.target.value)}>
@@ -3582,23 +3583,27 @@ function isUnavailablePlaceholder(value) {
               </datalist>
             </label>
 
-            <label className="full">
-              Building / House No.
-              <div className="inline-fields two-even">
+            <div className="full inline-fields two-even">
+              <label>
+                Building / House No.
                 <input
                   className="single-line-input"
                   value={form.buildingHouseNo}
                   onChange={(event) => updateForm("buildingHouseNo", event.target.value)}
                   placeholder="House / unit no."
                 />
+              </label>
+
+              <label>
+                Postcode
                 <input
                   className="single-line-input"
                   value={form.postcode}
                   onChange={(event) => updateForm("postcode", event.target.value)}
                   placeholder="Postcode"
                 />
-              </div>
-            </label>
+              </label>
+            </div>
 
             <label>
               Building / House Name
@@ -3627,84 +3632,325 @@ function isUnavailablePlaceholder(value) {
               Street Address
               <input value={form.streetAddress} onChange={(event) => updateForm("streetAddress", event.target.value)} placeholder="Street address" />
             </label>
-            <label style={{ display: "none" }}>
-              Primary Admin Name / District / Mukim / County / Shire
-              <input value={form.district} onChange={(event) => updateForm("district", event.target.value)} placeholder="Primary admin area name: district, mukim, county, parish, shire, etc." />
-            </label>
 
-            <label style={{ display: "none" }}>
-              Town / City / Locality
-              <input value={form.townCity} onChange={(event) => updateForm("townCity", event.target.value)} placeholder="Town, city, village, township or locality" />
-            </label>
-            <label style={{ display: "none" }}>
-              State / Province / Territory
-              <input
-                list="l360-state-location-options"
-                className={inputClass("state")}
-                value={form.state}
-                onChange={(event) => updateForm("state", event.target.value)}
-                placeholder="State / Province / Territory"
-              />
-              {renderInlineError("state")}
-            </label>
-
-            <label style={{ display: "none" }}>
-              Municipality / Local Authority Name
-              <input
-                list="l360-municipality-options"
-                value={form.municipality}
-                onChange={(event) => updateForm("municipality", event.target.value)}
-                placeholder="Municipality or local authority name"
-              />
-            </label>
-
-            <label style={{ display: "none" }}>
-              Council / Local Council Name
-              <input
-                list="l360-council-options"
-                value={form.council}
-                onChange={(event) => updateForm("council", event.target.value)}
-                placeholder="Council or local council name"
-              />
-            </label>
-
-            <label style={{ display: "none" }}>
-              Borough / County / Parish / Shire Name
-              <input
-                list="l360-borough-options"
-                value={form.borough}
-                onChange={(event) => updateForm("borough", event.target.value)}
-                placeholder="Borough, county, parish or shire name"
-              />
-            </label>
-
-            
-            {/* L360_CLIENTS_V3J7_LOCATION_CONSISTENCY_NOTE */}
             <div className="full mandatory-note">
-              <strong>Location / Administrative Classification:</strong> Country, state/province/territory, postcode, town/locality and administrative authority should match the same real-world jurisdiction. Use the admin category/name fields for municipality, council, borough, district, county, parish, shire, mukim or other local authority structures.
+              <strong>Location / Administrative Classification — Combined:</strong> Select the administrative category/type, then enter the actual area, authority or locality details. Use this for postcode area, town, state, municipality, council, borough, district, county, parish, shire, mukim or other local authority structures.
             </div>
-<label style={{ display: "none" }}>
-              Primary / Secondary Location Admin Category Type
-              <input
-                list="l360-location-admin-type-options"
-                value={form.locationAdminType}
-                onChange={(event) => updateForm("locationAdminType", event.target.value)}
-                placeholder="Search/type admin category: municipality, council, borough, district, county, parish, shire, mukim, etc."
-              />
-            </label>
 
-            {form.locationAdminType === "Other / Manual" && (
-              <label className="full">
-                Manual Location / Admin Category
-                <input
-                  className={inputClass("locationAdminTypeManual")}
-                  value={form.locationAdminTypeManual}
-                  onChange={(event) => updateForm("locationAdminTypeManual", event.target.value)}
-                  placeholder="Manual fallback: enter official local category or extra admin detail when not listed."
-                />
-                {renderInlineError("locationAdminTypeManual")}
-              </label>
-            )}
+            {/* L360_ADMIN_AREA_PROGRESSIVE_WIZARD_FINAL */}
+            <div className="full l360-admin-wizard">
+              <div className="mandatory-note">
+                <strong>Hierarchical administrative areas:</strong> Add one recognised administrative area at a time. Complete the current level before adding the next. Maximum 5 levels.
+              </div>
+
+              <div className="l360-admin-progress">
+                Administrative Area Level {Number(form.administrativeAreaActiveLevel || 1)} of 5
+              </div>
+
+              {form.locationAdminType && form.manualAdministrativeLocation && Number(form.administrativeAreaActiveLevel || 1) !== 1 && (
+                <div className="l360-admin-summary-card">
+                  <span>✓ 1st: {form.locationAdminType} — {form.manualAdministrativeLocation}</span>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 1)}>Edit</button>
+                </div>
+              )}
+
+              {form.secondaryAdministrativeCategory && form.secondaryAdministrativeName && Number(form.administrativeAreaActiveLevel || 1) !== 2 && (
+                <div className="l360-admin-summary-card">
+                  <span>✓ 2nd: {form.secondaryAdministrativeCategory} — {form.secondaryAdministrativeName}</span>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 2)}>Edit</button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("secondaryAdministrativeCategory", "");
+                      updateForm("secondaryAdministrativeName", "");
+                      updateForm("thirdAdministrativeCategory", "");
+                      updateForm("thirdAdministrativeLocation", "");
+                      updateForm("fourthAdministrativeCategory", "");
+                      updateForm("fourthAdministrativeLocation", "");
+                      updateForm("fifthAdministrativeCategory", "");
+                      updateForm("fifthAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 1);
+                    }}
+                  >Delete</button>
+                </div>
+              )}
+
+              {form.thirdAdministrativeCategory && form.thirdAdministrativeLocation && Number(form.administrativeAreaActiveLevel || 1) !== 3 && (
+                <div className="l360-admin-summary-card">
+                  <span>✓ 3rd: {form.thirdAdministrativeCategory} — {form.thirdAdministrativeLocation}</span>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 3)}>Edit</button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("thirdAdministrativeCategory", "");
+                      updateForm("thirdAdministrativeLocation", "");
+                      updateForm("fourthAdministrativeCategory", "");
+                      updateForm("fourthAdministrativeLocation", "");
+                      updateForm("fifthAdministrativeCategory", "");
+                      updateForm("fifthAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 2);
+                    }}
+                  >Delete</button>
+                </div>
+              )}
+
+              {form.fourthAdministrativeCategory && form.fourthAdministrativeLocation && Number(form.administrativeAreaActiveLevel || 1) !== 4 && (
+                <div className="l360-admin-summary-card">
+                  <span>✓ 4th: {form.fourthAdministrativeCategory} — {form.fourthAdministrativeLocation}</span>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 4)}>Edit</button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("fourthAdministrativeCategory", "");
+                      updateForm("fourthAdministrativeLocation", "");
+                      updateForm("fifthAdministrativeCategory", "");
+                      updateForm("fifthAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 3);
+                    }}
+                  >Delete</button>
+                </div>
+              )}
+
+              {form.fifthAdministrativeCategory && form.fifthAdministrativeLocation && Number(form.administrativeAreaActiveLevel || 1) !== 5 && (
+                <div className="l360-admin-summary-card">
+                  <span>✓ 5th: {form.fifthAdministrativeCategory} — {form.fifthAdministrativeLocation}</span>
+                  <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 5)}>Edit</button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("fifthAdministrativeCategory", "");
+                      updateForm("fifthAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 4);
+                    }}
+                  >Delete</button>
+                </div>
+              )}
+
+              {Number(form.administrativeAreaActiveLevel || 1) === 1 && (
+                <div className="l360-admin-active-card">
+                  <div className="l360-admin-level-title">Now editing: 1st Administrative Area</div>
+                  <div className="l360-admin-area-row">
+                    <label>
+                      1st Location / Administrative Area — All-in-One
+                      <input
+                        list="l360-location-admin-type-options"
+                        value={form.locationAdminType}
+                        onChange={(event) => updateForm("locationAdminType", event.target.value)}
+                        placeholder="Select or type first administrative category/type"
+                        title="Examples: state, province, municipality, council, borough, district, county, parish, shire, mukim, locality, postcode area."
+                      />
+                    </label>
+
+                    <label>
+                      First Administrative Area Details
+                      <input
+                        value={form.manualAdministrativeLocation || ""}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          updateForm("manualAdministrativeLocation", value);
+                          updateForm("townCity", value);
+                          updateForm("district", value);
+                        }}
+                        placeholder="Enter first admin area/name/details"
+                        title="Example: Selangor, Petaling Jaya, MBPJ, Mukim Damansara or 47300."
+                      />
+                    </label>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    disabled={!(String(form.locationAdminType || "").trim() && String(form.manualAdministrativeLocation || "").trim())}
+                    onClick={() => updateForm("administrativeAreaActiveLevel", 2)}
+                  >
+                    Add Another Administrative Area
+                  </button>
+                </div>
+              )}
+
+              {Number(form.administrativeAreaActiveLevel || 1) === 2 && (
+                <div className="l360-admin-active-card">
+                  <div className="l360-admin-level-title">Now editing: 2nd Administrative Area</div>
+                  <div className="l360-admin-area-row">
+                    <label>
+                      2nd Location / Administrative Area — All-in-One
+                      <input
+                        list="l360-location-admin-type-options"
+                        value={form.secondaryAdministrativeCategory || ""}
+                        onChange={(event) => updateForm("secondaryAdministrativeCategory", event.target.value)}
+                        placeholder="Select or type second administrative category/type"
+                      />
+                    </label>
+
+                    <label>
+                      Second Administrative Area Details
+                      <input
+                        value={form.secondaryAdministrativeName || ""}
+                        onChange={(event) => updateForm("secondaryAdministrativeName", event.target.value)}
+                        placeholder="Enter second admin area/name/details"
+                      />
+                    </label>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    disabled={!(String(form.secondaryAdministrativeCategory || "").trim() && String(form.secondaryAdministrativeName || "").trim())}
+                    onClick={() => updateForm("administrativeAreaActiveLevel", 3)}
+                  >
+                    Add Another Administrative Area
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("secondaryAdministrativeCategory", "");
+                      updateForm("secondaryAdministrativeName", "");
+                      updateForm("administrativeAreaActiveLevel", 1);
+                    }}
+                  >
+                    Remove This Administrative Area
+                  </button>
+                </div>
+              )}
+
+              {Number(form.administrativeAreaActiveLevel || 1) === 3 && (
+                <div className="l360-admin-active-card">
+                  <div className="l360-admin-level-title">Now editing: 3rd Administrative Area</div>
+                  <div className="l360-admin-area-row">
+                    <label>
+                      3rd Location / Administrative Area — All-in-One
+                      <input
+                        list="l360-location-admin-type-options"
+                        value={form.thirdAdministrativeCategory || ""}
+                        onChange={(event) => updateForm("thirdAdministrativeCategory", event.target.value)}
+                        placeholder="Select or type third administrative category/type"
+                      />
+                    </label>
+
+                    <label>
+                      Third Administrative Area Details
+                      <input
+                        value={form.thirdAdministrativeLocation || ""}
+                        onChange={(event) => updateForm("thirdAdministrativeLocation", event.target.value)}
+                        placeholder="Enter third admin area/name/details"
+                      />
+                    </label>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    disabled={!(String(form.thirdAdministrativeCategory || "").trim() && String(form.thirdAdministrativeLocation || "").trim())}
+                    onClick={() => updateForm("administrativeAreaActiveLevel", 4)}
+                  >
+                    Add Another Administrative Area
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("thirdAdministrativeCategory", "");
+                      updateForm("thirdAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 2);
+                    }}
+                  >
+                    Remove This Administrative Area
+                  </button>
+                </div>
+              )}
+
+              {Number(form.administrativeAreaActiveLevel || 1) === 4 && (
+                <div className="l360-admin-active-card">
+                  <div className="l360-admin-level-title">Now editing: 4th Administrative Area</div>
+                  <div className="l360-admin-area-row">
+                    <label>
+                      4th Location / Administrative Area — All-in-One
+                      <input
+                        list="l360-location-admin-type-options"
+                        value={form.fourthAdministrativeCategory || ""}
+                        onChange={(event) => updateForm("fourthAdministrativeCategory", event.target.value)}
+                        placeholder="Select or type fourth administrative category/type"
+                      />
+                    </label>
+
+                    <label>
+                      Fourth Administrative Area Details
+                      <input
+                        value={form.fourthAdministrativeLocation || ""}
+                        onChange={(event) => updateForm("fourthAdministrativeLocation", event.target.value)}
+                        placeholder="Enter fourth admin area/name/details"
+                      />
+                    </label>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    disabled={!(String(form.fourthAdministrativeCategory || "").trim() && String(form.fourthAdministrativeLocation || "").trim())}
+                    onClick={() => updateForm("administrativeAreaActiveLevel", 5)}
+                  >
+                    Add Another Administrative Area
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("fourthAdministrativeCategory", "");
+                      updateForm("fourthAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 3);
+                    }}
+                  >
+                    Remove This Administrative Area
+                  </button>
+                </div>
+              )}
+
+              {Number(form.administrativeAreaActiveLevel || 1) === 5 && (
+                <div className="l360-admin-active-card">
+                  <div className="l360-admin-level-title">Now editing: 5th Administrative Area</div>
+                  <div className="l360-admin-area-row">
+                    <label>
+                      5th Location / Administrative Area — All-in-One
+                      <input
+                        list="l360-location-admin-type-options"
+                        value={form.fifthAdministrativeCategory || ""}
+                        onChange={(event) => updateForm("fifthAdministrativeCategory", event.target.value)}
+                        placeholder="Select or type fifth administrative category/type"
+                      />
+                    </label>
+
+                    <label>
+                      Fifth Administrative Area Details / Notes
+                      <input
+                        value={form.fifthAdministrativeLocation || ""}
+                        onChange={(event) => updateForm("fifthAdministrativeLocation", event.target.value)}
+                        placeholder="Enter fifth admin area/name/details or notes"
+                      />
+                    </label>
+                  </div>
+
+                  <small className="field-hint">
+                    Maximum of 5 administrative area levels reached. Submit/save the client if no further level is needed.
+                  </small>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-small"
+                    onClick={() => {
+                      updateForm("fifthAdministrativeCategory", "");
+                      updateForm("fifthAdministrativeLocation", "");
+                      updateForm("administrativeAreaActiveLevel", 4);
+                    }}
+                  >
+                    Remove This Administrative Area
+                  </button>
+                </div>
+              )}
+            </div>
 
             <datalist id="l360-location-admin-type-options">
               {LOCATION_ADMIN_TYPE_OPTIONS.map((option) => <option key={option} value={option} />)}
@@ -3896,7 +4142,7 @@ function isUnavailablePlaceholder(value) {
               <th>Title</th>
               <th>Given Name</th>
               <th>Surname</th>
-              <th>gender</th>
+              <th>Gender</th>
               <th>Age Category</th>
               <th>Generation</th>
               <th>IC Colour / Class</th>
@@ -4011,18 +4257,3 @@ function isUnavailablePlaceholder(value) {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

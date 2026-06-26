@@ -109,3 +109,83 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* L360_STANDARD_CHECKBOX_SIZE_FIX
+   Prevent global text-input styling from making checkbox controls huge.
+*/
+input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  padding: 0 !important;
+  margin: 0 8px 0 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  flex: 0 0 16px !important;
+  box-sizing: border-box !important;
+  appearance: auto !important;
+  -webkit-appearance: checkbox !important;
+}
+
+
+/* L360_ADMIN_AREA_PROGRESSIVE_WIZARD_FINAL
+   Progressive disclosure for hierarchical administrative area fields.
+*/
+.l360-admin-wizard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.l360-admin-progress,
+.l360-admin-level-title {
+  font-weight: 700;
+}
+
+.l360-admin-area-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.l360-admin-active-card,
+.l360-admin-summary-card {
+  border: 1px solid rgba(120, 120, 120, 0.35);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.l360-admin-summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.l360-admin-active-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.l360-admin-active-card .btn,
+.l360-admin-summary-card .btn {
+  width: auto !important;
+  min-width: 0 !important;
+  display: inline-block !important;
+}
+
+@media (max-width: 768px) {
+  .l360-admin-area-row {
+    grid-template-columns: 1fr;
+  }
+
+  .l360-admin-summary-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
