@@ -4889,4 +4889,103 @@ h4:has(.client-profile-card-title):focus-within {
 }
 
 /* Phase 13E.4Z-Z3-G1 Static Client Profile Summary Rail END */
+/* Phase 13E.4Z-Z3-G2 Client Profile Section Jump Links START */
+
+/*
+  Non-destructive anchor / jump-link layer.
+
+  Scope:
+  - Static checklist links only
+  - Anchors added to confirmed section headings
+  - No validation computation
+  - No save/draft logic changes
+  - No backend/API changes
+*/
+
+.client-profile-summary-link {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #0f766e;
+  font-weight: 850;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 4px 6px;
+  margin-left: -6px;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.client-profile-summary-link::after {
+  content: "Jump";
+  flex: 0 0 auto;
+  border: 1px solid rgba(15, 118, 110, 0.2);
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: #f0fdfa;
+  color: #115e59;
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+}
+
+.client-profile-summary-link:hover {
+  background: #f0fdfa;
+  color: #115e59;
+  transform: translateX(2px);
+}
+
+.client-profile-summary-link:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.28);
+  outline-offset: 3px;
+  background: #ecfeff;
+}
+
+#client-profile-details,
+#client-identification-details,
+#client-employment-details,
+#client-family-marital-details,
+#client-matter-context-origin,
+#client-source-value-indicators,
+#client-will-estate-metadata,
+#client-health-oku-accommodation,
+#client-contact-communication-preferences,
+#client-address-service-location,
+#client-emergency-next-of-kin,
+#client-documentation-verification,
+#client-internal-remarks-issues,
+#client-missing-pending-information {
+  scroll-margin-top: 96px;
+}
+
+#client-profile-details:target,
+#client-identification-details:target,
+#client-employment-details:target,
+#client-family-marital-details:target,
+#client-matter-context-origin:target,
+#client-source-value-indicators:target,
+#client-will-estate-metadata:target,
+#client-health-oku-accommodation:target,
+#client-contact-communication-preferences:target,
+#client-address-service-location:target,
+#client-emergency-next-of-kin:target,
+#client-documentation-verification:target,
+#client-internal-remarks-issues:target,
+#client-missing-pending-information:target {
+  box-shadow:
+    0 0 0 4px rgba(20, 184, 166, 0.16),
+    0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Phase 13E.4Z-Z3-G2 Client Profile Section Jump Links END */
 
