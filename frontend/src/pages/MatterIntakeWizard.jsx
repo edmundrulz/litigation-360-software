@@ -4,18 +4,44 @@ const SAMPLE_CLIENTS = [
   {
     id: "CL-0001",
     fullName: "John Edmund Pereira",
+    givenName: "John Edmund",
+    surname: "Pereira",
+    preferredName: "John",
+    alias: "",
     email: "edmundrulz@gmail.com",
     phone: "0162172852",
+    whatsapp: "0162172852",
+    idReference: "",
+    passportNumber: "",
+    companyName: "",
     address: "20 JALAN SS2/6",
+    city: "Petaling Jaya",
+    postcode: "47300",
+    state: "Selangor",
+    country: "Malaysia",
+    clientType: "Individual",
     status: "Existing Client",
     lastUpdated: "2026-06-27"
   },
   {
     id: "CL-0002",
     fullName: "Sample Test Client",
+    givenName: "Sample",
+    surname: "Client",
+    preferredName: "",
+    alias: "",
     email: "sample.client@example.com",
     phone: "0123456789",
+    whatsapp: "",
+    idReference: "",
+    passportNumber: "",
+    companyName: "Sample Client Sdn Bhd",
     address: "Petaling Jaya",
+    city: "Petaling Jaya",
+    postcode: "",
+    state: "Selangor",
+    country: "Malaysia",
+    clientType: "Company",
     status: "Sample Record",
     lastUpdated: "2026-06-27"
   }
@@ -23,13 +49,26 @@ const SAMPLE_CLIENTS = [
 
 const EMPTY_CLIENT_INTAKE = {
   fullName: "",
+  givenName: "",
+  surname: "",
+  preferredName: "",
+  alias: "",
   email: "",
   phone: "",
-  address: "",
+  whatsapp: "",
   idReference: "",
+  passportNumber: "",
+  companyName: "",
+  address: "",
+  city: "",
+  postcode: "",
+  state: "",
+  country: "Malaysia",
+  dateOfBirth: "",
   clientType: "Individual",
   intakeSource: "Manual Entry",
-  notes: ""
+  notes: "",
+  duplicateDecision: ""
 };
 
 const STEPS = [
@@ -79,20 +118,141 @@ function compactPhone(value) {
   return String(value || "").replace(/\D/g, "");
 }
 
+function hasCompanySignal(value) {
+  const text = normalizeText(value);
+  return (
+    text.includes("sdn bhd") ||
+    text.includes("berhad") ||
+    text.includes("enterprise") ||
+    text.includes("trading") ||
+    text.includes("llp") ||
+    text.includes("ltd") ||
+    text.includes("pte")
+  );
+}
+
+function hasAddressSignal(value) {
+  const text = normalizeText(value);
+  return (
+    text.includes("jalan") ||
+    text.includes("road") ||
+    text.includes("taman") ||
+    text.includes("lorong") ||
+    text.includes("persiaran") ||
+    text.includes("petaling") ||
+    text.includes("selangor") ||
+    text.includes("kuala lumpur") ||
+    text.includes("ss")
+  );
+}
+
+function deriveIntakeFromSearch(rawValue) {
+  const value = String(rawValue || "").trim();
+
+  if (!value) {
+    return {};
+  }
+
+  const emailMatch = value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+  const phoneMatch = value.match(/(?:\+?6?0|\b0)[0-9][0-9\s-]{6,14}/);
+  const idLike = value.match(/\b[A-Z0-9][A-Z0-9-]{5,24}\b/i);
+
+  let remaining = value;
+
+  if (emailMatch) {
+    remaining = remaining.replace(emailMatch[0], "");
+  }
+
+  if (phoneMatch) {
+    remaining = remaining.replace(phoneMatch[0], "");
+  }
+
+  remaining = remaining.replace(/\s+/g, " ").trim();
+
+  const derived = {};
+
+  if (emailMatch) {
+    derived.email = emailMatch[0];
+  }
+
+  if (phoneMatch) {
+    derived.phone = phoneMatch[0].replace(/\s+/g, "");
+  }
+
+  if (hasCompanySignal(value)) {
+    derived.clientType = "Company";
+    derived.companyName = remaining || value;
+  } else if (hasAddressSignal(value)) {
+    derived.address = value;
+  } else if (remaining && remaining.length > 2) {
+    derived.fullName = remaining;
+  }
+
+  if (!emailMatch && !phoneMatch && idLike && value === idLike[0]) {
+    derived.idReference = value;
+  }
+
+  return derived;
+}
+
+function extractBasicFieldsFromPaste(text) {
+  const source = String(text || "");
+  const emailMatch = source.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+  const phoneMatch = source.match(/(?:\+?6?0|\b0)[0-9][0-9\s-]{6,14}/);
+
+  const lines = source
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const possibleName = lines.find((line) => {
+    const lower = line.toLowerCase();
+
+    return (
+      line.length >= 4 &&
+      line.length <= 90 &&
+      !lower.includes("@") &&
+      !lower.includes("tel") &&
+      !lower.includes("phone") &&
+      !lower.includes("address") &&
+      !hasAddressSignal(line)
+    );
+  });
+
+  const possibleAddress = lines.find((line) => hasAddressSignal(line));
+  const possibleCompany = lines.find((line) => hasCompanySignal(line));
+
+  return {
+    fullName: possibleName || "",
+    email: emailMatch ? emailMatch[0] : "",
+    phone: phoneMatch ? phoneMatch[0].replace(/\s+/g, "") : "",
+    address: possibleAddress || "",
+    companyName: possibleCompany || "",
+    clientType: possibleCompany ? "Company" : ""
+  };
+}
+
 function findClientMatches(query, intake) {
   const normalizedQuery = normalizeText(query);
   const queryPhone = compactPhone(query);
 
-  const signals = [
-    normalizedQuery,
-    normalizeText(intake.fullName),
-    normalizeText(intake.email),
-    compactPhone(intake.phone),
-    normalizeText(intake.address),
-    normalizeText(intake.idReference)
-  ].filter(Boolean);
+  const hasSearchInput = Boolean(
+    normalizedQuery ||
+    queryPhone ||
+    normalizeText(intake.fullName) ||
+    normalizeText(intake.givenName) ||
+    normalizeText(intake.surname) ||
+    normalizeText(intake.alias) ||
+    normalizeText(intake.email) ||
+    compactPhone(intake.phone) ||
+    compactPhone(intake.whatsapp) ||
+    normalizeText(intake.idReference) ||
+    normalizeText(intake.passportNumber) ||
+    normalizeText(intake.companyName) ||
+    normalizeText(intake.address)
+  );
 
-  if (signals.length === 0 && !queryPhone) {
+  if (!hasSearchInput) {
     return [];
   }
 
@@ -100,17 +260,50 @@ function findClientMatches(query, intake) {
     const matchedFields = [];
 
     const clientName = normalizeText(client.fullName);
+    const clientGivenName = normalizeText(client.givenName);
+    const clientSurname = normalizeText(client.surname);
+    const clientAlias = normalizeText(client.alias);
     const clientEmail = normalizeText(client.email);
     const clientPhone = compactPhone(client.phone);
+    const clientWhatsapp = compactPhone(client.whatsapp);
+    const clientId = normalizeText(client.idReference);
+    const clientPassport = normalizeText(client.passportNumber);
+    const clientCompany = normalizeText(client.companyName);
     const clientAddress = normalizeText(client.address);
+    const clientCity = normalizeText(client.city);
+    const clientPostcode = normalizeText(client.postcode);
+    const clientState = normalizeText(client.state);
+    const clientCountry = normalizeText(client.country);
 
-    if (normalizedQuery && clientName.includes(normalizedQuery)) matchedFields.push("Name");
-    if (normalizedQuery && clientEmail.includes(normalizedQuery)) matchedFields.push("Email");
-    if (queryPhone && clientPhone.includes(queryPhone)) matchedFields.push("Phone");
+    const searchableText = [
+      clientName,
+      clientGivenName,
+      clientSurname,
+      clientAlias,
+      clientEmail,
+      clientCompany,
+      clientAddress,
+      clientCity,
+      clientPostcode,
+      clientState,
+      clientCountry,
+      clientId,
+      clientPassport
+    ].filter(Boolean).join(" ");
 
-    if (normalizeText(intake.fullName) && clientName.includes(normalizeText(intake.fullName))) matchedFields.push("Name");
+    if (normalizedQuery && searchableText.includes(normalizedQuery)) matchedFields.push("Search Term");
+    if (queryPhone && (clientPhone.includes(queryPhone) || clientWhatsapp.includes(queryPhone))) matchedFields.push("Phone");
+
+    if (normalizeText(intake.fullName) && clientName.includes(normalizeText(intake.fullName))) matchedFields.push("Full Name");
+    if (normalizeText(intake.givenName) && clientGivenName.includes(normalizeText(intake.givenName))) matchedFields.push("Given Name");
+    if (normalizeText(intake.surname) && clientSurname.includes(normalizeText(intake.surname))) matchedFields.push("Surname");
+    if (normalizeText(intake.alias) && clientAlias.includes(normalizeText(intake.alias))) matchedFields.push("Alias");
     if (normalizeText(intake.email) && clientEmail === normalizeText(intake.email)) matchedFields.push("Email");
     if (compactPhone(intake.phone) && clientPhone === compactPhone(intake.phone)) matchedFields.push("Phone");
+    if (compactPhone(intake.whatsapp) && clientWhatsapp === compactPhone(intake.whatsapp)) matchedFields.push("WhatsApp");
+    if (normalizeText(intake.idReference) && clientId === normalizeText(intake.idReference)) matchedFields.push("ID Reference");
+    if (normalizeText(intake.passportNumber) && clientPassport === normalizeText(intake.passportNumber)) matchedFields.push("Passport");
+    if (normalizeText(intake.companyName) && clientCompany.includes(normalizeText(intake.companyName))) matchedFields.push("Company");
     if (normalizeText(intake.address) && clientAddress.includes(normalizeText(intake.address))) matchedFields.push("Address");
 
     const uniqueMatchedFields = [...new Set(matchedFields)];
@@ -119,57 +312,15 @@ function findClientMatches(query, intake) {
       return null;
     }
 
+    const strongFields = ["Email", "Phone", "WhatsApp", "ID Reference", "Passport"];
+    const hasStrongMatch = uniqueMatchedFields.some((field) => strongFields.includes(field));
+
     return {
       ...client,
       matchedFields: uniqueMatchedFields,
-      confidence:
-        uniqueMatchedFields.includes("Email") || uniqueMatchedFields.includes("Phone")
-          ? "Exact / Strong Match"
-          : "Possible Match"
+      confidence: hasStrongMatch ? "Exact / Strong Match" : "Possible Match"
     };
   }).filter(Boolean);
-}
-
-function extractBasicFieldsFromPaste(text) {
-  const source = String(text || "");
-
-  const emailMatch = source.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  const phoneMatch = source.match(/(?:\+?6?0|\b0)[0-9][0-9\s-]{6,14}/);
-  const lines = source
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean);
-
-  const possibleName = lines.find((line) => {
-    const lower = line.toLowerCase();
-    return (
-      line.length >= 4 &&
-      line.length <= 80 &&
-      !lower.includes("@") &&
-      !lower.includes("tel") &&
-      !lower.includes("phone") &&
-      !lower.includes("address")
-    );
-  });
-
-  const possibleAddress = lines.find((line) => {
-    const lower = line.toLowerCase();
-    return (
-      lower.includes("jalan") ||
-      lower.includes("road") ||
-      lower.includes("taman") ||
-      lower.includes("ss") ||
-      lower.includes("petaling") ||
-      lower.includes("selangor")
-    );
-  });
-
-  return {
-    fullName: possibleName || "",
-    email: emailMatch ? emailMatch[0] : "",
-    phone: phoneMatch ? phoneMatch[0].replace(/\s+/g, "") : "",
-    address: possibleAddress || ""
-  };
 }
 
 export default function MatterIntakeWizard({ setModule } = {}) {
@@ -177,19 +328,24 @@ export default function MatterIntakeWizard({ setModule } = {}) {
   const [clientIntake, setClientIntake] = useState(EMPTY_CLIENT_INTAKE);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchStatus, setSearchStatus] = useState("Search existing clients before creating a new profile.");
+  const [searchMode, setSearchMode] = useState("idle");
   const [clientMatches, setClientMatches] = useState([]);
   const [pasteText, setPasteText] = useState("");
   const [selectedClientId, setSelectedClientId] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
   const [draftMessage, setDraftMessage] = useState("");
+  const [creationMode, setCreationMode] = useState(false);
 
   const activeStep = STEPS.find((item) => item.id === step) || STEPS[0];
 
   const intakeHasMinimumValue = useMemo(() => {
     return Boolean(
       String(clientIntake.fullName || "").trim() ||
+      String(clientIntake.companyName || "").trim() ||
       String(clientIntake.email || "").trim() ||
-      String(clientIntake.phone || "").trim()
+      String(clientIntake.phone || "").trim() ||
+      String(clientIntake.idReference || "").trim() ||
+      String(clientIntake.passportNumber || "").trim()
     );
   }, [clientIntake]);
 
@@ -212,16 +368,19 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     const matches = findClientMatches(searchQuery, clientIntake);
     setClientMatches(matches);
     setSelectedClientId("");
+    setCreationMode(false);
 
     if (matches.length === 0) {
-      setSearchStatus("No existing client found. You may continue creating a new client profile.");
+      setSearchMode("none");
+      setSearchStatus("No results found. Create a new client profile from this search without leaving the intake workflow.");
       return;
     }
 
     const hasStrongMatch = matches.some((match) => match.confidence === "Exact / Strong Match");
+    setSearchMode(hasStrongMatch ? "strong" : "possible");
     setSearchStatus(
       hasStrongMatch
-        ? "Client already exists or strongly matches an existing record. Select or load the existing client before continuing."
+        ? "Client already exists or strongly matches an existing record. Review the record before creating a duplicate."
         : "Possible matching client records found. Review before continuing as new."
     );
   }
@@ -230,22 +389,60 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     setSearchQuery("");
     setClientMatches([]);
     setSelectedClientId("");
+    setSearchMode("idle");
+    setCreationMode(false);
     setSearchStatus("Search existing clients before creating a new profile.");
+  }
+
+  function createNewFromSearch() {
+    const derived = deriveIntakeFromSearch(searchQuery);
+
+    setClientIntake((current) => ({
+      ...current,
+      ...derived,
+      intakeSource: "Search No Result",
+      duplicateDecision: "No existing client found from search. Proceeding with new client profile."
+    }));
+
+    setCreationMode(true);
+    setSearchStatus("New client profile form prepared from the search term. Review and complete the editable fields below.");
+    setValidationMessage("");
   }
 
   function loadClientIntoIntake(client) {
     setClientIntake((current) => ({
       ...current,
       fullName: client.fullName || "",
+      givenName: client.givenName || "",
+      surname: client.surname || "",
+      preferredName: client.preferredName || "",
+      alias: client.alias || "",
       email: client.email || "",
       phone: client.phone || "",
+      whatsapp: client.whatsapp || "",
+      idReference: client.idReference || "",
+      passportNumber: client.passportNumber || "",
+      companyName: client.companyName || "",
       address: client.address || "",
+      city: client.city || "",
+      postcode: client.postcode || "",
+      state: client.state || "",
+      country: client.country || "Malaysia",
+      clientType: client.clientType || "Individual",
       intakeSource: "Loaded Existing Client",
-      notes: current.notes
+      notes: current.notes,
+      duplicateDecision: "Existing client loaded into intake."
     }));
+
     setSelectedClientId(client.id);
-    setSearchStatus("Existing client loaded into intake. You may review, amend frontend draft values, or start a new matter.");
+    setCreationMode(true);
+    setSearchStatus("Existing client loaded into intake. Review, amend frontend draft values, or start a new matter.");
     setValidationMessage("");
+  }
+
+  function markReviewed(client) {
+    setSelectedClientId(client.id);
+    updateClientField("duplicateDecision", `Reviewed possible duplicate ${client.id}.`);
   }
 
   function applyPastedText() {
@@ -257,11 +454,14 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       email: extracted.email || current.email,
       phone: extracted.phone || current.phone,
       address: extracted.address || current.address,
+      companyName: extracted.companyName || current.companyName,
+      clientType: extracted.clientType || current.clientType,
       notes: current.notes || pasteText,
       intakeSource: "Pasted Email / Document"
     }));
 
-    setDraftMessage("Pasted text applied where simple name, email, phone, or address values were detected. Please review and amend manually.");
+    setCreationMode(true);
+    setDraftMessage("Pasted text applied where simple name, email, phone, address, or company values were detected. Review and amend before continuing.");
   }
 
   function saveDraft() {
@@ -303,6 +503,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     setClientMatches([]);
     setSelectedClientId("");
     setValidationMessage("");
+    setSearchMode("idle");
+    setCreationMode(false);
     setSearchStatus("Search existing clients before creating a new profile.");
     setDraftMessage("Client intake fields reset.");
   }
@@ -318,7 +520,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
   function nextStep() {
     if (step === 1 && !intakeHasMinimumValue) {
-      setValidationMessage("Enter at least a full name, email, or phone number before continuing to Case / Matter Details.");
+      setValidationMessage("Enter at least a full name, company name, email, phone, ID reference, or passport number before continuing.");
       return;
     }
 
@@ -328,58 +530,106 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
   function renderClientSearchStep() {
     return (
-      <section className="card">
-        <h2>▶ 1. Client Details</h2>
-        <p>Search existing clients first, then load an existing client or continue with a new editable intake profile.</p>
+      <section className="intake-client-step">
+        <div className="intake-section-heading">
+          <div>
+            <p className="eyebrow">Step 1A</p>
+            <h2>Client Search & Duplicate Check</h2>
+            <p>Search first. If no record exists, create a new client profile immediately in the same workflow.</p>
+          </div>
+          <span className="intake-status-chip">Search-first intake</span>
+        </div>
 
-        <div className="card">
-          <p className="eyebrow">Search Existing Client</p>
-          <div className="form-grid">
-            <label className="full">
-              Search by name, email, phone, ID, company, or address
+        <div className="intake-panel intake-search-panel">
+          <div className="intake-panel-header">
+            <div>
+              <h3>Search Existing Client</h3>
+              <p>Use any identifying detail available from the potential client, email, document, call note, or referral.</p>
+            </div>
+          </div>
+
+          <div className="intake-search-row">
+            <label>
+              Universal Client Search
               <input
+                className="intake-control"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Example: John Edmund Pereira, email, phone, or address"
+                placeholder="Name, email, phone, ID, passport, company, address, city, postcode, state, or country"
               />
             </label>
+
+            <div className="intake-search-actions">
+              <button type="button" onClick={runClientSearch}>
+                Search Existing Client
+              </button>
+              <button type="button" className="secondary-action" onClick={clearSearch}>
+                Clear Search
+              </button>
+            </div>
           </div>
 
-          <div className="actions">
-            <button type="button" onClick={runClientSearch}>
-              Search Existing Client
-            </button>
-            <button type="button" onClick={clearSearch}>
-              Clear Search
-            </button>
+          <div className="intake-search-hints">
+            <span>Name</span>
+            <span>Email</span>
+            <span>Phone / WhatsApp</span>
+            <span>ID / Passport</span>
+            <span>Company</span>
+            <span>Address</span>
+            <span>City / Postcode</span>
           </div>
 
-          <p>{searchStatus}</p>
+          <div className={`intake-alert intake-alert-${searchMode}`}>
+            <strong>{searchMode === "none" ? "No results found" : searchMode === "strong" ? "Existing client warning" : searchMode === "possible" ? "Possible match review" : "Search status"}</strong>
+            <p>{searchStatus}</p>
+
+            {searchMode === "none" && (
+              <button type="button" onClick={createNewFromSearch}>
+                Create New Client Profile From Search
+              </button>
+            )}
+          </div>
 
           {clientMatches.length > 0 && (
-            <div className="summary">
+            <div className="intake-results-grid">
               {clientMatches.map((client) => (
-                <article className="card" key={client.id}>
-                  <div className="module-step-header">
+                <article className="intake-result-card" key={client.id}>
+                  <div className="intake-card-topline">
                     <span className={client.confidence === "Exact / Strong Match" ? "pill danger" : "pill"}>
                       {client.confidence}
                     </span>
                     <span className="pill">{client.id}</span>
                   </div>
 
-                  <h3>{client.fullName}</h3>
-                  <p>{client.email}</p>
-                  <p>{client.phone}</p>
-                  <p>{client.address}</p>
-                  <small>Matched fields: {client.matchedFields.join(", ")}</small>
-                  <small>Last updated: {client.lastUpdated}</small>
+                  <h4>{client.fullName}</h4>
+                  <dl>
+                    <div>
+                      <dt>Email</dt>
+                      <dd>{client.email || "Not recorded"}</dd>
+                    </div>
+                    <div>
+                      <dt>Phone</dt>
+                      <dd>{client.phone || "Not recorded"}</dd>
+                    </div>
+                    <div>
+                      <dt>Company</dt>
+                      <dd>{client.companyName || "Not applicable"}</dd>
+                    </div>
+                    <div>
+                      <dt>Address</dt>
+                      <dd>{client.address || "Not recorded"}</dd>
+                    </div>
+                  </dl>
 
-                  <div className="actions">
+                  <p className="intake-small">Matched fields: {client.matchedFields.join(", ")}</p>
+                  <p className="intake-small">Last updated: {client.lastUpdated}</p>
+
+                  <div className="intake-card-actions">
                     <button type="button" onClick={() => loadClientIntoIntake(client)}>
-                      Load Existing Client Into Intake
+                      Load Existing Client
                     </button>
-                    <button type="button" onClick={() => setSelectedClientId(client.id)}>
-                      Mark As Reviewed
+                    <button type="button" className="secondary-action" onClick={() => markReviewed(client)}>
+                      Mark Reviewed
                     </button>
                   </div>
                 </article>
@@ -388,84 +638,128 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           )}
 
           {selectedClientId && (
-            <p className="field-warning-message">
-              Selected/reviewed client reference: {selectedClientId}
+            <p className="intake-note">
+              Selected / reviewed client reference: <strong>{selectedClientId}</strong>
             </p>
           )}
         </div>
 
-        <div className="card">
-          <p className="eyebrow">Paste From Email / Document</p>
-          <label className="full">
-            Paste intake notes, email content, WhatsApp text, or document extract
-            <textarea
-              value={pasteText}
-              onChange={(event) => setPasteText(event.target.value)}
-              placeholder="Paste copied intake text here. Simple email, phone, name, and address extraction will be attempted."
-              rows={7}
-            />
-          </label>
+        <div className="intake-two-column">
+          <div className="intake-panel">
+            <div className="intake-panel-header">
+              <div>
+                <h3>Paste From Email / Document</h3>
+                <p>Paste copied intake text and apply detected values into the editable profile form.</p>
+              </div>
+            </div>
 
-          <div className="actions">
+            <label>
+              Intake text
+              <textarea
+                className="intake-control"
+                value={pasteText}
+                onChange={(event) => setPasteText(event.target.value)}
+                placeholder="Paste email, WhatsApp text, letter extract, PDF text, call notes, or referral notes here."
+                rows={9}
+              />
+            </label>
+
             <button type="button" onClick={applyPastedText}>
-              Apply Pasted Text To Editable Fields
+              Apply Pasted Text To Form
             </button>
+          </div>
+
+          <div className="intake-panel">
+            <div className="intake-panel-header">
+              <div>
+                <h3>Creation Decision</h3>
+                <p>The intake should remain in one continuous flow from search to creation.</p>
+              </div>
+            </div>
+
+            <div className="intake-decision-card">
+              <strong>{creationMode ? "Client profile draft active" : "Awaiting search or intake entry"}</strong>
+              <p>
+                {creationMode
+                  ? "Review the editable fields below, amend as needed, then continue to Case / Matter Details."
+                  : "Search first, load an existing record, paste details, or manually enter a new profile."}
+              </p>
+            </div>
+
+            <div className="intake-decision-list">
+              <span>1. Search</span>
+              <span>2. Review match</span>
+              <span>3. Load or create</span>
+              <span>4. Edit profile</span>
+              <span>5. Save & Next</span>
+            </div>
           </div>
         </div>
 
-        <div className="card">
-          <p className="eyebrow">Editable Client Intake Fields</p>
+        <div className="intake-panel intake-form-panel">
+          <div className="intake-panel-header">
+            <div>
+              <h3>Editable Client Profile</h3>
+              <p>All key searchable and identifying fields are editable before continuing.</p>
+            </div>
+            <span className="intake-status-chip">{clientIntake.clientType}</span>
+          </div>
 
-          <div className="form-grid">
+          <div className="intake-field-grid">
             <label>
               Full Name
               <input
+                className="intake-control"
                 value={clientIntake.fullName}
                 onChange={(event) => updateClientField("fullName", event.target.value)}
-                placeholder="Enter client full name"
+                placeholder="Client full legal name"
               />
             </label>
 
             <label>
-              Email
+              Given Name
               <input
-                value={clientIntake.email}
-                onChange={(event) => updateClientField("email", event.target.value)}
-                placeholder="Enter email address"
+                className="intake-control"
+                value={clientIntake.givenName}
+                onChange={(event) => updateClientField("givenName", event.target.value)}
+                placeholder="Given name"
               />
             </label>
 
             <label>
-              Phone
+              Surname
               <input
-                value={clientIntake.phone}
-                onChange={(event) => updateClientField("phone", event.target.value)}
-                placeholder="Enter phone number"
+                className="intake-control"
+                value={clientIntake.surname}
+                onChange={(event) => updateClientField("surname", event.target.value)}
+                placeholder="Surname / family name"
               />
             </label>
 
             <label>
-              ID / Passport / Reference
+              Preferred Name
               <input
-                value={clientIntake.idReference}
-                onChange={(event) => updateClientField("idReference", event.target.value)}
-                placeholder="Enter ID, passport, or client reference"
+                className="intake-control"
+                value={clientIntake.preferredName}
+                onChange={(event) => updateClientField("preferredName", event.target.value)}
+                placeholder="Preferred name"
               />
             </label>
 
-            <label className="full">
-              Address
-              <textarea
-                value={clientIntake.address}
-                onChange={(event) => updateClientField("address", event.target.value)}
-                placeholder="Enter client address"
-                rows={3}
+            <label>
+              Alias / Also Known As
+              <input
+                className="intake-control"
+                value={clientIntake.alias}
+                onChange={(event) => updateClientField("alias", event.target.value)}
+                placeholder="Alias, nickname, alternate spelling"
               />
             </label>
 
             <label>
               Client Type
               <select
+                className="intake-control"
                 value={clientIntake.clientType}
                 onChange={(event) => updateClientField("clientType", event.target.value)}
               >
@@ -478,12 +772,135 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             </label>
 
             <label>
+              Email
+              <input
+                className="intake-control"
+                value={clientIntake.email}
+                onChange={(event) => updateClientField("email", event.target.value)}
+                placeholder="Email address"
+              />
+            </label>
+
+            <label>
+              Phone
+              <input
+                className="intake-control"
+                value={clientIntake.phone}
+                onChange={(event) => updateClientField("phone", event.target.value)}
+                placeholder="Primary phone number"
+              />
+            </label>
+
+            <label>
+              WhatsApp
+              <input
+                className="intake-control"
+                value={clientIntake.whatsapp}
+                onChange={(event) => updateClientField("whatsapp", event.target.value)}
+                placeholder="WhatsApp number"
+              />
+            </label>
+
+            <label>
+              ID / NRIC / Reference
+              <input
+                className="intake-control"
+                value={clientIntake.idReference}
+                onChange={(event) => updateClientField("idReference", event.target.value)}
+                placeholder="ID, NRIC, internal reference"
+              />
+            </label>
+
+            <label>
+              Passport Number
+              <input
+                className="intake-control"
+                value={clientIntake.passportNumber}
+                onChange={(event) => updateClientField("passportNumber", event.target.value)}
+                placeholder="Passport number"
+              />
+            </label>
+
+            <label>
+              Date Of Birth
+              <input
+                className="intake-control"
+                type="date"
+                value={clientIntake.dateOfBirth}
+                onChange={(event) => updateClientField("dateOfBirth", event.target.value)}
+              />
+            </label>
+
+            <label className="full">
+              Company / Organisation Name
+              <input
+                className="intake-control"
+                value={clientIntake.companyName}
+                onChange={(event) => updateClientField("companyName", event.target.value)}
+                placeholder="Company, employer, organisation, or entity name"
+              />
+            </label>
+
+            <label className="full">
+              Address
+              <textarea
+                className="intake-control"
+                value={clientIntake.address}
+                onChange={(event) => updateClientField("address", event.target.value)}
+                placeholder="Full address"
+                rows={3}
+              />
+            </label>
+
+            <label>
+              City / Area
+              <input
+                className="intake-control"
+                value={clientIntake.city}
+                onChange={(event) => updateClientField("city", event.target.value)}
+                placeholder="City, town, area"
+              />
+            </label>
+
+            <label>
+              Postcode
+              <input
+                className="intake-control"
+                value={clientIntake.postcode}
+                onChange={(event) => updateClientField("postcode", event.target.value)}
+                placeholder="Postcode"
+              />
+            </label>
+
+            <label>
+              State
+              <input
+                className="intake-control"
+                value={clientIntake.state}
+                onChange={(event) => updateClientField("state", event.target.value)}
+                placeholder="State"
+              />
+            </label>
+
+            <label>
+              Country
+              <input
+                className="intake-control"
+                value={clientIntake.country}
+                onChange={(event) => updateClientField("country", event.target.value)}
+                placeholder="Country"
+              />
+            </label>
+
+            <label>
               Intake Source
               <select
+                className="intake-control"
                 value={clientIntake.intakeSource}
                 onChange={(event) => updateClientField("intakeSource", event.target.value)}
               >
                 <option>Manual Entry</option>
+                <option>Search No Result</option>
                 <option>Pasted Email / Document</option>
                 <option>Loaded Existing Client</option>
                 <option>Phone Call</option>
@@ -493,27 +910,39 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             </label>
 
             <label className="full">
-              Notes
+              Duplicate Decision / Review Notes
               <textarea
+                className="intake-control"
+                value={clientIntake.duplicateDecision}
+                onChange={(event) => updateClientField("duplicateDecision", event.target.value)}
+                placeholder="Record duplicate decision, reason to continue as new, or selected existing client reference."
+                rows={3}
+              />
+            </label>
+
+            <label className="full">
+              General Intake Notes
+              <textarea
+                className="intake-control"
                 value={clientIntake.notes}
                 onChange={(event) => updateClientField("notes", event.target.value)}
-                placeholder="Enter intake notes, duplicate decision, or source comments"
+                placeholder="Matter notes, referral details, urgency, source comments, or copied intake context."
                 rows={4}
               />
             </label>
           </div>
 
-          {validationMessage && <p className="field-warning-message">{validationMessage}</p>}
-          {draftMessage && <p>{draftMessage}</p>}
+          {validationMessage && <p className="intake-warning">{validationMessage}</p>}
+          {draftMessage && <p className="intake-note">{draftMessage}</p>}
 
-          <div className="actions">
+          <div className="intake-form-actions">
             <button type="button" onClick={saveDraft}>
               Save Draft
             </button>
-            <button type="button" onClick={clearDraft}>
+            <button type="button" className="secondary-action" onClick={clearDraft}>
               Clear Draft
             </button>
-            <button type="button" onClick={resetClientIntake}>
+            <button type="button" className="secondary-action" onClick={resetClientIntake}>
               Reset Client Intake
             </button>
           </div>
@@ -529,18 +958,18 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
     if (step === 2) {
       return (
-        <section className="card">
+        <section className="intake-panel">
           <h2>▶ 2. Case / Matter Details</h2>
           <p>Capture the case or matter summary, parties, legal issue, and file-opening details.</p>
 
-          <div className="summary">
+          <div className="intake-summary-grid">
             <div>
-              <strong>{clientIntake.fullName || "Client Intake Prepared"}</strong>
+              <strong>{clientIntake.fullName || clientIntake.companyName || "Client Intake Prepared"}</strong>
               <span>Client</span>
             </div>
             <div>
-              <strong>{clientIntake.email || clientIntake.phone || "No contact entered"}</strong>
-              <span>Primary Contact</span>
+              <strong>{clientIntake.email || clientIntake.phone || clientIntake.idReference || "No primary identifier entered"}</strong>
+              <span>Primary Identifier</span>
             </div>
             <div>
               <strong>Case / Matter Details</strong>
@@ -557,53 +986,31 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
     if (step === 3) {
       return (
-        <section className="card">
+        <section className="intake-panel">
           <h2>▶ 3. Deadline Details</h2>
           <p>Record court dates, filing deadlines, limitation periods, reminders, and urgency indicators.</p>
-
-          <div className="summary">
-            <div>
-              <strong>Deadline Details</strong>
-              <span>Workflow Stage</span>
-            </div>
-            <div>
-              <strong>OPEN</strong>
-              <span>Status</span>
-            </div>
-          </div>
         </section>
       );
     }
 
     if (step === 4) {
       return (
-        <section className="card">
+        <section className="intake-panel">
           <h2>▶ 4. Document Details</h2>
           <p>Prepare document, evidence, filing, bundle, template, and review information.</p>
-
-          <div className="summary">
-            <div>
-              <strong>Document Details</strong>
-              <span>Workflow Stage</span>
-            </div>
-            <div>
-              <strong>OPEN</strong>
-              <span>Status</span>
-            </div>
-          </div>
         </section>
       );
     }
 
     if (step === 5) {
       return (
-        <section className="card">
+        <section className="intake-panel">
           <h2>▶ 5. Review</h2>
           <p>Review the prepared workflow before save or submission.</p>
 
-          <div className="summary">
+          <div className="intake-summary-grid">
             <div>
-              <strong>{clientIntake.fullName || "Client Intake"}</strong>
+              <strong>{clientIntake.fullName || clientIntake.companyName || "Client Intake"}</strong>
               <span>Client</span>
             </div>
             <div>
@@ -611,12 +1018,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
               <span>Intake Source</span>
             </div>
             <div>
-              <strong>Review</strong>
-              <span>Workflow Stage</span>
-            </div>
-            <div>
-              <strong>OPEN</strong>
-              <span>Status</span>
+              <strong>{clientIntake.duplicateDecision || "No duplicate decision recorded"}</strong>
+              <span>Duplicate Review</span>
             </div>
           </div>
         </section>
@@ -624,13 +1027,13 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     }
 
     return (
-      <section className="card">
+      <section className="intake-panel">
         <h2>▶ 6. Review / Save & Submit</h2>
         <p>Final review point before saving, submission, or future workflow handoff.</p>
 
-        <div className="summary">
+        <div className="intake-summary-grid">
           <div>
-            <strong>{clientIntake.fullName || "Client Intake"}</strong>
+            <strong>{clientIntake.fullName || clientIntake.companyName || "Client Intake"}</strong>
             <span>Client</span>
           </div>
           <div>
@@ -643,7 +1046,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           </div>
         </div>
 
-        <div className="actions">
+        <div className="intake-form-actions">
           <button type="button" onClick={() => setModule?.("Review Submit")}>
             Open Completion Review
           </button>
@@ -653,8 +1056,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
   }
 
   return (
-    <section className="module-frame">
-      <div className="module-frame-header">
+    <section className="intake-workflow-shell">
+      <div className="intake-workflow-header">
         <div>
           <p className="eyebrow">Matter Intake Workflow</p>
           <h2>{activeStep.title}</h2>
@@ -666,7 +1069,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         </span>
       </div>
 
-      <div className="summary">
+      <nav className="intake-step-grid" aria-label="Matter intake steps">
         {STEPS.map((item) => (
           <button
             key={item.id}
@@ -674,19 +1077,20 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             className={item.id === step ? "active" : ""}
             onClick={() => setStep(item.id)}
           >
-            {item.id}. {item.title}
+            <span>{item.id}</span>
+            {item.title}
           </button>
         ))}
-      </div>
+      </nav>
 
       {renderStepBody()}
 
-      <div className="actions">
+      <div className="intake-sticky-actions">
         <button type="button" onClick={previousStep}>
           ← Previous
         </button>
 
-        <button type="button" onClick={goHome}>
+        <button type="button" className="secondary-action" onClick={goHome}>
           Main Page
         </button>
 

@@ -403,7 +403,19 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
       </ModuleFrame>
     );
   }
-  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard setModule={setModule} /></ModuleFrame>;
+  if (module === "Matter Intake") {
+    return (
+      <ModuleFrame
+        title="Matter Intake"
+        setModule={setModule}
+        previous={previous}
+        canGoBack={canGoBack}
+        showActions={false}
+      >
+        <MatterIntakeWizard setModule={setModule} />
+      </ModuleFrame>
+    );
+  }
 
   return (
     <>
@@ -579,6 +591,7 @@ function ModuleFrame({
   setModule,
   previous,
   canGoBack,
+  showActions = true,
   children
 }) {
   const previousMap = {
@@ -634,25 +647,27 @@ function ModuleFrame({
           <h2>{title}</h2>
         </div>
 
-        <div className="module-frame-actions">
-          <button type="button" onClick={goPrevious}>
-            ← Previous
-          </button>
-
-          <button type="button" onClick={goHome}>
-            Main Page
-          </button>
-
-          {nextTarget ? (
-            <button type="button" onClick={goNext}>
-              Save & Next →
+        {showActions && (
+          <div className="module-frame-actions">
+            <button type="button" onClick={goPrevious}>
+              ← Previous
             </button>
-          ) : (
+
             <button type="button" onClick={goHome}>
-              Complete / Return Home
+              Main Page
             </button>
-          )}
-        </div>
+
+            {nextTarget ? (
+              <button type="button" onClick={goNext}>
+                Save & Next →
+              </button>
+            ) : (
+              <button type="button" onClick={goHome}>
+                Complete / Return Home
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="module-frame-body">
