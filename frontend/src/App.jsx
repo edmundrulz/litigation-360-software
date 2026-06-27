@@ -611,9 +611,7 @@ function ModuleFrame({
     "Cases": "Court Dates",
     "Matters": "Court Dates",
     "Court Dates": "Documents",
-    "Documents": "Review Submit",
-    "Matter Intake": "Clients"
-  };
+    "Documents": "Review Submit"};
 
   const previousTarget = previousMap[title] || "home";
   const nextTarget = nextMap[title] || "";

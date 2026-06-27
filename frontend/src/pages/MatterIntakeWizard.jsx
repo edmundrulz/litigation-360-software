@@ -566,6 +566,9 @@ export default function MatterIntakeWizard({ setModule } = {}) {
               <button type="button" className="secondary-action" onClick={clearSearch}>
                 Clear Search
               </button>
+              <button type="button" className="secondary-action" onClick={() => setModule?.("Clients")}>
+                Open Full Clients Directory
+              </button>
             </div>
           </div>
 
@@ -960,7 +963,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       return (
         <section className="intake-panel">
           <h2>▶ 2. Case / Matter Details</h2>
-          <p>Capture the case or matter summary, parties, legal issue, and file-opening details.</p>
+          <p>Create the case or matter using the client selected, loaded, or created in Step 1.</p>
 
           <div className="intake-summary-grid">
             <div>
@@ -1096,7 +1099,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
         {step < STEPS.length ? (
           <button type="button" onClick={nextStep}>
-            Save & Next →
+            {step === 1 ? "Continue to Case / Matter Details →" : "Save & Next →"}
           </button>
         ) : (
           <button type="button" onClick={() => setModule?.("Review Submit")}>
@@ -1107,3 +1110,4 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     </section>
   );
 }
+
