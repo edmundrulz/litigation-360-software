@@ -3599,11 +3599,11 @@ function isUnavailablePlaceholder(value) {
       `}</style>
       <div className="client-module-header">
         <div>
-          <h2>Client Registration / Client Profile</h2>
+          <h2>Client Registration / Full Client Profile</h2>
         <div className="client-flow-bridge-panel">
           <strong>Advanced Client Directory / Manual Management</strong>
           <p>
-            This workspace preserves the full original client profile, directory, validation, draft, and manual management process.
+            This workspace preserves the full original client profile, directory, validation, draft, and manual management process. Labels are aligned with the Matter Intake conveyor, but the original manual Clients protocol remains preserved.
             Use it for advanced profile management. To continue the guided matter-opening conveyor, return to Matter Intake.
           </p>
           <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Matter Intake")}>
@@ -3629,7 +3629,7 @@ function isUnavailablePlaceholder(value) {
       <div className="client-directory-control-panel">
         <div className="client-directory-header-row">
           <div>
-            <h3>Client Directory / Index</h3>
+            <h3>Advanced Client Directory / Manual Management</h3>
             <p className="mandatory-note">Saved clients are searchable, alphabetically indexed, and filterable without opening the full client profile form. Google Contacts can be included only when contacts are imported into Litigation 360 or when a backend Google Contacts connector endpoint is active.</p>
           </div>
           <div className="client-directory-actions">
@@ -3671,7 +3671,7 @@ function isUnavailablePlaceholder(value) {
           </label>
 
           <label>
-            Search Clients
+            Search Existing Client
             <input
               list="client-directory-name-suggestions"
               value={searchTerm}
@@ -5368,7 +5368,7 @@ function isUnavailablePlaceholder(value) {
 
         <div className="client-form-actions">
           <button type="submit" disabled={isSaving}>
-            {isSaving ? "Saving..." : editingId ? "Save Modified Client" : "Add Client"}
+            {isSaving ? "Saving..." : editingId ? "Save Modified Client" : "Create New Client Profile"}
           </button>
 
           <button type="button" onClick={resetForm}>

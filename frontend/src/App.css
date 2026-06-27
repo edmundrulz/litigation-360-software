@@ -3941,4 +3941,16 @@ Section labels/icons may remain gold.
 }
 
 /* Phase 13E.4Z-X Unified Client Flow Trigger Patch END */
+/* Phase 13E.4Z-Z1 Shared Client Labels START */
+
+.intake-hidden-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Phase 13E.4Z-Z1 Shared Client Labels END */
 

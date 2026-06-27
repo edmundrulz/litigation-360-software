@@ -534,7 +534,11 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         <div className="intake-section-heading">
           <div>
             <p className="eyebrow">Step 1A</p>
-            <h2>Client Search & Duplicate Check</h2>
+            <h2>Client Search, Duplicate Check & Profile</h2>
+              <p className="intake-small">
+                Shared client workflow language is aligned with Advanced Client Directory / Manual Management.
+              </p>
+              <h2 className="intake-hidden-heading"></h2>
             <p>Search first. If no record exists, create a new client profile immediately in the same workflow.</p>
           </div>
           <span className="intake-status-chip">Search-first intake</span>
@@ -550,7 +554,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
           <div className="intake-search-row">
             <label>
-              Universal Client Search
+              Search Existing Client
               <input
                 className="intake-control"
                 value={searchQuery}
