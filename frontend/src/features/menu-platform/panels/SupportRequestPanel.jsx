@@ -1,146 +1,186 @@
 import { useMemo, useState } from "react";
-import {
-  redactSensitiveLogText,
-  submitSupportRequest,
-  validateSupportAttachment,
-} from "../mockSupportApi";
+import { submitSupportRequest } from "../mockSupportApi";
 
-const ISSUE_TYPES = [
-  { value: "bug", label: "Bug Report" },
-  { value: "feature", label: "Feature Request" },
-  { value: "general", label: "General Inquiry" },
-  { value: "performance", label: "Performance Issue" },
-  { value: "uiux", label: "UI/UX Feedback" },
+const CATEGORIES = [
+  "Bug / Defect",
+  "User Query",
+  "Feature Request",
+  "Data Issue",
+  "UI / UX Feedback",
+  "Access / Permission Question",
+  "Other",
 ];
+
+const PRIORITIES = ["Low", "Normal", "High", "Urgent"];
+
+function makeReferenceId() {
+  return `L360-${Date.now().toString().slice(-6)}`;
+}
+
+function validateForm(form, attachments) {
+  const errors = [];
+
+  if (!form.category) errors.push("Category is required.");
+  if (!form.priority) errors.push("Priority is required.");
+  if (form.subject.trim().length < 5) errors.push("Subject must be at least 5 characters.");
+  if (form.description.trim().length < 20) errors.push("Description must be at least 20 characters.");
+  if (form.contact.trim() && !form.contact.includes("@")) {
+    errors.push("Contact email should include @ if provided.");
+  }
+
+  const totalSize = attachments.reduce((sum, file) => sum + file.size, 0);
+  const maxSize = 8 * 1024 * 1024;
+
+  if (attachments.length > 5) errors.push("Maximum 5 attachments allowed.");
+  if (totalSize > maxSize) errors.push("Total attachment size must stay below 8 MB.");
+
+  return errors;
+}
+
+function formatBytes(bytes) {
+  if (!bytes) return "0 B";
+  const units = ["B", "KB", "MB"];
+  let value = bytes;
+  let unitIndex = 0;
+
+  while (value >= 1024 && unitIndex < units.length - 1) {
+    value = value / 1024;
+    unitIndex += 1;
+  }
+
+  return `${value.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+}
 
 export function SupportRequestPanel() {
   const [form, setForm] = useState({
-    issueType: "bug",
-    title: "",
+    category: "User Query",
+    priority: "Normal",
+    subject: "",
     description: "",
-    logs: "",
     contact: "",
-    autoCaptureLogs: true,
+    includeDiagnostics: true,
   });
 
   const [attachments, setAttachments] = useState([]);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState([]);
   const [ticket, setTicket] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const redactedLogs = useMemo(
-    () => redactSensitiveLogText(form.logs),
-    [form.logs]
-  );
+  const attachmentSummary = useMemo(() => {
+    const totalSize = attachments.reduce((sum, file) => sum + file.size, 0);
+    return `${attachments.length}/5 files · ${formatBytes(totalSize)} / 8 MB`;
+  }, [attachments]);
 
   function updateField(field, value) {
     setForm((current) => ({ ...current, [field]: value }));
-    setError("");
+    setErrors([]);
   }
 
-  function addFiles(fileList) {
-    const incoming = Array.from(fileList || []);
-    const next = [];
-
-    for (const file of incoming) {
-      const validation = validateSupportAttachment(file);
-      if (!validation.ok) {
-        setError(validation.message);
-        return;
-      }
-      next.push(file);
-    }
-
-    setAttachments((current) => [...current, ...next].slice(0, 5));
+  function handleFiles(event) {
+    const incoming = Array.from(event.target.files || []);
+    const merged = [...attachments, ...incoming].slice(0, 5);
+    setAttachments(merged);
+    setErrors([]);
+    event.target.value = "";
   }
 
-  function handlePaste(event) {
-    const files = [];
-    const items = Array.from(event.clipboardData?.items || []);
-
-    items.forEach((item) => {
-      if (item.kind === "file") {
-        const file = item.getAsFile();
-        if (file) files.push(file);
-      }
-    });
-
-    if (files.length > 0) {
-      addFiles(files);
-    }
+  function removeAttachment(index) {
+    setAttachments((current) => current.filter((_, itemIndex) => itemIndex !== index));
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setError("");
-    setTicket(null);
 
-    if (!form.title.trim()) {
-      setError("Please enter a short title.");
-      return;
-    }
-
-    if (!form.description.trim()) {
-      setError("Please describe the issue or request.");
+    const validationErrors = validateForm(form, attachments);
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
     setSubmitting(true);
+    setTicket(null);
 
     try {
+      const referenceId = makeReferenceId();
       const response = await submitSupportRequest({
         ...form,
-        logs: redactedLogs,
-        attachments,
+        referenceId,
+        attachments: attachments.map((file) => ({
+          name: file.name,
+          size: file.size,
+          type: file.type || "unknown",
+        })),
       });
 
-      setTicket(response);
-      setForm({
-        issueType: "bug",
-        title: "",
-        description: "",
-        logs: "",
-        contact: "",
-        autoCaptureLogs: true,
+      setTicket({
+        referenceId,
+        status: response.status || "Mock Submitted",
+        createdAt: new Date().toLocaleString(),
       });
-      setAttachments([]);
-    } catch (requestError) {
-      setError("Submission failed. Please try again.");
+    } catch {
+      setErrors(["Mock support submission failed. Please retry."]);
     } finally {
       setSubmitting(false);
     }
   }
 
   return (
-    <section className="mp-panel" aria-labelledby="mp-support-title">
+    <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2 id="mp-support-title">Submit Query / Request</h2>
-          <p>Send bugs, feature requests, screenshots, logs, or UI feedback.</p>
+          <h2>Submit Query / Request</h2>
+          <p>Frontend-only support request form for feedback, issues, and future ticket workflows.</p>
         </div>
       </div>
 
-      <form className="mp-support-form" onSubmit={handleSubmit} onPaste={handlePaste}>
-        <label className="mp-field">
-          <span>Issue Type</span>
-          <select
-            value={form.issueType}
-            onChange={(event) => updateField("issueType", event.target.value)}
-          >
-            {ISSUE_TYPES.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
+      {ticket ? (
+        <div className="mp-success">
+          <strong>Mock request captured</strong>
+          <span>Reference: {ticket.referenceId}</span>
+          <span>Status: {ticket.status}</span>
+          <span>Created: {ticket.createdAt}</span>
+          <span>No backend ticket was created in this phase.</span>
+        </div>
+      ) : null}
+
+      {errors.length > 0 ? (
+        <div className="mp-error-box" role="alert">
+          <strong>Check the form</strong>
+          <ul>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
             ))}
-          </select>
-        </label>
+          </ul>
+        </div>
+      ) : null}
+
+      <form className="mp-support-form" onSubmit={handleSubmit}>
+        <div className="mp-form-grid">
+          <label className="mp-field">
+            <span>Category</span>
+            <select value={form.category} onChange={(event) => updateField("category", event.target.value)}>
+              {CATEGORIES.map((category) => (
+                <option key={category}>{category}</option>
+              ))}
+            </select>
+          </label>
+
+          <label className="mp-field">
+            <span>Priority</span>
+            <select value={form.priority} onChange={(event) => updateField("priority", event.target.value)}>
+              {PRIORITIES.map((priority) => (
+                <option key={priority}>{priority}</option>
+              ))}
+            </select>
+          </label>
+        </div>
 
         <label className="mp-field">
-          <span>Title</span>
+          <span>Subject</span>
           <input
-            value={form.title}
-            onChange={(event) => updateField("title", event.target.value)}
-            placeholder="Short summary"
+            value={form.subject}
+            onChange={(event) => updateField("subject", event.target.value)}
+            placeholder="Short summary of the issue or request"
           />
         </label>
 
@@ -149,65 +189,45 @@ export function SupportRequestPanel() {
           <textarea
             value={form.description}
             onChange={(event) => updateField("description", event.target.value)}
-            placeholder="Explain what happened, what you expected, and steps to reproduce."
-            rows={5}
+            rows={6}
+            placeholder="Describe what happened, what you expected, and any steps to reproduce."
+          />
+        </label>
+
+        <label className="mp-field">
+          <span>Contact Email Optional</span>
+          <input
+            value={form.contact}
+            onChange={(event) => updateField("contact", event.target.value)}
+            placeholder="name@example.com"
           />
         </label>
 
         <label className="mp-checkbox">
           <input
             type="checkbox"
-            checked={form.autoCaptureLogs}
-            onChange={(event) =>
-              updateField("autoCaptureLogs", event.target.checked)
-            }
+            checked={form.includeDiagnostics}
+            onChange={(event) => updateField("includeDiagnostics", event.target.checked)}
           />
-          <span>Include automatically captured error context where available</span>
-        </label>
-
-        <label className="mp-field">
-          <span>Error Messages / Logs</span>
-          <textarea
-            value={form.logs}
-            onChange={(event) => updateField("logs", event.target.value)}
-            placeholder="Paste crash report, console error, or logs. Sensitive tokens are redacted before mock submission."
-            rows={4}
-          />
-        </label>
-
-        <label className="mp-field">
-          <span>Optional Contact</span>
-          <input
-            value={form.contact}
-            onChange={(event) => updateField("contact", event.target.value)}
-            placeholder="Email or phone, if follow-up is needed"
-          />
+          <span>
+            Include frontend diagnostics summary. No backend, database, auth, RBAC, or server data is collected.
+          </span>
         </label>
 
         <label className="mp-file-drop">
-          <input
-            type="file"
-            multiple
-            accept="image/png,image/jpeg,image/webp,text/plain,application/json"
-            onChange={(event) => addFiles(event.target.files)}
-          />
-          <span>Attach screenshot / log file, or paste screenshot directly here</span>
-          <small>PNG, JPG, WEBP, TXT, JSON. Max 5MB each. Max 5 files.</small>
+          <strong>Attachments</strong>
+          <small>{attachmentSummary}</small>
+          <input type="file" multiple onChange={handleFiles} />
         </label>
 
         {attachments.length > 0 ? (
-          <ul className="mp-attachment-list" aria-label="Attached files">
+          <ul className="mp-attachment-list">
             {attachments.map((file, index) => (
               <li key={`${file.name}-${index}`}>
-                <span>{file.name}</span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setAttachments((current) =>
-                      current.filter((_, itemIndex) => itemIndex !== index)
-                    )
-                  }
-                >
+                <span>
+                  {file.name} · {formatBytes(file.size)}
+                </span>
+                <button type="button" onClick={() => removeAttachment(index)}>
                   Remove
                 </button>
               </li>
@@ -215,21 +235,8 @@ export function SupportRequestPanel() {
           </ul>
         ) : null}
 
-        {error ? (
-          <p className="mp-error" role="alert">
-            {error}
-          </p>
-        ) : null}
-
-        {ticket ? (
-          <div className="mp-success" role="status" aria-live="polite">
-            <strong>Request submitted.</strong>
-            <span>Ticket reference: {ticket.ticketId}</span>
-          </div>
-        ) : null}
-
         <button className="mp-primary-button" type="submit" disabled={submitting}>
-          {submitting ? "Submitting..." : "Submit Request"}
+          {submitting ? "Submitting Mock Request..." : "Submit Mock Request"}
         </button>
       </form>
     </section>
