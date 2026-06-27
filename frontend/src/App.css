@@ -4363,4 +4363,350 @@ Section labels/icons may remain gold.
 }
 
 /* Phase 13E.4Z-Z2-B Client Search Gate END */
+/* Phase 13E.4Z-Z3-C2 Full Client Profile Section Card Shell START */
+
+/*
+  Conservative CSS-first modernization layer.
+
+  Scope:
+  - Visual shell only
+  - No Clients.jsx logic changes
+  - No field deletion
+  - No validation changes
+  - No backend/API/draft/localStorage changes
+
+  Intent:
+  Make the original full Clients profile read as a modern section-card system
+  while preserving all existing fields, protocols, and process behaviour.
+*/
+
+.client-flow-bridge-panel {
+  border-radius: 20px;
+  border: 1px solid rgba(14, 116, 144, 0.24);
+  background: linear-gradient(135deg, #ecfeff, #f8fafc);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+}
+
+.client-flow-bridge-panel button:focus-visible,
+.clients-page button:focus-visible,
+.clients-page input:focus-visible,
+.clients-page select:focus-visible,
+.clients-page textarea:focus-visible,
+.client-page button:focus-visible,
+.client-page input:focus-visible,
+.client-page select:focus-visible,
+.client-page textarea:focus-visible,
+.clients button:focus-visible,
+.clients input:focus-visible,
+.clients select:focus-visible,
+.clients textarea:focus-visible {
+  outline: 3px solid rgba(14, 116, 144, 0.34);
+  outline-offset: 3px;
+}
+
+.clients-page,
+.client-page,
+.clients {
+  --client-shell-border: rgba(148, 163, 184, 0.24);
+  --client-shell-border-strong: rgba(14, 116, 144, 0.24);
+  --client-shell-bg: rgba(255, 255, 255, 0.94);
+  --client-shell-muted-bg: #f8fafc;
+  --client-shell-text: #0f172a;
+  --client-shell-muted: #64748b;
+  --client-shell-accent: #0f766e;
+  --client-shell-warning: #b45309;
+  --client-shell-danger: #991b1b;
+  color: var(--client-shell-text);
+}
+
+.clients-page h1,
+.clients-page h2,
+.clients-page h3,
+.clients-page h4,
+.client-page h1,
+.client-page h2,
+.client-page h3,
+.client-page h4,
+.clients h1,
+.clients h2,
+.clients h3,
+.clients h4 {
+  color: var(--client-shell-text);
+  letter-spacing: -0.015em;
+}
+
+.clients-page p,
+.client-page p,
+.clients p {
+  color: var(--client-shell-muted);
+  line-height: 1.55;
+}
+
+/*
+  Card shell for common Clients form containers.
+  Uses multiple likely existing class targets and structural fallbacks.
+*/
+.clients-page section,
+.client-page section,
+.clients section,
+.clients-page fieldset,
+.client-page fieldset,
+.clients fieldset,
+.clients-page .form-section,
+.client-page .form-section,
+.clients .form-section,
+.clients-page .client-section,
+.client-page .client-section,
+.clients .client-section,
+.clients-page .profile-section,
+.client-page .profile-section,
+.clients .profile-section {
+  border: 1px solid var(--client-shell-border);
+  border-radius: 22px;
+  background: var(--client-shell-bg);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.055);
+}
+
+.clients-page section,
+.client-page section,
+.clients section,
+.clients-page fieldset,
+.client-page fieldset,
+.clients fieldset {
+  margin-block: 18px;
+  padding: 20px;
+}
+
+/*
+  Section heading treatment.
+*/
+.clients-page section > h2:first-child,
+.clients-page section > h3:first-child,
+.clients-page section > h4:first-child,
+.client-page section > h2:first-child,
+.client-page section > h3:first-child,
+.client-page section > h4:first-child,
+.clients section > h2:first-child,
+.clients section > h3:first-child,
+.clients section > h4:first-child,
+.clients-page fieldset > legend,
+.client-page fieldset > legend,
+.clients fieldset > legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  margin: -2px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  color: var(--client-shell-text);
+  font-size: 1.03rem;
+  font-weight: 900;
+}
+
+/*
+  Dense form readability improvement.
+*/
+.clients-page label,
+.client-page label,
+.clients label {
+  color: #334155;
+  font-weight: 800;
+}
+
+.clients-page input,
+.clients-page select,
+.clients-page textarea,
+.client-page input,
+.client-page select,
+.client-page textarea,
+.clients input,
+.clients select,
+.clients textarea {
+  border-color: rgba(148, 163, 184, 0.48);
+  border-radius: 12px;
+  background: #fff;
+  color: #0f172a;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+.clients-page input:hover,
+.clients-page select:hover,
+.clients-page textarea:hover,
+.client-page input:hover,
+.client-page select:hover,
+.client-page textarea:hover,
+.clients input:hover,
+.clients select:hover,
+.clients textarea:hover {
+  border-color: rgba(14, 116, 144, 0.36);
+}
+
+.clients-page input:focus,
+.clients-page select:focus,
+.clients-page textarea:focus,
+.client-page input:focus,
+.client-page select:focus,
+.client-page textarea:focus,
+.clients input:focus,
+.clients select:focus,
+.clients textarea:focus {
+  border-color: rgba(14, 116, 144, 0.62);
+  box-shadow: 0 0 0 4px rgba(14, 116, 144, 0.10);
+}
+
+/*
+  Required and warning text should remain visible and readable.
+*/
+.clients-page .required,
+.clients-page .error,
+.clients-page .field-error,
+.clients-page [role="alert"],
+.client-page .required,
+.client-page .error,
+.client-page .field-error,
+.client-page [role="alert"],
+.clients .required,
+.clients .error,
+.clients .field-error,
+.clients [role="alert"] {
+  font-weight: 800;
+}
+
+.clients-page .error,
+.clients-page .field-error,
+.clients-page [role="alert"],
+.client-page .error,
+.client-page .field-error,
+.client-page [role="alert"],
+.clients .error,
+.clients .field-error,
+.clients [role="alert"] {
+  color: var(--client-shell-danger);
+}
+
+/*
+  Tables / directory areas stay intact, but receive modern card framing.
+*/
+.clients-page table,
+.client-page table,
+.clients table {
+  overflow: hidden;
+  border-radius: 16px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.clients-page thead,
+.client-page thead,
+.clients thead {
+  background: #f1f5f9;
+}
+
+.clients-page th,
+.client-page th,
+.clients th {
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/*
+  Action zones.
+*/
+.clients-page .actions,
+.clients-page .form-actions,
+.clients-page .button-row,
+.client-page .actions,
+.client-page .form-actions,
+.client-page .button-row,
+.clients .actions,
+.clients .form-actions,
+.clients .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.clients-page button,
+.client-page button,
+.clients button {
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.clients-page button:hover,
+.client-page button:hover,
+.clients button:hover {
+  transform: translateY(-1px);
+}
+
+/*
+  Backend / local fallback / warning panels.
+*/
+.clients-page .warning,
+.clients-page .alert,
+.clients-page .notice,
+.client-page .warning,
+.client-page .alert,
+.client-page .notice,
+.clients .warning,
+.clients .alert,
+.clients .notice {
+  border-radius: 16px;
+  border: 1px solid rgba(217, 119, 6, 0.28);
+  background: #fffbeb;
+  color: #92400e;
+}
+
+/*
+  Responsive card shell.
+*/
+@media (max-width: 1100px) {
+  .clients-page section,
+  .client-page section,
+  .clients section,
+  .clients-page fieldset,
+  .client-page fieldset,
+  .clients fieldset {
+    padding: 16px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 720px) {
+  .clients-page section,
+  .client-page section,
+  .clients section,
+  .clients-page fieldset,
+  .client-page fieldset,
+  .clients fieldset {
+    margin-block: 14px;
+    padding: 14px;
+  }
+
+  .clients-page .actions,
+  .clients-page .form-actions,
+  .clients-page .button-row,
+  .client-page .actions,
+  .client-page .form-actions,
+  .client-page .button-row,
+  .clients .actions,
+  .clients .form-actions,
+  .clients .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .clients-page button,
+  .client-page button,
+  .clients button {
+    width: 100%;
+  }
+}
+
+/* Phase 13E.4Z-Z3-C2 Full Client Profile Section Card Shell END */
 
