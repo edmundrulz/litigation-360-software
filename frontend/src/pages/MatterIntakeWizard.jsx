@@ -432,20 +432,40 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
   function openNewClientCreation() {
     if (!searchPerformed) {
-      setValidationMessage("Search must be performed before creating a new client profile.");
+      setValidationMessage("Search must be performed before creating a full client profile.");
       return;
     }
 
-    setClientIntake((current) => deriveIntakeFromSearch(searchQuery, current));
-    setConfirmedNoDuplicate(false);
-    setClientStepMode(CLIENT_STEP_MODE.CREATE);
-    setValidationMessage("");
-    setDraftMessage("");
+    const derivedIntake = deriveIntakeFromSearch(searchQuery, clientIntake);
 
-    addAudit("new_client_creation_opened_after_search", {
+    try {
+      localStorage.setItem(
+        "litigation360:no-match-client-creation-context",
+        JSON.stringify({
+          source: "matter-intake-no-match",
+          searchTerm: searchQuery.trim(),
+          reviewedResultCount: clientMatches.length,
+          searchPerformed,
+          suggestedIntake: derivedIntake,
+          instruction: "Create the full client profile in Advanced Client Directory / Manual Management.",
+          createdAt: new Date().toISOString(),
+        }),
+      );
+    } catch (error) {
+      console.warn("No-match client creation context could not be saved.", error);
+    }
+
+    setClientIntake(derivedIntake);
+    setConfirmedNoDuplicate(false);
+    setValidationMessage("");
+    setDraftMessage("Redirecting to Advanced Client Directory / Manual Management for full client profile creation.");
+
+    addAudit("no_match_redirected_to_advanced_client_directory", {
       query: searchQuery.trim(),
       reviewedResultCount: clientMatches.length,
     });
+
+    setModule?.("Clients");
   }
 
   function saveDraft() {
@@ -730,12 +750,12 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             ) : (
               <div className="client-no-match-panel">
                 <strong>No Match Found</strong>
-                <p>No existing client record matched this search. Create a new client profile only after confirming duplicate review.</p>
+                <p>No existing client record matched this search. Create the full client profile through Advanced Client Directory / Manual Management so complete contact, billing, communication, document, audit, and manual-management details are preserved.</p>
               </div>
             )}
 
             <button type="button" className="client-create-pathway" onClick={openNewClientCreation}>
-              No Match Found — Create New Client Profile
+              No Match Found — Create Full Client Profile in Advanced Directory
             </button>
           </div>
         ) : (
@@ -826,8 +846,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         <div className="client-gate-header">
           <div>
             <p className="eyebrow">Step 1B</p>
-            <h2>New Client Profile Creation</h2>
-            <p>Reserved for brand-new client details only after duplicate search has been completed.</p>
+            <h2>Legacy Simplified Client Intake Form</h2>
+            <p>Legacy fallback only. The primary no-match creation route now redirects to Advanced Client Directory / Manual Management for the complete full profile process.</p>
           </div>
           <span className="intake-status-pill">Protected interface</span>
         </div>
@@ -1037,8 +1057,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
             ← Previous
           </button>
-          <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.CREATE)}>
-            Return to New Client Profile Creation
+          <button type="button" className="secondary-action" onClick={openNewClientCreation}>
+            Create Full Profile in Advanced Directory
           </button>
           <button type="button" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
             Continue to Case / Matter Details →
@@ -1117,3 +1137,4 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     </div>
   );
 }
+
