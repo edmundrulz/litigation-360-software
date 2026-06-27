@@ -5414,7 +5414,72 @@ function isUnavailablePlaceholder(value) {
           ))}
         </datalist>
 
-        <div className="client-form-actions">
+
+        <section className="client-profile-review-panel" aria-labelledby="client-profile-review-heading">
+          <div className="client-profile-review-header">
+            <div>
+              <p className="client-profile-review-kicker">Pre-Submission Review</p>
+              <h3 id="client-profile-review-heading">Review Full Client Profile Before Saving</h3>
+              <p>
+                Confirm the complete manual-management profile before creating or saving this client record.
+                This panel is informational only and does not replace the original validation, required fields,
+                backend checks, draft behaviour, or save controls.
+              </p>
+            </div>
+            <span className="client-profile-review-status">Verify before saving</span>
+          </div>
+
+          <div className="client-profile-review-grid">
+            <article className="client-profile-review-card">
+              <p className="client-profile-review-kicker">Identity</p>
+              <h4>Client Identity Review</h4>
+              <p>Confirm legal name, organisation details, client type, identification reference, and profile classification.</p>
+              <a href="#client-profile-details" className="client-profile-review-link">Jump to Client Profile Details</a>
+            </article>
+
+            <article className="client-profile-review-card">
+              <p className="client-profile-review-kicker">Verification</p>
+              <h4>Identification & Documentation</h4>
+              <p>Check identification details, document status, pending document reasons, and verification notes.</p>
+              <a href="#client-documentation-verification" className="client-profile-review-link">Jump to Documentation Verification</a>
+            </article>
+
+            <article className="client-profile-review-card">
+              <p className="client-profile-review-kicker">Contact</p>
+              <h4>Contact & Communication</h4>
+              <p>Review phone, email, WhatsApp/contact preference, communication notes, and correspondence protocol.</p>
+              <a href="#client-contact-communication-preferences" className="client-profile-review-link">Jump to Contact Details</a>
+            </article>
+
+            <article className="client-profile-review-card">
+              <p className="client-profile-review-kicker">Location</p>
+              <h4>Address & Service Location</h4>
+              <p>Confirm address, service location, correspondence location, postcode, city, state, and country details.</p>
+              <a href="#client-address-service-location" className="client-profile-review-link">Jump to Address Details</a>
+            </article>
+
+            <article className="client-profile-review-card">
+              <p className="client-profile-review-kicker">Matter Context</p>
+              <h4>Matter Origin & Client Source</h4>
+              <p>Review matter origin, client source, referral details, value indicators, and prior-firm context where applicable.</p>
+              <a href="#client-matter-context-origin" className="client-profile-review-link">Jump to Matter Context</a>
+            </article>
+
+            <article className="client-profile-review-card client-profile-review-warning">
+              <p className="client-profile-review-kicker">Pending Items</p>
+              <h4>Internal Remarks & Missing Information</h4>
+              <p>Check unresolved notes, pending information, missing details, and internal follow-up items before final save.</p>
+              <a href="#client-internal-remarks-issues" className="client-profile-review-link">Jump to Internal Remarks</a>
+            </article>
+          </div>
+
+          <div className="client-profile-review-footer">
+            <strong>Preservation notice:</strong>
+            Existing required markers, validation rules, backend/local fallback warnings, draft controls,
+            create/save actions, and manual-management protocols remain authoritative.
+          </div>
+        </section>
+<div className="client-form-actions">
           <button type="submit" disabled={isSaving}>
             {isSaving ? "Saving..." : editingId ? "Save Modified Client" : "Create New Client Profile"}
           </button>

@@ -4988,4 +4988,175 @@ h4:has(.client-profile-card-title):focus-within {
 }
 
 /* Phase 13E.4Z-Z3-G2 Client Profile Section Jump Links END */
+/* Phase 13E.4Z-Z3-I Pre-Submission Review Panel START */
+
+/*
+  Non-destructive pre-submission review layer.
+
+  Scope:
+  - Informational review panel only
+  - Existing validation remains authoritative
+  - Existing create/save/draft/reset handlers remain unchanged
+  - No backend/API/payload changes
+*/
+
+.client-profile-review-panel {
+  margin: 22px 0;
+  padding: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(240, 253, 250, 0.72), rgba(255, 255, 255, 0.98)),
+    #ffffff;
+  box-shadow: 0 24px 54px rgba(15, 23, 42, 0.075);
+}
+
+.client-profile-review-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.client-profile-review-kicker {
+  margin: 0 0 6px;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.client-profile-review-header h3,
+.client-profile-review-card h4 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-weight: 950;
+  letter-spacing: -0.015em;
+}
+
+.client-profile-review-header h3 {
+  font-size: 1.16rem;
+}
+
+.client-profile-review-card h4 {
+  font-size: 0.98rem;
+}
+
+.client-profile-review-header p,
+.client-profile-review-card p,
+.client-profile-review-footer {
+  color: #475569;
+  line-height: 1.55;
+}
+
+.client-profile-review-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(15, 118, 110, 0.22);
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #115e59;
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.client-profile-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.client-profile-review-card {
+  display: flex;
+  min-height: 176px;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 15px;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.045);
+}
+
+.client-profile-review-warning {
+  border-color: rgba(217, 119, 6, 0.28);
+  background: linear-gradient(135deg, #fffbeb, #ffffff);
+}
+
+.client-profile-review-warning .client-profile-review-kicker {
+  color: #92400e;
+}
+
+.client-profile-review-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: #f0fdfa;
+  color: #0f766e;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+  padding: 7px 10px;
+}
+
+.client-profile-review-link::after {
+  content: "→";
+  font-weight: 950;
+}
+
+.client-profile-review-link:hover {
+  background: #ccfbf1;
+  color: #115e59;
+}
+
+.client-profile-review-link:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.28);
+  outline-offset: 3px;
+}
+
+.client-profile-review-footer {
+  margin-top: 16px;
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  border-radius: 16px;
+  background: rgba(240, 253, 250, 0.72);
+  padding: 12px 14px;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 1080px) {
+  .client-profile-review-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .client-profile-review-panel {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .client-profile-review-header {
+    display: grid;
+  }
+
+  .client-profile-review-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .client-profile-review-status {
+    width: fit-content;
+  }
+}
+
+/* Phase 13E.4Z-Z3-I Pre-Submission Review Panel END */
 
