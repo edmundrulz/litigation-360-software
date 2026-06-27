@@ -3284,3 +3284,170 @@ Section labels/icons may remain gold.
   justify-content: flex-start;
   border-radius: 12px;
 }
+
+/* Phase 13C.4 - Workspace navigation grouping */
+.workspace-section-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.workspace-module-section {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.workspace-section-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.workspace-section-header h3 {
+  margin: 0.25rem 0 0.2rem;
+}
+
+.workspace-section-header p {
+  margin: 0;
+  opacity: 0.78;
+}
+
+.workflow-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.workflow-card {
+  position: relative;
+}
+
+.card-meta {
+  display: inline-flex;
+  width: fit-content;
+  min-width: 1.75rem;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Phase 13D.4 - Module frame polish and workflow continuity */
+.module-frame {
+  display: grid;
+  gap: 1rem;
+}
+
+.module-frame-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1rem;
+}
+
+.module-frame-copy {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.module-context,
+.module-position {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.module-context {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.module-position {
+  background: rgba(76, 175, 80, 0.14);
+  border: 1px solid rgba(76, 175, 80, 0.32);
+}
+
+.module-frame-header h2 {
+  margin: 0;
+}
+
+.module-description {
+  margin: 0;
+  opacity: 0.78;
+}
+
+.module-frame-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.module-secondary-button,
+.module-next-button {
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.module-secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+}
+
+.module-secondary-button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.module-next-button {
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.92);
+  color: #111827;
+}
+
+.module-next-button:hover {
+  background: #ffffff;
+}
+
+.module-frame-body {
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .module-frame-header {
+    display: grid;
+  }
+
+  .module-frame-actions {
+    justify-content: stretch;
+  }
+
+  .module-secondary-button,
+  .module-next-button {
+    width: 100%;
+  }
+}
