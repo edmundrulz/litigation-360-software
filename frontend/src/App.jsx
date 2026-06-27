@@ -375,168 +375,136 @@ function viewTitle(view, module) {
   }[view];
 }
 
-function Workspace({ setModule, goToModule }) {
-  const navigateToModule = goToModule || setModule;
-  const sections = workspaceSections || [];
-
-  const plannedSections = sections.filter((section) =>
-    String(section.title || "").toLowerCase().includes("planned")
-  );
-
-  const liveSections = sections.filter((section) =>
-    !String(section.title || "").toLowerCase().includes("planned")
-  );
-
-  const liveModuleCount = liveSections.reduce((total, section) => {
-    const cards = section.modules || section.items || section.cards || [];
-    return total + cards.filter((card) => !card.disabled).length;
-  }, 0);
-
-  const workflowSectionCount = liveSections.length;
-
-  const plannedModuleCount = plannedSections.reduce((total, section) => {
-    const cards = section.modules || section.items || section.cards || [];
-    return total + cards.length;
-  }, 0);
-
-  const dashboardMetrics = [
-    {
-      label: "Live Workspace Modules",
-      value: liveModuleCount,
-      text: "Active modules ready for intake, legal work, review, and administration.",
-    },
-    {
-      label: "Workflow Sections",
-      value: workflowSectionCount,
-      text: "Grouped areas for starting, continuing, reviewing, and administering work.",
-    },
-    {
-      label: "Planned Modules",
-      value: plannedModuleCount,
-      text: "Roadmap modules remain visible but disabled until future implementation.",
-    },
-    {
-      label: "Safety Gate",
-      value: "Build",
-      text: "Frontend production build remains the required verification gate.",
-    },
-  ];
-
-  function openModule(moduleName) {
-    if (typeof navigateToModule === "function") {
-      navigateToModule(moduleName);
-    }
-  }
-
-  function renderWorkspaceCard(card, sectionTitle) {
-    const isPlannedSection = String(sectionTitle || "").toLowerCase().includes("planned");
-    const isDisabled = Boolean(card.disabled || isPlannedSection);
-    const moduleLabel = card.title || card.label || card.name || card.module || "Workspace Module";
-    const moduleDescription = card.description || card.summary || "Open this workspace module.";
-    const moduleTarget = card.module || card.target || card.key || moduleLabel;
-    const badge = card.badge || (isDisabled ? "Roadmap" : sectionTitle);
-
-    return (
-      <button
-        key={`${sectionTitle}-${moduleLabel}`}
-        type="button"
-        className={`card workflow-card ${isDisabled ? "planned-card" : "clickable-card"}`}
-        onClick={() => {
-          if (!isDisabled) {
-            openModule(moduleTarget);
-          }
-        }}
-        disabled={isDisabled}
-        aria-label={isDisabled ? `${moduleLabel} is planned` : `Open ${moduleLabel}`}
-      >
-        <span className="workflow-badge">{badge}</span>
-        <h3>{moduleLabel}</h3>
-        <p>{moduleDescription}</p>
-        <span className="card-meta">
-          {isDisabled ? "Planned module - disabled" : "Open workspace module"}
-        </span>
-      </button>
-    );
-  }
+function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule} previous={previous} canGoBack={canGoBack}><Clients /></ModuleFrame>;
+  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
+  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+  if (module === "Review Submit") return <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}><ReviewSubmit setModule={setModule} /></ModuleFrame>;
+  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
 
   return (
-    <div className="workspace-dashboard-shell">
-      <section className="hero workspace-hero-polished">
-        <div className="workspace-hero-copy">
-          <span className="workspace-eyebrow">Guided legal workflow command centre</span>
-          <h1>End User Workspace</h1>
-          <p>
-            Start intake, continue legal work, manage documents, and complete review steps
-            from one guided workspace.
+    <>
+      <section className="hero">
+        <h2>Litigation 360 LEOS Workspace</h2>
+        <p>Level 10/11 enterprise legal operating system command grid. Open modules are live. Planned modules are visible roadmap placeholders.</p>
+        <section
+          aria-label="Legal Operations Command Centre"
+          style={{
+            marginTop: 16,
+            background: "#fff",
+            border: "1px solid #EAECF0",
+            borderRadius: 16,
+            boxShadow: "0 2px 8px rgba(16,24,40,0.06)",
+            padding: 16,
+          }}
+        >
+          <h3 style={{ margin: 0, fontSize: 18, color: "#101828", fontWeight: 700 }}>
+            Legal Operations Command Centre
+          </h3>
+          <p style={{ margin: "6px 0 14px", color: "#475467", fontSize: 13 }}>
+            Priority-driven legal operations overview, today’s tasks, alerts, and quick controls.
           </p>
-        </div>
 
-        <div className="actions workspace-action-panel">
-          <button
-            type="button"
-            className="primary-action"
-            onClick={() => openModule("Matter Intake")}
-          >
-            Start Matter Intake
-          </button>
-
-          <button type="button" onClick={() => openModule("Clients")}>
-            Open Client Details
-          </button>
-
-          <button type="button" onClick={() => openModule("Cases")}>
-            Continue Legal Work
-          </button>
-
-          <button type="button" onClick={() => openModule("Review Submit")}>
-            Review / Save & Submit
-          </button>
-        </div>
-      </section>
-
-      <section className="summary dashboard-summary-grid" aria-label="Workspace summary">
-        {dashboardMetrics.map((metric) => (
-          <article className="dashboard-metric-card" key={metric.label}>
-            <span>{metric.label}</span>
-            <strong>{metric.value}</strong>
-            <p>{metric.text}</p>
-          </article>
-        ))}
-      </section>
-
-      <section className="workspace-section-list" aria-label="Workspace module sections">
-        {sections.map((section) => {
-          const cards = section.modules || section.items || section.cards || [];
-          const isPlannedSection = String(section.title || "").toLowerCase().includes("planned");
-
-          return (
-            <article
-              className={`workspace-module-section ${
-                isPlannedSection ? "planned-module-section" : "live-module-section"
-              }`}
-              key={section.title}
-            >
-              <header className="workspace-section-header">
-                <div>
-                  <span className="workspace-section-kicker">
-                    {isPlannedSection ? "Future roadmap" : "Live workflow"}
-                  </span>
-                  <h2>{section.title}</h2>
-                  {section.description ? <p>{section.description}</p> : null}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 12 }}>
+            <article style={{ border: "1px solid #EAECF0", borderRadius: 12, padding: 12 }}>
+              <strong>Priority Actions</strong>
+              <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FDA29B", background: "#FEF3F2", color: "#B42318", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Urgent court deadlines</span><span>3</span>
                 </div>
-              </header>
-
-              <div className="grid workspace-card-grid">
-                {cards.map((card) => renderWorkspaceCard(card, section.title))}
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FEC84B", background: "#FFFAEB", color: "#B54708", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Client approvals pending</span><span>2</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #C3B5FD", background: "#F9F5FF", color: "#6941C6", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Filing blocked</span><span>1</span>
+                </div>
               </div>
             </article>
-          );
-        })}
+
+            <article style={{ border: "1px solid #EAECF0", borderRadius: 12, padding: 12 }}>
+              <strong>Today’s Tasks</strong>
+              <ul style={{ margin: "10px 0 0", paddingLeft: 18, display: "grid", gap: 8, color: "#175CD3", fontWeight: 600 }}>
+                <li>Review witness bundle</li>
+                <li>Approve draft affidavit</li>
+                <li>Confirm client meeting</li>
+                <li>File amended pleadings</li>
+              </ul>
+            </article>
+
+            <article style={{ border: "1px solid #EAECF0", borderRadius: 12, padding: 12 }}>
+              <strong>Notifications & Alerts</strong>
+              <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FDA29B", background: "#FEF3F2", color: "#B42318", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Overdue</span><span>2</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FEC84B", background: "#FFFAEB", color: "#B54708", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Due today</span><span>4</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #84CAFF", background: "#EFF8FF", color: "#175CD3", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Unread alerts</span><span>5</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #C3B5FD", background: "#F9F5FF", color: "#6941C6", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Blocked items</span><span>1</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div style={{ borderTop: "1px solid #EAECF0", marginTop: 12, paddingTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <button type="button" onClick={() => window.alert("Open is a frontend placeholder for now.")}>Open</button>
+            <button type="button" onClick={() => window.alert("Assign is a frontend placeholder for now.")}>Assign</button>
+            <button type="button" onClick={() => window.alert("Snooze is a frontend placeholder for now.")}>Snooze</button>
+            <button type="button" onClick={() => window.alert("Move to KIV is a frontend placeholder for now.")}>Move to KIV</button>
+          </div>
+        </section>
       </section>
-    </div>
+
+      <section className="summary">
+        <Metric label="Live Backend Modules" value={`${passed}/${results.length}`} />
+        <Metric label="Failed Checks" value={failed} />
+        <Metric label="Last Refresh" value={updated} />
+        <button onClick={runChecks}>Refresh Live Monitor</button>
+      </section>
+      <section className="workspace-section-list" aria-label="Workspace module groups">
+        {workspaceSections.map((section) => (
+          <section className="workspace-module-section" key={section.id}>
+            <div className="workspace-section-header">
+              <div>
+                <span className="workflow-badge">{section.label}</span>
+                <h3>{section.title}</h3>
+                <p>{section.description}</p>
+              </div>
+            </div>
+
+            <div className="grid">
+              {section.items.map((item) => {
+                const isOpen = item.status === "OPEN";
+
+                return (
+                  <button
+                    key={`${section.id}-${item.module}`}
+                    type="button"
+                    className={isOpen ? "card clickable-card workflow-card" : "card planned-card workflow-card"}
+                    onClick={() => isOpen && setModule(item.module)}
+                    disabled={!isOpen}
+                  >
+                    <span className="card-meta">{item.sequence}</span>
+                    <h3>{item.title}</h3>
+                    <strong>{item.status}</strong>
+                    <p>{item.text}</p>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </section>
+    </>
   );
 }
-
 
 function ModuleFrame({
   title,
