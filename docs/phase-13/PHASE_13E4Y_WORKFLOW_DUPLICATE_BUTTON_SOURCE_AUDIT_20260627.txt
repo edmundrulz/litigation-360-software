@@ -1,0 +1,880 @@
+Litigation 360 / LEOS 360
+Phase 13E.4Y Workflow Duplicate Button Source Audit
+Date: 2026-06-27
+Current issue: Visible Previous / Save & Next controls did not change after App.jsx ModuleFrame patch.
+
+============================================================
+PATTERN: Previous
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:279:      setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:280:      return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:281:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:282:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:283:    setModuleHistory((previousHistory) => [...previousHistory, module]);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:284:    setModule(resolvedModule);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:285:  }
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:286:  function backToPreviousModule() {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:287:    setModuleHistory((previousHistory) => {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:288:      if (previousHistory.length === 0) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:289:        setModule("home");
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:290:        return previousHistory;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:291:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:292:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:293:      const previousModule = previousHistory[previousHistory.length - 1];
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:294:      setModule(previousModule);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:295:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:296:      return previousHistory.slice(0, -1);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:297:    });
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:298:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:299:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:300:  function openWorkspace() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:359:        {view === "workspace" && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:360:          <Workspace
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:361:            module={module}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:362:            setModule={goToModule}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:363:            previous={backToPreviousModule}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:364:            canGoBack={moduleHistory.length > 0}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:365:            results={results}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:366:            runChecks={runChecks}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:367:            passed={passed}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:388:    developer: "Developer Centre"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:389:  }[view];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:390:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:391:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:392:function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:393:  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule} previous={previous} canGoBack={canGoBack}><Clients /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:394:  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:395:  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:396:  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:397:  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:398:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:399:  if (module === "Review Submit" || module === "Review / Save & Submit" || module === "Review And Completion" || module === "Completion Review And Completion") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:400:    return (
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:401:      <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:402:        <ReviewSubmit setModule={setModule} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:403:      </ModuleFrame>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:404:    );
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:405:  }
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:406:  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:407:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:408:  return (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:409:    <>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:410:      <section className="hero">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:576:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:577:function ModuleFrame({
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:578:  title,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:579:  setModule,
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:580:  previous,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:581:  canGoBack,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:582:  children
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:583:}) {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:584:  const previousMap = {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:585:    "Clients": "home",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:586:    "Cases": "Clients",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:587:    "Matters": "Clients",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:588:    "Court Dates": "Cases",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:601:    "Documents": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:602:    "Matter Intake": "Clients"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:603:  };
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:604:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:605:  const previousTarget = previousMap[title] || "home";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:606:  const nextTarget = nextMap[title] || "";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:607:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:608:  function goPrevious() {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:609:    if (previousTarget === "home") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:610:      setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:611:      return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:612:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:613:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:614:    setModule(previousTarget);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:615:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:616:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:617:  function goHome() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:618:    setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:634:          <h2>{title}</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:635:        </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:636:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:637:        <div className="module-frame-actions">
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:638:          <button type="button" onClick={goPrevious}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:639:            ← Previous
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:640:          </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:641:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:642:          <button type="button" onClick={goHome}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:643:            Main Page
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:212:  clientValueNotes: "",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:213:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:214:  clientRoleInMatter: "Plaintiff",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:215:  caseOriginType: "New Direct Client",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:216:  previousFirmName: "",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:217:  coCounselNotes: "",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:218:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:219:  healthDisabilityStatus: "None",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:220:  accommodationRequired: false,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1446:    clientValueNotes: source.clientValueNotes || "",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1447:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1448:    clientRoleInMatter: source.clientRoleInMatter || "Plaintiff",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1449:    caseOriginType: source.caseOriginType || "New Direct Client",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1450:    previousFirmName: source.previousFirmName || "",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1451:    coCounselNotes: source.coCounselNotes || "",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1452:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1453:    healthDisabilityStatus: source.healthDisabilityStatus || "None",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1454:    accommodationRequired: Boolean(source.accommodationRequired),
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2000:    setSearchTerm(value);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2001:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2002:    const trimmed = value.trim();
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2003:    if (trimmed.length >= 2) {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2004:      setClientSearchHistory((previous) => [trimmed, ...previous.filter((item) => item !== trimmed)].slice(0, 8));
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2005:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2006:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2007:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2008:  function selectClientFromDirectory(client) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2239:      if (!draftPayload || !draftPayload.form) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2240:        setDraftSaveStatus("Saved draft could not be read safely.");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2241:        return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2242:      }
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2243:      setForm((previous) => ({ ...previous, ...draftPayload.form }));
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2244:      setLastDraftSavedAt(draftPayload.savedAt || "");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2245:      setDraftSaveStatus("Draft restored from local browser storage.");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2246:      setFieldErrors({});
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2247:      setValidationErrors([]);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2444:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2445:      if (duplicateRank) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2446:        const message = getDuplicateContactChoiceMessage(value, rank, duplicateRank);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2447:        setContactChoiceNotice(message);
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2448:        setFieldErrors((previous) => ({
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2449:          ...previous,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2450:          [field]: message
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2451:        }));
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2452:        showStatus(message, "warning");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2453:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2464:    if (shouldSanitizeNumericField(field, form)) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2465:      const digitsOnly = String(value || "").replace(/\D/g, "");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2466:      const hadInvalidCharacters = String(value || "") !== digitsOnly;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2467:      safeValue = digitsOnly;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2468:      setNumericWarnings((previous) => ({
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2469:        ...previous,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2470:        [field]: hadInvalidCharacters ? "Only numeric characters are allowed. Please enter a valid phone number." : ""
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2471:      }));
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2472:    } else {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2473:      setNumericWarnings((previous) => ({ ...previous, [field]: "" }));
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2474:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2475:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2476:    setFieldErrors((previous) => ({ ...previous, [field]: undefined }));
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2477:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2478:    setForm((previous) => {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2479:      const next = {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2480:        ...previous,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2481:        [field]: safeValue
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2482:      };
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2483:      if (field === "hasDependents") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2484:        const checked = Boolean(value);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2495:        next.willAuthorizedParties = [];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2496:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2497:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2498:      if (field === "caseOriginType" && value !== "Inherited / Taken Over from Another Firm") {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2499:        next.previousFirmName = "";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2500:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2501:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2502:      if (field === "caseOriginType" && value !== "Joint Representation / Multi-firm Action") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2503:        next.coCounselNotes = "";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2544:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2545:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2546:      if (field === "givenName" || field === "surname") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2547:        next.initials = makeInitials(
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2548:          field === "givenName" ? value : previous.givenName,
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2549:          field === "surname" ? value : previous.surname
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2550:        );
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2551:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2552:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2553:      if (field === "identityCardColour") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2615:        }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2616:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2617:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2618:      if (field === "identificationKind" || field === "nricPassportNumber") {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2619:        const kind = field === "identificationKind" ? value : previous.identificationKind;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2620:        const idValue = field === "nricPassportNumber" ? value : previous.nricPassportNumber;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2621:        const suggestedGender = deriveGenderFromIdentification(idValue, kind);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2622:        const derivedDob = parseNricDob(idValue, kind);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2623:        const age = calculateAge(derivedDob);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2624:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2627:        next.ageCategory = getAgeCategory(age);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2628:        next.generation = getGeneration(derivedDob);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2629:        next.stateOfBirth = getMalaysiaNricStateOfBirth(idValue, kind);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2630:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2631:        if (previous.genderSource !== "manual") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2632:          next.gender = suggestedGender;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2633:          next.genderSource = "auto";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2634:        }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2635:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2638:        next.genderSource = "manual";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2639:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2640:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2641:      if (field === "country") {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2642:        next.continent = COUNTRY_TO_CONTINENT[value] || previous.continent || "";
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2643:        next.region = getDefaultRegion(value, next.continent) || previous.region || "";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2644:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2645:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2646:      if (field === "phoneCountryCode" && previous.whatsappSameAsPhone) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2647:        next.whatsappCountryCode = value;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2648:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2649:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2650:      if (field === "phoneNumber" && previous.whatsappSameAsPhone) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2651:        next.whatsappNumber = value;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2652:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2653:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2654:      if (field === "whatsappSameAsPhone") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2655:        const checked = Boolean(value);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2656:        next.whatsappSameAsPhone = checked;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2657:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2658:        if (checked) {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2659:          next.whatsappCountryCode = previous.phoneCountryCode;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2660:          next.whatsappNumber = previous.phoneNumber;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2661:        }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2662:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2663:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2664:      if (field === "titleGenderOverride") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2944:  function upsertClientInUi(savedClient) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2945:    const normalizedSaved = normalizeClient(savedClient);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2946:    const savedId = getClientId(normalizedSaved);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2947:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2948:    setClients((previousClients) => {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2949:      const exists = previousClients.some((client) => getClientId(client) === savedId);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2950:      const nextClients = exists
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2951:        ? previousClients.map((client) => (getClientId(client) === savedId ? normalizedSaved : client))
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2952:        : [normalizedSaved, ...previousClients];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2953:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2954:      writeLocalClients(nextClients);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2955:      return nextClients;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2956:    });
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4178:            </label>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4179:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4180:            {form.caseOriginType === "Inherited / Taken Over from Another Firm" && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4181:              <label className="full">
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4182:                Previous Firm
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4183:                <input
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4184:                  value={form.previousFirmName}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4185:                  onChange={(event) => updateForm("previousFirmName", event.target.value)}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4186:                  placeholder="Previous firm name, if known"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4187:                />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4188:              </label>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4189:            )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4190:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:201:      </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:202:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:203:      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24 }}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:204:        <button disabled={step === 1} onClick={() => setStep(step - 1)}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:205:          ← Previous
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:206:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:207:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:208:        {step < 6 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:209:          <button onClick={nextStep}>
+
+============================================================
+PATTERN: Save & Next
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:644:          </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:645:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:646:          {nextTarget ? (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:647:            <button type="button" onClick={goNext}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:648:              Save & Next →
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:649:            </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:650:          ) : (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:651:            <button type="button" onClick={goHome}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:652:              Complete / Return Home
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:206:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:207:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:208:        {step < 6 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:209:          <button onClick={nextStep}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:210:            Save & Next →
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:211:          </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:212:        )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:213:      </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:214:
+
+============================================================
+PATTERN: Save and Next
+============================================================
+
+============================================================
+PATTERN: Next:
+============================================================
+
+============================================================
+PATTERN: Review / Save
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:86:    description: "Review the prepared workflow before save or submission.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:87:    items: [
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:88:      {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:89:        module: "Review Submit",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:90:        title: "Review / Save & Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:91:        status: "OPEN",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:92:        sequence: "7",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:93:        text: "Final review point before saving, submission, or future workflow handoff.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:94:      },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:184:    group: "Active Legal Work",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:185:    description: "Drafts, filings, templates, evidence, and document management.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:186:    position: "Step 5 of 6",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:187:    nextModule: "Review Submit",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:188:    nextLabel: "Review / Save & Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:189:  },
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:190:  "Review / Save & Submit": {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:191:    displayTitle: "Review / Save & Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:192:    group: "Review And Completion",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:193:    description: "Final review point before saving, submission, or future workflow handoff.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:194:    position: "Step 6 of 6",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:195:  },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:213:const moduleRouteAliases = {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:214:  "Client Details": "Clients",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:215:  "Case / Matter Details": "Cases",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:216:  "Matter Workspace": "Matters",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:217:  "Review / Save & Submit": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:218:  "Review And Completion": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:219:  "Completion Review And Completion": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:220:};
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:221:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:395:  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:396:  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:397:  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:398:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:399:  if (module === "Review Submit" || module === "Review / Save & Submit" || module === "Review And Completion" || module === "Completion Review And Completion") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:400:    return (
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:401:      <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:402:        <ReviewSubmit setModule={setModule} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:403:      </ModuleFrame>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:404:    );
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:405:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:535:      </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:536:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:537:      <p className="eyebrow">Completion Review And Completion</p>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:538:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:539:      <h2>Review / Save & Submit</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:540:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:541:      <p>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:542:        Review the prepared workflow before save or submission.
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:543:      </p>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:586:    "Cases": "Clients",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:587:    "Matters": "Clients",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:588:    "Court Dates": "Cases",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:589:    "Documents": "Court Dates",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:590:    "Review / Save & Submit": "Documents",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:591:    "Review Submit": "Documents",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:592:    "Staff": "home",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:593:    "Matter Intake": "home"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:594:  };
+
+============================================================
+PATTERN: Save & Submit Details
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:7:  "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:8:  "Deadline Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:9:  "Document Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:10:  "Review",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:11:  "Save & Submit Details"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:12:];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:13:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:14:export default function MatterIntakeWizard() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:15:  const [step, setStep] = useState(1);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:190:        )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:191:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:192:        {step === 6 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:193:          <>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:194:            <h2>▶ 6. Save & Submit Details?</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:195:            <p>Choose one:</p>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:196:            <button onClick={submitWizard}>YES - Save & Submit</button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:197:            <button onClick={() => setMessage("NO - Submission cancelled. Nothing submitted.")}>NO - Do Not Submit</button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:198:            <button onClick={() => setStep(1)}>CHANGE / AMEND / EDIT</button>
+
+============================================================
+PATTERN: Client Details
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:24:  {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:25:    id: "start-here",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:26:    label: "Start Here",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:27:    title: "Start Here",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:28:    description: "Begin a new legal workflow or open client details.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:29:    items: [
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:30:      {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:31:        module: "Matter Intake",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:32:        title: "Matter Intake",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:35:        text: "Guided starting point for new matter intake and workflow preparation.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:36:      },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:37:      {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:38:        module: "Clients",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:39:        title: "Client Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:40:        status: "OPEN",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:41:        sequence: "2",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:42:        text: "Client records, contacts, onboarding and profile management.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:43:      },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:144:    group: "Start Here",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:145:    description: "Guided starting point for new matter intake and workflow preparation.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:146:    position: "Step 1 of 6",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:147:    nextModule: "Clients",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:148:    nextLabel: "Client Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:149:  },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:150:  Clients: {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:151:    displayTitle: "Client Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:152:    group: "Start Here",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:153:    description: "Client records, contact information, onboarding, and profile management.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:154:    position: "Step 2 of 6",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:155:    nextModule: "Cases",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:210:  };
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:211:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:212:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:213:const moduleRouteAliases = {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:214:  "Client Details": "Clients",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:215:  "Case / Matter Details": "Cases",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:216:  "Matter Workspace": "Matters",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:217:  "Review / Save & Submit": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:218:  "Review And Completion": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:2:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:3:const API_URL = "http://localhost:5000/api";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:4:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:5:const steps = [
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:6:  "Client Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:7:  "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:8:  "Deadline Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:9:  "Document Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:10:  "Review",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:142:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:143:      <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 24, minHeight: 330 }}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:144:        {step === 1 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:145:          <>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:146:            <h2>▶ 1. Client Details</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:147:            <input style={inputStyle()} placeholder="Full Name" value={clientData.full_name} onChange={e => setClientData({ ...clientData, full_name: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:148:            <input style={inputStyle()} placeholder="Email" value={clientData.email} onChange={e => setClientData({ ...clientData, email: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:149:            <input style={inputStyle()} placeholder="Phone" value={clientData.phone} onChange={e => setClientData({ ...clientData, phone: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:150:            <input style={inputStyle()} placeholder="Address" value={clientData.address} onChange={e => setClientData({ ...clientData, address: e.target.value })} />
+
+============================================================
+PATTERN: Case / Matter Details
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:50:    description: "Manage active case, matter, court, and document work.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:51:    items: [
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:52:      {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:53:        module: "Cases",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:54:        title: "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:55:        status: "OPEN",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:56:        sequence: "3",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:57:        text: "Case files, parties, progress and litigation status.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:58:      },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:152:    group: "Start Here",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:153:    description: "Client records, contact information, onboarding, and profile management.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:154:    position: "Step 2 of 6",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:155:    nextModule: "Cases",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:156:    nextLabel: "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:157:  },
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:158:  Cases: {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:159:    displayTitle: "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:160:    group: "Active Legal Work",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:161:    description: "Case files, parties, progress, and litigation status.",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:162:    position: "Step 3 of 6",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:163:    nextModule: "Court Dates",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:211:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:212:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:213:const moduleRouteAliases = {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:214:  "Client Details": "Clients",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:215:  "Case / Matter Details": "Cases",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:216:  "Matter Workspace": "Matters",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:217:  "Review / Save & Submit": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:218:  "Review And Completion": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:219:  "Completion Review And Completion": "Review Submit",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:3:const API_URL = "http://localhost:5000/api";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:4:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:5:const steps = [
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:6:  "Client Details",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:7:  "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:8:  "Deadline Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:9:  "Document Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:10:  "Review",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:11:  "Save & Submit Details"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:152:        )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:153:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:154:        {step === 2 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:155:          <>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:156:            <h2>▶ 2. Case / Matter Details</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:157:            <input style={inputStyle()} placeholder="Case Number" value={caseData.case_number} onChange={e => setCaseData({ ...caseData, case_number: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:158:            <input style={inputStyle()} placeholder="Matter / Case Title" value={caseData.title} onChange={e => setCaseData({ ...caseData, title: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:159:            <input style={inputStyle()} placeholder="Status" value={caseData.status} onChange={e => setCaseData({ ...caseData, status: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:160:            <input style={inputStyle()} placeholder="Opened Date YYYY-MM-DD" value={caseData.opened_date} onChange={e => setCaseData({ ...caseData, opened_date: e.target.value })} />
+
+============================================================
+PATTERN: Deadline Details
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:4:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:5:const steps = [
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:6:  "Client Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:7:  "Case / Matter Details",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:8:  "Deadline Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:9:  "Document Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:10:  "Review",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:11:  "Save & Submit Details"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:12:];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:163:        )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:164:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:165:        {step === 3 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:166:          <>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:167:            <h2>▶ 3. Deadline Details</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:168:            <input style={inputStyle()} placeholder="Deadline Title" value={deadlineData.title} onChange={e => setDeadlineData({ ...deadlineData, title: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:169:            <input style={inputStyle()} placeholder="Deadline Date YYYY-MM-DD" value={deadlineData.deadline_date} onChange={e => setDeadlineData({ ...deadlineData, deadline_date: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:170:            <input style={inputStyle()} placeholder="Reminder Days" value={deadlineData.reminder_days} onChange={e => setDeadlineData({ ...deadlineData, reminder_days: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:171:            <textarea style={inputStyle()} placeholder="Notes" value={deadlineData.notes} onChange={e => setDeadlineData({ ...deadlineData, notes: e.target.value })} />
+
+============================================================
+PATTERN: Document Details
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:558:      </article>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:559:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:560:      <div className="actions">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:561:        <button type="button" onClick={() => setModule("Documents")}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:562:          Back to Document Details
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:563:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:564:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:565:        <button type="button" onClick={() => setModule("home")}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:566:          Return to Main Workspace
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:5:const steps = [
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:6:  "Client Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:7:  "Case / Matter Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:8:  "Deadline Details",
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:9:  "Document Details",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:10:  "Review",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:11:  "Save & Submit Details"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:12:];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:13:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:173:        )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:174:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:175:        {step === 4 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:176:          <>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:177:            <h2>▶ 4. Document Details</h2>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:178:            <input style={inputStyle()} placeholder="Document Name / File Name" value={documentData.file_name} onChange={e => setDocumentData({ ...documentData, file_name: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:179:            <input style={inputStyle()} placeholder="File Path / Location" value={documentData.file_path} onChange={e => setDocumentData({ ...documentData, file_path: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:180:            <input style={inputStyle()} placeholder="Document Type" value={documentData.document_type} onChange={e => setDocumentData({ ...documentData, document_type: e.target.value })} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:181:          </>
+
+============================================================
+PATTERN: currentStep
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:62:    if (step === 5) return { reviewed: true };
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:63:    return {};
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:64:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:65:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:66:  async function saveCurrentStep() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:67:    const guid = await ensureDraft();
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:68:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:69:    const res = await fetch(`${API_URL}/intake/draft/${guid}/step/${step}`, {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:70:      method: "POST",
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:82:    return true;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:83:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:84:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:85:  async function nextStep() {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:86:    const ok = await saveCurrentStep();
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:87:    if (ok && step < 6) setStep(step + 1);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:88:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:89:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:90:  async function submitWizard() {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:91:    const ok = await saveCurrentStep();
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:92:    if (!ok) return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:93:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:94:    const guid = await ensureDraft();
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:95:
+
+============================================================
+PATTERN: activeStep
+============================================================
+
+============================================================
+PATTERN: workflowSteps
+============================================================
+
+============================================================
+PATTERN: disabled
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:508:                    key={`${section.id}-${item.module}`}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:509:                    type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:510:                    className={isOpen ? "card clickable-card workflow-card" : "card planned-card workflow-card"}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:511:                    onClick={() => isOpen && setModule(item.module)}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:512:                    disabled={!isOpen}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:513:                  >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:514:                    <span className="card-meta">{item.sequence}</span>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:515:                    <h3>{item.title}</h3>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:516:                    <strong>{item.status}</strong>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:565:        <button type="button" onClick={() => setModule("home")}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:566:          Return to Main Workspace
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:567:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:568:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:569:        <button type="button" disabled>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:570:          Save & Submit - Future Backend Action
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:571:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:572:      </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:573:    </section>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2376:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2377:  function renderContactMethodOptions(rank) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2378:    return CONTACT_METHOD_OPTIONS.map((option) => {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2379:      const duplicateRank = findDuplicateContactChoiceRank(option, rank, form);
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2380:      const isDisabled = Boolean(duplicateRank);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2381:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2382:      return (
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2383:        <option key={option} value={option} disabled={isDisabled}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2384:          {option}{isDisabled ? " (already selected as " + getContactChoiceLabel(duplicateRank) + ")" : ""}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2385:        </option>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2386:      );
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2387:    });
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2388:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3890:            )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3891:          </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3892:          <div className="inline-actions">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3893:            <button type="button" className="btn btn-secondary btn-small" onClick={saveClientDraftManually}>Manual Save Draft</button>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3894:            <button type="button" className="btn btn-secondary btn-small" onClick={restoreClientDraft} disabled={!hasRecoverableDraft}>Restore Draft</button>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3895:            <button type="button" className="btn btn-secondary btn-small" onClick={clearClientDraft} disabled={!hasRecoverableDraft}>Clear Draft</button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3896:          </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3897:          <small className="field-warning-message">Drafts are saved locally in this browser to protect against refresh, accidental navigation, browser crash, or timeout.</small>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3898:        </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3899:        {(() => {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4475:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4476:            <div className="contact-choice-guard-panel full" role="status" aria-live="polite">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4477:              <strong>Preferred contact choice guard</strong>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4478:              <small>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4479:                Each contact method may be selected once only. Already-used choices are disabled in the next dropdowns to prevent accidental duplicate selections.
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4480:              </small>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4481:              {getActiveContactChoiceSummary().length > 0 && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4482:                <small>Active choices: {getActiveContactChoiceSummary().join(" | ")}</small>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4483:              )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4990:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4991:                  <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4992:                    type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4993:                    className="btn btn-secondary btn-small"
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4994:                    disabled={!(String(form.locationAdminType || "").trim() && String(form.manualAdministrativeLocation || "").trim())}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4995:                    onClick={() => updateForm("administrativeAreaActiveLevel", 2)}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4996:                  >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4997:                    Add Another Administrative Area
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4998:                  </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5025:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5026:                  <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5027:                    type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5028:                    className="btn btn-secondary btn-small"
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5029:                    disabled={!(String(form.secondaryAdministrativeCategory || "").trim() && String(form.secondaryAdministrativeName || "").trim())}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5030:                    onClick={() => updateForm("administrativeAreaActiveLevel", 3)}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5031:                  >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5032:                    Add Another Administrative Area
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5033:                  </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5071:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5072:                  <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5073:                    type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5074:                    className="btn btn-secondary btn-small"
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5075:                    disabled={!(String(form.thirdAdministrativeCategory || "").trim() && String(form.thirdAdministrativeLocation || "").trim())}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5076:                    onClick={() => updateForm("administrativeAreaActiveLevel", 4)}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5077:                  >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5078:                    Add Another Administrative Area
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5079:                  </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5117:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5118:                  <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5119:                    type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5120:                    className="btn btn-secondary btn-small"
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5121:                    disabled={!(String(form.fourthAdministrativeCategory || "").trim() && String(form.fourthAdministrativeLocation || "").trim())}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5122:                    onClick={() => updateForm("administrativeAreaActiveLevel", 5)}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5123:                  >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5124:                    Add Another Administrative Area
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5125:                  </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5356:          ))}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5357:        </datalist>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5358:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5359:        <div className="client-form-actions">
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5360:          <button type="submit" disabled={isSaving}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5361:            {isSaving ? "Saving..." : editingId ? "Save Modified Client" : "Add Client"}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5362:          </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5363:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5364:          <button type="button" onClick={resetForm}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:364:            placeholder="Matter Description / Summary"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:365:            rows="4"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:366:          />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:367:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:368:          <button className="matter-button matter-button-success" type="submit" disabled={saving}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:369:            {saving ? "Saving..." : editingId ? "Update Matter" : "Create Matter"}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:370:          </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:371:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:372:        </form>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:191:        <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:192:          type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:193:          className="btn btn-secondary"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:194:          onClick={loadData}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:195:          disabled={loading || isSubmitting}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:196:        >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:197:          Refresh
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:198:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:199:      </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:278:              </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:279:            </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:280:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:281:            <div style={{ display: 'flex', gap: '10px' }}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:282:              <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:283:                {isSubmitting ? 'Adding...' : 'Add Document'}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:284:              </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:285:              <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:286:                Cancel
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:334:                    <td>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:335:                      <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:336:                        className="btn btn-danger btn-small"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:337:                        onClick={() => handleDelete(doc.id)}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:338:                        disabled={deletingId === doc.id}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:339:                      >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:340:                        {deletingId === doc.id ? 'Deleting...' : 'Delete'}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:341:                      </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:342:                    </td>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:200:        )}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:201:      </div>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:202:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:203:      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24 }}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:204:        <button disabled={step === 1} onClick={() => setStep(step - 1)}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:205:          ← Previous
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:206:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:207:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:208:        {step < 6 && (
+
+============================================================
+PATTERN: not-allowed
+============================================================
+
+============================================================
+PATTERN: setModule
+============================================================
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:224:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:225:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:226:export default function App() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:227:  const [view, setView] = useState("workspace");
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:228:  const [module, setModule] = useState("home");
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:229:  const [moduleHistory, setModuleHistory] = useState([]);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:230:  const [results, setResults] = useState([]);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:231:  const [updated, setUpdated] = useState("Pending");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:232:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:233:  async function runChecks() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:274:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:275:    if (resolvedModule === module) return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:276:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:277:    if (resolvedModule === "home") {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:278:      setModuleHistory([]);
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:279:      setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:280:      return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:281:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:282:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:283:    setModuleHistory((previousHistory) => [...previousHistory, module]);
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:284:    setModule(resolvedModule);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:285:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:286:  function backToPreviousModule() {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:287:    setModuleHistory((previousHistory) => {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:288:      if (previousHistory.length === 0) {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:289:        setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:290:        return previousHistory;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:291:      }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:292:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:293:      const previousModule = previousHistory[previousHistory.length - 1];
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:294:      setModule(previousModule);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:295:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:296:      return previousHistory.slice(0, -1);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:297:    });
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:298:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:299:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:300:  function openWorkspace() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:301:    setView("workspace");
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:302:    setModuleHistory([]);
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:303:    setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:304:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:305:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:306:  return (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:307:    <div className="shell">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:358:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:359:        {view === "workspace" && (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:360:          <Workspace
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:361:            module={module}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:362:            setModule={goToModule}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:363:            previous={backToPreviousModule}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:364:            canGoBack={moduleHistory.length > 0}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:365:            results={results}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:366:            runChecks={runChecks}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:388:    developer: "Developer Centre"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:389:  }[view];
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:390:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:391:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:392:function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:393:  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule} previous={previous} canGoBack={canGoBack}><Clients /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:394:  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:395:  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:396:  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:397:  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:398:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:399:  if (module === "Review Submit" || module === "Review / Save & Submit" || module === "Review And Completion" || module === "Completion Review And Completion") {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:400:    return (
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:401:      <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:402:        <ReviewSubmit setModule={setModule} />
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:403:      </ModuleFrame>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:404:    );
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:405:  }
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:406:  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:407:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:408:  return (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:409:    <>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:410:      <section className="hero">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:507:                  <button
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:508:                    key={`${section.id}-${item.module}`}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:509:                    type="button"
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:510:                    className={isOpen ? "card clickable-card workflow-card" : "card planned-card workflow-card"}
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:511:                    onClick={() => isOpen && setModule(item.module)}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:512:                    disabled={!isOpen}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:513:                  >
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:514:                    <span className="card-meta">{item.sequence}</span>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:515:                    <h3>{item.title}</h3>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:525:    </>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:526:  );
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:527:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:528:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:529:function ReviewSubmit({ setModule }) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:530:  return (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:531:    <section className="card review-submit-screen">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:532:      <div className="module-step-header">
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:533:        <span className="pill">Step 7</span>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:557:        </p>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:558:      </article>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:559:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:560:      <div className="actions">
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:561:        <button type="button" onClick={() => setModule("Documents")}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:562:          Back to Document Details
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:563:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:564:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:565:        <button type="button" onClick={() => setModule("home")}>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:566:          Return to Main Workspace
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:567:        </button>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:568:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:569:        <button type="button" disabled>
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:575:}
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:576:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:577:function ModuleFrame({
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:578:  title,
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:579:  setModule,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:580:  previous,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:581:  canGoBack,
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:582:  children
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:583:}) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:606:  const nextTarget = nextMap[title] || "";
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:607:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:608:  function goPrevious() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:609:    if (previousTarget === "home") {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:610:      setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:611:      return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:612:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:613:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:614:    setModule(previousTarget);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:615:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:616:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:617:  function goHome() {
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:618:    setModule("home");
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:619:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:620:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:621:  function goNext() {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:622:    if (!nextTarget) {
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:623:      return;
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:624:    }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:625:
+> C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:626:    setModule(nextTarget);
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:627:  }
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:628:
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:629:  return (
+  C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:630:    <section className="module-frame">
+

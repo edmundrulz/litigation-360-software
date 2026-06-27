@@ -403,7 +403,7 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
       </ModuleFrame>
     );
   }
-  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard setModule={setModule} /></ModuleFrame>;
 
   return (
     <>

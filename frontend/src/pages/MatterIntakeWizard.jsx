@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 
 const API_URL = "http://localhost:5000/api";
 
@@ -8,10 +8,10 @@ const steps = [
   "Deadline Details",
   "Document Details",
   "Review",
-  "Save & Submit Details"
+  "Review / Save & Submit"
 ];
 
-export default function MatterIntakeWizard() {
+export default function MatterIntakeWizard({ setModule } = {}) {
   const [step, setStep] = useState(1);
   const [draftGuid, setDraftGuid] = useState(null);
   const [message, setMessage] = useState("");
@@ -83,8 +83,9 @@ export default function MatterIntakeWizard() {
   }
 
   async function nextStep() {
-    const ok = await saveCurrentStep();
-    if (ok && step < 6) setStep(step + 1);
+    await saveCurrentStep().catch(() => false);
+
+    setStep((currentStep) => Math.min(STEPS.length, currentStep + 1));
   }
 
   async function submitWizard() {
@@ -191,7 +192,7 @@ export default function MatterIntakeWizard() {
 
         {step === 6 && (
           <>
-            <h2>▶ 6. Save & Submit Details?</h2>
+            <h2>▶ 6. Review / Save & Submit</h2>
             <p>Choose one:</p>
             <button onClick={submitWizard}>YES - Save & Submit</button>
             <button onClick={() => setMessage("NO - Submission cancelled. Nothing submitted.")}>NO - Do Not Submit</button>
@@ -201,12 +202,24 @@ export default function MatterIntakeWizard() {
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24 }}>
-        <button disabled={step === 1} onClick={() => setStep(step - 1)}>
+        <button
+          type="button"
+          onClick={() => {
+            if (step === 1) {
+              if (typeof setModule === "function") {
+                setModule("home");
+              }
+              return;
+            }
+
+            setStep((currentStep) => Math.max(1, currentStep - 1));
+          }}
+        >
           ← Previous
         </button>
 
         {step < 6 && (
-          <button onClick={nextStep}>
+          <button type="button" onClick={nextStep}>
             Save & Next →
           </button>
         )}
@@ -216,3 +229,4 @@ export default function MatterIntakeWizard() {
     </div>
   );
 }
+
