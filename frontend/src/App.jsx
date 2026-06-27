@@ -581,59 +581,79 @@ function ModuleFrame({
   canGoBack,
   children
 }) {
-  const details = getModuleFrameDetails(title);
-  const hasNextStep = Boolean(details.nextModule);
+  const previousMap = {
+    "Clients": "home",
+    "Cases": "Clients",
+    "Matters": "Clients",
+    "Court Dates": "Cases",
+    "Documents": "Court Dates",
+    "Review / Save & Submit": "Documents",
+    "Review Submit": "Documents",
+    "Staff": "home",
+    "Matter Intake": "home"
+  };
 
-  function returnToWorkspace() {
+  const nextMap = {
+    "Clients": "Cases",
+    "Cases": "Court Dates",
+    "Matters": "Court Dates",
+    "Court Dates": "Documents",
+    "Documents": "Review Submit",
+    "Matter Intake": "Clients"
+  };
+
+  const previousTarget = previousMap[title] || "home";
+  const nextTarget = nextMap[title] || "";
+
+  function goPrevious() {
+    if (previousTarget === "home") {
+      setModule("home");
+      return;
+    }
+
+    setModule(previousTarget);
+  }
+
+  function goHome() {
     setModule("home");
   }
 
-  function goToNextStep() {
-    if (details.nextModule) {
-      setModule(details.nextModule);
+  function goNext() {
+    if (!nextTarget) {
+      return;
     }
+
+    setModule(nextTarget);
   }
 
   return (
     <section className="module-frame">
-      <header className="module-frame-header">
-        <div className="module-frame-copy">
-          <span className="module-context">{details.group}</span>
-          <h2>{details.displayTitle}</h2>
-          <p className="module-description">{details.description}</p>
-          {details.position ? (
-            <span className="module-position">{details.position}</span>
-          ) : null}
+      <div className="module-frame-header">
+        <div>
+          <p className="eyebrow">Workflow module</p>
+          <h2>{title}</h2>
         </div>
 
         <div className="module-frame-actions">
-          <button
-            type="button"
-            className="module-secondary-button"
-            onClick={canGoBack ? previous : returnToWorkspace}
-          >
-            {canGoBack ? "Back" : "Return to Workspace"}
+          <button type="button" onClick={goPrevious}>
+            ← Previous
           </button>
 
-          <button
-            type="button"
-            className="module-secondary-button"
-            onClick={returnToWorkspace}
-          >
-            Return to Workspace
+          <button type="button" onClick={goHome}>
+            Main Page
           </button>
 
-          {hasNextStep ? (
-            <button
-              type="button"
-              className="module-next-button"
-              onClick={goToNextStep}
-            >
-              Next: {details.nextLabel}
+          {nextTarget ? (
+            <button type="button" onClick={goNext}>
+              Save & Next →
             </button>
-          ) : null}
+          ) : (
+            <button type="button" onClick={goHome}>
+              Complete / Return Home
+            </button>
+          )}
         </div>
-      </header>
+      </div>
 
       <div className="module-frame-body">
         {children}
