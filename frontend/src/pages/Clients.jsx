@@ -3610,7 +3610,7 @@ function isUnavailablePlaceholder(value) {
             Return to Matter Intake
           </button>
         </div>
-          
+
         <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
           <div className="client-profile-summary-card">
             <p className="client-profile-summary-kicker">Profile Status</p>
