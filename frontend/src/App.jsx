@@ -210,6 +210,19 @@ function getModuleFrameDetails(title) {
   };
 }
 
+const moduleRouteAliases = {
+  "Client Details": "Clients",
+  "Case / Matter Details": "Cases",
+  "Matter Workspace": "Matters",
+  "Review / Save & Submit": "Review Submit",
+  "Review And Completion": "Review Submit",
+  "Completion Review And Completion": "Review Submit",
+};
+
+function normalizeWorkspaceModule(moduleName) {
+  return moduleRouteAliases[moduleName] || moduleName;
+}
+
 export default function App() {
   const [view, setView] = useState("workspace");
   const [module, setModule] = useState("home");
@@ -257,18 +270,19 @@ export default function App() {
   const failed = results.length - passed;
 
   function goToModule(nextModule) {
-    if (nextModule === module) return;
+    const resolvedModule = normalizeWorkspaceModule(nextModule);
 
-    if (nextModule === "home") {
+    if (resolvedModule === module) return;
+
+    if (resolvedModule === "home") {
       setModuleHistory([]);
       setModule("home");
       return;
     }
 
     setModuleHistory((previousHistory) => [...previousHistory, module]);
-    setModule(nextModule);
+    setModule(resolvedModule);
   }
-
   function backToPreviousModule() {
     setModuleHistory((previousHistory) => {
       if (previousHistory.length === 0) {
@@ -382,7 +396,13 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
   if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
   if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
   if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
-  if (module === "Review Submit") return <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}><ReviewSubmit setModule={setModule} /></ModuleFrame>;
+  if (module === "Review Submit" || module === "Review / Save & Submit" || module === "Review And Completion" || module === "Completion Review And Completion") {
+    return (
+      <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+        <ReviewSubmit setModule={setModule} />
+      </ModuleFrame>
+    );
+  }
   if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
 
   return (
