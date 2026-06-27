@@ -3624,7 +3624,7 @@ function isUnavailablePlaceholder(value) {
           </div>
           <div className="client-directory-actions">
             <button type="button" className="btn btn-primary" onClick={openNewClientProfile}>
-              + Add Client Profile / Create New Client
+              + Add/Create New Client Profile
             </button>
             {showClientProfileForm && (
               <button type="button" className="btn btn-secondary" onClick={closeClientProfileForm}>
@@ -5500,3 +5500,4 @@ function isUnavailablePlaceholder(value) {
     </section>
   );
 }
+
