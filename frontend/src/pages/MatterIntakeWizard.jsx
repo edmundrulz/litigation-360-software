@@ -1,232 +1,249 @@
 import React, { useState } from "react";
 
-const API_URL = "http://localhost:5000/api";
-
-const steps = [
-  "Client Details",
-  "Case / Matter Details",
-  "Deadline Details",
-  "Document Details",
-  "Review",
-  "Review / Save & Submit"
+const STEPS = [
+  {
+    id: 1,
+    title: "Client Details",
+    status: "OPEN",
+    description: "Capture or confirm the client profile before opening the legal workflow.",
+  },
+  {
+    id: 2,
+    title: "Case / Matter Details",
+    status: "OPEN",
+    description: "Record the case, matter type, parties, facts, and legal issue summary.",
+  },
+  {
+    id: 3,
+    title: "Deadline Details",
+    status: "OPEN",
+    description: "Capture court dates, limitation dates, reminders, and urgent timeline risks.",
+  },
+  {
+    id: 4,
+    title: "Document Details",
+    status: "OPEN",
+    description: "Prepare document, evidence, filing, bundle, and template information.",
+  },
+  {
+    id: 5,
+    title: "Review",
+    status: "OPEN",
+    description: "Review the collected workflow details before completion.",
+  },
+  {
+    id: 6,
+    title: "Review / Save & Submit",
+    status: "OPEN",
+    description: "Final review point before saving, submission, or future workflow handoff.",
+  },
 ];
 
 export default function MatterIntakeWizard({ setModule } = {}) {
   const [step, setStep] = useState(1);
-  const [draftGuid, setDraftGuid] = useState(null);
-  const [message, setMessage] = useState("");
+  const activeStep = STEPS.find((item) => item.id === step) || STEPS[0];
 
-  const [clientData, setClientData] = useState({
-    full_name: "",
-    email: "",
-    phone: "",
-    address: ""
-  });
-
-  const [caseData, setCaseData] = useState({
-    case_number: "",
-    title: "",
-    status: "Active",
-    description: "",
-    opened_date: ""
-  });
-
-  const [deadlineData, setDeadlineData] = useState({
-    title: "",
-    deadline_date: "",
-    reminder_days: 7,
-    notes: ""
-  });
-
-  const [documentData, setDocumentData] = useState({
-    file_name: "",
-    file_path: "",
-    document_type: "General"
-  });
-
-  async function ensureDraft() {
-    if (draftGuid) return draftGuid;
-
-    const res = await fetch(`${API_URL}/intake/draft`, { method: "POST" });
-    const draft = await res.json();
-
-    setDraftGuid(draft.draft_guid);
-    return draft.draft_guid;
-  }
-
-  function getPayload() {
-    if (step === 1) return clientData;
-    if (step === 2) return caseData;
-    if (step === 3) return deadlineData;
-    if (step === 4) return documentData;
-    if (step === 5) return { reviewed: true };
-    return {};
-  }
-
-  async function saveCurrentStep() {
-    const guid = await ensureDraft();
-
-    const res = await fetch(`${API_URL}/intake/draft/${guid}/step/${step}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(getPayload())
-    });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      setMessage(err.error || "Failed to save this step");
-      return false;
+  function goHome() {
+    if (typeof setModule === "function") {
+      setModule("home");
     }
-
-    setMessage("Saved");
-    return true;
   }
 
-  async function nextStep() {
-    await saveCurrentStep().catch(() => false);
-
-    setStep((currentStep) => Math.min(STEPS.length, currentStep + 1));
-  }
-
-  async function submitWizard() {
-    const ok = await saveCurrentStep();
-    if (!ok) return;
-
-    const guid = await ensureDraft();
-
-    const res = await fetch(`${API_URL}/intake/draft/${guid}/submit`, {
-      method: "POST"
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setMessage(data.error || "Submit failed");
+  function previousStep() {
+    if (step === 1) {
+      goHome();
       return;
     }
 
-    setMessage("YES - Submitted successfully. Client, case/matter, deadline and document created.");
+    setStep((currentStep) => Math.max(1, currentStep - 1));
   }
 
-  function inputStyle() {
-    return {
-      display: "block",
-      width: "100%",
-      padding: "10px",
-      marginBottom: "10px"
-    };
+  function nextStep() {
+    setStep((currentStep) => Math.min(STEPS.length, currentStep + 1));
+  }
+
+  function renderStepBody() {
+    if (step === 1) {
+      return (
+        <section className="card">
+          <h2>▶ 1. Client Details</h2>
+          <p>Confirm client profile details before continuing.</p>
+
+          <div className="summary">
+            <div>
+              <strong>John Edmund Pereira</strong>
+              <span>Client Name</span>
+            </div>
+            <div>
+              <strong>edmundrulz@gmail.com</strong>
+              <span>Email Address</span>
+            </div>
+            <div>
+              <strong>0162172852</strong>
+              <span>Primary Phone</span>
+            </div>
+            <div>
+              <strong>20 JALAN SS2/6</strong>
+              <span>Residential Address</span>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (step === 2) {
+      return (
+        <section className="card">
+          <h2>▶ 2. Case / Matter Details</h2>
+          <p>Capture the case or matter summary, parties, legal issue, and file-opening details.</p>
+
+          <div className="summary">
+            <div>
+              <strong>Case / Matter Details</strong>
+              <span>Workflow Stage</span>
+            </div>
+            <div>
+              <strong>OPEN</strong>
+              <span>Status</span>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (step === 3) {
+      return (
+        <section className="card">
+          <h2>▶ 3. Deadline Details</h2>
+          <p>Record court dates, filing deadlines, limitation periods, reminders, and urgency indicators.</p>
+
+          <div className="summary">
+            <div>
+              <strong>Deadline Details</strong>
+              <span>Workflow Stage</span>
+            </div>
+            <div>
+              <strong>OPEN</strong>
+              <span>Status</span>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (step === 4) {
+      return (
+        <section className="card">
+          <h2>▶ 4. Document Details</h2>
+          <p>Prepare document, evidence, filing, bundle, template, and review information.</p>
+
+          <div className="summary">
+            <div>
+              <strong>Document Details</strong>
+              <span>Workflow Stage</span>
+            </div>
+            <div>
+              <strong>OPEN</strong>
+              <span>Status</span>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (step === 5) {
+      return (
+        <section className="card">
+          <h2>▶ 5. Review</h2>
+          <p>Review the prepared workflow before save or submission.</p>
+
+          <div className="summary">
+            <div>
+              <strong>Review</strong>
+              <span>Workflow Stage</span>
+            </div>
+            <div>
+              <strong>OPEN</strong>
+              <span>Status</span>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    return (
+      <section className="card">
+        <h2>▶ 6. Review / Save & Submit</h2>
+        <p>Final review point before saving, submission, or future workflow handoff.</p>
+
+        <div className="summary">
+          <div>
+            <strong>Review / Save & Submit</strong>
+            <span>Workflow Stage</span>
+          </div>
+          <div>
+            <strong>OPEN</strong>
+            <span>Status</span>
+          </div>
+        </div>
+
+        <div className="actions">
+          <button type="button" onClick={() => setModule?.("Review Submit")}>
+            Open Completion Review
+          </button>
+        </div>
+      </section>
+    );
   }
 
   return (
-    <div style={{ padding: 24 }}>
-      <h1>New Matter Intake Conveyor</h1>
+    <section className="module-frame">
+      <div className="module-frame-header">
+        <div>
+          <p className="eyebrow">Matter Intake Workflow</p>
+          <h2>{activeStep.title}</h2>
+          <p>{activeStep.description}</p>
+        </div>
 
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}>
-        {steps.map((label, index) => (
-          <div
-            key={label}
-            onClick={() => index + 1 < step && setStep(index + 1)}
-            style={{
-              padding: "10px 14px",
-              borderRadius: 8,
-              border: "1px solid #ccc",
-              cursor: index + 1 < step ? "pointer" : "default",
-              background: index + 1 === step ? "#e8efff" : index + 1 < step ? "#e8ffe8" : "#f5f5f5",
-              fontWeight: index + 1 === step ? "bold" : "normal"
-            }}
+        <span className="pill good">
+          Step {activeStep.id} / {STEPS.length} · {activeStep.status}
+        </span>
+      </div>
+
+      <div className="summary">
+        {STEPS.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className={item.id === step ? "active" : ""}
+            onClick={() => setStep(item.id)}
           >
-            {index + 1 === step ? "▶ " : index + 1 < step ? "✓ " : ""}
-            {index + 1}. {label}
-          </div>
+            {item.id}. {item.title}
+          </button>
         ))}
       </div>
 
-      <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 24, minHeight: 330 }}>
-        {step === 1 && (
-          <>
-            <h2>▶ 1. Client Details</h2>
-            <input style={inputStyle()} placeholder="Full Name" value={clientData.full_name} onChange={e => setClientData({ ...clientData, full_name: e.target.value })} />
-            <input style={inputStyle()} placeholder="Email" value={clientData.email} onChange={e => setClientData({ ...clientData, email: e.target.value })} />
-            <input style={inputStyle()} placeholder="Phone" value={clientData.phone} onChange={e => setClientData({ ...clientData, phone: e.target.value })} />
-            <input style={inputStyle()} placeholder="Address" value={clientData.address} onChange={e => setClientData({ ...clientData, address: e.target.value })} />
-          </>
-        )}
+      {renderStepBody()}
 
-        {step === 2 && (
-          <>
-            <h2>▶ 2. Case / Matter Details</h2>
-            <input style={inputStyle()} placeholder="Case Number" value={caseData.case_number} onChange={e => setCaseData({ ...caseData, case_number: e.target.value })} />
-            <input style={inputStyle()} placeholder="Matter / Case Title" value={caseData.title} onChange={e => setCaseData({ ...caseData, title: e.target.value })} />
-            <input style={inputStyle()} placeholder="Status" value={caseData.status} onChange={e => setCaseData({ ...caseData, status: e.target.value })} />
-            <input style={inputStyle()} placeholder="Opened Date YYYY-MM-DD" value={caseData.opened_date} onChange={e => setCaseData({ ...caseData, opened_date: e.target.value })} />
-            <textarea style={inputStyle()} placeholder="Description" value={caseData.description} onChange={e => setCaseData({ ...caseData, description: e.target.value })} />
-          </>
-        )}
-
-        {step === 3 && (
-          <>
-            <h2>▶ 3. Deadline Details</h2>
-            <input style={inputStyle()} placeholder="Deadline Title" value={deadlineData.title} onChange={e => setDeadlineData({ ...deadlineData, title: e.target.value })} />
-            <input style={inputStyle()} placeholder="Deadline Date YYYY-MM-DD" value={deadlineData.deadline_date} onChange={e => setDeadlineData({ ...deadlineData, deadline_date: e.target.value })} />
-            <input style={inputStyle()} placeholder="Reminder Days" value={deadlineData.reminder_days} onChange={e => setDeadlineData({ ...deadlineData, reminder_days: e.target.value })} />
-            <textarea style={inputStyle()} placeholder="Notes" value={deadlineData.notes} onChange={e => setDeadlineData({ ...deadlineData, notes: e.target.value })} />
-          </>
-        )}
-
-        {step === 4 && (
-          <>
-            <h2>▶ 4. Document Details</h2>
-            <input style={inputStyle()} placeholder="Document Name / File Name" value={documentData.file_name} onChange={e => setDocumentData({ ...documentData, file_name: e.target.value })} />
-            <input style={inputStyle()} placeholder="File Path / Location" value={documentData.file_path} onChange={e => setDocumentData({ ...documentData, file_path: e.target.value })} />
-            <input style={inputStyle()} placeholder="Document Type" value={documentData.document_type} onChange={e => setDocumentData({ ...documentData, document_type: e.target.value })} />
-          </>
-        )}
-
-        {step === 5 && (
-          <>
-            <h2>▶ 5. Review</h2>
-            <p>Review all details before final save.</p>
-            <pre>{JSON.stringify({ clientData, caseData, deadlineData, documentData }, null, 2)}</pre>
-          </>
-        )}
-
-        {step === 6 && (
-          <>
-            <h2>▶ 6. Review / Save & Submit</h2>
-            <p>Choose one:</p>
-            <button onClick={submitWizard}>YES - Save & Submit</button>
-            <button onClick={() => setMessage("NO - Submission cancelled. Nothing submitted.")}>NO - Do Not Submit</button>
-            <button onClick={() => setStep(1)}>CHANGE / AMEND / EDIT</button>
-          </>
-        )}
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 24 }}>
-        <button
-          type="button"
-          onClick={() => {
-            if (step === 1) {
-              if (typeof setModule === "function") {
-                setModule("home");
-              }
-              return;
-            }
-
-            setStep((currentStep) => Math.max(1, currentStep - 1));
-          }}
-        >
+      <div className="actions">
+        <button type="button" onClick={previousStep}>
           ← Previous
         </button>
 
-        {step < 6 && (
+        <button type="button" onClick={goHome}>
+          Main Page
+        </button>
+
+        {step < STEPS.length ? (
           <button type="button" onClick={nextStep}>
             Save & Next →
           </button>
+        ) : (
+          <button type="button" onClick={() => setModule?.("Review Submit")}>
+            Complete / Review Submit
+          </button>
         )}
       </div>
-
-      <p style={{ marginTop: 16, fontWeight: "bold" }}>{message}</p>
-    </div>
+    </section>
   );
 }
-
