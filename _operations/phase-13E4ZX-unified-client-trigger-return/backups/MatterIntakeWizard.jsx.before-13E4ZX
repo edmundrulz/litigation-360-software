@@ -567,11 +567,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
                 Clear Search
               </button>
               <button type="button" className="secondary-action" onClick={() => setModule?.("Clients")}>
-                Advanced Client Directory / Manual Management
+                Open Full Clients Directory
               </button>
-              <small className="intake-small">
-                Opens the full manual Clients workspace. Your guided Matter Intake conveyor remains separate.
-              </small>
             </div>
           </div>
 
@@ -1113,4 +1110,3 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     </section>
   );
 }
-
