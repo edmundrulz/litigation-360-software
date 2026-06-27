@@ -1,0 +1,192 @@
+# Phase 13D.2 Workspace Routing Evidence
+# Date: 2026-06-27
+# Source: frontend/src/App.jsx
+
+## Workspace Module Routing Evidence
+
+
+  frontend\src\App.jsx:4:import { MenuPlatform } from "./features/menu-platform";
+  frontend\src\App.jsx:5:
+> frontend\src\App.jsx:6:import Clients from "./pages/Clients";
+> frontend\src\App.jsx:7:import Cases from "./pages/Cases";
+> frontend\src\App.jsx:8:import Matters from "./pages/Matters";
+  frontend\src\App.jsx:9:import Deadlines from "./pages/Deadlines";
+> frontend\src\App.jsx:10:import Documents from "./pages/Documents";
+> frontend\src\App.jsx:11:import Staff from "./pages/Staff";
+  frontend\src\App.jsx:12:
+  frontend\src\App.jsx:13:const endpoints = [
+  frontend\src\App.jsx:29:    items: [
+  frontend\src\App.jsx:30:      {
+> frontend\src\App.jsx:31:        module: "Matter Intake",
+> frontend\src\App.jsx:32:        title: "Matter Intake",
+  frontend\src\App.jsx:33:        status: "OPEN",
+  frontend\src\App.jsx:34:        sequence: "1",
+> frontend\src\App.jsx:35:        text: "Guided starting point for new matter intake and workflow preparation.",
+  frontend\src\App.jsx:36:      },
+  frontend\src\App.jsx:37:      {
+> frontend\src\App.jsx:38:        module: "Clients",
+  frontend\src\App.jsx:39:        title: "Client Details",
+  frontend\src\App.jsx:40:        status: "OPEN",
+  frontend\src\App.jsx:51:    items: [
+  frontend\src\App.jsx:52:      {
+> frontend\src\App.jsx:53:        module: "Cases",
+  frontend\src\App.jsx:54:        title: "Case / Matter Details",
+  frontend\src\App.jsx:55:        status: "OPEN",
+  frontend\src\App.jsx:58:      },
+  frontend\src\App.jsx:59:      {
+> frontend\src\App.jsx:60:        module: "Matters",
+  frontend\src\App.jsx:61:        title: "Matter Workspace",
+  frontend\src\App.jsx:62:        status: "OPEN",
+  frontend\src\App.jsx:65:      },
+  frontend\src\App.jsx:66:      {
+> frontend\src\App.jsx:67:        module: "Court Dates",
+> frontend\src\App.jsx:68:        title: "Court Dates",
+  frontend\src\App.jsx:69:        status: "OPEN",
+  frontend\src\App.jsx:70:        sequence: "5",
+  frontend\src\App.jsx:72:      },
+  frontend\src\App.jsx:73:      {
+> frontend\src\App.jsx:74:        module: "Documents",
+> frontend\src\App.jsx:75:        title: "Documents",
+  frontend\src\App.jsx:76:        status: "OPEN",
+  frontend\src\App.jsx:77:        sequence: "6",
+  frontend\src\App.jsx:87:    items: [
+  frontend\src\App.jsx:88:      {
+> frontend\src\App.jsx:89:        module: "Review Submit",
+  frontend\src\App.jsx:90:        title: "Review / Save & Submit",
+  frontend\src\App.jsx:91:        status: "OPEN",
+  frontend\src\App.jsx:102:    items: [
+  frontend\src\App.jsx:103:      {
+> frontend\src\App.jsx:104:        module: "Staff",
+> frontend\src\App.jsx:105:        title: "Staff",
+  frontend\src\App.jsx:106:        status: "OPEN",
+  frontend\src\App.jsx:107:        sequence: "A",
+> frontend\src\App.jsx:108:        text: "Staff records and internal team administration.",
+  frontend\src\App.jsx:109:      },
+  frontend\src\App.jsx:110:    ],
+  frontend\src\App.jsx:120:      { module: "Court Navigation", title: "Court Navigation", status: "PLANNED", sequence: "P3", text: "Court location intelligence, travel planning and readiness." },
+  frontend\src\App.jsx:121:      { module: "Reports", title: "Reports", status: "PLANNED", sequence: "P4", text: "Matter summaries, workload reports and executive overview." },
+> frontend\src\App.jsx:122:      { module: "Lawyer View", title: "Lawyer View", status: "PLANNED", sequence: "P5", text: "Hearings, active matters, pleadings, deadlines and court preparation." },
+  frontend\src\App.jsx:123:      { module: "Clerk View", title: "Clerk View", status: "PLANNED", sequence: "P6", text: "Filing tasks, service tracking, bundles and registry follow-ups." },
+  frontend\src\App.jsx:124:      { module: "Admin View", title: "Admin View", status: "PLANNED", sequence: "P7", text: "Client intake, scheduling, reminders and office coordination." },
+  frontend\src\App.jsx:142:  const [view, setView] = useState("workspace");
+  frontend\src\App.jsx:143:  const [module, setModule] = useState("home");
+> frontend\src\App.jsx:144:  const [moduleHistory, setModuleHistory] = useState([]);
+  frontend\src\App.jsx:145:  const [results, setResults] = useState([]);
+  frontend\src\App.jsx:146:  const [updated, setUpdated] = useState("Pending");
+  frontend\src\App.jsx:185:  const failed = results.length - passed;
+  frontend\src\App.jsx:186:
+> frontend\src\App.jsx:187:  function goToModule(nextModule) {
+  frontend\src\App.jsx:188:    if (nextModule === module) return;
+  frontend\src\App.jsx:189:
+  frontend\src\App.jsx:190:    if (nextModule === "home") {
+> frontend\src\App.jsx:191:      setModuleHistory([]);
+  frontend\src\App.jsx:192:      setModule("home");
+  frontend\src\App.jsx:193:      return;
+  frontend\src\App.jsx:194:    }
+  frontend\src\App.jsx:195:
+> frontend\src\App.jsx:196:    setModuleHistory((previousHistory) => [...previousHistory, module]);
+  frontend\src\App.jsx:197:    setModule(nextModule);
+  frontend\src\App.jsx:198:  }
+  frontend\src\App.jsx:199:
+  frontend\src\App.jsx:200:  function backToPreviousModule() {
+> frontend\src\App.jsx:201:    setModuleHistory((previousHistory) => {
+  frontend\src\App.jsx:202:      if (previousHistory.length === 0) {
+  frontend\src\App.jsx:203:        setModule("home");
+  frontend\src\App.jsx:212:  }
+  frontend\src\App.jsx:213:
+> frontend\src\App.jsx:214:  function openWorkspace() {
+  frontend\src\App.jsx:215:    setView("workspace");
+> frontend\src\App.jsx:216:    setModuleHistory([]);
+  frontend\src\App.jsx:217:    setModule("home");
+  frontend\src\App.jsx:218:  }
+  frontend\src\App.jsx:231:            onNavigate={(target) => {
+  frontend\src\App.jsx:232:              if (target === "home") {
+> frontend\src\App.jsx:233:                openWorkspace();
+  frontend\src\App.jsx:234:              }
+  frontend\src\App.jsx:235:            }}
+  frontend\src\App.jsx:236:            onAction={(item) => {
+  frontend\src\App.jsx:237:              if (item.id === "home") {
+> frontend\src\App.jsx:238:                openWorkspace();
+  frontend\src\App.jsx:239:              }
+  frontend\src\App.jsx:240:            }}
+  frontend\src\App.jsx:274:          <Workspace
+  frontend\src\App.jsx:275:            module={module}
+> frontend\src\App.jsx:276:            setModule={goToModule}
+  frontend\src\App.jsx:277:            previous={backToPreviousModule}
+> frontend\src\App.jsx:278:            canGoBack={moduleHistory.length > 0}
+  frontend\src\App.jsx:279:            results={results}
+  frontend\src\App.jsx:280:            runChecks={runChecks}
+  frontend\src\App.jsx:304:}
+  frontend\src\App.jsx:305:
+> frontend\src\App.jsx:306:function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+> frontend\src\App.jsx:307:  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule} previous={previous} canGoBack={canGoBack}><Clients /></ModuleFrame>;
+> frontend\src\App.jsx:308:  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
+> frontend\src\App.jsx:309:  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+> frontend\src\App.jsx:310:  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+> frontend\src\App.jsx:311:  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+> frontend\src\App.jsx:312:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+> frontend\src\App.jsx:313:  if (module === "Review Submit") return <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}><ReviewSubmit setModule={setModule} /></ModuleFrame>;
+> frontend\src\App.jsx:314:  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  frontend\src\App.jsx:315:
+  frontend\src\App.jsx:316:  return (
+  frontend\src\App.jsx:321:
+  frontend\src\App.jsx:322:        <div className="actions">
+> frontend\src\App.jsx:323:          <button onClick={() => setModule("Clients")}>▶ 1. Client Details</button>
+> frontend\src\App.jsx:324:          <button onClick={() => setModule("Cases")}>2. Case / Matter Details</button>
+> frontend\src\App.jsx:325:          <button onClick={() => setModule("Court Dates")}>3. Deadline Details</button>
+> frontend\src\App.jsx:326:          <button onClick={() => setModule("Documents")}>4. Document Details</button>
+> frontend\src\App.jsx:327:          <button onClick={() => setModule("Review Submit")}>5. Review</button>
+> frontend\src\App.jsx:328:          <button onClick={() => setModule("Review Submit")}>6. Save & Submit</button>
+  frontend\src\App.jsx:329:        </div>
+  frontend\src\App.jsx:330:      </section>
+  frontend\src\App.jsx:384:}) {
+  frontend\src\App.jsx:385:  const nextMap = {
+> frontend\src\App.jsx:386:    "Clients": "Cases",
+> frontend\src\App.jsx:387:    "Cases": "Court Dates",
+> frontend\src\App.jsx:388:    "Matters": "Court Dates",
+> frontend\src\App.jsx:389:    "Court Dates": "Documents",
+> frontend\src\App.jsx:390:    "Documents": "Review Submit",
+> frontend\src\App.jsx:391:    "Staff": "home",
+  frontend\src\App.jsx:392:    "Review / Save & Submit": "home",
+> frontend\src\App.jsx:393:    "Matter Intake": "home"
+  frontend\src\App.jsx:394:  };
+  frontend\src\App.jsx:395:
+  frontend\src\App.jsx:396:  const previousMap = {
+> frontend\src\App.jsx:397:    "Clients": "home",
+> frontend\src\App.jsx:398:    "Cases": "Clients",
+> frontend\src\App.jsx:399:    "Matters": "Clients",
+> frontend\src\App.jsx:400:    "Court Dates": "Cases",
+> frontend\src\App.jsx:401:    "Documents": "Court Dates",
+> frontend\src\App.jsx:402:    "Review / Save & Submit": "Documents",
+> frontend\src\App.jsx:403:    "Staff": "home",
+> frontend\src\App.jsx:404:    "Matter Intake": "home"
+  frontend\src\App.jsx:405:  };
+  frontend\src\App.jsx:406:
+  frontend\src\App.jsx:409:
+  frontend\src\App.jsx:410:  const nextLabel =
+> frontend\src\App.jsx:411:    title === "Clients" ? "Save & Next -> Case / Matter Details" :
+> frontend\src\App.jsx:412:    title === "Cases" ? "Save & Next -> Deadline Details" :
+> frontend\src\App.jsx:413:    title === "Matters" ? "Save & Next -> Deadline Details" :
+> frontend\src\App.jsx:414:    title === "Court Dates" ? "Save & Next -> Document Details" :
+> frontend\src\App.jsx:415:    title === "Documents" ? "Save & Next -> Review / Submit" :
+  frontend\src\App.jsx:416:    title === "Review / Save & Submit" ? "Complete / Save / Submit" :
+  frontend\src\App.jsx:417:    "Next Page";
+  frontend\src\App.jsx:479:        </button>
+  frontend\src\App.jsx:480:
+> frontend\src\App.jsx:481:        <button onClick={() => setModule("Clients")}>
+  frontend\src\App.jsx:482:          Change / Amend / Edit Client Details
+  frontend\src\App.jsx:483:        </button>
+  frontend\src\App.jsx:484:
+> frontend\src\App.jsx:485:        <button onClick={() => setModule("Cases")}>
+  frontend\src\App.jsx:486:          Change / Amend / Edit Case / Matter Details
+  frontend\src\App.jsx:487:        </button>
+  frontend\src\App.jsx:488:
+> frontend\src\App.jsx:489:        <button onClick={() => setModule("Court Dates")}>
+  frontend\src\App.jsx:490:          Change / Amend / Edit Deadline Details
+  frontend\src\App.jsx:491:        </button>
+  frontend\src\App.jsx:492:
+> frontend\src\App.jsx:493:        <button onClick={() => setModule("Documents")}>
+  frontend\src\App.jsx:494:          Change / Amend / Edit Document Details
+  frontend\src\App.jsx:495:        </button>
+
+

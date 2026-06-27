@@ -1,0 +1,294 @@
+# Phase 13D.2 ModuleFrame Evidence
+# Date: 2026-06-27
+# Source: frontend/src/App.jsx
+
+## ModuleFrame / Back / Return / Next Behaviour Evidence
+
+
+  frontend\src\App.jsx:13:const endpoints = [
+  frontend\src\App.jsx:14:  ["Monitoring", "/api/enterprise/monitoring/health"],
+  frontend\src\App.jsx:15:  ["Deployment Readiness", "/api/enterprise/deployment-centre/health"],
+> frontend\src\App.jsx:16:  ["Backup Recovery", "/api/enterprise/backup-recovery/health"],
+  frontend\src\App.jsx:17:  ["Performance", "/api/enterprise/performance/health"],
+  frontend\src\App.jsx:18:  ["Governance", "/api/enterprise/governance/health"],
+  frontend\src\App.jsx:19:  ["Maps", "/api/enterprise/maps/health"],
+  frontend\src\App.jsx:140:
+  frontend\src\App.jsx:141:export default function App() {
+  frontend\src\App.jsx:142:  const [view, setView] = useState("workspace");
+> frontend\src\App.jsx:143:  const [module, setModule] = useState("home");
+> frontend\src\App.jsx:144:  const [moduleHistory, setModuleHistory] = useState([]);
+  frontend\src\App.jsx:145:  const [results, setResults] = useState([]);
+  frontend\src\App.jsx:146:  const [updated, setUpdated] = useState("Pending");
+  frontend\src\App.jsx:147:
+  frontend\src\App.jsx:178:  useEffect(() => {
+  frontend\src\App.jsx:179:    runChecks();
+  frontend\src\App.jsx:180:    const timer = setInterval(runChecks, 30000);
+> frontend\src\App.jsx:181:    return () => clearInterval(timer);
+  frontend\src\App.jsx:182:  }, []);
+  frontend\src\App.jsx:183:
+  frontend\src\App.jsx:184:  const passed = results.filter(r => r.ok).length;
+  frontend\src\App.jsx:185:  const failed = results.length - passed;
+  frontend\src\App.jsx:186:
+> frontend\src\App.jsx:187:  function goToModule(nextModule) {
+> frontend\src\App.jsx:188:    if (nextModule === module) return;
+  frontend\src\App.jsx:189:
+> frontend\src\App.jsx:190:    if (nextModule === "home") {
+> frontend\src\App.jsx:191:      setModuleHistory([]);
+> frontend\src\App.jsx:192:      setModule("home");
+> frontend\src\App.jsx:193:      return;
+  frontend\src\App.jsx:194:    }
+  frontend\src\App.jsx:195:
+> frontend\src\App.jsx:196:    setModuleHistory((previousHistory) => [...previousHistory, module]);
+> frontend\src\App.jsx:197:    setModule(nextModule);
+  frontend\src\App.jsx:198:  }
+  frontend\src\App.jsx:199:
+> frontend\src\App.jsx:200:  function backToPreviousModule() {
+> frontend\src\App.jsx:201:    setModuleHistory((previousHistory) => {
+> frontend\src\App.jsx:202:      if (previousHistory.length === 0) {
+> frontend\src\App.jsx:203:        setModule("home");
+> frontend\src\App.jsx:204:        return previousHistory;
+  frontend\src\App.jsx:205:      }
+  frontend\src\App.jsx:206:
+> frontend\src\App.jsx:207:      const previousModule = previousHistory[previousHistory.length - 1];
+> frontend\src\App.jsx:208:      setModule(previousModule);
+  frontend\src\App.jsx:209:
+> frontend\src\App.jsx:210:      return previousHistory.slice(0, -1);
+  frontend\src\App.jsx:211:    });
+  frontend\src\App.jsx:212:  }
+  frontend\src\App.jsx:213:
+  frontend\src\App.jsx:214:  function openWorkspace() {
+  frontend\src\App.jsx:215:    setView("workspace");
+> frontend\src\App.jsx:216:    setModuleHistory([]);
+> frontend\src\App.jsx:217:    setModule("home");
+  frontend\src\App.jsx:218:  }
+  frontend\src\App.jsx:219:
+> frontend\src\App.jsx:220:  return (
+  frontend\src\App.jsx:221:    <div className="shell">
+  frontend\src\App.jsx:222:      <aside className="sidebar">
+  frontend\src\App.jsx:223:        <div className="brand">Litigation 360</div>
+  frontend\src\App.jsx:266:          </div>
+  frontend\src\App.jsx:267:
+  frontend\src\App.jsx:268:          <span className={failed ? "pill bad" : "pill good"}>
+> frontend\src\App.jsx:269:            {failed ? "BACKEND CHECK REQUIRED" : "SYSTEM HEALTHY"}
+  frontend\src\App.jsx:270:          </span>
+  frontend\src\App.jsx:271:        </header>
+  frontend\src\App.jsx:272:
+  frontend\src\App.jsx:273:        {view === "workspace" && (
+  frontend\src\App.jsx:274:          <Workspace
+  frontend\src\App.jsx:275:            module={module}
+> frontend\src\App.jsx:276:            setModule={goToModule}
+> frontend\src\App.jsx:277:            previous={backToPreviousModule}
+> frontend\src\App.jsx:278:            canGoBack={moduleHistory.length > 0}
+  frontend\src\App.jsx:279:            results={results}
+  frontend\src\App.jsx:280:            runChecks={runChecks}
+  frontend\src\App.jsx:281:            passed={passed}
+  frontend\src\App.jsx:293:}
+  frontend\src\App.jsx:294:
+  frontend\src\App.jsx:295:function viewTitle(view, module) {
+> frontend\src\App.jsx:296:  if (view === "workspace" && module !== "home") return "Workspace - " + module;
+  frontend\src\App.jsx:297:
+> frontend\src\App.jsx:298:  return {
+  frontend\src\App.jsx:299:    workspace: "End User Legal Workspace - LEOS Module Command Grid",
+  frontend\src\App.jsx:300:    operations: "Operations Centre",
+  frontend\src\App.jsx:301:    admin: "Admin Centre",
+  frontend\src\App.jsx:303:  }[view];
+  frontend\src\App.jsx:304:}
+  frontend\src\App.jsx:305:
+> frontend\src\App.jsx:306:function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+> frontend\src\App.jsx:307:  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule} previous={previous} canGoBack={canGoBack}><Clients /></ModuleFrame>;
+> frontend\src\App.jsx:308:  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
+> frontend\src\App.jsx:309:  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+> frontend\src\App.jsx:310:  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+> frontend\src\App.jsx:311:  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+> frontend\src\App.jsx:312:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+> frontend\src\App.jsx:313:  if (module === "Review Submit") return <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}><ReviewSubmit setModule={setModule} /></ModuleFrame>;
+> frontend\src\App.jsx:314:  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  frontend\src\App.jsx:315:
+> frontend\src\App.jsx:316:  return (
+  frontend\src\App.jsx:317:    <>
+  frontend\src\App.jsx:318:      <section className="hero">
+  frontend\src\App.jsx:319:        <h2>Litigation 360 LEOS Workspace</h2>
+  frontend\src\App.jsx:320:        <p>Level 10/11 enterprise legal operating system command grid. Open modules are live. Planned modules are visible roadmap placeholders.</p>
+  frontend\src\App.jsx:321:
+  frontend\src\App.jsx:322:        <div className="actions">
+> frontend\src\App.jsx:323:          <button onClick={() => setModule("Clients")}>▶ 1. Client Details</button>
+> frontend\src\App.jsx:324:          <button onClick={() => setModule("Cases")}>2. Case / Matter Details</button>
+> frontend\src\App.jsx:325:          <button onClick={() => setModule("Court Dates")}>3. Deadline Details</button>
+> frontend\src\App.jsx:326:          <button onClick={() => setModule("Documents")}>4. Document Details</button>
+> frontend\src\App.jsx:327:          <button onClick={() => setModule("Review Submit")}>5. Review</button>
+> frontend\src\App.jsx:328:          <button onClick={() => setModule("Review Submit")}>6. Save & Submit</button>
+  frontend\src\App.jsx:329:        </div>
+  frontend\src\App.jsx:330:      </section>
+  frontend\src\App.jsx:331:
+  frontend\src\App.jsx:332:      <section className="summary">
+> frontend\src\App.jsx:333:        <Metric label="Live Backend Modules" value={`${passed}/${results.length}`} />
+  frontend\src\App.jsx:334:        <Metric label="Failed Checks" value={failed} />
+  frontend\src\App.jsx:335:        <Metric label="Last Refresh" value={updated} />
+  frontend\src\App.jsx:336:        <button onClick={runChecks}>Refresh Live Monitor</button>
+  frontend\src\App.jsx:350:              {section.items.map((item) => {
+  frontend\src\App.jsx:351:                const isOpen = item.status === "OPEN";
+  frontend\src\App.jsx:352:
+> frontend\src\App.jsx:353:                return (
+  frontend\src\App.jsx:354:                  <button
+  frontend\src\App.jsx:355:                    key={`${section.id}-${item.module}`}
+  frontend\src\App.jsx:356:                    type="button"
+  frontend\src\App.jsx:357:                    className={isOpen ? "card clickable-card workflow-card" : "card planned-card workflow-card"}
+> frontend\src\App.jsx:358:                    onClick={() => isOpen && setModule(item.module)}
+  frontend\src\App.jsx:359:                    disabled={!isOpen}
+  frontend\src\App.jsx:360:                  >
+  frontend\src\App.jsx:361:                    <span className="card-meta">{item.sequence}</span>
+  frontend\src\App.jsx:373:  );
+  frontend\src\App.jsx:374:}
+  frontend\src\App.jsx:375:
+> frontend\src\App.jsx:376:function ModuleFrame({
+  frontend\src\App.jsx:377:  title,
+> frontend\src\App.jsx:378:  setModule,
+> frontend\src\App.jsx:379:  backToPreviousModule,
+> frontend\src\App.jsx:380:  previous,
+> frontend\src\App.jsx:381:  canGoBack,
+> frontend\src\App.jsx:382:  previousTarget,
+> frontend\src\App.jsx:383:  children
+  frontend\src\App.jsx:384:}) {
+> frontend\src\App.jsx:385:  const nextMap = {
+  frontend\src\App.jsx:386:    "Clients": "Cases",
+  frontend\src\App.jsx:387:    "Cases": "Court Dates",
+  frontend\src\App.jsx:388:    "Matters": "Court Dates",
+  frontend\src\App.jsx:393:    "Matter Intake": "home"
+  frontend\src\App.jsx:394:  };
+  frontend\src\App.jsx:395:
+> frontend\src\App.jsx:396:  const previousMap = {
+  frontend\src\App.jsx:397:    "Clients": "home",
+  frontend\src\App.jsx:398:    "Cases": "Clients",
+  frontend\src\App.jsx:399:    "Matters": "Clients",
+  frontend\src\App.jsx:404:    "Matter Intake": "home"
+  frontend\src\App.jsx:405:  };
+  frontend\src\App.jsx:406:
+> frontend\src\App.jsx:407:  const nextTarget = nextMap[title];
+> frontend\src\App.jsx:408:  const resolvedPreviousTarget = previousTarget || previousMap[title] || "home";
+  frontend\src\App.jsx:409:
+> frontend\src\App.jsx:410:  const nextLabel =
+> frontend\src\App.jsx:411:    title === "Clients" ? "Save & Next -> Case / Matter Details" :
+> frontend\src\App.jsx:412:    title === "Cases" ? "Save & Next -> Deadline Details" :
+> frontend\src\App.jsx:413:    title === "Matters" ? "Save & Next -> Deadline Details" :
+> frontend\src\App.jsx:414:    title === "Court Dates" ? "Save & Next -> Document Details" :
+> frontend\src\App.jsx:415:    title === "Documents" ? "Save & Next -> Review / Submit" :
+  frontend\src\App.jsx:416:    title === "Review / Save & Submit" ? "Complete / Save / Submit" :
+> frontend\src\App.jsx:417:    "Next Page";
+  frontend\src\App.jsx:418:
+> frontend\src\App.jsx:419:  function goPreviousPage() {
+> frontend\src\App.jsx:420:    if (typeof previous === "function" && canGoBack) {
+> frontend\src\App.jsx:421:      previous();
+> frontend\src\App.jsx:422:      return;
+  frontend\src\App.jsx:423:    }
+  frontend\src\App.jsx:424:
+> frontend\src\App.jsx:425:    if (typeof backToPreviousModule === "function" && canGoBack) {
+> frontend\src\App.jsx:426:      backToPreviousModule();
+> frontend\src\App.jsx:427:      return;
+  frontend\src\App.jsx:428:    }
+  frontend\src\App.jsx:429:
+> frontend\src\App.jsx:430:    setModule(resolvedPreviousTarget);
+  frontend\src\App.jsx:431:  }
+  frontend\src\App.jsx:432:
+> frontend\src\App.jsx:433:  return (
+  frontend\src\App.jsx:434:    <>
+  frontend\src\App.jsx:435:      <section className="module-toolbar module-toolbar-fixed">
+  frontend\src\App.jsx:436:        <div className="toolbar-left">
+> frontend\src\App.jsx:437:          <button type="button" onClick={goPreviousPage}>
+> frontend\src\App.jsx:438:            Previous Page
+  frontend\src\App.jsx:439:          </button>
+  frontend\src\App.jsx:440:        </div>
+  frontend\src\App.jsx:441:
+  frontend\src\App.jsx:442:        <div className="toolbar-center">
+> frontend\src\App.jsx:443:          <button type="button" className="toolbar-home-button" onClick={() => setModule("home")}>
+  frontend\src\App.jsx:444:            Home
+  frontend\src\App.jsx:445:          </button>
+  frontend\src\App.jsx:446:          <strong>{title} module is open</strong>
+  frontend\src\App.jsx:447:        </div>
+  frontend\src\App.jsx:448:
+  frontend\src\App.jsx:449:        <div className="toolbar-right">
+> frontend\src\App.jsx:450:          {nextTarget && (
+> frontend\src\App.jsx:451:            <button type="button" onClick={() => setModule(nextTarget)}>
+> frontend\src\App.jsx:452:              {nextLabel}
+  frontend\src\App.jsx:453:            </button>
+  frontend\src\App.jsx:454:          )}
+  frontend\src\App.jsx:455:        </div>
+  frontend\src\App.jsx:456:      </section>
+  frontend\src\App.jsx:457:
+> frontend\src\App.jsx:458:      {children}
+  frontend\src\App.jsx:459:    </>
+  frontend\src\App.jsx:460:  );
+  frontend\src\App.jsx:461:}
+> frontend\src\App.jsx:462:function ReviewSubmit({ setModule }) {
+> frontend\src\App.jsx:463:  return (
+  frontend\src\App.jsx:464:    <section className="hero">
+  frontend\src\App.jsx:465:      <h2>5. Review Details / 6. Save & Submit Details</h2>
+  frontend\src\App.jsx:466:
+  frontend\src\App.jsx:467:      <p>
+  frontend\src\App.jsx:468:        Review the entered details of client, case/matter, deadline and document details.
+> frontend\src\App.jsx:469:        Choose what to do next.
+  frontend\src\App.jsx:470:      </p>
+  frontend\src\App.jsx:471:
+  frontend\src\App.jsx:472:      <div className="actions">
+  frontend\src\App.jsx:474:          YES - Save & Submit Details
+  frontend\src\App.jsx:475:        </button>
+  frontend\src\App.jsx:476:
+> frontend\src\App.jsx:477:        <button onClick={() => setModule("home")}>
+> frontend\src\App.jsx:478:          NO - Return to Main Workspace / HOME
+  frontend\src\App.jsx:479:        </button>
+  frontend\src\App.jsx:480:
+> frontend\src\App.jsx:481:        <button onClick={() => setModule("Clients")}>
+  frontend\src\App.jsx:482:          Change / Amend / Edit Client Details
+  frontend\src\App.jsx:483:        </button>
+  frontend\src\App.jsx:484:
+> frontend\src\App.jsx:485:        <button onClick={() => setModule("Cases")}>
+  frontend\src\App.jsx:486:          Change / Amend / Edit Case / Matter Details
+  frontend\src\App.jsx:487:        </button>
+  frontend\src\App.jsx:488:
+> frontend\src\App.jsx:489:        <button onClick={() => setModule("Court Dates")}>
+  frontend\src\App.jsx:490:          Change / Amend / Edit Deadline Details
+  frontend\src\App.jsx:491:        </button>
+  frontend\src\App.jsx:492:
+> frontend\src\App.jsx:493:        <button onClick={() => setModule("Documents")}>
+  frontend\src\App.jsx:494:          Change / Amend / Edit Document Details
+  frontend\src\App.jsx:495:        </button>
+  frontend\src\App.jsx:496:      </div>
+  frontend\src\App.jsx:499:}
+  frontend\src\App.jsx:500:
+  frontend\src\App.jsx:501:function Operations({ results, run, passed, failed }) {
+> frontend\src\App.jsx:502:  return (
+  frontend\src\App.jsx:503:    <>
+  frontend\src\App.jsx:504:      <section className="summary">
+  frontend\src\App.jsx:505:        <Metric label="Modules Online" value={`${passed}/${results.length}`} />
+  frontend\src\App.jsx:523:}
+  frontend\src\App.jsx:524:
+  frontend\src\App.jsx:525:function Admin() {
+> frontend\src\App.jsx:526:  return (
+  frontend\src\App.jsx:527:    <section className="grid">
+  frontend\src\App.jsx:528:      <Card title="Governance" status="Ready" text="Compliance, approvals, policies and audit readiness." />
+> frontend\src\App.jsx:529:      <Card title="Backup Recovery" status="Ready" text="Backup status, restore planning and disaster readiness." />
+  frontend\src\App.jsx:530:      <Card title="Deployment Readiness" status="Ready" text="Production readiness, blockers and release checks." />
+  frontend\src\App.jsx:531:      <Card title="Audit Trail" status="Ready" text="System evidence and operational traceability." />
+  frontend\src\App.jsx:532:    </section>
+  frontend\src\App.jsx:534:}
+  frontend\src\App.jsx:535:
+  frontend\src\App.jsx:536:function Developer({ results }) {
+> frontend\src\App.jsx:537:  return (
+  frontend\src\App.jsx:538:    <>
+  frontend\src\App.jsx:539:      <section className="grid">
+  frontend\src\App.jsx:540:        {results.map(r => (
+  frontend\src\App.jsx:557:}
+  frontend\src\App.jsx:558:
+  frontend\src\App.jsx:559:function Card({ title, status, text, bad }) {
+> frontend\src\App.jsx:560:  return (
+  frontend\src\App.jsx:561:    <article className={bad ? "card badcard" : "card"}>
+  frontend\src\App.jsx:562:      <h3>{title}</h3>
+  frontend\src\App.jsx:563:      <strong>{status}</strong>
+  frontend\src\App.jsx:567:}
+  frontend\src\App.jsx:568:
+  frontend\src\App.jsx:569:function Metric({ label, value }) {
+> frontend\src\App.jsx:570:  return (
+  frontend\src\App.jsx:571:    <div className="metric">
+  frontend\src\App.jsx:572:      <span>{label}</span>
+  frontend\src\App.jsx:573:      <strong>{value}</strong>
+
+
