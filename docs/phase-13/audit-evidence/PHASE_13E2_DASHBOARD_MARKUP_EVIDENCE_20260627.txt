@@ -1,0 +1,145 @@
+# Phase 13E.2 Dashboard Markup Evidence
+# Date: 2026-06-27
+# Source: frontend/src/App.jsx
+
+## Dashboard / Hero / Actions / Summary / Workspace Sections
+
+
+  frontend\src\App.jsx:24:  {
+  frontend\src\App.jsx:25:    id: "start-here",
+> frontend\src\App.jsx:26:    label: "Start Here",
+> frontend\src\App.jsx:27:    title: "Start Here",
+  frontend\src\App.jsx:28:    description: "Begin a new legal workflow or open client details.",
+  frontend\src\App.jsx:29:    items: [
+  frontend\src\App.jsx:30:      {
+> frontend\src\App.jsx:31:        module: "Matter Intake",
+> frontend\src\App.jsx:32:        title: "Matter Intake",
+  frontend\src\App.jsx:33:        status: "OPEN",
+  frontend\src\App.jsx:34:        sequence: "1",
+> frontend\src\App.jsx:35:        text: "Guided starting point for new matter intake and workflow preparation.",
+  frontend\src\App.jsx:36:      },
+  frontend\src\App.jsx:37:      {
+  frontend\src\App.jsx:113:    id: "planned-platform",
+  frontend\src\App.jsx:114:    label: "Future",
+> frontend\src\App.jsx:115:    title: "Planned Platform Modules",
+  frontend\src\App.jsx:116:    description: "Roadmap modules are visible for planning but not active yet.",
+  frontend\src\App.jsx:117:    items: [
+> frontend\src\App.jsx:118:      { module: "Tasks", title: "Tasks", status: "PLANNED", sequence: "P1", text: "Daily assignments, follow-ups and pending actions." },
+  frontend\src\App.jsx:119:      { module: "Notifications", title: "Notifications", status: "PLANNED", sequence: "P2", text: "Alerts, reminders, escalations and updates." },
+  frontend\src\App.jsx:120:      { module: "Court Navigation", title: "Court Navigation", status: "PLANNED", sequence: "P3", text: "Court location intelligence, travel planning and readiness." },
+  frontend\src\App.jsx:140:
+  frontend\src\App.jsx:141:const moduleFrameDetails = {
+> frontend\src\App.jsx:142:  "Matter Intake": {
+> frontend\src\App.jsx:143:    displayTitle: "Matter Intake",
+> frontend\src\App.jsx:144:    group: "Start Here",
+> frontend\src\App.jsx:145:    description: "Guided starting point for new matter intake and workflow preparation.",
+  frontend\src\App.jsx:146:    position: "Step 1 of 6",
+  frontend\src\App.jsx:147:    nextModule: "Clients",
+  frontend\src\App.jsx:150:  Clients: {
+  frontend\src\App.jsx:151:    displayTitle: "Client Details",
+> frontend\src\App.jsx:152:    group: "Start Here",
+  frontend\src\App.jsx:153:    description: "Client records, contact information, onboarding, and profile management.",
+  frontend\src\App.jsx:154:    position: "Step 2 of 6",
+  frontend\src\App.jsx:369:
+  frontend\src\App.jsx:370:  return {
+> frontend\src\App.jsx:371:    workspace: "End User Legal Workspace - LEOS Module Command Grid",
+  frontend\src\App.jsx:372:    operations: "Operations Centre",
+  frontend\src\App.jsx:373:    admin: "Admin Centre",
+  frontend\src\App.jsx:384:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+  frontend\src\App.jsx:385:  if (module === "Review Submit") return <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}><ReviewSubmit setModule={setModule} /></ModuleFrame>;
+> frontend\src\App.jsx:386:  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  frontend\src\App.jsx:387:
+  frontend\src\App.jsx:388:  return (
+  frontend\src\App.jsx:389:    <>
+> frontend\src\App.jsx:390:      <section className="hero">
+  frontend\src\App.jsx:391:        <h2>Litigation 360 LEOS Workspace</h2>
+> frontend\src\App.jsx:392:        <p>Level 10/11 enterprise legal operating system command grid. Open modules are live. Planned modules are visible roadmap placeholders.</p>
+  frontend\src\App.jsx:393:
+> frontend\src\App.jsx:394:        <div className="actions">
+  frontend\src\App.jsx:395:          <button onClick={() => setModule("Clients")}>▶ 1. Client Details</button>
+  frontend\src\App.jsx:396:          <button onClick={() => setModule("Cases")}>2. Case / Matter Details</button>
+  frontend\src\App.jsx:402:      </section>
+  frontend\src\App.jsx:403:
+> frontend\src\App.jsx:404:      <section className="summary">
+> frontend\src\App.jsx:405:        <Metric label="Live Backend Modules" value={`${passed}/${results.length}`} />
+> frontend\src\App.jsx:406:        <Metric label="Failed Checks" value={failed} />
+> frontend\src\App.jsx:407:        <Metric label="Last Refresh" value={updated} />
+  frontend\src\App.jsx:408:        <button onClick={runChecks}>Refresh Live Monitor</button>
+  frontend\src\App.jsx:409:      </section>
+> frontend\src\App.jsx:410:      <section className="workspace-section-list" aria-label="Workspace module groups">
+  frontend\src\App.jsx:411:        {workspaceSections.map((section) => (
+> frontend\src\App.jsx:412:          <section className="workspace-module-section" key={section.id}>
+> frontend\src\App.jsx:413:            <div className="workspace-section-header">
+  frontend\src\App.jsx:414:              <div>
+> frontend\src\App.jsx:415:                <span className="workflow-badge">{section.label}</span>
+  frontend\src\App.jsx:416:                <h3>{section.title}</h3>
+  frontend\src\App.jsx:417:                <p>{section.description}</p>
+  frontend\src\App.jsx:419:            </div>
+  frontend\src\App.jsx:420:
+> frontend\src\App.jsx:421:            <div className="grid">
+  frontend\src\App.jsx:422:              {section.items.map((item) => {
+  frontend\src\App.jsx:423:                const isOpen = item.status === "OPEN";
+  frontend\src\App.jsx:427:                    key={`${section.id}-${item.module}`}
+  frontend\src\App.jsx:428:                    type="button"
+> frontend\src\App.jsx:429:                    className={isOpen ? "card clickable-card workflow-card" : "card planned-card workflow-card"}
+  frontend\src\App.jsx:430:                    onClick={() => isOpen && setModule(item.module)}
+  frontend\src\App.jsx:431:                    disabled={!isOpen}
+  frontend\src\App.jsx:432:                  >
+> frontend\src\App.jsx:433:                    <span className="card-meta">{item.sequence}</span>
+  frontend\src\App.jsx:434:                    <h3>{item.title}</h3>
+  frontend\src\App.jsx:435:                    <strong>{item.status}</strong>
+  frontend\src\App.jsx:478:        </div>
+  frontend\src\App.jsx:479:
+> frontend\src\App.jsx:480:        <div className="module-frame-actions">
+  frontend\src\App.jsx:481:          <button
+  frontend\src\App.jsx:482:            type="button"
+  frontend\src\App.jsx:517:  return (
+  frontend\src\App.jsx:518:    <>
+> frontend\src\App.jsx:519:      <section className="summary">
+> frontend\src\App.jsx:520:        <Metric label="Modules Online" value={`${passed}/${results.length}`} />
+> frontend\src\App.jsx:521:        <Metric label="Modules Failed" value={failed} />
+  frontend\src\App.jsx:522:        <button onClick={run}>Refresh Now</button>
+  frontend\src\App.jsx:523:      </section>
+  frontend\src\App.jsx:524:
+> frontend\src\App.jsx:525:      <section className="grid">
+  frontend\src\App.jsx:526:        {results.map(r => (
+> frontend\src\App.jsx:527:          <Card
+  frontend\src\App.jsx:528:            key={r.name}
+  frontend\src\App.jsx:529:            title={r.name}
+  frontend\src\App.jsx:540:function Admin() {
+  frontend\src\App.jsx:541:  return (
+> frontend\src\App.jsx:542:    <section className="grid">
+> frontend\src\App.jsx:543:      <Card title="Governance" status="Ready" text="Compliance, approvals, policies and audit readiness." />
+> frontend\src\App.jsx:544:      <Card title="Backup Recovery" status="Ready" text="Backup status, restore planning and disaster readiness." />
+> frontend\src\App.jsx:545:      <Card title="Deployment Readiness" status="Ready" text="Production readiness, blockers and release checks." />
+> frontend\src\App.jsx:546:      <Card title="Audit Trail" status="Ready" text="System evidence and operational traceability." />
+  frontend\src\App.jsx:547:    </section>
+  frontend\src\App.jsx:548:  );
+  frontend\src\App.jsx:552:  return (
+  frontend\src\App.jsx:553:    <>
+> frontend\src\App.jsx:554:      <section className="grid">
+  frontend\src\App.jsx:555:        {results.map(r => (
+> frontend\src\App.jsx:556:          <Card
+  frontend\src\App.jsx:557:            key={r.name}
+  frontend\src\App.jsx:558:            title={r.name}
+  frontend\src\App.jsx:565:
+  frontend\src\App.jsx:566:      <details className="jsonbox">
+> frontend\src\App.jsx:567:        <summary>Developer Raw JSON Diagnostics</summary>
+  frontend\src\App.jsx:568:        <pre>{JSON.stringify(results, null, 2)}</pre>
+  frontend\src\App.jsx:569:      </details>
+  frontend\src\App.jsx:572:}
+  frontend\src\App.jsx:573:
+> frontend\src\App.jsx:574:function Card({ title, status, text, bad }) {
+  frontend\src\App.jsx:575:  return (
+> frontend\src\App.jsx:576:    <article className={bad ? "card badcard" : "card"}>
+  frontend\src\App.jsx:577:      <h3>{title}</h3>
+  frontend\src\App.jsx:578:      <strong>{status}</strong>
+  frontend\src\App.jsx:582:}
+  frontend\src\App.jsx:583:
+> frontend\src\App.jsx:584:function Metric({ label, value }) {
+  frontend\src\App.jsx:585:  return (
+> frontend\src\App.jsx:586:    <div className="metric">
+  frontend\src\App.jsx:587:      <span>{label}</span>
+  frontend\src\App.jsx:588:      <strong>{value}</strong>
+
+

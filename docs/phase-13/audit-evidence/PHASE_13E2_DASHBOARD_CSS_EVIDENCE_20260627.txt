@@ -1,0 +1,988 @@
+# Phase 13E.2 Dashboard CSS Evidence
+# Date: 2026-06-27
+# Source: frontend/src/App.css
+
+## Dashboard / Hero / Actions / Summary / Workspace CSS
+
+
+  frontend\src\App.css:76:}
+  frontend\src\App.css:77:
+> frontend\src\App.css:78:.main {
+  frontend\src\App.css:79:  flex: 1;
+  frontend\src\App.css:80:  min-width: 0;
+  frontend\src\App.css:83:}
+  frontend\src\App.css:84:
+> frontend\src\App.css:85:.topbar {
+  frontend\src\App.css:86:  display: flex;
+  frontend\src\App.css:87:  justify-content: space-between;
+  frontend\src\App.css:95:}
+  frontend\src\App.css:96:
+> frontend\src\App.css:97:.topbar h1 {
+  frontend\src\App.css:98:  margin: 0;
+  frontend\src\App.css:99:  font-size: clamp(28px, 3vw, 42px);
+  frontend\src\App.css:101:}
+  frontend\src\App.css:102:
+> frontend\src\App.css:103:.topbar p {
+  frontend\src\App.css:104:  margin: 8px 0 0;
+  frontend\src\App.css:105:  color: #64748b;
+  frontend\src\App.css:123:}
+  frontend\src\App.css:124:
+> frontend\src\App.css:125:.hero, .card, .metric, .jsonbox {
+  frontend\src\App.css:126:  background: white;
+  frontend\src\App.css:127:  border: 1px solid #d9dee8;
+  frontend\src\App.css:130:}
+  frontend\src\App.css:131:
+> frontend\src\App.css:132:.hero {
+  frontend\src\App.css:133:  margin-bottom: 24px;
+  frontend\src\App.css:134:}
+  frontend\src\App.css:135:
+> frontend\src\App.css:136:.hero h2 {
+  frontend\src\App.css:137:  margin: 0 0 10px;
+  frontend\src\App.css:138:  font-size: 30px;
+  frontend\src\App.css:139:}
+  frontend\src\App.css:140:
+> frontend\src\App.css:141:.hero p, .card p {
+  frontend\src\App.css:142:  color: #64748b;
+  frontend\src\App.css:143:  line-height: 1.45;
+  frontend\src\App.css:144:}
+  frontend\src\App.css:145:
+> frontend\src\App.css:146:.actions {
+  frontend\src\App.css:147:  display: flex;
+  frontend\src\App.css:148:  flex-wrap: wrap;
+  frontend\src\App.css:150:}
+  frontend\src\App.css:151:
+> frontend\src\App.css:152:.actions button, .summary button {
+  frontend\src\App.css:153:  padding: 12px 16px;
+  frontend\src\App.css:154:  border-radius: 10px;
+  frontend\src\App.css:160:}
+  frontend\src\App.css:161:
+> frontend\src\App.css:162:.grid, .summary {
+> frontend\src\App.css:163:  display: grid;
+> frontend\src\App.css:164:  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  frontend\src\App.css:165:  gap: 18px;
+  frontend\src\App.css:166:}
+  frontend\src\App.css:167:
+> frontend\src\App.css:168:.card h3 {
+  frontend\src\App.css:169:  margin: 0 0 10px;
+  frontend\src\App.css:170:  font-size: 20px;
+  frontend\src\App.css:171:}
+  frontend\src\App.css:172:
+> frontend\src\App.css:173:.card strong {
+  frontend\src\App.css:174:  display: inline-block;
+  frontend\src\App.css:175:  margin-bottom: 10px;
+  frontend\src\App.css:177:}
+  frontend\src\App.css:178:
+> frontend\src\App.css:179:.badcard {
+  frontend\src\App.css:180:  background: #fff1f2;
+  frontend\src\App.css:181:  border-color: #fecdd3;
+  frontend\src\App.css:182:}
+  frontend\src\App.css:183:
+> frontend\src\App.css:184:.badcard strong {
+  frontend\src\App.css:185:  color: #be123c;
+  frontend\src\App.css:186:}
+  frontend\src\App.css:187:
+> frontend\src\App.css:188:.metric span {
+  frontend\src\App.css:189:  display: block;
+  frontend\src\App.css:190:  color: #64748b;
+  frontend\src\App.css:192:}
+  frontend\src\App.css:193:
+> frontend\src\App.css:194:.metric strong {
+  frontend\src\App.css:195:  font-size: 24px;
+  frontend\src\App.css:196:}
+  frontend\src\App.css:212:  .shell { flex-direction: column; }
+  frontend\src\App.css:213:  .sidebar { width: 100%; }
+> frontend\src\App.css:214:  .topbar { flex-direction: column; align-items: flex-start; }
+  frontend\src\App.css:215:}
+  frontend\src\App.css:216:
+  frontend\src\App.css:217:/* Phase 10Y Stabilisation Enhancements */
+> frontend\src\App.css:218:.card {
+  frontend\src\App.css:219:  min-height: 165px;
+  frontend\src\App.css:220:}
+  frontend\src\App.css:221:
+> frontend\src\App.css:222:.card:hover {
+  frontend\src\App.css:223:  transform: translateY(-2px);
+  frontend\src\App.css:224:  transition: 0.15s ease;
+  frontend\src\App.css:230:}
+  frontend\src\App.css:231:
+> frontend\src\App.css:232:.actions button:hover,
+> frontend\src\App.css:233:.summary button:hover,
+  frontend\src\App.css:234:.sidebar button:hover,
+  frontend\src\App.css:235:.sidebar-nav-item:hover,
+  frontend\src\App.css:256:}
+  frontend\src\App.css:257:
+> frontend\src\App.css:258:.topbar {
+  frontend\src\App.css:259:  position: sticky;
+  frontend\src\App.css:260:  top: 0;
+  frontend\src\App.css:273:
+  frontend\src\App.css:274:/* Phase 10ZE Final Safe Workspace Wiring */
+> frontend\src\App.css:275:.clickable-card {
+  frontend\src\App.css:276:  text-align: left;
+  frontend\src\App.css:277:  cursor: pointer;
+  frontend\src\App.css:280:}
+  frontend\src\App.css:281:
+> frontend\src\App.css:282:.clickable-card:hover {
+  frontend\src\App.css:283:  transform: translateY(-2px);
+  frontend\src\App.css:284:  transition: 0.15s ease;
+  frontend\src\App.css:287:
+  frontend\src\App.css:288:/* Phase 10ZF Navigation + LEOS Module Menu */
+> frontend\src\App.css:289:.clickable-card {
+  frontend\src\App.css:290:  text-align: left;
+  frontend\src\App.css:291:  cursor: pointer;
+  frontend\src\App.css:294:}
+  frontend\src\App.css:295:
+> frontend\src\App.css:296:.clickable-card:hover {
+  frontend\src\App.css:297:  transform: translateY(-2px);
+  frontend\src\App.css:298:  transition: 0.15s ease;
+  frontend\src\App.css:300:}
+  frontend\src\App.css:301:
+> frontend\src\App.css:302:.planned-card {
+  frontend\src\App.css:303:  text-align: left;
+  frontend\src\App.css:304:  color: inherit;
+  frontend\src\App.css:331:
+  frontend\src\App.css:332:/* ============================================================
+> frontend\src\App.css:333:   Table layout fix - prevents Actions column from being cropped
+  frontend\src\App.css:334:   ============================================================ */
+  frontend\src\App.css:335:
+> frontend\src\App.css:336:.main {
+  frontend\src\App.css:337:  min-width: 0;
+  frontend\src\App.css:338:  overflow-x: hidden;
+  frontend\src\App.css:339:}
+  frontend\src\App.css:340:
+> frontend\src\App.css:341:.main table {
+  frontend\src\App.css:342:  width: 100%;
+  frontend\src\App.css:343:  max-width: 100%;
+  frontend\src\App.css:347:}
+  frontend\src\App.css:348:
+> frontend\src\App.css:349:.main th,
+> frontend\src\App.css:350:.main td {
+  frontend\src\App.css:351:  padding: 10px 12px;
+  frontend\src\App.css:352:  vertical-align: middle;
+  frontend\src\App.css:354:}
+  frontend\src\App.css:355:
+> frontend\src\App.css:356:.main th:last-child,
+> frontend\src\App.css:357:.main td:last-child {
+  frontend\src\App.css:358:  min-width: 110px;
+  frontend\src\App.css:359:  width: 110px;
+  frontend\src\App.css:363:}
+  frontend\src\App.css:364:
+> frontend\src\App.css:365:.main td:last-child button {
+  frontend\src\App.css:366:  display: block;
+  frontend\src\App.css:367:  min-width: 72px;
+  frontend\src\App.css:394:}
+  frontend\src\App.css:395:
+> frontend\src\App.css:396:main,
+  frontend\src\App.css:397:section,
+> frontend\src\App.css:398:.hero,
+> frontend\src\App.css:399:.summary,
+> frontend\src\App.css:400:.grid,
+  frontend\src\App.css:401:.module-toolbar {
+  frontend\src\App.css:402:  box-sizing: border-box;
+  frontend\src\App.css:481:}
+  frontend\src\App.css:482:
+> frontend\src\App.css:483:.client-form-grid {
+> frontend\src\App.css:484:  display: grid;
+> frontend\src\App.css:485:  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  frontend\src\App.css:486:  gap: 12px;
+  frontend\src\App.css:487:}
+  frontend\src\App.css:488:
+> frontend\src\App.css:489:.client-form-grid label,
+  frontend\src\App.css:490:.client-search-row label {
+  frontend\src\App.css:491:  display: flex;
+  frontend\src\App.css:495:}
+  frontend\src\App.css:496:
+> frontend\src\App.css:497:.client-form-grid input,
+> frontend\src\App.css:498:.client-form-grid select,
+  frontend\src\App.css:499:.client-search-row input {
+  frontend\src\App.css:500:  width: 100%;
+  frontend\src\App.css:506:}
+  frontend\src\App.css:507:
+> frontend\src\App.css:508:.client-form-grid small {
+  frontend\src\App.css:509:  font-weight: 400;
+  frontend\src\App.css:510:  color: #566275;
+  frontend\src\App.css:511:}
+  frontend\src\App.css:512:
+> frontend\src\App.css:513:.client-form-actions {
+  frontend\src\App.css:514:  display: flex;
+  frontend\src\App.css:515:  gap: 10px;
+  frontend\src\App.css:569:}
+  frontend\src\App.css:570:
+> frontend\src\App.css:571:.client-contact-actions,
+> frontend\src\App.css:572:.client-row-actions {
+  frontend\src\App.css:573:  display: flex;
+  frontend\src\App.css:574:  flex-direction: column;
+  frontend\src\App.css:577:}
+  frontend\src\App.css:578:
+> frontend\src\App.css:579:.client-contact-actions a {
+  frontend\src\App.css:580:  display: inline-block;
+  frontend\src\App.css:581:}
+  frontend\src\App.css:582:
+> frontend\src\App.css:583:.client-row-actions button {
+  frontend\src\App.css:584:  width: 100%;
+  frontend\src\App.css:585:}
+  frontend\src\App.css:592:
+  frontend\src\App.css:593:@media (max-width: 1100px) {
+> frontend\src\App.css:594:  .client-form-grid {
+> frontend\src\App.css:595:    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  frontend\src\App.css:596:  }
+  frontend\src\App.css:597:}
+  frontend\src\App.css:602:  }
+  frontend\src\App.css:603:
+> frontend\src\App.css:604:  .client-form-grid {
+> frontend\src\App.css:605:    grid-template-columns: 1fr;
+  frontend\src\App.css:606:  }
+  frontend\src\App.css:607:}
+  frontend\src\App.css:625:}
+  frontend\src\App.css:626:
+> frontend\src\App.css:627:.client-count-card {
+  frontend\src\App.css:628:  display: flex;
+  frontend\src\App.css:629:  flex-direction: column;
+  frontend\src\App.css:633:}
+  frontend\src\App.css:634:
+> frontend\src\App.css:635:.client-count-card span {
+  frontend\src\App.css:636:  font-size: 0.95rem;
+  frontend\src\App.css:637:  color: #566275;
+  frontend\src\App.css:672:}
+  frontend\src\App.css:673:
+> frontend\src\App.css:674:.client-form-grid {
+> frontend\src\App.css:675:  display: grid;
+> frontend\src\App.css:676:  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  frontend\src\App.css:677:  gap: 12px;
+  frontend\src\App.css:678:}
+  frontend\src\App.css:679:
+> frontend\src\App.css:680:.client-form-grid label,
+  frontend\src\App.css:681:.client-search-row label {
+  frontend\src\App.css:682:  display: flex;
+  frontend\src\App.css:686:}
+  frontend\src\App.css:687:
+> frontend\src\App.css:688:.client-form-grid input,
+> frontend\src\App.css:689:.client-form-grid select,
+  frontend\src\App.css:690:.client-search-row input {
+  frontend\src\App.css:691:  width: 100%;
+  frontend\src\App.css:697:}
+  frontend\src\App.css:698:
+> frontend\src\App.css:699:.client-form-grid small {
+  frontend\src\App.css:700:  font-weight: 400;
+  frontend\src\App.css:701:  color: #566275;
+  frontend\src\App.css:702:}
+  frontend\src\App.css:703:
+> frontend\src\App.css:704:.client-form-actions {
+  frontend\src\App.css:705:  display: flex;
+  frontend\src\App.css:706:  gap: 10px;
+  frontend\src\App.css:760:}
+  frontend\src\App.css:761:
+> frontend\src\App.css:762:.client-contact-actions,
+> frontend\src\App.css:763:.client-row-actions {
+  frontend\src\App.css:764:  display: flex;
+  frontend\src\App.css:765:  flex-direction: column;
+  frontend\src\App.css:768:}
+  frontend\src\App.css:769:
+> frontend\src\App.css:770:.client-contact-actions a {
+  frontend\src\App.css:771:  display: inline-block;
+  frontend\src\App.css:772:}
+  frontend\src\App.css:773:
+> frontend\src\App.css:774:.client-row-actions button {
+  frontend\src\App.css:775:  width: 100%;
+  frontend\src\App.css:776:}
+  frontend\src\App.css:783:
+  frontend\src\App.css:784:@media (max-width: 1100px) {
+> frontend\src\App.css:785:  .client-form-grid {
+> frontend\src\App.css:786:    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  frontend\src\App.css:787:  }
+  frontend\src\App.css:788:}
+  frontend\src\App.css:793:  }
+  frontend\src\App.css:794:
+> frontend\src\App.css:795:  .client-count-card {
+  frontend\src\App.css:796:    text-align: left;
+  frontend\src\App.css:797:  }
+  frontend\src\App.css:798:
+> frontend\src\App.css:799:  .client-form-grid {
+> frontend\src\App.css:800:    grid-template-columns: 1fr;
+  frontend\src\App.css:801:  }
+  frontend\src\App.css:802:}
+  frontend\src\App.css:825:}
+  frontend\src\App.css:826:
+> frontend\src\App.css:827:.client-count-card {
+  frontend\src\App.css:828:  display: flex;
+  frontend\src\App.css:829:  flex-direction: column;
+  frontend\src\App.css:833:}
+  frontend\src\App.css:834:
+> frontend\src\App.css:835:.client-count-card span {
+  frontend\src\App.css:836:  font-size: 0.95rem;
+  frontend\src\App.css:837:  color: #566275;
+  frontend\src\App.css:872:}
+  frontend\src\App.css:873:
+> frontend\src\App.css:874:.client-form-grid {
+> frontend\src\App.css:875:  display: grid;
+> frontend\src\App.css:876:  grid-template-columns: repeat(4, minmax(190px, 1fr));
+  frontend\src\App.css:877:  gap: 12px;
+  frontend\src\App.css:878:}
+  frontend\src\App.css:879:
+> frontend\src\App.css:880:.client-form-grid label,
+  frontend\src\App.css:881:.client-search-row label {
+  frontend\src\App.css:882:  display: flex;
+  frontend\src\App.css:886:}
+  frontend\src\App.css:887:
+> frontend\src\App.css:888:.client-form-grid input,
+> frontend\src\App.css:889:.client-form-grid select,
+  frontend\src\App.css:890:.client-search-row input {
+  frontend\src\App.css:891:  width: 100%;
+  frontend\src\App.css:897:}
+  frontend\src\App.css:898:
+> frontend\src\App.css:899:.client-form-grid small {
+  frontend\src\App.css:900:  font-weight: 400;
+  frontend\src\App.css:901:  color: #566275;
+  frontend\src\App.css:910:}
+  frontend\src\App.css:911:
+> frontend\src\App.css:912:.client-form-actions {
+  frontend\src\App.css:913:  display: flex;
+  frontend\src\App.css:914:  gap: 10px;
+  frontend\src\App.css:968:}
+  frontend\src\App.css:969:
+> frontend\src\App.css:970:.client-contact-actions,
+> frontend\src\App.css:971:.client-row-actions {
+  frontend\src\App.css:972:  display: flex;
+  frontend\src\App.css:973:  flex-direction: column;
+  frontend\src\App.css:976:}
+  frontend\src\App.css:977:
+> frontend\src\App.css:978:.client-contact-actions a {
+  frontend\src\App.css:979:  display: inline-block;
+  frontend\src\App.css:980:}
+  frontend\src\App.css:981:
+> frontend\src\App.css:982:.client-row-actions button {
+  frontend\src\App.css:983:  width: 100%;
+  frontend\src\App.css:984:}
+  frontend\src\App.css:991:
+  frontend\src\App.css:992:@media (max-width: 1100px) {
+> frontend\src\App.css:993:  .client-form-grid {
+> frontend\src\App.css:994:    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  frontend\src\App.css:995:  }
+  frontend\src\App.css:996:}
+  frontend\src\App.css:1001:  }
+  frontend\src\App.css:1002:
+> frontend\src\App.css:1003:  .client-count-card {
+  frontend\src\App.css:1004:    text-align: left;
+  frontend\src\App.css:1005:  }
+  frontend\src\App.css:1006:
+> frontend\src\App.css:1007:  .client-form-grid {
+> frontend\src\App.css:1008:    grid-template-columns: 1fr;
+  frontend\src\App.css:1009:  }
+  frontend\src\App.css:1010:}
+  frontend\src\App.css:1037:}
+  frontend\src\App.css:1038:
+> frontend\src\App.css:1039:.client-count-card {
+  frontend\src\App.css:1040:  display: flex;
+  frontend\src\App.css:1041:  flex-direction: column;
+  frontend\src\App.css:1045:}
+  frontend\src\App.css:1046:
+> frontend\src\App.css:1047:.client-count-card span {
+  frontend\src\App.css:1048:  font-size: 0.95rem;
+  frontend\src\App.css:1049:  color: #566275;
+  frontend\src\App.css:1092:}
+  frontend\src\App.css:1093:
+> frontend\src\App.css:1094:.client-form-grid {
+> frontend\src\App.css:1095:  display: grid;
+> frontend\src\App.css:1096:  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  frontend\src\App.css:1097:  gap: 16px 18px;
+  frontend\src\App.css:1098:  align-items: start;
+  frontend\src\App.css:1099:}
+  frontend\src\App.css:1100:
+> frontend\src\App.css:1101:.client-form-grid label,
+  frontend\src\App.css:1102:.client-search-row label {
+  frontend\src\App.css:1103:  display: flex;
+  frontend\src\App.css:1118:}
+  frontend\src\App.css:1119:
+> frontend\src\App.css:1120:.client-form-grid input,
+> frontend\src\App.css:1121:.client-form-grid select,
+> frontend\src\App.css:1122:.client-form-grid textarea,
+  frontend\src\App.css:1123:.client-search-row input {
+  frontend\src\App.css:1124:  width: 100%;
+  frontend\src\App.css:1131:}
+  frontend\src\App.css:1132:
+> frontend\src\App.css:1133:.client-form-grid textarea {
+  frontend\src\App.css:1134:  min-height: 88px;
+  frontend\src\App.css:1135:  resize: vertical;
+  frontend\src\App.css:1136:}
+  frontend\src\App.css:1137:
+> frontend\src\App.css:1138:.client-form-grid small {
+  frontend\src\App.css:1139:  font-weight: 400;
+  frontend\src\App.css:1140:  color: #566275;
+  frontend\src\App.css:1143:
+  frontend\src\App.css:1144:.client-span-2 {
+> frontend\src\App.css:1145:  grid-column: span 2;
+  frontend\src\App.css:1146:}
+  frontend\src\App.css:1147:
+  frontend\src\App.css:1169:}
+  frontend\src\App.css:1170:
+> frontend\src\App.css:1171:.client-form-actions {
+  frontend\src\App.css:1172:  display: flex;
+  frontend\src\App.css:1173:  gap: 10px;
+  frontend\src\App.css:1176:}
+  frontend\src\App.css:1177:
+> frontend\src\App.css:1178:.client-form-actions button {
+  frontend\src\App.css:1179:  min-width: 140px;
+  frontend\src\App.css:1180:}
+  frontend\src\App.css:1221:}
+  frontend\src\App.css:1222:
+> frontend\src\App.css:1223:.client-contact-actions,
+> frontend\src\App.css:1224:.client-row-actions {
+  frontend\src\App.css:1225:  display: flex;
+  frontend\src\App.css:1226:  flex-direction: column;
+  frontend\src\App.css:1229:}
+  frontend\src\App.css:1230:
+> frontend\src\App.css:1231:.client-contact-actions a {
+  frontend\src\App.css:1232:  display: inline-block;
+  frontend\src\App.css:1233:}
+  frontend\src\App.css:1234:
+> frontend\src\App.css:1235:.client-row-actions button {
+  frontend\src\App.css:1236:  width: 100%;
+  frontend\src\App.css:1237:}
+  frontend\src\App.css:1244:
+  frontend\src\App.css:1245:@media (max-width: 1250px) {
+> frontend\src\App.css:1246:  .client-form-grid {
+> frontend\src\App.css:1247:    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  frontend\src\App.css:1248:  }
+  frontend\src\App.css:1249:
+  frontend\src\App.css:1250:  .client-span-2 {
+> frontend\src\App.css:1251:    grid-column: span 2;
+  frontend\src\App.css:1252:  }
+  frontend\src\App.css:1253:}
+  frontend\src\App.css:1254:
+  frontend\src\App.css:1255:@media (max-width: 900px) {
+> frontend\src\App.css:1256:  .client-form-grid {
+> frontend\src\App.css:1257:    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  frontend\src\App.css:1258:  }
+  frontend\src\App.css:1259:}
+  frontend\src\App.css:1264:  }
+  frontend\src\App.css:1265:
+> frontend\src\App.css:1266:  .client-count-card {
+  frontend\src\App.css:1267:    text-align: left;
+  frontend\src\App.css:1268:  }
+  frontend\src\App.css:1269:
+> frontend\src\App.css:1270:  .client-form-grid {
+> frontend\src\App.css:1271:    grid-template-columns: 1fr;
+  frontend\src\App.css:1272:  }
+  frontend\src\App.css:1273:
+  frontend\src\App.css:1274:  .client-span-2 {
+> frontend\src\App.css:1275:    grid-column: span 1;
+  frontend\src\App.css:1276:  }
+  frontend\src\App.css:1277:}
+  frontend\src\App.css:1297:}
+  frontend\src\App.css:1298:
+> frontend\src\App.css:1299:/* Main client module sizing */
+  frontend\src\App.css:1300:.client-module {
+  frontend\src\App.css:1301:  width: 100% !important;
+  frontend\src\App.css:1336:}
+  frontend\src\App.css:1337:
+> frontend\src\App.css:1338:/* Form card */
+  frontend\src\App.css:1339:.client-form {
+  frontend\src\App.css:1340:  width: 100% !important;
+  frontend\src\App.css:1348:   4 columns were too cramped and caused fields to spill outside.
+  frontend\src\App.css:1349:   Use a stable 2-column layout for professional forms. */
+> frontend\src\App.css:1350:.client-form-grid {
+> frontend\src\App.css:1351:  display: grid !important;
+> frontend\src\App.css:1352:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:1353:  gap: 14px 18px !important;
+  frontend\src\App.css:1354:  align-items: start !important;
+  frontend\src\App.css:1356:}
+  frontend\src\App.css:1357:
+> frontend\src\App.css:1358:/* Every grid item must be allowed to shrink inside its column. */
+> frontend\src\App.css:1359:.client-form-grid > * {
+  frontend\src\App.css:1360:  min-width: 0 !important;
+  frontend\src\App.css:1361:  max-width: 100% !important;
+  frontend\src\App.css:1364:/* Longer notes/textareas should take the full row. */
+  frontend\src\App.css:1365:.client-span-2 {
+> frontend\src\App.css:1366:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:1367:}
+  frontend\src\App.css:1368:
+  frontend\src\App.css:1369:/* Labels: consistent small professional size */
+> frontend\src\App.css:1370:.client-form-grid label,
+  frontend\src\App.css:1371:.client-search-row label {
+  frontend\src\App.css:1372:  display: flex !important;
+  frontend\src\App.css:1382:
+  frontend\src\App.css:1383:/* Inputs/selects/textareas: same height, same font, no overflow */
+> frontend\src\App.css:1384:.client-form-grid input,
+> frontend\src\App.css:1385:.client-form-grid select,
+> frontend\src\App.css:1386:.client-form-grid textarea,
+  frontend\src\App.css:1387:.client-search-row input {
+  frontend\src\App.css:1388:  width: 100% !important;
+  frontend\src\App.css:1400:}
+  frontend\src\App.css:1401:
+> frontend\src\App.css:1402:.client-form-grid textarea {
+  frontend\src\App.css:1403:  min-height: 76px !important;
+  frontend\src\App.css:1404:  resize: vertical !important;
+  frontend\src\App.css:1406:
+  frontend\src\App.css:1407:/* Helper notes: smaller and not visually overpowering */
+> frontend\src\App.css:1408:.client-form-grid small {
+  frontend\src\App.css:1409:  display: block !important;
+  frontend\src\App.css:1410:  max-width: 100% !important;
+  frontend\src\App.css:1434:
+  frontend\src\App.css:1435:/* Checkbox rows: fix the checkbox floating far away and align it properly. */
+> frontend\src\App.css:1436:.client-form-grid label.client-checkbox-label,
+  frontend\src\App.css:1437:.client-checkbox-label {
+  frontend\src\App.css:1438:  display: flex !important;
+  frontend\src\App.css:1467:
+  frontend\src\App.css:1468:/* Buttons: not tiny, but not oversized */
+> frontend\src\App.css:1469:.client-form-actions {
+  frontend\src\App.css:1470:  display: flex !important;
+  frontend\src\App.css:1471:  gap: 10px !important;
+  frontend\src\App.css:1474:}
+  frontend\src\App.css:1475:
+> frontend\src\App.css:1476:.client-form-actions button {
+  frontend\src\App.css:1477:  min-width: 120px !important;
+  frontend\src\App.css:1478:  min-height: 34px !important;
+  frontend\src\App.css:1518:/* Responsive: 1 column on smaller screens */
+  frontend\src\App.css:1519:@media (max-width: 900px) {
+> frontend\src\App.css:1520:  .client-form-grid {
+> frontend\src\App.css:1521:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:1522:  }
+  frontend\src\App.css:1523:
+  frontend\src\App.css:1524:  .client-span-2 {
+> frontend\src\App.css:1525:    grid-column: 1 / -1 !important;
+  frontend\src\App.css:1526:  }
+  frontend\src\App.css:1527:
+  frontend\src\App.css:1530:  }
+  frontend\src\App.css:1531:
+> frontend\src\App.css:1532:  .client-count-card {
+  frontend\src\App.css:1533:    text-align: left !important;
+  frontend\src\App.css:1534:  }
+  frontend\src\App.css:1589:}
+  frontend\src\App.css:1590:
+> frontend\src\App.css:1591:.client-form-v4 .smart-grid {
+> frontend\src\App.css:1592:  display: grid !important;
+  frontend\src\App.css:1593:  gap: 14px 18px !important;
+  frontend\src\App.css:1594:  align-items: start !important;
+  frontend\src\App.css:1596:}
+  frontend\src\App.css:1597:
+> frontend\src\App.css:1598:.client-form-v4 .smart-grid.two {
+> frontend\src\App.css:1599:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:1600:}
+  frontend\src\App.css:1601:
+> frontend\src\App.css:1602:.client-form-v4 .smart-grid > * {
+  frontend\src\App.css:1603:  min-width: 0 !important;
+  frontend\src\App.css:1604:  max-width: 100% !important;
+  frontend\src\App.css:1606:
+  frontend\src\App.css:1607:.client-form-v4 .full {
+> frontend\src\App.css:1608:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:1609:}
+  frontend\src\App.css:1610:
+  frontend\src\App.css:1651:
+  frontend\src\App.css:1652:.client-form-v4 .inline-fields {
+> frontend\src\App.css:1653:  display: grid !important;
+  frontend\src\App.css:1654:  gap: 10px !important;
+  frontend\src\App.css:1655:  width: 100% !important;
+  frontend\src\App.css:1657:
+  frontend\src\App.css:1658:.client-form-v4 .code-and-number {
+> frontend\src\App.css:1659:  grid-template-columns: minmax(150px, 0.36fr) minmax(180px, 0.64fr) !important;
+  frontend\src\App.css:1660:}
+  frontend\src\App.css:1661:
+  frontend\src\App.css:1662:.client-form-v4 .two-even {
+> frontend\src\App.css:1663:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:1664:}
+  frontend\src\App.css:1665:
+  frontend\src\App.css:1689:
+  frontend\src\App.css:1690:.client-form-v4 .status-checks {
+> frontend\src\App.css:1691:  display: grid !important;
+> frontend\src\App.css:1692:  grid-template-columns: 150px repeat(4, minmax(120px, 1fr)) !important;
+  frontend\src\App.css:1693:  align-items: center !important;
+  frontend\src\App.css:1694:  gap: 10px !important;
+  frontend\src\App.css:1744:}
+  frontend\src\App.css:1745:
+> frontend\src\App.css:1746:.client-form-actions {
+  frontend\src\App.css:1747:  display: flex !important;
+  frontend\src\App.css:1748:  gap: 10px !important;
+  frontend\src\App.css:1751:}
+  frontend\src\App.css:1752:
+> frontend\src\App.css:1753:.client-form-actions button {
+  frontend\src\App.css:1754:  min-width: 132px !important;
+  frontend\src\App.css:1755:  min-height: 36px !important;
+  frontend\src\App.css:1795:
+  frontend\src\App.css:1796:@media (max-width: 1000px) {
+> frontend\src\App.css:1797:  .client-form-v4 .smart-grid.two {
+> frontend\src\App.css:1798:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:1799:  }
+  frontend\src\App.css:1800:
+  frontend\src\App.css:1802:  .client-form-v4 .two-even,
+  frontend\src\App.css:1803:  .client-form-v4 .status-checks {
+> frontend\src\App.css:1804:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:1805:  }
+  frontend\src\App.css:1806:
+  frontend\src\App.css:1807:  .client-form-v4 .full {
+> frontend\src\App.css:1808:    grid-column: 1 / -1 !important;
+  frontend\src\App.css:1809:  }
+  frontend\src\App.css:1810:}
+  frontend\src\App.css:1853:}
+  frontend\src\App.css:1854:
+> frontend\src\App.css:1855:.client-form-v5 .smart-grid {
+> frontend\src\App.css:1856:  display: grid !important;
+  frontend\src\App.css:1857:  gap: 14px 18px !important;
+  frontend\src\App.css:1858:  align-items: start !important;
+  frontend\src\App.css:1860:}
+  frontend\src\App.css:1861:
+> frontend\src\App.css:1862:.client-form-v5 .smart-grid.two {
+> frontend\src\App.css:1863:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:1864:}
+  frontend\src\App.css:1865:
+  frontend\src\App.css:1866:.client-form-v5 .full {
+> frontend\src\App.css:1867:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:1868:}
+  frontend\src\App.css:1869:
+  frontend\src\App.css:1917:
+  frontend\src\App.css:1918:.client-form-v5 .inline-fields {
+> frontend\src\App.css:1919:  display: grid !important;
+  frontend\src\App.css:1920:  gap: 10px !important;
+  frontend\src\App.css:1921:  width: 100% !important;
+  frontend\src\App.css:1923:
+  frontend\src\App.css:1924:.client-form-v5 .code-and-number {
+> frontend\src\App.css:1925:  grid-template-columns: minmax(150px, 0.36fr) minmax(180px, 0.64fr) !important;
+  frontend\src\App.css:1926:}
+  frontend\src\App.css:1927:
+  frontend\src\App.css:1928:.client-form-v5 .two-even {
+> frontend\src\App.css:1929:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:1930:}
+  frontend\src\App.css:1931:
+  frontend\src\App.css:2014:
+  frontend\src\App.css:2015:@media (max-width: 1000px) {
+> frontend\src\App.css:2016:  .client-form-v5 .smart-grid.two,
+  frontend\src\App.css:2017:  .client-form-v5 .code-and-number,
+  frontend\src\App.css:2018:  .client-form-v5 .two-even {
+> frontend\src\App.css:2019:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2020:  }
+  frontend\src\App.css:2021:
+  frontend\src\App.css:2022:  .client-form-v5 .full {
+> frontend\src\App.css:2023:    grid-column: 1 / -1 !important;
+  frontend\src\App.css:2024:  }
+  frontend\src\App.css:2025:}
+  frontend\src\App.css:2079:}
+  frontend\src\App.css:2080:
+> frontend\src\App.css:2081:.client-form-v6 .smart-grid {
+> frontend\src\App.css:2082:  display: grid !important;
+  frontend\src\App.css:2083:  gap: 14px 18px !important;
+  frontend\src\App.css:2084:  align-items: start !important;
+  frontend\src\App.css:2086:}
+  frontend\src\App.css:2087:
+> frontend\src\App.css:2088:.client-form-v6 .smart-grid.two {
+> frontend\src\App.css:2089:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:2090:}
+  frontend\src\App.css:2091:
+> frontend\src\App.css:2092:.client-form-v6 .smart-grid > * {
+  frontend\src\App.css:2093:  min-width: 0 !important;
+  frontend\src\App.css:2094:  max-width: 100% !important;
+  frontend\src\App.css:2096:
+  frontend\src\App.css:2097:.client-form-v6 .full {
+> frontend\src\App.css:2098:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:2099:}
+  frontend\src\App.css:2100:
+  frontend\src\App.css:2141:
+  frontend\src\App.css:2142:.client-form-v6 .inline-fields {
+> frontend\src\App.css:2143:  display: grid !important;
+  frontend\src\App.css:2144:  gap: 10px !important;
+  frontend\src\App.css:2145:  width: 100% !important;
+  frontend\src\App.css:2147:
+  frontend\src\App.css:2148:.client-form-v6 .code-and-number {
+> frontend\src\App.css:2149:  grid-template-columns: minmax(150px, 0.36fr) minmax(180px, 0.64fr) !important;
+  frontend\src\App.css:2150:}
+  frontend\src\App.css:2151:
+  frontend\src\App.css:2152:.client-form-v6 .two-even {
+> frontend\src\App.css:2153:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:2154:}
+  frontend\src\App.css:2155:
+  frontend\src\App.css:2218:}
+  frontend\src\App.css:2219:
+> frontend\src\App.css:2220:.client-form-actions {
+  frontend\src\App.css:2221:  display: flex !important;
+  frontend\src\App.css:2222:  gap: 10px !important;
+  frontend\src\App.css:2225:}
+  frontend\src\App.css:2226:
+> frontend\src\App.css:2227:.client-form-actions button {
+  frontend\src\App.css:2228:  min-width: 132px !important;
+  frontend\src\App.css:2229:  min-height: 36px !important;
+  frontend\src\App.css:2264:
+  frontend\src\App.css:2265:@media (max-width: 1000px) {
+> frontend\src\App.css:2266:  .client-form-v6 .smart-grid.two {
+> frontend\src\App.css:2267:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2268:  }
+  frontend\src\App.css:2269:
+  frontend\src\App.css:2270:  .client-form-v6 .code-and-number,
+  frontend\src\App.css:2271:  .client-form-v6 .two-even {
+> frontend\src\App.css:2272:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2273:  }
+  frontend\src\App.css:2274:
+  frontend\src\App.css:2275:  .client-form-v6 .full {
+> frontend\src\App.css:2276:    grid-column: 1 / -1 !important;
+  frontend\src\App.css:2277:  }
+  frontend\src\App.css:2278:}
+  frontend\src\App.css:2284:/* Toolbar: Previous left, Home centered, Next right, all on the same horizontal line. */
+  frontend\src\App.css:2285:.module-toolbar-fixed {
+> frontend\src\App.css:2286:  display: grid !important;
+> frontend\src\App.css:2287:  grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr) !important;
+  frontend\src\App.css:2288:  align-items: center !important;
+  frontend\src\App.css:2289:  gap: 12px !important;
+  frontend\src\App.css:2343:
+  frontend\src\App.css:2344:/* Professional form alignment. */
+> frontend\src\App.css:2345:.client-form-v6 .smart-grid.two,
+> frontend\src\App.css:2346:.client-form-v7 .smart-grid.two {
+> frontend\src\App.css:2347:  display: grid !important;
+> frontend\src\App.css:2348:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:2349:  gap: 14px 18px !important;
+  frontend\src\App.css:2350:  align-items: start !important;
+  frontend\src\App.css:2351:}
+  frontend\src\App.css:2352:
+> frontend\src\App.css:2353:.client-form-v6 .smart-grid > *,
+> frontend\src\App.css:2354:.client-form-v7 .smart-grid > * {
+  frontend\src\App.css:2355:  min-width: 0 !important;
+  frontend\src\App.css:2356:  max-width: 100% !important;
+  frontend\src\App.css:2377:.client-form-v6 .inline-fields,
+  frontend\src\App.css:2378:.client-form-v7 .inline-fields {
+> frontend\src\App.css:2379:  display: grid !important;
+  frontend\src\App.css:2380:  align-items: start !important;
+  frontend\src\App.css:2381:  width: 100% !important;
+  frontend\src\App.css:2385:.client-form-v6 .code-and-number,
+  frontend\src\App.css:2386:.client-form-v7 .code-and-number {
+> frontend\src\App.css:2387:  grid-template-columns: minmax(150px, 0.34fr) minmax(220px, 0.66fr) !important;
+  frontend\src\App.css:2388:}
+  frontend\src\App.css:2389:
+  frontend\src\App.css:2390:.client-form-v6 .two-even,
+  frontend\src\App.css:2391:.client-form-v7 .two-even {
+> frontend\src\App.css:2392:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:2393:}
+  frontend\src\App.css:2394:
+> frontend\src\App.css:2395:/* Remove visual confusion from old numeric marker layout if any old marker remains. */
+  frontend\src\App.css:2396:.field-number {
+  frontend\src\App.css:2397:  display: none !important;
+  frontend\src\App.css:2412:.client-form-v6 label.full,
+  frontend\src\App.css:2413:.client-form-v7 label.full {
+> frontend\src\App.css:2414:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:2415:}
+  frontend\src\App.css:2416:
+  frontend\src\App.css:2423:@media (max-width: 1000px) {
+  frontend\src\App.css:2424:  .module-toolbar-fixed {
+> frontend\src\App.css:2425:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2426:  }
+  frontend\src\App.css:2427:
+  frontend\src\App.css:2432:  }
+  frontend\src\App.css:2433:
+> frontend\src\App.css:2434:  .client-form-v6 .smart-grid.two,
+> frontend\src\App.css:2435:  .client-form-v7 .smart-grid.two,
+  frontend\src\App.css:2436:  .client-form-v6 .code-and-number,
+  frontend\src\App.css:2437:  .client-form-v7 .code-and-number,
+  frontend\src\App.css:2438:  .client-form-v6 .two-even,
+  frontend\src\App.css:2439:  .client-form-v7 .two-even {
+> frontend\src\App.css:2440:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2441:  }
+  frontend\src\App.css:2442:}
+  frontend\src\App.css:2449:.module-toolbar.module-toolbar-fixed,
+  frontend\src\App.css:2450:.module-toolbar {
+> frontend\src\App.css:2451:  display: grid !important;
+> frontend\src\App.css:2452:  grid-template-columns: minmax(150px, 1fr) auto minmax(220px, 1fr) !important;
+  frontend\src\App.css:2453:  align-items: center !important;
+  frontend\src\App.css:2454:  gap: 12px !important;
+  frontend\src\App.css:2516:}
+  frontend\src\App.css:2517:
+> frontend\src\App.css:2518:.client-form-v6 .smart-grid.two {
+> frontend\src\App.css:2519:  display: grid !important;
+> frontend\src\App.css:2520:  grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+  frontend\src\App.css:2521:  gap: 16px 20px !important;
+  frontend\src\App.css:2522:  align-items: start !important;
+  frontend\src\App.css:2523:}
+  frontend\src\App.css:2524:
+> frontend\src\App.css:2525:.client-form-v6 .smart-grid.two > label {
+  frontend\src\App.css:2526:  min-width: 0 !important;
+  frontend\src\App.css:2527:  width: 100% !important;
+  frontend\src\App.css:2548:
+  frontend\src\App.css:2549:.client-form-v6 .full {
+> frontend\src\App.css:2550:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:2551:}
+  frontend\src\App.css:2552:
+  frontend\src\App.css:2553:.client-form-v6 .inline-fields {
+> frontend\src\App.css:2554:  display: grid !important;
+  frontend\src\App.css:2555:  width: 100% !important;
+  frontend\src\App.css:2556:  gap: 10px !important;
+  frontend\src\App.css:2558:
+  frontend\src\App.css:2559:.client-form-v6 .code-and-number {
+> frontend\src\App.css:2560:  grid-template-columns: 170px minmax(0, 1fr) !important;
+  frontend\src\App.css:2561:}
+  frontend\src\App.css:2562:
+  frontend\src\App.css:2563:.client-form-v6 .two-even {
+> frontend\src\App.css:2564:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:2565:}
+  frontend\src\App.css:2566:
+  frontend\src\App.css:2583:}
+  frontend\src\App.css:2584:
+> frontend\src\App.css:2585:/* Table remains scrollable instead of crushing columns */
+  frontend\src\App.css:2586:.client-table-wrap {
+  frontend\src\App.css:2587:  overflow-x: auto !important;
+  frontend\src\App.css:2603:  .module-toolbar.module-toolbar-fixed,
+  frontend\src\App.css:2604:  .module-toolbar {
+> frontend\src\App.css:2605:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2606:    justify-items: stretch !important;
+  frontend\src\App.css:2607:  }
+  frontend\src\App.css:2614:  }
+  frontend\src\App.css:2615:
+> frontend\src\App.css:2616:  .client-form-v6 .smart-grid.two {
+> frontend\src\App.css:2617:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2618:  }
+  frontend\src\App.css:2619:
+  frontend\src\App.css:2620:  .client-form-v6 .code-and-number,
+  frontend\src\App.css:2621:  .client-form-v6 .two-even {
+> frontend\src\App.css:2622:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2623:  }
+  frontend\src\App.css:2624:}
+  frontend\src\App.css:2642:
+  frontend\src\App.css:2643:/* Consistent two-column professional layout */
+> frontend\src\App.css:2644:.client-form-v6 .smart-grid.two {
+> frontend\src\App.css:2645:  display: grid !important;
+> frontend\src\App.css:2646:  grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+  frontend\src\App.css:2647:  gap: 16px 20px !important;
+  frontend\src\App.css:2648:  align-items: start !important;
+  frontend\src\App.css:2650:}
+  frontend\src\App.css:2651:
+> frontend\src\App.css:2652:.client-form-v6 .smart-grid.two > label,
+> frontend\src\App.css:2653:.client-form-v6 .smart-grid.two > div {
+  frontend\src\App.css:2654:  min-width: 0 !important;
+  frontend\src\App.css:2655:  width: 100% !important;
+  frontend\src\App.css:2671:
+  frontend\src\App.css:2672:/* Given Name and Surname: same row, same sizing */
+> frontend\src\App.css:2673:.client-form-v6 .name-lock-grid label:nth-of-type(3),
+> frontend\src\App.css:2674:.client-form-v6 .name-lock-grid label:nth-of-type(4) {
+  frontend\src\App.css:2675:  align-self: start !important;
+  frontend\src\App.css:2676:}
+  frontend\src\App.css:2686:/* Inline phone/address pairs */
+  frontend\src\App.css:2687:.client-form-v6 .inline-fields {
+> frontend\src\App.css:2688:  display: grid !important;
+  frontend\src\App.css:2689:  gap: 10px !important;
+  frontend\src\App.css:2690:  width: 100% !important;
+  frontend\src\App.css:2693:
+  frontend\src\App.css:2694:.client-form-v6 .code-and-number {
+> frontend\src\App.css:2695:  grid-template-columns: 170px minmax(0, 1fr) !important;
+  frontend\src\App.css:2696:}
+  frontend\src\App.css:2697:
+  frontend\src\App.css:2698:.client-form-v6 .two-even {
+> frontend\src\App.css:2699:  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  frontend\src\App.css:2700:}
+  frontend\src\App.css:2701:
+  frontend\src\App.css:2716:/* Full-width rows */
+  frontend\src\App.css:2717:.client-form-v6 .full {
+> frontend\src\App.css:2718:  grid-column: 1 / -1 !important;
+  frontend\src\App.css:2719:}
+  frontend\src\App.css:2720:
+  frontend\src\App.css:2735:}
+  frontend\src\App.css:2736:
+> frontend\src\App.css:2737:/* Table remains horizontally scrollable */
+  frontend\src\App.css:2738:.client-table-wrap {
+  frontend\src\App.css:2739:  overflow-x: auto !important;
+  frontend\src\App.css:2753:/* Responsive */
+  frontend\src\App.css:2754:@media (max-width: 1000px) {
+> frontend\src\App.css:2755:  .client-form-v6 .smart-grid.two {
+> frontend\src\App.css:2756:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2757:  }
+  frontend\src\App.css:2758:
+  frontend\src\App.css:2759:  .client-form-v6 .code-and-number,
+  frontend\src\App.css:2760:  .client-form-v6 .two-even {
+> frontend\src\App.css:2761:    grid-template-columns: 1fr !important;
+  frontend\src\App.css:2762:  }
+  frontend\src\App.css:2763:
+  frontend\src\App.css:2764:  .client-form-v6 .full {
+> frontend\src\App.css:2765:    grid-column: 1 / -1 !important;
+  frontend\src\App.css:2766:  }
+  frontend\src\App.css:2767:}
+  frontend\src\App.css:2829:
+  frontend\src\App.css:2830:/* Given Name and Surname must sit on the same row */
+> frontend\src\App.css:2831:.client-form-v6 .name-lock-grid {
+> frontend\src\App.css:2832:  grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+  frontend\src\App.css:2833:  align-items: start !important;
+  frontend\src\App.css:2834:}
+  frontend\src\App.css:2835:
+> frontend\src\App.css:2836:.client-form-v6 .name-lock-grid label:nth-of-type(3),
+> frontend\src\App.css:2837:.client-form-v6 .name-lock-grid label:nth-of-type(4) {
+  frontend\src\App.css:2838:  align-self: start !important;
+  frontend\src\App.css:2839:}
+  frontend\src\App.css:2904:
+  frontend\src\App.css:2905:/* Keep Given Name / Surname and NRIC row aligned */
+> frontend\src\App.css:2906:.client-form-v6 .name-lock-grid,
+> frontend\src\App.css:2907:.client-form-v6 .identity-grid {
+  frontend\src\App.css:2908:  align-items: start !important;
+  frontend\src\App.css:2909:}
+  frontend\src\App.css:2910:
+> frontend\src\App.css:2911:.client-form-v6 .name-lock-grid label,
+> frontend\src\App.css:2912:.client-form-v6 .identity-grid label {
+  frontend\src\App.css:2913:  min-width: 0 !important;
+  frontend\src\App.css:2914:}
+  frontend\src\App.css:2926:}
+  frontend\src\App.css:2927:
+> frontend\src\App.css:2928:/* Force important form controls to remain single-line input fields. */
+  frontend\src\App.css:2929:.client-form-v6 input,
+  frontend\src\App.css:2930:.client-form-v6 select {
+  frontend\src\App.css:2947:
+  frontend\src\App.css:2948:/* Keep two-column row alignment stable. */
+> frontend\src\App.css:2949:.client-form-v6 .smart-grid.two {
+  frontend\src\App.css:2950:  align-items: start !important;
+  frontend\src\App.css:2951:  gap: 16px 20px !important;
+  frontend\src\App.css:3118:Rule:
+  frontend\src\App.css:3119:All active/current/selected sidebar menu buttons use the SAME white active state.
+> frontend\src\App.css:3120:Normal dark menu buttons remain dark.
+> frontend\src\App.css:3121:Section labels/icons may remain gold.
+  frontend\src\App.css:3122:*/
+  frontend\src\App.css:3123:
+  frontend\src\App.css:3287:
+  frontend\src\App.css:3288:/* Phase 13C.4 - Workspace navigation grouping */
+> frontend\src\App.css:3289:.workspace-section-list {
+> frontend\src\App.css:3290:  display: grid;
+  frontend\src\App.css:3291:  gap: 1.25rem;
+  frontend\src\App.css:3292:}
+  frontend\src\App.css:3293:
+  frontend\src\App.css:3294:.workspace-module-section {
+> frontend\src\App.css:3295:  display: grid;
+  frontend\src\App.css:3296:  gap: 0.85rem;
+  frontend\src\App.css:3297:}
+  frontend\src\App.css:3298:
+> frontend\src\App.css:3299:.workspace-section-header {
+  frontend\src\App.css:3300:  display: flex;
+  frontend\src\App.css:3301:  justify-content: space-between;
+  frontend\src\App.css:3304:}
+  frontend\src\App.css:3305:
+> frontend\src\App.css:3306:.workspace-section-header h3 {
+  frontend\src\App.css:3307:  margin: 0.25rem 0 0.2rem;
+  frontend\src\App.css:3308:}
+  frontend\src\App.css:3309:
+> frontend\src\App.css:3310:.workspace-section-header p {
+  frontend\src\App.css:3311:  margin: 0;
+  frontend\src\App.css:3312:  opacity: 0.78;
+  frontend\src\App.css:3313:}
+  frontend\src\App.css:3314:
+> frontend\src\App.css:3315:.workflow-badge {
+  frontend\src\App.css:3316:  display: inline-flex;
+  frontend\src\App.css:3317:  align-items: center;
+  frontend\src\App.css:3327:}
+  frontend\src\App.css:3328:
+> frontend\src\App.css:3329:.workflow-card {
+  frontend\src\App.css:3330:  position: relative;
+  frontend\src\App.css:3331:}
+  frontend\src\App.css:3332:
+> frontend\src\App.css:3333:.card-meta {
+  frontend\src\App.css:3334:  display: inline-flex;
+  frontend\src\App.css:3335:  width: fit-content;
+  frontend\src\App.css:3346:/* Phase 13D.4 - Module frame polish and workflow continuity */
+  frontend\src\App.css:3347:.module-frame {
+> frontend\src\App.css:3348:  display: grid;
+  frontend\src\App.css:3349:  gap: 1rem;
+  frontend\src\App.css:3350:}
+  frontend\src\App.css:3362:
+  frontend\src\App.css:3363:.module-frame-copy {
+> frontend\src\App.css:3364:  display: grid;
+  frontend\src\App.css:3365:  gap: 0.35rem;
+  frontend\src\App.css:3366:  min-width: 0;
+  frontend\src\App.css:3398:}
+  frontend\src\App.css:3399:
+> frontend\src\App.css:3400:.module-frame-actions {
+  frontend\src\App.css:3401:  display: flex;
+  frontend\src\App.css:3402:  flex-wrap: wrap;
+  frontend\src\App.css:3440:@media (max-width: 860px) {
+  frontend\src\App.css:3441:  .module-frame-header {
+> frontend\src\App.css:3442:    display: grid;
+  frontend\src\App.css:3443:  }
+  frontend\src\App.css:3444:
+> frontend\src\App.css:3445:  .module-frame-actions {
+  frontend\src\App.css:3446:    justify-content: stretch;
+  frontend\src\App.css:3447:  }
+
+
