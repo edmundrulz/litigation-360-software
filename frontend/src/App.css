@@ -3916,4 +3916,29 @@ Section labels/icons may remain gold.
 }
 
 /* Phase 13E.4Z-U Matter Intake Client UI Polish END */
+/* Phase 13E.4Z-X Unified Client Flow Trigger Patch START */
+
+.client-flow-bridge-panel {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+  padding: 16px 18px;
+  border: 1px solid rgba(14, 116, 144, 0.24);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ecfeff, #f8fafc);
+  color: #0f172a;
+}
+
+.client-flow-bridge-panel strong {
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.client-flow-bridge-panel p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+}
+
+/* Phase 13E.4Z-X Unified Client Flow Trigger Patch END */
 

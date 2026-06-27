@@ -22,15 +22,6 @@ The original Clients.jsx process remains preserved, including:
 - local saved clients fallback
 - original client management protocol depth
 
-## Problem
-
-The application had two client-related flows:
-
-1. Matter Intake conveyor workflow
-2. Original Clients manual directory/profile workflow
-
-They were improved separately, but not yet clearly connected.
-
 ## Implemented
 
 ### App.jsx
@@ -46,27 +37,13 @@ They were improved separately, but not yet clearly connected.
 ### Clients.jsx
 
 - Accepts optional setModule prop
-- Adds a non-destructive bridge panel near the top of the Clients page
+- Adds a non-destructive bridge panel using a flexible heading anchor
 - Adds Return to Matter Intake action
 - Does not remove any original Clients logic, fields, validations, or protocols
 
 ### App.css
 
 - Adds small bridge-panel styling only
-
-## Final Behaviour For This Phase
-
-Matter Intake:
-
-- remains the guided conveyor process
-- continues internally to Case / Matter Details
-- only opens Clients through an explicit advanced/manual action
-
-Clients:
-
-- remains the full manual directory/profile management workspace
-- now clearly identifies itself as Advanced Client Directory / Manual Management
-- provides Return to Matter Intake
 
 ## Safety Scope
 

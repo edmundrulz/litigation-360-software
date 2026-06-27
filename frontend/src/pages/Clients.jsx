@@ -1884,7 +1884,7 @@ function prepareClientFormForValidation(source) {
   return withCanonicalContacts;
 }
 
-export default function Clients() {
+export default function Clients({ setModule } = {}) {
   const [clients, setClients] = useState([]);
   const [form, setForm] = useState(EMPTY_CLIENT);
   const [editingId, setEditingId] = useState("");
@@ -3600,6 +3600,16 @@ function isUnavailablePlaceholder(value) {
       <div className="client-module-header">
         <div>
           <h2>Client Registration / Client Profile</h2>
+        <div className="client-flow-bridge-panel">
+          <strong>Advanced Client Directory / Manual Management</strong>
+          <p>
+            This workspace preserves the full original client profile, directory, validation, draft, and manual management process.
+            Use it for advanced profile management. To continue the guided matter-opening conveyor, return to Matter Intake.
+          </p>
+          <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Matter Intake")}>
+            Return to Matter Intake
+          </button>
+        </div>
           <p>
             Client database, directory and profile management.
           </p>
