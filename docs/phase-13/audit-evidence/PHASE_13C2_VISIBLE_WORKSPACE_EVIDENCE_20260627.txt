@@ -1,0 +1,207 @@
+# Phase 13C.2 Visible Sidebar And Module Grid Evidence
+# Date: 2026-06-27
+# Source: frontend/src/App.jsx
+
+## Sidebar / Workspace / Module Grid
+
+
+  frontend\src\App.jsx:21:];
+  frontend\src\App.jsx:22:
+> frontend\src\App.jsx:23:const leosModules = [
+> frontend\src\App.jsx:24:  ["Clients", "OPEN", "Client records, contacts, onboarding and profile management."],
+> frontend\src\App.jsx:25:  ["Cases", "OPEN", "Case files, parties, progress and litigation status."],
+> frontend\src\App.jsx:26:  ["Matters", "OPEN", "Matter workspace and legal file tracking."],
+> frontend\src\App.jsx:27:  ["Court Dates", "OPEN", "Hearings, mentions, deadlines and reminders."],
+> frontend\src\App.jsx:28:  ["Documents", "OPEN", "Drafts, filings, templates, evidence and archives."],
+> frontend\src\App.jsx:29:  ["Staff", "OPEN", "Staff records and internal team administration."],
+  frontend\src\App.jsx:30:
+> frontend\src\App.jsx:31:  ["Tasks", "PLANNED", "Daily assignments, follow-ups and pending actions."],
+> frontend\src\App.jsx:32:  ["Notifications", "PLANNED", "Alerts, reminders, escalations and updates."],
+> frontend\src\App.jsx:33:  ["Court Navigation", "PLANNED", "Court location intelligence, travel planning and readiness."],
+> frontend\src\App.jsx:34:  ["Reports", "PLANNED", "Matter summaries, workload reports and executive overview."],
+> frontend\src\App.jsx:35:  ["Lawyer View", "PLANNED", "Hearings, active matters, pleadings, deadlines and court preparation."],
+> frontend\src\App.jsx:36:  ["Clerk View", "PLANNED", "Filing tasks, service tracking, bundles and registry follow-ups."],
+> frontend\src\App.jsx:37:  ["Admin View", "PLANNED", "Client intake, scheduling, reminders and office coordination."],
+> frontend\src\App.jsx:38:  ["Finance View", "PLANNED", "Invoices, payments, disbursements and billing status."],
+> frontend\src\App.jsx:39:  ["Partner View", "PLANNED", "Firm-wide performance, risk view and supervision."],
+> frontend\src\App.jsx:40:  ["Legal AI", "PLANNED", "AI drafting, review, research and legal operations support."],
+> frontend\src\App.jsx:41:  ["Knowledge Management", "PLANNED", "Precedents, templates, research notes and internal knowledge."],
+> frontend\src\App.jsx:42:  ["Predictive Analytics", "PLANNED", "Matter risk, workload trend and outcome intelligence."],
+> frontend\src\App.jsx:43:  ["Executive Command Centre", "PLANNED", "Leadership cockpit for firm-wide legal operations."],
+> frontend\src\App.jsx:44:  ["Workflow Automation", "PLANNED", "Automated routing, reminders, escalation and process control."],
+> frontend\src\App.jsx:45:  ["Government Integrations", "PLANNED", "Court, PERKESO, government and external registry integration layer."],
+> frontend\src\App.jsx:46:  ["Client Portal", "PLANNED", "Client-facing secure matter, document and update portal."],
+> frontend\src\App.jsx:47:  ["Mobile App", "PLANNED", "Mobile-ready legal operations access."],
+> frontend\src\App.jsx:48:  ["Autonomous Operations", "PLANNED", "Self-monitoring, recovery, alerts and operational automation."],
+> frontend\src\App.jsx:49:  ["Marketplace", "PLANNED", "Future ecosystem marketplace and API extension layer."]
+  frontend\src\App.jsx:50:];
+  frontend\src\App.jsx:51:
+  frontend\src\App.jsx:52:export default function App() {
+  frontend\src\App.jsx:53:  const [view, setView] = useState("workspace");
+> frontend\src\App.jsx:54:  const [module, setModule] = useState("home");
+> frontend\src\App.jsx:55:  const [moduleHistory, setModuleHistory] = useState([]);
+  frontend\src\App.jsx:56:  const [results, setResults] = useState([]);
+  frontend\src\App.jsx:57:  const [updated, setUpdated] = useState("Pending");
+  frontend\src\App.jsx:100:
+  frontend\src\App.jsx:101:    if (nextModule === "home") {
+> frontend\src\App.jsx:102:      setModuleHistory([]);
+> frontend\src\App.jsx:103:      setModule("home");
+  frontend\src\App.jsx:104:      return;
+  frontend\src\App.jsx:105:    }
+  frontend\src\App.jsx:106:
+> frontend\src\App.jsx:107:    setModuleHistory((previousHistory) => [...previousHistory, module]);
+> frontend\src\App.jsx:108:    setModule(nextModule);
+  frontend\src\App.jsx:109:  }
+  frontend\src\App.jsx:110:
+  frontend\src\App.jsx:111:  function backToPreviousModule() {
+> frontend\src\App.jsx:112:    setModuleHistory((previousHistory) => {
+  frontend\src\App.jsx:113:      if (previousHistory.length === 0) {
+> frontend\src\App.jsx:114:        setModule("home");
+  frontend\src\App.jsx:115:        return previousHistory;
+  frontend\src\App.jsx:116:      }
+  frontend\src\App.jsx:117:
+  frontend\src\App.jsx:118:      const previousModule = previousHistory[previousHistory.length - 1];
+> frontend\src\App.jsx:119:      setModule(previousModule);
+  frontend\src\App.jsx:120:
+  frontend\src\App.jsx:121:      return previousHistory.slice(0, -1);
+  frontend\src\App.jsx:123:  }
+  frontend\src\App.jsx:124:
+> frontend\src\App.jsx:125:  function openWorkspace() {
+  frontend\src\App.jsx:126:    setView("workspace");
+> frontend\src\App.jsx:127:    setModuleHistory([]);
+> frontend\src\App.jsx:128:    setModule("home");
+  frontend\src\App.jsx:129:  }
+  frontend\src\App.jsx:130:
+  frontend\src\App.jsx:131:  return (
+> frontend\src\App.jsx:132:    <div className="shell">
+> frontend\src\App.jsx:133:      <aside className="sidebar">
+> frontend\src\App.jsx:134:        <div className="brand">Litigation 360</div>
+  frontend\src\App.jsx:135:
+  frontend\src\App.jsx:136:        <div className="sidebar-menu-platform" aria-label="Application menu hub">
+  frontend\src\App.jsx:142:            onNavigate={(target) => {
+  frontend\src\App.jsx:143:              if (target === "home") {
+> frontend\src\App.jsx:144:                openWorkspace();
+  frontend\src\App.jsx:145:              }
+  frontend\src\App.jsx:146:            }}
+  frontend\src\App.jsx:147:            onAction={(item) => {
+  frontend\src\App.jsx:148:              if (item.id === "home") {
+> frontend\src\App.jsx:149:                openWorkspace();
+  frontend\src\App.jsx:150:              }
+  frontend\src\App.jsx:151:            }}
+  frontend\src\App.jsx:153:        </div>
+  frontend\src\App.jsx:154:
+> frontend\src\App.jsx:155:        <button className={view === "workspace" ? "active" : ""} onClick={openWorkspace}>
+> frontend\src\App.jsx:156:          End User Workspace
+  frontend\src\App.jsx:157:        </button>
+  frontend\src\App.jsx:158:
+  frontend\src\App.jsx:159:        <button className={view === "operations" ? "active" : ""} onClick={() => setView("operations")}>
+> frontend\src\App.jsx:160:          Operations Centre
+  frontend\src\App.jsx:161:        </button>
+  frontend\src\App.jsx:162:
+  frontend\src\App.jsx:163:        <button className={view === "admin" ? "active" : ""} onClick={() => setView("admin")}>
+> frontend\src\App.jsx:164:          Admin Centre
+  frontend\src\App.jsx:165:        </button>
+  frontend\src\App.jsx:166:
+  frontend\src\App.jsx:167:        <button className={view === "developer" ? "active" : ""} onClick={() => setView("developer")}>
+> frontend\src\App.jsx:168:          Developer Centre
+  frontend\src\App.jsx:169:        </button>
+  frontend\src\App.jsx:170:      </aside>
+  frontend\src\App.jsx:185:          <Workspace
+  frontend\src\App.jsx:186:            module={module}
+> frontend\src\App.jsx:187:            setModule={goToModule}
+  frontend\src\App.jsx:188:            previous={backToPreviousModule}
+  frontend\src\App.jsx:189:            canGoBack={moduleHistory.length > 0}
+  frontend\src\App.jsx:209:  return {
+  frontend\src\App.jsx:210:    workspace: "End User Legal Workspace - LEOS Module Command Grid",
+> frontend\src\App.jsx:211:    operations: "Operations Centre",
+> frontend\src\App.jsx:212:    admin: "Admin Centre",
+> frontend\src\App.jsx:213:    developer: "Developer Centre"
+  frontend\src\App.jsx:214:  }[view];
+  frontend\src\App.jsx:215:}
+  frontend\src\App.jsx:216:
+> frontend\src\App.jsx:217:function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+> frontend\src\App.jsx:218:  if (module === "Clients") return <ModuleFrame title="Clients" setModule={setModule} previous={previous} canGoBack={canGoBack}><Clients /></ModuleFrame>;
+> frontend\src\App.jsx:219:  if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
+> frontend\src\App.jsx:220:  if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
+> frontend\src\App.jsx:221:  if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+> frontend\src\App.jsx:222:  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+> frontend\src\App.jsx:223:  if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
+> frontend\src\App.jsx:224:  if (module === "Review Submit") return <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}><ReviewSubmit setModule={setModule} /></ModuleFrame>;
+> frontend\src\App.jsx:225:  if (module === "Matter Intake") return <ModuleFrame title="Matter Intake" setModule={setModule} previous={previous} canGoBack={canGoBack}><MatterIntakeWizard /></ModuleFrame>;
+  frontend\src\App.jsx:226:
+  frontend\src\App.jsx:227:  return (
+  frontend\src\App.jsx:229:      <section className="hero">
+  frontend\src\App.jsx:230:        <h2>Litigation 360 LEOS Workspace</h2>
+> frontend\src\App.jsx:231:        <p>Level 10/11 enterprise legal operating system command grid. Open modules are live. Planned modules are visible roadmap placeholders.</p>
+  frontend\src\App.jsx:232:
+  frontend\src\App.jsx:233:        <div className="actions">
+> frontend\src\App.jsx:234:          <button onClick={() => setModule("Clients")}>▶ 1. Client Details</button>
+> frontend\src\App.jsx:235:          <button onClick={() => setModule("Cases")}>2. Case / Matter Details</button>
+> frontend\src\App.jsx:236:          <button onClick={() => setModule("Court Dates")}>3. Deadline Details</button>
+> frontend\src\App.jsx:237:          <button onClick={() => setModule("Documents")}>4. Document Details</button>
+> frontend\src\App.jsx:238:          <button onClick={() => setModule("Review Submit")}>5. Review</button>
+> frontend\src\App.jsx:239:          <button onClick={() => setModule("Review Submit")}>6. Save & Submit</button>
+  frontend\src\App.jsx:240:        </div>
+  frontend\src\App.jsx:241:      </section>
+  frontend\src\App.jsx:249:
+  frontend\src\App.jsx:250:      <section className="grid">
+> frontend\src\App.jsx:251:        {leosModules.map(([title, status, text]) => (
+  frontend\src\App.jsx:252:          <button
+  frontend\src\App.jsx:253:            key={title}
+  frontend\src\App.jsx:254:            type="button"
+> frontend\src\App.jsx:255:            className={status === "OPEN" ? "card clickable-card" : "card planned-card"}
+> frontend\src\App.jsx:256:            onClick={() => status === "OPEN" && setModule(title)}
+> frontend\src\App.jsx:257:            disabled={status !== "OPEN"}
+  frontend\src\App.jsx:258:          >
+  frontend\src\App.jsx:259:            <h3>{title}</h3>
+  frontend\src\App.jsx:269:function ModuleFrame({
+  frontend\src\App.jsx:270:  title,
+> frontend\src\App.jsx:271:  setModule,
+  frontend\src\App.jsx:272:  backToPreviousModule,
+  frontend\src\App.jsx:273:  previous,
+  frontend\src\App.jsx:321:    }
+  frontend\src\App.jsx:322:
+> frontend\src\App.jsx:323:    setModule(resolvedPreviousTarget);
+  frontend\src\App.jsx:324:  }
+  frontend\src\App.jsx:325:
+  frontend\src\App.jsx:334:
+  frontend\src\App.jsx:335:        <div className="toolbar-center">
+> frontend\src\App.jsx:336:          <button type="button" className="toolbar-home-button" onClick={() => setModule("home")}>
+  frontend\src\App.jsx:337:            Home
+  frontend\src\App.jsx:338:          </button>
+> frontend\src\App.jsx:339:          <strong>{title} module is open</strong>
+  frontend\src\App.jsx:340:        </div>
+  frontend\src\App.jsx:341:
+  frontend\src\App.jsx:342:        <div className="toolbar-right">
+  frontend\src\App.jsx:343:          {nextTarget && (
+> frontend\src\App.jsx:344:            <button type="button" onClick={() => setModule(nextTarget)}>
+  frontend\src\App.jsx:345:              {nextLabel}
+  frontend\src\App.jsx:346:            </button>
+  frontend\src\App.jsx:353:  );
+  frontend\src\App.jsx:354:}
+> frontend\src\App.jsx:355:function ReviewSubmit({ setModule }) {
+  frontend\src\App.jsx:356:  return (
+  frontend\src\App.jsx:357:    <section className="hero">
+  frontend\src\App.jsx:368:        </button>
+  frontend\src\App.jsx:369:
+> frontend\src\App.jsx:370:        <button onClick={() => setModule("home")}>
+  frontend\src\App.jsx:371:          NO - Return to Main Workspace / HOME
+  frontend\src\App.jsx:372:        </button>
+  frontend\src\App.jsx:373:
+> frontend\src\App.jsx:374:        <button onClick={() => setModule("Clients")}>
+  frontend\src\App.jsx:375:          Change / Amend / Edit Client Details
+  frontend\src\App.jsx:376:        </button>
+  frontend\src\App.jsx:377:
+> frontend\src\App.jsx:378:        <button onClick={() => setModule("Cases")}>
+  frontend\src\App.jsx:379:          Change / Amend / Edit Case / Matter Details
+  frontend\src\App.jsx:380:        </button>
+  frontend\src\App.jsx:381:
+> frontend\src\App.jsx:382:        <button onClick={() => setModule("Court Dates")}>
+  frontend\src\App.jsx:383:          Change / Amend / Edit Deadline Details
+  frontend\src\App.jsx:384:        </button>
+  frontend\src\App.jsx:385:
+> frontend\src\App.jsx:386:        <button onClick={() => setModule("Documents")}>
+  frontend\src\App.jsx:387:          Change / Amend / Edit Document Details
+  frontend\src\App.jsx:388:        </button>
+
+
