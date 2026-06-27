@@ -1884,6 +1884,131 @@ function prepareClientFormForValidation(source) {
   return withCanonicalContacts;
 }
 
+
+function ClientRequiredFieldCounter() {
+  const [snapshot, setSnapshot] = useState({
+    total: 0,
+    complete: 0,
+    missing: 0,
+  });
+
+  useEffect(() => {
+    const getRoot = () => document.querySelector(".client-module-header")?.parentElement || document;
+
+    const isVisible = (control) => {
+      if (!control || control.disabled) return false;
+      if (control.closest(".client-profile-completion-shell")) return false;
+      if (control.closest(".client-profile-review-panel")) return false;
+      if (control.closest(".client-profile-summary-rail")) return false;
+      return Boolean(control.offsetParent || control.getClientRects().length);
+    };
+
+    const isFilled = (control, root, countedGroups) => {
+      const type = (control.getAttribute("type") || "").toLowerCase();
+
+      if (type === "checkbox" || type === "radio") {
+        const name = control.getAttribute("name");
+
+        if (name) {
+          const groupKey = type + ":" + name;
+          if (countedGroups.has(groupKey)) return null;
+          countedGroups.add(groupKey);
+
+          const groupControls = Array.from(root.querySelectorAll('input[type="' + type + '"]')).filter(
+            (candidate) => candidate.getAttribute("name") === name && isVisible(candidate),
+          );
+
+          return groupControls.some((candidate) => candidate.checked);
+        }
+
+        return control.checked;
+      }
+
+      return String(control.value || "").trim().length > 0;
+    };
+
+    const collectRequiredState = () => {
+      const root = getRoot();
+      const rawControls = Array.from(
+        root.querySelectorAll('input[required], select[required], textarea[required], [aria-required="true"]'),
+      ).filter(isVisible);
+
+      const countedGroups = new Set();
+      let total = 0;
+      let complete = 0;
+
+      rawControls.forEach((control) => {
+        const filled = isFilled(control, root, countedGroups);
+
+        if (filled === null) {
+          return;
+        }
+
+        total += 1;
+
+        if (filled) {
+          complete += 1;
+        }
+      });
+
+      setSnapshot({
+        total,
+        complete,
+        missing: Math.max(total - complete, 0),
+      });
+    };
+
+    collectRequiredState();
+
+    const root = getRoot();
+    root.addEventListener("input", collectRequiredState, true);
+    root.addEventListener("change", collectRequiredState, true);
+
+    const observer = new MutationObserver(collectRequiredState);
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["required", "aria-required", "disabled", "class", "style"],
+    });
+
+    return () => {
+      root.removeEventListener("input", collectRequiredState, true);
+      root.removeEventListener("change", collectRequiredState, true);
+      observer.disconnect();
+    };
+  }, []);
+
+  const hasRequiredFields = snapshot.total > 0;
+  const isClear = hasRequiredFields && snapshot.missing === 0;
+
+  return (
+    <div className="client-required-field-counter" aria-live="polite">
+      <div>
+        <p className="client-profile-completion-kicker">Existing Required Fields</p>
+        <h4>{isClear ? "No Visible Required Field Gaps Detected" : "Visible Required Fields Need Review"}</h4>
+        <p>
+          Counter reads currently rendered required controls only. Existing Clients validation and save/create checks remain authoritative.
+        </p>
+      </div>
+
+      <div className="client-required-field-counter-metrics">
+        <span>
+          <strong>{snapshot.total}</strong>
+          Required
+        </span>
+        <span>
+          <strong>{snapshot.complete}</strong>
+          Complete
+        </span>
+        <span className={snapshot.missing > 0 ? "needs-review" : "is-clear"}>
+          <strong>{snapshot.missing}</strong>
+          Missing
+        </span>
+      </div>
+    </div>
+  );
+}
 export default function Clients({ setModule } = {}) {
   const [clients, setClients] = useState([]);
   const [form, setForm] = useState(EMPTY_CLIENT);
@@ -3713,6 +3838,8 @@ function isUnavailablePlaceholder(value) {
             </p>
           </article>
         </div>
+
+        <ClientRequiredFieldCounter />
 
         <div className="client-profile-completion-links" aria-label="Completion review jump links">
           <a href="#client-profile-details">Identity</a>

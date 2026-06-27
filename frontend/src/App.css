@@ -5321,4 +5321,107 @@ h4:has(.client-profile-card-title):focus-within {
 }
 
 /* Phase 13E.4Z-Z4-C Static Completion Status Shell END */
+/* Phase 13E.4Z-Z4-D Existing Required Field Counter START */
+
+/*
+  Non-destructive required-field counter.
+
+  Scope:
+  - Reads existing rendered required / aria-required controls only
+  - No validation rule changes
+  - No save/create/draft/backend/API changes
+*/
+
+.client-required-field-counter {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.045);
+}
+
+.client-required-field-counter h4 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 0.98rem;
+  font-weight: 950;
+}
+
+.client-required-field-counter p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.client-required-field-counter-metrics {
+  display: grid;
+  min-width: 260px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.client-required-field-counter-metrics span {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 16px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.74rem;
+  font-weight: 900;
+  padding: 10px;
+  text-align: center;
+}
+
+.client-required-field-counter-metrics strong {
+  display: block;
+  color: #0f172a;
+  font-size: 1.18rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.client-required-field-counter-metrics .needs-review {
+  border-color: rgba(217, 119, 6, 0.28);
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.client-required-field-counter-metrics .needs-review strong {
+  color: #92400e;
+}
+
+.client-required-field-counter-metrics .is-clear {
+  border-color: rgba(15, 118, 110, 0.24);
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.client-required-field-counter-metrics .is-clear strong {
+  color: #047857;
+}
+
+@media (max-width: 820px) {
+  .client-required-field-counter {
+    display: grid;
+  }
+
+  .client-required-field-counter-metrics {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .client-required-field-counter-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Phase 13E.4Z-Z4-D Existing Required Field Counter END */
 
