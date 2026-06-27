@@ -5159,4 +5159,166 @@ h4:has(.client-profile-card-title):focus-within {
 }
 
 /* Phase 13E.4Z-Z3-I Pre-Submission Review Panel END */
+/* Phase 13E.4Z-Z4-C Static Completion Status Shell START */
+
+/*
+  Static non-destructive completion intelligence shell.
+
+  Scope:
+  - Informational completion shell only
+  - No computed validation
+  - No required-field counting
+  - No save/create/draft/backend/API changes
+*/
+
+.client-profile-completion-shell {
+  margin: 22px 0;
+  padding: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(239, 246, 255, 0.72), rgba(255, 255, 255, 0.98)),
+    #ffffff;
+  box-shadow: 0 24px 54px rgba(15, 23, 42, 0.07);
+}
+
+.client-profile-completion-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.client-profile-completion-kicker {
+  margin: 0 0 6px;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.client-profile-completion-header h3,
+.client-profile-completion-card h4 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-weight: 950;
+  letter-spacing: -0.015em;
+}
+
+.client-profile-completion-header h3 {
+  font-size: 1.16rem;
+}
+
+.client-profile-completion-card h4 {
+  font-size: 0.98rem;
+}
+
+.client-profile-completion-header p,
+.client-profile-completion-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.client-profile-completion-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.client-profile-completion-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.client-profile-completion-card {
+  min-height: 158px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 15px;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.045);
+}
+
+.client-profile-completion-warning {
+  border-color: rgba(217, 119, 6, 0.3);
+  background: linear-gradient(135deg, #fffbeb, #ffffff);
+}
+
+.client-profile-completion-warning .client-profile-completion-kicker {
+  color: #92400e;
+}
+
+.client-profile-completion-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.client-profile-completion-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 7px 10px;
+  text-decoration: none;
+}
+
+.client-profile-completion-links a:hover {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.client-profile-completion-links a:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.28);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1180px) {
+  .client-profile-completion-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .client-profile-completion-shell {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .client-profile-completion-header {
+    display: grid;
+  }
+
+  .client-profile-completion-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .client-profile-completion-status {
+    width: fit-content;
+  }
+}
+
+/* Phase 13E.4Z-Z4-C Static Completion Status Shell END */
 

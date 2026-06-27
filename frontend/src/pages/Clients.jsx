@@ -3664,7 +3664,65 @@ function isUnavailablePlaceholder(value) {
           {status}
         </p>
       )}
-      <div className="client-directory-control-panel">
+
+      <section className="client-profile-completion-shell" aria-labelledby="client-profile-completion-heading">
+        <div className="client-profile-completion-header">
+          <div>
+            <p className="client-profile-completion-kicker">Completion Intelligence</p>
+            <h3 id="client-profile-completion-heading">Client Profile Completion Status</h3>
+            <p>
+              Static readiness shell. Existing Clients validation, required fields, backend checks, local fallback,
+              draft behaviour, create/save controls, and manual-management protocols remain authoritative.
+            </p>
+          </div>
+          <span className="client-profile-completion-status">Static shell only</span>
+        </div>
+
+        <div className="client-profile-completion-grid">
+          <article className="client-profile-completion-card">
+            <p className="client-profile-completion-kicker">Profile Readiness</p>
+            <h4>Verify Before Saving</h4>
+            <p>
+              Completion indicators are prepared for future audited validation mapping. This card does not calculate
+              missing fields yet.
+            </p>
+          </article>
+
+          <article className="client-profile-completion-card">
+            <p className="client-profile-completion-kicker">Required Items</p>
+            <h4>Audit Mapping Pending</h4>
+            <p>
+              Required-field counting will only be added after confirmed field keys and existing validation sources are mapped.
+            </p>
+          </article>
+
+          <article className="client-profile-completion-card">
+            <p className="client-profile-completion-kicker">Section Status</p>
+            <h4>Section Intelligence Pending</h4>
+            <p>
+              Future section statuses must use the existing Clients form state and must not invent new validation rules.
+            </p>
+          </article>
+
+          <article className="client-profile-completion-card client-profile-completion-warning">
+            <p className="client-profile-completion-kicker">Compliance</p>
+            <h4>Manual Review Remains Required</h4>
+            <p>
+              Documentation verification, pending information, backend warnings, and local fallback warnings remain controlled
+              by the existing Clients workflow.
+            </p>
+          </article>
+        </div>
+
+        <div className="client-profile-completion-links" aria-label="Completion review jump links">
+          <a href="#client-profile-details">Identity</a>
+          <a href="#client-contact-communication-preferences">Contact</a>
+          <a href="#client-address-service-location">Address</a>
+          <a href="#client-documentation-verification">Documentation</a>
+          <a href="#client-internal-remarks-issues">Pending Info</a>
+        </div>
+      </section>
+<div className="client-directory-control-panel">
         <div className="client-directory-header-row">
           <div>
             <h3>Advanced Client Directory / Manual Management</h3>
