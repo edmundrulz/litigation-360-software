@@ -4709,4 +4709,93 @@ Section labels/icons may remain gold.
 }
 
 /* Phase 13E.4Z-Z3-C2 Full Client Profile Section Card Shell END */
+/* Phase 13E.4Z-Z3-E Explicit Client Section Header Wrappers START */
+
+/*
+  Non-destructive explicit section-heading wrapper layer.
+
+  Scope:
+  - Visual heading structure only
+  - Existing Clients.jsx fields remain in place
+  - Existing handlers, state, validation, backend, local fallback, draft, and save/reset behaviour remain unchanged
+*/
+
+.client-profile-card-kicker {
+  display: block;
+  margin-bottom: 3px;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.client-profile-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f172a;
+  font-size: 1.02rem;
+  font-weight: 950;
+  letter-spacing: -0.015em;
+}
+
+.client-profile-card-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #155e75;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  vertical-align: middle;
+}
+
+.client-profile-card-help {
+  margin: -8px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(14, 116, 144, 0.16);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  color: #64748b;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+h2:has(.client-profile-card-title),
+h3:has(.client-profile-card-title),
+h4:has(.client-profile-card-title) {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-left: 5px solid #0f766e;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.045);
+}
+
+h2:has(.client-profile-card-title):focus-within,
+h3:has(.client-profile-card-title):focus-within,
+h4:has(.client-profile-card-title):focus-within {
+  outline: 3px solid rgba(14, 116, 144, 0.24);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .client-profile-card-status {
+    display: flex;
+    width: fit-content;
+    margin: 8px 0 0;
+  }
+
+  .client-profile-card-help {
+    font-size: 0.82rem;
+  }
+}
+
+/* Phase 13E.4Z-Z3-E Explicit Client Section Header Wrappers END */
 

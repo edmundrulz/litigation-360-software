@@ -3925,7 +3925,8 @@ function isUnavailablePlaceholder(value) {
         })()}
 
                 <div className="form-section">
-          <h3>Client Profile Details</h3>
+          <h3><span className="client-profile-card-kicker">Section 1</span><span className="client-profile-card-title">Client Profile Details</span><span className="client-profile-card-status">Identity</span></h3>
+          <p className="client-profile-card-help">Core identity and profile classification information. Existing fields, validation, and handlers remain preserved.</p>
 
           <div className="smart-grid two name-lock-grid">
             <label>
@@ -3998,7 +3999,8 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
         <div className="form-section">
-          <h3>Client Identification Details</h3>
+          <h3><span className="client-profile-card-kicker">Section 2</span><span className="client-profile-card-title">Client Identification Details</span><span className="client-profile-card-status">Verification</span></h3>
+          <p className="client-profile-card-help">Identification, document status, date of birth, and verification-related details. Existing validation remains preserved.</p>
 
           <div className="smart-grid two identity-grid">
             <label>
@@ -4103,7 +4105,8 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
         <div className="form-section">
-          <h3>Employment Details</h3>
+          <h3><span className="client-profile-card-kicker">Section 3</span><span className="client-profile-card-title">Employment Details</span><span className="client-profile-card-status">Profile metadata</span></h3>
+          <p className="client-profile-card-help">Employment and organisation-related details. Existing fields and rules remain preserved.</p>
 
           <div className="smart-grid two">
             <label>
@@ -4117,7 +4120,8 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
         <div className="form-section">
-          <h3>Family and Marital Details</h3>
+          <h3><span className="client-profile-card-kicker">Section 4</span><span className="client-profile-card-title">Family and Marital Details</span><span className="client-profile-card-status">Personal metadata</span></h3>
+          <p className="client-profile-card-help">Family, marital, and dependency information. Existing conditional rules remain preserved.</p>
 
           <div className="smart-grid two">
             <label>
@@ -4165,7 +4169,8 @@ function isUnavailablePlaceholder(value) {
         </div>
 
         <div className="form-section">
-          <h3>Matter Context and Case Origin</h3>
+          <h3><span className="client-profile-card-kicker">Section 5</span><span className="client-profile-card-title">Matter Context and Case Origin</span><span className="client-profile-card-status">Workflow context</span></h3>
+          <p className="client-profile-card-help">Client role, case origin, and matter-source context. Existing protocol warnings remain preserved.</p>
           <p className="mandatory-note">Frontend metadata only. Linkage to actual matters/cases should be enforced in a future backend matter module.</p>
 
           <div className="smart-grid two">
@@ -4258,7 +4263,8 @@ function isUnavailablePlaceholder(value) {
         </div>
 
         <div className="form-section">
-          <h3>Will / Estate Handling Metadata</h3>
+          <h3><span className="client-profile-card-kicker">Section 7</span><span className="client-profile-card-title">Will / Estate Handling Metadata</span><span className="client-profile-card-status">Specialist metadata</span></h3>
+          <p className="client-profile-card-help">Will, estate, probate, and inheritance handling metadata. Existing conditional handling remains preserved.</p>
           <p className="mandatory-note">Frontend indicator only; enforce access via backend RBAC in future phase.</p>
 
           <div className="smart-grid two">
@@ -4320,7 +4326,8 @@ function isUnavailablePlaceholder(value) {
         </div>
 
         <div className="form-section">
-          <h3>Health / OKU / Disability and Accommodation Metadata</h3>
+          <h3><span className="client-profile-card-kicker">Section 8</span><span className="client-profile-card-title">Health / OKU / Disability and Accommodation Metadata</span><span className="client-profile-card-status">Accommodation</span></h3>
+          <p className="client-profile-card-help">Accommodation, accessibility, and communication support information. Existing requirements remain preserved.</p>
           <p className="mandatory-note">Use respectful, neutral wording. Treat accommodation details as sensitive frontend metadata.</p>
 
           <div className="smart-grid two">
@@ -4653,7 +4660,8 @@ function isUnavailablePlaceholder(value) {
         </div>
 
                 <div className="form-section">
-          <h3>Address and Service Location Details</h3>
+          <h3><span className="client-profile-card-kicker">Section 10</span><span className="client-profile-card-title">Address and Service Location Details</span><span className="client-profile-card-status">Location</span></h3>
+          <p className="client-profile-card-help">Address, correspondence, service location, and administrative-area details. Existing synchronization rules remain preserved.</p>
           <p className="mandatory-note">Use this section for residential, business, local, overseas, correspondence, courier and service-location details.</p>
           <p className="mandatory-note">
             <a
@@ -5207,7 +5215,8 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
 <div className="form-section">
-          <h3>Emergency Contact / Next of Kin Details</h3>
+          <h3><span className="client-profile-card-kicker">Section 11</span><span className="client-profile-card-title">Emergency Contact / Next of Kin Details</span><span className="client-profile-card-status">Secondary contact</span></h3>
+          <p className="client-profile-card-help">Emergency and next-of-kin information. Existing fields and handlers remain preserved.</p>
 
           <div className="smart-grid two">
             <label>
@@ -5256,7 +5265,8 @@ function isUnavailablePlaceholder(value) {
         </div>
 
         <div className="form-section">
-          <h3>Documentation Verification Status</h3>
+          <h3><span className="client-profile-card-kicker">Section 12</span><span className="client-profile-card-title">Documentation Verification Status</span><span className="client-profile-card-status">Compliance</span></h3>
+          <p className="client-profile-card-help">Document verification, status, pending reasons, retention notes, and review fields. Existing compliance process remains preserved.</p>
           <p className="mandatory-note">Tracks document type, document receipt status, verification status and digital copy handling.</p>
 
                     <div className="smart-grid two">
