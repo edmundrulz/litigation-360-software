@@ -3451,3 +3451,212 @@ Section labels/icons may remain gold.
     width: 100%;
   }
 }
+
+/* Phase 13E.4 - End User Workspace dashboard polish */
+.workspace-dashboard-shell {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.workspace-hero-polished {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.workspace-hero-copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.workspace-eyebrow,
+.workspace-section-kicker {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.workspace-eyebrow {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.workspace-hero-polished h1 {
+  margin-bottom: 0;
+}
+
+.workspace-hero-polished p {
+  max-width: 68ch;
+}
+
+.workspace-action-panel {
+  align-content: center;
+  justify-content: flex-end;
+  min-width: 260px;
+}
+
+.workspace-action-panel .primary-action {
+  background: #ffffff;
+  color: #111827;
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.dashboard-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.dashboard-metric-card {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.dashboard-metric-card span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.dashboard-metric-card strong {
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.dashboard-metric-card p {
+  margin: 0;
+  opacity: 0.72;
+}
+
+.workspace-section-list {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.workspace-module-section {
+  display: grid;
+  gap: 0.85rem;
+  border-radius: 22px;
+  padding: 1rem;
+}
+
+.live-module-section {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.planned-module-section {
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.workspace-section-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.workspace-section-header h2 {
+  margin: 0.25rem 0 0;
+}
+
+.workspace-section-header p {
+  margin: 0.3rem 0 0;
+  opacity: 0.72;
+}
+
+.workspace-section-kicker {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.workspace-card-grid {
+  align-items: stretch;
+}
+
+.workflow-card {
+  text-align: left;
+  min-height: 180px;
+}
+
+.workflow-card h3 {
+  margin-top: 0.4rem;
+}
+
+.workflow-card p {
+  min-height: 3.2em;
+}
+
+.workflow-card.clickable-card {
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.workflow-card.clickable-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.workflow-card.planned-card {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.workflow-card.planned-card .workflow-badge {
+  opacity: 0.75;
+}
+
+.card-meta {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: auto;
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  opacity: 0.76;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 1100px) {
+  .workspace-hero-polished {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-action-panel {
+    min-width: 0;
+    justify-content: flex-start;
+  }
+
+  .dashboard-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .dashboard-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-action-panel button {
+    width: 100%;
+  }
+
+  .workspace-module-section {
+    padding: 0.85rem;
+  }
+}
