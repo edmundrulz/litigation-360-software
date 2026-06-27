@@ -2009,6 +2009,223 @@ function ClientRequiredFieldCounter() {
     </div>
   );
 }
+
+function ClientSectionCompletionStatus() {
+  const sectionDefinitions = [
+    { anchor: "client-profile-details", label: "Profile Details" },
+    { anchor: "client-identification-details", label: "Identification" },
+    { anchor: "client-employment-details", label: "Employment" },
+    { anchor: "client-family-marital-details", label: "Family / Marital" },
+    { anchor: "client-matter-context-origin", label: "Matter Context" },
+    { anchor: "client-source-value-indicators", label: "Source / Value" },
+    { anchor: "client-will-estate-metadata", label: "Will / Estate" },
+    { anchor: "client-health-oku-accommodation", label: "Health / OKU / Accommodation" },
+    { anchor: "client-contact-communication-preferences", label: "Contact / Communication" },
+    { anchor: "client-address-service-location", label: "Address / Service Location" },
+    { anchor: "client-emergency-next-of-kin", label: "Emergency / Next of Kin" },
+    { anchor: "client-documentation-verification", label: "Documentation Verification" },
+    { anchor: "client-internal-remarks-issues", label: "Remarks / Pending Info" },
+  ];
+
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+    const getRoot = () => document.querySelector(".client-module-header")?.parentElement || document;
+
+    const isVisible = (control) => {
+      if (!control || control.disabled) return false;
+      if (control.closest(".client-profile-completion-shell")) return false;
+      if (control.closest(".client-profile-review-panel")) return false;
+      if (control.closest(".client-profile-summary-rail")) return false;
+      return Boolean(control.offsetParent || control.getClientRects().length);
+    };
+
+    const hasValue = (control) => {
+      const type = (control.getAttribute("type") || "").toLowerCase();
+
+      if (type === "checkbox" || type === "radio") {
+        return Boolean(control.checked);
+      }
+
+      return String(control.value || "").trim().length > 0;
+    };
+
+    const countRequiredControls = (controls, sectionRoot) => {
+      const countedGroups = new Set();
+      let required = 0;
+      let complete = 0;
+
+      controls.forEach((control) => {
+        const type = (control.getAttribute("type") || "").toLowerCase();
+
+        if (type === "checkbox" || type === "radio") {
+          const name = control.getAttribute("name");
+
+          if (name) {
+            const groupKey = type + ":" + name;
+
+            if (countedGroups.has(groupKey)) {
+              return;
+            }
+
+            countedGroups.add(groupKey);
+
+            const groupControls = Array.from(sectionRoot.querySelectorAll('input[type="' + type + '"]')).filter(
+              (candidate) => candidate.getAttribute("name") === name && isVisible(candidate),
+            );
+
+            required += 1;
+
+            if (groupControls.some((candidate) => candidate.checked)) {
+              complete += 1;
+            }
+
+            return;
+          }
+
+          required += 1;
+
+          if (control.checked) {
+            complete += 1;
+          }
+
+          return;
+        }
+
+        required += 1;
+
+        if (String(control.value || "").trim().length > 0) {
+          complete += 1;
+        }
+      });
+
+      return {
+        required,
+        complete,
+        missing: Math.max(required - complete, 0),
+      };
+    };
+
+    const readSection = (section) => {
+      const anchorElement = document.getElementById(section.anchor);
+
+      if (!anchorElement) {
+        return {
+          ...section,
+          status: "Mapping Pending",
+          tone: "optional",
+          required: 0,
+          complete: 0,
+          missing: 0,
+          active: false,
+        };
+      }
+
+      const sectionRoot =
+        anchorElement.closest(".client-profile-card, .client-profile-section, .client-form-section, .form-section, section, article, fieldset") ||
+        anchorElement.parentElement ||
+        anchorElement;
+
+      const controls = Array.from(sectionRoot.querySelectorAll("input, select, textarea")).filter(isVisible);
+      const requiredControls = controls.filter((control) => control.matches("[required], [aria-required='true']"));
+      const counts = countRequiredControls(requiredControls, sectionRoot);
+      const active = controls.some(hasValue);
+
+      let status = "Optional";
+      let tone = "optional";
+
+      if (counts.required > 0 && counts.missing === 0) {
+        status = "Complete";
+        tone = "complete";
+      } else if (counts.required > 0 && counts.complete > 0) {
+        status = "Review Required";
+        tone = "review";
+      } else if (counts.required > 0) {
+        status = "Pending";
+        tone = "pending";
+      } else if (active) {
+        status = "Review Required";
+        tone = "review";
+      }
+
+      return {
+        ...section,
+        ...counts,
+        active,
+        status,
+        tone,
+      };
+    };
+
+    const collectSections = () => {
+      setSections(sectionDefinitions.map(readSection));
+    };
+
+    collectSections();
+
+    const root = getRoot();
+    root.addEventListener("input", collectSections, true);
+    root.addEventListener("change", collectSections, true);
+
+    const observer = new MutationObserver(collectSections);
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["required", "aria-required", "disabled", "class", "style"],
+    });
+
+    return () => {
+      root.removeEventListener("input", collectSections, true);
+      root.removeEventListener("change", collectSections, true);
+      observer.disconnect();
+    };
+  }, []);
+
+  const totalMissing = sections.reduce((sum, section) => sum + section.missing, 0);
+  const reviewSections = sections.filter((section) => section.tone === "review" || section.tone === "pending").length;
+
+  return (
+    <div className="client-section-completion-status" aria-live="polite">
+      <div className="client-section-completion-header">
+        <div>
+          <p className="client-profile-completion-kicker">Section-Level Completion</p>
+          <h4>Full Profile Section Readiness</h4>
+          <p>
+            Section statuses read existing visible required fields and entered values only. Existing Clients validation remains authoritative.
+          </p>
+        </div>
+
+        <div className="client-section-completion-summary">
+          <span>
+            <strong>{reviewSections}</strong>
+            Review
+          </span>
+          <span>
+            <strong>{totalMissing}</strong>
+            Missing
+          </span>
+        </div>
+      </div>
+
+      <div className="client-section-completion-list" aria-label="Client profile section completion statuses">
+        {sections.map((section) => (
+          <a
+            className={`client-section-completion-row ${section.tone}`}
+            href={`#${section.anchor}`}
+            key={section.anchor}
+          >
+            <span className="client-section-completion-name">{section.label}</span>
+            <span className="client-section-completion-badge">{section.status}</span>
+            <span className="client-section-completion-count">
+              {section.required} required / {section.missing} missing
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
 export default function Clients({ setModule } = {}) {
   const [clients, setClients] = useState([]);
   const [form, setForm] = useState(EMPTY_CLIENT);
@@ -3840,6 +4057,8 @@ function isUnavailablePlaceholder(value) {
         </div>
 
         <ClientRequiredFieldCounter />
+
+        <ClientSectionCompletionStatus />
 
         <div className="client-profile-completion-links" aria-label="Completion review jump links">
           <a href="#client-profile-details">Identity</a>
@@ -5808,4 +6027,3 @@ function isUnavailablePlaceholder(value) {
     </section>
   );
 }
-
