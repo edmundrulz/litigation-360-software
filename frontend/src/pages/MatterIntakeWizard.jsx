@@ -1,53 +1,23 @@
 import React, { useMemo, useState } from "react";
 
-const SAMPLE_CLIENTS = [
-  {
-    id: "CL-0001",
-    fullName: "John Edmund Pereira",
-    givenName: "John Edmund",
-    surname: "Pereira",
-    preferredName: "John",
-    alias: "",
-    email: "edmundrulz@gmail.com",
-    phone: "0162172852",
-    whatsapp: "0162172852",
-    idReference: "",
-    passportNumber: "",
-    companyName: "",
-    address: "20 JALAN SS2/6",
-    city: "Petaling Jaya",
-    postcode: "47300",
-    state: "Selangor",
-    country: "Malaysia",
-    clientType: "Individual",
-    status: "Existing Client",
-    lastUpdated: "2026-06-27"
-  },
-  {
-    id: "CL-0002",
-    fullName: "Sample Test Client",
-    givenName: "Sample",
-    surname: "Client",
-    preferredName: "",
-    alias: "",
-    email: "sample.client@example.com",
-    phone: "0123456789",
-    whatsapp: "",
-    idReference: "",
-    passportNumber: "",
-    companyName: "Sample Client Sdn Bhd",
-    address: "Petaling Jaya",
-    city: "Petaling Jaya",
-    postcode: "",
-    state: "Selangor",
-    country: "Malaysia",
-    clientType: "Company",
-    status: "Sample Record",
-    lastUpdated: "2026-06-27"
-  }
+const CLIENT_STEP_MODE = {
+  SEARCH: "search",
+  CREATE: "create",
+  EXISTING_SELECTED: "existing-selected",
+  DUPLICATE_REVIEW: "duplicate-review",
+};
+
+const STEPS = [
+  "Client Details",
+  "Case / Matter Details",
+  "Deadline Details",
+  "Document Details",
+  "Review",
+  "Review / Save & Submit",
 ];
 
 const EMPTY_CLIENT_INTAKE = {
+  clientType: "Individual",
   fullName: "",
   givenName: "",
   surname: "",
@@ -58,1063 +28,1092 @@ const EMPTY_CLIENT_INTAKE = {
   whatsapp: "",
   idReference: "",
   passportNumber: "",
+  dateOfBirth: "",
   companyName: "",
   address: "",
   city: "",
   postcode: "",
   state: "",
   country: "Malaysia",
-  dateOfBirth: "",
-  clientType: "Individual",
   intakeSource: "Manual Entry",
+  duplicateDecision: "",
   notes: "",
-  duplicateDecision: ""
 };
 
-const STEPS = [
+const SAMPLE_CLIENTS = [
   {
-    id: 1,
-    title: "Client Details",
-    status: "OPEN",
-    description: "Search, check duplicates, paste intake notes, and prepare an editable client profile."
+    clientId: "CL-0001",
+    fullName: "John Edmund Pereira",
+    givenName: "John Edmund",
+    surname: "Pereira",
+    preferredName: "John",
+    alias: "J E Pereira",
+    email: "john.pereira@example.com",
+    phone: "0123456789",
+    whatsapp: "0123456789",
+    idReference: "900101-10-1234",
+    passportNumber: "A12345678",
+    dateOfBirth: "01/01/1990",
+    companyName: "Pereira Holdings",
+    address: "Petaling Jaya, Selangor",
+    lastMatterDate: "18/06/2026",
+    clientType: "Individual",
   },
   {
-    id: 2,
-    title: "Case / Matter Details",
-    status: "OPEN",
-    description: "Record the case, matter type, parties, facts, and legal issue summary."
+    clientId: "CL-0002",
+    fullName: "Sample Test Client",
+    givenName: "Sample",
+    surname: "Client",
+    preferredName: "Sample",
+    alias: "Test Client",
+    email: "sample.client@example.com",
+    phone: "0198887777",
+    whatsapp: "0198887777",
+    idReference: "850505-14-5678",
+    passportNumber: "B99887766",
+    dateOfBirth: "05/05/1985",
+    companyName: "Sample Client Sdn Bhd",
+    address: "Kuala Lumpur",
+    lastMatterDate: "03/05/2026",
+    clientType: "Individual",
   },
-  {
-    id: 3,
-    title: "Deadline Details",
-    status: "OPEN",
-    description: "Capture court dates, limitation dates, reminders, and urgent timeline risks."
-  },
-  {
-    id: 4,
-    title: "Document Details",
-    status: "OPEN",
-    description: "Prepare document, evidence, filing, bundle, and template information."
-  },
-  {
-    id: 5,
-    title: "Review",
-    status: "OPEN",
-    description: "Review the collected workflow details before completion."
-  },
-  {
-    id: 6,
-    title: "Review / Save & Submit",
-    status: "OPEN",
-    description: "Final review point before saving, submission, or future workflow handoff."
-  }
 ];
 
-function normalizeText(value) {
-  return String(value || "").trim().toLowerCase();
+function normalizeText(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
 
-function compactPhone(value) {
-  return String(value || "").replace(/\D/g, "");
+function compact(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 }
 
-function hasCompanySignal(value) {
-  const text = normalizeText(value);
-  return (
-    text.includes("sdn bhd") ||
-    text.includes("berhad") ||
-    text.includes("enterprise") ||
-    text.includes("trading") ||
-    text.includes("llp") ||
-    text.includes("ltd") ||
-    text.includes("pte")
-  );
+function compactDigits(value = "") {
+  return String(value).replace(/\D/g, "");
 }
 
-function hasAddressSignal(value) {
-  const text = normalizeText(value);
-  return (
-    text.includes("jalan") ||
-    text.includes("road") ||
-    text.includes("taman") ||
-    text.includes("lorong") ||
-    text.includes("persiaran") ||
-    text.includes("petaling") ||
-    text.includes("selangor") ||
-    text.includes("kuala lumpur") ||
-    text.includes("ss")
-  );
+function phoneticKey(value = "") {
+  return normalizeText(value)
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => `${part.charAt(0)}${part.slice(1).replace(/[aeiou]/g, "")}`)
+    .join(" ");
 }
 
-function deriveIntakeFromSearch(rawValue) {
-  const value = String(rawValue || "").trim();
-
-  if (!value) {
-    return {};
-  }
-
-  const emailMatch = value.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  const phoneMatch = value.match(/(?:\+?6?0|\b0)[0-9][0-9\s-]{6,14}/);
-  const idLike = value.match(/\b[A-Z0-9][A-Z0-9-]{5,24}\b/i);
-
-  let remaining = value;
-
-  if (emailMatch) {
-    remaining = remaining.replace(emailMatch[0], "");
-  }
-
-  if (phoneMatch) {
-    remaining = remaining.replace(phoneMatch[0], "");
-  }
-
-  remaining = remaining.replace(/\s+/g, " ").trim();
-
-  const derived = {};
-
-  if (emailMatch) {
-    derived.email = emailMatch[0];
-  }
-
-  if (phoneMatch) {
-    derived.phone = phoneMatch[0].replace(/\s+/g, "");
-  }
-
-  if (hasCompanySignal(value)) {
-    derived.clientType = "Company";
-    derived.companyName = remaining || value;
-  } else if (hasAddressSignal(value)) {
-    derived.address = value;
-  } else if (remaining && remaining.length > 2) {
-    derived.fullName = remaining;
-  }
-
-  if (!emailMatch && !phoneMatch && idLike && value === idLike[0]) {
-    derived.idReference = value;
-  }
-
-  return derived;
+function confidenceWeight(level) {
+  if (level === "high") return 3;
+  if (level === "medium") return 2;
+  return 1;
 }
 
-function extractBasicFieldsFromPaste(text) {
-  const source = String(text || "");
-  const emailMatch = source.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  const phoneMatch = source.match(/(?:\+?6?0|\b0)[0-9][0-9\s-]{6,14}/);
+function scoreClientMatch(query, client) {
+  const q = normalizeText(query);
+  const qc = compact(query);
+  const qd = compactDigits(query);
+  const qPhonetic = phoneticKey(query);
 
-  const lines = source
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean);
+  if (!q) return null;
 
-  const possibleName = lines.find((line) => {
-    const lower = line.toLowerCase();
+  const fields = [
+    client.fullName,
+    client.givenName,
+    client.surname,
+    client.preferredName,
+    client.alias,
+    client.email,
+    client.phone,
+    client.whatsapp,
+    client.idReference,
+    client.passportNumber,
+    client.companyName,
+    client.address,
+  ];
 
-    return (
-      line.length >= 4 &&
-      line.length <= 90 &&
-      !lower.includes("@") &&
-      !lower.includes("tel") &&
-      !lower.includes("phone") &&
-      !lower.includes("address") &&
-      !hasAddressSignal(line)
-    );
-  });
+  const haystack = normalizeText(fields.filter(Boolean).join(" "));
+  const compactFields = fields.map((field) => compact(field));
+  const digitFields = [client.phone, client.whatsapp, client.idReference].map((field) => compactDigits(field));
 
-  const possibleAddress = lines.find((line) => hasAddressSignal(line));
-  const possibleCompany = lines.find((line) => hasCompanySignal(line));
+  const exactIdentity =
+    (qc && [client.email, client.idReference, client.passportNumber].some((field) => compact(field) === qc)) ||
+    (qd && digitFields.some((field) => field === qd));
 
-  return {
-    fullName: possibleName || "",
-    email: emailMatch ? emailMatch[0] : "",
-    phone: phoneMatch ? phoneMatch[0].replace(/\s+/g, "") : "",
-    address: possibleAddress || "",
-    companyName: possibleCompany || "",
-    clientType: possibleCompany ? "Company" : ""
-  };
-}
-
-function findClientMatches(query, intake) {
-  const normalizedQuery = normalizeText(query);
-  const queryPhone = compactPhone(query);
-
-  const hasSearchInput = Boolean(
-    normalizedQuery ||
-    queryPhone ||
-    normalizeText(intake.fullName) ||
-    normalizeText(intake.givenName) ||
-    normalizeText(intake.surname) ||
-    normalizeText(intake.alias) ||
-    normalizeText(intake.email) ||
-    compactPhone(intake.phone) ||
-    compactPhone(intake.whatsapp) ||
-    normalizeText(intake.idReference) ||
-    normalizeText(intake.passportNumber) ||
-    normalizeText(intake.companyName) ||
-    normalizeText(intake.address)
-  );
-
-  if (!hasSearchInput) {
-    return [];
+  if (exactIdentity) {
+    return {
+      confidenceLevel: "high",
+      confidenceLabel: "High probability",
+      matchType: "Exact match",
+      reason: "Exact identifying detail matched.",
+    };
   }
 
+  const exactName = [client.fullName, client.preferredName, client.alias, client.companyName]
+    .filter(Boolean)
+    .some((field) => normalizeText(field) === q);
+
+  if (exactName) {
+    return {
+      confidenceLevel: "high",
+      confidenceLabel: "High probability",
+      matchType: "Exact match",
+      reason: "Exact name or organisation value matched.",
+    };
+  }
+
+  const allTokensMatch = q
+    .split(" ")
+    .filter(Boolean)
+    .every((token) => haystack.includes(token));
+
+  if (allTokensMatch) {
+    return {
+      confidenceLevel: "medium",
+      confidenceLabel: "Medium probability",
+      matchType: "Partial match",
+      reason: "Search terms partially matched existing client details.",
+    };
+  }
+
+  const phoneticMatch = qPhonetic && phoneticKey(client.fullName).includes(qPhonetic);
+
+  if (phoneticMatch) {
+    return {
+      confidenceLevel: "low",
+      confidenceLabel: "Low probability",
+      matchType: "Phonetic match",
+      reason: "Name appears similar by phonetic comparison.",
+    };
+  }
+
+  if (compactFields.some((field) => field.includes(qc) || qc.includes(field))) {
+    return {
+      confidenceLevel: "low",
+      confidenceLabel: "Low probability",
+      matchType: "Partial match",
+      reason: "Partial identifying value matched.",
+    };
+  }
+
+  return null;
+}
+
+function findClientMatches(query) {
   return SAMPLE_CLIENTS.map((client) => {
-    const matchedFields = [];
-
-    const clientName = normalizeText(client.fullName);
-    const clientGivenName = normalizeText(client.givenName);
-    const clientSurname = normalizeText(client.surname);
-    const clientAlias = normalizeText(client.alias);
-    const clientEmail = normalizeText(client.email);
-    const clientPhone = compactPhone(client.phone);
-    const clientWhatsapp = compactPhone(client.whatsapp);
-    const clientId = normalizeText(client.idReference);
-    const clientPassport = normalizeText(client.passportNumber);
-    const clientCompany = normalizeText(client.companyName);
-    const clientAddress = normalizeText(client.address);
-    const clientCity = normalizeText(client.city);
-    const clientPostcode = normalizeText(client.postcode);
-    const clientState = normalizeText(client.state);
-    const clientCountry = normalizeText(client.country);
-
-    const searchableText = [
-      clientName,
-      clientGivenName,
-      clientSurname,
-      clientAlias,
-      clientEmail,
-      clientCompany,
-      clientAddress,
-      clientCity,
-      clientPostcode,
-      clientState,
-      clientCountry,
-      clientId,
-      clientPassport
-    ].filter(Boolean).join(" ");
-
-    if (normalizedQuery && searchableText.includes(normalizedQuery)) matchedFields.push("Search Term");
-    if (queryPhone && (clientPhone.includes(queryPhone) || clientWhatsapp.includes(queryPhone))) matchedFields.push("Phone");
-
-    if (normalizeText(intake.fullName) && clientName.includes(normalizeText(intake.fullName))) matchedFields.push("Full Name");
-    if (normalizeText(intake.givenName) && clientGivenName.includes(normalizeText(intake.givenName))) matchedFields.push("Given Name");
-    if (normalizeText(intake.surname) && clientSurname.includes(normalizeText(intake.surname))) matchedFields.push("Surname");
-    if (normalizeText(intake.alias) && clientAlias.includes(normalizeText(intake.alias))) matchedFields.push("Alias");
-    if (normalizeText(intake.email) && clientEmail === normalizeText(intake.email)) matchedFields.push("Email");
-    if (compactPhone(intake.phone) && clientPhone === compactPhone(intake.phone)) matchedFields.push("Phone");
-    if (compactPhone(intake.whatsapp) && clientWhatsapp === compactPhone(intake.whatsapp)) matchedFields.push("WhatsApp");
-    if (normalizeText(intake.idReference) && clientId === normalizeText(intake.idReference)) matchedFields.push("ID Reference");
-    if (normalizeText(intake.passportNumber) && clientPassport === normalizeText(intake.passportNumber)) matchedFields.push("Passport");
-    if (normalizeText(intake.companyName) && clientCompany.includes(normalizeText(intake.companyName))) matchedFields.push("Company");
-    if (normalizeText(intake.address) && clientAddress.includes(normalizeText(intake.address))) matchedFields.push("Address");
-
-    const uniqueMatchedFields = [...new Set(matchedFields)];
-
-    if (uniqueMatchedFields.length === 0) {
-      return null;
-    }
-
-    const strongFields = ["Email", "Phone", "WhatsApp", "ID Reference", "Passport"];
-    const hasStrongMatch = uniqueMatchedFields.some((field) => strongFields.includes(field));
+    const score = scoreClientMatch(query, client);
+    if (!score) return null;
 
     return {
       ...client,
-      matchedFields: uniqueMatchedFields,
-      confidence: hasStrongMatch ? "Exact / Strong Match" : "Possible Match"
+      ...score,
     };
+  })
+    .filter(Boolean)
+    .sort((a, b) => confidenceWeight(b.confidenceLevel) - confidenceWeight(a.confidenceLevel));
+}
+
+function deriveIntakeFromSearch(query, current) {
+  const next = { ...current };
+  const trimmed = query.trim();
+  const digits = compactDigits(trimmed);
+
+  if (trimmed.includes("@") && !next.email) {
+    next.email = trimmed;
+  } else if (digits.length >= 7 && !next.phone) {
+    next.phone = trimmed;
+  } else if (!next.fullName && trimmed) {
+    next.fullName = trimmed;
+  }
+
+  return next;
+}
+
+function detectDuplicateCandidates(intake) {
+  const fullName = normalizeText(intake.fullName);
+  const email = compact(intake.email);
+  const phone = compactDigits(intake.phone);
+  const whatsapp = compactDigits(intake.whatsapp);
+  const idReference = compact(intake.idReference);
+  const passportNumber = compact(intake.passportNumber);
+  const dateOfBirth = compact(intake.dateOfBirth);
+
+  return SAMPLE_CLIENTS.map((client) => {
+    const exactIdentity =
+      (email && compact(client.email) === email) ||
+      (phone && compactDigits(client.phone) === phone) ||
+      (whatsapp && compactDigits(client.whatsapp) === whatsapp) ||
+      (idReference && compact(client.idReference) === idReference) ||
+      (passportNumber && compact(client.passportNumber) === passportNumber);
+
+    if (exactIdentity) {
+      return {
+        ...client,
+        confidenceLevel: "high",
+        confidenceLabel: "High probability",
+        matchType: "Exact match",
+        reason: "A unique identifying value matches an existing client.",
+      };
+    }
+
+    const nameDobMatch =
+      fullName &&
+      normalizeText(client.fullName) === fullName &&
+      dateOfBirth &&
+      compact(client.dateOfBirth) === dateOfBirth;
+
+    if (nameDobMatch) {
+      return {
+        ...client,
+        confidenceLevel: "medium",
+        confidenceLabel: "Medium probability",
+        matchType: "Partial match",
+        reason: "Full name and date of birth match an existing client.",
+      };
+    }
+
+    const nameOnlyMatch = fullName && normalizeText(client.fullName) === fullName;
+
+    if (nameOnlyMatch) {
+      return {
+        ...client,
+        confidenceLevel: "low",
+        confidenceLabel: "Low probability",
+        matchType: "Partial match",
+        reason: "Full name matches an existing client.",
+      };
+    }
+
+    return null;
   }).filter(Boolean);
+}
+
+function Field({ label, children }) {
+  return (
+    <label className="client-gate-field">
+      <span>{label}</span>
+      {children}
+    </label>
+  );
+}
+
+function ClientMatchCard({ client, onView, onSelect }) {
+  return (
+    <article className={`client-match-card confidence-${client.confidenceLevel}`}>
+      <div className="client-match-card-header">
+        <div>
+          <strong>{client.fullName}</strong>
+          <p>{client.clientId} · {client.clientType}</p>
+        </div>
+        <span className="confidence-badge">{client.matchType} · {client.confidenceLabel}</span>
+      </div>
+
+      <dl className="client-match-summary">
+        <div>
+          <dt>Date of Birth</dt>
+          <dd>{client.dateOfBirth || "-"}</dd>
+        </div>
+        <div>
+          <dt>Primary Contact Details</dt>
+          <dd>{client.email || client.phone || client.whatsapp || "-"}</dd>
+        </div>
+        <div>
+          <dt>ID/NRIC</dt>
+          <dd>{client.idReference || "-"}</dd>
+        </div>
+        <div>
+          <dt>Last Matter Date</dt>
+          <dd>{client.lastMatterDate || "-"}</dd>
+        </div>
+      </dl>
+
+      <p className="client-match-reason">{client.reason}</p>
+
+      <div className="client-match-actions">
+        <button type="button" className="secondary-action" onClick={() => onView(client)}>
+          View Full Profile
+        </button>
+        <button type="button" onClick={() => onSelect(client)}>
+          Select This Client
+        </button>
+      </div>
+    </article>
+  );
 }
 
 export default function MatterIntakeWizard({ setModule } = {}) {
   const [step, setStep] = useState(1);
-  const [clientIntake, setClientIntake] = useState(EMPTY_CLIENT_INTAKE);
+  const [clientStepMode, setClientStepMode] = useState(CLIENT_STEP_MODE.SEARCH);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchStatus, setSearchStatus] = useState("Search existing clients before creating a new profile.");
-  const [searchMode, setSearchMode] = useState("idle");
+  const [searchPerformed, setSearchPerformed] = useState(false);
   const [clientMatches, setClientMatches] = useState([]);
-  const [pasteText, setPasteText] = useState("");
-  const [selectedClientId, setSelectedClientId] = useState("");
+  const [selectedExistingClient, setSelectedExistingClient] = useState(null);
+  const [profilePreviewClient, setProfilePreviewClient] = useState(null);
+  const [confirmedNoDuplicate, setConfirmedNoDuplicate] = useState(false);
+  const [duplicateOverrideMatches, setDuplicateOverrideMatches] = useState([]);
+  const [searchAuditTrail, setSearchAuditTrail] = useState([]);
+  const [viewedClientIds, setViewedClientIds] = useState([]);
+  const [clientIntake, setClientIntake] = useState(EMPTY_CLIENT_INTAKE);
   const [validationMessage, setValidationMessage] = useState("");
   const [draftMessage, setDraftMessage] = useState("");
-  const [creationMode, setCreationMode] = useState(false);
 
-  const activeStep = STEPS.find((item) => item.id === step) || STEPS[0];
+  const stepLabel = STEPS[step - 1] || STEPS[0];
 
-  const intakeHasMinimumValue = useMemo(() => {
-    return Boolean(
-      String(clientIntake.fullName || "").trim() ||
-      String(clientIntake.companyName || "").trim() ||
-      String(clientIntake.email || "").trim() ||
-      String(clientIntake.phone || "").trim() ||
-      String(clientIntake.idReference || "").trim() ||
-      String(clientIntake.passportNumber || "").trim()
-    );
+  const hasMinimumNewClientIdentity = useMemo(() => {
+    if (clientIntake.clientType === "Organisation") {
+      return Boolean(clientIntake.companyName.trim() || clientIntake.fullName.trim());
+    }
+
+    return Boolean(clientIntake.fullName.trim());
   }, [clientIntake]);
 
-  function goHome() {
-    if (typeof setModule === "function") {
-      setModule("home");
-    }
+  function addAudit(action, details = {}) {
+    const entry = {
+      timestamp: new Date().toISOString(),
+      action,
+      ...details,
+    };
+
+    setSearchAuditTrail((current) => [...current, entry]);
   }
 
-  function updateClientField(field, value) {
+  function updateClientIntake(field, value) {
     setClientIntake((current) => ({
       ...current,
-      [field]: value
+      [field]: value,
     }));
+
     setValidationMessage("");
     setDraftMessage("");
   }
 
   function runClientSearch() {
-    const matches = findClientMatches(searchQuery, clientIntake);
-    setClientMatches(matches);
-    setSelectedClientId("");
-    setCreationMode(false);
+    const trimmed = searchQuery.trim();
 
-    if (matches.length === 0) {
-      setSearchMode("none");
-      setSearchStatus("No results found. Create a new client profile from this search without leaving the intake workflow.");
+    if (!trimmed) {
+      setValidationMessage("Enter at least one identifying detail before searching.");
       return;
     }
 
-    const hasStrongMatch = matches.some((match) => match.confidence === "Exact / Strong Match");
-    setSearchMode(hasStrongMatch ? "strong" : "possible");
-    setSearchStatus(
-      hasStrongMatch
-        ? "Client already exists or strongly matches an existing record. Review the record before creating a duplicate."
-        : "Possible matching client records found. Review before continuing as new."
-    );
-  }
-
-  function clearSearch() {
-    setSearchQuery("");
-    setClientMatches([]);
-    setSelectedClientId("");
-    setSearchMode("idle");
-    setCreationMode(false);
-    setSearchStatus("Search existing clients before creating a new profile.");
-  }
-
-  function createNewFromSearch() {
-    const derived = deriveIntakeFromSearch(searchQuery);
-
-    setClientIntake((current) => ({
-      ...current,
-      ...derived,
-      intakeSource: "Search No Result",
-      duplicateDecision: "No existing client found from search. Proceeding with new client profile."
-    }));
-
-    setCreationMode(true);
-    setSearchStatus("New client profile form prepared from the search term. Review and complete the editable fields below.");
+    const matches = findClientMatches(trimmed);
+    setSearchPerformed(true);
+    setClientMatches(matches);
+    setProfilePreviewClient(null);
     setValidationMessage("");
+    setDraftMessage(matches.length ? `${matches.length} possible match record(s) found.` : "No results found.");
+
+    addAudit("search_performed", {
+      query: trimmed,
+      resultCount: matches.length,
+    });
   }
 
-  function loadClientIntoIntake(client) {
-    setClientIntake((current) => ({
-      ...current,
-      fullName: client.fullName || "",
-      givenName: client.givenName || "",
-      surname: client.surname || "",
-      preferredName: client.preferredName || "",
-      alias: client.alias || "",
-      email: client.email || "",
-      phone: client.phone || "",
-      whatsapp: client.whatsapp || "",
-      idReference: client.idReference || "",
-      passportNumber: client.passportNumber || "",
-      companyName: client.companyName || "",
-      address: client.address || "",
-      city: client.city || "",
-      postcode: client.postcode || "",
-      state: client.state || "",
-      country: client.country || "Malaysia",
-      clientType: client.clientType || "Individual",
-      intakeSource: "Loaded Existing Client",
-      notes: current.notes,
-      duplicateDecision: "Existing client loaded into intake."
-    }));
+  function viewFullProfile(client) {
+    setProfilePreviewClient(client);
+    setViewedClientIds((current) => Array.from(new Set([...current, client.clientId])));
+    addAudit("full_profile_viewed", {
+      clientId: client.clientId,
+      fullName: client.fullName,
+    });
+  }
 
-    setSelectedClientId(client.id);
-    setCreationMode(true);
-    setSearchStatus("Existing client loaded into intake. Review, amend frontend draft values, or start a new matter.");
+  function selectExistingClient(client) {
+    setSelectedExistingClient(client);
+    setClientStepMode(CLIENT_STEP_MODE.EXISTING_SELECTED);
     setValidationMessage("");
+    setDraftMessage("Existing client selected for this matter intake.");
+
+    addAudit("existing_client_selected", {
+      clientId: client.clientId,
+      fullName: client.fullName,
+    });
   }
 
-  function markReviewed(client) {
-    setSelectedClientId(client.id);
-    updateClientField("duplicateDecision", `Reviewed possible duplicate ${client.id}.`);
-  }
+  function openNewClientCreation() {
+    if (!searchPerformed) {
+      setValidationMessage("Search must be performed before creating a new client profile.");
+      return;
+    }
 
-  function applyPastedText() {
-    const extracted = extractBasicFieldsFromPaste(pasteText);
+    setClientIntake((current) => deriveIntakeFromSearch(searchQuery, current));
+    setConfirmedNoDuplicate(false);
+    setClientStepMode(CLIENT_STEP_MODE.CREATE);
+    setValidationMessage("");
+    setDraftMessage("");
 
-    setClientIntake((current) => ({
-      ...current,
-      fullName: extracted.fullName || current.fullName,
-      email: extracted.email || current.email,
-      phone: extracted.phone || current.phone,
-      address: extracted.address || current.address,
-      companyName: extracted.companyName || current.companyName,
-      clientType: extracted.clientType || current.clientType,
-      notes: current.notes || pasteText,
-      intakeSource: "Pasted Email / Document"
-    }));
-
-    setCreationMode(true);
-    setDraftMessage("Pasted text applied where simple name, email, phone, address, or company values were detected. Review and amend before continuing.");
+    addAudit("new_client_creation_opened_after_search", {
+      query: searchQuery.trim(),
+      reviewedResultCount: clientMatches.length,
+    });
   }
 
   function saveDraft() {
-    try {
-      if (typeof window !== "undefined" && window.localStorage) {
-        window.localStorage.setItem(
-          "litigation360.matterIntake.clientDraft",
-          JSON.stringify({
-            savedAt: new Date().toISOString(),
-            clientIntake,
-            pasteText,
-            searchQuery
-          })
-        );
-      }
+    localStorage.setItem(
+      "litigation360:matter-intake-client-draft",
+      JSON.stringify({
+        clientIntake,
+        clientStepMode,
+        searchQuery,
+        searchPerformed,
+        clientMatches,
+        selectedExistingClient,
+        searchAuditTrail,
+        savedAt: new Date().toISOString(),
+      }),
+    );
 
-      setDraftMessage("Client intake draft saved locally in this browser.");
-    } catch (error) {
-      setDraftMessage("Draft could not be saved in this browser.");
-    }
+    setDraftMessage("Client intake draft saved locally.");
+    addAudit("client_intake_draft_saved");
   }
 
   function clearDraft() {
-    try {
-      if (typeof window !== "undefined" && window.localStorage) {
-        window.localStorage.removeItem("litigation360.matterIntake.clientDraft");
-      }
-    } catch (error) {
-      // Frontend-only draft clearing should not break the wizard.
-    }
-
-    setDraftMessage("Local client intake draft cleared.");
+    localStorage.removeItem("litigation360:matter-intake-client-draft");
+    setDraftMessage("Client intake draft cleared.");
+    addAudit("client_intake_draft_cleared");
   }
 
   function resetClientIntake() {
     setClientIntake(EMPTY_CLIENT_INTAKE);
-    setPasteText("");
-    setSearchQuery("");
-    setClientMatches([]);
-    setSelectedClientId("");
+    setConfirmedNoDuplicate(false);
+    setDuplicateOverrideMatches([]);
     setValidationMessage("");
-    setSearchMode("idle");
-    setCreationMode(false);
-    setSearchStatus("Search existing clients before creating a new profile.");
     setDraftMessage("Client intake fields reset.");
+    addAudit("client_intake_reset");
+  }
+
+  function continueToCaseDetailsFromNewClient({ allowOverride = false } = {}) {
+    if (!searchPerformed) {
+      setValidationMessage("Search must be completed before continuing.");
+      setClientStepMode(CLIENT_STEP_MODE.SEARCH);
+      return;
+    }
+
+    if (!confirmedNoDuplicate) {
+      setValidationMessage("Confirm that duplicate search was performed and reviewed before entering a new client profile.");
+      return;
+    }
+
+    if (!hasMinimumNewClientIdentity) {
+      setValidationMessage("Minimum required field missing: Full Name (legal name) or Company/Organisation Name.");
+      return;
+    }
+
+    const duplicateCandidates = detectDuplicateCandidates(clientIntake);
+
+    if (duplicateCandidates.length && !allowOverride) {
+      setDuplicateOverrideMatches(duplicateCandidates);
+      setClientStepMode(CLIENT_STEP_MODE.DUPLICATE_REVIEW);
+      setValidationMessage("Possible duplicate detected. Review the matching record(s) and record an override reason before continuing.");
+      addAudit("duplicate_hard_stop_triggered", {
+        matchCount: duplicateCandidates.length,
+      });
+      return;
+    }
+
+    if (duplicateCandidates.length && clientIntake.duplicateDecision.trim().length < 12) {
+      setValidationMessage("Duplicate Decision/Review Notes must explain why this is a new record before override is allowed.");
+      return;
+    }
+
+    addAudit(duplicateCandidates.length ? "duplicate_override_confirmed" : "new_client_confirmed", {
+      fullName: clientIntake.fullName,
+      companyName: clientIntake.companyName,
+      reason: clientIntake.duplicateDecision,
+    });
+
+    setStep(2);
+    setValidationMessage("");
+    setDraftMessage("Client profile accepted. Continue with Case / Matter Details.");
+  }
+
+  function continueFromExistingClient() {
+    if (!selectedExistingClient) {
+      setValidationMessage("Select an existing client before continuing.");
+      return;
+    }
+
+    addAudit("continued_with_existing_client", {
+      clientId: selectedExistingClient.clientId,
+      fullName: selectedExistingClient.fullName,
+    });
+
+    setStep(2);
+    setValidationMessage("");
+    setDraftMessage("Existing client linked to matter intake.");
   }
 
   function previousStep() {
     if (step === 1) {
-      goHome();
+      if (clientStepMode !== CLIENT_STEP_MODE.SEARCH) {
+        setClientStepMode(CLIENT_STEP_MODE.SEARCH);
+        setValidationMessage("");
+        return;
+      }
+
       return;
     }
 
-    setStep((currentStep) => Math.max(1, currentStep - 1));
+    setStep((current) => Math.max(1, current - 1));
   }
 
   function nextStep() {
-    if (step === 1 && !intakeHasMinimumValue) {
-      setValidationMessage("Enter at least a full name, company name, email, phone, ID reference, or passport number before continuing.");
+    if (step === 1) {
+      if (clientStepMode === CLIENT_STEP_MODE.EXISTING_SELECTED) {
+        continueFromExistingClient();
+        return;
+      }
+
+      if (clientStepMode === CLIENT_STEP_MODE.CREATE) {
+        continueToCaseDetailsFromNewClient();
+        return;
+      }
+
+      if (clientStepMode === CLIENT_STEP_MODE.DUPLICATE_REVIEW) {
+        continueToCaseDetailsFromNewClient({ allowOverride: true });
+        return;
+      }
+
+      setValidationMessage("Search and select an existing client, or confirm no match before creating a new client profile.");
       return;
     }
 
-    setValidationMessage("");
-    setStep((currentStep) => Math.min(STEPS.length, currentStep + 1));
+    if (step < STEPS.length) {
+      setStep((current) => current + 1);
+      return;
+    }
+
+    setModule?.("Review Submit");
   }
 
-  function renderClientSearchStep() {
+  function renderStepTabs() {
     return (
-      <section className="intake-client-step">
-        <div className="intake-section-heading">
+      <div className="intake-step-grid">
+        {STEPS.map((label, index) => {
+          const number = index + 1;
+          const active = number === step;
+
+          return (
+            <div key={label} className={`intake-step-pill ${active ? "active" : ""}`}>
+              <span>{number}</span>
+              {label}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  function renderSearchTips() {
+    return (
+      <aside className="client-gate-tips">
+        <strong>Search Tips</strong>
+        <ul>
+          <li>Try full legal name first.</li>
+          <li>Use ID/NRIC, passport number, phone, WhatsApp, or email if the name is uncertain.</li>
+          <li>Try alternate spellings, partial names, preferred names, or aliases.</li>
+          <li>Company name can help locate organisation-linked records.</li>
+        </ul>
+      </aside>
+    );
+  }
+
+  function renderAuditTrail() {
+    if (!searchAuditTrail.length) return null;
+
+    return (
+      <details className="client-audit-trail">
+        <summary>Search audit trail ({searchAuditTrail.length})</summary>
+        <ol>
+          {searchAuditTrail.map((entry, index) => (
+            <li key={`${entry.timestamp}-${index}`}>
+              <strong>{entry.action}</strong>
+              <span>{entry.timestamp}</span>
+              {entry.query ? <em>Query: {entry.query}</em> : null}
+              {typeof entry.resultCount === "number" ? <em>Results: {entry.resultCount}</em> : null}
+              {entry.clientId ? <em>Client: {entry.clientId}</em> : null}
+            </li>
+          ))}
+        </ol>
+      </details>
+    );
+  }
+
+  function renderSearchModule() {
+    return (
+      <section className="client-gate-screen">
+        <div className="client-gate-header">
           <div>
             <p className="eyebrow">Step 1A</p>
-            <h2>Client Search, Duplicate Check & Profile</h2>
-              <p className="intake-small">
-                Shared client workflow language is aligned with Advanced Client Directory / Manual Management.
-              </p>
-              <h2 className="intake-hidden-heading"></h2>
-            <p>Search first. If no record exists, create a new client profile immediately in the same workflow.</p>
+            <h2>Client Search & Duplicate Detection</h2>
+            <p>Search existing records first to prevent duplicate client creation.</p>
           </div>
-          <span className="intake-status-chip">Search-first intake</span>
+          <span className="intake-status-pill">Primary landing interface</span>
         </div>
 
-        <div className="intake-panel intake-search-panel">
-          <div className="intake-panel-header">
-            <div>
-              <h3>Search Existing Client</h3>
-              <p>Use any identifying detail available from the potential client, email, document, call note, or referral.</p>
-            </div>
-          </div>
-
-          <div className="intake-search-row">
-            <label>
+        <div className="client-search-layout">
+          <div className="client-search-primary">
+            <label className="client-search-input-label" htmlFor="client-search-gate-input">
               Search Existing Client
+            </label>
+            <div className="client-search-row">
               <input
-                className="intake-control"
+                id="client-search-gate-input"
+                type="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Name, email, phone, ID, passport, company, address, city, postcode, state, or country"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    runClientSearch();
+                  }
+                }}
+                placeholder="Enter full name, given name, surname, preferred name, alias, ID/NRIC, passport number, phone, WhatsApp, email, or company name"
               />
-            </label>
-
-            <div className="intake-search-actions">
               <button type="button" onClick={runClientSearch}>
                 Search Existing Client
               </button>
-              <button type="button" className="secondary-action" onClick={clearSearch}>
+            </div>
+
+            <div className="client-search-chip-row">
+              <span>Name</span>
+              <span>ID/NRIC</span>
+              <span>Passport</span>
+              <span>Phone</span>
+              <span>WhatsApp</span>
+              <span>Email</span>
+              <span>Company</span>
+            </div>
+
+            <div className="client-search-secondary-actions">
+              <button type="button" className="secondary-action" onClick={() => {
+                setSearchQuery("");
+                setClientMatches([]);
+                setSearchPerformed(false);
+                setProfilePreviewClient(null);
+                setValidationMessage("");
+                setDraftMessage("");
+              }}>
                 Clear Search
               </button>
               <button type="button" className="secondary-action" onClick={() => setModule?.("Clients")}>
                 Advanced Client Directory / Manual Management
               </button>
-              <small className="intake-small">
-                Opens the full manual Clients workspace. Your guided Matter Intake conveyor remains separate.
-              </small>
             </div>
+
+            <small className="intake-small">
+              Opens the full manual Clients workspace. Your guided Matter Intake conveyor remains separate.
+            </small>
           </div>
 
-          <div className="intake-search-hints">
-            <span>Name</span>
-            <span>Email</span>
-            <span>Phone / WhatsApp</span>
-            <span>ID / Passport</span>
-            <span>Company</span>
-            <span>Address</span>
-            <span>City / Postcode</span>
-          </div>
+          {renderSearchTips()}
+        </div>
 
-          <div className={`intake-alert intake-alert-${searchMode}`}>
-            <strong>{searchMode === "none" ? "No results found" : searchMode === "strong" ? "Existing client warning" : searchMode === "possible" ? "Possible match review" : "Search status"}</strong>
-            <p>{searchStatus}</p>
+        {searchPerformed ? (
+          <div className="client-search-results">
+            <div className="client-results-header">
+              <h3>Search Results</h3>
+              <span>{clientMatches.length} potential match(es)</span>
+            </div>
 
-            {searchMode === "none" && (
-              <button type="button" onClick={createNewFromSearch}>
-                Create New Client Profile From Search
-              </button>
+            {clientMatches.length ? (
+              <div className="client-match-list">
+                {clientMatches.map((client) => (
+                  <ClientMatchCard
+                    key={client.clientId}
+                    client={client}
+                    onView={viewFullProfile}
+                    onSelect={selectExistingClient}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="client-no-match-panel">
+                <strong>No Match Found</strong>
+                <p>No existing client record matched this search. Create a new client profile only after confirming duplicate review.</p>
+              </div>
             )}
-          </div>
 
-          {clientMatches.length > 0 && (
-            <div className="intake-results-grid">
-              {clientMatches.map((client) => (
-                <article className="intake-result-card" key={client.id}>
-                  <div className="intake-card-topline">
-                    <span className={client.confidence === "Exact / Strong Match" ? "pill danger" : "pill"}>
-                      {client.confidence}
-                    </span>
-                    <span className="pill">{client.id}</span>
-                  </div>
-
-                  <h4>{client.fullName}</h4>
-                  <dl>
-                    <div>
-                      <dt>Email</dt>
-                      <dd>{client.email || "Not recorded"}</dd>
-                    </div>
-                    <div>
-                      <dt>Phone</dt>
-                      <dd>{client.phone || "Not recorded"}</dd>
-                    </div>
-                    <div>
-                      <dt>Company</dt>
-                      <dd>{client.companyName || "Not applicable"}</dd>
-                    </div>
-                    <div>
-                      <dt>Address</dt>
-                      <dd>{client.address || "Not recorded"}</dd>
-                    </div>
-                  </dl>
-
-                  <p className="intake-small">Matched fields: {client.matchedFields.join(", ")}</p>
-                  <p className="intake-small">Last updated: {client.lastUpdated}</p>
-
-                  <div className="intake-card-actions">
-                    <button type="button" onClick={() => loadClientIntoIntake(client)}>
-                      Load Existing Client
-                    </button>
-                    <button type="button" className="secondary-action" onClick={() => markReviewed(client)}>
-                      Mark Reviewed
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-
-          {selectedClientId && (
-            <p className="intake-note">
-              Selected / reviewed client reference: <strong>{selectedClientId}</strong>
-            </p>
-          )}
-        </div>
-
-        <div className="intake-two-column">
-          <div className="intake-panel">
-            <div className="intake-panel-header">
-              <div>
-                <h3>Paste From Email / Document</h3>
-                <p>Paste copied intake text and apply detected values into the editable profile form.</p>
-              </div>
-            </div>
-
-            <label>
-              Intake text
-              <textarea
-                className="intake-control"
-                value={pasteText}
-                onChange={(event) => setPasteText(event.target.value)}
-                placeholder="Paste email, WhatsApp text, letter extract, PDF text, call notes, or referral notes here."
-                rows={9}
-              />
-            </label>
-
-            <button type="button" onClick={applyPastedText}>
-              Apply Pasted Text To Form
+            <button type="button" className="client-create-pathway" onClick={openNewClientCreation}>
+              No Match Found — Create New Client Profile
             </button>
           </div>
-
-          <div className="intake-panel">
-            <div className="intake-panel-header">
-              <div>
-                <h3>Creation Decision</h3>
-                <p>The intake should remain in one continuous flow from search to creation.</p>
-              </div>
-            </div>
-
-            <div className="intake-decision-card">
-              <strong>{creationMode ? "Client profile draft active" : "Awaiting search or intake entry"}</strong>
-              <p>
-                {creationMode
-                  ? "Review the editable fields below, amend as needed, then continue to Case / Matter Details."
-                  : "Search first, load an existing record, paste details, or manually enter a new profile."}
-              </p>
-            </div>
-
-            <div className="intake-decision-list">
-              <span>1. Search</span>
-              <span>2. Review match</span>
-              <span>3. Load or create</span>
-              <span>4. Edit profile</span>
-              <span>5. Save & Next</span>
-            </div>
+        ) : (
+          <div className="client-search-empty-state">
+            <strong>Search required</strong>
+            <p>Run a deliberate search before selecting an existing client or creating a new profile.</p>
           </div>
-        </div>
+        )}
 
-        <div className="intake-panel intake-form-panel">
-          <div className="intake-panel-header">
+        {profilePreviewClient ? (
+          <aside className="client-profile-preview">
             <div>
-              <h3>Editable Client Profile</h3>
-              <p>All key searchable and identifying fields are editable before continuing.</p>
+              <p className="eyebrow">Read-only profile preview</p>
+              <h3>{profilePreviewClient.fullName}</h3>
             </div>
-            <span className="intake-status-chip">{clientIntake.clientType}</span>
-          </div>
+            <dl className="client-match-summary">
+              <div>
+                <dt>Client ID</dt>
+                <dd>{profilePreviewClient.clientId}</dd>
+              </div>
+              <div>
+                <dt>Date of Birth</dt>
+                <dd>{profilePreviewClient.dateOfBirth}</dd>
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd>{profilePreviewClient.email}</dd>
+              </div>
+              <div>
+                <dt>Phone / WhatsApp</dt>
+                <dd>{profilePreviewClient.phone} / {profilePreviewClient.whatsapp}</dd>
+              </div>
+              <div>
+                <dt>ID/NRIC</dt>
+                <dd>{profilePreviewClient.idReference}</dd>
+              </div>
+              <div>
+                <dt>Last Matter Date</dt>
+                <dd>{profilePreviewClient.lastMatterDate}</dd>
+              </div>
+            </dl>
+          </aside>
+        ) : null}
 
-          <div className="intake-field-grid">
-            <label>
-              Full Name
-              <input
-                className="intake-control"
-                value={clientIntake.fullName}
-                onChange={(event) => updateClientField("fullName", event.target.value)}
-                placeholder="Client full legal name"
-              />
-            </label>
-
-            <label>
-              Given Name
-              <input
-                className="intake-control"
-                value={clientIntake.givenName}
-                onChange={(event) => updateClientField("givenName", event.target.value)}
-                placeholder="Given name"
-              />
-            </label>
-
-            <label>
-              Surname
-              <input
-                className="intake-control"
-                value={clientIntake.surname}
-                onChange={(event) => updateClientField("surname", event.target.value)}
-                placeholder="Surname / family name"
-              />
-            </label>
-
-            <label>
-              Preferred Name
-              <input
-                className="intake-control"
-                value={clientIntake.preferredName}
-                onChange={(event) => updateClientField("preferredName", event.target.value)}
-                placeholder="Preferred name"
-              />
-            </label>
-
-            <label>
-              Alias / Also Known As
-              <input
-                className="intake-control"
-                value={clientIntake.alias}
-                onChange={(event) => updateClientField("alias", event.target.value)}
-                placeholder="Alias, nickname, alternate spelling"
-              />
-            </label>
-
-            <label>
-              Client Type
-              <select
-                className="intake-control"
-                value={clientIntake.clientType}
-                onChange={(event) => updateClientField("clientType", event.target.value)}
-              >
-                <option>Individual</option>
-                <option>Company</option>
-                <option>Government / Agency</option>
-                <option>Organisation</option>
-                <option>Other</option>
-              </select>
-            </label>
-
-            <label>
-              Email
-              <input
-                className="intake-control"
-                value={clientIntake.email}
-                onChange={(event) => updateClientField("email", event.target.value)}
-                placeholder="Email address"
-              />
-            </label>
-
-            <label>
-              Phone
-              <input
-                className="intake-control"
-                value={clientIntake.phone}
-                onChange={(event) => updateClientField("phone", event.target.value)}
-                placeholder="Primary phone number"
-              />
-            </label>
-
-            <label>
-              WhatsApp
-              <input
-                className="intake-control"
-                value={clientIntake.whatsapp}
-                onChange={(event) => updateClientField("whatsapp", event.target.value)}
-                placeholder="WhatsApp number"
-              />
-            </label>
-
-            <label>
-              ID / NRIC / Reference
-              <input
-                className="intake-control"
-                value={clientIntake.idReference}
-                onChange={(event) => updateClientField("idReference", event.target.value)}
-                placeholder="ID, NRIC, internal reference"
-              />
-            </label>
-
-            <label>
-              Passport Number
-              <input
-                className="intake-control"
-                value={clientIntake.passportNumber}
-                onChange={(event) => updateClientField("passportNumber", event.target.value)}
-                placeholder="Passport number"
-              />
-            </label>
-
-            <label>
-              Date Of Birth
-              <input
-                className="intake-control"
-                type="date"
-                value={clientIntake.dateOfBirth}
-                onChange={(event) => updateClientField("dateOfBirth", event.target.value)}
-              />
-            </label>
-
-            <label className="full">
-              Company / Organisation Name
-              <input
-                className="intake-control"
-                value={clientIntake.companyName}
-                onChange={(event) => updateClientField("companyName", event.target.value)}
-                placeholder="Company, employer, organisation, or entity name"
-              />
-            </label>
-
-            <label className="full">
-              Address
-              <textarea
-                className="intake-control"
-                value={clientIntake.address}
-                onChange={(event) => updateClientField("address", event.target.value)}
-                placeholder="Full address"
-                rows={3}
-              />
-            </label>
-
-            <label>
-              City / Area
-              <input
-                className="intake-control"
-                value={clientIntake.city}
-                onChange={(event) => updateClientField("city", event.target.value)}
-                placeholder="City, town, area"
-              />
-            </label>
-
-            <label>
-              Postcode
-              <input
-                className="intake-control"
-                value={clientIntake.postcode}
-                onChange={(event) => updateClientField("postcode", event.target.value)}
-                placeholder="Postcode"
-              />
-            </label>
-
-            <label>
-              State
-              <input
-                className="intake-control"
-                value={clientIntake.state}
-                onChange={(event) => updateClientField("state", event.target.value)}
-                placeholder="State"
-              />
-            </label>
-
-            <label>
-              Country
-              <input
-                className="intake-control"
-                value={clientIntake.country}
-                onChange={(event) => updateClientField("country", event.target.value)}
-                placeholder="Country"
-              />
-            </label>
-
-            <label>
-              Intake Source
-              <select
-                className="intake-control"
-                value={clientIntake.intakeSource}
-                onChange={(event) => updateClientField("intakeSource", event.target.value)}
-              >
-                <option>Manual Entry</option>
-                <option>Search No Result</option>
-                <option>Pasted Email / Document</option>
-                <option>Loaded Existing Client</option>
-                <option>Phone Call</option>
-                <option>Walk-In</option>
-                <option>Referral</option>
-              </select>
-            </label>
-
-            <label className="full">
-              Duplicate Decision / Review Notes
-              <textarea
-                className="intake-control"
-                value={clientIntake.duplicateDecision}
-                onChange={(event) => updateClientField("duplicateDecision", event.target.value)}
-                placeholder="Record duplicate decision, reason to continue as new, or selected existing client reference."
-                rows={3}
-              />
-            </label>
-
-            <label className="full">
-              General Intake Notes
-              <textarea
-                className="intake-control"
-                value={clientIntake.notes}
-                onChange={(event) => updateClientField("notes", event.target.value)}
-                placeholder="Matter notes, referral details, urgency, source comments, or copied intake context."
-                rows={4}
-              />
-            </label>
-          </div>
-
-          {validationMessage && <p className="intake-warning">{validationMessage}</p>}
-          {draftMessage && <p className="intake-note">{draftMessage}</p>}
-
-          <div className="intake-form-actions">
-            <button type="button" onClick={saveDraft}>
-              Save Draft
-            </button>
-            <button type="button" className="secondary-action" onClick={clearDraft}>
-              Clear Draft
-            </button>
-            <button type="button" className="secondary-action" onClick={resetClientIntake}>
-              Reset Client Intake
-            </button>
-          </div>
-        </div>
+        {renderAuditTrail()}
       </section>
     );
   }
 
-  function renderStepBody() {
-    if (step === 1) {
-      return renderClientSearchStep();
-    }
-
-    if (step === 2) {
-      return (
-        <section className="intake-panel">
-          <h2>▶ 2. Case / Matter Details</h2>
-          <p>Create the case or matter using the client selected, loaded, or created in Step 1.</p>
-
-          <div className="intake-summary-grid">
-            <div>
-              <strong>{clientIntake.fullName || clientIntake.companyName || "Client Intake Prepared"}</strong>
-              <span>Client</span>
-            </div>
-            <div>
-              <strong>{clientIntake.email || clientIntake.phone || clientIntake.idReference || "No primary identifier entered"}</strong>
-              <span>Primary Identifier</span>
-            </div>
-            <div>
-              <strong>Case / Matter Details</strong>
-              <span>Workflow Stage</span>
-            </div>
-            <div>
-              <strong>OPEN</strong>
-              <span>Status</span>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    if (step === 3) {
-      return (
-        <section className="intake-panel">
-          <h2>▶ 3. Deadline Details</h2>
-          <p>Record court dates, filing deadlines, limitation periods, reminders, and urgency indicators.</p>
-        </section>
-      );
-    }
-
-    if (step === 4) {
-      return (
-        <section className="intake-panel">
-          <h2>▶ 4. Document Details</h2>
-          <p>Prepare document, evidence, filing, bundle, template, and review information.</p>
-        </section>
-      );
-    }
-
-    if (step === 5) {
-      return (
-        <section className="intake-panel">
-          <h2>▶ 5. Review</h2>
-          <p>Review the prepared workflow before save or submission.</p>
-
-          <div className="intake-summary-grid">
-            <div>
-              <strong>{clientIntake.fullName || clientIntake.companyName || "Client Intake"}</strong>
-              <span>Client</span>
-            </div>
-            <div>
-              <strong>{clientIntake.intakeSource}</strong>
-              <span>Intake Source</span>
-            </div>
-            <div>
-              <strong>{clientIntake.duplicateDecision || "No duplicate decision recorded"}</strong>
-              <span>Duplicate Review</span>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
+  function renderExistingSelectedModule() {
     return (
-      <section className="intake-panel">
-        <h2>▶ 6. Review / Save & Submit</h2>
-        <p>Final review point before saving, submission, or future workflow handoff.</p>
-
-        <div className="intake-summary-grid">
+      <section className="client-gate-screen">
+        <div className="client-gate-header">
           <div>
-            <strong>{clientIntake.fullName || clientIntake.companyName || "Client Intake"}</strong>
-            <span>Client</span>
+            <p className="eyebrow">Step 1A decision</p>
+            <h2>Existing Client Selected</h2>
+            <p>This existing client will be linked to the new matter/intake.</p>
           </div>
-          <div>
-            <strong>Review / Save & Submit</strong>
-            <span>Workflow Stage</span>
-          </div>
-          <div>
-            <strong>OPEN</strong>
-            <span>Status</span>
-          </div>
+          <span className="intake-status-pill">Existing client</span>
         </div>
 
-        <div className="intake-form-actions">
-          <button type="button" onClick={() => setModule?.("Review Submit")}>
-            Open Completion Review
+        <ClientMatchCard client={selectedExistingClient} onView={viewFullProfile} onSelect={continueFromExistingClient} />
+
+        <div className="client-selected-actions">
+          <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
+            Change Selection
           </button>
+          <button type="button" onClick={continueFromExistingClient}>
+            Continue to Case / Matter Details →
+          </button>
+        </div>
+
+        {profilePreviewClient ? (
+          <aside className="client-profile-preview">
+            <h3>{profilePreviewClient.fullName}</h3>
+            <p>{profilePreviewClient.email} · {profilePreviewClient.phone}</p>
+          </aside>
+        ) : null}
+
+        {renderAuditTrail()}
+      </section>
+    );
+  }
+
+  function renderNewClientCreationModule() {
+    return (
+      <section className="client-gate-screen">
+        <div className="client-gate-header">
+          <div>
+            <p className="eyebrow">Step 1B</p>
+            <h2>New Client Profile Creation</h2>
+            <p>Reserved for brand-new client details only after duplicate search has been completed.</p>
+          </div>
+          <span className="intake-status-pill">Protected interface</span>
+        </div>
+
+        <div className="client-confirmation-gate">
+          <label>
+            <input
+              type="checkbox"
+              checked={confirmedNoDuplicate}
+              onChange={(event) => {
+                setConfirmedNoDuplicate(event.target.checked);
+                addAudit(event.target.checked ? "no_duplicate_confirmation_checked" : "no_duplicate_confirmation_unchecked", {
+                  query: searchQuery.trim(),
+                  reviewedResultCount: clientMatches.length,
+                });
+              }}
+            />
+            <span>
+              I confirm I have performed a search and verified no duplicate exists before creating a new client profile.
+            </span>
+          </label>
+        </div>
+
+        {!confirmedNoDuplicate ? (
+          <div className="client-search-empty-state">
+            <strong>New client form protected</strong>
+            <p>Confirm the duplicate search gate above before entering brand-new client details.</p>
+          </div>
+        ) : (
+          <>
+            <div className="client-create-actions">
+              <button type="button" className="secondary-action" onClick={saveDraft}>
+                Save Draft
+              </button>
+              <button type="button" className="secondary-action" onClick={clearDraft}>
+                Clear Draft
+              </button>
+              <button type="button" className="secondary-action" onClick={resetClientIntake}>
+                Reset Client Intake
+              </button>
+            </div>
+
+            <div className="client-profile-form-gated">
+              <section>
+                <h3>Client Type</h3>
+                <Field label="Client Type">
+                  <select value={clientIntake.clientType} onChange={(event) => updateClientIntake("clientType", event.target.value)}>
+                    <option>Individual</option>
+                    <option>Organisation</option>
+                  </select>
+                </Field>
+              </section>
+
+              {clientIntake.clientType === "Individual" ? (
+                <section>
+                  <h3>Individual Information</h3>
+                  <div className="client-form-grid three">
+                    <Field label="Full Name (legal name)">
+                      <input value={clientIntake.fullName} onChange={(event) => updateClientIntake("fullName", event.target.value)} placeholder="Client full legal name" />
+                    </Field>
+                    <Field label="Given Name">
+                      <input value={clientIntake.givenName} onChange={(event) => updateClientIntake("givenName", event.target.value)} placeholder="Given name" />
+                    </Field>
+                    <Field label="Surname">
+                      <input value={clientIntake.surname} onChange={(event) => updateClientIntake("surname", event.target.value)} placeholder="Surname / family name" />
+                    </Field>
+                    <Field label="Preferred Name">
+                      <input value={clientIntake.preferredName} onChange={(event) => updateClientIntake("preferredName", event.target.value)} placeholder="Preferred name" />
+                    </Field>
+                    <Field label="Alias/Also Known As">
+                      <input value={clientIntake.alias} onChange={(event) => updateClientIntake("alias", event.target.value)} placeholder="Alias, nickname, alternate spelling" />
+                    </Field>
+                  </div>
+                </section>
+              ) : null}
+
+              <section>
+                <h3>Contact Details</h3>
+                <div className="client-form-grid three">
+                  <Field label="Email">
+                    <input type="email" value={clientIntake.email} onChange={(event) => updateClientIntake("email", event.target.value)} placeholder="Email address" />
+                  </Field>
+                  <Field label="Phone">
+                    <input value={clientIntake.phone} onChange={(event) => updateClientIntake("phone", event.target.value)} placeholder="Primary phone number" />
+                  </Field>
+                  <Field label="WhatsApp">
+                    <input value={clientIntake.whatsapp} onChange={(event) => updateClientIntake("whatsapp", event.target.value)} placeholder="WhatsApp number" />
+                  </Field>
+                </div>
+              </section>
+
+              <section>
+                <h3>Identification</h3>
+                <div className="client-form-grid three">
+                  <Field label="ID/NRIC/Reference">
+                    <input value={clientIntake.idReference} onChange={(event) => updateClientIntake("idReference", event.target.value)} placeholder="ID, NRIC, internal reference" />
+                  </Field>
+                  <Field label="Passport Number">
+                    <input value={clientIntake.passportNumber} onChange={(event) => updateClientIntake("passportNumber", event.target.value)} placeholder="Passport number" />
+                  </Field>
+                  <Field label="Date of Birth">
+                    <input value={clientIntake.dateOfBirth} onChange={(event) => updateClientIntake("dateOfBirth", event.target.value)} placeholder="dd/mm/yyyy" />
+                  </Field>
+                </div>
+              </section>
+
+              <section>
+                <h3>Employment/Entity</h3>
+                <Field label="Company/Organisation Name">
+                  <input value={clientIntake.companyName} onChange={(event) => updateClientIntake("companyName", event.target.value)} placeholder="Company, employer, organisation, or entity name" />
+                </Field>
+              </section>
+
+              <section>
+                <h3>Address</h3>
+                <Field label="Full Address">
+                  <textarea value={clientIntake.address} onChange={(event) => updateClientIntake("address", event.target.value)} placeholder="Full address" rows={3} />
+                </Field>
+                <div className="client-form-grid three">
+                  <Field label="City/Area">
+                    <input value={clientIntake.city} onChange={(event) => updateClientIntake("city", event.target.value)} placeholder="City, town, area" />
+                  </Field>
+                  <Field label="Postcode">
+                    <input value={clientIntake.postcode} onChange={(event) => updateClientIntake("postcode", event.target.value)} placeholder="Postcode" />
+                  </Field>
+                  <Field label="State">
+                    <input value={clientIntake.state} onChange={(event) => updateClientIntake("state", event.target.value)} placeholder="State" />
+                  </Field>
+                </div>
+                <Field label="Country">
+                  <input value={clientIntake.country} onChange={(event) => updateClientIntake("country", event.target.value)} placeholder="Malaysia" />
+                </Field>
+              </section>
+
+              <section>
+                <h3>Intake Metadata</h3>
+                <div className="client-form-grid two">
+                  <Field label="Intake Source">
+                    <select value={clientIntake.intakeSource} onChange={(event) => updateClientIntake("intakeSource", event.target.value)}>
+                      <option>Manual Entry</option>
+                      <option>Referral</option>
+                      <option>Walk-in</option>
+                      <option>Phone Inquiry</option>
+                      <option>Email Inquiry</option>
+                      <option>Website Inquiry</option>
+                      <option>Existing Client Referral</option>
+                      <option>Other</option>
+                    </select>
+                  </Field>
+                </div>
+
+                <Field label="Duplicate Decision/Review Notes">
+                  <textarea
+                    value={clientIntake.duplicateDecision}
+                    onChange={(event) => updateClientIntake("duplicateDecision", event.target.value)}
+                    placeholder="Record duplicate decision, reason to continue as new, or selected existing client reference."
+                    rows={3}
+                  />
+                </Field>
+
+                <Field label="General Intake Notes">
+                  <textarea
+                    value={clientIntake.notes}
+                    onChange={(event) => updateClientIntake("notes", event.target.value)}
+                    placeholder="Matter notes, referral details, urgency, source comments, or copied intake context."
+                    rows={4}
+                  />
+                </Field>
+              </section>
+            </div>
+          </>
+        )}
+
+        {renderAuditTrail()}
+      </section>
+    );
+  }
+
+  function renderDuplicateReviewModule() {
+    return (
+      <section className="client-gate-screen duplicate-hard-stop">
+        <div className="client-gate-header">
+          <div>
+            <p className="eyebrow">Duplicate hard stop</p>
+            <h2>Possible Existing Client Detected</h2>
+            <p>Review the matching record(s). Continuing as new requires explicit justification.</p>
+          </div>
+          <span className="intake-status-pill danger">Review required</span>
+        </div>
+
+        <div className="client-match-list">
+          {duplicateOverrideMatches.map((client) => (
+            <ClientMatchCard key={client.clientId} client={client} onView={viewFullProfile} onSelect={selectExistingClient} />
+          ))}
+        </div>
+
+        <Field label="Duplicate Decision/Review Notes">
+          <textarea
+            value={clientIntake.duplicateDecision}
+            onChange={(event) => updateClientIntake("duplicateDecision", event.target.value)}
+            placeholder="Record duplicate decision, reason to continue as new, or selected existing client reference."
+            rows={4}
+          />
+        </Field>
+
+        <div className="client-selected-actions">
+          <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
+            ← Previous
+          </button>
+          <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.CREATE)}>
+            Return to New Client Profile Creation
+          </button>
+          <button type="button" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
+            Continue to Case / Matter Details →
+          </button>
+        </div>
+
+        {renderAuditTrail()}
+      </section>
+    );
+  }
+
+  function renderClientDetailsStep() {
+    if (clientStepMode === CLIENT_STEP_MODE.SEARCH) return renderSearchModule();
+    if (clientStepMode === CLIENT_STEP_MODE.CREATE) return renderNewClientCreationModule();
+    if (clientStepMode === CLIENT_STEP_MODE.EXISTING_SELECTED) return renderExistingSelectedModule();
+    if (clientStepMode === CLIENT_STEP_MODE.DUPLICATE_REVIEW) return renderDuplicateReviewModule();
+
+    return null;
+  }
+
+  function renderLaterStep() {
+    return (
+      <section className="client-gate-screen">
+        <div className="client-gate-header">
+          <div>
+            <p className="eyebrow">Step {step}</p>
+            <h2>{stepLabel}</h2>
+            <p>
+              Continue the matter intake workflow using the client selected or created in Step 1.
+            </p>
+          </div>
+          <span className="intake-status-pill">Client linked</span>
+        </div>
+
+        <div className="client-search-empty-state">
+          <strong>Client context</strong>
+          {selectedExistingClient ? (
+            <p>{selectedExistingClient.fullName} is linked as the existing client for this matter.</p>
+          ) : (
+            <p>{clientIntake.fullName || clientIntake.companyName || "New client profile"} is prepared for this matter intake.</p>
+          )}
         </div>
       </section>
     );
   }
 
   return (
-    <section className="intake-workflow-shell">
+    <div className="matter-intake-workflow">
       <div className="intake-workflow-header">
         <div>
-          <p className="eyebrow">Matter Intake Workflow</p>
-          <h2>{activeStep.title}</h2>
-          <p>{activeStep.description}</p>
+          <p>Matter Intake Workflow</p>
+          <h2>{stepLabel}</h2>
+          <p>Search, check duplicates, confirm client identity, and prepare the matter workflow.</p>
         </div>
-
-        <span className="pill good">
-          Step {activeStep.id} / {STEPS.length} · {activeStep.status}
-        </span>
+        <span className="intake-status-pill">Step {step} / {STEPS.length} · OPEN</span>
       </div>
 
-      <nav className="intake-step-grid" aria-label="Matter intake steps">
-        {STEPS.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={item.id === step ? "active" : ""}
-            onClick={() => setStep(item.id)}
-          >
-            <span>{item.id}</span>
-            {item.title}
-          </button>
-        ))}
-      </nav>
+      {renderStepTabs()}
 
-      {renderStepBody()}
+      {step === 1 ? renderClientDetailsStep() : renderLaterStep()}
 
-      <div className="intake-sticky-actions">
-        <button type="button" onClick={previousStep}>
+      {validationMessage ? <div className="intake-validation-message">{validationMessage}</div> : null}
+      {draftMessage ? <div className="intake-draft-message">{draftMessage}</div> : null}
+
+      <div className="intake-bottom-actions">
+        <button type="button" className="secondary-action" onClick={previousStep} disabled={step === 1 && clientStepMode === CLIENT_STEP_MODE.SEARCH}>
           ← Previous
         </button>
-
-        <button type="button" className="secondary-action" onClick={goHome}>
+        <button type="button" className="secondary-action" onClick={() => setModule?.("End User Workspace")}>
           Main Page
         </button>
-
-        {step < STEPS.length ? (
-          <button type="button" onClick={nextStep}>
-            {step === 1 ? "Continue to Case / Matter Details →" : "Save & Next →"}
-          </button>
-        ) : (
-          <button type="button" onClick={() => setModule?.("Review Submit")}>
-            Complete / Review Submit
-          </button>
-        )}
+        <button type="button" onClick={nextStep}>
+          {step === 1 ? "Continue to Case / Matter Details →" : "Save & Next →"}
+        </button>
       </div>
-    </section>
+    </div>
   );
 }
-
