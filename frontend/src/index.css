@@ -348,3 +348,110 @@ button:disabled {
   color: #8a5a00;
   font-weight: 700;
 }
+
+/* Phase 13F.1 keyboard accessibility framework */
+:focus-visible {
+  outline: 3px solid #7c3aed;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+}
+
+.keyboard-shortcuts-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.56);
+}
+
+.keyboard-shortcuts-dialog {
+  width: min(920px, 100%);
+  max-height: min(760px, 90vh);
+  overflow: auto;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.32);
+  padding: 24px;
+}
+
+.keyboard-shortcuts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.keyboard-shortcuts-header h2 {
+  margin: 4px 0 0;
+}
+
+.keyboard-shortcuts-note {
+  margin: 0 0 18px;
+  color: #475569;
+}
+
+.keyboard-shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.keyboard-shortcuts-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #f8fafc;
+  padding: 16px;
+}
+
+.keyboard-shortcuts-card h3 {
+  margin-top: 0;
+}
+
+.keyboard-shortcuts-card dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.keyboard-shortcuts-card dl div {
+  display: grid;
+  grid-template-columns: minmax(110px, 160px) 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.keyboard-shortcuts-card dt,
+.keyboard-shortcuts-card dd {
+  margin: 0;
+}
+
+.keyboard-shortcuts-card kbd {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+  font: 700 0.82rem ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@media (max-width: 640px) {
+  .keyboard-shortcuts-dialog {
+    padding: 18px;
+  }
+
+  .keyboard-shortcuts-header {
+    flex-direction: column;
+  }
+
+  .keyboard-shortcuts-card dl div {
+    grid-template-columns: 1fr;
+  }
+}

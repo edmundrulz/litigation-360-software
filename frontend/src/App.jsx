@@ -2,6 +2,7 @@ import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { MenuPlatform } from "./features/menu-platform";
+import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
 
 import Clients from "./pages/Clients";
 import Cases from "./pages/Cases";
@@ -219,6 +220,34 @@ const moduleRouteAliases = {
   "Completion Review And Completion": "Review Submit",
 };
 
+
+function isEditableKeyboardTarget(target) {
+  if (!target || typeof target.closest !== "function") return false;
+
+  return Boolean(
+    target.closest(
+      "input, textarea, select, [contenteditable='true'], [role='textbox']"
+    )
+  );
+}
+
+function isSaveShortcut(event) {
+  return (
+    (event.ctrlKey || event.metaKey) &&
+    !event.altKey &&
+    !event.shiftKey &&
+    event.key.toLowerCase() === "s"
+  );
+}
+
+function isQuestionShortcut(event) {
+  return (
+    event.key === "?" &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.altKey
+  );
+}
 function normalizeWorkspaceModule(moduleName) {
   return moduleRouteAliases[moduleName] || moduleName;
 }
@@ -229,6 +258,7 @@ export default function App() {
   const [moduleHistory, setModuleHistory] = useState([]);
   const [results, setResults] = useState([]);
   const [updated, setUpdated] = useState("Pending");
+  const [keyboardHelpOpen, setKeyboardHelpOpen] = useState(false);
 
   async function runChecks() {
     const out = [];
@@ -343,6 +373,8 @@ export default function App() {
           Developer Centre
         </button>
       </aside>
+
+      <KeyboardShortcutsHelp open={keyboardHelpOpen} onClose={() => setKeyboardHelpOpen(false)} />
 
       <main className="main">
         <header className="topbar">
@@ -751,4 +783,5 @@ function Metric({ label, value }) {
     </div>
   );
 }
+
 
