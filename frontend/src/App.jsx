@@ -390,15 +390,76 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
       <section className="hero">
         <h2>Litigation 360 LEOS Workspace</h2>
         <p>Level 10/11 enterprise legal operating system command grid. Open modules are live. Planned modules are visible roadmap placeholders.</p>
+        <section
+          aria-label="Legal Operations Command Centre"
+          style={{
+            marginTop: 16,
+            background: "#fff",
+            border: "1px solid #EAECF0",
+            borderRadius: 16,
+            boxShadow: "0 2px 8px rgba(16,24,40,0.06)",
+            padding: 16,
+          }}
+        >
+          <h3 style={{ margin: 0, fontSize: 18, color: "#101828", fontWeight: 700 }}>
+            Legal Operations Command Centre
+          </h3>
+          <p style={{ margin: "6px 0 14px", color: "#475467", fontSize: 13 }}>
+            Priority-driven legal operations overview, today’s tasks, alerts, and quick controls.
+          </p>
 
-        <div className="actions">
-          <button onClick={() => setModule("Clients")}>▶ 1. Client Details</button>
-          <button onClick={() => setModule("Cases")}>2. Case / Matter Details</button>
-          <button onClick={() => setModule("Court Dates")}>3. Deadline Details</button>
-          <button onClick={() => setModule("Documents")}>4. Document Details</button>
-          <button onClick={() => setModule("Review Submit")}>5. Review</button>
-          <button onClick={() => setModule("Review Submit")}>6. Save & Submit</button>
-        </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 12 }}>
+            <article style={{ border: "1px solid #EAECF0", borderRadius: 12, padding: 12 }}>
+              <strong>Priority Actions</strong>
+              <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FDA29B", background: "#FEF3F2", color: "#B42318", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Urgent court deadlines</span><span>3</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FEC84B", background: "#FFFAEB", color: "#B54708", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Client approvals pending</span><span>2</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #C3B5FD", background: "#F9F5FF", color: "#6941C6", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Filing blocked</span><span>1</span>
+                </div>
+              </div>
+            </article>
+
+            <article style={{ border: "1px solid #EAECF0", borderRadius: 12, padding: 12 }}>
+              <strong>Today’s Tasks</strong>
+              <ul style={{ margin: "10px 0 0", paddingLeft: 18, display: "grid", gap: 8, color: "#175CD3", fontWeight: 600 }}>
+                <li>Review witness bundle</li>
+                <li>Approve draft affidavit</li>
+                <li>Confirm client meeting</li>
+                <li>File amended pleadings</li>
+              </ul>
+            </article>
+
+            <article style={{ border: "1px solid #EAECF0", borderRadius: 12, padding: 12 }}>
+              <strong>Notifications & Alerts</strong>
+              <div style={{ display: "grid", gap: 8, marginTop: 10 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FDA29B", background: "#FEF3F2", color: "#B42318", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Overdue</span><span>2</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #FEC84B", background: "#FFFAEB", color: "#B54708", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Due today</span><span>4</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #84CAFF", background: "#EFF8FF", color: "#175CD3", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Unread alerts</span><span>5</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", border: "1px solid #C3B5FD", background: "#F9F5FF", color: "#6941C6", borderRadius: 8, padding: "8px 10px", fontWeight: 600 }}>
+                  <span>Blocked items</span><span>1</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div style={{ borderTop: "1px solid #EAECF0", marginTop: 12, paddingTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <button type="button" onClick={() => window.alert("Open is a frontend placeholder for now.")}>Open</button>
+            <button type="button" onClick={() => window.alert("Assign is a frontend placeholder for now.")}>Assign</button>
+            <button type="button" onClick={() => window.alert("Snooze is a frontend placeholder for now.")}>Snooze</button>
+            <button type="button" onClick={() => window.alert("Move to KIV is a frontend placeholder for now.")}>Move to KIV</button>
+          </div>
+        </section>
       </section>
 
       <section className="summary">
