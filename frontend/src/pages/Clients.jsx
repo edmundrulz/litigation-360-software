@@ -3610,7 +3610,45 @@ function isUnavailablePlaceholder(value) {
             Return to Matter Intake
           </button>
         </div>
-          <p>
+          
+        <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
+          <div className="client-profile-summary-card">
+            <p className="client-profile-summary-kicker">Profile Status</p>
+            <h3>Full Client Profile Summary</h3>
+            <p>
+              Static preservation rail. Original fields, validation, backend checks, local fallback, draft behaviour,
+              and manual management protocols remain unchanged.
+            </p>
+          </div>
+
+          <nav className="client-profile-summary-card" aria-label="Client profile section checklist">
+            <p className="client-profile-summary-kicker">Section Checklist</p>
+            <ol className="client-profile-summary-list">
+              <li>Client Profile Details</li>
+              <li>Client Identification Details</li>
+              <li>Employment Details</li>
+              <li>Family and Marital Details</li>
+              <li>Matter Context and Case Origin</li>
+              <li>Client Source and Value Indicators</li>
+              <li>Will / Estate Handling Metadata</li>
+              <li>Health / OKU / Disability and Accommodation Metadata</li>
+              <li>Contact Information and Communication Preferences</li>
+              <li>Address and Service Location Details</li>
+              <li>Emergency Contact / Next of Kin Details</li>
+              <li>Documentation Verification Status</li>
+              <li>Internal Remarks / Pending Information</li>
+            </ol>
+          </nav>
+
+          <div className="client-profile-summary-card client-profile-summary-warning">
+            <p className="client-profile-summary-kicker">Compliance Reminder</p>
+            <p>
+              This rail is informational only. Existing required fields, verification rules, and submission blockers remain
+              controlled by the original Clients workflow.
+            </p>
+          </div>
+        </aside>
+<p>
             Client database, directory and profile management.
           </p>
         </div>
