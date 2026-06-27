@@ -9,15 +9,28 @@ Resolve the white/blank screen when navigating to Review / Save & Submit.
 
 ## Issue
 
-Phase 13E.4T normalized route aliases, but browser QA confirmed the screen still rendered blank.
+Browser QA confirmed that the Review / Save & Submit screen still rendered blank after route alias normalization.
 
-Because production build passed but runtime browser navigation failed, the likely failure point is the ReviewSubmit component render path.
+The failed recovery attempt reported:
 
-## Recovery Action
+STOP: Could not locate function ReviewSubmit in App.jsx.
 
-Replaced only the ReviewSubmit component with a known-good safe completion screen.
+This confirmed the likely runtime cause:
 
-Expected visible content:
+- App.jsx routes to ReviewSubmit
+- ReviewSubmit was not available as a renderable component
+- Build could still pass
+- Runtime navigation produced a white/blank page when the route was opened
+
+## Correction
+
+The earlier commit 9ec7bbc created this recovery record only.
+
+This follow-up patch adds the missing ReviewSubmit component to App.jsx.
+
+## Expected Visible Content
+
+The Review / Save & Submit screen should now show:
 
 - Completion Review And Completion
 - Review the prepared workflow before save or submission.
@@ -28,6 +41,7 @@ Expected visible content:
 ## Files Changed
 
 - frontend/src/App.jsx
+- docs/phase-13/PHASE_13E4V_REVIEW_SUBMIT_RUNTIME_RECOVERY_20260627.md
 
 ## Safety Scope
 
@@ -52,7 +66,7 @@ No production infrastructure files changed.
 - Completion Review And Completion is visible
 - Step indicator 7 is visible
 - Status OPEN is visible
-- Description is visible
+- Final review description is visible
 - Back to Document Details works
 - Return to Main Workspace works
 - Browser console has no red runtime error

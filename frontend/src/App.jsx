@@ -526,6 +526,54 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
   );
 }
 
+function ReviewSubmit({ setModule }) {
+  return (
+    <section className="card review-submit-screen">
+      <div className="module-step-header">
+        <span className="pill">Step 7</span>
+        <span className="pill good">OPEN</span>
+      </div>
+
+      <p className="eyebrow">Completion Review And Completion</p>
+
+      <h2>Review / Save & Submit</h2>
+
+      <p>
+        Review the prepared workflow before save or submission.
+      </p>
+
+      <div className="summary">
+        <Metric label="Step Indicator" value="7" />
+        <Metric label="Status" value="OPEN" />
+        <Metric label="Workflow Stage" value="Completion Review" />
+      </div>
+
+      <article className="card">
+        <h3>Final review point before saving, submission, or future workflow handoff.</h3>
+        <p>
+          This screen confirms that the workflow has reached the final review stage.
+          Future save, submission, approval, handoff, audit, and backend persistence workflows
+          can be connected here.
+        </p>
+      </article>
+
+      <div className="actions">
+        <button type="button" onClick={() => setModule("Documents")}>
+          Back to Document Details
+        </button>
+
+        <button type="button" onClick={() => setModule("home")}>
+          Return to Main Workspace
+        </button>
+
+        <button type="button" disabled>
+          Save & Submit - Future Backend Action
+        </button>
+      </div>
+    </section>
+  );
+}
+
 function ModuleFrame({
   title,
   setModule,
