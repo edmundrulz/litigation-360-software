@@ -14,6 +14,12 @@ import {
   SettingsPanel,
   SystemPanel,
 } from "./panels/InfoPanels";
+import {
+  FileExportPanel,
+  FileImportPanel,
+  FileOpenPanel,
+  FileSavePanel,
+} from "./panels/FileActionPanels";
 import "./MenuPlatform.css";
 
 const ICONS = {
@@ -33,6 +39,10 @@ const ICONS = {
 };
 
 const PANEL_COMPONENTS = {
+  "file-open": FileOpenPanel,
+  "file-save": FileSavePanel,
+  "file-import": FileImportPanel,
+  "file-export": FileExportPanel,
   faq: FaqPanel,
   "submit-request": SupportRequestPanel,
   "about-app": AboutAppPanel,

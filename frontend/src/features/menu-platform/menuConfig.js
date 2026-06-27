@@ -14,7 +14,7 @@ export const menuSections = [
           {
             id: "file-open",
             label: "Open",
-            type: "action",
+            type: "panel",
             shortcut: "Ctrl+O",
             icon: "folder-open",
             keywords: ["browse", "load"],
@@ -22,7 +22,7 @@ export const menuSections = [
           {
             id: "file-save",
             label: "Save",
-            type: "action",
+            type: "panel",
             shortcut: "Ctrl+S",
             icon: "save",
             keywords: ["store", "commit"],
@@ -30,14 +30,14 @@ export const menuSections = [
           {
             id: "file-import",
             label: "Import",
-            type: "action",
+            type: "panel",
             icon: "import",
             keywords: ["upload", "bring in"],
           },
           {
             id: "file-export",
             label: "Export",
-            type: "action",
+            type: "panel",
             icon: "export",
             keywords: ["download", "pdf", "csv", "excel"],
           },

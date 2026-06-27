@@ -483,3 +483,21 @@
     grid-template-columns: 1fr;
   }
 }
+
+.mp-info-card {
+  border: 1px solid var(--mp-border);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.mp-info-card h3 {
+  margin: 0 0 0.45rem;
+}
+
+.mp-info-card ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--mp-muted);
+}
