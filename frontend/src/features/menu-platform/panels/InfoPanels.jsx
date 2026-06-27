@@ -1,182 +1,205 @@
+function InfoCard({ title, children }) {
+  return (
+    <article className="mp-info-card">
+      <h3>{title}</h3>
+      {children}
+    </article>
+  );
+}
+
+function DetailGrid({ items }) {
+  return (
+    <dl className="mp-info-grid">
+      {items.map((item) => (
+        <div key={item.label}>
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 export function AboutAppPanel({ appVersion = "0.0.0" }) {
   return (
-    <section className="mp-panel" aria-labelledby="mp-about-app-title">
+    <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2 id="mp-about-app-title">About App</h2>
-          <p>Version, credits, license, update status, and release notes.</p>
+          <h2>About App</h2>
+          <p>Application identity, release context, and current frontend scope.</p>
         </div>
       </div>
 
-      <dl className="mp-info-grid">
-        <div>
-          <dt>Version</dt>
-          <dd>{appVersion}</dd>
-        </div>
-        <div>
-          <dt>Update Status</dt>
-          <dd>Ready for update-provider integration</dd>
-        </div>
-        <div>
-          <dt>License</dt>
-          <dd>Internal application license placeholder</dd>
-        </div>
-        <div>
-          <dt>Credits</dt>
-          <dd>Application team, contributors, and future integration providers</dd>
-        </div>
-      </dl>
+      <DetailGrid
+        items={[
+          { label: "Application", value: "Litigation 360 / LEOS 360" },
+          { label: "Version", value: appVersion },
+          { label: "Current Layer", value: "Frontend menu platform" },
+          { label: "Status", value: "Active development" },
+        ]}
+      />
+
+      <InfoCard title="Current Capability">
+        <p>
+          The App Menu provides a professional frontend command hub for navigation,
+          information, settings, FAQs, and support-request workflows.
+        </p>
+      </InfoCard>
 
       <div className="mp-release-notes">
-        <h3>Release Notes</h3>
-        <ul>
-          <li>Schema-driven dropdown menu platform added.</li>
-          <li>FAQ and support-request panels included.</li>
-          <li>Responsive, accessible, keyboard-friendly menu shell included.</li>
-        </ul>
+        <strong>Release Notes</strong>
+        <p>
+          Phase 13B.3 focuses on safe frontend-first menu action wiring before any
+          backend, API, document repository, or production integration is approved.
+        </p>
       </div>
     </section>
   );
 }
 
 export function AboutSystemPanel() {
-  const nav = typeof navigator !== "undefined" ? navigator : {};
-  const screenInfo = typeof window !== "undefined" ? window.screen : {};
+  const browser = typeof navigator !== "undefined" ? navigator.userAgent : "Unavailable";
+  const language = typeof navigator !== "undefined" ? navigator.language : "Unavailable";
+  const platform = typeof navigator !== "undefined" ? navigator.platform : "Unavailable";
+  const viewport =
+    typeof window !== "undefined"
+      ? `${window.innerWidth} × ${window.innerHeight}`
+      : "Unavailable";
 
   return (
-    <section className="mp-panel" aria-labelledby="mp-about-system-title">
+    <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2 id="mp-about-system-title">About System</h2>
-          <p>Device, environment, compatibility, and performance context.</p>
+          <h2>About System</h2>
+          <p>Frontend-only environment information for diagnostics and support.</p>
         </div>
       </div>
 
-      <dl className="mp-info-grid">
-        <div>
-          <dt>Platform</dt>
-          <dd>{nav.platform || "Unavailable"}</dd>
-        </div>
-        <div>
-          <dt>Browser Language</dt>
-          <dd>{nav.language || "Unavailable"}</dd>
-        </div>
-        <div>
-          <dt>Online</dt>
-          <dd>{nav.onLine ? "Yes" : "No"}</dd>
-        </div>
-        <div>
-          <dt>CPU Threads</dt>
-          <dd>{nav.hardwareConcurrency || "Unavailable"}</dd>
-        </div>
-        <div>
-          <dt>Device Memory</dt>
-          <dd>{nav.deviceMemory ? `${nav.deviceMemory} GB` : "Unavailable"}</dd>
-        </div>
-        <div>
-          <dt>Screen</dt>
-          <dd>
-            {screenInfo.width && screenInfo.height
-              ? `${screenInfo.width} × ${screenInfo.height}`
-              : "Unavailable"}
-          </dd>
-        </div>
-      </dl>
+      <DetailGrid
+        items={[
+          { label: "Platform", value: platform },
+          { label: "Language", value: language },
+          { label: "Viewport", value: viewport },
+          { label: "Mode", value: "Browser client" },
+        ]}
+      />
+
+      <InfoCard title="Browser User Agent">
+        <p className="mp-code-text">{browser}</p>
+      </InfoCard>
+
+      <p className="mp-empty">
+        This panel does not inspect server, database, authentication, RBAC, or production infrastructure.
+      </p>
     </section>
   );
 }
 
 export function SettingsPanel() {
   return (
-    <section className="mp-panel" aria-labelledby="mp-settings-title">
+    <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2 id="mp-settings-title">Settings</h2>
-          <p>Application preferences and customization options.</p>
+          <h2>Settings</h2>
+          <p>Frontend-only preference placeholders for future application configuration.</p>
         </div>
       </div>
 
       <div className="mp-setting-list">
-        <label className="mp-checkbox">
-          <input type="checkbox" defaultChecked />
-          <span>Show pinned favorites</span>
-        </label>
+        <div className="mp-setting-row">
+          <div>
+            <strong>Theme</strong>
+            <span>Visual theme controls are planned.</span>
+          </div>
+          <span className="mp-status-pill">Planned</span>
+        </div>
 
-        <label className="mp-checkbox">
-          <input type="checkbox" defaultChecked />
-          <span>Use compact menu rows</span>
-        </label>
+        <div className="mp-setting-row">
+          <div>
+            <strong>Accessibility</strong>
+            <span>Keyboard, contrast, and motion preferences are planned.</span>
+          </div>
+          <span className="mp-status-pill">Planned</span>
+        </div>
 
-        <label className="mp-field">
-          <span>Theme Mode</span>
-          <select defaultValue="system">
-            <option value="system">Follow system</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-            <option value="high-contrast">High contrast</option>
-          </select>
-        </label>
+        <div className="mp-setting-row">
+          <div>
+            <strong>Notifications</strong>
+            <span>Notification preferences require future workflow approval.</span>
+          </div>
+          <span className="mp-status-pill">Planned</span>
+        </div>
 
-        <label className="mp-field">
-          <span>Accent Color</span>
-          <select defaultValue="default">
-            <option value="default">Default</option>
-            <option value="blue">Blue</option>
-            <option value="green">Green</option>
-            <option value="purple">Purple</option>
-            <option value="amber">Amber</option>
-          </select>
-        </label>
+        <div className="mp-setting-row">
+          <div>
+            <strong>Workspace Defaults</strong>
+            <span>Default landing module and menu preferences are planned.</span>
+          </div>
+          <span className="mp-status-pill">Planned</span>
+        </div>
       </div>
+
+      <p className="mp-empty">
+        No settings are persisted in this phase.
+      </p>
     </section>
   );
 }
 
 export function SystemPanel() {
   return (
-    <section className="mp-panel" aria-labelledby="mp-system-title">
+    <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2 id="mp-system-title">System</h2>
-          <p>System-level controls and diagnostic entry points.</p>
+          <h2>System</h2>
+          <p>Frontend-safe operational status for the menu platform.</p>
         </div>
       </div>
 
-      <div className="mp-action-grid">
-        <button type="button">Run Diagnostics</button>
-        <button type="button">Check Compatibility</button>
-        <button type="button">View Performance Metrics</button>
-        <button type="button" disabled title="Requires admin permission">
-          Reset System Cache
-        </button>
-      </div>
+      <DetailGrid
+        items={[
+          { label: "Menu Overlay", value: "Active" },
+          { label: "Portal Rendering", value: "Enabled" },
+          { label: "Backdrop", value: "Enabled" },
+          { label: "Backend Calls", value: "Not used by menu platform" },
+        ]}
+      />
+
+      <InfoCard title="Safe Operating Boundary">
+        <p>
+          This menu platform is operating in frontend-only mode. It does not modify
+          backend services, databases, authentication, RBAC, API routes, or production infrastructure.
+        </p>
+      </InfoCard>
     </section>
   );
 }
 
 export function RecentFilesPanel() {
-  const files = [
-    "Client Intake Draft",
-    "Matter Checklist Template",
-    "Exported Report Example",
-  ];
-
   return (
-    <section className="mp-panel" aria-labelledby="mp-recent-files-title">
+    <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2 id="mp-recent-files-title">Recent Files</h2>
-          <p>Recent file entries are ready for storage-provider integration.</p>
+          <h2>Recent Files</h2>
+          <p>Frontend placeholder for future matter documents, templates, and exports.</p>
         </div>
       </div>
 
-      <ul className="mp-simple-list">
-        {files.map((file) => (
-          <li key={file}>
-            <button type="button">{file}</button>
-          </li>
-        ))}
-      </ul>
+      <div className="mp-simple-list">
+        <button type="button" disabled>
+          No recent files connected yet
+        </button>
+        <button type="button" disabled>
+          Future: recent matter document
+        </button>
+        <button type="button" disabled>
+          Future: recent exported report
+        </button>
+      </div>
+
+      <p className="mp-empty">
+        Document repository, file storage, and real recent-file history are intentionally not connected in this phase.
+      </p>
     </section>
   );
 }
