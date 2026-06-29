@@ -3946,10 +3946,10 @@ function isUnavailablePlaceholder(value) {
           <strong>Advanced Client Directory / Manual Management</strong>
           <p>
             This workspace preserves the full original client profile, directory, validation, draft, and manual management process. Labels are aligned with the Matter Intake conveyor, but the original manual Clients protocol remains preserved.
-            Use it for advanced profile management. To continue the guided matter-opening conveyor, return to Matter Intake.
+            Use it for advanced profile management. This page is open in direct review mode. Use the fixed workflow navigation bars to continue the guided intake sequence, or return to Stage 2 Matter Intake when required.
           </p>
           <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Matter Intake")}>
-            Return to Matter Intake
+            Return to Stage 2 Matter Intake
           </button>
         </div>
 

@@ -8,12 +8,12 @@ const CLIENT_STEP_MODE = {
 };
 
 const STEPS = [
-  "Client Details",
+  "Client Search & Duplicate Detection",
   "Case / Matter Details",
   "Deadline Details",
   "Document Details",
   "Review",
-  "Review / Save & Submit",
+  "Draft Engagement Preview",
 ];
 
 const EMPTY_CLIENT_INTAKE = {
@@ -447,7 +447,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           reviewedResultCount: clientMatches.length,
           searchPerformed,
           suggestedIntake: derivedIntake,
-          instruction: "Create the full client profile in Advanced Client Directory / Manual Management.",
+          instruction: "Create the full client profile in Direct Client Directory / Manual Management.",
           createdAt: new Date().toISOString(),
         }),
       );
@@ -458,7 +458,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     setClientIntake(derivedIntake);
     setConfirmedNoDuplicate(false);
     setValidationMessage("");
-    setDraftMessage("Redirecting to Advanced Client Directory / Manual Management for full client profile creation.");
+    setDraftMessage("Redirecting to Direct Client Directory / Manual Management for full client profile creation.");
 
     addAudit("no_match_redirected_to_advanced_client_directory", {
       query: searchQuery.trim(),
@@ -664,11 +664,11 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       <section className="client-gate-screen">
         <div className="client-gate-header">
           <div>
-            <p className="eyebrow">Step 1A</p>
+            <p className="eyebrow">Stage 2 · Step 1</p>
             <h2>Client Search & Duplicate Detection</h2>
             <p>Search existing records first to prevent duplicate client creation.</p>
           </div>
-          <span className="intake-status-pill">Primary landing interface</span>
+          <span className="intake-status-pill">Mandatory first action in Stage 2</span>
         </div>
 
         <div className="client-search-layout">
@@ -717,12 +717,12 @@ export default function MatterIntakeWizard({ setModule } = {}) {
                 Clear Search
               </button>
               <button type="button" className="secondary-action" onClick={() => setModule?.("Clients")}>
-                Advanced Client Directory / Manual Management
+                Direct Client Directory / Manual Management
               </button>
             </div>
 
             <small className="intake-small">
-              Opens the full manual Clients workspace. Your guided Matter Intake conveyor remains separate.
+              Opens the full manual client directory for review or editing. The guided Matter Intake conveyor remains active and separate.
             </small>
           </div>
 
@@ -750,7 +750,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             ) : (
               <div className="client-no-match-panel">
                 <strong>No Match Found</strong>
-                <p>No existing client record matched this search. Create the full client profile through Advanced Client Directory / Manual Management so complete contact, billing, communication, document, audit, and manual-management details are preserved.</p>
+                <p>No existing client record matched this search. Create the full client profile through Direct Client Directory / Manual Management so complete contact, billing, communication, document, audit, and manual-management details are preserved.</p>
               </div>
             )}
 
@@ -760,8 +760,8 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           </div>
         ) : (
           <div className="client-search-empty-state">
-            <strong>Search required</strong>
-            <p>Run a deliberate search before selecting an existing client or creating a new profile.</p>
+            <strong>Duplicate check required</strong>
+            <p>Run a deliberate duplicate check before selecting an existing client or continuing to client details entry.</p>
           </div>
         )}
 
@@ -810,7 +810,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       <section className="client-gate-screen">
         <div className="client-gate-header">
           <div>
-            <p className="eyebrow">Step 1A decision</p>
+            <p className="eyebrow">Stage 2 · Step 1 decision</p>
             <h2>Existing Client Selected</h2>
             <p>This existing client will be linked to the new matter/intake.</p>
           </div>
@@ -824,7 +824,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             Change Selection
           </button>
           <button type="button" onClick={continueFromExistingClient}>
-            Continue to Case / Matter Details →
+            Continue to Next Step →
           </button>
         </div>
 
@@ -847,7 +847,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           <div>
             <p className="eyebrow">Step 1B</p>
             <h2>Legacy Simplified Client Intake Form</h2>
-            <p>Legacy fallback only. The primary no-match creation route now redirects to Advanced Client Directory / Manual Management for the complete full profile process.</p>
+            <p>Legacy fallback only. The primary no-match creation route now redirects to Direct Client Directory / Manual Management for the complete full profile process.</p>
           </div>
           <span className="intake-status-pill">Protected interface</span>
         </div>
@@ -1061,7 +1061,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             Create Full Profile in Advanced Directory
           </button>
           <button type="button" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
-            Continue to Case / Matter Details →
+            Continue to Next Step →
           </button>
         </div>
 
@@ -1109,9 +1109,9 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     <div className="matter-intake-workflow">
       <div className="intake-workflow-header">
         <div>
-          <p>Matter Intake Workflow</p>
+          <p>Stage 2 Matter Intake Workflow</p>
           <h2>{stepLabel}</h2>
-          <p>Search, check duplicates, confirm client identity, and prepare the matter workflow.</p>
+          <p>Start with duplicate detection, then confirm an existing client or continue to client details entry before proceeding to matter facts.</p>
         </div>
         <span className="intake-status-pill">Step {step} / {STEPS.length} · OPEN</span>
       </div>
@@ -1131,7 +1131,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           Main Page
         </button>
         <button type="button" onClick={nextStep}>
-          {step === 1 ? "Continue to Case / Matter Details →" : "Save & Next →"}
+          {step === 1 ? "Continue to Next Step →" : "Continue to Next Step →"}
         </button>
       </div>
     </div>
