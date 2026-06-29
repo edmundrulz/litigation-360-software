@@ -21,6 +21,13 @@ const initialIntake = {
   documentsRequired: "",
   budgetRange: "",
   feeModel: "",
+  consultationFee: "",
+  professionalFeeEstimate: "",
+  disbursementEstimate: "",
+  approvalThreshold: "",
+  feeComplexity: "Medium",
+  feeAssumptions: "",
+  feeEscalationTriggers: "",
   communicationPreference: "",
 };
 
@@ -307,7 +314,7 @@ export default function ClientIntakeDiscoveryPrototype() {
             <ClientIntakeSectionCard
               number="07"
               title="Budget, Fees & Engagement Expectations"
-              description="Capture budget range, fee model preference, approval thresholds, and disbursement concerns."
+              description="Capture budget range, fee model preference, fee assumptions, approval thresholds, and escalation triggers."
             >
               <div className="client-intake-grid">
                 <label>
@@ -336,16 +343,91 @@ export default function ClientIntakeDiscoveryPrototype() {
                     <option>Unknown / wants estimate first</option>
                   </select>
                 </label>
+
+                <label>
+                  Complexity Rating
+                  <select
+                    value={intake.feeComplexity}
+                    onChange={(event) => updateField("feeComplexity", event.target.value)}
+                  >
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                    <option>Emergency / Expedited</option>
+                  </select>
+                </label>
+
+                <label>
+                  Consultation Fee Placeholder
+                  <input
+                    value={intake.consultationFee}
+                    onChange={(event) => updateField("consultationFee", event.target.value)}
+                    placeholder="e.g. RM300 / waived / to be confirmed"
+                  />
+                </label>
+
+                <label>
+                  Professional Work Fee Estimate
+                  <input
+                    value={intake.professionalFeeEstimate}
+                    onChange={(event) =>
+                      updateField("professionalFeeEstimate", event.target.value)
+                    }
+                    placeholder="e.g. RM3,000–RM8,000"
+                  />
+                </label>
+
+                <label>
+                  Disbursement Estimate
+                  <input
+                    value={intake.disbursementEstimate}
+                    onChange={(event) =>
+                      updateField("disbursementEstimate", event.target.value)
+                    }
+                    placeholder="e.g. filing, searches, travel, translation"
+                  />
+                </label>
+
+                <label>
+                  Client Approval Threshold
+                  <input
+                    value={intake.approvalThreshold}
+                    onChange={(event) =>
+                      updateField("approvalThreshold", event.target.value)
+                    }
+                    placeholder="e.g. seek approval above RM1,000"
+                  />
+                </label>
+
+                <label>
+                  Communication Preference
+                  <input
+                    value={intake.communicationPreference}
+                    onChange={(event) =>
+                      updateField("communicationPreference", event.target.value)
+                    }
+                    placeholder="e.g. WhatsApp for quick updates, email for formal advice"
+                  />
+                </label>
               </div>
 
               <label>
-                Communication Preference
-                <input
-                  value={intake.communicationPreference}
+                Fee Assumptions
+                <textarea
+                  value={intake.feeAssumptions}
+                  onChange={(event) => updateField("feeAssumptions", event.target.value)}
+                  placeholder="What assumptions is the estimate based on?"
+                />
+              </label>
+
+              <label>
+                Fee Escalation Triggers
+                <textarea
+                  value={intake.feeEscalationTriggers}
                   onChange={(event) =>
-                    updateField("communicationPreference", event.target.value)
+                    updateField("feeEscalationTriggers", event.target.value)
                   }
-                  placeholder="e.g. WhatsApp for quick updates, email for formal advice"
+                  placeholder="Scope expansion, urgency, new parties, extra documents, court/tribunal action, experts, revisions."
                 />
               </label>
             </ClientIntakeSectionCard>
