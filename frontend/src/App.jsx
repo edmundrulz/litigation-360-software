@@ -45,9 +45,7 @@ const workspaceSections = [
       },
       {
         module: "Clients",
-        title: "Client Details / Authority & Conflict",
-        status: "OPEN",
-        sequence: "2",
+        sequence: "3",
         text: "Client records, contacts, onboarding and profile management.",
       },
     ],
@@ -717,6 +715,21 @@ function ModuleFrame({
   function renderNavigation(position) {
     const isBottom = position === "bottom";
 
+    function jumpToPageEnd() {
+      if (typeof window !== "undefined") {
+        window.scrollTo({
+          top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+          behavior: "smooth"
+        });
+      }
+    }
+
+    function jumpToPageStart() {
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
     return (
       <nav
         className={"module-page-nav module-page-nav-" + position}
@@ -726,20 +739,18 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-previous"
           onClick={goPrevious}
-          title="Go Back to Previous Step"
+          title="Previous Page"
         >
           ← Previous Page
-          <span>Go Back to Previous Step</span>
         </button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-home"
           onClick={goHome}
-          title="Return to Main Home Page"
+          title="Home Main Page"
         >
           Home Main Page
-          <span>Return to Main Home Page</span>
         </button>
 
         <button
@@ -749,27 +760,15 @@ function ModuleFrame({
           title="Continue to Next Step"
         >
           Continue to Next Step →
-          <span>Continue to Next Step</span>
         </button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-jump"
-          onClick={() => window.scrollTo({ top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), behavior: "smooth" })}
-          title="Go to Page End"
+          onClick={isBottom ? jumpToPageStart : jumpToPageEnd}
+          title={isBottom ? "Return to Top/Beginning of Page" : "Go to Bottom/End of Page"}
         >
-          Go to Page End ↓
-          <span>Go to Page End</span>
-        </button>
-
-        <button
-          type="button"
-          className={"module-page-nav-button " + (isBottom ? "module-page-nav-top-jump" : "module-page-nav-bottom-jump")}
-          onClick={isBottom ? goToPageStart : goToPageBottom}
-          title={isBottom ? "Go to Top of Page" : "Go to Bottom of Page"}
-        >
-          {isBottom ? "Return to Page Start ↑" : "Go to Bottom of Page ↓"}
-          <span>{isBottom ? "Go to Top of Page" : "Go to Bottom of Page"}</span>
+          {isBottom ? "Return to Top/Beginning of Page ↑" : "Go to Bottom/End of Page ↓"}
         </button>
       </nav>
     );
