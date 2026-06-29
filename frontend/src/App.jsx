@@ -38,10 +38,10 @@ const workspaceSections = [
       },
       {
         module: "Client Intake Discovery",
-        title: "Client Intake Discovery",
+        title: "Client Intake & Preliminary Assessment",
         status: "OPEN",
         sequence: "1A",
-        text: "Frontend-only Phase 14A prototype for guided client discovery and proposal preview.",
+        text: "Guided preliminary intake review for client instructions, matter background, risk, documents, and fee expectations.",
       },
       {
         module: "Clients",
@@ -157,13 +157,14 @@ const moduleFrameDetails = {
     nextLabel: "Client Details",
   },
   "Client Intake Discovery": {
-    displayTitle: "Client Intake Discovery",
+    displayTitle: "Client Intake & Preliminary Assessment",
     group: "Start Here",
-    description: "Frontend-only Phase 14A prototype for guided client discovery and proposal preview.",
-    position: "Prototype",
+    description: "Guided preliminary intake review before conflict clearance, engagement approval, and matter opening.",
+    position: "Preliminary Assessment",
     nextModule: "Clients",
     nextLabel: "Client Details",
-  },  Clients: {
+  },
+  Clients: {
     displayTitle: "Client Details",
     group: "Start Here",
     description: "Client records, contact information, onboarding, and profile management.",
@@ -439,7 +440,7 @@ function viewTitle(view, module) {
 function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
   if (module === "Client Intake Discovery") {
     return (
-      <ModuleFrame title="Client Intake Discovery" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+      <ModuleFrame title="Client Intake & Preliminary Assessment" setModule={setModule} previous={previous} canGoBack={canGoBack}>
         <ClientIntakeDiscovery />
       </ModuleFrame>
     );
@@ -658,7 +659,8 @@ function ModuleFrame({
     "Review Submit": "Documents",
     "Staff": "home",
     "Matter Intake": "home",
-    "Client Intake Discovery": "home"
+    "Client Intake Discovery": "home",
+    "Client Intake & Preliminary Assessment": "home"
   };
 
   const nextMap = {
@@ -667,7 +669,8 @@ function ModuleFrame({
     "Matters": "Court Dates",
     "Court Dates": "Documents",
     "Documents": "Review Submit",
-    "Client Intake Discovery": "Clients"
+    "Client Intake Discovery": "Clients",
+    "Client Intake & Preliminary Assessment": "Clients"
   };
 
   const previousTarget = previousMap[title] || "home";
@@ -714,7 +717,7 @@ function ModuleFrame({
 
             {nextTarget ? (
               <button type="button" onClick={goNext}>
-                Save & Next →
+                Continue to Next Step →
               </button>
             ) : (
               <button type="button" onClick={goHome}>
