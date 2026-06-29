@@ -1,27 +1,17 @@
 import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import React, { useEffect, useState } from "react";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import "./App.css";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import { MenuPlatform } from "./features/menu-platform";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
 
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import Clients from "./pages/Clients";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import Cases from "./pages/Cases";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import Matters from "./pages/Matters";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import Deadlines from "./pages/Deadlines";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import Documents from "./pages/Documents";
-import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
 import Staff from "./pages/Staff";
-
 import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
+
 const endpoints = [
   ["Monitoring", "/api/enterprise/monitoring/health"],
   ["Deployment Readiness", "/api/enterprise/deployment-centre/health"],
@@ -794,7 +784,3 @@ function Metric({ label, value }) {
     </div>
   );
 }
-
-
-
-
