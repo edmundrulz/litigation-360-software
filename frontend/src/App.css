@@ -6205,3 +6205,630 @@ h4:has(.client-profile-card-title):focus-within {
     grid-row: auto !important;
   }
 }
+
+/* Phase 14A Homepage Alignment Cleanup */
+
+/* 1. Main page shell alignment */
+.app-shell,
+.app-layout,
+.layout {
+  min-height: 100vh;
+}
+
+.main-content,
+.workspace,
+.workspace-page,
+.hero,
+.summary,
+.grid {
+  min-width: 0;
+}
+
+/* 2. Homepage card grid alignment */
+.grid {
+  align-items: stretch;
+}
+
+.card {
+  height: 100%;
+  min-height: 168px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  gap: 8px;
+}
+
+.card h3 {
+  min-height: 42px;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.card strong {
+  width: fit-content;
+  min-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* 3. Metrics row consistency */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.metric {
+  min-height: 96px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+/* 4. Neutral button styling */
+button {
+  font-family: inherit;
+}
+
+.actions button,
+.module-page-nav-button,
+.module-frame-actions button {
+  border: 1px solid #cbd5e1 !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+}
+
+.actions button:hover,
+.module-page-nav-button:hover,
+.module-frame-actions button:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+/* 5. Reduce visual dominance of planned/future cards without hiding them */
+.card:has(strong):has(p) {
+  border-color: #e2e8f0;
+}
+
+@media (max-width: 900px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: auto;
+  }
+}
+
+/* Phase 14A Main Page Visual Restore */
+
+/* 1. Restore text visibility and prevent hidden/clipped content */
+.hero,
+.workspace,
+.workspace-page,
+.summary,
+.grid,
+.card,
+.metric,
+.module-page-nav,
+.sidebar,
+main,
+section,
+article {
+  color: #0f172a;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: anywhere;
+}
+
+.card,
+.metric,
+.hero,
+.summary {
+  overflow: visible;
+}
+
+.card h1,
+.card h2,
+.card h3,
+.card p,
+.card span,
+.card strong,
+.metric span,
+.metric strong,
+.hero h1,
+.hero p,
+.workspace h1,
+.workspace h2,
+.workspace h3,
+.workspace p {
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-shadow: none !important;
+}
+
+/* 2. Main page shell and sidebar coordination */
+.app-shell,
+.app-layout,
+.layout {
+  min-height: 100vh;
+}
+
+.sidebar {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+main,
+.main,
+.main-content,
+.workspace,
+.workspace-page {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 3. Main content hierarchy */
+.hero {
+  margin-bottom: 18px;
+  border-radius: 16px;
+}
+
+.workspace,
+.workspace-page {
+  width: min(100%, 1120px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section {
+  box-sizing: border-box;
+}
+
+/* 4. Metrics row integration */
+.summary {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  align-items: stretch !important;
+  margin: 18px 0 !important;
+}
+
+.metric {
+  min-height: 96px !important;
+  padding: 16px !important;
+  display: grid !important;
+  align-content: center !important;
+  gap: 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04) !important;
+}
+
+.metric span {
+  color: #64748b !important;
+  font-size: 0.78rem !important;
+  font-weight: 750 !important;
+}
+
+.metric strong {
+  color: #0f172a !important;
+  font-size: 1.05rem !important;
+  line-height: 1.25 !important;
+}
+
+/* 5. Card grid alignment */
+.grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+}
+
+.grid > * {
+  min-width: 0 !important;
+  height: 100% !important;
+}
+
+.card {
+  height: 100% !important;
+  min-height: 178px !important;
+  display: grid !important;
+  grid-template-rows: auto auto 1fr !important;
+  align-content: start !important;
+  gap: 8px !important;
+  padding: 18px !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04) !important;
+}
+
+.card h3 {
+  min-height: 42px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  color: #0f172a !important;
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  font-weight: 850 !important;
+}
+
+.card strong {
+  width: fit-content !important;
+  min-height: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 3px 8px !important;
+  border-radius: 999px !important;
+  border: 1px solid #cbd5e1 !important;
+  background: #f8fafc !important;
+  color: #334155 !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.card p {
+  margin: 0 !important;
+  color: #475569 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.5 !important;
+}
+
+/* 6. Command centre proportional cleanup */
+.command-centre,
+.command-center,
+.legal-command-centre,
+.legal-command-center,
+.workspace-command-centre,
+.workspace-command-center {
+  border-radius: 18px !important;
+  border: 1px solid #dbe3ef !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05) !important;
+  overflow: visible !important;
+}
+
+/* 7. Button consistency */
+button {
+  font-family: inherit;
+}
+
+.actions button,
+.module-page-nav-button,
+.module-frame-actions button,
+.card button,
+.summary button {
+  min-height: 34px;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+  font-weight: 750 !important;
+}
+
+.actions button:hover,
+.module-page-nav-button:hover,
+.module-frame-actions button:hover,
+.card button:hover,
+.summary button:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+}
+
+/* 8. Page navigation: keep clean, non-floating, and page-positioned */
+.module-page-nav {
+  position: static !important;
+  z-index: auto !important;
+  box-shadow: none !important;
+}
+
+.module-page-nav-button span {
+  display: none !important;
+}
+
+/* 9. Typography and visual consistency */
+:root {
+  --home-color-bg: #f5f7fb;
+  --home-color-surface: #ffffff;
+  --home-color-border: #dbe3ef;
+  --home-color-text: #0f172a;
+  --home-color-muted: #475569;
+  --home-radius-card: 14px;
+  --home-radius-panel: 18px;
+  --home-shadow-card: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+body {
+  background: var(--home-color-bg);
+}
+
+/* 10. Responsive restoration */
+@media (max-width: 1024px) {
+  .workspace,
+  .workspace-page {
+    width: min(100%, 960px);
+  }
+}
+
+@media (max-width: 900px) {
+  .summary {
+    grid-template-columns: 1fr !important;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sidebar {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  main,
+  .main,
+  .main-content,
+  .workspace,
+  .workspace-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card {
+    min-height: auto !important;
+  }
+
+  .hero {
+    border-radius: 12px;
+  }
+}
+
+/* Phase 14A Clients Page Readability Restore */
+
+.clients-page,
+.client-page,
+.clients-workspace,
+.client-workspace {
+  width: min(100%, 1120px);
+  margin-left: auto;
+  margin-right: auto;
+  color: #0f172a;
+}
+
+/* Restore readable text */
+.clients-page *,
+.client-page *,
+.clients-workspace *,
+.client-workspace * {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: anywhere;
+}
+
+/* Main page vertical rhythm */
+.clients-page section,
+.client-page section,
+.clients-workspace section,
+.client-workspace section {
+  margin-bottom: 18px;
+}
+
+/* Standardise all panels/cards */
+.clients-page article,
+.client-page article,
+.clients-workspace article,
+.client-workspace article,
+.clients-page .card,
+.client-page .card,
+.clients-workspace .card,
+.client-workspace .card,
+.clients-page .panel,
+.client-page .panel,
+.clients-workspace .panel,
+.client-workspace .panel {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04) !important;
+  overflow: visible !important;
+}
+
+/* Section headings */
+.clients-page h1,
+.client-page h1,
+.clients-workspace h1,
+.client-workspace h1 {
+  margin: 0 0 6px !important;
+  color: #0f172a !important;
+  font-size: 1.65rem !important;
+  line-height: 1.2 !important;
+  font-weight: 850 !important;
+}
+
+.clients-page h2,
+.client-page h2,
+.clients-workspace h2,
+.client-workspace h2 {
+  margin: 0 0 10px !important;
+  color: #0f172a !important;
+  font-size: 1.18rem !important;
+  line-height: 1.25 !important;
+  font-weight: 850 !important;
+}
+
+.clients-page h3,
+.client-page h3,
+.clients-workspace h3,
+.client-workspace h3 {
+  margin: 0 0 8px !important;
+  color: #0f172a !important;
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+}
+
+/* Paragraphs */
+.clients-page p,
+.client-page p,
+.clients-workspace p,
+.client-workspace p {
+  color: #475569 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+}
+
+/* Form readability */
+.clients-page input,
+.clients-page select,
+.clients-page textarea,
+.client-page input,
+.client-page select,
+.client-page textarea,
+.clients-workspace input,
+.clients-workspace select,
+.clients-workspace textarea,
+.client-workspace input,
+.client-workspace select,
+.client-workspace textarea {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 9px !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-size: 0.86rem !important;
+}
+
+.clients-page textarea,
+.client-page textarea,
+.clients-workspace textarea,
+.client-workspace textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+/* Form grid alignment */
+.clients-page .grid,
+.client-page .grid,
+.clients-workspace .grid,
+.client-workspace .grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  align-items: start !important;
+}
+
+/* Make important summary cards align */
+.clients-page .summary,
+.client-page .summary,
+.clients-workspace .summary,
+.client-workspace .summary {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  align-items: stretch !important;
+}
+
+/* Reduce excessive visual noise */
+.clients-page small,
+.client-page small,
+.clients-workspace small,
+.client-workspace small {
+  color: #64748b !important;
+}
+
+/* Buttons */
+.clients-page button,
+.client-page button,
+.clients-workspace button,
+.client-workspace button {
+  min-height: 34px;
+  border-radius: 8px !important;
+  font-weight: 750 !important;
+}
+
+/* Warnings should be clear but not visually violent */
+.clients-page .warning,
+.client-page .warning,
+.clients-workspace .warning,
+.client-workspace .warning {
+  border-color: #fed7aa !important;
+  background: #fff7ed !important;
+  color: #9a3412 !important;
+}
+
+/* Success/status blocks */
+.clients-page .success,
+.client-page .success,
+.clients-workspace .success,
+.client-workspace .success {
+  border-color: #bbf7d0 !important;
+  background: #f0fdf4 !important;
+  color: #166534 !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .clients-page,
+  .client-page,
+  .clients-workspace,
+  .client-workspace {
+    width: 100%;
+  }
+
+  .clients-page .grid,
+  .client-page .grid,
+  .clients-workspace .grid,
+  .client-workspace .grid,
+  .clients-page .summary,
+  .client-page .summary,
+  .clients-workspace .summary,
+  .client-workspace .summary {
+    grid-template-columns: 1fr !important;
+  }
+}
