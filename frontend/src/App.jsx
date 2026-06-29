@@ -25,27 +25,27 @@ const endpoints = [
 const workspaceSections = [
   {
     id: "start-here",
-    label: "Start Here",
-    title: "Start Here",
-    description: "Begin a new legal workflow or open client details.",
+    label: "START WORKFLOW",
+    title: "Begin Guided Workflow",
+    description: "Begin the guided legal workflow from preliminary triage through engagement preview.",
     items: [
       {
-        module: "Matter Intake",
-        title: "Matter Intake",
+        module: "Client Intake Discovery",
+        title: "Preliminary Assessment & Triage",
         status: "OPEN",
         sequence: "1",
-        text: "Guided starting point for new matter intake and workflow preparation.",
+        text: "Stage 1 triage for client instructions, urgency, risk, documents, objectives, and engagement readiness.",
       },
       {
-        module: "Client Intake Discovery",
-        title: "Client Intake & Preliminary Assessment",
+        module: "Matter Intake",
+        title: "Matter Intake / Urgent Action",
         status: "OPEN",
-        sequence: "1A",
-        text: "Guided preliminary intake review for client instructions, matter background, risk, documents, and fee expectations.",
+        sequence: "2",
+        text: "Stage 2 matter-opening workspace for urgent action, duplicate checks, and structured intake progression.",
       },
       {
         module: "Clients",
-        title: "Client Details",
+        title: "Client Details / Authority & Conflict",
         status: "OPEN",
         sequence: "2",
         text: "Client records, contacts, onboarding and profile management.",
@@ -80,8 +80,8 @@ const workspaceSections = [
         text: "Hearings, mentions, deadlines and reminders.",
       },
       {
-        module: "Documents",
-        title: "Documents",
+        module: "Documents & Evidence Readiness",
+        title: "Documents & Evidence Readiness",
         status: "OPEN",
         sequence: "6",
         text: "Drafts, filings, templates, evidence and archives.",
@@ -96,7 +96,7 @@ const workspaceSections = [
     items: [
       {
         module: "Review Submit",
-        title: "Review / Save & Submit",
+        title: "Draft Engagement Preview",
         status: "OPEN",
         sequence: "7",
         text: "Final review point before saving, submission, or future workflow handoff.",
@@ -154,18 +154,18 @@ const moduleFrameDetails = {
     description: "Guided starting point for new matter intake and workflow preparation.",
     position: "Step 1 of 6",
     nextModule: "Clients",
-    nextLabel: "Client Details",
+    nextLabel: "Client Details / Authority & Conflict",
   },
   "Client Intake Discovery": {
-    displayTitle: "Client Intake & Preliminary Assessment",
+    displayTitle: "Preliminary Assessment & Triage",
     group: "Start Here",
     description: "Guided preliminary intake review before conflict clearance, engagement approval, and matter opening.",
     position: "Preliminary Assessment",
     nextModule: "Clients",
-    nextLabel: "Client Details",
+    nextLabel: "Client Details / Authority & Conflict",
   },
   Clients: {
-    displayTitle: "Client Details",
+    displayTitle: "Client Details / Authority & Conflict",
     group: "Start Here",
     description: "Client records, contact information, onboarding, and profile management.",
     position: "Step 2 of 6",
@@ -193,19 +193,19 @@ const moduleFrameDetails = {
     group: "Active Legal Work",
     description: "Hearings, mentions, deadlines, reminders, and court date tracking.",
     position: "Step 4 of 6",
-    nextModule: "Documents",
-    nextLabel: "Documents",
+    nextModule: "Documents & Evidence Readiness",
+    nextLabel: "Documents & Evidence Readiness",
   },
   Documents: {
-    displayTitle: "Documents",
+    displayTitle: "Documents & Evidence Readiness",
     group: "Active Legal Work",
     description: "Drafts, filings, templates, evidence, and document management.",
     position: "Step 5 of 6",
     nextModule: "Review Submit",
-    nextLabel: "Review / Save & Submit",
+    nextLabel: "Draft Engagement Preview",
   },
-  "Review / Save & Submit": {
-    displayTitle: "Review / Save & Submit",
+  "Draft Engagement Preview": {
+    displayTitle: "Draft Engagement Preview",
     group: "Review And Completion",
     description: "Final review point before saving, submission, or future workflow handoff.",
     position: "Step 6 of 6",
@@ -228,10 +228,10 @@ function getModuleFrameDetails(title) {
 }
 
 const moduleRouteAliases = {
-  "Client Details": "Clients",
+  "Client Details / Authority & Conflict": "Clients",
   "Case / Matter Details": "Cases",
   "Matter Workspace": "Matters",
-  "Review / Save & Submit": "Review Submit",
+  "Draft Engagement Preview": "Review Submit",
   "Review And Completion": "Review Submit",
   "Completion Review And Completion": "Review Submit",
 };
@@ -396,7 +396,7 @@ export default function App() {
         <header className="topbar">
           <div>
             <h1>{viewTitle(view, module)}</h1>
-            <p>Realtime legal operations interface. Last update: {updated}</p>
+            <p>Real-time legal operations workspace. Last updated: {updated}</p>
           </div>
 
           <span className={failed ? "pill bad" : "pill good"}>
@@ -430,7 +430,7 @@ function viewTitle(view, module) {
   if (view === "workspace" && module !== "home") return "Workspace - " + module;
 
   return {
-    workspace: "End User Legal Workspace - LEOS Module Command Grid",
+    workspace: "LEOS Legal Workspace Command Hub",
     operations: "Operations Centre",
     admin: "Admin Centre",
     developer: "Developer Centre"
@@ -440,7 +440,7 @@ function viewTitle(view, module) {
 function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
   if (module === "Client Intake Discovery") {
     return (
-      <ModuleFrame title="Client Intake & Preliminary Assessment" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+      <ModuleFrame title="Preliminary Assessment & Triage" setModule={setModule} previous={previous} canGoBack={canGoBack}>
         <ClientIntakeDiscovery />
       </ModuleFrame>
     );
@@ -449,11 +449,11 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
   if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
   if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
   if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
-  if (module === "Documents") return <ModuleFrame title="Documents" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+  if (module === "Documents & Evidence Readiness") return <ModuleFrame title="Documents & Evidence Readiness" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
   if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
-  if (module === "Review Submit" || module === "Review / Save & Submit" || module === "Review And Completion" || module === "Completion Review And Completion") {
+  if (module === "Review Submit" || module === "Draft Engagement Preview" || module === "Review And Completion" || module === "Completion Review And Completion") {
     return (
-      <ModuleFrame title="Review / Save & Submit" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+      <ModuleFrame title="Draft Engagement Preview" setModule={setModule} previous={previous} canGoBack={canGoBack}>
         <ReviewSubmit setModule={setModule} />
       </ModuleFrame>
     );
@@ -603,7 +603,7 @@ function ReviewSubmit({ setModule }) {
 
       <p className="eyebrow">Completion Review And Completion</p>
 
-      <h2>Review / Save & Submit</h2>
+      <h2>Draft Engagement Preview</h2>
 
       <p>
         Review the prepared workflow before save or submission.
@@ -625,7 +625,7 @@ function ReviewSubmit({ setModule }) {
       </article>
 
       <div className="actions">
-        <button type="button" onClick={() => setModule("Documents")}>
+        <button type="button" onClick={() => setModule("Documents & Evidence Readiness")}>
           Back to Document Details
         </button>
 
@@ -654,35 +654,36 @@ function ModuleFrame({
     "Cases": "Clients",
     "Matters": "Clients",
     "Court Dates": "Cases",
-    "Documents": "Court Dates",
-    "Review / Save & Submit": "Documents",
-    "Review Submit": "Documents",
+    "Documents & Evidence Readiness": "Court Dates",
+    "Draft Engagement Preview": "Documents & Evidence Readiness",
+    "Review Submit": "Documents & Evidence Readiness",
     "Staff": "home",
-    "Matter Intake": "home",
+    "Matter Intake": "Client Intake Discovery",
     "Client Intake Discovery": "home",
-    "Client Intake & Preliminary Assessment": "home"
+    "Preliminary Assessment & Triage": "home"
   };
 
   const nextMap = {
     "Clients": "Cases",
     "Cases": "Court Dates",
     "Matters": "Court Dates",
-    "Court Dates": "Documents",
-    "Documents": "Review Submit",
-    "Client Intake Discovery": "Clients",
-    "Client Intake & Preliminary Assessment": "Clients"
+    "Court Dates": "Documents & Evidence Readiness",
+    "Documents & Evidence Readiness": "Review Submit",
+    "Client Intake Discovery": "Matter Intake",
+    "Preliminary Assessment & Triage": "Matter Intake",
+    "Matter Intake": "Clients"
   };
 
   const previousTarget = previousMap[title] || "home";
   const nextTarget = nextMap[title] || "";
 
   function goPrevious() {
-    if (previousTarget === "home") {
-      setModule("home");
+    if (typeof previous === "function" && canGoBack) {
+      previous();
       return;
     }
 
-    setModule(previousTarget);
+    setModule(previousTarget || "home");
   }
 
   function goHome() {
@@ -691,10 +692,87 @@ function ModuleFrame({
 
   function goNext() {
     if (!nextTarget) {
+      setModule("home");
       return;
     }
 
     setModule(nextTarget);
+  }
+
+  function goToPageStart() {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  function goToPageBottom() {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+        behavior: "smooth"
+      });
+    }
+  }
+
+  function renderNavigation(position) {
+    const isBottom = position === "bottom";
+
+    return (
+      <nav
+        className={"module-page-nav module-page-nav-" + position}
+        aria-label={position + " workflow page navigation"}
+      >
+        <button
+          type="button"
+          className="module-page-nav-button module-page-nav-previous"
+          onClick={goPrevious}
+          title="Go Back to Previous Step"
+        >
+          ← Previous Page
+          <span>Go Back to Previous Step</span>
+        </button>
+
+        <button
+          type="button"
+          className="module-page-nav-button module-page-nav-home"
+          onClick={goHome}
+          title="Return to Main Home Page"
+        >
+          Home Main Page
+          <span>Return to Main Home Page</span>
+        </button>
+
+        <button
+          type="button"
+          className="module-page-nav-button module-page-nav-next"
+          onClick={goNext}
+          title="Continue to Next Step"
+        >
+          Continue to Next Step →
+          <span>Continue to Next Step</span>
+        </button>
+
+        <button
+          type="button"
+          className="module-page-nav-button module-page-nav-jump"
+          onClick={() => window.scrollTo({ top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), behavior: "smooth" })}
+          title="Go to Page End"
+        >
+          Go to Page End ↓
+          <span>Go to Page End</span>
+        </button>
+
+        <button
+          type="button"
+          className={"module-page-nav-button " + (isBottom ? "module-page-nav-top-jump" : "module-page-nav-bottom-jump")}
+          onClick={isBottom ? goToPageStart : goToPageBottom}
+          title={isBottom ? "Go to Top of Page" : "Go to Bottom of Page"}
+        >
+          {isBottom ? "Return to Page Start ↑" : "Go to Bottom of Page ↓"}
+          <span>{isBottom ? "Go to Top of Page" : "Go to Bottom of Page"}</span>
+        </button>
+      </nav>
+    );
   }
 
   return (
@@ -704,33 +782,15 @@ function ModuleFrame({
           <p className="eyebrow">Workflow module</p>
           <h2>{title}</h2>
         </div>
-
-        {showActions && (
-          <div className="module-frame-actions">
-            <button type="button" onClick={goPrevious}>
-              ← Previous
-            </button>
-
-            <button type="button" onClick={goHome}>
-              Main Page
-            </button>
-
-            {nextTarget ? (
-              <button type="button" onClick={goNext}>
-                Continue to Next Step →
-              </button>
-            ) : (
-              <button type="button" onClick={goHome}>
-                Complete / Return Home
-              </button>
-            )}
-          </div>
-        )}
       </div>
+
+      {showActions && renderNavigation("top")}
 
       <div className="module-frame-body">
         {children}
       </div>
+
+      {showActions && renderNavigation("bottom")}
     </section>
   );
 }

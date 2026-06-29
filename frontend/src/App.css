@@ -5614,3 +5614,231 @@ h4:has(.client-profile-card-title):focus-within {
 
 /* Phase 13E.4Z-Z4-E Section-Level Completion Status END */
 
+
+
+/* Phase 14A Clean Page-Flow Navigation Layout */
+.module-page-nav {
+  position: static;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(220px, auto) minmax(180px, 1fr);
+  grid-template-rows: auto auto;
+  gap: 10px 14px;
+  align-items: center;
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px solid #d8e0ec;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  z-index: auto;
+}
+
+.module-page-nav-top .module-page-nav-bottom-jump {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.module-page-nav-top .module-page-nav-next {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.module-page-nav-top .module-page-nav-previous {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.module-page-nav-top .module-page-nav-home {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+}
+
+.module-page-nav-bottom .module-page-nav-home {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.module-page-nav-bottom .module-page-nav-previous {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.module-page-nav-bottom .module-page-nav-top-jump {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+}
+
+.module-page-nav-bottom .module-page-nav-next {
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: end;
+}
+
+.module-page-nav-button {
+  min-width: 180px;
+  min-height: 38px;
+  padding: 8px 14px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.module-page-nav-button span {
+  font-size: 0.66rem;
+  font-weight: 700;
+  opacity: 0.78;
+}
+
+.module-page-nav-previous {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.module-page-nav-previous:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.module-page-nav-home {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #9a3412;
+}
+
+.module-page-nav-home:hover {
+  background: #ffedd5;
+  border-color: #fdba74;
+  color: #7c2d12;
+}
+
+.module-page-nav-next {
+  background: #2563eb;
+  border-color: #1d4ed8;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+.module-page-nav-next:hover {
+  background: #1d4ed8;
+  border-color: #1e40af;
+  color: #ffffff;
+}
+
+.module-page-nav-bottom-jump,
+.module-page-nav-top-jump {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #3730a3;
+}
+
+.module-page-nav-bottom-jump:hover,
+.module-page-nav-top-jump:hover {
+  background: #e0e7ff;
+  border-color: #a5b4fc;
+  color: #312e81;
+}
+
+.module-page-nav-button:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: none;
+}
+
+.module-page-nav-button:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 3px;
+}
+
+@media (max-width: 820px) {
+  .module-page-nav {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .module-page-nav-top .module-page-nav-bottom-jump,
+  .module-page-nav-top .module-page-nav-home,
+  .module-page-nav-bottom .module-page-nav-home,
+  .module-page-nav-bottom .module-page-nav-top-jump {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    justify-self: stretch;
+  }
+
+  .module-page-nav-top .module-page-nav-previous,
+  .module-page-nav-bottom .module-page-nav-previous {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: stretch;
+  }
+
+  .module-page-nav-top .module-page-nav-next,
+  .module-page-nav-bottom .module-page-nav-next {
+    grid-column: 2;
+    grid-row: auto;
+    justify-self: stretch;
+  }
+
+  .module-page-nav-button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .module-page-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .module-page-nav-top .module-page-nav-bottom-jump,
+  .module-page-nav-top .module-page-nav-next,
+  .module-page-nav-top .module-page-nav-previous,
+  .module-page-nav-top .module-page-nav-home,
+  .module-page-nav-bottom .module-page-nav-home,
+  .module-page-nav-bottom .module-page-nav-previous,
+  .module-page-nav-bottom .module-page-nav-top-jump,
+  .module-page-nav-bottom .module-page-nav-next {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: stretch;
+  }
+
+  .module-page-nav-button {
+    min-height: 42px;
+    border-radius: 12px;
+  }
+}
+
+/* Phase 14A Final App Content Repair */
+.module-page-nav,
+.module-frame-actions {
+  position: static !important;
+}
+
+.workflow-fixed-dock,
+.workflow-nav-dock,
+.workflow-compact-nav,
+.workflow-page-nav {
+  display: none !important;
+}
+
