@@ -1156,7 +1156,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     <div className="matter-intake-workflow">
       <div className="intake-workflow-header">
         <div>
-          <p>Stage 2 Matter Intake Workflow</p>
+          <p>Stage 2 · Client Gate</p>
           <h2>{stepLabel}</h2>
           <p>Start with duplicate detection, then confirm an existing client or continue to client details entry before proceeding to matter facts.</p>
         </div>
