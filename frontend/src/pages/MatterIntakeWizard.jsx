@@ -1160,7 +1160,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           <h2>{stepLabel}</h2>
           <p>Search first, then link an existing client or continue to new client details.</p>
         </div>
-        <span className="intake-status-pill">Step 2 of {STEPS.length} · OPEN</span>
+        <span className="intake-status-pill">Step 2 of {STEPS.length}</span>
       </div>
 
       {renderPageNavigationBar("top")}
