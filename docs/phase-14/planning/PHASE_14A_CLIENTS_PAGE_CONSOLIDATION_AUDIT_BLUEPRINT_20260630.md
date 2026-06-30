@@ -1,8 +1,8 @@
 # PHASE 14A CLIENTS PAGE CONSOLIDATION AUDIT BLUEPRINT (2026-06-30)
 
-**Controlling Gate:** `PHASE_14A_CLIENTS_PAGE_CONSOLIDATION_GATE_20260630.md`  
-**Date:** June 30, 2026  
-**Status:** Read-only audit blueprint (documentation only)  
+**Controlling Gate:** `PHASE_14A_CLIENTS_PAGE_CONSOLIDATION_GATE_20260630.md`
+**Date:** June 30, 2026
+**Status:** Read-only audit blueprint (documentation only)
 **Scope:** Frontend planning and audit documentation only; no implementation
 
 ---
@@ -325,5 +325,5 @@ Defer implementation and keep this lane documentation-only.
 
 ## Audit Outcome
 
-This blueprint is complete as a read-only audit artifact under the controlling gate.  
+This blueprint is complete as a read-only audit artifact under the controlling gate.
 No code, CSS, or runtime behavior changes have been made.
