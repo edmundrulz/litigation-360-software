@@ -722,14 +722,6 @@ export default function MatterIntakeWizard({ setModule } = {}) {
   function renderSearchModule() {
     return (
       <section className="client-gate-screen">
-        <div className="client-gate-header">
-          <div>
-            <p className="eyebrow">Stage 2 · Step 1</p>
-            <h2>Client Search & Duplicate Detection</h2>
-            <p>Search existing records first to prevent duplicate client creation.</p>
-          </div>
-          <span className="intake-status-pill">Mandatory first action in Stage 2</span>
-        </div>
 
         <div className="client-search-layout">
           <div className="client-search-primary">
@@ -870,7 +862,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       <section className="client-gate-screen">
         <div className="client-gate-header">
           <div>
-            <p className="eyebrow">Stage 2 · Step 1 decision</p>
+            <p className="eyebrow">Stage 2 · Existing Client Decision</p>
             <h2>Existing Client Selected</h2>
             <p>This existing client will be linked to the new matter/intake.</p>
           </div>
@@ -1115,7 +1107,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
         <div className="client-selected-actions">
           <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
-            ← Previous
+            ← Previous Page
           </button>
           <button type="button" className="secondary-action" onClick={openNewClientCreation}>
             Create Full Profile in Advanced Directory
@@ -1147,7 +1139,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             <p className="eyebrow">Step {step}</p>
             <h2>{stepLabel}</h2>
             <p>
-              Continue the matter intake workflow using the client selected or created in Step 1.
+              Continue the matter intake workflow using the client selected or created in this stage.
             </p>
           </div>
           <span className="intake-status-pill">Client linked</span>
@@ -1173,7 +1165,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           <h2>{stepLabel}</h2>
           <p>Start with duplicate detection, then confirm an existing client or continue to client details entry before proceeding to matter facts.</p>
         </div>
-        <span className="intake-status-pill">Step {step} / {STEPS.length} · OPEN</span>
+        <span className="intake-status-pill">Step 2 of {STEPS.length} · OPEN</span>
       </div>
 
       {renderPageNavigationBar("top")}
@@ -1187,4 +1179,3 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     </div>
   );
 }
-
