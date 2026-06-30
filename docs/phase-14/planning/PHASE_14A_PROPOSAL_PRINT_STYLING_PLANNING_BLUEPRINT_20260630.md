@@ -1,9 +1,9 @@
 # PHASE 14A PROPOSAL PRINT STYLING PLANNING BLUEPRINT (2026-06-30)
 
-**Primary Thread / Integration SSOT:** `PHASE_14A_UI_HOUSEKEEPING_MAIN_SSOT_INTEGRATION_20260630.md`  
-**Lane-Specific Controlling Gate:** `PHASE_14A_PROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md`  
-**Date:** June 30, 2026  
-**Status:** Planning only (documentation-only; no code changes)  
+**Primary Thread / Integration SSOT:** `PHASE_14A_UI_HOUSEKEEPING_MAIN_SSOT_INTEGRATION_20260630.md`
+**Lane-Specific Controlling Gate:** `PHASE_14A_PROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md`
+**Date:** June 30, 2026
+**Status:** Planning only (documentation-only; no code changes)
 **Scope Type:** Frontend print-style planning guidance only
 
 ---
