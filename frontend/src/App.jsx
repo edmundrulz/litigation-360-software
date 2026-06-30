@@ -785,13 +785,15 @@ function ModuleFrame({
 
   return (
     <section className="module-frame">
-      <div className="module-frame-header">
-        <div>
-          <p className="eyebrow">Workflow module</p>
-          <h2>{title}</h2>
-          <p className="workflow-node-label">Current Node: {title} · OPEN</p>
+      {title === "Matter Intake" ? null : (
+        <div className="module-frame-header">
+          <div>
+            <p className="eyebrow">Workflow module</p>
+            <h2>{title}</h2>
+            <p className="workflow-node-label">Current Node: {title} · OPEN</p>
+          </div>
         </div>
-      </div>
+      )}
 
       {showActions && renderNavigation("top")}
 
@@ -880,5 +882,3 @@ function Metric({ label, value }) {
     </div>
   );
 }
-
-
