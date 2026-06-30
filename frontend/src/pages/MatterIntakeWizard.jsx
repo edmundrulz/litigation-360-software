@@ -1158,7 +1158,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         <div>
           <p>Stage 2 · Client Gate</p>
           <h2>{stepLabel}</h2>
-          <p>Start with duplicate detection, then confirm an existing client or continue to client details entry before proceeding to matter facts.</p>
+          <p>Search first, then link an existing client or continue to new client details.</p>
         </div>
         <span className="intake-status-pill">Step 2 of {STEPS.length} · OPEN</span>
       </div>
