@@ -810,12 +810,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
               No Match Found — Create Full Client Profile in Advanced Directory
             </button>
           </div>
-        ) : (
-          <div className="client-search-empty-state">
-            <strong>Duplicate check required</strong>
-            <p>Run a deliberate duplicate check before selecting an existing client or continuing to client details entry.</p>
-          </div>
-        )}
+        ) : null}
 
         {profilePreviewClient ? (
           <aside className="client-profile-preview">
