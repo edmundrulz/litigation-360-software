@@ -1,4 +1,5 @@
 const fallback = "Not captured yet";
+const readModeFallback = "Not specified yet.";
 
 function hasValue(value) {
   return String(value || "").trim().length > 0;
@@ -38,7 +39,6 @@ function PreviewBlock({ title, children }) {
     </section>
   );
 }
-
 
 function buildDocumentChecklist(intake) {
   return [
@@ -121,6 +121,27 @@ function DocumentChecklistPreview({ checklist, notes }) {
   );
 }
 
+function ReadModeSection({ title, internalOnly = false, children }) {
+  return (
+    <section
+      className="proposal-preview-block"
+      style={{
+        border: internalOnly
+          ? "1px dashed rgba(245, 158, 11, 0.55)"
+          : "1px solid rgba(148, 163, 184, 0.28)",
+        borderRadius: "12px",
+        padding: "14px",
+        background: internalOnly ? "rgba(245, 158, 11, 0.08)" : "transparent",
+      }}
+    >
+      <h4 style={{ marginTop: 0 }}>
+        {title} {internalOnly ? "(Internal Only)" : ""}
+      </h4>
+      {children}
+    </section>
+  );
+}
+
 export default function ClientIntakeProposalPreview({ intake }) {
   const requiredFields = [
     ["Client / Entity", intake.clientName],
@@ -167,6 +188,30 @@ export default function ClientIntakeProposalPreview({ intake }) {
     "New parties, documents, or issues",
     "Court, tribunal, regulatory, or expert involvement",
   ]);
+
+  const includedScopeItems = toPreviewList(intake.scopeIncluded, [readModeFallback]);
+  const excludedScopeItems = toPreviewList(intake.scopeExcluded, [readModeFallback]);
+  const keyAssumptionItems = toPreviewList(intake.keyAssumptions, [readModeFallback]);
+  const clientResponsibilityItems = toPreviewList(intake.clientResponsibilities, [readModeFallback]);
+  const internalProposalNotesItems = toPreviewList(intake.internalProposalNotes, [readModeFallback]);
+
+  const supportNotesText =
+    "This scope and exclusions summary supports Draft Engagement Preview preparation by clarifying what is included, what is excluded, key assumptions, and client-side responsibilities before formal engagement drafting.";
+
+  const finalReadinessChecklistItems = [
+    hasValue(intake.clientName) ? "Client/entity identified." : readModeFallback,
+    hasValue(intake.matterType) ? "Matter type identified." : readModeFallback,
+    hasValue(intake.primaryObjective) ? "Primary objective captured." : readModeFallback,
+    documentChecklistPendingCount
+      ? "Document checklist has missing or partial items."
+      : "Document checklist has no missing/partial items.",
+    hasValue(intake.scopeIncluded) ? "Included scope captured." : readModeFallback,
+    hasValue(intake.scopeExcluded) ? "Excluded scope captured." : readModeFallback,
+    hasValue(intake.keyAssumptions) ? "Key assumptions captured." : readModeFallback,
+    hasValue(intake.clientResponsibilities)
+      ? "Client responsibilities captured."
+      : readModeFallback,
+  ];
 
   const nextSteps = [
     "Confirm conflict check can proceed",
@@ -331,6 +376,37 @@ export default function ClientIntakeProposalPreview({ intake }) {
         <p>{intake.dependencies || fallback}</p>
       </PreviewBlock>
 
+      <PreviewBlock title="Scope & Exclusions Preview">
+        <div className="fee-assumption-box">
+          <h5>Included Scope</h5>
+          <PreviewList items={includedScopeItems} />
+        </div>
+
+        <div className="fee-assumption-box">
+          <h5>Excluded Scope</h5>
+          <PreviewList items={excludedScopeItems} />
+        </div>
+
+        <div className="fee-assumption-box">
+          <h5>Key Assumptions</h5>
+          <PreviewList items={keyAssumptionItems} />
+        </div>
+
+        <div className="fee-assumption-box">
+          <h5>Client Responsibilities</h5>
+          <PreviewList items={clientResponsibilityItems} />
+        </div>
+
+        <div className="fee-assumption-box">
+          <h5>Internal Proposal Notes</h5>
+          <PreviewList items={internalProposalNotesItems} />
+        </div>
+
+        <p className="proposal-preview-muted">
+          Draft Engagement Preview Support Note: {supportNotesText}
+        </p>
+      </PreviewBlock>
+
       <PreviewBlock title="8. Client Responsibilities">
         <PreviewList
           items={[
@@ -344,6 +420,59 @@ export default function ClientIntakeProposalPreview({ intake }) {
 
       <PreviewBlock title="9. Recommended Next Steps">
         <PreviewList items={nextSteps} />
+      </PreviewBlock>
+
+      <PreviewBlock title="Proposal Read Mode">
+        <ReadModeSection title="1. Proposal Header">
+          <p><strong>Client / Entity:</strong> {intake.clientName || readModeFallback}</p>
+          <p><strong>Matter Type:</strong> {intake.matterType || readModeFallback}</p>
+          <p><strong>Urgency:</strong> {intake.urgency || readModeFallback}</p>
+          <p><strong>Proposal Readiness:</strong> {readinessPercent}%</p>
+        </ReadModeSection>
+
+        <ReadModeSection title="2. Client / Matter Summary">
+          <p>{intake.background || readModeFallback}</p>
+        </ReadModeSection>
+
+        <ReadModeSection title="3. Intake Risk Summary">
+          <PreviewList items={riskItems.length ? riskItems : [readModeFallback]} />
+        </ReadModeSection>
+
+        <ReadModeSection title="4. Document Checklist Readiness">
+          <p>
+            {documentChecklistPendingCount
+              ? `${documentChecklistPendingCount} checklist categories are still missing or partial.`
+              : "All active checklist categories are available or not applicable."}
+          </p>
+        </ReadModeSection>
+
+        <ReadModeSection title="5. Scope Included">
+          <PreviewList items={includedScopeItems} />
+        </ReadModeSection>
+
+        <ReadModeSection title="6. Scope Excluded">
+          <PreviewList items={excludedScopeItems} />
+        </ReadModeSection>
+
+        <ReadModeSection title="7. Key Assumptions">
+          <PreviewList items={keyAssumptionItems} />
+        </ReadModeSection>
+
+        <ReadModeSection title="8. Client Responsibilities">
+          <PreviewList items={clientResponsibilityItems} />
+        </ReadModeSection>
+
+        <ReadModeSection title="9. Internal Proposal Notes" internalOnly>
+          <PreviewList items={internalProposalNotesItems} />
+        </ReadModeSection>
+
+        <ReadModeSection title="10. Draft Engagement Preview Support Notes" internalOnly>
+          <p>{supportNotesText}</p>
+        </ReadModeSection>
+
+        <ReadModeSection title="11. Final Readiness Checklist" internalOnly>
+          <PreviewList items={finalReadinessChecklistItems} />
+        </ReadModeSection>
       </PreviewBlock>
 
       <div className="proposal-preview-warning">
