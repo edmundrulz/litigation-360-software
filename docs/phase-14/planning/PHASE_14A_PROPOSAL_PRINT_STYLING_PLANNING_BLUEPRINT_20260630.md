@@ -1,8 +1,8 @@
 # PHASE 14A PROPOSAL PRINT STYLING PLANNING BLUEPRINT (2026-06-30)
 
-**Controlling SSOT:** `PHASE_14A_PROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md`  
-**Date:** June 30, 2026  
-**Status:** Planning only (documentation-only; no code changes)  
+**Controlling SSOT:** `PHASE_14A_PROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md`
+**Date:** June 30, 2026
+**Status:** Planning only (documentation-only; no code changes)
 **Scope Type:** Frontend print-style planning guidance only
 
 ---
@@ -319,9 +319,9 @@ New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 $content = @'
 # PHASE 14A PROPOSAL PRINT STYLING PLANNING BLUEPRINT (2026-06-30)
 
-**Controlling SSOT:** `PHASE_14A_PROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md`  
-**Date:** June 30, 2026  
-**Status:** Planning only (documentation-only; no code changes)  
+**Controlling SSOT:** `PHASE_14A_PROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md`
+**Date:** June 30, 2026
+**Status:** Planning only (documentation-only; no code changes)
 **Scope Type:** Frontend print-style planning guidance only
 
 ---
@@ -671,5 +671,5 @@ Remain at planning status and defer implementation.
 
 ## Planning Outcome
 
-This blueprint is complete as a planning artifact under the controlling SSOT.  
+This blueprint is complete as a planning artifact under the controlling SSOT.
 No code, component, or CSS changes have been performed in this lane.
