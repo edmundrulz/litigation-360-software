@@ -7090,3 +7090,79 @@ body {
   }
 }
 /* END_PHASE_14A_WORKFLOW_NAV_BUTTON_STANDARDIZATION */
+
+/* PHASE_14A_PROPOSAL_READ_MODE_PRINT_STYLING */
+.proposal-read-mode-shell {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 8px 0;
+}
+
+.proposal-read-mode-shell .proposal-read-mode-section {
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.04);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.proposal-read-mode-shell .proposal-read-mode-section h4 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.proposal-read-mode-shell .proposal-read-mode-section p,
+.proposal-read-mode-shell .proposal-read-mode-section li {
+  color: #334155;
+  line-height: 1.55;
+}
+
+.proposal-read-mode-shell .proposal-read-mode-client {
+  background: #ffffff;
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+.proposal-read-mode-shell .proposal-read-mode-internal {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.proposal-read-mode-shell .proposal-read-mode-section .proposal-preview-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.proposal-read-mode-shell .fee-preview-panel {
+  gap: 10px;
+}
+
+.proposal-read-mode-shell .fee-assumption-box {
+  margin-top: 8px;
+}
+
+.proposal-read-mode-shell .proposal-preview-muted {
+  color: #64748b;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .proposal-read-mode-shell {
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .proposal-read-mode-shell .proposal-read-mode-section {
+    padding: 12px;
+    border-radius: 10px;
+  }
+}
+/* END_PHASE_14A_PROPOSAL_READ_MODE_PRINT_STYLING */

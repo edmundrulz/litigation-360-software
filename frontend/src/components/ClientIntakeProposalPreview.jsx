@@ -33,7 +33,7 @@ function PreviewList({ items }) {
 
 function PreviewBlock({ title, children }) {
   return (
-    <section className="proposal-preview-block">
+    <section className={"proposal-preview-block proposal-read-mode-section" + (internalOnly ? " proposal-read-mode-internal" : " proposal-read-mode-client")}>
       <h4>{title}</h4>
       {children}
     </section>
@@ -124,7 +124,7 @@ function DocumentChecklistPreview({ checklist, notes }) {
 function ReadModeSection({ title, internalOnly = false, children }) {
   return (
     <section
-      className="proposal-preview-block"
+      className={"proposal-preview-block proposal-read-mode-section" + (internalOnly ? " proposal-read-mode-internal" : " proposal-read-mode-client")}
       style={{
         border: internalOnly
           ? "1px dashed rgba(245, 158, 11, 0.55)"
@@ -422,7 +422,7 @@ export default function ClientIntakeProposalPreview({ intake }) {
         <PreviewList items={nextSteps} />
       </PreviewBlock>
 
-      <PreviewBlock title="Proposal Read Mode">
+      <PreviewBlock title="Proposal Read Mode"><div className="proposal-read-mode-shell">
         <ReadModeSection title="1. Proposal Header">
           <p><strong>Client / Entity:</strong> {intake.clientName || readModeFallback}</p>
           <p><strong>Matter Type:</strong> {intake.matterType || readModeFallback}</p>
@@ -473,6 +473,7 @@ export default function ClientIntakeProposalPreview({ intake }) {
         <ReadModeSection title="11. Final Readiness Checklist" internalOnly>
           <PreviewList items={finalReadinessChecklistItems} />
         </ReadModeSection>
+        </div>
       </PreviewBlock>
 
       <div className="proposal-preview-warning">
@@ -483,3 +484,4 @@ export default function ClientIntakeProposalPreview({ intake }) {
     </aside>
   );
 }
+
