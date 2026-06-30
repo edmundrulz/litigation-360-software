@@ -39,6 +39,88 @@ function PreviewBlock({ title, children }) {
   );
 }
 
+
+function buildDocumentChecklist(intake) {
+  return [
+    ["Agreements / Contracts", intake.documentChecklistAgreements || "Missing"],
+    ["Chronology / Timeline", intake.documentChecklistChronology || "Missing"],
+    ["Correspondence", intake.documentChecklistCorrespondence || "Missing"],
+    ["Payment / Invoices / Receipts", intake.documentChecklistPayments || "Missing"],
+    ["Pleadings / Notices / Court Documents", intake.documentChecklistPleadings || "Not Applicable"],
+    ["Photos / Reports / Expert Evidence", intake.documentChecklistPhotosReports || "Not Applicable"],
+    ["Witness / Contact Details", intake.documentChecklistWitnesses || "Missing"],
+    ["Authority / Identity / Company Documents", intake.documentChecklistAuthorityIdentity || "Missing"],
+  ].map(([label, status]) => ({ label, status }));
+}
+
+function DocumentChecklistPreview({ checklist, notes }) {
+  const activeItems = checklist.filter((item) => item.status !== "Not Applicable");
+  const availableItems = checklist.filter((item) => item.status === "Available");
+  const partialItems = checklist.filter((item) => item.status === "Partial");
+  const missingItems = checklist.filter((item) => item.status === "Missing");
+  const readinessPercent = activeItems.length
+    ? Math.round((availableItems.length / activeItems.length) * 100)
+    : 100;
+
+  const pendingItems = [...missingItems, ...partialItems];
+
+  return (
+    <div style={{ display: "grid", gap: "14px", marginTop: "14px" }}>
+      <div className="fee-preview-panel">
+        <div>
+          <span>Checklist Readiness</span>
+          <strong>{readinessPercent}%</strong>
+        </div>
+        <div>
+          <span>Available</span>
+          <strong>{availableItems.length}</strong>
+        </div>
+        <div>
+          <span>Partial</span>
+          <strong>{partialItems.length}</strong>
+        </div>
+        <div>
+          <span>Missing</span>
+          <strong>{missingItems.length}</strong>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gap: "8px" }}>
+        {checklist.map((item) => (
+          <div
+            key={item.label}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "minmax(0, 1fr) auto",
+              gap: "10px",
+              alignItems: "center",
+              padding: "10px 12px",
+              border: "1px solid rgba(148, 163, 184, 0.28)",
+              borderRadius: "12px",
+            }}
+          >
+            <strong>{item.label}</strong>
+            <span>{item.status}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="fee-assumption-box">
+        <h5>Missing / partial document categories</h5>
+        <PreviewList items={pendingItems.map((item) => item.label + " — " + item.status)} />
+      </div>
+
+      <div className="fee-assumption-box">
+        <h5>Client responsibility notes</h5>
+        <p>
+          {notes ||
+            "Client should provide all available documents, disclose missing items early, and confirm whether unavailable categories are not applicable."}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function ClientIntakeProposalPreview({ intake }) {
   const requiredFields = [
     ["Client / Entity", intake.clientName],
@@ -70,6 +152,11 @@ export default function ClientIntakeProposalPreview({ intake }) {
     "Chronology and supporting evidence",
   ]);
 
+  const documentChecklist = buildDocumentChecklist(intake);
+  const documentChecklistPendingCount = documentChecklist.filter(
+    (item) => item.status === "Missing" || item.status === "Partial"
+  ).length;
+
   const riskItems = toPreviewList(intake.riskMerits, [
     "Merits and risk assessment pending fuller documents",
   ]);
@@ -83,7 +170,7 @@ export default function ClientIntakeProposalPreview({ intake }) {
 
   const nextSteps = [
     "Confirm conflict check can proceed",
-    "Provide missing documents and chronology",
+    "Provide missing or partial document checklist items",
     "Review proposed scope and exclusions",
     "Confirm fee model and budget threshold",
   ];
@@ -188,6 +275,17 @@ export default function ClientIntakeProposalPreview({ intake }) {
 
       <PreviewBlock title="5. Documents and Evidence Required">
         <PreviewList items={documentItems} />
+
+        <DocumentChecklistPreview
+          checklist={documentChecklist}
+          notes={intake.documentChecklistNotes}
+        />
+
+        <p className="proposal-preview-muted">
+          Draft Engagement Preview support: {documentChecklistPendingCount
+            ? "Documents are not yet complete. Missing or partial categories should be resolved or expressly marked not applicable before formal engagement approval."
+            : "Document checklist is ready for preliminary proposal review, subject to conflict, authority, scope, and fee confirmation."}
+        </p>
       </PreviewBlock>
 
       <PreviewBlock title="6. Fee Preview">

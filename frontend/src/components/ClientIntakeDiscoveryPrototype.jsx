@@ -19,6 +19,15 @@ const initialIntake = {
   scopeSummary: "",
   dependencies: "",
   documentsRequired: "",
+  documentChecklistAgreements: "Missing",
+  documentChecklistChronology: "Missing",
+  documentChecklistCorrespondence: "Missing",
+  documentChecklistPayments: "Missing",
+  documentChecklistPleadings: "Not Applicable",
+  documentChecklistPhotosReports: "Not Applicable",
+  documentChecklistWitnesses: "Missing",
+  documentChecklistAuthorityIdentity: "Missing",
+  documentChecklistNotes: "",
   budgetRange: "",
   feeModel: "",
   consultationFee: "",
@@ -56,6 +65,23 @@ export default function ClientIntakeDiscoveryPrototype() {
       [field]: value,
     }));
   };
+
+
+  const renderDocumentChecklistField = (field, label, helperText) => (
+    <label>
+      {label}
+      <select
+        value={intake[field]}
+        onChange={(event) => updateField(field, event.target.value)}
+      >
+        <option>Available</option>
+        <option>Partial</option>
+        <option>Missing</option>
+        <option>Not Applicable</option>
+      </select>
+      <small>{helperText}</small>
+    </label>
+  );
 
   const nextSection = () => {
     setActiveSection((current) => Math.min(current + 1, sections.length - 1));
@@ -305,6 +331,65 @@ export default function ClientIntakeDiscoveryPrototype() {
                   value={intake.documentsRequired}
                   onChange={(event) => updateField("documentsRequired", event.target.value)}
                   placeholder="Agreements, emails, WhatsApp, invoices, payment proof, photos, reports, court papers, expert input."
+                />
+              </label>
+
+              <div className="client-intake-grid">
+                {renderDocumentChecklistField(
+                  "documentChecklistAgreements",
+                  "Agreements / Contracts",
+                  "Contracts, engagement records, purchase orders, tenancy documents, quotations, or signed terms."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistChronology",
+                  "Chronology / Timeline",
+                  "Key dates, event sequence, deadline timeline, limitation risk, and current procedural stage."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistCorrespondence",
+                  "Correspondence",
+                  "Emails, WhatsApp messages, letters, notices, meeting notes, and call records."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistPayments",
+                  "Payment / Invoices / Receipts",
+                  "Invoices, receipts, bank slips, proof of payment, statements of account, or ledgers."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistPleadings",
+                  "Pleadings / Notices / Court Documents",
+                  "Court papers, demand letters, statutory notices, tribunal forms, orders, or hearing notices."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistPhotosReports",
+                  "Photos / Reports / Expert Evidence",
+                  "Photos, inspection reports, technical findings, expert input, screenshots, or site records."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistWitnesses",
+                  "Witness / Contact Details",
+                  "Names, roles, phone/email details, and relevance of witnesses or supporting contacts."
+                )}
+
+                {renderDocumentChecklistField(
+                  "documentChecklistAuthorityIdentity",
+                  "Authority / Identity / Company Documents",
+                  "Identity, company, representative authority, consent proof, or instruction authority documents."
+                )}
+              </div>
+
+              <label>
+                Document Checklist Notes / Client Responsibility
+                <textarea
+                  value={intake.documentChecklistNotes}
+                  onChange={(event) => updateField("documentChecklistNotes", event.target.value)}
+                  placeholder="Record what the client must still provide, by when, and any document-quality concerns."
                 />
               </label>
             </ClientIntakeSectionCard>
