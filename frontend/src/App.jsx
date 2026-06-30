@@ -38,10 +38,10 @@ const workspaceSections = [
       },
       {
         module: "Matter Intake",
-        title: "Matter Intake / Urgent Action",
+        title: "Matter Opening & Client Gate",
         status: "OPEN",
         sequence: "2",
-        text: "Stage 2 matter-opening workspace for urgent action, duplicate checks, and structured intake progression.",
+        text: "Stage 2 workspace for client search, duplicate prevention, client linking, new-client preparation, and matter-opening progression.",
       },
       {
         module: "Clients",
@@ -151,8 +151,8 @@ const moduleFrameDetails = {
   "Matter Intake": {
     displayTitle: "Matter Intake",
     group: "Start Here",
-    description: "Guided starting point for new matter intake and workflow preparation.",
-    position: "Workflow Node: Matter Intake / Urgent Action · OPEN",
+    description: "Guided Stage 2 workspace for duplicate prevention, client linking, new-client preparation, and matter-opening readiness.",
+    position: "Stage 2 · Client Gate",
     nextModule: "Clients",
     nextLabel: "Client Details / Authority & Conflict",
   },
