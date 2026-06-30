@@ -606,6 +606,66 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     setModule?.("Review Submit");
   }
 
+
+  function renderPageNavigationBar(placement = "top") {
+    const isTop = placement === "top";
+
+    const goPreviousPage = () => {
+      if (step === 1 && clientStepMode === CLIENT_STEP_MODE.SEARCH) {
+        setModule?.("Client Intake Discovery");
+        return;
+      }
+
+      previousStep();
+    };
+
+    const goPageEdge = () => {
+      window.scrollTo({
+        top: isTop ? document.documentElement.scrollHeight : 0,
+        behavior: "smooth",
+      });
+    };
+
+    return (
+      <div
+        className="matter-intake-page-nav"
+        aria-label={"Matter intake page navigation - " + placement}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+          gap: "12px 16px",
+          alignItems: "center",
+          margin: isTop ? "0 0 24px" : "24px 0 0",
+          padding: "14px",
+          border: "1px solid rgba(148, 163, 184, 0.35)",
+          borderRadius: "18px",
+          background: "#ffffff",
+        }}
+      >
+        <button type="button" className="secondary-action" onClick={goPreviousPage}>
+          ← Previous Page
+        </button>
+
+        <button type="button" className="secondary-action" onClick={() => setModule?.("home")}>
+          Home Main Page
+        </button>
+
+        <button type="button" onClick={nextStep}>
+          Continue to Next Step →
+        </button>
+
+        <button
+          type="button"
+          className="secondary-action"
+          onClick={goPageEdge}
+          style={{ gridColumn: "2 / 3" }}
+        >
+          {isTop ? "Go to Bottom/End of Page ↓" : "Go to Top of Page ↑"}
+        </button>
+      </div>
+    );
+  }
+
   function renderStepTabs() {
     return (
       <div className="intake-step-grid">
@@ -1116,24 +1176,14 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         <span className="intake-status-pill">Step {step} / {STEPS.length} · OPEN</span>
       </div>
 
-      {renderStepTabs()}
+      {renderPageNavigationBar("top")}
 
       {step === 1 ? renderClientDetailsStep() : renderLaterStep()}
 
       {validationMessage ? <div className="intake-validation-message">{validationMessage}</div> : null}
       {draftMessage ? <div className="intake-draft-message">{draftMessage}</div> : null}
 
-      <div className="intake-bottom-actions">
-        <button type="button" className="secondary-action" onClick={previousStep} disabled={step === 1 && clientStepMode === CLIENT_STEP_MODE.SEARCH}>
-          ← Previous
-        </button>
-        <button type="button" className="secondary-action" onClick={() => setModule?.("End User Workspace")}>
-          Main Page
-        </button>
-        <button type="button" onClick={nextStep}>
-          {step === 1 ? "Continue to Next Step →" : "Continue to Next Step →"}
-        </button>
-      </div>
+      {renderPageNavigationBar("bottom")}
     </div>
   );
 }

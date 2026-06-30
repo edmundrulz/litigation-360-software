@@ -45,6 +45,8 @@ const workspaceSections = [
       },
       {
         module: "Clients",
+        title: "Client Details / Authority & Conflict",
+        status: "OPEN",
         sequence: "3",
         text: "Client records, contacts, onboarding and profile management.",
       },
@@ -78,7 +80,7 @@ const workspaceSections = [
         text: "Hearings, mentions, deadlines and reminders.",
       },
       {
-        module: "Documents & Evidence Readiness",
+        module: "Documents",
         title: "Documents & Evidence Readiness",
         status: "OPEN",
         sequence: "6",
@@ -191,7 +193,7 @@ const moduleFrameDetails = {
     group: "Active Legal Work",
     description: "Hearings, mentions, deadlines, reminders, and court date tracking.",
     position: "Step 4 of 6",
-    nextModule: "Documents & Evidence Readiness",
+    nextModule: "Documents",
     nextLabel: "Documents & Evidence Readiness",
   },
   Documents: {
@@ -658,8 +660,10 @@ function ModuleFrame({
     "Staff": "home",
     "Matter Intake": "Client Intake Discovery",
     "Client Intake Discovery": "home",
-    "Preliminary Assessment & Triage": "home"
-  };
+    "Preliminary Assessment & Triage": "home",
+    "Client Intake & Preliminary Assessment": "home",
+    "Client Intake & Preliminary Matter Assessment": "home",
+};
 
   const nextMap = {
     "Clients": "Cases",
@@ -669,8 +673,10 @@ function ModuleFrame({
     "Documents & Evidence Readiness": "Review Submit",
     "Client Intake Discovery": "Matter Intake",
     "Preliminary Assessment & Triage": "Matter Intake",
-    "Matter Intake": "Clients"
-  };
+    "Matter Intake": "Clients",
+    "Client Intake & Preliminary Assessment": "Matter Intake",
+    "Client Intake & Preliminary Matter Assessment": "Matter Intake",
+};
 
   const previousTarget = previousMap[title] || "home";
   const nextTarget = nextMap[title] || "";
