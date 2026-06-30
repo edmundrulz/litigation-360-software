@@ -152,7 +152,7 @@ const moduleFrameDetails = {
     displayTitle: "Matter Intake",
     group: "Start Here",
     description: "Guided starting point for new matter intake and workflow preparation.",
-    position: "Step 1 of 6",
+    position: "Workflow Node: Matter Intake / Urgent Action · OPEN",
     nextModule: "Clients",
     nextLabel: "Client Details / Authority & Conflict",
   },
@@ -168,7 +168,7 @@ const moduleFrameDetails = {
     displayTitle: "Client Details / Authority & Conflict",
     group: "Start Here",
     description: "Client records, contact information, onboarding, and profile management.",
-    position: "Step 2 of 6",
+    position: "Workflow Node: Client Details / Authority & Conflict · OPEN",
     nextModule: "Cases",
     nextLabel: "Case / Matter Details",
   },
@@ -176,7 +176,7 @@ const moduleFrameDetails = {
     displayTitle: "Case / Matter Details",
     group: "Active Legal Work",
     description: "Case files, parties, progress, and litigation status.",
-    position: "Step 3 of 6",
+    position: "Workflow Node: Case / Matter Details · OPEN",
     nextModule: "Court Dates",
     nextLabel: "Court Dates",
   },
@@ -192,7 +192,7 @@ const moduleFrameDetails = {
     displayTitle: "Court Dates",
     group: "Active Legal Work",
     description: "Hearings, mentions, deadlines, reminders, and court date tracking.",
-    position: "Step 4 of 6",
+    position: "Workflow Node: Court Dates · OPEN",
     nextModule: "Documents",
     nextLabel: "Documents & Evidence Readiness",
   },
@@ -200,7 +200,7 @@ const moduleFrameDetails = {
     displayTitle: "Documents & Evidence Readiness",
     group: "Active Legal Work",
     description: "Drafts, filings, templates, evidence, and document management.",
-    position: "Step 5 of 6",
+    position: "Workflow Node: Documents & Evidence Readiness · OPEN",
     nextModule: "Review Submit",
     nextLabel: "Draft Engagement Preview",
   },
@@ -208,7 +208,7 @@ const moduleFrameDetails = {
     displayTitle: "Draft Engagement Preview",
     group: "Review And Completion",
     description: "Final review point before saving, submission, or future workflow handoff.",
-    position: "Step 6 of 6",
+    position: "Workflow Node: Draft Engagement Preview · OPEN",
   },
   Staff: {
     displayTitle: "Staff",
@@ -598,7 +598,7 @@ function ReviewSubmit({ setModule }) {
   return (
     <section className="card review-submit-screen">
       <div className="module-step-header">
-        <span className="pill">Step 7</span>
+        <span className="pill">Workflow Node</span>
         <span className="pill good">OPEN</span>
       </div>
 
@@ -611,9 +611,9 @@ function ReviewSubmit({ setModule }) {
       </p>
 
       <div className="summary">
-        <Metric label="Step Indicator" value="7" />
+        <Metric label="Workflow Node" value="Draft Engagement Preview · OPEN" />
         <Metric label="Status" value="OPEN" />
-        <Metric label="Workflow Stage" value="Completion Review" />
+        <Metric label="Workflow Context" value="Final Review Node" />
       </div>
 
       <article className="card">
@@ -748,36 +748,36 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-previous"
           onClick={goPrevious}
-          title="Previous Page"
+          title="Previous"
         >
-          ← Previous Page
+          ← Previous
         </button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-home"
           onClick={goHome}
-          title="Home Main Page"
+          title="Home"
         >
-          Home Main Page
+          Home
         </button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-next"
           onClick={goNext}
-          title="Continue to Next Step"
+          title="Continue"
         >
-          Continue to Next Step →
+          Continue →
         </button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-jump"
           onClick={isBottom ? jumpToPageStart : jumpToPageEnd}
-          title={isBottom ? "Return to Top/Beginning of Page" : "Go to Bottom/End of Page"}
+          title={isBottom ? "Return to Top" : "Go to Bottom"}
         >
-          {isBottom ? "Return to Top/Beginning of Page ↑" : "Go to Bottom/End of Page ↓"}
+          {isBottom ? "Return to Top ↑" : "Go to Bottom ↓"}
         </button>
       </nav>
     );
@@ -789,6 +789,7 @@ function ModuleFrame({
         <div>
           <p className="eyebrow">Workflow module</p>
           <h2>{title}</h2>
+          <p className="workflow-node-label">Current Node: {title} · OPEN</p>
         </div>
       </div>
 
@@ -879,3 +880,4 @@ function Metric({ label, value }) {
     </div>
   );
 }
+
