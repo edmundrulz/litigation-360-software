@@ -3,11 +3,9 @@
 
 Date: 2026-06-30
 Branch: phase-14a-green-recovery-checkpoint
-HEAD: 24177be
+HEAD: dad355a
 
----
-
-## 1. Gate Decision
+## Gate Decision
 
 GATE OPENED.
 
@@ -19,19 +17,13 @@ This gate is planning-first only.
 
 No implementation is approved yet unless separately confirmed after this gate is committed.
 
----
-
-## 2. Objective
+## Objective
 
 Plan a safer proposal review experience for the Client Intake Proposal Preview.
 
-The intended future outcome is a cleaner read/review mode that can later support proposal viewing, internal checking, and possible future print/PDF planning.
-
 This gate does not approve actual PDF generation.
 
----
-
-## 3. Approved Scope for This Gate
+## Approved Scope for This Gate
 
 Approved now:
 
@@ -54,70 +46,7 @@ Not approved yet:
 - Package/dependency changes
 - Production export behavior
 
----
-
-## 4. Future Candidate Files, Not Approved Yet
-
-Potential future frontend files may include:
-
-- frontend/src/components/ClientIntakeProposalPreview.jsx
-- optional future read-mode component, only if separately approved
-
-No edits are approved under this planning gate yet.
-
----
-
-## 5. Current Proposal Preview Capabilities
-
-Current proposal preview already supports:
-
-- Document checklist readiness
-- Available / partial / missing document counters
-- Missing / partial document category summary
-- Scope included
-- Scope excluded
-- Key assumptions
-- Client responsibilities
-- Internal proposal notes
-- Draft Engagement Preview support notes
-
----
-
-## 6. Planning Target
-
-The future Proposal Print / Read Mode should consider:
-
-- Cleaner read-only display
-- Reduced input-like appearance
-- Better proposal section hierarchy
-- Clear internal-only versus client-facing content separation
-- Optional print-safe layout planning
-- Page-break planning, but no PDF generation yet
-- Review checklist before formal engagement drafting
-- No backend storage dependency
-- No email or export dependency
-
----
-
-## 7. Proposed Read Mode Sections
-
-Recommended future structure:
-
-1. Proposal Header
-2. Client / Matter Summary
-3. Intake Risk Summary
-4. Document Checklist Readiness
-5. Scope Included
-6. Scope Excluded
-7. Key Assumptions
-8. Client Responsibilities
-9. Internal Proposal Notes
-10. Draft Engagement Preview Support Notes
-11. Final Readiness Checklist
-
----
-
-## 8. Strict Blocked Scope
+## Strict Blocked Scope
 
 Do not touch:
 
@@ -137,45 +66,69 @@ Do not touch:
 - Migrations
 - Production deployment
 
----
+## Current Proposal Preview Capabilities
 
-## 9. Non-Blocking Warning
+Current proposal preview already supports:
 
-The Vite chunk-size warning above 500 kB remains non-blocking.
+- Document checklist readiness
+- Available / partial / missing document counters
+- Missing / partial document category summary
+- Scope included
+- Scope excluded
+- Key assumptions
+- Client responsibilities
+- Internal proposal notes
+- Draft Engagement Preview support notes
 
-It must stay in the future performance/code-splitting lane and must not be mixed into this planning gate.
+## Proposed Read Mode Sections
 
----
+1. Proposal Header
+2. Client / Matter Summary
+3. Intake Risk Summary
+4. Document Checklist Readiness
+5. Scope Included
+6. Scope Excluded
+7. Key Assumptions
+8. Client Responsibilities
+9. Internal Proposal Notes
+10. Draft Engagement Preview Support Notes
+11. Final Readiness Checklist
 
-## 10. Verification Commands
-
-Run before and after committing this gate:
+## Verification Commands
 
 - git status --short
 - git diff --check
 - npm --prefix ".\frontend" run build
 - git log -15 --oneline
 
----
-
-## 11. Gate Approval Decision
+## Gate Approval Decision
 
 APPROVED FOR PLANNING ONLY.
 
 Next output should be a planning blueprint, not implementation.
 
-Recommended next document after this gate:
+Recommended next document:
 
 PHASE_14A_PROPOSAL_PRINT_READ_MODE_PLANNING_BLUEPRINT_20260630.md
 
----
-
-## 12. Git Status at Gate Creation
+## Git Status at Gate Creation
 
 CLEAN
 
----
+## Recent Commit Chain
 
-## 13. Recent Commit Chain
-
-24177be docs(phase-14a): close scope and exclusions preview enhancement 8f7db07 docs(phase-14a): open scope and exclusions preview gate efaedbc docs(phase-14a): preserve green recovery closeout handover 54a59e3 feat(phase-14a): add document checklist preview 1416763 fix(phase-14a): stabilize documents route key and labels b4a1374 docs(phase-14a): add thread closeout audit and handover 0ded7e6 fix(phase-14a): stabilize intake gateway and matter intake navigation aa9163d fix(clients): restore page hierarchy and remove duplicate content 65a1faa fix(phase-14a): finalize page navigation layout e2c3988 chore(phase-14a): remove obsolete app backup artifact fdf917f fix(phase-14a): restore app workflow wording and page navigation 917ada9 fix(phase-14a): recover stage one and matter intake page updates 5711667 fix(phase-14a): repair client intake navigation syntax b7a5999 docs(phase-14): approve document checklist preview lane a265589 docs(phase-14): close fee preview enhancement
+dad355a docs(phase-14a): open proposal print read mode planning gate
+24177be docs(phase-14a): close scope and exclusions preview enhancement
+8f7db07 docs(phase-14a): open scope and exclusions preview gate
+efaedbc docs(phase-14a): preserve green recovery closeout handover
+54a59e3 feat(phase-14a): add document checklist preview
+1416763 fix(phase-14a): stabilize documents route key and labels
+b4a1374 docs(phase-14a): add thread closeout audit and handover
+0ded7e6 fix(phase-14a): stabilize intake gateway and matter intake navigation
+aa9163d fix(clients): restore page hierarchy and remove duplicate content
+65a1faa fix(phase-14a): finalize page navigation layout
+e2c3988 chore(phase-14a): remove obsolete app backup artifact
+fdf917f fix(phase-14a): restore app workflow wording and page navigation
+917ada9 fix(phase-14a): recover stage one and matter intake page updates
+5711667 fix(phase-14a): repair client intake navigation syntax
+b7a5999 docs(phase-14): approve document checklist preview lane
