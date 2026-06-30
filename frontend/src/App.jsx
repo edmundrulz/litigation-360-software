@@ -231,6 +231,7 @@ const moduleRouteAliases = {
   "Client Details / Authority & Conflict": "Clients",
   "Case / Matter Details": "Cases",
   "Matter Workspace": "Matters",
+  "Documents & Evidence Readiness": "Documents",
   "Draft Engagement Preview": "Review Submit",
   "Review And Completion": "Review Submit",
   "Completion Review And Completion": "Review Submit",
@@ -449,7 +450,7 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
   if (module === "Cases") return <ModuleFrame title="Cases" setModule={setModule} previous={previous} canGoBack={canGoBack}><Cases /></ModuleFrame>;
   if (module === "Matters") return <ModuleFrame title="Matters" setModule={setModule} previous={previous} canGoBack={canGoBack}><Matters /></ModuleFrame>;
   if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
-  if (module === "Documents & Evidence Readiness") return <ModuleFrame title="Documents & Evidence Readiness" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+  if (module === "Documents" || module === "Documents & Evidence Readiness") return <ModuleFrame title="Documents & Evidence Readiness" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
   if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
   if (module === "Review Submit" || module === "Draft Engagement Preview" || module === "Review And Completion" || module === "Completion Review And Completion") {
     return (
@@ -625,7 +626,7 @@ function ReviewSubmit({ setModule }) {
       </article>
 
       <div className="actions">
-        <button type="button" onClick={() => setModule("Documents & Evidence Readiness")}>
+        <button type="button" onClick={() => setModule("Documents")}>
           Back to Document Details
         </button>
 
@@ -654,9 +655,10 @@ function ModuleFrame({
     "Cases": "Clients",
     "Matters": "Clients",
     "Court Dates": "Cases",
+    "Documents": "Court Dates",
     "Documents & Evidence Readiness": "Court Dates",
-    "Draft Engagement Preview": "Documents & Evidence Readiness",
-    "Review Submit": "Documents & Evidence Readiness",
+    "Draft Engagement Preview": "Documents",
+    "Review Submit": "Documents",
     "Staff": "home",
     "Matter Intake": "Client Intake Discovery",
     "Client Intake Discovery": "home",
@@ -669,7 +671,8 @@ function ModuleFrame({
     "Clients": "Cases",
     "Cases": "Court Dates",
     "Matters": "Court Dates",
-    "Court Dates": "Documents & Evidence Readiness",
+    "Court Dates": "Documents",
+    "Documents": "Review Submit",
     "Documents & Evidence Readiness": "Review Submit",
     "Client Intake Discovery": "Matter Intake",
     "Preliminary Assessment & Triage": "Matter Intake",
