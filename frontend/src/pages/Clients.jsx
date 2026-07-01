@@ -3981,18 +3981,7 @@ function isUnavailablePlaceholder(value) {
               <li><a href="#client-internal-remarks-issues" className="client-profile-summary-link">Internal Remarks / Pending Information</a></li>
             </ol>
           </nav>
-
-          <div className="client-profile-summary-card client-profile-summary-warning">
-            <p className="client-profile-summary-kicker">Compliance Reminder</p>
-            <p>
-              This rail is informational only. Existing required fields, verification rules, and submission blockers remain
-              controlled by the original Clients workflow.
-            </p>
-          </div>
-        </aside>
-<p>
-            Client database, directory and profile management.
-          </p>
+</aside>
         </div>
 
         <div className="client-count-card">
@@ -4010,50 +3999,13 @@ function isUnavailablePlaceholder(value) {
       <section className="client-profile-completion-shell" aria-labelledby="client-profile-completion-heading">
         <div className="client-profile-completion-header">
           <div>
-            <p className="client-profile-completion-kicker">Completion Intelligence</p>
+            <p className="client-profile-completion-kicker">Client File Alert / Status</p>
             <h3 id="client-profile-completion-heading">Client Profile Completion Status</h3>
             <p>
               Static readiness shell. Existing Clients validation, required fields, backend checks, local fallback,
               draft behaviour, create/save controls, and manual-management protocols remain authoritative.
             </p>
           </div>
-          <span className="client-profile-completion-status">Static shell only</span>
-        </div>
-
-        <div className="client-profile-completion-grid">
-          <article className="client-profile-completion-card">
-            <p className="client-profile-completion-kicker">Profile Readiness</p>
-            <h4>Verify Before Saving</h4>
-            <p>
-              Completion indicators are prepared for future audited validation mapping. This card does not calculate
-              missing fields yet.
-            </p>
-          </article>
-
-          <article className="client-profile-completion-card">
-            <p className="client-profile-completion-kicker">Required Items</p>
-            <h4>Audit Mapping Pending</h4>
-            <p>
-              Required-field counting will only be added after confirmed field keys and existing validation sources are mapped.
-            </p>
-          </article>
-
-          <article className="client-profile-completion-card">
-            <p className="client-profile-completion-kicker">Section Status</p>
-            <h4>Section Intelligence Pending</h4>
-            <p>
-              Future section statuses must use the existing Clients form state and must not invent new validation rules.
-            </p>
-          </article>
-
-          <article className="client-profile-completion-card client-profile-completion-warning">
-            <p className="client-profile-completion-kicker">Compliance</p>
-            <h4>Manual Review Remains Required</h4>
-            <p>
-              Documentation verification, pending information, backend warnings, and local fallback warnings remain controlled
-              by the existing Clients workflow.
-            </p>
-          </article>
         </div>
 
         <ClientRequiredFieldCounter />
@@ -4200,50 +4152,6 @@ function isUnavailablePlaceholder(value) {
           </div>
         )}
 
-        <div className="client-directory-summary-row" style={{ display: "none" }}>
-          <span>Directory Results: {filteredDirectoryClients.length}</span>
-          <button type="button" className="btn btn-secondary btn-small" onClick={clearDirectoryFilters}>Clear Filters</button>
-        </div>
-
-        <div className="client-directory-mini-list" style={{ display: "none" }}>
-          {filteredDirectoryClients.slice(0, 26).map((client) => (
-            <button
-              type="button"
-              className="client-directory-mini-card"
-              key={getClientId(client) || getClientDirectoryName(client)}
-              onClick={() => selectClientFromDirectory(client)}
-            >
-              <strong>{getClientDirectoryName(client)}</strong>
-              <span className="client-contact-meta">
-                <span>{client.email || "No email"}</span>
-                <span>{formatPhoneDisplay(client.phoneCountryCode, client.phoneNumber) || "No phone"}</span>
-                <span>{client.townCity || "No town/city"}</span>
-              </span>
-            </button>
-          ))}
-          {filteredDirectoryClients.length === 0 && <p className="mandatory-note">No clients match the current search/filter.</p>}
-
-          {viewingClientProfile && (
-            <div className="client-profile-preview-card" style={{ display: "none" }}>
-              <div className="client-profile-preview-header">
-                <h3>View Client Profile</h3>
-                <button type="button" className="btn btn-secondary btn-small" onClick={closeClientProfileView}>Close View</button>
-              </div>
-              <div className="client-profile-preview-grid">
-                <span><strong>Client ID</strong><br />{getClientId(viewingClientProfile) || "Not assigned"}</span>
-                <span><strong>Name</strong><br />{[viewingClientProfile.titlePrefix, viewingClientProfile.givenName, viewingClientProfile.surname].filter(Boolean).join(" ") || viewingClientProfile.name || "Unnamed client"}</span>
-                <span><strong>Email</strong><br />{viewingClientProfile.email || "No email recorded"}</span>
-                <span><strong>Phone</strong><br />{formatPhoneDisplay(viewingClientProfile.phoneCountryCode, viewingClientProfile.phoneNumber) || "No phone recorded"}</span>
-                <span><strong>Town / City</strong><br />{viewingClientProfile.townCity || "Not recorded"}</span>
-                <span><strong>Status</strong><br />{viewingClientProfile.verificationStatus || viewingClientProfile.documentStatus || "To be reviewed"}</span>
-              </div>
-              <div className="client-directory-result-actions">
-                <button type="button" className="btn btn-secondary btn-small" onClick={() => editClient(viewingClientProfile)}>Edit / Amend</button>
-                <button type="button" className="btn btn-secondary btn-small" onClick={() => deleteClient(viewingClientProfile)}>Delete</button>
-              </div>
-            </div>
-          )}
-        </div>
       </div>
 
       {/* L360_DASHBOARD_V3G2_VIEW_PROFILE_PANEL */}
