@@ -2012,7 +2012,7 @@ function ClientRequiredFieldCounter() {
 
 function ClientSectionCompletionStatus() {
   const sectionDefinitions = [
-    { anchor: "client-profile-details", label: "Profile Details" },
+    { anchor: "client-profile-details", label: "Identity & Authority" },
     { anchor: "client-identification-details", label: "Identification" },
     { anchor: "client-employment-details", label: "Employment" },
     { anchor: "client-family-marital-details", label: "Family / Marital" },
@@ -3972,7 +3972,7 @@ function isUnavailablePlaceholder(value) {
           <nav className="client-profile-summary-card" aria-label="Client profile section checklist">
             <p className="client-profile-summary-kicker">Section Checklist</p>
             <ol className="client-profile-summary-list">
-              <li><a href="#client-profile-details" className="client-profile-summary-link">Client Profile Details</a></li>
+              <li><a href="#client-profile-details" className="client-profile-summary-link">Client Identity & Authority</a></li>
               <li><a href="#client-identification-details" className="client-profile-summary-link">Client Identification Details</a></li>
               <li><a href="#client-employment-details" className="client-profile-summary-link">Employment Details</a></li>
               <li><a href="#client-family-marital-details" className="client-profile-summary-link">Family and Marital Details</a></li>
@@ -4019,7 +4019,7 @@ function isUnavailablePlaceholder(value) {
         <ClientSectionCompletionStatus />
 
         <div className="client-profile-completion-links" aria-label="Completion review jump links">
-          <a href="#client-profile-details">Identity</a>
+          <a href="#client-profile-details">Identity & Authority</a>
           <a href="#client-contact-communication-preferences">Contact</a>
           <a href="#client-address-service-location">Address</a>
           <a href="#client-documentation-verification">Documentation</a>
@@ -4281,8 +4281,8 @@ function isUnavailablePlaceholder(value) {
         })()}
 
                 <div className="form-section">
-          <h3 id="client-profile-details"><span className="client-profile-card-kicker">Section 1</span><span className="client-profile-card-title">Client Profile Details</span><span className="client-profile-card-status">Identity</span></h3>
-          <p className="client-profile-card-help">Core identity and profile classification information. Existing fields, validation, and handlers remain preserved.</p>
+          <h3 id="client-profile-details"><span className="client-profile-card-kicker">Section 1</span><span className="client-profile-card-title">Client Identity & Authority</span><span className="client-profile-card-status">Identity & authority</span></h3>
+          <p className="client-profile-card-help">Core legal identity, name authority, title/gender authority, and profile classification information. Existing fields, validation, and handlers remain preserved.</p>
 
           <div className="smart-grid two name-lock-grid">
             <label>
@@ -5750,9 +5750,9 @@ function isUnavailablePlaceholder(value) {
           <div className="client-profile-review-grid">
             <article className="client-profile-review-card">
               <p className="client-profile-review-kicker">Identity</p>
-              <h4>Client Identity Review</h4>
-              <p>Confirm legal name, organisation details, client type, identification reference, and profile classification.</p>
-              <a href="#client-profile-details" className="client-profile-review-link">Jump to Client Profile Details</a>
+              <h4>Client Identity & Authority Review</h4>
+              <p>Confirm legal name, title authority, gender/title override reason, organisation details where present, identification reference, and profile classification.</p>
+              <a href="#client-profile-details" className="client-profile-review-link">Jump to Client Identity & Authority</a>
             </article>
 
             <article className="client-profile-review-card">
