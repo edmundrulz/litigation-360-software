@@ -628,7 +628,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
     return (
       <div
-        className="matter-intake-page-nav"
+        className={`module-page-nav matter-intake-page-nav ${isTop ? "module-page-nav-top" : "module-page-nav-bottom"}`}
         aria-label={"Matter intake page navigation - " + placement}
         style={{
           display: "grid",
@@ -642,21 +642,21 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           background: "#ffffff",
         }}
       >
-        <button type="button" className="secondary-action" onClick={goPreviousPage}>
+        <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={goPreviousPage}>
           ← Previous Page
         </button>
 
-        <button type="button" className="secondary-action" onClick={() => setModule?.("home")}>
+        <button type="button" className="module-page-nav-button module-page-nav-home" onClick={() => setModule?.("home")}>
           Home Main Page
         </button>
 
-        <button type="button" onClick={nextStep}>
+        <button type="button" className="module-page-nav-button module-page-nav-next" onClick={nextStep}>
           Continue to Next Step →
         </button>
 
         <button
           type="button"
-          className="secondary-action"
+          className={`module-page-nav-button module-page-nav-jump ${isTop ? "module-page-nav-bottom-jump" : "module-page-nav-top-jump"}`}
           onClick={goPageEdge}
           style={{ gridColumn: "2 / 3" }}
         >
@@ -742,7 +742,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
                 }}
                 placeholder="Enter full name, given name, surname, preferred name, alias, ID/NRIC, passport number, phone, WhatsApp, email, or company name"
               />
-              <button type="button" onClick={runClientSearch}>
+              <button type="button" className="client-gate-action-button client-gate-action-primary" onClick={runClientSearch}>
                 Search Existing Client
               </button>
             </div>
@@ -758,7 +758,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             </div>
 
             <div className="client-search-secondary-actions">
-              <button type="button" className="secondary-action" onClick={() => {
+              <button type="button" className="client-gate-action-button client-gate-action-tertiary" onClick={() => {
                 setSearchQuery("");
                 setClientMatches([]);
                 setSearchPerformed(false);
@@ -768,7 +768,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
               }}>
                 Clear Search
               </button>
-              <button type="button" className="secondary-action" onClick={() => setModule?.("Clients")}>
+              <button type="button" className="client-gate-action-button client-gate-action-secondary" onClick={() => setModule?.("Clients")}>
                 Direct Client Directory / Manual Management
               </button>
             </div>
@@ -867,10 +867,10 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         <ClientMatchCard client={selectedExistingClient} onView={viewFullProfile} onSelect={continueFromExistingClient} />
 
         <div className="client-selected-actions">
-          <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
+          <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
             Change Selection
           </button>
-          <button type="button" onClick={continueFromExistingClient}>
+          <button type="button" className="module-page-nav-button module-page-nav-next" onClick={continueFromExistingClient}>
             Continue to Next Step →
           </button>
         </div>
@@ -1101,13 +1101,13 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         </Field>
 
         <div className="client-selected-actions">
-          <button type="button" className="secondary-action" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
+          <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
             ← Previous Page
           </button>
-          <button type="button" className="secondary-action" onClick={openNewClientCreation}>
+          <button type="button" className="module-page-nav-button module-page-nav-home" onClick={openNewClientCreation}>
             Create Full Profile in Advanced Directory
           </button>
-          <button type="button" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
+          <button type="button" className="module-page-nav-button module-page-nav-next" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
             Continue to Next Step →
           </button>
         </div>

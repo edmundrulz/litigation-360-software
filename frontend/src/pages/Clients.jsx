@@ -3952,11 +3952,11 @@ function isUnavailablePlaceholder(value) {
             <p>
               Use these standard controls to reorient, return home, continue the guided workflow, or jump to the end of this page.
             </p>
-            <div className="client-directory-actions" aria-label="Standard page navigation controls">
-              <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Matter Intake")}>← Previous Page</button>
-              <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Home")}>Home Main Page</button>
-              <button type="button" className="btn btn-primary btn-small" onClick={() => setModule?.("Matter Intake")}>Continue to Next Step →</button>
-              <button type="button" className="btn btn-secondary btn-small" onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" })}>Go to Bottom/End of Page ↓</button>
+            <div className="module-page-nav module-page-nav-top client-directory-actions client-flow-page-nav" aria-label="Standard page navigation controls">
+              <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={() => setModule?.("Matter Intake")}>← Previous Page</button>
+              <button type="button" className="module-page-nav-button module-page-nav-home" onClick={() => setModule?.("Home")}>Home Main Page</button>
+              <button type="button" className="module-page-nav-button module-page-nav-next" onClick={() => setModule?.("Matter Intake")}>Continue to Next Step →</button>
+              <button type="button" className="module-page-nav-button module-page-nav-jump module-page-nav-bottom-jump" onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" })}>Go to Bottom/End of Page ↓</button>
             </div>
           </div>
         <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
