@@ -3960,12 +3960,12 @@ function isUnavailablePlaceholder(value) {
             </div>
           </div>
         <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
-          <div className="client-profile-summary-card">
-            <p className="client-profile-summary-kicker">Profile Status</p>
-            <h3>Full Client Profile Summary</h3>
+                    <div className="client-profile-summary-card">
+            <p className="client-profile-summary-kicker">Client Summary Dashboard</p>
+            <h3>Client Summary Dashboard</h3>
             <p>
-              Static preservation rail. Original fields, validation, backend checks, local fallback, draft behaviour,
-              and manual management protocols remain unchanged.
+              Summary navigation for the preserved Clients workflow. Original fields, validation, backend checks,
+              local fallback, draft behaviour, required-field rules, and manual management protocols remain unchanged.
             </p>
           </div>
 
@@ -4008,7 +4008,7 @@ function isUnavailablePlaceholder(value) {
             <p className="client-profile-completion-kicker">Client File Alert / Status</p>
             <h3 id="client-profile-completion-heading">Client Profile Completion Status</h3>
             <p>
-              Static readiness shell. Existing Clients validation, required fields, backend checks, local fallback,
+              Existing Clients validation, required fields, backend checks, local fallback,
               draft behaviour, create/save controls, and manual-management protocols remain authoritative.
             </p>
           </div>
