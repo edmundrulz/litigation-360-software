@@ -1526,7 +1526,7 @@ function getClientFormCompletionProgress(form) {
     ["Address", form.streetAddress || form.townCity || form.country],
     ["Emergency Contact", form.emergencyContactName || form.emergencyContactNumber],
     ["Documentation", form.documentationVerificationCompleted || form.documentType || form.documentStatus],
-    ["Family / Marital", form.maritalStatus],
+    ["Family / Marital / Dependents", form.maritalStatus],
     ["Matter Context", form.clientRoleInMatter || form.caseOriginType],
     ["Client Tenure / Value", form.clientSince || form.clientValueTier],
     ["Health / Accommodation", form.healthDisabilityStatus || form.accommodationRequired],
@@ -2015,7 +2015,7 @@ function ClientSectionCompletionStatus() {
     { anchor: "client-profile-details", label: "Identity & Authority" },
     { anchor: "client-identification-details", label: "Identification" },
     { anchor: "client-employment-details", label: "Employment & Organisation" },
-    { anchor: "client-family-marital-details", label: "Family / Marital" },
+    { anchor: "client-family-marital-details", label: "Family / Marital / Dependents" },
     { anchor: "client-matter-context-origin", label: "Matter Context" },
     { anchor: "client-source-value-indicators", label: "Source / Value" },
     { anchor: "client-will-estate-metadata", label: "Will / Estate" },
@@ -3975,7 +3975,7 @@ function isUnavailablePlaceholder(value) {
               <li><a href="#client-profile-details" className="client-profile-summary-link">Client Identity & Authority</a></li>
               <li><a href="#client-identification-details" className="client-profile-summary-link">Client Identification Details</a></li>
               <li><a href="#client-employment-details" className="client-profile-summary-link">Employment & Organisation Details</a></li>
-              <li><a href="#client-family-marital-details" className="client-profile-summary-link">Family and Marital Details</a></li>
+              <li><a href="#client-family-marital-details" className="client-profile-summary-link">Family / Marital / Dependents Details</a></li>
               <li><a href="#client-matter-context-origin" className="client-profile-summary-link">Matter Context and Case Origin</a></li>
               <li><a href="#client-source-value-indicators" className="client-profile-summary-link">Client Source and Value Indicators</a></li>
               <li><a href="#client-will-estate-metadata" className="client-profile-summary-link">Will / Estate Handling Metadata</a></li>
@@ -4476,8 +4476,8 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
         <div className="form-section">
-          <h3 id="client-family-marital-details"><span className="client-profile-card-kicker">Section 4</span><span className="client-profile-card-title">Family and Marital Details</span><span className="client-profile-card-status">Personal metadata</span></h3>
-          <p className="client-profile-card-help">Family, marital, and dependency information. Existing conditional rules remain preserved.</p>
+          <h3 id="client-family-marital-details"><span className="client-profile-card-kicker">Section 4</span><span className="client-profile-card-title">Family / Marital / Dependents Details</span><span className="client-profile-card-status">Family / dependents</span></h3>
+          <p className="client-profile-card-help">Family, marital, and dependents status information. Existing maritalStatus, hasDependents, dependentsCount, dependentNotes, conditional rules, validation, and handlers remain preserved.</p>
 
           <div className="smart-grid two">
             <label>
