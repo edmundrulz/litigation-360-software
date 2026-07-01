@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import WizardProgressPanel from "../components/workflow/WizardProgressPanel";
 
 const CLIENT_STEP_MODE = {
   SEARCH: "search",
@@ -359,6 +360,15 @@ export default function MatterIntakeWizard({ setModule } = {}) {
   const [draftMessage, setDraftMessage] = useState("");
 
   const stepLabel = STEPS[step - 1] || STEPS[0];
+  const stepTwoCompletionChecks = [
+    Boolean(String(searchQuery || "").trim()),
+    Boolean(searchPerformed),
+    Boolean(searchPerformed && Array.isArray(clientMatches)),
+    Boolean(selectedExistingClient || clientStepMode !== CLIENT_STEP_MODE.SEARCH),
+    Boolean((selectedExistingClient || clientStepMode !== CLIENT_STEP_MODE.SEARCH) && !validationMessage),
+  ];
+  const stepTwoCompletedRequiredItems = stepTwoCompletionChecks.filter(Boolean).length;
+  const stepTwoTotalRequiredItems = stepTwoCompletionChecks.length;
 
   const hasMinimumNewClientIdentity = useMemo(() => {
     if (clientIntake.clientType === "Organisation") {
@@ -1160,8 +1170,15 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           <h2>{stepLabel}</h2>
           <p>Search first, then link an existing client or continue to new client details.</p>
         </div>
-        <span className="intake-status-pill">Step 2 of {STEPS.length}</span>
+        <span className="intake-status-pill">Client Gate</span>
       </div>
+
+      <WizardProgressPanel
+        currentStep={2}
+        completedRequiredItems={stepTwoCompletedRequiredItems}
+        totalRequiredItems={stepTwoTotalRequiredItems}
+        pageCompletionLabel="Current Page Completion"
+      />
 
       {renderPageNavigationBar("top")}
 
