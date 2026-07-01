@@ -2014,7 +2014,7 @@ function ClientSectionCompletionStatus() {
   const sectionDefinitions = [
     { anchor: "client-profile-details", label: "Identity & Authority" },
     { anchor: "client-identification-details", label: "Identification" },
-    { anchor: "client-employment-details", label: "Employment" },
+    { anchor: "client-employment-details", label: "Employment & Organisation" },
     { anchor: "client-family-marital-details", label: "Family / Marital" },
     { anchor: "client-matter-context-origin", label: "Matter Context" },
     { anchor: "client-source-value-indicators", label: "Source / Value" },
@@ -3974,7 +3974,7 @@ function isUnavailablePlaceholder(value) {
             <ol className="client-profile-summary-list">
               <li><a href="#client-profile-details" className="client-profile-summary-link">Client Identity & Authority</a></li>
               <li><a href="#client-identification-details" className="client-profile-summary-link">Client Identification Details</a></li>
-              <li><a href="#client-employment-details" className="client-profile-summary-link">Employment Details</a></li>
+              <li><a href="#client-employment-details" className="client-profile-summary-link">Employment & Organisation Details</a></li>
               <li><a href="#client-family-marital-details" className="client-profile-summary-link">Family and Marital Details</a></li>
               <li><a href="#client-matter-context-origin" className="client-profile-summary-link">Matter Context and Case Origin</a></li>
               <li><a href="#client-source-value-indicators" className="client-profile-summary-link">Client Source and Value Indicators</a></li>
@@ -4461,8 +4461,8 @@ function isUnavailablePlaceholder(value) {
           </div>
         </div>
         <div className="form-section">
-          <h3 id="client-employment-details"><span className="client-profile-card-kicker">Section 3</span><span className="client-profile-card-title">Employment Details</span><span className="client-profile-card-status">Profile metadata</span></h3>
-          <p className="client-profile-card-help">Employment and organisation-related details. Existing fields and rules remain preserved.</p>
+          <h3 id="client-employment-details"><span className="client-profile-card-kicker">Section 3</span><span className="client-profile-card-title">Employment & Organisation Details</span><span className="client-profile-card-status">Employment / organisation</span></h3>
+          <p className="client-profile-card-help">Employment and organisation-related status details. Existing employmentStatus field, options, rules, validation, and handlers remain preserved.</p>
 
           <div className="smart-grid two">
             <label>
