@@ -3939,20 +3939,26 @@ function isUnavailablePlaceholder(value) {
           opacity: 0.78;
         }
       `}</style>
-      <div className="client-module-header">
+      <div className="client-module-header" id="clients-page-top">
         <div>
-          <h2>Client Registration / Full Client Profile</h2>
-        <div className="client-flow-bridge-panel">
-          <strong>Advanced Client Directory / Manual Management</strong>
-          <p>
-            This workspace preserves the full original client profile, directory, validation, draft, and manual management process. Labels are aligned with the Matter Intake conveyor, but the original manual Clients protocol remains preserved.
-            Use it for advanced profile management. This page is open in direct review mode. Use the fixed workflow navigation bars to continue the guided intake sequence, or return to Stage 2 Matter Intake when required.
+          <p className="client-profile-summary-kicker">Stage 2 · Client Gate</p>
+          <h2>Client Search & Duplicate Detection</h2>
+          <p className="mandatory-note">
+            Search first, then link an existing client or continue to new client details. This page preserves the full original client profile, directory, validation, draft, and manual management process.
           </p>
-          <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Matter Intake")}>
-            Return to Stage 2 Matter Intake
-          </button>
-        </div>
 
+          <div className="client-flow-bridge-panel" role="navigation" aria-label="Clients page workflow navigation">
+            <strong>Step 2 of 6</strong>
+            <p>
+              Use these standard controls to reorient, return home, continue the guided workflow, or jump to the end of this page.
+            </p>
+            <div className="client-directory-actions" aria-label="Standard page navigation controls">
+              <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Matter Intake")}>← Previous Page</button>
+              <button type="button" className="btn btn-secondary btn-small" onClick={() => setModule?.("Home")}>Home Main Page</button>
+              <button type="button" className="btn btn-primary btn-small" onClick={() => setModule?.("Matter Intake")}>Continue to Next Step →</button>
+              <button type="button" className="btn btn-secondary btn-small" onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" })}>Go to Bottom/End of Page ↓</button>
+            </div>
+          </div>
         <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
           <div className="client-profile-summary-card">
             <p className="client-profile-summary-kicker">Profile Status</p>
