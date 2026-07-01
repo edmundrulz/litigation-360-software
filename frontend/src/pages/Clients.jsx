@@ -1527,7 +1527,7 @@ function getClientFormCompletionProgress(form) {
     ["Emergency Contact", form.emergencyContactName || form.emergencyContactNumber],
     ["Documentation", form.documentationVerificationCompleted || form.documentType || form.documentStatus],
     ["Family / Marital / Dependents", form.maritalStatus],
-    ["Matter Context", form.clientRoleInMatter || form.caseOriginType],
+    ["Matter Context / Origin", form.clientRoleInMatter || form.caseOriginType],
     ["Client Tenure / Value", form.clientSince || form.clientValueTier],
     ["Health / Accommodation", form.healthDisabilityStatus || form.accommodationRequired],
     ["Will / Estate", form.willStatus]
@@ -2016,7 +2016,7 @@ function ClientSectionCompletionStatus() {
     { anchor: "client-identification-details", label: "Identification" },
     { anchor: "client-employment-details", label: "Employment & Organisation" },
     { anchor: "client-family-marital-details", label: "Family / Marital / Dependents" },
-    { anchor: "client-matter-context-origin", label: "Matter Context" },
+    { anchor: "client-matter-context-origin", label: "Matter Context / Origin" },
     { anchor: "client-source-value-indicators", label: "Source / Value" },
     { anchor: "client-will-estate-metadata", label: "Will / Estate" },
     { anchor: "client-health-oku-accommodation", label: "Health / OKU / Accommodation" },
@@ -3976,7 +3976,7 @@ function isUnavailablePlaceholder(value) {
               <li><a href="#client-identification-details" className="client-profile-summary-link">Client Identification Details</a></li>
               <li><a href="#client-employment-details" className="client-profile-summary-link">Employment & Organisation Details</a></li>
               <li><a href="#client-family-marital-details" className="client-profile-summary-link">Family / Marital / Dependents Details</a></li>
-              <li><a href="#client-matter-context-origin" className="client-profile-summary-link">Matter Context and Case Origin</a></li>
+              <li><a href="#client-matter-context-origin" className="client-profile-summary-link">Matter Context / Case Origin</a></li>
               <li><a href="#client-source-value-indicators" className="client-profile-summary-link">Client Source and Value Indicators</a></li>
               <li><a href="#client-will-estate-metadata" className="client-profile-summary-link">Will / Estate Handling Metadata</a></li>
               <li><a href="#client-health-oku-accommodation" className="client-profile-summary-link">Health / OKU / Disability and Accommodation Metadata</a></li>
@@ -4525,9 +4525,9 @@ function isUnavailablePlaceholder(value) {
         </div>
 
         <div className="form-section">
-          <h3 id="client-matter-context-origin"><span className="client-profile-card-kicker">Section 5</span><span className="client-profile-card-title">Matter Context and Case Origin</span><span className="client-profile-card-status">Workflow context</span></h3>
-          <p className="client-profile-card-help">Client role, case origin, and matter-source context. Existing protocol warnings remain preserved.</p>
-          <p className="mandatory-note">Frontend metadata only. Linkage to actual matters/cases should be enforced in a future backend matter module.</p>
+          <h3 id="client-matter-context-origin"><span className="client-profile-card-kicker">Section 5</span><span className="client-profile-card-title">Matter Context / Case Origin</span><span className="client-profile-card-status">Matter source</span></h3>
+          <p className="client-profile-card-help">Client role, matter entry point, inherited-file context, and co-counsel origin notes. Existing fields, handlers, conditional rules, validation, draft behaviour, and save behaviour remain preserved.</p>
+          <p className="mandatory-note">Frontend context metadata only. Actual matter linkage, conflict enforcement, file ownership, and source-of-instruction controls remain future backend matter-module responsibilities.</p>
 
           <div className="smart-grid two">
             <label>
