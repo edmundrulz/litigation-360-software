@@ -748,7 +748,7 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-previous"
           onClick={goPrevious}
-          title="Previous"
+          title="Previous Page"
         >
           ← Previous
         </button>
@@ -757,7 +757,7 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-home"
           onClick={goHome}
-          title="Home"
+          title="Home Main Page"
         >
           Home
         </button>
@@ -766,7 +766,7 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-next"
           onClick={goNext}
-          title="Continue"
+          title="Continue to Next Step"
         >
           Continue →
         </button>
@@ -775,7 +775,7 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-jump"
           onClick={isBottom ? jumpToPageStart : jumpToPageEnd}
-          title={isBottom ? "Return to Top" : "Go to Bottom"}
+          title={isBottom ? "Go to Top of Page" : "Go to Bottom/End of Page"}
         >
           {isBottom ? "Return to Top ↑" : "Go to Bottom ↓"}
         </button>
