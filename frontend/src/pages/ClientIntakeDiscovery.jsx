@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import WizardProgressPanel from "../components/workflow/WizardProgressPanel";
 
 const STORAGE_KEY = "litigation360.workflow.stage1.preliminaryAssessment";
 
@@ -239,66 +240,47 @@ export default function ClientIntakeDiscovery() {
     >
       <section style={heroStyle}>
         <div>
-          <p style={eyebrowStyle}>Phase 14A · Intake Gateway</p>
+          <p style={eyebrowStyle}>Step 1 · Assessment Gateway</p>
           <h1 id="client-intake-title" style={titleStyle}>
             1. Preliminary Assessment & Triage
           </h1>
           <p style={heroTextStyle}>
-            The mandatory first stage before Matter Intake, Client Details,
-            document readiness, fee review, or draft engagement preparation.
-            The assessment recommends whether Stage 2 or Stage 3 should happen next.
+            The mandatory first step before Matter Intake, Client Details, document readiness, fee review, or draft engagement preparation. The assessment recommends the next appropriate workflow step.
           </p>
         </div>
 
         <aside style={statusPanelStyle}>
-          <strong>Prototype status</strong>
+          <strong>Local assessment status</strong>
           <p style={{ margin: "10px 0 0", lineHeight: 1.6 }}>
-            Information is saved locally in this browser only. This prototype
-            does not create a client record, open a matter file, upload documents,
-            issue a fee quote, or provide legal advice.
+            Information is saved locally in this browser. This assessment screen does not create a client record, open a matter file, upload documents, issue a fee quote, or provide legal advice.
           </p>
           <p style={{ margin: "12px 0 0", fontWeight: 800 }}>
             Autosaved: {lastSavedAt || "pending first change"}
           </p>
         </aside>
       </section>
-
-      <section style={workflowMapStyle} aria-label="Workflow order">
-        <WorkflowNode label="1" title="Assessment" active />
-        <WorkflowArrow />
-        <WorkflowNode
-          label={analysis.primaryRoute.number}
-          title={analysis.primaryRoute.shortTitle}
-          active
-        />
-        <WorkflowArrow />
-        <WorkflowNode label="4-6" title="Readiness Checks" />
-        <WorkflowArrow />
-        <WorkflowNode label="7" title="Draft Preview" />
-      </section>
+      <WizardProgressPanel
+        currentStep={1}
+        pageCompletionPercent={completionPercent}
+        pageCompletionLabel="Current Page Completion"
+      />
 
       <section style={layoutStyle}>
         <section style={mainPanelStyle}>
           <div style={sectionHeaderStyle}>
             <div>
-              <p style={eyebrowStyle}>Stage 1 gateway assessment</p>
-              <h2 style={h2Style}>Stage 1 Comes First</h2>
+              <p style={eyebrowStyle}>Step 1 assessment</p>
+              <h2 style={h2Style}>Assessment Details</h2>
               <p style={mutedTextStyle}>
                 Complete the decision-critical intake factors below. The system
-                will recommend either Stage 2 Matter Intake or Stage 3 Client
-                Details as the next priority.
+                will recommend the next appropriate step: Matter Intake or Client Details.
               </p>
-            </div>
-
-            <div style={progressCardStyle}>
-              <span>{completionPercent}%</span>
-              <small>complete</small>
             </div>
           </div>
 
           <FormSection
             title="A. Identity, Authority & Conflict"
-            text="These fields decide whether Stage 3 Client Details, Authority & Conflict must happen before matter work."
+            text="These fields decide whether Step 3 Client Details, Authority & Conflict must happen before matter work."
           >
             <div style={formGridStyle}>
               <Field label="Prospective Client / Entity">
@@ -344,7 +326,7 @@ export default function ClientIntakeDiscovery() {
 
           <FormSection
             title="B. Urgency & Matter Direction"
-            text="These fields decide whether Stage 2 Matter Intake / Urgent Action should become the next route."
+            text="These fields decide whether Step 2 Matter Intake / Urgent Action should become the next route."
           >
             <div style={formGridStyle}>
               <Field label="Matter Category">
@@ -444,7 +426,7 @@ export default function ClientIntakeDiscovery() {
 
         <aside style={sideColumnStyle}>
           <section style={recommendationStyle}>
-            <p style={eyebrowStyle}>Recommended next stage</p>
+            <p style={eyebrowStyle}>Recommended next step</p>
             <div style={routeBadgeStyle}>{analysis.primaryRoute.number}</div>
             <h2 style={{ ...h2Style, marginTop: 12 }}>
               {analysis.primaryRoute.title}
@@ -502,7 +484,7 @@ export default function ClientIntakeDiscovery() {
           </section>
 
           <section style={panelStyle}>
-            <p style={eyebrowStyle}>Supporting stages</p>
+            <p style={eyebrowStyle}>Supporting steps</p>
 
             {analysis.supportingAlerts.length > 0 ? (
               <ul style={alertListStyle}>
@@ -604,7 +586,7 @@ function RouteChoice({ route, recommended, selected, onClick }) {
       <span>
         <strong style={{ display: "block" }}>{route.title}</strong>
         <small style={routeMetaStyle}>
-          {recommended ? "Recommended after Stage 1" : "Secondary branch"}
+          {recommended ? "Recommended after Step 1" : "Secondary branch"}
         </small>
       </span>
     </button>
