@@ -481,7 +481,7 @@ export default function ClientIntakeDiscovery() {
             </p>
 
             <button type="button" disabled style={disabledButtonStyle}>
-              Continue to Stage {selectedRoute.number} — Prototype Only
+              Continue to Next Step →
             </button>
           </section>
 
