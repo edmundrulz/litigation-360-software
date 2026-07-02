@@ -139,21 +139,21 @@ function analyseAssessment(assessment) {
     assessment.documentReadiness === "Not available" ||
     assessment.documentReadiness === "Partially available"
   ) {
-    supportingAlerts.push("Stage 4 document readiness should be improved before full legal review.");
+    supportingAlerts.push("Page 5 document readiness should be improved before full legal review.");
   }
 
   if (
     assessment.evidencePosition === "Unknown / to assess" ||
     assessment.evidencePosition === "Weak / incomplete"
   ) {
-    supportingAlerts.push("Stage 5 risk and evidence review may be required before scope is finalised.");
+    supportingAlerts.push("Page 6 risk and evidence review may be required before scope is finalised.");
   }
 
   if (
     assessment.budgetClarity === "Unknown / estimate required" ||
     assessment.budgetClarity === "Budget concern"
   ) {
-    supportingAlerts.push("Stage 6 fee estimate and approval threshold should be clarified before engagement approval.");
+    supportingAlerts.push("Page 6 fee estimate and approval threshold should be clarified before engagement approval.");
   }
 
   if (!hasValue(assessment.primaryObjective)) {
@@ -240,7 +240,7 @@ export default function ClientIntakeDiscovery() {
     >
       <section style={heroStyle}>
         <div>
-          <p style={eyebrowStyle}>Step 1 · Assessment Gateway</p>
+          <p style={eyebrowStyle}>Page 1 of 6 · Assessment Gateway</p>
           <h1 id="client-intake-title" style={titleStyle}>
             1. Preliminary Assessment & Triage
           </h1>
@@ -269,7 +269,7 @@ export default function ClientIntakeDiscovery() {
         <section style={mainPanelStyle}>
           <div style={sectionHeaderStyle}>
             <div>
-              <p style={eyebrowStyle}>Step 1 assessment</p>
+              <p style={eyebrowStyle}>Page 1 assessment</p>
               <h2 style={h2Style}>Assessment Details</h2>
               <p style={mutedTextStyle}>
                 Complete the decision-critical intake factors below. The system
@@ -435,7 +435,7 @@ export default function ClientIntakeDiscovery() {
           </section>
 
           <section style={panelStyle}>
-            <p style={eyebrowStyle}>Priority branch after Stage 1</p>
+            <p style={eyebrowStyle}>Priority branch after Page 1</p>
 
             <RouteChoice
               route={primaryRoutes.matter}

@@ -3942,7 +3942,7 @@ function isUnavailablePlaceholder(value) {
       `}</style>
       <div className="client-module-header" id="clients-page-top">
         <div>
-          <p className="client-profile-summary-kicker">Stage 2 · Client Gate</p>
+          <p className="client-profile-summary-kicker">Page 3 of 6 · Client Profile / Duplicate & Authority</p>
           <h2>Client Search & Duplicate Detection</h2>
           <p className="mandatory-note">
             Search first, then link an existing client or continue to new client details. This page preserves the full original client profile, directory, validation, draft, and manual management process.
@@ -3997,7 +3997,7 @@ function isUnavailablePlaceholder(value) {
           <div className="client-visible-workflow-dashboard">
             <WorkflowProgressDashboard
               title="Client Profile Workflow Progress"
-              stepLabel="Step 3 of 6 · Clients"
+              stepLabel="Page 3 of 6 · Clients"
               completedCount={progress.completed}
               inProgressCount={0}
               pendingCount={Math.max(progress.total - progress.completed, 0)}

@@ -13,6 +13,7 @@ import {
 } from "../services/caseService";
 
 import { formatStatus } from "../utils/formatters";
+import WorkflowProgressDashboard from "../components/workflow/WorkflowProgressDashboard";
 
 export default function Cases() {
 
@@ -182,6 +183,39 @@ export default function Cases() {
   }
   const safeCases = Array.isArray(cases) ? cases : [];
   const safeClients = Array.isArray(clients) ? clients : [];
+  const linkedClientIds = new Set(safeClients.map((client) => Number(client.id)).filter((id) => Number.isFinite(id)));
+  const caseTitleComplete = String(formData.title || "").trim().length > 0;
+  const caseStatusComplete = String(formData.status || "").trim().length > 0;
+  const caseDescriptionComplete = String(formData.description || "").trim().length > 0;
+  const caseClientState = safeClients.length === 0
+    ? "blocked"
+    : formData.client_id === ""
+      ? "pending"
+      : linkedClientIds.has(Number(formData.client_id))
+        ? "completed"
+        : "blocked";
+  const caseFormFieldStates = [
+    caseTitleComplete ? "completed" : "pending",
+    caseClientState,
+    caseStatusComplete ? "completed" : "pending",
+    caseDescriptionComplete ? "completed" : "pending",
+  ];
+  const caseFormTotalCount = caseFormFieldStates.length;
+  const caseFormCompletedCount = caseFormFieldStates.filter((state) => state === "completed").length;
+  const caseFormBlockedCount = caseFormFieldStates.filter((state) => state === "blocked").length;
+  const caseFormRawPendingCount = caseFormFieldStates.filter((state) => state === "pending").length;
+  const caseFormInProgressCount = showForm && caseFormCompletedCount > 0 && caseFormRawPendingCount > 0 ? 1 : 0;
+  const caseFormPendingCount = Math.max(caseFormRawPendingCount - caseFormInProgressCount, 0);
+  const caseFormProgressNote =
+    "Live Page 4 field completion: " +
+    caseFormCompletedCount +
+    " of " +
+    caseFormTotalCount +
+    " tracked matter fields complete. Records loaded: " +
+    safeCases.length +
+    " matters and " +
+    safeClients.length +
+    " clients.";
 
   if (loading) return <div>Loading...</div>;
 
@@ -313,6 +347,16 @@ export default function Cases() {
       
       <h2>Matter Details</h2>
       <p>Manage legal matters linked to client profiles.</p>
+      <WorkflowProgressDashboard
+        title="Case / Matter Workflow Progress"
+        stepLabel="Page 4 of 6 · Case / Matter Details"
+        completedCount={caseFormCompletedCount}
+        inProgressCount={caseFormInProgressCount}
+        pendingCount={caseFormPendingCount}
+        blockedCount={caseFormBlockedCount}
+        totalCount={caseFormTotalCount}
+        notes={caseFormProgressNote}
+      />
 {successMsg && <div className="matter-success">{successMsg}</div>}
 
       <div className="matter-toolbar"><button className="matter-button matter-button-primary" onClick={() => setShowForm(true)}>Create New Matter</button></div>

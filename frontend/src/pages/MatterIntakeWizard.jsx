@@ -868,7 +868,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       <section className="client-gate-screen">
         <div className="client-gate-header">
           <div>
-            <p className="eyebrow">Stage 2 · Existing Client Decision</p>
+            <p className="eyebrow">Page 2 of 6 · Existing Client Decision</p>
             <h2>Existing Client Selected</h2>
             <p>This existing client will be linked to the new matter/intake.</p>
           </div>
@@ -1167,7 +1167,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
     <div className="matter-intake-workflow">
       <div className="intake-workflow-header">
         <div>
-          <p>Stage 2 · Client Gate</p>
+          <p>Page 2 of 6 · Matter Intake / Client Gate</p>
           <h2>{stepLabel}</h2>
           <p>Search first, then link an existing client or continue to new client details.</p>
         </div>
@@ -1184,7 +1184,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
       />
       <WorkflowProgressDashboard
         title="Matter Intake Workflow Progress"
-        stepLabel="Step 2 of 6 · Matter Intake"
+        stepLabel="Page 2 of 6 · Matter Intake"
         completedCount={stepTwoCompletedRequiredItems}
         inProgressCount={stepTwoCompletedRequiredItems > 0 && stepTwoCompletedRequiredItems < stepTwoTotalRequiredItems ? 1 : 0}
         pendingCount={Math.max(stepTwoTotalRequiredItems - stepTwoCompletedRequiredItems - (stepTwoCompletedRequiredItems > 0 && stepTwoCompletedRequiredItems < stepTwoTotalRequiredItems ? 1 : 0), 0)}
