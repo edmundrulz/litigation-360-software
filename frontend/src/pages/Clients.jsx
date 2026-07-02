@@ -3947,7 +3947,7 @@ function isUnavailablePlaceholder(value) {
             Search first, then link an existing client or continue to new client details. This page preserves the full original client profile, directory, validation, draft, and manual management process.
           </p>
 
-<aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
+          <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
                     <div className="client-profile-summary-card">
             <p className="client-profile-summary-kicker">Client Summary Dashboard</p>
             <h3>Client Summary Dashboard</h3>
