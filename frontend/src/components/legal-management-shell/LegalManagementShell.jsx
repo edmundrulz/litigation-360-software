@@ -4,32 +4,18 @@ import firmProfile from "./firmProfile.config.json";
 import legalNewsLinks from "./legalNewsLinks.config.json";
 import { MenuPlatform } from "../../features/menu-platform";
 
-/**
- * LegalManagementShell
- * Lab-safe legal management interface shell.
- *
- * Purpose:
- * - Left sidebar navigation
- * - Search / Instructions / Glossary / Settings
- * - Firm branding panel
- * - Owner / Managing Partner profile
- * - Legal news links for Malaysia and Singapore
- *
- * Integration rule:
- * Do not overwrite existing App.jsx until reviewed.
- */
 export default function LegalManagementShell() {
   const [activePanel, setActivePanel] = useState("workspace");
   const [query, setQuery] = useState("");
 
   const searchFolders = useMemo(() => {
     return [
-      { icon: "ðŸ“", title: "Client Files", description: "Client profiles, IDs, engagement letters, contact details." },
-      { icon: "ðŸ“‚", title: "Matter Folders", description: "Case records, pleadings, status notes, court timelines." },
-      { icon: "ðŸ“„", title: "Documents", description: "Drafts, templates, letters, affidavits, bundles and exhibits." },
-      { icon: "â°", title: "Deadlines", description: "Limitation dates, hearing dates, filing dates and reminders." },
-      { icon: "âš–ï¸", title: "Legal Research", description: "Research notes, case summaries, statutory extracts and authorities." },
-      { icon: "ðŸ§¾", title: "Billing / Finance", description: "Invoices, receipts, fee notes and disbursement tracking." }
+      { icon: "📁", title: "Client Files", description: "Client profiles, IDs, engagement letters, contact details." },
+      { icon: "📂", title: "Matter Folders", description: "Case records, pleadings, status notes, court timelines." },
+      { icon: "📄", title: "Documents", description: "Drafts, templates, letters, affidavits, bundles and exhibits." },
+      { icon: "⏰", title: "Deadlines", description: "Limitation dates, hearing dates, filing dates and reminders." },
+      { icon: "⚖️", title: "Legal Research", description: "Research notes, case summaries, statutory extracts and authorities." },
+      { icon: "🧾", title: "Billing / Finance", description: "Invoices, receipts, fee notes and disbursement tracking." }
     ];
   }, []);
 
@@ -47,13 +33,85 @@ export default function LegalManagementShell() {
     { term: "Retainer", definition: "The engagement arrangement between a legal practitioner or firm and a client." }
   ];
 
+  const todayOverviewSections = [
+    {
+      title: "Urgent Matters",
+      items: [
+        "Sample Matter A — affidavit review due tomorrow",
+        "Sample Matter B — client instructions pending today"
+      ]
+    },
+    {
+      title: "Upcoming Deadlines",
+      items: [
+        "Sample Hearing — 3 days",
+        "Filing Reminder — 5 days"
+      ]
+    },
+    {
+      title: "Missing Documents",
+      items: [
+        "Authority letter pending",
+        "Identification copy pending",
+        "Supporting exhibits pending"
+      ]
+    },
+    {
+      title: "Pending Client Instructions",
+      items: [
+        "Confirm chronology",
+        "Approve draft letter",
+        "Confirm settlement position"
+      ]
+    },
+    {
+      title: "Overdue Tasks",
+      items: [
+        "Follow up unsigned engagement letter",
+        "Update matter status note"
+      ]
+    },
+    {
+      title: "Recently Updated Matters",
+      items: [
+        "Sample Matter A — status note updated",
+        "Sample Matter C — documents marked received"
+      ]
+    }
+  ];
+
+  function renderTodayOverview() {
+    return (
+      <section className="panel-card" aria-label="Legal practice control desk today overview">
+        <div className="panel-header">
+          <span className="panel-icon">⚖️</span>
+          <div>
+            <h2>Today Overview</h2>
+            <p>Sample legal practice control desk for urgent work, deadlines, documents, instructions, and follow-ups.</p>
+          </div>
+        </div>
+
+        <div className="settings-grid">
+          {todayOverviewSections.map((section) => (
+            <div className="settings-card" key={section.title}>
+              <strong>{section.title}</strong>
+              {section.items.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   function renderPanel() {
     switch (activePanel) {
       case "search":
         return (
           <section className="panel-card">
             <div className="panel-header">
-              <span className="panel-icon">ðŸ”Ž</span>
+              <span className="panel-icon">🔎</span>
               <div>
                 <h2>Search Legal Repository</h2>
                 <p>Find documents, files, folders, client records, matter records and legal references.</p>
@@ -84,7 +142,7 @@ export default function LegalManagementShell() {
         return (
           <section className="panel-card">
             <div className="panel-header">
-              <span className="panel-icon">ðŸ“˜</span>
+              <span className="panel-icon">📘</span>
               <div>
                 <h2>Instructions & User Guides</h2>
                 <p>Training, tutorials, SOPs and help documentation for staff.</p>
@@ -92,12 +150,12 @@ export default function LegalManagementShell() {
             </div>
 
             <div className="instruction-list">
-              <button type="button">ðŸš€ Getting Started Guide</button>
-              <button type="button">ðŸ‘¤ Client Intake Workflow</button>
-              <button type="button">ðŸ’¼ Matter Opening SOP</button>
-              <button type="button">ðŸ“„ Document Upload & Review Guide</button>
-              <button type="button">â° Deadline Monitoring Guide</button>
-              <button type="button">ðŸ›¡ï¸ Security, RBAC & Audit SOP</button>
+              <button type="button">🚀 Getting Started Guide</button>
+              <button type="button">👤 Client Intake Workflow</button>
+              <button type="button">💼 Matter Opening SOP</button>
+              <button type="button">📄 Document Upload & Review Guide</button>
+              <button type="button">⏰ Deadline Monitoring Guide</button>
+              <button type="button">🛡️ Security, RBAC & Audit SOP</button>
             </div>
           </section>
         );
@@ -106,7 +164,7 @@ export default function LegalManagementShell() {
         return (
           <section className="panel-card">
             <div className="panel-header">
-              <span className="panel-icon">ðŸ“š</span>
+              <span className="panel-icon">📚</span>
               <div>
                 <h2>Legal Glossary</h2>
                 <p>Common legal terms and internal terminology used in this system.</p>
@@ -128,7 +186,7 @@ export default function LegalManagementShell() {
         return (
           <section className="panel-card">
             <div className="panel-header">
-              <span className="panel-icon">âš™ï¸</span>
+              <span className="panel-icon">⚙️</span>
               <div>
                 <h2>System Settings & Configuration</h2>
                 <p>System-wide preferences and administrative controls.</p>
@@ -136,12 +194,12 @@ export default function LegalManagementShell() {
             </div>
 
             <div className="settings-grid">
-              <div className="settings-card"><strong>ðŸ‘¤ User Preferences</strong><span>Language, default dashboard, quick links.</span></div>
-              <div className="settings-card"><strong>ðŸŽ¨ Display Settings</strong><span>Theme, density, font size, layout mode.</span></div>
-              <div className="settings-card"><strong>ðŸ”” Notifications</strong><span>Email, in-app alerts, deadline reminders.</span></div>
-              <div className="settings-card"><strong>ðŸ›¡ï¸ Access Controls</strong><span>Roles, permissions, module visibility, RBAC.</span></div>
-              <div className="settings-card"><strong>ðŸ›ï¸ Firm Profile</strong><span>Firm name, logo, tagline and contact details.</span></div>
-              <div className="settings-card"><strong>ðŸ§¾ Audit & Compliance</strong><span>Logs, retention rules, review controls.</span></div>
+              <div className="settings-card"><strong>👤 User Preferences</strong><span>Language, default dashboard, quick links.</span></div>
+              <div className="settings-card"><strong>🎨 Display Settings</strong><span>Theme, density, font size, layout mode.</span></div>
+              <div className="settings-card"><strong>🔔 Notifications</strong><span>Email, in-app alerts, deadline reminders.</span></div>
+              <div className="settings-card"><strong>🛡️ Access Controls</strong><span>Roles, permissions, module visibility, RBAC.</span></div>
+              <div className="settings-card"><strong>🏛️ Firm Profile</strong><span>Firm name, logo, tagline and contact details.</span></div>
+              <div className="settings-card"><strong>🧾 Audit & Compliance</strong><span>Logs, retention rules, review controls.</span></div>
             </div>
           </section>
         );
@@ -150,7 +208,7 @@ export default function LegalManagementShell() {
         return (
           <section className="panel-card">
             <div className="panel-header">
-              <span className="panel-icon">ðŸ“°</span>
+              <span className="panel-icon">📰</span>
               <div>
                 <h2>Malaysia & Singapore Legal News</h2>
                 <p>Staff legal-awareness links for Malaysia and Singapore.</p>
@@ -172,13 +230,13 @@ export default function LegalManagementShell() {
       default:
         return (
           <section className="panel-card hero-panel">
-            <div className="justice-mark">âš–ï¸</div>
+            <div className="justice-mark">⚖️</div>
             <h1>{firmProfile.firmName}</h1>
             <p>{firmProfile.tagline}</p>
             <div className="hero-actions">
-              <button type="button" onClick={() => setActivePanel("search")}>ðŸ”Ž Search Repository</button>
-              <button type="button" onClick={() => setActivePanel("clients")}>ðŸ’¼ Open Workspace</button>
-              <button type="button" onClick={() => setActivePanel("news")}>ðŸ“° Legal News</button>
+              <button type="button" onClick={() => setActivePanel("search")}>🔎 Search Repository</button>
+              <button type="button" onClick={() => setActivePanel("workspace")}>💼 Open Workspace</button>
+              <button type="button" onClick={() => setActivePanel("news")}>📰 Legal News</button>
             </div>
           </section>
         );
@@ -196,18 +254,19 @@ export default function LegalManagementShell() {
             appVersion="0.0.0"
             onNavigate={(target) => {
               if (target === "home") {
-                setActivePanel("home");
+                setActivePanel("workspace");
               }
             }}
             onAction={(item) => {
               if (item.id === "home") {
-                setActivePanel("home");
+                setActivePanel("workspace");
               }
             }}
           />
         </div>
+
         <div className="brand-block">
-          <div className="brand-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
+          <div className="brand-logo">{firmProfile.firmLogoEmoji || "⚖️"}</div>
           <div>
             <strong>{firmProfile.firmName}</strong>
             <small>{firmProfile.shortName}</small>
@@ -215,16 +274,16 @@ export default function LegalManagementShell() {
         </div>
 
         <nav className="side-nav">
-          <button type="button" onClick={() => setActivePanel("workspace")}>âš–ï¸ Workspace</button>
-          <button type="button" onClick={() => setActivePanel("search")}>ðŸ”Ž Search</button>
-          <button type="button" onClick={() => setActivePanel("instructions")}>ðŸ“˜ Instructions</button>
-          <button type="button" onClick={() => setActivePanel("glossary")}>ðŸ“š Glossary</button>
-          <button type="button" onClick={() => setActivePanel("news")}>ðŸ“° MY/SG Legal News</button>
-          <button type="button" onClick={() => setActivePanel("settings")}>âš™ï¸ Settings</button>
+          <button type="button" onClick={() => setActivePanel("workspace")}>⚖️ Workspace</button>
+          <button type="button" onClick={() => setActivePanel("search")}>🔎 Search</button>
+          <button type="button" onClick={() => setActivePanel("instructions")}>📘 Instructions</button>
+          <button type="button" onClick={() => setActivePanel("glossary")}>📚 Glossary</button>
+          <button type="button" onClick={() => setActivePanel("news")}>📰 MY/SG Legal News</button>
+          <button type="button" onClick={() => setActivePanel("settings")}>⚙️ Settings</button>
         </nav>
 
         <div className="sidebar-footer">
-          <span>ðŸ›ï¸ Legal Operations</span>
+          <span>🏛️ Legal Operations</span>
           <small>Lab UI Prototype</small>
         </div>
       </aside>
@@ -235,12 +294,12 @@ export default function LegalManagementShell() {
             <h1>Legal Management System</h1>
             <p>Professional legal workspace for matters, clients, documents and governance.</p>
           </div>
-          <button className="settings-pill" type="button" onClick={() => setActivePanel("settings")}>âš™ï¸ Configure</button>
+          <button className="settings-pill" type="button" onClick={() => setActivePanel("settings")}>⚙️ Configure</button>
         </header>
 
         <section className="profile-grid">
           <article className="firm-card">
-            <div className="mini-logo">{firmProfile.firmLogoEmoji || "âš–ï¸"}</div>
+            <div className="mini-logo">{firmProfile.firmLogoEmoji || "⚖️"}</div>
             <div>
               <h2>{firmProfile.firmName}</h2>
               <p>{firmProfile.tagline}</p>
@@ -249,20 +308,20 @@ export default function LegalManagementShell() {
           </article>
 
           <article className="partner-card">
-            <div className="avatar">{firmProfile.managingPartner.avatarEmoji || "ðŸ‘¨â€âš–ï¸"}</div>
+            <div className="avatar">{firmProfile.managingPartner.avatarEmoji || "👨‍⚖️"}</div>
             <div>
               <h2>{firmProfile.managingPartner.name}</h2>
               <p>{firmProfile.managingPartner.title}</p>
-              <small>{firmProfile.managingPartner.email} Â· {firmProfile.managingPartner.phone}</small>
+              <small>{firmProfile.managingPartner.email} · {firmProfile.managingPartner.phone}</small>
               <small>{firmProfile.managingPartner.credentials}</small>
             </div>
           </article>
         </section>
+
+        {activePanel === "workspace" ? renderTodayOverview() : null}
 
         {renderPanel()}
       </main>
     </div>
   );
 }
-
-
