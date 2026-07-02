@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import WorkflowProgressDashboard from "../components/workflow/WorkflowProgressDashboard";
 const API_URL = "/api/clients";
 const CLIENT_DIRECTORY_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -3989,6 +3990,24 @@ function isUnavailablePlaceholder(value) {
           {status}
         </p>
       )}
+
+      {(() => {
+        const progress = getClientFormCompletionProgress(form);
+        return (
+          <div className="client-visible-workflow-dashboard">
+            <WorkflowProgressDashboard
+              title="Client Profile Workflow Progress"
+              stepLabel="Step 3 of 6 · Clients"
+              completedCount={progress.completed}
+              inProgressCount={0}
+              pendingCount={Math.max(progress.total - progress.completed, 0)}
+              blockedCount={0}
+              totalCount={progress.total}
+              notes="Always-visible Page 3 progress calculated from actual client profile completion fields."
+            />
+          </div>
+        );
+      })()}
 
       <section className="client-profile-completion-shell" aria-labelledby="client-profile-completion-heading">
         <div className="client-profile-completion-header">

@@ -779,6 +779,8 @@ function ModuleFrame({
 
   return (
     <section className="module-frame">
+      {showActions && renderNavigation("top")}
+
       {title === "Matter Intake" ? null : (
         <div className="module-frame-header">
           <div>
@@ -788,8 +790,6 @@ function ModuleFrame({
           </div>
         </div>
       )}
-
-      {showActions && renderNavigation("top")}
 
       <div className="module-frame-body">
         {children}

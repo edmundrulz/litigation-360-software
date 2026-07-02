@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import WizardProgressPanel from "../components/workflow/WizardProgressPanel";
+import WorkflowProgressDashboard from "../components/workflow/WorkflowProgressDashboard";
 
 const CLIENT_STEP_MODE = {
   SEARCH: "search",
@@ -653,7 +654,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         }}
       >
         <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={goPreviousPage}>
-          ← Previous Page
+          ← Previous Step / Page
         </button>
 
         <button type="button" className="module-page-nav-button module-page-nav-home" onClick={() => setModule?.("home")}>
@@ -661,7 +662,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         </button>
 
         <button type="button" className="module-page-nav-button module-page-nav-next" onClick={nextStep}>
-          Continue to Next Step →
+          Continue to Next Step / Page →
         </button>
 
         <button
@@ -881,7 +882,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             Change Selection
           </button>
           <button type="button" className="module-page-nav-button module-page-nav-next" onClick={continueFromExistingClient}>
-            Continue to Next Step →
+            Continue to Next Step / Page →
           </button>
         </div>
 
@@ -1112,13 +1113,13 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
         <div className="client-selected-actions">
           <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
-            ← Previous Page
+            ← Previous Step / Page
           </button>
           <button type="button" className="module-page-nav-button module-page-nav-home" onClick={openNewClientCreation}>
             Create Full Profile in Advanced Directory
           </button>
           <button type="button" className="module-page-nav-button module-page-nav-next" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
-            Continue to Next Step →
+            Continue to Next Step / Page →
           </button>
         </div>
 
@@ -1173,15 +1174,24 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         <span className="intake-status-pill">Client Gate</span>
       </div>
 
+      {renderPageNavigationBar("top")}
+
       <WizardProgressPanel
         currentStep={2}
         completedRequiredItems={stepTwoCompletedRequiredItems}
         totalRequiredItems={stepTwoTotalRequiredItems}
         pageCompletionLabel="Current Page Completion"
       />
-
-      {renderPageNavigationBar("top")}
-
+      <WorkflowProgressDashboard
+        title="Matter Intake Workflow Progress"
+        stepLabel="Step 2 of 6 · Matter Intake"
+        completedCount={stepTwoCompletedRequiredItems}
+        inProgressCount={stepTwoCompletedRequiredItems > 0 && stepTwoCompletedRequiredItems < stepTwoTotalRequiredItems ? 1 : 0}
+        pendingCount={Math.max(stepTwoTotalRequiredItems - stepTwoCompletedRequiredItems - (stepTwoCompletedRequiredItems > 0 && stepTwoCompletedRequiredItems < stepTwoTotalRequiredItems ? 1 : 0), 0)}
+        blockedCount={validationMessage ? 1 : 0}
+        totalCount={stepTwoTotalRequiredItems}
+        notes="Step 2 progress is calculated from the actual client-gate search, selection, and validation checks on this page."
+      />
       {step === 1 ? renderClientDetailsStep() : renderLaterStep()}
 
       {validationMessage ? <div className="intake-validation-message">{validationMessage}</div> : null}
