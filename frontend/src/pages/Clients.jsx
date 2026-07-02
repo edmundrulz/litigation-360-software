@@ -3947,19 +3947,7 @@ function isUnavailablePlaceholder(value) {
             Search first, then link an existing client or continue to new client details. This page preserves the full original client profile, directory, validation, draft, and manual management process.
           </p>
 
-          <div className="client-flow-bridge-panel" role="navigation" aria-label="Clients page workflow navigation">
-            <strong>Step 2 of 6</strong>
-            <p>
-              Use these standard controls to reorient, return home, continue the guided workflow, or jump to the end of this page.
-            </p>
-            <div className="module-page-nav module-page-nav-top client-directory-actions client-flow-page-nav" aria-label="Standard page navigation controls">
-              <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={() => setModule?.("Matter Intake")}>← Previous Page</button>
-              <button type="button" className="module-page-nav-button module-page-nav-home" onClick={() => setModule?.("Home")}>Home Main Page</button>
-              <button type="button" className="module-page-nav-button module-page-nav-next" onClick={() => setModule?.("Matter Intake")}>Continue to Next Step →</button>
-              <button type="button" className="module-page-nav-button module-page-nav-jump module-page-nav-bottom-jump" onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" })}>Go to Bottom/End of Page ↓</button>
-            </div>
-          </div>
-        <aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
+<aside className="client-profile-summary-rail" aria-label="Client profile summary and section navigation">
                     <div className="client-profile-summary-card">
             <p className="client-profile-summary-kicker">Client Summary Dashboard</p>
             <h3>Client Summary Dashboard</h3>
