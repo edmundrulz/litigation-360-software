@@ -7352,3 +7352,28 @@ body {
   }
 }
 /* PHASE 14C SHARED WORKFLOW PROGRESS DASHBOARD END */
+
+/* PHASE 14C-P10P19 BADGE WRAP REGRESSION FIX START */
+.card.workflow-card .card-meta,
+.workspace-module-section .workflow-card .card-meta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-self: start !important;
+  align-self: start !important;
+  width: auto !important;
+  min-width: 46px !important;
+  max-width: none !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 0 10px !important;
+  border-radius: 999px !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+/* PHASE 14C-P10P19 BADGE WRAP REGRESSION FIX END */
