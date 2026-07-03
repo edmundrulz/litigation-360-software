@@ -238,6 +238,65 @@ const moduleRouteAliases = {
 };
 
 
+function computeRequiredProgress(items) {
+  const safeItems = Array.isArray(items) ? items : [];
+  const requiredItems = safeItems.filter((item) => item.required !== false);
+  const totalRequired = requiredItems.length;
+  const completedRequired = requiredItems.filter((item) => Boolean(item.complete)).length;
+  const missingRequired = Math.max(totalRequired - completedRequired, 0);
+  const percentage = totalRequired > 0 ? Math.round((completedRequired / totalRequired) * 100) : 0;
+
+  let label = "No required items";
+  if (totalRequired > 0 && percentage === 100) label = "Complete";
+  else if (totalRequired > 0 && percentage > 0) label = "In progress";
+  else if (totalRequired > 0) label = "Not started";
+
+  return {
+    totalRequired,
+    completedRequired,
+    missingRequired,
+    percentage,
+    label,
+  };
+}
+
+function PageRequiredProgressCard({ title, items, note }) {
+  const progress = computeRequiredProgress(items);
+
+  return (
+    <section className="workflow-progress-dashboard" aria-label={`${title} progress`}>
+      <div className="workflow-progress-dashboard-header">
+        <div>
+          <p className="workflow-progress-dashboard-kicker">Required Completion</p>
+          <h3>{title}</h3>
+          <p>{note || "Real required-item progress for this page."}</p>
+        </div>
+        <div className="workflow-progress-dashboard-total">
+          <strong>{progress.percentage}%</strong>
+          <span>{progress.label}</span>
+        </div>
+      </div>
+
+      <div className="workflow-progress-dashboard-metrics">
+        <div>
+          <strong>{progress.totalRequired}</strong>
+          <span>Required</span>
+          <small>Total required items</small>
+        </div>
+        <div>
+          <strong>{progress.completedRequired}</strong>
+          <span>Complete</span>
+          <small>Required items completed</small>
+        </div>
+        <div>
+          <strong>{progress.missingRequired}</strong>
+          <span>Missing</span>
+          <small>Required items still pending</small>
+        </div>
+      </div>
+    </section>
+  );
+}
 function isEditableKeyboardTarget(target) {
   if (!target || typeof target.closest !== "function") return false;
 
@@ -682,6 +741,47 @@ function ModuleFrame({
 };
 
   const previousTarget = previousMap[title] || "home";
+  const isPostPage3Module = [
+    "Cases",
+    "Court Dates",
+    "Documents",
+    "Documents & Evidence Readiness",
+    "Draft Engagement Preview",
+    "Review Submit",
+  ].includes(title);
+
+  const hasRenderableChildren = Boolean(children);
+
+  const pageProgressItems = (() => {
+    if (title === "Cases") {
+      return [
+        { label: "Case / Matter details section available", required: true, complete: hasRenderableChildren },
+      ];
+    }
+
+    if (title === "Court Dates") {
+      return [
+        { label: "Court Dates section available", required: true, complete: hasRenderableChildren },
+      ];
+    }
+
+    if (title === "Documents" || title === "Documents & Evidence Readiness") {
+      return [
+        { label: "Documents / Evidence section available", required: true, complete: hasRenderableChildren },
+      ];
+    }
+
+    if (title === "Draft Engagement Preview" || title === "Review Submit") {
+      return [
+        { label: "Final review section available", required: true, complete: hasRenderableChildren },
+      ];
+    }
+
+    return [];
+  })();
+
+  const pageProgressNote = "Current App.jsx exposes module-level completion only. Field-level required items can be expanded when page-specific field models are available.";
+
   const nextTarget = nextMap[title] || "";
 
   function goPrevious() {
@@ -792,6 +892,9 @@ function ModuleFrame({
       )}
 
       <div className="module-frame-body">
+        {isPostPage3Module ? (
+          <PageRequiredProgressCard title={title} items={pageProgressItems} note={pageProgressNote} />
+        ) : null}
         {children}
       </div>
 
@@ -876,3 +979,5 @@ function Metric({ label, value }) {
     </div>
   );
 }
+
+
