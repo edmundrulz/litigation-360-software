@@ -1,0 +1,859 @@
+# PHASE 14E PAGE 5 COURT DATES AUDIT
+
+Project:
+Litigation 360 / LEOS
+
+Branch:
+audit/14e-page5-court-dates-map
+
+Purpose:
+Audit Page 5 / Court Dates for layout, function, wording, visual consistency, and integration readiness.
+
+Audit type:
+Documentation / inspection only.
+
+No source code should be changed in this branch.
+
+============================================================
+1. ISSUE BEING INVESTIGATED
+============================================================
+
+Known concern:
+Page 5 / Court Dates may still contain legacy layout, incomplete cards, unclear purpose, or inconsistent styling compared with the approved localhost:5173 visual baseline.
+
+============================================================
+2. CORE PURPOSE OF PAGE 5
+============================================================
+
+Page 5 / Court Dates should help the user track:
+- Hearing dates
+- Mention dates
+- Case management dates
+- Filing deadlines
+- Submission deadlines
+- Court reminders
+- Urgency / action required
+- Matter or case reference
+
+============================================================
+3. ACCEPTED FINAL STANDARD
+============================================================
+
+Page 5 should use the same visual direction as the approved localhost:5173 interface.
+
+Recommended structure:
+- Court Dates Header
+- Current Phase / Matter Status
+- Upcoming Court Dates Panel
+- Deadline / Filing Reminder Panel
+- Action Required Panel
+- Navigation Controls
+
+============================================================
+4. WHAT TO FIND
+============================================================
+
+Search for:
+- court
+- court date
+- hearing
+- mention
+- case management
+- deadline
+- filing
+- calendar
+- date
+- dates
+- reminder
+- upcoming
+- Page 5
+- page 5
+- PAGE 5
+
+For each match, determine:
+1. File path
+2. Line number
+3. Exact text
+4. Whether it is likely Page 5 related
+5. Whether it is user-facing
+6. Whether it affects layout/function
+7. Whether it is safe to amend later
+
+============================================================
+5. PAGE 5 ACCEPTANCE CRITERIA AFTER FUTURE FIX
+============================================================
+
+Future Page 5 fix is acceptable only when:
+
+[ ] Court Dates page loads correctly
+[ ] It has a clear legal case-management purpose
+[ ] It uses the approved localhost:5173 visual baseline
+[ ] It does not look like a legacy or disconnected page
+[ ] It clearly shows upcoming dates or professional empty state
+[ ] It clearly shows required action or next step
+[ ] Navigation from Page 4 to Page 5 works
+[ ] Navigation from Page 5 to Page 6 works
+[ ] No backend/database/auth/RBAC/API files are touched
+[ ] npm run build passes after implementation
+
+============================================================
+6. SEARCH RESULTS
+============================================================
+
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:45: export async function updateClient(clientId, clientData) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:52: if (!response.ok) throw new Error('Failed to update client');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:55: console.error('updateClient error:', error);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:101: export async function updateCase(caseId, caseData) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:108: if (!response.ok) throw new Error('Failed to update case');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:111: console.error('updateCase error:', error);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:130: // ===== DEADLINES =====
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:131: export async function getDeadlines() {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:133: const response = await fetch(`${API_URL}/deadlines`);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:134: if (!response.ok) throw new Error('Failed to fetch deadlines');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:137: console.error('getDeadlines error:', error);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:142: export async function createDeadline(deadlineData) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:144: const response = await fetch(`${API_URL}/deadlines`, {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:147: body: JSON.stringify(deadlineData)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:149: if (!response.ok) throw new Error('Failed to create deadline');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:152: console.error('createDeadline error:', error);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:157: export async function updateDeadline(deadlineId, deadlineData) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:159: const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:162: body: JSON.stringify(deadlineData)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:164: if (!response.ok) throw new Error('Failed to update deadline');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:167: console.error('updateDeadline error:', error);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:172: export async function deleteDeadline(deadlineId) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:174: const response = await fetch(`${API_URL}/deadlines/${deadlineId}`, {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:178: if (!response.ok) throw new Error('Failed to delete deadline');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\api.js:181: console.error('deleteDeadline error:', error);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:10: import Deadlines from "./pages/Deadlines";
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:59: description: "Manage active case, matter, court, and document work.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:76: module: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:77: title: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:80: text: "Hearings, mentions, deadlines and reminders.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:87: text: "Drafts, filings, templates, evidence and archives.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:128: { module: "Notifications", title: "Notifications", status: "PLANNED", sequence: "P2", text: "Alerts, reminders, escalations and updates." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:129: { module: "Court Navigation", title: "Court Navigation", status: "PLANNED", sequence: "P3", text: "Court location intelligence, travel planning and readiness." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:131: { module: "Lawyer View", title: "Lawyer View", status: "PLANNED", sequence: "P5", text: "Hearings, active matters, pleadings, deadlines and court preparation." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:132: { module: "Clerk View", title: "Clerk View", status: "PLANNED", sequence: "P6", text: "Filing tasks, service tracking, bundles and registry follow-ups." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:133: { module: "Admin View", title: "Admin View", status: "PLANNED", sequence: "P7", text: "Client intake, scheduling, reminders and office coordination." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:140: { module: "Workflow Automation", title: "Workflow Automation", status: "PLANNED", sequence: "P14", text: "Automated routing, reminders, escalation and process control." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:141: { module: "Government Integrations", title: "Government Integrations", status: "PLANNED", sequence: "P15", text: "Court, PERKESO, government and external registry integration layer." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:142: { module: "Client Portal", title: "Client Portal", status: "PLANNED", sequence: "P16", text: "Client-facing secure matter, document and update portal." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:180: nextModule: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:181: nextLabel: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:188: nextModule: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:189: nextLabel: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:191: "Court Dates": {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:192: displayTitle: "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:194: description: "Hearings, mentions, deadlines, reminders, and court date tracking.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:195: position: "Workflow Node: Court Dates · OPEN",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:202: description: "Drafts, filings, templates, evidence, and document management.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:277: const [updated, setUpdated] = useState("Pending");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:307: setUpdated(new Date().toLocaleString());
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:400: <p>Real-time legal operations workspace. Last updated: {updated}</p>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:418: updated={updated}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:441: function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:452: if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:504: <span>Urgent court deadlines</span><span>3</span>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:510: <span>Filing blocked</span><span>1</span>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:556: <Metric label="Last Refresh" value={updated} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:657: "Court Dates": "Cases",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:658: "Documents": "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:659: "Documents & Evidence Readiness": "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:672: "Cases": "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:673: "Matters": "Court Dates",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\App.jsx:674: "Court Dates": "Documents",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:32: "Court / Tribunal Portal",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:42: ["Malaysian Bar Main Portal", "Malaysia Bar updates, legal resources and public information.", "https://www.malaysianbar.org.my/", "Bar / Regulator"],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:43: ["Singapore Law Watch Headlines", "Singapore legal headlines and legal sector updates.", "https://www.singaporelawwatch.sg/Headlines/category/overview", "Legal News"],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:45: ["Singapore Courts News", "Singapore Judiciary news and resources.", "https://www.judiciary.gov.sg/news-and-resources/news", "Court / Tribunal Portal"]
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:50: ["Matter Folders", "Case files, pleadings, court documents, status notes and progress records."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:51: ["Documents", "Drafts, letters, affidavits, bundles, exhibits, templates and filings."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:52: ["Deadlines", "Limitation periods, hearing dates, filing deadlines and reminders."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:55: ["Court Operations", "Court locations, attendance plans, hearing preparation and registry follow-ups."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:61: ["Cause Papers", "Court documents filed in a matter, including pleadings, applications and supporting documents."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:66: ["Hearing", "A court session where a matter, application or issue is considered."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:67: ["Bundle", "A prepared set of documents arranged for court, hearing, filing or review."]
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:86: ["Email Attachments", "Find email attachments connected to clients, matters, deadlines or documents."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:92: ["Court Bundles", "Open or search bundles, exhibits, authorities and hearing papers."],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:98: courthouse: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M5 9v8"/><path d="M9 9v8"/><path d="M15 9v8"/><path d="M19 9v8"/><path d="M2 19h20"/><path d="M12 4 3 8h18L12 4Z"/></svg></span>',
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:194: "Instructions and User Guides": "courthouse",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:197: "Firm Information": "courthouse",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:308: "Manual legal-only links for legal news, legal forms, legal issues, legal research, court portals and client-lawyer work resources.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:312: Add only legal-based websites: legal news, legal forms, court portals, bar/regulator pages, legal research, government legal portals, client-lawyer work portals, legal document portals, and law-firm work resources.
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:332: <input name="title" placeholder="Example: Malaysian Court Forms" required />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:343: <textarea name="desc" placeholder="Example: Official legal forms, court filing guidance, legal research, law-firm client document portal..." required></textarea>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:386: links.push({ title, url, category, desc, addedAt: new Date().toISOString() });
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:407: <input class="leos-pro-input" id="leos-pro-search" placeholder="Search clients, matters, documents, deadlines, folders..." />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:429: ${card("Getting Started Guide", "How to use the Legal 360 workspace safely.", "Guide", "courthouse")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:432: ${card("Document Handling Guide", "Document upload, naming, review, filing and archive practices.", "Guide", "document")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:433: ${card("Deadline Monitoring Guide", "How to check deadlines, reminders and court-related dates.", "Guide", "gavel")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:486: ${card(p.firmName, p.tagline + " | " + p.address, "Firm", "courthouse")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:559: ${card("Notification Preferences", "Deadline reminders, alert escalation and staff notifications.", "Settings", "news")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:561: ${card("Firm Customization", "Firm profile, logo, tagline and contact details.", "Firm", "courthouse")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:576: const candidates = Array.from(document.querySelectorAll("aside, nav, section, div"));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:578: const matching = candidates
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:591: const titleCandidates = candidates
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:602: return titleCandidates[0] || null;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:645: toolBox.appendChild(createToolButton("Instructions", "instructions", false, "courthouse"));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\legal-management-enhancer.js:647: toolBox.appendChild(createToolButton("Firm Info", "firm", false, "courthouse"));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:62: const updateField = (field, value) => {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:75: onChange={(event) => updateField(field, event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:141: onChange={(event) => updateField("clientName", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:150: onChange={(event) => updateField("clientType", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:168: onChange={(event) => updateField("industry", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:177: onChange={(event) => updateField("matterType", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:186: onChange={(event) => updateField("urgency", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:200: onChange={(event) => updateField("background", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:217: onChange={(event) => updateField("stakeholders", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:234: onChange={(event) => updateField("primaryObjective", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:244: onChange={(event) => updateField("shortTermGoals", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:253: onChange={(event) => updateField("longTermGoals", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:263: onChange={(event) => updateField("successCriteria", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:280: onChange={(event) => updateField("valueAtStake", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:289: onChange={(event) => updateField("riskMerits", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:306: onChange={(event) => updateField("scopeSummary", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:307: placeholder="Advice, drafting, negotiation, filing, representation, document review, proposal, report, etc."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:312: Dependencies / Deadlines
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:315: onChange={(event) => updateField("dependencies", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:316: placeholder="Prerequisites, sequential tasks, parallel workstreams, hard deadlines, approvals."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:332: onChange={(event) => updateField("documentsRequired", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:333: placeholder="Agreements, emails, WhatsApp, invoices, payment proof, photos, reports, court papers, expert input."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:347: "Key dates, event sequence, deadline timeline, limitation risk, and current procedural stage."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:364: "Pleadings / Notices / Court Documents",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:365: "Court papers, demand letters, statutory notices, tribunal forms, orders, or hearing notices."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:391: onChange={(event) => updateField("documentChecklistNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:409: onChange={(event) => updateField("budgetRange", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:418: onChange={(event) => updateField("feeModel", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:436: onChange={(event) => updateField("feeComplexity", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:449: onChange={(event) => updateField("consultationFee", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:459: updateField("professionalFeeEstimate", event.target.value)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:470: updateField("disbursementEstimate", event.target.value)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:472: placeholder="e.g. filing, searches, travel, translation"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:481: updateField("approvalThreshold", event.target.value)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:492: updateField("communicationPreference", event.target.value)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:494: placeholder="e.g. WhatsApp for quick updates, email for formal advice"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:503: onChange={(event) => updateField("feeAssumptions", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:513: updateField("feeEscalationTriggers", event.target.value)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeDiscoveryPrototype.jsx:515: placeholder="Scope expansion, urgency, new parties, extra documents, court/tribunal action, experts, revisions."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeProposalPreview.jsx:49: ["Pleadings / Notices / Court Documents", intake.documentChecklistPleadings || "Not Applicable"],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeProposalPreview.jsx:189: "Court, tribunal, regulatory, or expert involvement",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\ClientIntakeProposalPreview.jsx:415: "Provide requested documents by deadline",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:14: { icon: "📂", title: "Matter Folders", description: "Case records, pleadings, status notes, court timelines." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:16: { icon: "⏰", title: "Deadlines", description: "Limitation dates, hearing dates, filing dates and reminders." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:29: { term: "Cause Papers", definition: "Court documents filed in a case, including pleadings and applications." },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:45: title: "Upcoming Deadlines",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:47: "Sample Hearing — 3 days",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:48: "Filing Reminder — 5 days"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:71: "Update matter status note"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:75: title: "Recently Updated Matters",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:77: "Sample Matter A — status note updated",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:90: <p>Sample legal practice control desk for urgent work, deadlines, documents, instructions, and follow-ups.</p>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:125: placeholder="Search clients, matters, documents, deadlines, folders..."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:157: <button type="button">⏰ Deadline Monitoring Guide</button>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\legal-management-shell\LegalManagementShell.jsx:199: <div className="settings-card"><strong>🔔 Notifications</strong><span>Email, in-app alerts, deadline reminders.</span></div>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\workflow\WorkflowProgressDashboard.jsx:23: lastUpdated,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\workflow\WorkflowProgressDashboard.jsx:37: const updatedLabel = lastUpdated || new Date().toLocaleString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\components\workflow\WorkflowProgressDashboard.jsx:72: <small>Last updated: {updatedLabel}</small>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\connectivityValidatorApi.js:11: { key: "navigation", label: "Court Navigation", path: "/api/enterprise/navigation/health" },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\connectivityValidatorApi.js:16: { key: "courtOperations", label: "Court Operations", path: "/api/enterprise/court-operations/health" },
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\connectivityValidatorApi.js:41: testedAt: new Date().toISOString()
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\connectivityValidatorApi.js:51: testedAt: new Date().toISOString()
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\connectivityValidatorApi.js:56: export async function validateFrontendBackendConnectivity() {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\connectivityValidatorApi.js:75: generatedAt: new Date().toISOString()
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\enterpriseApi.js:30: return { generatedAt: new Date().toISOString(), result };
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\api\operationsAnalyticsApi.js:15: courts: () => readJson("/courts"),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseAlertEscalationCentre.jsx:17: setStatus("Live dashboard updated");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseAutonomousOperationsSupervisor.jsx:26: <h2>Court Supervision</h2>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseAutonomousOperationsSupervisor.jsx:27: <pre>{JSON.stringify(dashboard.courts, null, 2)}</pre>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsCommandCentre.jsx:28: <p>Live operations view for system health, deployment, workflows, courts, Industrial Court, PERKESO, navigation, and alerts.</p>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsCommandCentre.jsx:38: <div style={{ padding: 16, border: "1px solid #ddd", borderRadius: 12 }}><h3>Industrial Court</h3><strong>{summary.industrialCourtStatus || "UNKNOWN"}</strong></div>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsCommandCentre.jsx:51: <li>Industrial Court Kuala Lumpur</li>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsDashboard.jsx:52: <EnterpriseStatusCard title="Maps" status={result.maps?.status} value={`Courts: ${result.maps?.registeredCourts ?? "N/A"}`} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsDashboard.jsx:53: <EnterpriseStatusCard title="Navigation" status={result.navigation?.status} value={`Courts: ${result.navigation?.courtsRegistered ?? "N/A"}`} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsDashboard.jsx:56: <h2 style={{ marginTop: 32 }}>Special Court / Agency Monitoring</h2>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\EnterpriseOperationsDashboard.jsx:58: <li>Industrial Court Kuala Lumpur</li>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\ExecutiveDeploymentDashboard.jsx:65: <li>Industrial Court Kuala Lumpur</li>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\ExecutiveDeploymentDashboard.jsx:69: <li>Court Navigation</li>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\FrontendBackendConnectivityValidator.jsx:3: import { validateFrontendBackendConnectivity } from "../api/connectivityValidatorApi";
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\FrontendBackendConnectivityValidator.jsx:11: const result = await validateFrontendBackendConnectivity();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\FrontendBackendConnectivityValidator.jsx:25: <p>Validates frontend access to all major Phase 10 backend endpoints. Auto-refreshes every 30 seconds.</p>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\FrontendBackendConnectivityValidator.jsx:43: <h2>Special Court / Agency Coverage</h2>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\enterprise\pages\FrontendBackendConnectivityValidator.jsx:45: <li>Industrial Court Kuala Lumpur</li>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\menuConfig.js:96: keywords: ["version", "license", "credits", "release notes", "updates"],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\FileActionPanels.jsx:85: <li>Court bundles</li>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:17: return `L360-${Date.now().toString().slice(-6)}`;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:20: function validateForm(form, attachments) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:74: function updateField(field, value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:94: const validationErrors = validateForm(form, attachments);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:118: createdAt: new Date().toLocaleString(),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:161: <select value={form.category} onChange={(event) => updateField("category", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:170: <select value={form.priority} onChange={(event) => updateField("priority", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:182: onChange={(event) => updateField("subject", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:191: onChange={(event) => updateField("description", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:201: onChange={(event) => updateField("contact", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx:210: onChange={(event) => updateField("includeDiagnostics", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:38: opened_date: ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:114: setSuccessMsg("Matter updated");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:161: opened_date: c.opened_date || ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:178: opened_date: ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:398: <option value="PENDING_COURT">Pending Court</option>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Cases.jsx:413: {saving ? "Saving..." : editingId ? "Update Matter" : "Create Matter"}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:13: criticalDeadline: "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:30: "Court date, limitation risk, urgent filing, injunction risk, regulatory deadline, enforcement risk, or immediate commercial exposure.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:53: text: "Clarify the proposed work scope, exclusions, risk position, merits, dependencies, deadlines, and practical action plan.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:105: if (hasValue(assessment.criticalDeadline)) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:107: matterReasons.push("Critical deadline or time pressure recorded.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:142: supportingAlerts.push("Page 5 document readiness should be improved before full legal review.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:204: const now = new Date().toLocaleString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:218: function updateField(field, value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:289: onChange={(value) => updateField("prospectiveClient", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:297: onChange={(value) => updateField("contactPerson", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:305: onChange={(value) => updateField("authorityToInstruct", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:317: onChange={(value) => updateField("conflictRisk", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:335: onChange={(value) => updateField("matterCategory", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:343: onChange={(value) => updateField("urgencyLevel", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:352: <Field label="Critical Deadline / Time Pressure">
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:354: value={assessment.criticalDeadline}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:355: onChange={(value) => updateField("criticalDeadline", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:356: placeholder="e.g. hearing tomorrow / limitation risk / no fixed deadline"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:363: onChange={(value) => updateField("documentReadiness", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:382: onChange={(value) => updateField("evidencePosition", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:394: onChange={(value) => updateField("budgetClarity", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:411: onChange={(value) => updateField("primaryObjective", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:419: onChange={(value) => updateField("backgroundSummary", value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientIntakeDiscovery.jsx:476: fallback="Current default favours governance first unless urgency or deadline risk is recorded."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:13: "Court Matter",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:81: dateOfBirth: "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:132: unavailableUntilDate: "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:229: updatedAt: ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:620: "Court / Legal Appointment",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:647: "Court-Ordered Access"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:764: "Appointment reminder": "Hello, this is a reminder regarding your upcoming appointment. Please confirm your availability.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:794: return "client-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:891: const now = new Date();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:894: const date = new Date(fullYear, mm - 1, dd);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:897: date.getFullYear() !== fullYear ||
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:898: date.getMonth() !== mm - 1 ||
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:899: date.getDate() !== dd
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:977: function formatDateDisplay(value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:991: function calculateAge(dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:992: if (!dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:996: const birthDate = new Date(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:997: const today = new Date();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:999: if (Number.isNaN(birthDate.getTime())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1003: let age = today.getFullYear() - birthDate.getFullYear();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1004: const monthDiff = today.getMonth() - birthDate.getMonth();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1006: if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1031: function getGeneration(dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1032: if (!dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1036: const year = new Date(dateOfBirth).getFullYear();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1126: function formatDateTime(value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1131: const date = new Date(value);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1133: if (Number.isNaN(date.getTime())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1137: return date.toLocaleString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1219: return { date: "", time: "" };
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1225: const [date, timeWithSeconds] = raw.split("T");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1227: date,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1232: return { date: "", time: "" };
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1235: function combineAvailability(date, time) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1236: if (!date) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1240: return date + "T" + (time || "23:59");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1244: const combined = combineAvailability(client.unavailableUntilDate, client.unavailableUntilTime);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1250: const until = new Date(combined);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1253: return "Unavailable until date/time invalid";
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1256: if (until.getTime() < Date.now()) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1260: return "Unavailable until " + formatDateTime(combined);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1286: const dateOfBirth = source.dateOfBirth || derivedDob;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1287: const age = source.age || calculateAge(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1289: const generation = source.generation || getGeneration(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1312: dateOfBirth,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1363: unavailableUntilDate: source.unavailableUntilDate || availability.date || "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1370: : Boolean(source.unavailableUntilDate || source.unavailableUntilTime || source.unavailableUntil),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1463: updatedAt: source.updatedAt || source.modifiedOn || source.changedOn || source.editedOn || ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1490: const start = new Date(clientSince);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1491: if (Number.isNaN(start.getTime())) return "Invalid date";
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1493: const now = new Date();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1496: if (now.getDate() < start.getDate()) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1523: ["Date of Birth / Age", form.dateOfBirth || form.ageCategory],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1586: const now = new Date().toISOString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1595: const dateOfBirth = derivedDob || form.dateOfBirth;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1596: const age = calculateAge(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1598: const generation = getGeneration(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1617: const unavailableUntil = combineAvailability(form.unavailableUntilDate, form.unavailableUntilTime);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1632: dateOfBirth,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1651: updatedAt: now
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1844: function getCorrespondenceAddressUpdatesFromResidential(source) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1845: const updates = {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1851: updates[correspondenceField] = residentialField === "addressType"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1856: return updates;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1881: ...getCorrespondenceAddressUpdatesFromResidential(withCanonicalContacts)
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1919: (candidate) => candidate.getAttribute("name") === name && isVisible(candidate),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:1922: return groupControls.some((candidate) => candidate.checked);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2075: (candidate) => candidate.getAttribute("name") === name && isVisible(candidate),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2080: if (groupControls.some((candidate) => candidate.checked)) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2559: const savedAt = new Date().toISOString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2562: setDraftSaveStatus(message + " " + new Date(savedAt).toLocaleString());
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2615: setDraftSaveStatus(draftPayload.savedAt ? "Recoverable draft saved at " + new Date(draftPayload.savedAt).toLocaleString() : "Recoverable draft found.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2771: onChange={(event) => updateForm(detailField, event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2780: function updateForm(field, value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2863: next.unavailableUntilDate = "";
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2881: Object.assign(next, getCorrespondenceAddressUpdatesFromResidential(next));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:2968: next.dateOfBirth = derivedDob;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3011: if (field === "unavailableUntilDate" && !value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3018: Object.assign(next, getCorrespondenceAddressUpdatesFromResidential(next));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3034: function validateClientForm(payload) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3218: errors.push("NRIC date of birth could not be read. Check the first six digits.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3276: if (payload.unavailableUntilDate && !payload.unavailableUntilTime) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3277: errors.push("Unavailable Until time is mandatory when Unavailable Until date is set.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3280: if (payload.unavailableUntilDate && payload.availabilityReason === "Not Applicable / N/A") {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3308: const { errors, flags } = validateClientForm(preparedForm);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3453: function updateDocumentFiles(event) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3457: updateForm("documentAttachmentNames", names);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3592: normalized.dateOfBirth,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:3613: "Date of Birth": [normalized.dateOfBirth],
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4028: "Date of Birth",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4159: <div><strong>Date / State of Birth</strong><span>{[viewingClientProfile.dateOfBirth, viewingClientProfile.stateOfBirth].filter(Boolean).join(" / ") || "Not recorded"}</span></div>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4226: <small>Last saved: {new Date(lastDraftSavedAt).toLocaleString()}</small>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4261: <select required value={form.titlePrefix} onChange={(event) => updateForm("titlePrefix", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4279: onChange={(event) => updateForm("givenName", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4290: onChange={(event) => updateForm("surname", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4297: <select value={form.gender} onChange={(event) => updateForm("gender", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4311: onChange={(event) => updateForm("titleGenderOverride", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4321: onChange={(event) => updateForm("titleOverrideReason", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4330: <p className="client-profile-card-help">Identification, document status, date of birth, and verification-related details. Existing validation remains preserved.</p>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4335: <select required value={form.residencyStatus} onChange={(event) => updateForm("residencyStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4344: <select required value={form.identificationKind} onChange={(event) => updateForm("identificationKind", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4353: <select required value={form.identityCardColour} onChange={(event) => updateForm("identityCardColour", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4366: onChange={(event) => updateForm("nricPassportNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4373: Date of Birth
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4374: <input value={form.dateOfBirth ? formatDateDisplay(form.dateOfBirth) : "Auto from NRIC"} readOnly />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4391: <input value={form.generation || "Auto from date of birth"} readOnly />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4399: onChange={(event) => updateForm("ethnicity", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4415: onChange={(event) => updateForm("nationality", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4427: onChange={(event) => updateForm("ethnicityOther", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4441: <select value={form.employmentStatus} onChange={(event) => updateForm("employmentStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4456: <select value={form.maritalStatus} onChange={(event) => updateForm("maritalStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4467: onChange={(event) => updateForm("hasDependents", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4480: onChange={(event) => updateForm("dependentsCount", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4489: onChange={(event) => updateForm("dependentNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4506: <select value={form.clientRoleInMatter} onChange={(event) => updateForm("clientRoleInMatter", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4515: <select value={form.caseOriginType} onChange={(event) => updateForm("caseOriginType", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4527: onChange={(event) => updateForm("previousFirmName", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4538: onChange={(event) => updateForm("coCounselNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4554: type="date"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4556: onChange={(event) => updateForm("clientSince", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4567: onChange={(event) => updateForm("totalMattersCount", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4574: <select value={form.clientValueTier} onChange={(event) => updateForm("clientValueTier", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4585: onChange={(event) => updateForm("clientValueNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4600: <select value={form.willStatus} onChange={(event) => updateForm("willStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4613: onChange={(event) => updateForm("willReferenceNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4614: placeholder="Example: will exists, held by client, executor named, copy requested, court access may be required."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4622: onChange={(event) => updateForm("willRestrictedAccess", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4641: updateForm("willAuthorizedParties", nextParties);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4663: <select value={form.healthDisabilityStatus} onChange={(event) => updateForm("healthDisabilityStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4674: onChange={(event) => updateForm("accommodationRequired", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4684: onChange={(event) => updateForm("accommodationNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4685: placeholder="Example: prefers written communication, mobility access, hearing/visual support, medical sensitivity, appointment timing needs."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4701: onChange={(event) => updateForm("email", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4713: onChange={(event) => updateForm("phoneCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4719: onChange={(event) => updateForm("phoneNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4733: onChange={(event) => updateForm("hasBackupPhone", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4745: onChange={(event) => updateForm("backupPhoneCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4751: onChange={(event) => updateForm("backupPhoneNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4765: onChange={(event) => updateForm("whatsappSameAsPhone", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4777: onChange={(event) => updateForm("whatsappCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4782: onChange={(event) => updateForm("whatsappNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4791: <select value={form.whatsappMessageTemplate} onChange={(event) => updateForm("whatsappMessageTemplate", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4814: onChange={(event) => updateForm("whatsappCustomMessage", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4836: onChange={(event) => updateForm("preferredContact1", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4850: onChange={(event) => updateForm("preferredContact2", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4877: onChange={(event) => updateForm("preferredContact3", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4891: onChange={(event) => updateForm("preferredContact4", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4905: onChange={(event) => updateForm("preferredContact5", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4919: <input type="time" value={form.preferredContactHoursFrom} onChange={(event) => updateForm("preferredContactHoursFrom", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4920: <input type="time" value={form.preferredContactHoursTo} onChange={(event) => updateForm("preferredContactHoursTo", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4928: onChange={(event) => updateForm("isClientUnavailable", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4937: <input type="date" value={form.unavailableUntilDate} onChange={(event) => updateForm("unavailableUntilDate", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4938: <input type="time" value={form.unavailableUntilTime} onChange={(event) => updateForm("unavailableUntilTime", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4940: <small>Date format: dd/mm/yyyy where applicable.</small>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4948: <select value={form.availabilityReason} onChange={(event) => updateForm("availabilityReason", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4961: onChange={(event) => updateForm("availabilityReasonOther", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4971: onChange={(event) => updateForm("enableCommunicationTimingNotes", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:4981: onChange={(event) => updateForm("communicationTimingNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5008: <select value={form.addressType} onChange={(event) => updateForm("addressType", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5020: onChange={(event) => updateForm("country", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5036: onChange={(event) => updateForm("buildingHouseNo", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5046: onChange={(event) => updateForm("postcode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5054: <input value={form.buildingHouseName} onChange={(event) => updateForm("buildingHouseName", event.target.value)} placeholder="Building / house name, if any" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5059: <select value={form.continent} onChange={(event) => updateForm("continent", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5068: <select value={form.region} onChange={(event) => updateForm("region", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5077: <input value={form.streetAddress} onChange={(event) => updateForm("streetAddress", event.target.value)} placeholder="Street address" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5094: onChange={(event) => updateForm("correspondenceSameAsResidential", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5117: onChange={(event) => updateForm("correspondenceCountry", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5129: onChange={(event) => updateForm("correspondenceBuildingHouseNo", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5140: onChange={(event) => updateForm("correspondencePostcode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5151: onChange={(event) => updateForm("correspondenceBuildingHouseName", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5161: onChange={(event) => updateForm("correspondenceTownCity", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5172: onChange={(event) => updateForm("correspondenceStreetAddress", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5182: onChange={(event) => updateForm("correspondenceState", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5191: onChange={(event) => updateForm("correspondenceNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5200: onChange={(event) => updateForm("correspondenceDifferenceConfirmed", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5225: <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 1)}>Edit</button>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5232: <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 2)}>Edit</button>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5237: updateForm("secondaryAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5238: updateForm("secondaryAdministrativeName", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5239: updateForm("thirdAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5240: updateForm("thirdAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5241: updateForm("fourthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5242: updateForm("fourthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5243: updateForm("fifthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5244: updateForm("fifthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5245: updateForm("administrativeAreaActiveLevel", 1);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5254: <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 3)}>Edit</button>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5259: updateForm("thirdAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5260: updateForm("thirdAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5261: updateForm("fourthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5262: updateForm("fourthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5263: updateForm("fifthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5264: updateForm("fifthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5265: updateForm("administrativeAreaActiveLevel", 2);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5274: <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 4)}>Edit</button>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5279: updateForm("fourthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5280: updateForm("fourthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5281: updateForm("fifthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5282: updateForm("fifthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5283: updateForm("administrativeAreaActiveLevel", 3);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5292: <button type="button" className="btn btn-secondary btn-small" onClick={() => updateForm("administrativeAreaActiveLevel", 5)}>Edit</button>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5297: updateForm("fifthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5298: updateForm("fifthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5299: updateForm("administrativeAreaActiveLevel", 4);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5314: onChange={(event) => updateForm("locationAdminType", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5326: updateForm("manualAdministrativeLocation", value);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5327: updateForm("townCity", value);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5328: updateForm("district", value);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5340: onClick={() => updateForm("administrativeAreaActiveLevel", 2)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5356: onChange={(event) => updateForm("secondaryAdministrativeCategory", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5365: onChange={(event) => updateForm("secondaryAdministrativeName", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5375: onClick={() => updateForm("administrativeAreaActiveLevel", 3)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5383: updateForm("secondaryAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5384: updateForm("secondaryAdministrativeName", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5385: updateForm("administrativeAreaActiveLevel", 1);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5402: onChange={(event) => updateForm("thirdAdministrativeCategory", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5411: onChange={(event) => updateForm("thirdAdministrativeLocation", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5421: onClick={() => updateForm("administrativeAreaActiveLevel", 4)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5429: updateForm("thirdAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5430: updateForm("thirdAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5431: updateForm("administrativeAreaActiveLevel", 2);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5448: onChange={(event) => updateForm("fourthAdministrativeCategory", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5457: onChange={(event) => updateForm("fourthAdministrativeLocation", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5467: onClick={() => updateForm("administrativeAreaActiveLevel", 5)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5475: updateForm("fourthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5476: updateForm("fourthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5477: updateForm("administrativeAreaActiveLevel", 3);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5494: onChange={(event) => updateForm("fifthAdministrativeCategory", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5503: onChange={(event) => updateForm("fifthAdministrativeLocation", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5516: updateForm("fifthAdministrativeCategory", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5517: updateForm("fifthAdministrativeLocation", "");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5518: updateForm("administrativeAreaActiveLevel", 4);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5551: <input value={form.emergencyContactName} onChange={(event) => updateForm("emergencyContactName", event.target.value)} placeholder="Name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5559: onChange={(event) => updateForm("emergencyContactRelationship", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5576: onChange={(event) => updateForm("emergencyContactCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5581: onChange={(event) => updateForm("emergencyContactNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5589: <input type="email" value={form.emergencyContactEmail} onChange={(event) => updateForm("emergencyContactEmail", event.target.value)} placeholder="email@example.com" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5604: onChange={(event) => updateForm("documentationVerificationCompleted", event.target.value === "done")}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5615: <select value={form.documentType} onChange={(event) => updateForm("documentType", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5624: <select value={form.documentStatus} onChange={(event) => updateForm("documentStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5633: <select value={form.verificationStatus} onChange={(event) => updateForm("verificationStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5642: <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp" onChange={updateDocumentFiles} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5650: onChange={(event) => updateForm("documentRelatedReferenceNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5662: onChange={(event) => updateForm("specialRemarksStaffLawyerNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5671: onChange={(event) => updateForm("missingInformationNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5692: {entry.label}: amended on {formatDateTime(entry.changedAt)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5892: <td>{formatDateTime(normalized.createdAt)}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5893: <td>{formatDateTime(normalized.updatedAt)}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Clients.jsx:5910: Age category and generation are locked from NRIC date of birth. Verification discrepancies are flagged for review and stored in the local audit trail until backend audit support is added.
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:13: "Court Matter",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:81: dateOfBirth: "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:129: unavailableUntilDate: "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:186: updatedAt: ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:577: "Court / Legal Appointment",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:682: "Appointment reminder": "Hello, this is a reminder regarding your upcoming appointment. Please confirm your availability.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:712: return "client-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:809: const now = new Date();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:812: const date = new Date(fullYear, mm - 1, dd);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:815: date.getFullYear() !== fullYear ||
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:816: date.getMonth() !== mm - 1 ||
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:817: date.getDate() !== dd
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:895: function formatDateDisplay(value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:909: function calculateAge(dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:910: if (!dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:914: const birthDate = new Date(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:915: const today = new Date();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:917: if (Number.isNaN(birthDate.getTime())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:921: let age = today.getFullYear() - birthDate.getFullYear();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:922: const monthDiff = today.getMonth() - birthDate.getMonth();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:924: if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:949: function getGeneration(dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:950: if (!dateOfBirth) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:954: const year = new Date(dateOfBirth).getFullYear();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1044: function formatDateTime(value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1049: const date = new Date(value);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1051: if (Number.isNaN(date.getTime())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1055: return date.toLocaleString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1137: return { date: "", time: "" };
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1143: const [date, timeWithSeconds] = raw.split("T");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1145: date,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1150: return { date: "", time: "" };
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1153: function combineAvailability(date, time) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1154: if (!date) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1158: return date + "T" + (time || "23:59");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1162: const combined = combineAvailability(client.unavailableUntilDate, client.unavailableUntilTime);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1168: const until = new Date(combined);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1171: return "Unavailable until date/time invalid";
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1174: if (until.getTime() < Date.now()) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1178: return "Unavailable until " + formatDateTime(combined);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1204: const dateOfBirth = source.dateOfBirth || derivedDob;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1205: const age = source.age || calculateAge(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1207: const generation = source.generation || getGeneration(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1230: dateOfBirth,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1278: unavailableUntilDate: source.unavailableUntilDate || availability.date || "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1332: updatedAt: source.updatedAt || source.modifiedOn || source.changedOn || source.editedOn || ""
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1391: const now = new Date().toISOString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1400: const dateOfBirth = derivedDob || form.dateOfBirth;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1401: const age = calculateAge(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1403: const generation = getGeneration(dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1422: const unavailableUntil = combineAvailability(form.unavailableUntilDate, form.unavailableUntilTime);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1437: dateOfBirth,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1456: updatedAt: now
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1558: const unavailabilityIsSet = Boolean(form.unavailableUntilDate);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1717: function updateForm(field, value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1819: next.dateOfBirth = derivedDob;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1862: if (field === "unavailableUntilDate" && !value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:1880: function validateClientForm(payload) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2018: errors.push("NRIC date of birth could not be read. Check the first six digits.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2076: if (payload.unavailableUntilDate && !payload.unavailableUntilTime) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2077: errors.push("Unavailable Until time is mandatory when Unavailable Until date is set.");
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2080: if (payload.unavailableUntilDate && payload.availabilityReason === "Not Applicable / N/A") {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2105: const { errors, flags } = validateClientForm(form);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2236: function updateDocumentFiles(event) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2240: updateForm("documentAttachmentNames", names);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2629: <select required value={form.titlePrefix} onChange={(event) => updateForm("titlePrefix", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2647: onChange={(event) => updateForm("givenName", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2658: onChange={(event) => updateForm("surname", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2665: <select value={form.gender} onChange={(event) => updateForm("gender", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2679: onChange={(event) => updateForm("titleGenderOverride", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2689: onChange={(event) => updateForm("titleOverrideReason", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2702: <select required value={form.residencyStatus} onChange={(event) => updateForm("residencyStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2711: <select required value={form.identificationKind} onChange={(event) => updateForm("identificationKind", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2720: <select required value={form.identityCardColour} onChange={(event) => updateForm("identityCardColour", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2733: onChange={(event) => updateForm("nricPassportNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2740: Date of Birth
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2741: <input value={form.dateOfBirth ? formatDateDisplay(form.dateOfBirth) : "Auto from NRIC"} readOnly />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2758: <input value={form.generation || "Auto from date of birth"} readOnly />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2766: onChange={(event) => updateForm("ethnicity", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2782: onChange={(event) => updateForm("nationality", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2794: onChange={(event) => updateForm("ethnicityOther", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2807: <select value={form.employmentStatus} onChange={(event) => updateForm("employmentStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2822: <select value={form.maritalStatus} onChange={(event) => updateForm("maritalStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2840: onChange={(event) => updateForm("email", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2853: onChange={(event) => updateForm("phoneCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2858: onChange={(event) => updateForm("phoneNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2871: onChange={(event) => updateForm("hasBackupPhone", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2883: onChange={(event) => updateForm("backupPhoneCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2889: onChange={(event) => updateForm("backupPhoneNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2903: onChange={(event) => updateForm("whatsappSameAsPhone", event.target.checked)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2915: onChange={(event) => updateForm("whatsappCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2920: onChange={(event) => updateForm("whatsappNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2929: <select value={form.whatsappMessageTemplate} onChange={(event) => updateForm("whatsappMessageTemplate", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2952: onChange={(event) => updateForm("whatsappCustomMessage", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2960: <select value={form.preferredContact1} onChange={(event) => updateForm("preferredContact1", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2969: <select value={form.preferredContact2} onChange={(event) => updateForm("preferredContact2", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2978: <select value={form.preferredContact3} onChange={(event) => updateForm("preferredContact3", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2989: onChange={(event) => updateForm("preferredContactDetail3", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:2998: <select value={form.preferredContact4} onChange={(event) => updateForm("preferredContact4", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3010: onChange={(event) => updateForm("preferredContactDetail4", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3019: <select value={form.preferredContact5} onChange={(event) => updateForm("preferredContact5", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3031: onChange={(event) => updateForm("preferredContactDetail5", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3041: <input type="time" value={form.preferredContactHoursFrom} onChange={(event) => updateForm("preferredContactHoursFrom", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3042: <input type="time" value={form.preferredContactHoursTo} onChange={(event) => updateForm("preferredContactHoursTo", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3049: <input type="date" value={form.unavailableUntilDate} onChange={(event) => updateForm("unavailableUntilDate", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3050: <input type="time" value={form.unavailableUntilTime} onChange={(event) => updateForm("unavailableUntilTime", event.target.value)} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3058: <select value={form.availabilityReason} onChange={(event) => updateForm("availabilityReason", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3071: onChange={(event) => updateForm("availabilityReasonOther", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3081: onChange={(event) => updateForm("communicationTimingNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3105: <select value={form.addressType} onChange={(event) => updateForm("addressType", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3117: onChange={(event) => updateForm("country", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3133: onChange={(event) => updateForm("buildingHouseNo", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3139: onChange={(event) => updateForm("postcode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3147: <input value={form.buildingHouseName} onChange={(event) => updateForm("buildingHouseName", event.target.value)} placeholder="Building / house name, if any" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3152: <select value={form.continent} onChange={(event) => updateForm("continent", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3161: <select value={form.region} onChange={(event) => updateForm("region", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3170: <input value={form.streetAddress} onChange={(event) => updateForm("streetAddress", event.target.value)} placeholder="Street address" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3175: <input value={form.district} onChange={(event) => updateForm("district", event.target.value)} placeholder="District" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3180: <input value={form.townCity} onChange={(event) => updateForm("townCity", event.target.value)} placeholder="Town / City" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3188: onChange={(event) => updateForm("state", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3199: onChange={(event) => updateForm("municipality", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3209: onChange={(event) => updateForm("council", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3219: onChange={(event) => updateForm("borough", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3229: onChange={(event) => updateForm("locationAdminType", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3240: onChange={(event) => updateForm("locationAdminTypeManual", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3270: <input value={form.emergencyContactName} onChange={(event) => updateForm("emergencyContactName", event.target.value)} placeholder="Name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3278: onChange={(event) => updateForm("emergencyContactRelationship", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3295: onChange={(event) => updateForm("emergencyContactCountryCode", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3300: onChange={(event) => updateForm("emergencyContactNumber", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3308: <input type="email" value={form.emergencyContactEmail} onChange={(event) => updateForm("emergencyContactEmail", event.target.value)} placeholder="email@example.com" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3320: <select value={form.documentType} onChange={(event) => updateForm("documentType", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3329: <select value={form.documentStatus} onChange={(event) => updateForm("documentStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3338: <select value={form.verificationStatus} onChange={(event) => updateForm("verificationStatus", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3347: <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp" onChange={updateDocumentFiles} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3355: onChange={(event) => updateForm("documentRelatedReferenceNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3364: onChange={(event) => updateForm("specialRemarksStaffLawyerNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3373: onChange={(event) => updateForm("missingInformationNotes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3394: {entry.label}: amended on {formatDateTime(entry.changedAt)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3529: <td>{formatDateTime(normalized.createdAt)}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3530: <td>{formatDateTime(normalized.updatedAt)}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\ClientsBackUpCopy.jsx:3546: Age category and generation are locked from NRIC date of birth. Verification discrepancies are flagged for review and stored in the local audit trail until backend audit support is added.
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:2: import { getDeadlines, getCases, createDeadline, updateDeadline, deleteDeadline } from '../api';
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:4: export default function Deadlines() {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:5: const [deadlines, setDeadlines] = useState([]);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:14: deadline_date: '',
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:16: reminder_days: 7,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:29: const [deadlinesData, casesData] = await Promise.all([
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:30: getDeadlines(),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:33: setDeadlines(deadlinesData);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:52: await updateDeadline(editingId, formData);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:53: setSuccessMsg('Deadline updated successfully');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:55: await createDeadline(formData);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:56: setSuccessMsg('Deadline created successfully');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:60: deadline_date: '',
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:62: reminder_days: 7,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:70: setError('Failed to save deadline');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:75: function handleEdit(deadline) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:77: title: deadline.title,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:78: deadline_date: deadline.deadline_date,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:79: case_id: deadline.case_id || '',
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:80: reminder_days: deadline.reminder_days || 7,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:81: notes: deadline.notes || ''
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:83: setEditingId(deadline.id);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:87: async function handleDelete(deadlineId) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:88: if (window.confirm('Are you sure you want to delete this deadline?')) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:90: await deleteDeadline(deadlineId);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:91: setSuccessMsg('Deadline deleted successfully');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:95: setError('Failed to delete deadline');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:106: deadline_date: '',
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:108: reminder_days: 7,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:118: function getDaysUntil(dateStr) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:119: const deadline = new Date(dateStr);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:120: const today = new Date();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:122: deadline.setHours(0, 0, 0, 0);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:123: return Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:134: const filteredDeadlines = deadlines.filter(d => {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:136: if (filterStatus === 'overdue') return getDaysUntil(d.deadline_date) < 0 && !d.is_complete;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:137: if (filterStatus === 'urgent') return getDaysUntil(d.deadline_date) <= 3 && !d.is_complete;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:138: if (filterStatus === 'upcoming') return getDaysUntil(d.deadline_date) > 3 && !d.is_complete;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:141: }).sort((a, b) => new Date(a.deadline_date) - new Date(b.deadline_date));
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:143: if (loading) return <div className="loading"><div className="spinner"></div> Loading deadlines...</div>;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:146: <div className="deadlines-page">
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:153: + Add Deadline
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:174: <option value="all">All Deadlines</option>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:177: <option value="upcoming">Upcoming</option>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:185: <h3>{editingId ? 'Edit Deadline' : 'Add New Deadline'}</h3>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:188: <label>Deadline Title *</label>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:201: <label>Due Date *</label>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:203: type="date"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:204: name="deadline_date"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:205: value={formData.deadline_date}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:226: <label>Reminder (days before deadline)</label>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:229: name="reminder_days"
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:230: value={formData.reminder_days}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:236: System will remind you {formData.reminder_days} day(s) before the deadline
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:246: placeholder="Additional notes for this deadline..."
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:252: {editingId ? 'Update Deadline' : 'Create Deadline'}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:262: {/* DEADLINES TABLE */}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:264: <h3>Deadlines ({filteredDeadlines.length})</h3>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:265: {filteredDeadlines.length === 0 ? (
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:266: <p style={{ color: 'var(--text)', margin: '20px 0' }}>No deadlines matching filter.</p>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:272: <th>Deadline</th>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:273: <th>Due Date</th>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:276: <th>Reminder Set</th>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:282: {filteredDeadlines.map(deadline => {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:283: const daysUntil = getDaysUntil(deadline.deadline_date);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:285: if (deadline.is_complete) statusLabel = 'Completed';
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:291: <tr key={deadline.id}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:292: <td><strong>{deadline.title}</strong></td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:293: <td>{new Date(deadline.deadline_date).toLocaleDateString()}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:294: <td style={{ color: getStatusColor(daysUntil, deadline.is_complete), fontWeight: 'bold' }}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:297: <td>{getCaseName(deadline.case_id)}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:298: <td>{deadline.reminder_days ? `${deadline.reminder_days} days` : '—'}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:307: onClick={() => handleEdit(deadline)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Deadlines.jsx:314: onClick={() => handleDelete(deadline.id)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:18: const [sortOrder, setSortOrder] = useState('date-desc');
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:58: const parsedDate = new Date(value);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:59: if (Number.isNaN(parsedDate.getTime())) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:63: return parsedDate.toLocaleDateString();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:142: 'Court Order',
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:166: const aTime = new Date(a.uploaded_at).getTime();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:167: const bTime = new Date(b.uploaded_at).getTime();
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:171: return sortOrder === 'date-asc' ? safeATime - safeBTime : safeBTime - safeATime;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:227: <option value="date-desc">Uploaded newest first</option>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Documents.jsx:228: <option value="date-asc">Uploaded oldest first</option>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:15: "Deadline Details",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:33: dateOfBirth: "",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:58: dateOfBirth: "01/01/1990",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:61: lastMatterDate: "18/06/2026",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:76: dateOfBirth: "05/05/1985",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:79: lastMatterDate: "03/05/2026",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:235: function detectDuplicateCandidates(intake) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:242: const dateOfBirth = compact(intake.dateOfBirth);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:265: dateOfBirth &&
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:266: compact(client.dateOfBirth) === dateOfBirth;
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:274: reason: "Full name and date of birth match an existing client.",
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:316: <dt>Date of Birth</dt>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:317: <dd>{client.dateOfBirth || "-"}</dd>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:328: <dt>Last Matter Date</dt>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:329: <dd>{client.lastMatterDate || "-"}</dd>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:384: timestamp: new Date().toISOString(),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:392: function updateClientIntake(field, value) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:462: createdAt: new Date().toISOString(),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:493: savedAt: new Date().toISOString(),
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:533: const duplicateCandidates = detectDuplicateCandidates(clientIntake);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:535: if (duplicateCandidates.length && !allowOverride) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:536: setDuplicateOverrideMatches(duplicateCandidates);
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:540: matchCount: duplicateCandidates.length,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:545: if (duplicateCandidates.length && clientIntake.duplicateDecision.trim().length < 12) {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:550: addAudit(duplicateCandidates.length ? "duplicate_override_confirmed" : "new_client_confirmed", {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:838: <dt>Date of Birth</dt>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:839: <dd>{profilePreviewClient.dateOfBirth}</dd>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:854: <dt>Last Matter Date</dt>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:855: <dd>{profilePreviewClient.lastMatterDate}</dd>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:955: <select value={clientIntake.clientType} onChange={(event) => updateClientIntake("clientType", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:967: <input value={clientIntake.fullName} onChange={(event) => updateClientIntake("fullName", event.target.value)} placeholder="Client full legal name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:970: <input value={clientIntake.givenName} onChange={(event) => updateClientIntake("givenName", event.target.value)} placeholder="Given name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:973: <input value={clientIntake.surname} onChange={(event) => updateClientIntake("surname", event.target.value)} placeholder="Surname / family name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:976: <input value={clientIntake.preferredName} onChange={(event) => updateClientIntake("preferredName", event.target.value)} placeholder="Preferred name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:979: <input value={clientIntake.alias} onChange={(event) => updateClientIntake("alias", event.target.value)} placeholder="Alias, nickname, alternate spelling" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:989: <input type="email" value={clientIntake.email} onChange={(event) => updateClientIntake("email", event.target.value)} placeholder="Email address" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:992: <input value={clientIntake.phone} onChange={(event) => updateClientIntake("phone", event.target.value)} placeholder="Primary phone number" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:995: <input value={clientIntake.whatsapp} onChange={(event) => updateClientIntake("whatsapp", event.target.value)} placeholder="WhatsApp number" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1004: <input value={clientIntake.idReference} onChange={(event) => updateClientIntake("idReference", event.target.value)} placeholder="ID, NRIC, internal reference" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1007: <input value={clientIntake.passportNumber} onChange={(event) => updateClientIntake("passportNumber", event.target.value)} placeholder="Passport number" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1009: <Field label="Date of Birth">
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1010: <input value={clientIntake.dateOfBirth} onChange={(event) => updateClientIntake("dateOfBirth", event.target.value)} placeholder="dd/mm/yyyy" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1018: <input value={clientIntake.companyName} onChange={(event) => updateClientIntake("companyName", event.target.value)} placeholder="Company, employer, organisation, or entity name" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1025: <textarea value={clientIntake.address} onChange={(event) => updateClientIntake("address", event.target.value)} placeholder="Full address" rows={3} />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1029: <input value={clientIntake.city} onChange={(event) => updateClientIntake("city", event.target.value)} placeholder="City, town, area" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1032: <input value={clientIntake.postcode} onChange={(event) => updateClientIntake("postcode", event.target.value)} placeholder="Postcode" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1035: <input value={clientIntake.state} onChange={(event) => updateClientIntake("state", event.target.value)} placeholder="State" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1039: <input value={clientIntake.country} onChange={(event) => updateClientIntake("country", event.target.value)} placeholder="Malaysia" />
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1047: <select value={clientIntake.intakeSource} onChange={(event) => updateClientIntake("intakeSource", event.target.value)}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1063: onChange={(event) => updateClientIntake("duplicateDecision", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1072: onChange={(event) => updateClientIntake("notes", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\MatterIntakeWizard.jsx:1108: onChange={(event) => updateClientIntake("duplicateDecision", event.target.value)}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Matters.jsx:23: <th>Court</th>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\Matters.jsx:33: <td>{m.courtName}</td>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\OperationsDashboard.jsx:133: <div style={updatedStyle}>
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\OperationsDashboard.jsx:134: Updated: {new Date(data.timestamp).toLocaleString()}
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\pages\OperationsDashboard.jsx:304: const updatedStyle = {
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\services\caseService.js:4: updateCase,
+C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\frontend\src\services\caseService.js:19: return await updateCase(id, data);
