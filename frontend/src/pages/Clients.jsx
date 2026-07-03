@@ -4125,24 +4125,51 @@ function isUnavailablePlaceholder(value) {
           </label>
         </div>
 
-        <div className="client-alphabet-filter two-rows" aria-label="Client alphabet filter">
-          <div className="alphabet-action-row">
-            <button type="button" className={"show-all-clients-chip " + (activeAlphabetFilter === "All" ? "active" : "")} onClick={clearDirectoryFilters}>Show All Clients</button>
-          </div>
-          <div className="alphabet-row">
-            {CLIENT_DIRECTORY_ALPHABET.slice(0, 13).map((letter) => (
-              <button
-                type="button"
-                key={letter}
-                className={activeAlphabetFilter === letter ? "active" : ""}
-                onClick={() => setActiveAlphabetFilter(letter)}
+        <div className="client-alphabet-filter alphabet-filter-control" aria-label="Client alphabet filter">
+          <div className="alphabet-filter-main-row">
+            <button
+              type="button"
+              className={"show-all-clients-chip " + (activeAlphabetFilter === "All" ? "active" : "")}
+              onClick={clearDirectoryFilters}
+            >
+              Show All Clients
+            </button>
+
+            <label className="alphabet-filter-select-field">
+              Filter by Letter
+              <select
+                value={activeAlphabetFilter}
+                onChange={(event) => setActiveAlphabetFilter(event.target.value)}
               >
-                {letter}
-              </button>
-            ))}
+                <option value="All">All letters</option>
+                {CLIENT_DIRECTORY_ALPHABET.map((letter) => (
+                  <option key={letter} value={letter}>{letter}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="alphabet-filter-manual-field">
+              Manual Letter
+              <input
+                value={activeAlphabetFilter === "All" ? "" : activeAlphabetFilter}
+                maxLength="1"
+                placeholder="Type A-Z"
+                onChange={(event) => {
+                  const nextLetter = String(event.target.value || "").trim().toUpperCase().slice(0, 1);
+                  if (!nextLetter) {
+                    setActiveAlphabetFilter("All");
+                    return;
+                  }
+                  if (CLIENT_DIRECTORY_ALPHABET.includes(nextLetter)) {
+                    setActiveAlphabetFilter(nextLetter);
+                  }
+                }}
+              />
+            </label>
           </div>
-          <div className="alphabet-row">
-            {CLIENT_DIRECTORY_ALPHABET.slice(13).map((letter) => (
+
+          <div className="alphabet-chip-grid" aria-label="Alphabet quick filter">
+            {CLIENT_DIRECTORY_ALPHABET.map((letter) => (
               <button
                 type="button"
                 key={letter}
