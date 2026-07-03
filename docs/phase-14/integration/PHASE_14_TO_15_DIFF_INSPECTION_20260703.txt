@@ -1,0 +1,326 @@
+# PHASE 14 TO PHASE 15 DIFF INSPECTION
+
+Project:
+Litigation 360 / LEOS
+
+Date:
+2026-07-03
+
+Branch:
+integration/phase-14-into-phase-15-review
+
+Purpose:
+Inspect accepted Phase 14 branches against the Phase 15 integration branch before applying any merge/cherry-pick.
+
+Rules:
+- No merge
+- No cherry-pick
+- No source edits
+- Diff inspection only
+
+
+
+============================================================
+CURRENT BRANCH
+COMMAND: git branch --show-current
+============================================================
+integration/phase-14-into-phase-15-review
+
+
+
+============================================================
+CURRENT STATUS
+COMMAND: git status
+============================================================
+On branch integration/phase-14-into-phase-15-review
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	docs/phase-14/integration/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+
+============================================================
+CURRENT HEAD
+COMMAND: git log --oneline -1
+============================================================
+812a18f fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+
+
+
+============================================================
+PHASE 15 HEAD
+COMMAND: git log --oneline -1 phase-15-mvp-legal-control-desk
+============================================================
+812a18f fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+
+
+
+============================================================
+PHASE 14E CLOSURE HEAD
+COMMAND: git log --oneline -1 control/phase-14e-closure-tracker
+============================================================
+165c49d docs: add page 3 visual data lock handover
+
+
+
+============================================================
+PAGE 4+ PROGRESS HEAD
+COMMAND: git log --oneline -1 fix/14e-page4-plus-progress-calculators
+============================================================
+a704c55 docs: close page 4 plus progress calculator work
+
+
+
+============================================================
+NAME STATUS: Phase 15 vs Phase 14E Closure
+COMMAND: git diff --name-status phase-15-mvp-legal-control-desk..control/phase-14e-closure-tracker
+============================================================
+A	PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt
+A	docs/phase-14/audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md
+A	docs/phase-14/audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md
+A	docs/phase-14/audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md
+A	docs/phase-14/closeout/PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md
+A	docs/phase-14/closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md
+A	docs/phase-14/closeout/PHASE_14E_FINAL_HANDOVER_CARD_20260703.md
+A	docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md
+M	frontend/src/App.css
+M	frontend/src/pages/Clients.jsx
+A	tools/install-page3-visual-lock-hooks.ps1
+A	tools/verify-page3-alphabet-filter-lock.ps1
+A	tools/verify-page3-real-percentage-lock.ps1
+A	tools/verify-page3-required-counter-lock.ps1
+
+
+
+============================================================
+STAT: Phase 15 vs Phase 14E Closure
+COMMAND: git diff --stat phase-15-mvp-legal-control-desk..control/phase-14e-closure-tracker
+============================================================
+ PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt              | 859 ++++++++++++++++++++
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    | 108 +++
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   | 146 ++++
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |  92 +++
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   | 183 +++++
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md | 262 ++++++
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      | 121 +++
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md | 222 ++++++
+ frontend/src/App.css                               | 886 +++++++++++++++++++++
+ frontend/src/pages/Clients.jsx                     |  59 +-
+ tools/install-page3-visual-lock-hooks.ps1          |  49 ++
+ tools/verify-page3-alphabet-filter-lock.ps1        |  55 ++
+ tools/verify-page3-real-percentage-lock.ps1        |  49 ++
+ tools/verify-page3-required-counter-lock.ps1       |  59 ++
+ 14 files changed, 3134 insertions(+), 16 deletions(-)
+
+
+
+============================================================
+NAME STATUS: Phase 15 vs Page 4+ Progress
+COMMAND: git diff --name-status phase-15-mvp-legal-control-desk..fix/14e-page4-plus-progress-calculators
+============================================================
+A	PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt
+A	docs/phase-14/audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md
+A	docs/phase-14/audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md
+A	docs/phase-14/audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md
+A	docs/phase-14/closeout/PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md
+A	docs/phase-14/closeout/PAGE_4_PLUS_PROGRESS_CALCULATOR_HANDOVER_20260703.md
+A	docs/phase-14/closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md
+A	docs/phase-14/closeout/PHASE_14E_FINAL_HANDOVER_CARD_20260703.md
+A	docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md
+A	docs/phase-14/implementation/PAGE_4_PLUS_PROGRESS_CALCULATOR_IMPLEMENTATION_20260703.md
+A	docs/phase-14/implementation/PAGE_4_PLUS_PROGRESS_CALCULATOR_SETUP_20260703.md
+M	frontend/src/App.css
+M	frontend/src/App.jsx
+M	frontend/src/pages/Clients.jsx
+A	tools/install-page3-visual-lock-hooks.ps1
+A	tools/verify-page3-alphabet-filter-lock.ps1
+A	tools/verify-page3-real-percentage-lock.ps1
+A	tools/verify-page3-required-counter-lock.ps1
+
+
+
+============================================================
+STAT: Phase 15 vs Page 4+ Progress
+COMMAND: git diff --stat phase-15-mvp-legal-control-desk..fix/14e-page4-plus-progress-calculators
+============================================================
+ PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt              | 859 ++++++++++++++++++++
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    | 108 +++
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   | 146 ++++
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |  92 +++
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   | 183 +++++
+ ...4_PLUS_PROGRESS_CALCULATOR_HANDOVER_20260703.md |  88 ++
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md | 262 ++++++
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      | 121 +++
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md | 222 ++++++
+ ..._PROGRESS_CALCULATOR_IMPLEMENTATION_20260703.md |  50 ++
+ ...GE_4_PLUS_PROGRESS_CALCULATOR_SETUP_20260703.md |  74 ++
+ frontend/src/App.css                               | 886 +++++++++++++++++++++
+ frontend/src/App.jsx                               | 105 +++
+ frontend/src/pages/Clients.jsx                     |  59 +-
+ tools/install-page3-visual-lock-hooks.ps1          |  49 ++
+ tools/verify-page3-alphabet-filter-lock.ps1        |  55 ++
+ tools/verify-page3-real-percentage-lock.ps1        |  49 ++
+ tools/verify-page3-required-counter-lock.ps1       |  59 ++
+ 18 files changed, 3451 insertions(+), 16 deletions(-)
+
+
+
+============================================================
+APP.JSX DIFF: Phase 15 vs Page 4+ Progress
+COMMAND: git diff phase-15-mvp-legal-control-desk..fix/14e-page4-plus-progress-calculators -- frontend/src/App.jsx
+============================================================
+diff --git a/frontend/src/App.jsx b/frontend/src/App.jsx
+index 2a8b362..486f7be 100644
+--- a/frontend/src/App.jsx
++++ b/frontend/src/App.jsx
+@@ -238,6 +238,65 @@ const moduleRouteAliases = {
+ };
+ 
+ 
++function computeRequiredProgress(items) {
++  const safeItems = Array.isArray(items) ? items : [];
++  const requiredItems = safeItems.filter((item) => item.required !== false);
++  const totalRequired = requiredItems.length;
++  const completedRequired = requiredItems.filter((item) => Boolean(item.complete)).length;
++  const missingRequired = Math.max(totalRequired - completedRequired, 0);
++  const percentage = totalRequired > 0 ? Math.round((completedRequired / totalRequired) * 100) : 0;
++
++  let label = "No required items";
++  if (totalRequired > 0 && percentage === 100) label = "Complete";
++  else if (totalRequired > 0 && percentage > 0) label = "In progress";
++  else if (totalRequired > 0) label = "Not started";
++
++  return {
++    totalRequired,
++    completedRequired,
++    missingRequired,
++    percentage,
++    label,
++  };
++}
++
++function PageRequiredProgressCard({ title, items, note }) {
++  const progress = computeRequiredProgress(items);
++
++  return (
++    <section className="workflow-progress-dashboard" aria-label={`${title} progress`}>
++      <div className="workflow-progress-dashboard-header">
++        <div>
++          <p className="workflow-progress-dashboard-kicker">Required Completion</p>
++          <h3>{title}</h3>
++          <p>{note || "Real required-item progress for this page."}</p>
++        </div>
++        <div className="workflow-progress-dashboard-total">
++          <strong>{progress.percentage}%</strong>
++          <span>{progress.label}</span>
++        </div>
++      </div>
++
++      <div className="workflow-progress-dashboard-metrics">
++        <div>
++          <strong>{progress.totalRequired}</strong>
++          <span>Required</span>
++          <small>Total required items</small>
++        </div>
++        <div>
++          <strong>{progress.completedRequired}</strong>
++          <span>Complete</span>
++          <small>Required items completed</small>
++        </div>
++        <div>
++          <strong>{progress.missingRequired}</strong>
++          <span>Missing</span>
++          <small>Required items still pending</small>
++        </div>
++      </div>
++    </section>
++  );
++}
+ function isEditableKeyboardTarget(target) {
+   if (!target || typeof target.closest !== "function") return false;
+ 
+@@ -682,6 +741,47 @@ function ModuleFrame({
+ };
+ 
+   const previousTarget = previousMap[title] || "home";
++  const isPostPage3Module = [
++    "Cases",
++    "Court Dates",
++    "Documents",
++    "Documents & Evidence Readiness",
++    "Draft Engagement Preview",
++    "Review Submit",
++  ].includes(title);
++
++  const hasRenderableChildren = Boolean(children);
++
++  const pageProgressItems = (() => {
++    if (title === "Cases") {
++      return [
++        { label: "Case / Matter details section available", required: true, complete: hasRenderableChildren },
++      ];
++    }
++
++    if (title === "Court Dates") {
++      return [
++        { label: "Court Dates section available", required: true, complete: hasRenderableChildren },
++      ];
++    }
++
++    if (title === "Documents" || title === "Documents & Evidence Readiness") {
++      return [
++        { label: "Documents / Evidence section available", required: true, complete: hasRenderableChildren },
++      ];
++    }
++
++    if (title === "Draft Engagement Preview" || title === "Review Submit") {
++      return [
++        { label: "Final review section available", required: true, complete: hasRenderableChildren },
++      ];
++    }
++
++    return [];
++  })();
++
++  const pageProgressNote = "Current App.jsx exposes module-level completion only. Field-level required items can be expanded when page-specific field models are available.";
++
+   const nextTarget = nextMap[title] || "";
+ 
+   function goPrevious() {
+@@ -792,6 +892,9 @@ function ModuleFrame({
+       )}
+ 
+       <div className="module-frame-body">
++        {isPostPage3Module ? (
++          <PageRequiredProgressCard title={title} items={pageProgressItems} note={pageProgressNote} />
++        ) : null}
+         {children}
+       </div>
+ 
+@@ -876,3 +979,5 @@ function Metric({ label, value }) {
+     </div>
+   );
+ }
++
++
+
+
+
+============================================================
+DOCS DIFF STAT: Phase 15 vs Page 4+ Progress
+COMMAND: git diff --stat phase-15-mvp-legal-control-desk..fix/14e-page4-plus-progress-calculators -- docs
+============================================================
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    | 108 +++++++++
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   | 146 ++++++++++++
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |  92 ++++++++
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   | 183 ++++++++++++++
+ ...4_PLUS_PROGRESS_CALCULATOR_HANDOVER_20260703.md |  88 +++++++
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md | 262 +++++++++++++++++++++
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      | 121 ++++++++++
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md | 222 +++++++++++++++++
+ ..._PROGRESS_CALCULATOR_IMPLEMENTATION_20260703.md |  50 ++++
+ ...GE_4_PLUS_PROGRESS_CALCULATOR_SETUP_20260703.md |  74 ++++++
+ 10 files changed, 1346 insertions(+)
+
