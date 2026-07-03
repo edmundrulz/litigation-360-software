@@ -524,3 +524,59 @@ Section labels/icons may remain gold.
 }
 
 /* L360-SIDEBAR-ACTIVE-FORCE-V2-END */
+
+/* PHASE 15A LEOS PRO DRAWER STACKING FIX START */
+/* Baseline-preservation fix only: drawer stacking, backdrop coverage, one active drawer, Escape/backdrop close, and non-wrapping Close button. */
+
+.leos-pro-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482999;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  background: rgba(15, 23, 42, 0.56);
+  backdrop-filter: blur(2px);
+  cursor: default;
+}
+
+.leos-pro-backdrop.open {
+  display: block;
+}
+
+.leos-pro-drawer {
+  z-index: 2147483001 !important;
+  isolation: isolate;
+}
+
+body.leos-pro-drawer-active {
+  overflow: hidden;
+}
+
+.leos-pro-close {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 72px !important;
+  min-height: 40px !important;
+  padding: 0.55rem 0.9rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  text-align: center !important;
+  flex-shrink: 0 !important;
+}
+
+@media (max-width: 860px) {
+  .leos-pro-drawer {
+    left: 16px !important;
+    right: 16px !important;
+    top: 16px !important;
+    width: auto !important;
+    max-height: calc(100vh - 32px) !important;
+  }
+}
+
+/* PHASE 15A LEOS PRO DRAWER STACKING FIX END */

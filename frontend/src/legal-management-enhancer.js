@@ -213,6 +213,45 @@ import "./legal-management-enhancer.css";
     return drawer;
   }
 
+    function closeLeosProDrawer() {
+    document.querySelectorAll(".leos-pro-drawer.open").forEach((drawer) => {
+      drawer.classList.remove("open");
+    });
+
+    const backdrop = document.querySelector(".leos-pro-backdrop");
+    if (backdrop) {
+      backdrop.classList.remove("open");
+    }
+
+    document.body.classList.remove("leos-pro-drawer-active");
+  }
+
+  function ensureLeosProBackdrop() {
+    let backdrop = document.querySelector(".leos-pro-backdrop");
+
+    if (!backdrop) {
+      backdrop = document.createElement("button");
+      backdrop.type = "button";
+      backdrop.className = "leos-pro-backdrop";
+      backdrop.setAttribute("aria-label", "Close legal management drawer");
+      backdrop.addEventListener("click", closeLeosProDrawer);
+      document.body.appendChild(backdrop);
+    }
+
+    return backdrop;
+  }
+
+  if (!window.__leosProDrawerEscapeBound) {
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeLeosProDrawer();
+      }
+    });
+
+    window.__leosProDrawerEscapeBound = true;
+  }
+
+
   function openDrawer(title, subtitle, html) {
     const drawer = ensureDrawer();
     const drawerIcon = drawerIconByAction(title);
@@ -229,8 +268,18 @@ import "./legal-management-enhancer.css";
       </div>
       ${html}
     `;
+    closeLeosProDrawer();
+
+    const backdrop = ensureLeosProBackdrop();
+    backdrop.classList.add("open");
+
     drawer.classList.add("open");
-    drawer.querySelector("[data-close]").addEventListener("click", () => drawer.classList.remove("open"));
+    document.body.classList.add("leos-pro-drawer-active");
+
+    const closeButton = drawer.querySelector("[data-close]");
+    if (closeButton) {
+      closeButton.addEventListener("click", closeLeosProDrawer);
+    }
   }
 
   function renderLegalLinksHtml(filterText = "") {
