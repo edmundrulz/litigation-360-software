@@ -9,6 +9,7 @@ if (!(Test-Path $clientsPath)) {
 
 $clients = Get-Content $clientsPath -Raw
 
+# Use .Contains() instead of -like because percentage logic contains [ ] characters.
 $requiredMarkers = @(
   "function getClientFormCompletionProgress(form)",
   "const completed = checks.filter(([, value]) => isCompletionValuePresent(value)).length;",
@@ -20,7 +21,7 @@ $requiredMarkers = @(
 )
 
 foreach ($marker in $requiredMarkers) {
-  if ($clients -notlike "*$marker*") {
+  if (!$clients.Contains($marker)) {
     Write-Host "PAGE 3 REAL PERCENTAGE LOCK FAILED: missing marker: $marker" -ForegroundColor Red
     exit 1
   }
@@ -38,7 +39,7 @@ $badMarkers = @(
 )
 
 foreach ($badMarker in $badMarkers) {
-  if ($clients -like "*$badMarker*") {
+  if ($clients.Contains($badMarker)) {
     Write-Host "PAGE 3 REAL PERCENTAGE LOCK FAILED: hardcoded percentage detected: $badMarker" -ForegroundColor Red
     exit 1
   }
