@@ -527,3 +527,20 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Phase 15 menu stacking/backdrop hardening (scoped to menu-platform only) */
+.mp-backdrop {
+  z-index: 2147483000;
+  pointer-events: auto;
+}
+
+.mp-dropdown-shell {
+  z-index: 2147483001;
+}
+
+/* Keep close label on one line */
+.mp-panel-header button,
+.mp-close,
+.mp-close-button {
+  white-space: nowrap;
+}

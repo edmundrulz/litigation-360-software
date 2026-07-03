@@ -168,6 +168,7 @@ function MenuTree({
               item={item}
               depth={depth}
               expanded={expanded}
+              active={activePanelId === item.id}
               disabled={disabled}
               onSelect={onSelect}
               onToggle={toggle}
@@ -237,7 +238,6 @@ export function MenuPlatform({
   const searchRef = useRef(null);
   const shellRef = useRef(null);
 
-
   const searchResults = useMemo(
     () => filterMenuItems(sections, query, { context, featureFlags }),
     [sections, query, context, featureFlags]
@@ -267,6 +267,25 @@ export function MenuPlatform({
     return () => {
       document.body.style.overflow = previousOverflow;
     };
+  }, [open]);
+
+  useEffect(() => {
+    function handleOpenEvent(event) {
+      if (event.detail?.source !== rootRef.current && open) {
+        setOpen(false);
+        setQuery("");
+      }
+    }
+
+    window.addEventListener("mp:menu-opened", handleOpenEvent);
+    return () => window.removeEventListener("mp:menu-opened", handleOpenEvent);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    window.dispatchEvent(
+      new CustomEvent("mp:menu-opened", { detail: { source: rootRef.current } })
+    );
   }, [open]);
 
   function closeMenu() {
@@ -378,7 +397,6 @@ export function MenuPlatform({
                   />
                 </label>
 
-
                 {query ? (
                   <div className="mp-search-results">
                     <div className="mp-section-title">Search Results</div>
@@ -444,4 +462,3 @@ export function MenuPlatform({
     </div>
   );
 }
-
