@@ -7377,3 +7377,33 @@ body {
   font-variant-numeric: tabular-nums !important;
 }
 /* PHASE 14C-P10P19 BADGE WRAP REGRESSION FIX END */
+
+/* Phase 14E status-card-label-nowrap: Page 3 top checklist width repair START */
+@media (min-width: 1180px) {
+  .client-profile-summary-rail {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 2.2fr);
+    align-items: start;
+  }
+}
+
+.client-profile-summary-link {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.client-profile-summary-link::after {
+  margin-left: auto;
+}
+/* Phase 14E status-card-label-nowrap: Page 3 top checklist width repair END */
+
+/* Phase 14E status-card-label-nowrap: Page 3 checklist breathing room refinement START */
+.client-profile-summary-list .client-profile-summary-link {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.client-profile-summary-list .client-profile-summary-link::after {
+  display: none;
+}
+/* Phase 14E status-card-label-nowrap: Page 3 checklist breathing room refinement END */
