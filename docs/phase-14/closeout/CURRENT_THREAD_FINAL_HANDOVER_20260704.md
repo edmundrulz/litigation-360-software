@@ -559,3 +559,199 @@ No additional development should continue in this thread after this handover is 
 Final status:
 
 COMPLETE / PUSHED / TAGGED / CLOSED / CLEAN
+
+---
+
+# MAIN SSOT INSERT — PHASE 14F DASHBOARD CATEGORY / NAVIGATION HANDOVER
+
+Date:
+2026-07-04
+
+Project:
+Litigation 360 / LEOS
+
+Purpose:
+Insert the completed Phase 14F dashboard category and navigation planning work back into the main SSOT / final handover record.
+
+Status:
+DOCUMENTATION COMPLETE / PUSHED / TAGGED / CLOSED / CLEAN
+
+---
+
+## 1. Phase 14F-A Dashboard Category Coverage Map
+
+Branch:
+audit/14f-dashboard-category-coverage-map
+
+Commit:
+8ddd3ce docs: add dashboard category coverage map
+
+File:
+docs/phase-14/audit/visual-ux/DASHBOARD_CATEGORY_COVERAGE_MAP_20260704.md
+
+Checkpoint tag:
+checkpoint/phase-14f-dashboard-category-coverage-map-20260704
+
+Status:
+COMPLETE / PUSHED / TAGGED
+
+Purpose:
+Created a comprehensive dashboard category coverage map for the LEOS / Litigation 360 main dashboard.
+
+This document identified:
+- gaps within existing dashboard categories
+- missing subcategories
+- missing main categories
+- recommended future dashboard grouping
+- safe priority order for placeholder expansion
+- do-not-implement-yet boundaries
+
+No source code was edited.
+
+---
+
+## 2. Phase 14F-B Navigation Placeholder Plan
+
+Branch:
+docs/14f-navigation-placeholder-plan
+
+Main plan commit:
+d14d0ab docs: add Phase 14F navigation placeholder plan
+
+Closeout commit:
+25881f2 docs: close phase 14f navigation placeholder plan
+
+Final handover commit:
+4cdfdaf docs: add current thread final handover
+
+Tags:
+checkpoint/phase14f-navigation-placeholder-plan-20260704
+checkpoint/phase14f-navigation-placeholder-closeout-20260704
+checkpoint/current-thread-final-handover-20260704
+
+Status:
+COMPLETE / PUSHED / TAGGED / CLOSED / CLEAN
+
+Purpose:
+Defined the safe placeholder-only navigation expansion plan for the main dashboard.
+
+The plan confirmed that future UI implementation may only add visual/navigation placeholders first, without backend wiring, database changes, auth/RBAC changes, API changes, payment logic, client portal access, mobile app logic, AI automation, or court/government integration.
+
+The recommended first placeholder cards were:
+1. My Work
+2. Clients & Parties
+3. Matter Registry
+4. Calendar & Deadline Centre
+5. Communications Centre
+6. Risk, Compliance & Audit
+7. Admin Settings
+8. System Configuration
+9. Help & Support
+
+No source code was edited.
+
+---
+
+## 3. Startup SaaS Operational Runbook Side Branch
+
+Branch:
+docs/startup-saas-operational-runbook
+
+Commit:
+f4d4330 docs: add startup SaaS operational runbook
+
+Checkpoint tag:
+checkpoint/startup-saas-operational-runbook-20260704
+
+Files added:
+- ops/startup-saas/.env.example
+- ops/startup-saas/ACCESS_MATRIX.md
+- ops/startup-saas/DEPLOYMENT_CHECKLIST.md
+- ops/startup-saas/MONITORING_THRESHOLDS.md
+- ops/startup-saas/STARTUP_SAAS_STACK_RUNBOOK.ps1
+
+Status:
+COMPLETE / PUSHED / TAGGED
+
+Purpose:
+Created a safe startup SaaS operational runbook scaffold for subscription, licensing, payment, login, admin access, monitoring, backup, rollback, and access-control planning.
+
+Important:
+This was moved off the incorrect navigation placeholder branch and preserved on its own correct documentation branch.
+
+---
+
+## 4. Current Clean State
+
+Current intended clean branch:
+docs/14f-navigation-placeholder-plan
+
+Current HEAD:
+4cdfdaf docs: add current thread final handover
+
+Working tree status:
+Clean at time of handover.
+
+Remote status:
+Up to date with origin at time of handover.
+
+---
+
+## 5. Non-Negotiable Safety Locks
+
+The following areas remain locked and must not be touched without explicit approval:
+
+1. Page 3 Required / Complete / Missing counter
+2. Page 3 alphabet filter structured control
+3. Page 3 real percentage calculation
+4. Backend files
+5. Database files
+6. Authentication files
+7. RBAC files
+8. API routes
+9. Server files
+10. Environment files
+11. Production logic
+
+Operating rule:
+Continue one branch at a time only.
+
+Before any future action:
+1. Verify current branch.
+2. Verify git status.
+3. Verify latest commits.
+4. Confirm exact task scope.
+5. Do not edit source code unless explicitly approved.
+
+---
+
+## 6. Recommended Next Step
+
+Do not continue UI implementation automatically.
+
+Recommended next phase only if explicitly approved:
+
+feature/14f-dashboard-navigation-placeholders
+
+Allowed future scope:
+- Add visual placeholder cards only.
+- Keep existing dashboard cards working.
+- Do not remove existing routes.
+- Do not wire backend logic.
+- Do not touch database.
+- Do not touch auth or RBAC.
+- Do not touch Page 3 locked controls.
+
+Recommended first action before implementation:
+Create a fresh implementation branch and inspect current frontend dashboard files read-only first.
+
+---
+
+## 7. Final SSOT Conclusion
+
+Phase 14F-A and Phase 14F-B are both complete, pushed, tagged, and closed.
+
+The project is safe to pause.
+
+Any continuation should start from a clean branch with explicit scope confirmation.
+
