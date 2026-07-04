@@ -16,5 +16,9 @@ if (Test-Path "tools/verify-page3-real-percentage-lock.ps1") {
   powershell -ExecutionPolicy Bypass -File tools/verify-page3-real-percentage-lock.ps1
 }
 
+if (Test-Path "tools/verify-protected-system-locks.ps1") {
+  powershell -ExecutionPolicy Bypass -File tools/verify-protected-system-locks.ps1
+}
+
 Write-Host "PROTECTION PRE-COMMIT CHECK PASSED" -ForegroundColor Green
 exit 0
