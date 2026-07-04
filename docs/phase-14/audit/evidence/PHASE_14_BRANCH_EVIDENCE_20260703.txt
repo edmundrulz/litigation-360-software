@@ -1,0 +1,684 @@
+# PHASE 14 MASTER BRANCH EVIDENCE
+
+Project:
+Litigation 360 / LEOS
+
+Date:
+2026-07-03
+
+Branch:
+audit/phase-14-master-completion
+
+Purpose:
+Collect branch, log, and diff evidence before deciding whether Phase 14 is complete, partially complete, blocked, or ready for Phase 15 integration.
+
+Rules:
+- No merge
+- No cherry-pick
+- No source edits
+- Evidence collection only
+
+
+
+============================================================
+CURRENT BRANCH
+COMMAND: git branch --show-current
+============================================================
+audit/phase-14-master-completion
+
+
+
+============================================================
+CURRENT STATUS
+COMMAND: git status
+============================================================
+On branch audit/phase-14-master-completion
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	docs/phase-14/audit/evidence/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+
+============================================================
+BRANCH LIST
+COMMAND: git branch --list
+============================================================
+  audit/14d-page2-progress-map
+  audit/14d-terminology-map
+  audit/14d-visual-baseline-map
+  audit/14e-manual-legal-links-map
+  audit/14e-merge-order-control-map
+  audit/14e-page5-court-dates-map
+  audit/14e-page6-completion-map
+* audit/phase-14-master-completion
+  cleanup/page3-remove-summary-rail-20260703-112533
+  control/phase-14-15-clickable-tracker
+  control/phase-14-15-status-verification
+  control/phase-14e-closure-tracker
+  fix/14d-page2-progress-dedupe
+  fix/14d-terminology-unification
+  fix/14e-page3-client-directory-density
+  fix/14e-page4-plus-progress-calculators
+  fix/14e-status-card-label-nowrap
+  main
+  phase-14a-green-recovery-checkpoint
+  phase-14a-recovery-clean-nav
+  phase-14b-wizard-progress-foundation
+  phase-15-mvp-legal-control-desk
+  repair/page-3-step-3-button-wrap-and-controls
+  repair/step-3-button-controls
+
+
+
+============================================================
+GRAPH LOG ALL BRANCHES
+COMMAND: git log --oneline --decorate --all --graph -40
+============================================================
+* f3eaeda (HEAD -> audit/phase-14-master-completion) audit: start phase 14 master completion audit
+* a704c55 (fix/14e-page4-plus-progress-calculators) docs: close page 4 plus progress calculator work
+* 4954310 fix: add page 4 plus progress completion calculators
+* fbd5b82 docs: add page 4 plus progress calculator setup
+* 165c49d (control/phase-14e-closure-tracker) docs: add page 3 visual data lock handover
+* 4fede11 chore: install page 3 real percentage lock hook
+* d0f82a5 fix: repair page 3 real percentage lock
+* c9f5e18 chore: lock page 3 real percentage calculation
+*   fc68b18 merge: integrate locked page 3 alphabet filter control
+|\  
+| * f7e9221 (fix/14e-page3-client-directory-density) chore: add page 3 visual lock hook installer
+| * bbd91eb chore: lock page 3 alphabet filter structure
+| * 9c9ecde fix: lock page 3 alphabet filter structured control
+|/  
+* 7a25d1b docs: add phase 14e final handover card
+* ca0faa8 docs: confirm phase 14e final control inventory
+* 8591a1a fix: keep status card labels aligned
+* 23ae09d docs: update phase 14e closure tracker with audit commits
+* 57e623b docs: add phase 14e closure tracker
+* 0a61c2c docs: update phase 14e closure tracker status
+* ca829f9 audit: add phase 14e merge order control audit
+* 9fd65df audit: add phase 14e manual legal links audit
+* cbb841c audit: add phase 14e page 6 completion audit
+* 63b5c1b audit: map page 5 court dates readiness
+* b71502c docs: add phase 14e closure tracker and restore counter lock
+| * 10d9345 (audit/14e-merge-order-control-map) audit: map phase 14e merge order control
+| * 18462cb chore: restore page 3 required counter pre-commit lock
+|/  
+| * a9b2e32 (audit/14e-manual-legal-links-map) audit: map manual legal links readiness
+| * 79f9cf1 chore: restore page 3 required counter pre-commit lock
+|/  
+| * cc7c950 (audit/14e-page6-completion-map) audit: map page 6 completion readiness
+| * 12cf127 chore: restore page 3 required counter pre-commit lock
+|/  
+| * ed40ea2 (fix/14e-status-card-label-nowrap) chore: restore page 3 required counter pre-commit lock
+| * 56c32f7 fix: keep status card labels aligned
+|/  
+| *   1f13c51 (refs/stash) On fix/14d-page2-progress-dedupe: wip-p3-vis-002-client-directory-css
+| |\  
+| | * c36787a index on fix/14d-page2-progress-dedupe: a4d4e8a docs(phase-14e): add expanded client form density defect
+| |/  
+| * a4d4e8a (fix/14d-page2-progress-dedupe) docs(phase-14e): add expanded client form density defect
+| * e91e1a4 docs(phase-14e): add page 3 visual qa defect register
+| * 494370e fix(phase-14e): prevent workflow metric label wrapping
+| * 1b45cb1 docs(phase-15a): record legal web links edit controls handover
+| * 60b72ad feat(phase-15a): add editable legal web link controls
+| * 31a30d2 chore(tools): restore page 3 required counter precommit guard
+|/  
+| * 6e1faad (audit/14e-page5-court-dates-map) Stabilize Page 3 client add workflow layout
+
+
+
+============================================================
+DIFF STAT: main..control/phase-14e-closure-tracker
+COMMAND: git diff main..control/phase-14e-closure-tracker --stat
+============================================================
+ PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt              |   859 +
+ .../backups/App.jsx.before-13E4ZX                  |   754 -
+ docs/LOCALHOST_5173_VISUAL_BASELINE_LOCK.md        |    36 +
+ docs/NEXT_THREAD_HANDOVER.md                       |    33 +
+ docs/PHASE_14C_CLEAN_BREAK_REBASELINE.md           |    26 +
+ docs/PHASE_14C_VISUAL_GOVERNANCE_SSOT.md           |    24 +
+ docs/PHASE_15A_LEGAL_PRACTICE_CONTROL_DESK_MVP.md  |    49 +
+ ...LE_CLUSTER_FINAL_VERIFICATION_AUDIT_20260701.md |   239 +
+ ...IENTATION_STANDARDIZATION_LOCAL_MAP_20260630.md |  1269 +
+ ...ECTION_REORDER_PASS_1_ANCHOR_DIGEST_20260630.md |  1817 ++
+ ...TS_SECTION_REORDER_PASS_1_LOCAL_MAP_20260630.md |  1697 ++
+ ...PASS_2_IDENTITY_AUTHORITY_LOCAL_MAP_20260630.md | 24440 +++++++++++++++++++
+ ...3_EMPLOYMENT_ORGANISATION_LOCAL_MAP_20260701.md |  3888 +++
+ ...DER_PASS_4_FAMILY_MARITAL_LOCAL_MAP_20260701.md | 10531 ++++++++
+ ...OBAL_NAV_ORIENTATION_PROGRESS_AUDIT_20260630.md |   336 +
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    |   108 +
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   |   146 +
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |    92 +
+ ...14A_WORKFLOW_NUMBERING_AUDIT_RECORD_20260630.md |   108 +
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   |   183 +
+ ...DATION_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   157 +
+ ...CONTEXT_CASE_ORIGIN_CLOSEOUT_20260701_130334.md |   105 +
+ ...ECTION_REORDER_PASS_1_CLOSEOUT_SSOT_20260630.md |   154 +
+ ...ECTION_REORDER_PASS_2_CLOSEOUT_SSOT_20260701.md |   156 +
+ ...ECTION_REORDER_PASS_3_CLOSEOUT_SSOT_20260701.md |   162 +
+ ...ECTION_REORDER_PASS_4_CLOSEOUT_SSOT_20260701.md |   184 +
+ ...CONSOLIDATION_CLEANUP_CLOSEOUT_SSOT_20260630.md |   152 +
+ ...EEN_RECOVERY_CLOSEOUT_SSOT_HANDOVER_20260630.md |   459 +
+ ...TYLING_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   158 +
+ ...4A_PROPOSAL_READ_MODE_CLOSEOUT_SSOT_20260630.md |   143 +
+ ...D_MODE_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   150 +
+ ...S_PREVIEW_ENHANCEMENT_CLOSEOUT_SSOT_20260630.md |   125 +
+ ...14A_UI_HOUSEKEEPING_THREAD_CLOSEOUT_20260630.md |    82 +
+ ...UTTON_STANDARDIZATION_CLOSEOUT_SSOT_20260630.md |   149 +
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md |   262 +
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      |   121 +
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md |   222 +
+ ...STANDARDIZATION_IMPLEMENTATION_GATE_20260630.md |   141 +
+ ...14A_CLIENTS_PAGE_CONSOLIDATION_GATE_20260630.md |   162 +
+ ...E_CONSOLIDATION_IMPLEMENTATION_GATE_20260630.md |   172 +
+ ...SECTION_REORDER_IMPLEMENTATION_GATE_20260630.md |   171 +
+ ..._PAGE_SECTION_REORDER_PLANNING_GATE_20260630.md |   171 +
+ ..._REORDER_PASS_2_IMPLEMENTATION_GATE_20260630.md |   137 +
+ ..._REORDER_PASS_3_IMPLEMENTATION_GATE_20260701.md |   141 +
+ ..._REORDER_PASS_4_IMPLEMENTATION_GATE_20260701.md |   141 +
+ ..._COMPONENT_EXTRACTION_PLANNING_GATE_20260630.md |   214 +
+ ...AV_ORIENTATION_STANDARDIZATION_GATE_20260630.md |   124 +
+ ...POSAL_PRINT_READ_MODE_PLANNING_GATE_20260630.md |   134 +
+ ...L_PRINT_STYLING_IMPLEMENTATION_GATE_20260630.md |   179 +
+ ...ROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md |   184 +
+ ...POSAL_READ_MODE_IMPLEMENTATION_GATE_20260630.md |   152 +
+ ...EXCLUSIONS_PREVIEW_ENHANCEMENT_GATE_20260630.md |   131 +
+ ...STANDARDIZATION_IMPLEMENTATION_GATE_20260630.md |   256 +
+ ...AND_BUTTON_DESIGN_SYSTEM_AUDIT_GATE_20260630.md |   134 +
+ ..._CORE_PROFILE_CLUSTER_HANDOVER_SSOT_20260701.md |   374 +
+ ...ANDOVER_REFRESH_AFTER_PRINT_STYLING_20260630.md |   340 +
+ ...ER_REFRESH_AFTER_PROPOSAL_READ_MODE_20260630.md |   291 +
+ ...EAD_MODE_AND_BUTTON_STANDARDIZATION_20260630.md |   331 +
+ ...RKFLOW_LABEL_BUTTON_STANDARDIZATION_20260630.md |   281 +
+ ..._HOUSEKEEPING_MAIN_SSOT_INTEGRATION_20260630.md |   224 +
+ ...ONTEXT_CASE_ORIGIN_LOCAL_MAP_20260701_130334.md |    80 +
+ ...14A_END_TO_END_BILLING_WORKFLOW_MAP_20260630.md |   130 +
+ ..._PAGE_CONSOLIDATION_AUDIT_BLUEPRINT_20260630.md |   329 +
+ ..._SECTION_REORDER_PLANNING_BLUEPRINT_20260630.md |   310 +
+ ...L_NAV_ORIENTATION_PROGRESS_STANDARD_20260630.md |   125 +
+ ..._PRINT_READ_MODE_PLANNING_BLUEPRINT_20260630.md |   161 +
+ ...AL_PRINT_STYLING_PLANNING_BLUEPRINT_20260630.md |   389 +
+ ...SOLIDATION_IMPLEMENTATION_QA_RECORD_20260630.md |   116 +
+ ...TS_SECTION_REORDER_PASS_1_QA_RECORD_20260630.md |   148 +
+ ...TS_SECTION_REORDER_PASS_2_QA_RECORD_20260701.md |   162 +
+ ...TS_SECTION_REORDER_PASS_3_QA_RECORD_20260701.md |   165 +
+ ...TS_SECTION_REORDER_PASS_4_QA_RECORD_20260701.md |   200 +
+ ...NTS_CONSOLIDATION_CLEANUP_QA_RECORD_20260630.md |   134 +
+ ...NT_STYLING_IMPLEMENTATION_QA_RECORD_20260630.md |   120 +
+ ..._READ_MODE_IMPLEMENTATION_QA_RECORD_20260630.md |   117 +
+ ...SE_14A_PROPOSAL_READ_MODE_QA_RECORD_20260630.md |   117 +
+ ...SIONS_PREVIEW_ENHANCEMENT_QA_RECORD_20260630.md |    72 +
+ ...ND_BUTTON_STANDARDIZATION_QA_RECORD_20260630.md |   120 +
+ ...E_14A_BUTTON_DESIGN_SYSTEM_STANDARD_20260630.md |   176 +
+ ...E_14A_THREAD_CLOSEOUT_SSOT_HANDOVER_20260630.md |   236 +
+ ..._THREAD_CLOSEOUT_VERIFICATION_AUDIT_20260630.md |   167 +
+ docs/qa/PHASE_14C_P10_P19_BADGE_REGRESSION_QA.md   |    24 +
+ frontend/src/App.css                               |  2649 ++
+ frontend/src/App.jsx                               |   231 +-
+ .../components/ClientIntakeDiscoveryPrototype.jsx  |    85 +
+ .../src/components/ClientIntakeProposalPreview.jsx |   233 +-
+ .../LegalManagementShell.jsx                       |   173 +-
+ .../components/workflow/WizardProgressPanel.jsx    |    49 +
+ .../workflow/WorkflowProgressDashboard.jsx         |    76 +
+ .../src/features/menu-platform/MenuPlatform.css    |    17 +
+ .../src/features/menu-platform/MenuPlatform.jsx    |    23 +-
+ frontend/src/legal-management-enhancer.css         |    56 +
+ frontend/src/legal-management-enhancer.js          |    53 +-
+ frontend/src/pages/Cases.jsx                       |    44 +
+ frontend/src/pages/ClientIntakeDiscovery.jsx       |   909 +-
+ frontend/src/pages/Clients.jsx                     |   250 +-
+ frontend/src/pages/MatterIntakeWizard.jsx          |   167 +-
+ frontend/src/workflow/wizardProgress.js            |    30 +
+ tools/install-page3-visual-lock-hooks.ps1          |    49 +
+ tools/verify-page3-alphabet-filter-lock.ps1        |    55 +
+ tools/verify-page3-real-percentage-lock.ps1        |    49 +
+ tools/verify-page3-required-counter-lock.ps1       |    59 +
+ 102 files changed, 61898 insertions(+), 1118 deletions(-)
+
+
+
+============================================================
+DIFF STAT: main..fix/14e-page4-plus-progress-calculators
+COMMAND: git diff main..fix/14e-page4-plus-progress-calculators --stat
+============================================================
+ PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt              |   859 +
+ .../backups/App.jsx.before-13E4ZX                  |   754 -
+ docs/LOCALHOST_5173_VISUAL_BASELINE_LOCK.md        |    36 +
+ docs/NEXT_THREAD_HANDOVER.md                       |    33 +
+ docs/PHASE_14C_CLEAN_BREAK_REBASELINE.md           |    26 +
+ docs/PHASE_14C_VISUAL_GOVERNANCE_SSOT.md           |    24 +
+ docs/PHASE_15A_LEGAL_PRACTICE_CONTROL_DESK_MVP.md  |    49 +
+ ...LE_CLUSTER_FINAL_VERIFICATION_AUDIT_20260701.md |   239 +
+ ...IENTATION_STANDARDIZATION_LOCAL_MAP_20260630.md |  1269 +
+ ...ECTION_REORDER_PASS_1_ANCHOR_DIGEST_20260630.md |  1817 ++
+ ...TS_SECTION_REORDER_PASS_1_LOCAL_MAP_20260630.md |  1697 ++
+ ...PASS_2_IDENTITY_AUTHORITY_LOCAL_MAP_20260630.md | 24440 +++++++++++++++++++
+ ...3_EMPLOYMENT_ORGANISATION_LOCAL_MAP_20260701.md |  3888 +++
+ ...DER_PASS_4_FAMILY_MARITAL_LOCAL_MAP_20260701.md | 10531 ++++++++
+ ...OBAL_NAV_ORIENTATION_PROGRESS_AUDIT_20260630.md |   336 +
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    |   108 +
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   |   146 +
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |    92 +
+ ...14A_WORKFLOW_NUMBERING_AUDIT_RECORD_20260630.md |   108 +
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   |   183 +
+ ...4_PLUS_PROGRESS_CALCULATOR_HANDOVER_20260703.md |    88 +
+ ...DATION_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   157 +
+ ...CONTEXT_CASE_ORIGIN_CLOSEOUT_20260701_130334.md |   105 +
+ ...ECTION_REORDER_PASS_1_CLOSEOUT_SSOT_20260630.md |   154 +
+ ...ECTION_REORDER_PASS_2_CLOSEOUT_SSOT_20260701.md |   156 +
+ ...ECTION_REORDER_PASS_3_CLOSEOUT_SSOT_20260701.md |   162 +
+ ...ECTION_REORDER_PASS_4_CLOSEOUT_SSOT_20260701.md |   184 +
+ ...CONSOLIDATION_CLEANUP_CLOSEOUT_SSOT_20260630.md |   152 +
+ ...EEN_RECOVERY_CLOSEOUT_SSOT_HANDOVER_20260630.md |   459 +
+ ...TYLING_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   158 +
+ ...4A_PROPOSAL_READ_MODE_CLOSEOUT_SSOT_20260630.md |   143 +
+ ...D_MODE_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   150 +
+ ...S_PREVIEW_ENHANCEMENT_CLOSEOUT_SSOT_20260630.md |   125 +
+ ...14A_UI_HOUSEKEEPING_THREAD_CLOSEOUT_20260630.md |    82 +
+ ...UTTON_STANDARDIZATION_CLOSEOUT_SSOT_20260630.md |   149 +
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md |   262 +
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      |   121 +
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md |   222 +
+ ...STANDARDIZATION_IMPLEMENTATION_GATE_20260630.md |   141 +
+ ...14A_CLIENTS_PAGE_CONSOLIDATION_GATE_20260630.md |   162 +
+ ...E_CONSOLIDATION_IMPLEMENTATION_GATE_20260630.md |   172 +
+ ...SECTION_REORDER_IMPLEMENTATION_GATE_20260630.md |   171 +
+ ..._PAGE_SECTION_REORDER_PLANNING_GATE_20260630.md |   171 +
+ ..._REORDER_PASS_2_IMPLEMENTATION_GATE_20260630.md |   137 +
+ ..._REORDER_PASS_3_IMPLEMENTATION_GATE_20260701.md |   141 +
+ ..._REORDER_PASS_4_IMPLEMENTATION_GATE_20260701.md |   141 +
+ ..._COMPONENT_EXTRACTION_PLANNING_GATE_20260630.md |   214 +
+ ...AV_ORIENTATION_STANDARDIZATION_GATE_20260630.md |   124 +
+ ...POSAL_PRINT_READ_MODE_PLANNING_GATE_20260630.md |   134 +
+ ...L_PRINT_STYLING_IMPLEMENTATION_GATE_20260630.md |   179 +
+ ...ROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md |   184 +
+ ...POSAL_READ_MODE_IMPLEMENTATION_GATE_20260630.md |   152 +
+ ...EXCLUSIONS_PREVIEW_ENHANCEMENT_GATE_20260630.md |   131 +
+ ...STANDARDIZATION_IMPLEMENTATION_GATE_20260630.md |   256 +
+ ...AND_BUTTON_DESIGN_SYSTEM_AUDIT_GATE_20260630.md |   134 +
+ ..._CORE_PROFILE_CLUSTER_HANDOVER_SSOT_20260701.md |   374 +
+ ...ANDOVER_REFRESH_AFTER_PRINT_STYLING_20260630.md |   340 +
+ ...ER_REFRESH_AFTER_PROPOSAL_READ_MODE_20260630.md |   291 +
+ ...EAD_MODE_AND_BUTTON_STANDARDIZATION_20260630.md |   331 +
+ ...RKFLOW_LABEL_BUTTON_STANDARDIZATION_20260630.md |   281 +
+ ..._HOUSEKEEPING_MAIN_SSOT_INTEGRATION_20260630.md |   224 +
+ ..._PROGRESS_CALCULATOR_IMPLEMENTATION_20260703.md |    50 +
+ ...GE_4_PLUS_PROGRESS_CALCULATOR_SETUP_20260703.md |    74 +
+ ...ONTEXT_CASE_ORIGIN_LOCAL_MAP_20260701_130334.md |    80 +
+ ...14A_END_TO_END_BILLING_WORKFLOW_MAP_20260630.md |   130 +
+ ..._PAGE_CONSOLIDATION_AUDIT_BLUEPRINT_20260630.md |   329 +
+ ..._SECTION_REORDER_PLANNING_BLUEPRINT_20260630.md |   310 +
+ ...L_NAV_ORIENTATION_PROGRESS_STANDARD_20260630.md |   125 +
+ ..._PRINT_READ_MODE_PLANNING_BLUEPRINT_20260630.md |   161 +
+ ...AL_PRINT_STYLING_PLANNING_BLUEPRINT_20260630.md |   389 +
+ ...SOLIDATION_IMPLEMENTATION_QA_RECORD_20260630.md |   116 +
+ ...TS_SECTION_REORDER_PASS_1_QA_RECORD_20260630.md |   148 +
+ ...TS_SECTION_REORDER_PASS_2_QA_RECORD_20260701.md |   162 +
+ ...TS_SECTION_REORDER_PASS_3_QA_RECORD_20260701.md |   165 +
+ ...TS_SECTION_REORDER_PASS_4_QA_RECORD_20260701.md |   200 +
+ ...NTS_CONSOLIDATION_CLEANUP_QA_RECORD_20260630.md |   134 +
+ ...NT_STYLING_IMPLEMENTATION_QA_RECORD_20260630.md |   120 +
+ ..._READ_MODE_IMPLEMENTATION_QA_RECORD_20260630.md |   117 +
+ ...SE_14A_PROPOSAL_READ_MODE_QA_RECORD_20260630.md |   117 +
+ ...SIONS_PREVIEW_ENHANCEMENT_QA_RECORD_20260630.md |    72 +
+ ...ND_BUTTON_STANDARDIZATION_QA_RECORD_20260630.md |   120 +
+ ...E_14A_BUTTON_DESIGN_SYSTEM_STANDARD_20260630.md |   176 +
+ ...E_14A_THREAD_CLOSEOUT_SSOT_HANDOVER_20260630.md |   236 +
+ ..._THREAD_CLOSEOUT_VERIFICATION_AUDIT_20260630.md |   167 +
+ docs/qa/PHASE_14C_P10_P19_BADGE_REGRESSION_QA.md   |    24 +
+ frontend/src/App.css                               |  2649 ++
+ frontend/src/App.jsx                               |   336 +-
+ .../components/ClientIntakeDiscoveryPrototype.jsx  |    85 +
+ .../src/components/ClientIntakeProposalPreview.jsx |   233 +-
+ .../LegalManagementShell.jsx                       |   173 +-
+ .../components/workflow/WizardProgressPanel.jsx    |    49 +
+ .../workflow/WorkflowProgressDashboard.jsx         |    76 +
+ .../src/features/menu-platform/MenuPlatform.css    |    17 +
+ .../src/features/menu-platform/MenuPlatform.jsx    |    23 +-
+ frontend/src/legal-management-enhancer.css         |    56 +
+ frontend/src/legal-management-enhancer.js          |    53 +-
+ frontend/src/pages/Cases.jsx                       |    44 +
+ frontend/src/pages/ClientIntakeDiscovery.jsx       |   909 +-
+ frontend/src/pages/Clients.jsx                     |   250 +-
+ frontend/src/pages/MatterIntakeWizard.jsx          |   167 +-
+ frontend/src/workflow/wizardProgress.js            |    30 +
+ tools/install-page3-visual-lock-hooks.ps1          |    49 +
+ tools/verify-page3-alphabet-filter-lock.ps1        |    55 +
+ tools/verify-page3-real-percentage-lock.ps1        |    49 +
+ tools/verify-page3-required-counter-lock.ps1       |    59 +
+ 105 files changed, 62215 insertions(+), 1118 deletions(-)
+
+
+
+============================================================
+DIFF STAT: main..phase-15-mvp-legal-control-desk
+COMMAND: git diff main..phase-15-mvp-legal-control-desk --stat
+============================================================
+ .../backups/App.jsx.before-13E4ZX                  |   754 -
+ docs/LOCALHOST_5173_VISUAL_BASELINE_LOCK.md        |    36 +
+ docs/NEXT_THREAD_HANDOVER.md                       |    33 +
+ docs/PHASE_14C_CLEAN_BREAK_REBASELINE.md           |    26 +
+ docs/PHASE_14C_VISUAL_GOVERNANCE_SSOT.md           |    24 +
+ docs/PHASE_15A_LEGAL_PRACTICE_CONTROL_DESK_MVP.md  |    49 +
+ ...LE_CLUSTER_FINAL_VERIFICATION_AUDIT_20260701.md |   239 +
+ ...IENTATION_STANDARDIZATION_LOCAL_MAP_20260630.md |  1269 +
+ ...ECTION_REORDER_PASS_1_ANCHOR_DIGEST_20260630.md |  1817 ++
+ ...TS_SECTION_REORDER_PASS_1_LOCAL_MAP_20260630.md |  1697 ++
+ ...PASS_2_IDENTITY_AUTHORITY_LOCAL_MAP_20260630.md | 24440 +++++++++++++++++++
+ ...3_EMPLOYMENT_ORGANISATION_LOCAL_MAP_20260701.md |  3888 +++
+ ...DER_PASS_4_FAMILY_MARITAL_LOCAL_MAP_20260701.md | 10531 ++++++++
+ ...OBAL_NAV_ORIENTATION_PROGRESS_AUDIT_20260630.md |   336 +
+ ...14A_WORKFLOW_NUMBERING_AUDIT_RECORD_20260630.md |   108 +
+ ...DATION_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   157 +
+ ...CONTEXT_CASE_ORIGIN_CLOSEOUT_20260701_130334.md |   105 +
+ ...ECTION_REORDER_PASS_1_CLOSEOUT_SSOT_20260630.md |   154 +
+ ...ECTION_REORDER_PASS_2_CLOSEOUT_SSOT_20260701.md |   156 +
+ ...ECTION_REORDER_PASS_3_CLOSEOUT_SSOT_20260701.md |   162 +
+ ...ECTION_REORDER_PASS_4_CLOSEOUT_SSOT_20260701.md |   184 +
+ ...CONSOLIDATION_CLEANUP_CLOSEOUT_SSOT_20260630.md |   152 +
+ ...EEN_RECOVERY_CLOSEOUT_SSOT_HANDOVER_20260630.md |   459 +
+ ...TYLING_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   158 +
+ ...4A_PROPOSAL_READ_MODE_CLOSEOUT_SSOT_20260630.md |   143 +
+ ...D_MODE_IMPLEMENTATION_CLOSEOUT_SSOT_20260630.md |   150 +
+ ...S_PREVIEW_ENHANCEMENT_CLOSEOUT_SSOT_20260630.md |   125 +
+ ...14A_UI_HOUSEKEEPING_THREAD_CLOSEOUT_20260630.md |    82 +
+ ...UTTON_STANDARDIZATION_CLOSEOUT_SSOT_20260630.md |   149 +
+ ...STANDARDIZATION_IMPLEMENTATION_GATE_20260630.md |   141 +
+ ...14A_CLIENTS_PAGE_CONSOLIDATION_GATE_20260630.md |   162 +
+ ...E_CONSOLIDATION_IMPLEMENTATION_GATE_20260630.md |   172 +
+ ...SECTION_REORDER_IMPLEMENTATION_GATE_20260630.md |   171 +
+ ..._PAGE_SECTION_REORDER_PLANNING_GATE_20260630.md |   171 +
+ ..._REORDER_PASS_2_IMPLEMENTATION_GATE_20260630.md |   137 +
+ ..._REORDER_PASS_3_IMPLEMENTATION_GATE_20260701.md |   141 +
+ ..._REORDER_PASS_4_IMPLEMENTATION_GATE_20260701.md |   141 +
+ ..._COMPONENT_EXTRACTION_PLANNING_GATE_20260630.md |   214 +
+ ...AV_ORIENTATION_STANDARDIZATION_GATE_20260630.md |   124 +
+ ...POSAL_PRINT_READ_MODE_PLANNING_GATE_20260630.md |   134 +
+ ...L_PRINT_STYLING_IMPLEMENTATION_GATE_20260630.md |   179 +
+ ...ROPOSAL_PRINT_STYLING_PLANNING_GATE_20260630.md |   184 +
+ ...POSAL_READ_MODE_IMPLEMENTATION_GATE_20260630.md |   152 +
+ ...EXCLUSIONS_PREVIEW_ENHANCEMENT_GATE_20260630.md |   131 +
+ ...STANDARDIZATION_IMPLEMENTATION_GATE_20260630.md |   256 +
+ ...AND_BUTTON_DESIGN_SYSTEM_AUDIT_GATE_20260630.md |   134 +
+ ..._CORE_PROFILE_CLUSTER_HANDOVER_SSOT_20260701.md |   374 +
+ ...ANDOVER_REFRESH_AFTER_PRINT_STYLING_20260630.md |   340 +
+ ...ER_REFRESH_AFTER_PROPOSAL_READ_MODE_20260630.md |   291 +
+ ...EAD_MODE_AND_BUTTON_STANDARDIZATION_20260630.md |   331 +
+ ...RKFLOW_LABEL_BUTTON_STANDARDIZATION_20260630.md |   281 +
+ ..._HOUSEKEEPING_MAIN_SSOT_INTEGRATION_20260630.md |   224 +
+ ...ONTEXT_CASE_ORIGIN_LOCAL_MAP_20260701_130334.md |    80 +
+ ...14A_END_TO_END_BILLING_WORKFLOW_MAP_20260630.md |   130 +
+ ..._PAGE_CONSOLIDATION_AUDIT_BLUEPRINT_20260630.md |   329 +
+ ..._SECTION_REORDER_PLANNING_BLUEPRINT_20260630.md |   310 +
+ ...L_NAV_ORIENTATION_PROGRESS_STANDARD_20260630.md |   125 +
+ ..._PRINT_READ_MODE_PLANNING_BLUEPRINT_20260630.md |   161 +
+ ...AL_PRINT_STYLING_PLANNING_BLUEPRINT_20260630.md |   389 +
+ ...SOLIDATION_IMPLEMENTATION_QA_RECORD_20260630.md |   116 +
+ ...TS_SECTION_REORDER_PASS_1_QA_RECORD_20260630.md |   148 +
+ ...TS_SECTION_REORDER_PASS_2_QA_RECORD_20260701.md |   162 +
+ ...TS_SECTION_REORDER_PASS_3_QA_RECORD_20260701.md |   165 +
+ ...TS_SECTION_REORDER_PASS_4_QA_RECORD_20260701.md |   200 +
+ ...NTS_CONSOLIDATION_CLEANUP_QA_RECORD_20260630.md |   134 +
+ ...NT_STYLING_IMPLEMENTATION_QA_RECORD_20260630.md |   120 +
+ ..._READ_MODE_IMPLEMENTATION_QA_RECORD_20260630.md |   117 +
+ ...SE_14A_PROPOSAL_READ_MODE_QA_RECORD_20260630.md |   117 +
+ ...SIONS_PREVIEW_ENHANCEMENT_QA_RECORD_20260630.md |    72 +
+ ...ND_BUTTON_STANDARDIZATION_QA_RECORD_20260630.md |   120 +
+ ...E_14A_BUTTON_DESIGN_SYSTEM_STANDARD_20260630.md |   176 +
+ ...E_14A_THREAD_CLOSEOUT_SSOT_HANDOVER_20260630.md |   236 +
+ ..._THREAD_CLOSEOUT_VERIFICATION_AUDIT_20260630.md |   167 +
+ docs/qa/PHASE_14C_P10_P19_BADGE_REGRESSION_QA.md   |    24 +
+ frontend/src/App.css                               |  1763 ++
+ frontend/src/App.jsx                               |   231 +-
+ .../components/ClientIntakeDiscoveryPrototype.jsx  |    85 +
+ .../src/components/ClientIntakeProposalPreview.jsx |   233 +-
+ .../LegalManagementShell.jsx                       |   173 +-
+ .../components/workflow/WizardProgressPanel.jsx    |    49 +
+ .../workflow/WorkflowProgressDashboard.jsx         |    76 +
+ .../src/features/menu-platform/MenuPlatform.css    |    17 +
+ .../src/features/menu-platform/MenuPlatform.jsx    |    23 +-
+ frontend/src/legal-management-enhancer.css         |    56 +
+ frontend/src/legal-management-enhancer.js          |    53 +-
+ frontend/src/pages/Cases.jsx                       |    44 +
+ frontend/src/pages/ClientIntakeDiscovery.jsx       |   909 +-
+ frontend/src/pages/Clients.jsx                     |   191 +-
+ frontend/src/pages/MatterIntakeWizard.jsx          |   167 +-
+ frontend/src/workflow/wizardProgress.js            |    30 +
+ 90 files changed, 58764 insertions(+), 1102 deletions(-)
+
+
+
+============================================================
+DIFF STAT: phase-15..control/phase-14e-closure-tracker
+COMMAND: git diff phase-15-mvp-legal-control-desk..control/phase-14e-closure-tracker --stat
+============================================================
+ PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt              | 859 ++++++++++++++++++++
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    | 108 +++
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   | 146 ++++
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |  92 +++
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   | 183 +++++
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md | 262 ++++++
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      | 121 +++
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md | 222 ++++++
+ frontend/src/App.css                               | 886 +++++++++++++++++++++
+ frontend/src/pages/Clients.jsx                     |  59 +-
+ tools/install-page3-visual-lock-hooks.ps1          |  49 ++
+ tools/verify-page3-alphabet-filter-lock.ps1        |  55 ++
+ tools/verify-page3-real-percentage-lock.ps1        |  49 ++
+ tools/verify-page3-required-counter-lock.ps1       |  59 ++
+ 14 files changed, 3134 insertions(+), 16 deletions(-)
+
+
+
+============================================================
+DIFF STAT: phase-15..fix/14e-page4-plus-progress-calculators
+COMMAND: git diff phase-15-mvp-legal-control-desk..fix/14e-page4-plus-progress-calculators --stat
+============================================================
+ PHASE_14E_PAGE5_COURT_DATES_AUDIT.txt              | 859 ++++++++++++++++++++
+ .../audit/PHASE_14E_MANUAL_LEGAL_LINKS_AUDIT.md    | 108 +++
+ .../audit/PHASE_14E_MERGE_ORDER_CONTROL_AUDIT.md   | 146 ++++
+ .../audit/PHASE_14E_PAGE6_COMPLETION_AUDIT.md      |  92 +++
+ .../PAGE_3_VISUAL_DATA_LOCK_HANDOVER_20260703.md   | 183 +++++
+ ...4_PLUS_PROGRESS_CALCULATOR_HANDOVER_20260703.md |  88 ++
+ .../closeout/PHASE_14E_CLOSURE_TRACKER_20260703.md | 262 ++++++
+ .../PHASE_14E_FINAL_HANDOVER_CARD_20260703.md      | 121 +++
+ docs/phase-14/control/PHASE_14E_CLOSURE_TRACKER.md | 222 ++++++
+ ..._PROGRESS_CALCULATOR_IMPLEMENTATION_20260703.md |  50 ++
+ ...GE_4_PLUS_PROGRESS_CALCULATOR_SETUP_20260703.md |  74 ++
+ frontend/src/App.css                               | 886 +++++++++++++++++++++
+ frontend/src/App.jsx                               | 105 +++
+ frontend/src/pages/Clients.jsx                     |  59 +-
+ tools/install-page3-visual-lock-hooks.ps1          |  49 ++
+ tools/verify-page3-alphabet-filter-lock.ps1        |  55 ++
+ tools/verify-page3-real-percentage-lock.ps1        |  49 ++
+ tools/verify-page3-required-counter-lock.ps1       |  59 ++
+ 18 files changed, 3451 insertions(+), 16 deletions(-)
+
+
+
+============================================================
+RECENT LOG: phase-14a-green-recovery-checkpoint
+COMMAND: git log --oneline --decorate phase-14a-green-recovery-checkpoint -10
+============================================================
+bc2faeb (phase-14a-green-recovery-checkpoint) fix(phase-14a): align client gate and workflow controls
+bc28fe4 refactor(phase-14a): align clients matter context case origin section
+f9f3244 docs(phase-14a): add clients core profile cluster handover
+103a2a1 docs(phase-14a): close clients section reorder pass four
+2ee7b19 refactor(phase-14a): align clients family marital dependents section
+9d2a8be docs(phase-14a): open clients section reorder pass four gate
+25004f8 docs(phase-14a): close clients section reorder pass three
+0c3956b refactor(phase-14a): align clients employment organisation section
+ffaa780 docs(phase-14a): open clients section reorder pass three gate
+c583c2c docs(phase-14a): close clients section reorder pass two
+
+
+
+============================================================
+RECENT LOG: phase-14a-recovery-clean-nav
+COMMAND: git log --oneline --decorate phase-14a-recovery-clean-nav -10
+============================================================
+5711667 (phase-14a-recovery-clean-nav, main) fix(phase-14a): repair client intake navigation syntax
+b7a5999 docs(phase-14): approve document checklist preview lane
+a265589 docs(phase-14): close fee preview enhancement
+221e2be fix(phase-14a): guard client intake section card props
+9cbdef2 docs(phase-14): record fee preview enhancement QA
+db88377 feat(phase-14a): add client intake frontend prototype
+aad2a30 feat(phase-14): add client intake fee preview
+4a881b4 docs(phase-14): approve fee preview enhancement gate
+466108b docs(phase-14): select fee estimation planning lane
+e595ef1 docs(phase-14): correct proposal preview enhancement closeout
+
+
+
+============================================================
+RECENT LOG: phase-14b-wizard-progress-foundation
+COMMAND: git log --oneline --decorate phase-14b-wizard-progress-foundation -10
+============================================================
+df611ae (phase-14b-wizard-progress-foundation) docs(phase-14c): add clean-break rebaseline and handover
+9567bcd fix(phase-14c): preserve current visual governance rebaseline changes
+8e1924b feat(phase-14c): wire step two and clients workflow dashboards
+97110d5 style(phase-14c): add shared workflow progress dashboard styling
+932d7e6 feat(phase-14c): add shared workflow progress dashboard
+2c9ef64 fix(phase-14b): finalize module navigation wording standard
+776d74e fix(phase-14b): standardize module navigation wording
+12073b7 fix(phase-14b): standardize main workspace card badges
+7dba4f9 fix(phase-14b): standardize workspace and page navigation labels
+e66b198 feat(phase-14b): standardize step one progress and wording
+
+
+
+============================================================
+RECENT LOG: fix/14d-page2-progress-dedupe
+COMMAND: git log --oneline --decorate fix/14d-page2-progress-dedupe -10
+============================================================
+a4d4e8a (fix/14d-page2-progress-dedupe) docs(phase-14e): add expanded client form density defect
+e91e1a4 docs(phase-14e): add page 3 visual qa defect register
+494370e fix(phase-14e): prevent workflow metric label wrapping
+1b45cb1 docs(phase-15a): record legal web links edit controls handover
+60b72ad feat(phase-15a): add editable legal web link controls
+31a30d2 chore(tools): restore page 3 required counter precommit guard
+812a18f (phase-15-mvp-legal-control-desk, fix/14d-terminology-unification, control/phase-14-15-status-verification, control/phase-14-15-clickable-tracker) fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+14ca12c fix(phase-15a): stabilize legal management drawer overlay
+8be6120 feat(phase-15a): restore legal management shell with today overview
+11b90d7 docs(phase-15a): define legal practice control desk MVP
+
+
+
+============================================================
+RECENT LOG: fix/14d-terminology-unification
+COMMAND: git log --oneline --decorate fix/14d-terminology-unification -10
+============================================================
+812a18f (phase-15-mvp-legal-control-desk, fix/14d-terminology-unification, control/phase-14-15-status-verification, control/phase-14-15-clickable-tracker) fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+14ca12c fix(phase-15a): stabilize legal management drawer overlay
+8be6120 feat(phase-15a): restore legal management shell with today overview
+11b90d7 docs(phase-15a): define legal practice control desk MVP
+2aea013 docs(qa): record p10-p19 badge regression verification
+9ae8354 fix(ui): prevent roadmap phase badge number wrapping
+9c3865f docs(governance): lock localhost 5173 visual baseline
+df611ae (phase-14b-wizard-progress-foundation) docs(phase-14c): add clean-break rebaseline and handover
+9567bcd fix(phase-14c): preserve current visual governance rebaseline changes
+8e1924b feat(phase-14c): wire step two and clients workflow dashboards
+
+
+
+============================================================
+RECENT LOG: fix/14e-status-card-label-nowrap
+COMMAND: git log --oneline --decorate fix/14e-status-card-label-nowrap -10
+============================================================
+ed40ea2 (fix/14e-status-card-label-nowrap) chore: restore page 3 required counter pre-commit lock
+56c32f7 fix: keep status card labels aligned
+812a18f (phase-15-mvp-legal-control-desk, fix/14d-terminology-unification, control/phase-14-15-status-verification, control/phase-14-15-clickable-tracker) fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+14ca12c fix(phase-15a): stabilize legal management drawer overlay
+8be6120 feat(phase-15a): restore legal management shell with today overview
+11b90d7 docs(phase-15a): define legal practice control desk MVP
+2aea013 docs(qa): record p10-p19 badge regression verification
+9ae8354 fix(ui): prevent roadmap phase badge number wrapping
+9c3865f docs(governance): lock localhost 5173 visual baseline
+df611ae (phase-14b-wizard-progress-foundation) docs(phase-14c): add clean-break rebaseline and handover
+
+
+
+============================================================
+RECENT LOG: fix/14e-page3-client-directory-density
+COMMAND: git log --oneline --decorate fix/14e-page3-client-directory-density -10
+============================================================
+f7e9221 (fix/14e-page3-client-directory-density) chore: add page 3 visual lock hook installer
+bbd91eb chore: lock page 3 alphabet filter structure
+9c9ecde fix: lock page 3 alphabet filter structured control
+7a25d1b docs: add phase 14e final handover card
+ca0faa8 docs: confirm phase 14e final control inventory
+8591a1a fix: keep status card labels aligned
+23ae09d docs: update phase 14e closure tracker with audit commits
+57e623b docs: add phase 14e closure tracker
+0a61c2c docs: update phase 14e closure tracker status
+ca829f9 audit: add phase 14e merge order control audit
+
+
+
+============================================================
+RECENT LOG: fix/14e-page4-plus-progress-calculators
+COMMAND: git log --oneline --decorate fix/14e-page4-plus-progress-calculators -10
+============================================================
+a704c55 (fix/14e-page4-plus-progress-calculators) docs: close page 4 plus progress calculator work
+4954310 fix: add page 4 plus progress completion calculators
+fbd5b82 docs: add page 4 plus progress calculator setup
+165c49d (control/phase-14e-closure-tracker) docs: add page 3 visual data lock handover
+4fede11 chore: install page 3 real percentage lock hook
+d0f82a5 fix: repair page 3 real percentage lock
+c9f5e18 chore: lock page 3 real percentage calculation
+fc68b18 merge: integrate locked page 3 alphabet filter control
+f7e9221 (fix/14e-page3-client-directory-density) chore: add page 3 visual lock hook installer
+bbd91eb chore: lock page 3 alphabet filter structure
+
+
+
+============================================================
+RECENT LOG: control/phase-14e-closure-tracker
+COMMAND: git log --oneline --decorate control/phase-14e-closure-tracker -10
+============================================================
+165c49d (control/phase-14e-closure-tracker) docs: add page 3 visual data lock handover
+4fede11 chore: install page 3 real percentage lock hook
+d0f82a5 fix: repair page 3 real percentage lock
+c9f5e18 chore: lock page 3 real percentage calculation
+fc68b18 merge: integrate locked page 3 alphabet filter control
+f7e9221 (fix/14e-page3-client-directory-density) chore: add page 3 visual lock hook installer
+bbd91eb chore: lock page 3 alphabet filter structure
+9c9ecde fix: lock page 3 alphabet filter structured control
+7a25d1b docs: add phase 14e final handover card
+ca0faa8 docs: confirm phase 14e final control inventory
+
+
+
+============================================================
+RECENT LOG: control/phase-14-15-clickable-tracker
+COMMAND: git log --oneline --decorate control/phase-14-15-clickable-tracker -10
+============================================================
+812a18f (phase-15-mvp-legal-control-desk, fix/14d-terminology-unification, control/phase-14-15-status-verification, control/phase-14-15-clickable-tracker) fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+14ca12c fix(phase-15a): stabilize legal management drawer overlay
+8be6120 feat(phase-15a): restore legal management shell with today overview
+11b90d7 docs(phase-15a): define legal practice control desk MVP
+2aea013 docs(qa): record p10-p19 badge regression verification
+9ae8354 fix(ui): prevent roadmap phase badge number wrapping
+9c3865f docs(governance): lock localhost 5173 visual baseline
+df611ae (phase-14b-wizard-progress-foundation) docs(phase-14c): add clean-break rebaseline and handover
+9567bcd fix(phase-14c): preserve current visual governance rebaseline changes
+8e1924b feat(phase-14c): wire step two and clients workflow dashboards
+
+
+
+============================================================
+RECENT LOG: control/phase-14-15-status-verification
+COMMAND: git log --oneline --decorate control/phase-14-15-status-verification -10
+============================================================
+812a18f (phase-15-mvp-legal-control-desk, fix/14d-terminology-unification, control/phase-14-15-status-verification, control/phase-14-15-clickable-tracker) fix(menu-platform): enforce single active menu overlay, proper stacking, backdrop blocking, and close-button nowrap
+14ca12c fix(phase-15a): stabilize legal management drawer overlay
+8be6120 feat(phase-15a): restore legal management shell with today overview
+11b90d7 docs(phase-15a): define legal practice control desk MVP
+2aea013 docs(qa): record p10-p19 badge regression verification
+9ae8354 fix(ui): prevent roadmap phase badge number wrapping
+9c3865f docs(governance): lock localhost 5173 visual baseline
+df611ae (phase-14b-wizard-progress-foundation) docs(phase-14c): add clean-break rebaseline and handover
+9567bcd fix(phase-14c): preserve current visual governance rebaseline changes
+8e1924b feat(phase-14c): wire step two and clients workflow dashboards
+
