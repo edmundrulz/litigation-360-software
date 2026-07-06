@@ -12,6 +12,14 @@ export const menuSections = [
         keywords: ["open", "save", "export", "import", "recent files"],
         children: [
           {
+            id: "legal-notice",
+            label: "Disclaimer / Copyright Notice",
+            type: "action",
+            icon: "info",
+            description: "View copyright, trademark, restrictions, liability, third-party content, and governing-law notice.",
+            keywords: ["legal", "copyright", "disclaimer", "trademark", "notice", "liability"],
+          },
+          {
             id: "file-open",
             label: "Open",
             type: "panel",
