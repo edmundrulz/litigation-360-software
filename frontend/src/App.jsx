@@ -2,7 +2,6 @@ import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { MenuPlatform } from "./features/menu-platform";
-import LegalFooter from "./components/LegalFooter";
 import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
 
 import Clients from "./pages/Clients";
@@ -55,7 +54,7 @@ const workspaceSections = [
   },
   {
     id: "active-legal-work",
-    label: "Active Work",
+    label: "ACTIVE WORK",
     title: "Active Legal Work",
     description: "Manage active case, matter, court, and document work.",
     items: [
@@ -91,7 +90,7 @@ const workspaceSections = [
   },
   {
     id: "review-completion",
-    label: "Completion",
+    label: "COMPLETION",
     title: "Review And Completion",
     description: "Review the prepared workflow before save or submission.",
     items: [
@@ -106,7 +105,7 @@ const workspaceSections = [
   },
   {
     id: "office-admin",
-    label: "Admin",
+    label: "ADMIN",
     title: "Office Administration",
     description: "Internal administration tools for firm operations.",
     items: [
@@ -121,7 +120,7 @@ const workspaceSections = [
   },
   {
     id: "planned-platform",
-    label: "Future",
+    label: "FUTURE",
     title: "Planned Platform Modules",
     description: "Roadmap modules are visible for planning but not active yet.",
     items: [
@@ -410,35 +409,11 @@ export default function App() {
     setModule("home");
   }
 
-  function scrollToLegalNotice() {
-    setView("workspace");
-    setModuleHistory([]);
-    setModule("home");
-
-    window.setTimeout(() => {
-      document.getElementById("legal-notice")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
-  }
-
   function handleMenuTarget(rawTarget) {
     const normalizedTarget = String(rawTarget || "").toLowerCase();
 
     if (normalizedTarget === "home") {
       openWorkspace();
-      return;
-    }
-
-    if (
-      normalizedTarget === "legal" ||
-      normalizedTarget === "legal-notice" ||
-      normalizedTarget === "disclaimer" ||
-      normalizedTarget === "copyright" ||
-      normalizedTarget === "copyright-notice"
-    ) {
-      scrollToLegalNotice();
     }
   }
 
@@ -483,7 +458,10 @@ export default function App() {
         <header className="topbar">
           <div>
             <h1>{viewTitle(view, module)}</h1>
-            <p>Real-time legal operations workspace. Last updated: {updated}</p>
+            <p className="topbar-status-line">
+              <span className="topbar-updated-prefix">Real-time legal operations workspace. Last updated:</span>
+              <span className="topbar-updated-value">{updated}</span>
+            </p>
           </div>
 
           <span className={failed ? "pill bad" : "pill good"}>
@@ -509,7 +487,6 @@ export default function App() {
         {view === "admin" && <Admin />}
         {view === "developer" && <Developer results={results} />}
 
-        <LegalFooter />
       </main>
     </div>
   );
@@ -648,7 +625,7 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
         {workspaceSections.map((section) => (
           <section className="workspace-module-section" key={section.id}>
             <div className="workspace-section-header">
-              <div>
+              <div className="workspace-section-heading">
                 <span className="workflow-badge">{section.label}</span>
                 <h3>{section.title}</h3>
                 <p>{section.description}</p>
@@ -668,8 +645,12 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
                     disabled={!isOpen}
                   >
                     <span className="card-meta">{item.sequence}</span>
-                    <h3>{item.title}</h3>
-                    <strong>{item.status}</strong>
+                    <div className="workflow-card-header">
+                      <h3 className="workflow-card-title">{item.title}</h3>
+                      <strong className={`workflow-status-badge ${isOpen ? "is-open" : "is-planned"}`}>
+                        {item.status}
+                      </strong>
+                    </div>
                     <p>{item.text}</p>
                   </button>
                 );
@@ -1008,5 +989,3 @@ function Metric({ label, value }) {
     </div>
   );
 }
-
-

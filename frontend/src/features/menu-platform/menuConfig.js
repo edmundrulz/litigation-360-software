@@ -12,14 +12,6 @@ export const menuSections = [
         keywords: ["open", "save", "export", "import", "recent files"],
         children: [
           {
-            id: "legal-notice",
-            label: "Disclaimer / Copyright Notice",
-            type: "action",
-            icon: "info",
-            description: "View copyright, trademark, restrictions, liability, third-party content, and governing-law notice.",
-            keywords: ["legal", "copyright", "disclaimer", "trademark", "notice", "liability"],
-          },
-          {
             id: "file-open",
             label: "Open",
             type: "panel",
@@ -77,9 +69,24 @@ export const menuSections = [
     ],
   },
   {
+    id: "legal-notices",
+    title: "Legal & Notices",
+    priority: 2,
+    items: [
+      {
+        id: "legal-notice",
+        label: "Disclaimer / Copyright Notice",
+        type: "panel",
+        icon: "info",
+        description: "View copyright, trademark, restrictions, liability, third-party content, and governing-law notice.",
+        keywords: ["legal", "copyright", "disclaimer", "trademark", "notice", "liability"],
+      },
+    ],
+  },
+  {
     id: "help-info",
     title: "Help & Info",
-    priority: 2,
+    priority: 3,
     items: [
       {
         id: "faq",

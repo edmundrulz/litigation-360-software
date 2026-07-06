@@ -8451,3 +8451,94 @@ body {
     width: 100%;
   }
 }
+
+/* Phase 14F dashboard/menu/legal notice layout fixes */
+.topbar-status-line {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.topbar-updated-prefix {
+  white-space: nowrap;
+}
+
+.topbar-updated-value {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.workspace-section-heading {
+  display: grid;
+  justify-items: start;
+  gap: 0.2rem;
+  align-content: start;
+}
+
+.workspace-section-header h3,
+.workspace-section-header p,
+.workspace-section-heading .workflow-badge {
+  margin: 0;
+}
+
+.workspace-module-section .grid {
+  align-items: stretch;
+}
+
+.card.workflow-card,
+.workspace-module-section .workflow-card {
+  grid-template-rows: auto auto 1fr !important;
+  gap: 8px !important;
+  min-height: 0 !important;
+}
+
+.workflow-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.workflow-card .workflow-card-header .workflow-card-title {
+  min-height: 0 !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.workflow-card .workflow-card-header .workflow-status-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 24px !important;
+  margin: 0 !important;
+  padding: 0.12rem 0.62rem !important;
+  border-radius: 999px !important;
+  border: 1px solid #cbd5e1 !important;
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.clickable-card.workflow-card .workflow-status-badge.is-open {
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  color: #1d4ed8 !important;
+}
+
+.planned-card.workflow-card {
+  opacity: 0.7;
+}
+
+.planned-card.workflow-card .workflow-status-badge.is-planned {
+  background: #f8fafc !important;
+  border-color: #d7dee8 !important;
+  color: #64748b !important;
+}

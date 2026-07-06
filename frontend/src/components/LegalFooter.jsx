@@ -1,10 +1,12 @@
 import "./LegalFooter.css";
 
-export default function LegalFooter() {
+export default function LegalFooter({ variant = "page" }) {
+  const isPanel = variant === "panel";
+
   return (
     <section
-      id="legal-notice"
-      className="legal-footer-section"
+      id={isPanel ? undefined : "legal-notice"}
+      className={`legal-footer-section${isPanel ? " legal-footer-panel" : ""}`}
       aria-labelledby="legal-footer-title"
     >
       <div className="legal-footer-card">
