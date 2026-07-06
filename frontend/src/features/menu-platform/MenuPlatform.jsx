@@ -145,6 +145,7 @@ function MenuTree({
   setExpandedIds,
   onSelect,
   featureFlags,
+  activePanelId,
 }) {
   function toggle(id) {
     setExpandedIds((current) => {
@@ -182,6 +183,7 @@ function MenuTree({
                 setExpandedIds={setExpandedIds}
                 onSelect={onSelect}
                 featureFlags={featureFlags}
+                activePanelId={activePanelId}
               />
             ) : null}
           </div>
@@ -424,6 +426,7 @@ export function MenuPlatform({
                         setExpandedIds={setExpandedIds}
                         onSelect={handleSelect}
                         featureFlags={featureFlags}
+                        activePanelId={activePanelId}
                       />
                     </section>
                   ))
