@@ -54,7 +54,7 @@ const workspaceSections = [
   },
   {
     id: "active-legal-work",
-    label: "Active Work",
+    label: "ACTIVE WORK",
     title: "Active Legal Work",
     description: "Manage active case, matter, court, and document work.",
     items: [
@@ -90,7 +90,7 @@ const workspaceSections = [
   },
   {
     id: "review-completion",
-    label: "Completion",
+    label: "COMPLETION",
     title: "Review And Completion",
     description: "Review the prepared workflow before save or submission.",
     items: [
@@ -105,7 +105,7 @@ const workspaceSections = [
   },
   {
     id: "office-admin",
-    label: "Admin",
+    label: "ADMIN",
     title: "Office Administration",
     description: "Internal administration tools for firm operations.",
     items: [
@@ -120,7 +120,7 @@ const workspaceSections = [
   },
   {
     id: "planned-platform",
-    label: "Future",
+    label: "FUTURE",
     title: "Planned Platform Modules",
     description: "Roadmap modules are visible for planning but not active yet.",
     items: [
@@ -459,7 +459,7 @@ export default function App() {
           <div>
             <h1>{viewTitle(view, module)}</h1>
             <p className="topbar-status-line">
-              <span>Real-time legal operations workspace. Last updated:</span>
+              <span className="topbar-updated-prefix">Real-time legal operations workspace. Last updated:</span>
               <span className="topbar-updated-value">{updated}</span>
             </p>
           </div>
@@ -989,4 +989,3 @@ function Metric({ label, value }) {
     </div>
   );
 }
-
