@@ -22,6 +22,21 @@
   color: #4b5563;
 }
 
+.legal-footer-panel {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+  clear: none;
+}
+
+.legal-footer-panel .legal-footer-card {
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
 .legal-footer-title {
   margin: 0 0 6px;
   font-size: 0.95rem;
