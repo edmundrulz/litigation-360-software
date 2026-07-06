@@ -20,6 +20,7 @@ import {
   FileOpenPanel,
   FileSavePanel,
 } from "./panels/FileActionPanels";
+import LegalFooter from "../../components/LegalFooter";
 import "./MenuPlatform.css";
 
 const ICONS = {
@@ -50,7 +51,12 @@ const PANEL_COMPONENTS = {
   settings: SettingsPanel,
   system: SystemPanel,
   "file-recent": RecentFilesPanel,
+  "legal-notice": LegalNoticePanel,
 };
+
+function LegalNoticePanel() {
+  return <LegalFooter variant="panel" />;
+}
 
 function getIcon(name) {
   return ICONS[name] || "•";
