@@ -2,6 +2,7 @@ import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { MenuPlatform } from "./features/menu-platform";
+import LegalFooter from "./components/LegalFooter";
 import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
 
 import Clients from "./pages/Clients";
@@ -409,6 +410,38 @@ export default function App() {
     setModule("home");
   }
 
+  function scrollToLegalNotice() {
+    setView("workspace");
+    setModuleHistory([]);
+    setModule("home");
+
+    window.setTimeout(() => {
+      document.getElementById("legal-notice")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  }
+
+  function handleMenuTarget(rawTarget) {
+    const normalizedTarget = String(rawTarget || "").toLowerCase();
+
+    if (normalizedTarget === "home") {
+      openWorkspace();
+      return;
+    }
+
+    if (
+      normalizedTarget === "legal" ||
+      normalizedTarget === "legal-notice" ||
+      normalizedTarget === "disclaimer" ||
+      normalizedTarget === "copyright" ||
+      normalizedTarget === "copyright-notice"
+    ) {
+      scrollToLegalNotice();
+    }
+  }
+
   return (
     <div className="shell">
       <aside className="sidebar">
@@ -420,15 +453,9 @@ export default function App() {
             triggerLabel="App Menu"
             triggerVariant="sidebar"
             appVersion="0.0.0"
-            onNavigate={(target) => {
-              if (target === "home") {
-                openWorkspace();
-              }
-            }}
+            onNavigate={handleMenuTarget}
             onAction={(item) => {
-              if (item.id === "home") {
-                openWorkspace();
-              }
+              handleMenuTarget(item?.id || item?.target || item?.route);
             }}
           />
         </div>
@@ -481,6 +508,8 @@ export default function App() {
         {view === "operations" && <Operations results={results} run={runChecks} passed={passed} failed={failed} />}
         {view === "admin" && <Admin />}
         {view === "developer" && <Developer results={results} />}
+
+        <LegalFooter />
       </main>
     </div>
   );
