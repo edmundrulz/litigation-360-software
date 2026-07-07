@@ -1,0 +1,212 @@
+============================================================
+FRONTEND UI PRE-LOCK AUDIT - 07/07/2026 12:27:23
+============================================================
+
+CURRENT BRANCH:
+fix/14f-open-button-centered-alignment
+
+GIT STATUS:
+ M frontend/src/App.css
+ M frontend/src/App.jsx
+ M frontend/src/features/menu-platform/MenuPlatform.css
+ M frontend/src/features/menu-platform/MenuPlatform.jsx
+?? FRONTEND_UI_PRE_LOCK_AUDIT_20260707.txt
+
+CHANGED FILES:
+frontend/src/App.css
+frontend/src/App.jsx
+frontend/src/features/menu-platform/MenuPlatform.css
+frontend/src/features/menu-platform/MenuPlatform.jsx
+
+DIFF STAT:
+ frontend/src/App.css                               | 334 +++++++++++++++++++++
+ frontend/src/App.jsx                               |   6 +-
+ .../src/features/menu-platform/MenuPlatform.css    | 211 +++++++++++++
+ .../src/features/menu-platform/MenuPlatform.jsx    |  47 ++-
+ 4 files changed, 593 insertions(+), 5 deletions(-)
+
+FRONTEND UI FILE INVENTORY:
+frontend\src\api.js
+frontend\src\App.css
+frontend\src\App.jsx
+frontend\src\components\ClientIntakeDiscoveryPrototype.jsx
+frontend\src\components\ClientIntakeProposalPreview.jsx
+frontend\src\components\ClientIntakeSectionCard.jsx
+frontend\src\components\EmailAutocompleteInput.jsx
+frontend\src\components\KeyboardShortcutsHelp.jsx
+frontend\src\components\legal-management-shell\LegalManagementShell.css
+frontend\src\components\legal-management-shell\LegalManagementShell.jsx
+frontend\src\components\LegalFooter.css
+frontend\src\components\LegalFooter.jsx
+frontend\src\components\workflow\WizardProgressPanel.jsx
+frontend\src\components\workflow\WorkflowProgressDashboard.jsx
+frontend\src\config\featureAccess.js
+frontend\src\constants\caseStatus.js
+frontend\src\data\emailSuggestions.js
+frontend\src\enterprise\api\alertEscalationApi.js
+frontend\src\enterprise\api\autonomousEcosystemApi.js
+frontend\src\enterprise\api\autonomousOperationsApi.js
+frontend\src\enterprise\api\connectivityValidatorApi.js
+frontend\src\enterprise\api\deploymentDashboardApi.js
+frontend\src\enterprise\api\enterpriseApi.js
+frontend\src\enterprise\api\enterpriseOperationsApi.js
+frontend\src\enterprise\api\operationsAnalyticsApi.js
+frontend\src\enterprise\api\predictiveIntelligenceApi.js
+frontend\src\enterprise\components\BackendConnectivityPanel.jsx
+frontend\src\enterprise\components\EnterpriseStatusCard.jsx
+frontend\src\enterprise\pages\AutonomousLegalEnterpriseEcosystem.jsx
+frontend\src\enterprise\pages\EnterpriseAlertEscalationCentre.jsx
+frontend\src\enterprise\pages\EnterpriseAutonomousOperationsSupervisor.jsx
+frontend\src\enterprise\pages\EnterpriseOperationsAnalyticsCentre.jsx
+frontend\src\enterprise\pages\EnterpriseOperationsCommandCentre.jsx
+frontend\src\enterprise\pages\EnterpriseOperationsDashboard.jsx
+frontend\src\enterprise\pages\ExecutiveDeploymentDashboard.jsx
+frontend\src\enterprise\pages\FrontendBackendConnectivityValidator.jsx
+frontend\src\enterprise\pages\PredictiveIntelligenceCentre.jsx
+frontend\src\features\menu-platform\index.js
+frontend\src\features\menu-platform\menuConfig.js
+frontend\src\features\menu-platform\MenuPlatform.css
+frontend\src\features\menu-platform\MenuPlatform.jsx
+frontend\src\features\menu-platform\menuSchema.js
+frontend\src\features\menu-platform\mockSupportApi.js
+frontend\src\features\menu-platform\panels\FaqPanel.jsx
+frontend\src\features\menu-platform\panels\FileActionPanels.jsx
+frontend\src\features\menu-platform\panels\InfoPanels.jsx
+frontend\src\features\menu-platform\panels\SupportRequestPanel.jsx
+frontend\src\index.css
+frontend\src\l360-status-injector.js
+frontend\src\layout\layout.jsx
+frontend\src\legal-management-enhancer.css
+frontend\src\legal-management-enhancer.js
+frontend\src\main.jsx
+frontend\src\pages\Cases.jsx
+frontend\src\pages\ClientIntakeDiscovery.jsx
+frontend\src\pages\Clients.jsx
+frontend\src\pages\ClientsBackUpCopy.jsx
+frontend\src\pages\Dashboard.jsx
+frontend\src\pages\Deadlines.jsx
+frontend\src\pages\Documents.jsx
+frontend\src\pages\LegalHomePage.jsx
+frontend\src\pages\MatterIntakeWizard.jsx
+frontend\src\pages\Matters.jsx
+frontend\src\pages\OperationsDashboard.jsx
+frontend\src\pages\ProjectDashboard.jsx
+frontend\src\pages\Staff.jsx
+frontend\src\pages\SystemDashboard.jsx
+frontend\src\rules\assignmentEngine.js
+frontend\src\rules\caseRules.js
+frontend\src\services\api.js
+frontend\src\services\assignmentService.js
+frontend\src\services\caseService.js
+frontend\src\services\clientService.js
+frontend\src\services\staffService.js
+frontend\src\utils\appGuard.js
+frontend\src\utils\emailValidation.js
+frontend\src\utils\formatters.js
+frontend\src\workflow\wizardProgress.js
+
+LOCK MARKERS FOUND:
+
+frontend\src\App.css:47:  display: block;
+frontend\src\App.css:174:  display: inline-block;
+frontend\src\App.css:189:  display: block;
+frontend\src\App.css:366:  display: block;
+frontend\src\App.css:445:  display: block;
+frontend\src\App.css:580:  display: inline-block;
+frontend\src\App.css:771:  display: inline-block;
+frontend\src\App.css:979:  display: inline-block;
+frontend\src\App.css:1232:  display: inline-block;
+frontend\src\App.css:1324:/* Section headers: smaller, cleaner, not oversized blocks */
+frontend\src\App.css:1326:  display: block !important;
+frontend\src\App.css:1409:  display: block !important;
+frontend\src\App.css:1420:  display: inline-block !important;
+frontend\src\App.css:1645:  display: block !important;
+frontend\src\App.css:1911:  display: block !important;
+frontend\src\App.css:2135:  display: block !important;
+frontend\src\App.css:2673:.client-form-v6 .name-lock-grid label:nth-of-type(3),
+frontend\src\App.css:2674:.client-form-v6 .name-lock-grid label:nth-of-type(4) {
+frontend\src\App.css:2679:  display: block !important;
+frontend\src\App.css:2777:  For normal labels, use block layout so "Given Name *" and
+frontend\src\App.css:2784:  display: block !important;
+frontend\src\App.css:2831:.client-form-v6 .name-lock-grid {
+frontend\src\App.css:2836:.client-form-v6 .name-lock-grid label:nth-of-type(3),
+frontend\src\App.css:2837:.client-form-v6 .name-lock-grid label:nth-of-type(4) {
+frontend\src\App.css:2906:.client-form-v6 .name-lock-grid,
+frontend\src\App.css:2911:.client-form-v6 .name-lock-grid label,
+frontend\src\App.css:2942:  display: block !important;
+frontend\src\App.css:2954:/* Avoid asterisks being treated as their own large block. */
+frontend\src\App.css:2984:  display: block !important;
+frontend\src\App.css:3278:  display: block;
+frontend\src\App.css:3667:  display: block;
+frontend\src\App.css:3777:  display: block;
+frontend\src\App.css:4084:  display: block;
+frontend\src\App.css:4131:  display: block;
+frontend\src\App.css:4256:  display: block;
+frontend\src\App.css:4476:  margin-block: 18px;
+frontend\src\App.css:4687:    margin-block: 14px;
+frontend\src\App.css:4724:  display: block;
+frontend\src\App.css:4772:  display: block;
+frontend\src\App.css:5383:  display: block;
+frontend\src\App.css:6805:/* Success/status blocks */
+frontend\src\App.css:7225:  display: block;
+frontend\src\App.css:7232:  display: block;
+frontend\src\App.css:7303:.workflow-progress-segmented-bar .blocked,
+frontend\src\App.css:7304:.workflow-progress-legend i.blocked {
+frontend\src\App.css:7329:  display: inline-block;
+frontend\src\App.css:7437:  display: block !important;
+frontend\src\App.css:7694:  display: block !important;
+frontend\src\App.css:8455:/* Phase 14F dashboard/menu/legal notice layout fixes */
+frontend\src\App.css:8546:/* PHASE 14F OPEN BUTTON CENTERED ALIGNMENT START */
+frontend\src\App.css:8613:/* PHASE 14F OPEN BUTTON CENTERED ALIGNMENT END */
+frontend\src\App.css:8615:/* PHASE 14F WORKFLOW CARD TITLE CENTERING ALIGNMENT START */
+frontend\src\App.css:8656:/* PHASE 14F WORKFLOW CARD TITLE CENTERING ALIGNMENT END */
+frontend\src\App.css:8658:/* PHASE 14F WORKFLOW CARD BOX SPACING FINALIZATION START */
+frontend\src\App.css:8762:/* PHASE 14F WORKFLOW CARD BOX SPACING FINALIZATION END */
+frontend\src\App.css:8764:/* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK START */
+frontend\src\App.css:8766:  LOCKED SCOPE:
+frontend\src\App.css:8772:  - Future changes to this block require explicit user approval.
+frontend\src\App.css:8859:  display: block !important;
+frontend\src\App.css:8878:/* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK END */
+frontend\src\features\menu-platform\MenuPlatform.css:21:  display: inline-block;
+frontend\src\features\menu-platform\MenuPlatform.css:103:  display: block;
+frontend\src\features\menu-platform\MenuPlatform.css:388:  display: block;
+frontend\src\features\menu-platform\MenuPlatform.css:548:/* PHASE 14F MENU FINAL TOUCH-UP START */
+frontend\src\features\menu-platform\MenuPlatform.css:635:/* PHASE 14F MENU FINAL TOUCH-UP END */
+frontend\src\features\menu-platform\MenuPlatform.css:637:/* PHASE 14F MENU TEXT ALIGNMENT LOCK START */
+frontend\src\features\menu-platform\MenuPlatform.css:639:  LOCKED SCOPE:
+frontend\src\features\menu-platform\MenuPlatform.css:642:  - Future changes to this block require explicit user approval.
+frontend\src\features\menu-platform\MenuPlatform.css:703:  display: block !important;
+frontend\src\features\menu-platform\MenuPlatform.css:732:/* PHASE 14F MENU TEXT ALIGNMENT LOCK END */
+frontend\src\features\menu-platform\MenuPlatform.css:734:/* PHASE 14F MENU PRIMARY ROOT ALIGNMENT FIX START */
+frontend\src\features\menu-platform\MenuPlatform.css:736:  LOCKED SCOPE:
+frontend\src\features\menu-platform\MenuPlatform.css:740:  - Future changes to this block require explicit user approval.
+frontend\src\features\menu-platform\MenuPlatform.css:757:/* PHASE 14F MENU PRIMARY ROOT ALIGNMENT FIX END */
+
+
+BUILD CHECK:
+
+> frontend@0.0.0 build
+> vite build
+
+[36mvite v8.0.16 [32mbuilding client environment for production...[36m[39m
+[2K
+transforming...Γ£ô 664 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.45 kB Γöé gzip:   0.29 kB
+dist/assets/index-LLJl9w9x.css  173.51 kB Γöé gzip:  25.26 kB
+dist/assets/index-ey-Zsrr-.js   546.60 kB Γöé gzip: 151.76 kB
+
+[32mΓ£ô built in 1.07s[39m
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+FINAL STATUS AFTER AUDIT:
+ M frontend/src/App.css
+ M frontend/src/App.jsx
+ M frontend/src/features/menu-platform/MenuPlatform.css
+ M frontend/src/features/menu-platform/MenuPlatform.jsx
+?? FRONTEND_UI_PRE_LOCK_AUDIT_20260707.txt

@@ -616,10 +616,10 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
       </section>
 
       <section className="summary">
-        <Metric label="Live Backend Modules" value={`${passed}/${results.length}`} />
-        <Metric label="Failed Checks" value={failed} />
+        <Metric label="Modules Online" value={`${passed}/${results.length}`} />
+        <Metric label="Modules Failed" value={failed} />
         <Metric label="Last Refresh" value={updated} />
-        <button onClick={runChecks}>Refresh Live Monitor</button>
+        <button onClick={runChecks}>Refresh Now</button>
       </section>
       <section className="workspace-section-list" aria-label="Workspace module groups">
         {workspaceSections.map((section) => (
