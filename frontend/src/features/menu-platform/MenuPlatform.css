@@ -755,3 +755,112 @@
   justify-self: stretch !important;
 }
 /* PHASE 14F MENU PRIMARY ROOT ALIGNMENT FIX END */
+
+/* PHASE 14F MENU LABEL VISIBILITY FIX START */
+/*
+  SCOPED UNLOCK BUG FIX:
+  - Fixes App Menu row labels being clipped or ellipsized.
+  - Covers long labels such as:
+    Submit Query / Request
+    Disclaimer / Copyright Notice
+    Exit / Close Menu
+  - Applies only inside the App Menu platform.
+  - Does not alter sidebar buttons, main white panels, popup position, routing, JSX, backend, database, auth, API, or server logic.
+  - Re-lock required after verification.
+
+  Root cause:
+  - Normal menu rows reserve grid columns for icon, label, badge, shortcut, and expand arrow.
+  - Long labels were forced into a narrow label column and clipped with ellipsis.
+  - The correct fix is to keep the grid but allow labels to use available space and wrap cleanly.
+*/
+
+.mp-menu-item {
+  min-height: 3.25rem !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.mp-menu-item .mp-item-main {
+  min-width: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  overflow: visible !important;
+  text-align: left !important;
+}
+
+.mp-menu-item .mp-item-label,
+.mp-menu-item .mp-item-trail {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  line-height: 1.18 !important;
+  text-align: left !important;
+}
+
+.mp-menu-item .mp-badge,
+.mp-menu-item .mp-shortcut,
+.mp-menu-item .mp-expand-indicator {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* The bottom exit action should not reserve unused shortcut/badge/expand space. */
+.mp-menu-exit-item {
+  grid-template-columns: 1.45rem minmax(0, 1fr) !important;
+  column-gap: 0.65rem !important;
+  width: 100% !important;
+  min-height: 3.25rem !important;
+  overflow: visible !important;
+}
+
+.mp-menu-exit-item .mp-badge,
+.mp-menu-exit-item .mp-shortcut,
+.mp-menu-exit-item .mp-expand-indicator {
+  display: none !important;
+}
+
+/* At narrow widths or high zoom, keep labels readable instead of clipping. */
+@media (max-width: 520px) {
+  .mp-menu-item {
+    grid-template-columns: 1.45rem minmax(0, 1fr) !important;
+    row-gap: 0.3rem !important;
+  }
+
+  .mp-menu-item .mp-badge,
+  .mp-menu-item .mp-shortcut,
+  .mp-menu-item .mp-expand-indicator {
+    grid-column: 2 !important;
+    justify-self: start !important;
+    margin-top: 0.15rem !important;
+  }
+}
+/* PHASE 14F MENU LABEL VISIBILITY FIX END */
+
+/* PHASE 14F MENU LABEL VISIBILITY REFINEMENT START */
+/*
+  SCOPED REFINEMENT:
+  - Disclaimer / Copyright Notice must not use the blue selected background.
+  - Submit Query / Request must not show the Recommended badge.
+  - Applies only to exact App Menu rows.
+  - Does not alter sidebar buttons, main white panels, popup position, JSX, routing, backend, database, auth, API, or server logic.
+*/
+
+/* Keep the legal notice row visually neutral even when its panel is active. */
+.mp-menu-item[title="Disclaimer / Copyright Notice"],
+.mp-menu-item[aria-label="Disclaimer / Copyright Notice"] {
+  background: #ffffff !important;
+  border-color: rgba(148, 163, 184, 0.28) !important;
+  box-shadow: none !important;
+}
+
+/* Do not display the Recommended badge on Submit Query / Request. */
+.mp-menu-item[title="Submit Query / Request"] .mp-badge,
+.mp-menu-item[aria-label="Submit Query / Request"] .mp-badge {
+  display: none !important;
+}
+/* PHASE 14F MENU LABEL VISIBILITY REFINEMENT END */
