@@ -1,6 +1,109 @@
 import React, { useState, useEffect } from 'react';
 import { getDeadlines, getCases, createDeadline, updateDeadline, deleteDeadline } from '../api';
 
+const EMPTY_FORM = {
+  title: '',
+  deadline_date: '',
+  case_id: '',
+  reminder_days: 7,
+  notes: ''
+};
+
+function formatDate(value) {
+  if (!value) return '—';
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleDateString(undefined, {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  });
+}
+
+function getDaysUntil(dateStr) {
+  const deadline = new Date(dateStr);
+  const today = new Date();
+
+  if (Number.isNaN(deadline.getTime())) {
+    return null;
+  }
+
+  today.setHours(0, 0, 0, 0);
+  deadline.setHours(0, 0, 0, 0);
+
+  return Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+}
+
+function getDeadlineState(deadline) {
+  const daysUntil = getDaysUntil(deadline.deadline_date);
+
+  if (deadline.is_complete) {
+    return {
+      daysUntil,
+      daysLabel: 'Completed',
+      label: 'Completed',
+      slug: 'completed'
+    };
+  }
+
+  if (daysUntil === null) {
+    return {
+      daysUntil,
+      daysLabel: 'Date missing',
+      label: 'Needs date',
+      slug: 'missing'
+    };
+  }
+
+  if (daysUntil < 0) {
+    return {
+      daysUntil,
+      daysLabel: `${Math.abs(daysUntil)} day${Math.abs(daysUntil) === 1 ? '' : 's'} overdue`,
+      label: 'Overdue',
+      slug: 'overdue'
+    };
+  }
+
+  if (daysUntil === 0) {
+    return {
+      daysUntil,
+      daysLabel: 'Due today',
+      label: 'Urgent',
+      slug: 'urgent'
+    };
+  }
+
+  if (daysUntil <= 3) {
+    return {
+      daysUntil,
+      daysLabel: `${daysUntil} day${daysUntil === 1 ? '' : 's'}`,
+      label: 'Urgent',
+      slug: 'urgent'
+    };
+  }
+
+  if (daysUntil <= 7) {
+    return {
+      daysUntil,
+      daysLabel: `${daysUntil} days`,
+      label: 'Due soon',
+      slug: 'due-soon'
+    };
+  }
+
+  return {
+    daysUntil,
+    daysLabel: `${daysUntil} days`,
+    label: 'On track',
+    slug: 'on-track'
+  };
+}
+
 export default function Deadlines() {
   const [deadlines, setDeadlines] = useState([]);
   const [cases, setCases] = useState([]);
@@ -9,13 +112,7 @@ export default function Deadlines() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
-  const [formData, setFormData] = useState({
-    title: '',
-    deadline_date: '',
-    case_id: '',
-    reminder_days: 7,
-    notes: ''
-  });
+  const [formData, setFormData] = useState(EMPTY_FORM);
   const [successMsg, setSuccessMsg] = useState(null);
 
   useEffect(() => {
@@ -26,167 +123,166 @@ export default function Deadlines() {
     try {
       setLoading(true);
       setError(null);
+
       const [deadlinesData, casesData] = await Promise.all([
         getDeadlines(),
         getCases()
       ]);
-      setDeadlines(deadlinesData);
-      setCases(casesData);
+
+      setDeadlines(Array.isArray(deadlinesData) ? deadlinesData : []);
+      setCases(Array.isArray(casesData) ? casesData : []);
     } catch (err) {
-      setError('Failed to load data');
-      console.error(err);
+      setError('Failed to load deadline data. Please refresh or check the backend connection.');
+      console.error('Deadline load error:', err);
     } finally {
       setLoading(false);
     }
   }
 
+  function resetForm() {
+    setFormData(EMPTY_FORM);
+    setEditingId(null);
+    setShowForm(false);
+  }
+
   function handleInputChange(e) {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'reminder_days' ? Number(value) : value
+    }));
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const payload = {
+      ...formData,
+      title: formData.title.trim(),
+      case_id: formData.case_id || null,
+      reminder_days: Number(formData.reminder_days) || 0,
+      notes: formData.notes.trim()
+    };
+
     try {
+      setError(null);
+
       if (editingId) {
-        await updateDeadline(editingId, formData);
-        setSuccessMsg('Deadline updated successfully');
+        await updateDeadline(editingId, payload);
+        setSuccessMsg('Deadline updated successfully.');
       } else {
-        await createDeadline(formData);
-        setSuccessMsg('Deadline created successfully');
+        await createDeadline(payload);
+        setSuccessMsg('Deadline created successfully.');
       }
-      setFormData({
-        title: '',
-        deadline_date: '',
-        case_id: '',
-        reminder_days: 7,
-        notes: ''
-      });
-      setEditingId(null);
-      setShowForm(false);
+
+      resetForm();
       await loadData();
       setTimeout(() => setSuccessMsg(null), 3000);
     } catch (err) {
-      setError('Failed to save deadline');
-      console.error(err);
+      setError('Failed to save deadline. Please check the required fields and try again.');
+      console.error('Deadline save error:', err);
     }
   }
 
   function handleEdit(deadline) {
     setFormData({
-      title: deadline.title,
-      deadline_date: deadline.deadline_date,
+      title: deadline.title || '',
+      deadline_date: deadline.deadline_date || '',
       case_id: deadline.case_id || '',
-      reminder_days: deadline.reminder_days || 7,
+      reminder_days: deadline.reminder_days ?? 7,
       notes: deadline.notes || ''
     });
     setEditingId(deadline.id);
     setShowForm(true);
+    setError(null);
   }
 
-  async function handleDelete(deadlineId) {
-    if (window.confirm('Are you sure you want to delete this deadline?')) {
-      try {
-        await deleteDeadline(deadlineId);
-        setSuccessMsg('Deadline deleted successfully');
-        await loadData();
-        setTimeout(() => setSuccessMsg(null), 3000);
-      } catch (err) {
-        setError('Failed to delete deadline');
-        console.error(err);
-      }
+  async function handleDelete(deadline) {
+    const title = deadline?.title || 'this deadline';
+    const confirmed = window.confirm(`Delete deadline "${title}"? This action cannot be undone.`);
+
+    if (!confirmed) return;
+
+    try {
+      setError(null);
+      await deleteDeadline(deadline.id);
+      setSuccessMsg('Deadline deleted successfully.');
+      await loadData();
+      setTimeout(() => setSuccessMsg(null), 3000);
+    } catch (err) {
+      setError('Failed to delete deadline. Please try again.');
+      console.error('Deadline delete error:', err);
     }
   }
 
-  function handleCancel() {
-    setShowForm(false);
-    setEditingId(null);
-    setFormData({
-      title: '',
-      deadline_date: '',
-      case_id: '',
-      reminder_days: 7,
-      notes: ''
-    });
-  }
-
   function getCaseName(caseId) {
-    const caseItem = cases.find(c => c.id === caseId);
+    const caseItem = cases.find((caseRecord) => Number(caseRecord.id) === Number(caseId));
     return caseItem ? caseItem.title : '—';
   }
 
-  function getDaysUntil(dateStr) {
-    const deadline = new Date(dateStr);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    deadline.setHours(0, 0, 0, 0);
-    return Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+  const filteredDeadlines = deadlines
+    .filter((deadline) => {
+      const state = getDeadlineState(deadline);
+
+      if (filterStatus === 'all') return true;
+      if (filterStatus === 'overdue') return state.slug === 'overdue';
+      if (filterStatus === 'urgent') return state.slug === 'urgent';
+      if (filterStatus === 'upcoming') return ['due-soon', 'on-track'].includes(state.slug);
+      if (filterStatus === 'completed') return state.slug === 'completed';
+
+      return true;
+    })
+    .sort((a, b) => new Date(a.deadline_date) - new Date(b.deadline_date));
+
+  if (loading) {
+    return (
+      <div className="loading" role="status" aria-live="polite">
+        <div className="spinner" /> Loading deadlines...
+      </div>
+    );
   }
-
-  function getStatusColor(daysUntil, isComplete) {
-    if (isComplete) return '#9ca3af';
-    if (daysUntil < 0) return '#dc2626';
-    if (daysUntil <= 3) return '#dc2626';
-    if (daysUntil <= 7) return '#f59e0b';
-    return '#16a34a';
-  }
-
-  const filteredDeadlines = deadlines.filter(d => {
-    if (filterStatus === 'all') return true;
-    if (filterStatus === 'overdue') return getDaysUntil(d.deadline_date) < 0 && !d.is_complete;
-    if (filterStatus === 'urgent') return getDaysUntil(d.deadline_date) <= 3 && !d.is_complete;
-    if (filterStatus === 'upcoming') return getDaysUntil(d.deadline_date) > 3 && !d.is_complete;
-    if (filterStatus === 'completed') return d.is_complete;
-    return true;
-  }).sort((a, b) => new Date(a.deadline_date) - new Date(b.deadline_date));
-
-  if (loading) return <div className="loading"><div className="spinner"></div> Loading deadlines...</div>;
 
   return (
-    <div className="deadlines-page">
-      {successMsg && <div className="alert alert-success">{successMsg}</div>}
-      {error && <div className="alert alert-error">{error}</div>}
+    <div className="deadlines-page l360-workspace-page">
+      {successMsg && <div className="alert alert-success" role="status">{successMsg}</div>}
+      {error && <div className="alert alert-error" role="alert">{error}</div>}
 
-      <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+      <div className="l360-page-toolbar deadlines-toolbar" aria-label="Deadline controls">
         {!showForm ? (
-          <button className="btn btn-primary" onClick={() => setShowForm(true)}>
+          <button className="btn btn-primary l360-primary-action" type="button" onClick={() => setShowForm(true)}>
             + Add Deadline
           </button>
         ) : (
-          <button className="btn btn-secondary" onClick={handleCancel}>
-            ✕ Cancel
+          <button className="btn btn-secondary l360-secondary-action" type="button" onClick={resetForm}>
+            Cancel
           </button>
         )}
-        
-        <select 
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          style={{
-            padding: '10px 12px',
-            border: '1px solid var(--border)',
-            borderRadius: '6px',
-            fontSize: '14px',
-            fontFamily: 'var(--sans)',
-            background: 'white',
-            cursor: 'pointer'
-          }}
-        >
-          <option value="all">All Deadlines</option>
-          <option value="overdue">Overdue</option>
-          <option value="urgent">Urgent (≤3 days)</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="completed">Completed</option>
-        </select>
+
+        <label className="l360-filter-control">
+          <span>Filter</span>
+          <select
+            className="l360-select"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="all">All Deadlines</option>
+            <option value="overdue">Overdue</option>
+            <option value="urgent">Urgent (≤3 days)</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
       </div>
 
-      {/* ADD/EDIT FORM */}
       {showForm && (
-        <div className="card">
+        <div className="card l360-editor-card">
           <h3>{editingId ? 'Edit Deadline' : 'Add New Deadline'}</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Deadline Title *</label>
+              <label htmlFor="deadline-title">Deadline Title *</label>
               <input
+                id="deadline-title"
                 type="text"
                 name="title"
                 value={formData.title}
@@ -196,10 +292,11 @@ export default function Deadlines() {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div className="l360-form-grid two">
               <div className="form-group">
-                <label>Due Date *</label>
+                <label htmlFor="deadline-date">Due Date *</label>
                 <input
+                  id="deadline-date"
                   type="date"
                   name="deadline_date"
                   value={formData.deadline_date}
@@ -207,24 +304,27 @@ export default function Deadlines() {
                   required
                 />
               </div>
+
               <div className="form-group">
-                <label>Associated Case</label>
+                <label htmlFor="deadline-case">Associated Case</label>
                 <select
+                  id="deadline-case"
                   name="case_id"
                   value={formData.case_id}
                   onChange={handleInputChange}
                 >
                   <option value="">Select a case (optional)</option>
-                  {cases.map(c => (
-                    <option key={c.id} value={c.id}>{c.title}</option>
+                  {cases.map((caseRecord) => (
+                    <option key={caseRecord.id} value={caseRecord.id}>{caseRecord.title}</option>
                   ))}
                 </select>
               </div>
             </div>
 
             <div className="form-group">
-              <label>Reminder (days before deadline)</label>
+              <label htmlFor="deadline-reminder">Reminder (days before deadline)</label>
               <input
+                id="deadline-reminder"
                 type="number"
                 name="reminder_days"
                 value={formData.reminder_days}
@@ -232,14 +332,15 @@ export default function Deadlines() {
                 min="0"
                 max="60"
               />
-              <small style={{ color: 'var(--text)', display: 'block', marginTop: '4px' }}>
-                System will remind you {formData.reminder_days} day(s) before the deadline
+              <small className="l360-field-help">
+                System will remind you {formData.reminder_days} day(s) before the deadline.
               </small>
             </div>
 
             <div className="form-group">
-              <label>Notes</label>
+              <label htmlFor="deadline-notes">Notes</label>
               <textarea
+                id="deadline-notes"
                 name="notes"
                 value={formData.notes}
                 onChange={handleInputChange}
@@ -247,11 +348,11 @@ export default function Deadlines() {
               />
             </div>
 
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button type="submit" className="btn btn-primary">
+            <div className="l360-form-actions">
+              <button type="submit" className="btn btn-primary l360-primary-action">
                 {editingId ? 'Update Deadline' : 'Create Deadline'}
               </button>
-              <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+              <button type="button" className="btn btn-secondary l360-secondary-action" onClick={resetForm}>
                 Cancel
               </button>
             </div>
@@ -259,14 +360,17 @@ export default function Deadlines() {
         </div>
       )}
 
-      {/* DEADLINES TABLE */}
-      <div className="card">
-        <h3>Deadlines ({filteredDeadlines.length})</h3>
+      <div className="card l360-data-card">
+        <div className="l360-card-header-row">
+          <h3>Deadlines ({filteredDeadlines.length})</h3>
+          <span className="l360-card-meta">Court dates and reminder readiness</span>
+        </div>
+
         {filteredDeadlines.length === 0 ? (
-          <p style={{ color: 'var(--text)', margin: '20px 0' }}>No deadlines matching filter.</p>
+          <p className="l360-empty-state">No deadlines match the current filter.</p>
         ) : (
-          <div className="table-container">
-            <table className="data-table">
+          <div className="table-container l360-table-scroll">
+            <table className="data-table l360-data-table deadlines-table" aria-label="Deadlines table">
               <thead>
                 <tr>
                   <th>Deadline</th>
@@ -279,42 +383,50 @@ export default function Deadlines() {
                 </tr>
               </thead>
               <tbody>
-                {filteredDeadlines.map(deadline => {
-                  const daysUntil = getDaysUntil(deadline.deadline_date);
-                  let statusLabel = '';
-                  if (deadline.is_complete) statusLabel = 'Completed';
-                  else if (daysUntil < 0) statusLabel = 'Overdue';
-                  else if (daysUntil <= 3) statusLabel = 'Urgent';
-                  else statusLabel = 'On Track';
+                {filteredDeadlines.map((deadline) => {
+                  const state = getDeadlineState(deadline);
 
                   return (
                     <tr key={deadline.id}>
-                      <td><strong>{deadline.title}</strong></td>
-                      <td>{new Date(deadline.deadline_date).toLocaleDateString()}</td>
-                      <td style={{ color: getStatusColor(daysUntil, deadline.is_complete), fontWeight: 'bold' }}>
-                        {daysUntil < 0 ? `${Math.abs(daysUntil)} overdue` : `${daysUntil} days`}
-                      </td>
-                      <td>{getCaseName(deadline.case_id)}</td>
-                      <td>{deadline.reminder_days ? `${deadline.reminder_days} days` : '—'}</td>
                       <td>
-                        <span className={`status-badge status-${statusLabel.toLowerCase()}`}>
-                          {statusLabel}
+                        <strong className="l360-table-primary-text" title={deadline.title || 'Untitled deadline'}>
+                          {deadline.title || 'Untitled deadline'}
+                        </strong>
+                      </td>
+                      <td className="l360-nowrap">{formatDate(deadline.deadline_date)}</td>
+                      <td>
+                        <span className={`deadline-days-badge deadline-days-${state.slug}`}>
+                          {state.daysLabel}
                         </span>
                       </td>
                       <td>
-                        <button 
-                          className="btn btn-secondary btn-small"
-                          onClick={() => handleEdit(deadline)}
-                          style={{ marginRight: '8px' }}
-                        >
-                          Edit
-                        </button>
-                        <button 
-                          className="btn btn-danger btn-small"
-                          onClick={() => handleDelete(deadline.id)}
-                        >
-                          Delete
-                        </button>
+                        <span className="l360-table-secondary-text" title={getCaseName(deadline.case_id)}>
+                          {getCaseName(deadline.case_id)}
+                        </span>
+                      </td>
+                      <td className="l360-nowrap">{deadline.reminder_days ? `${deadline.reminder_days} days` : '—'}</td>
+                      <td>
+                        <span className={`status-badge status-${state.slug}`}>
+                          {state.label}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="l360-actions-cell">
+                          <button
+                            className="btn btn-secondary btn-small l360-secondary-action"
+                            type="button"
+                            onClick={() => handleEdit(deadline)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="btn btn-danger btn-small l360-danger-action"
+                            type="button"
+                            onClick={() => handleDelete(deadline)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );

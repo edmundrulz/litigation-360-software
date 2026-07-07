@@ -260,8 +260,47 @@ function computeRequiredProgress(items) {
   };
 }
 
-function PageRequiredProgressCard({ title, items, note }) {
+function PageRequiredProgressCard({ title, items, note, fieldTrackingAvailable = true }) {
   const progress = computeRequiredProgress(items);
+
+  if (!fieldTrackingAvailable) {
+    return (
+      <section className="workflow-progress-dashboard workflow-progress-dashboard-module-status" aria-label={`${title} module status`}>
+        <div className="workflow-progress-dashboard-header">
+          <div>
+            <p className="workflow-progress-dashboard-kicker">Completion Tracking</p>
+            <h3>{title} status</h3>
+            <p>
+              {note ||
+                "This module is available. Detailed field-level completion tracking will appear once required field rules are configured."}
+            </p>
+          </div>
+          <div className="workflow-progress-dashboard-total workflow-progress-dashboard-status-total">
+            <strong>Ready</strong>
+            <span>Field tracking pending</span>
+          </div>
+        </div>
+
+        <div className="workflow-progress-dashboard-metrics workflow-progress-dashboard-module-metrics">
+          <div>
+            <strong>Ready</strong>
+            <span>Module</span>
+            <small>Page is available</small>
+          </div>
+          <div>
+            <strong>Pending</strong>
+            <span>Field Rules</span>
+            <small>Required-field model not configured</small>
+          </div>
+          <div>
+            <strong>Not shown</strong>
+            <span>Percent</span>
+            <small>Hidden until backed by real field data</small>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="workflow-progress-dashboard" aria-label={`${title} progress`}>
@@ -271,7 +310,14 @@ function PageRequiredProgressCard({ title, items, note }) {
           <h3>{title}</h3>
           <p>{note || "Real required-item progress for this page."}</p>
         </div>
-        <div className="workflow-progress-dashboard-total">
+        <div
+          className="workflow-progress-dashboard-total"
+          role="progressbar"
+          aria-valuenow={progress.percentage}
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label={`${title} required completion: ${progress.percentage}%`}
+        >
           <strong>{progress.percentage}%</strong>
           <span>{progress.label}</span>
         </div>
@@ -328,6 +374,29 @@ function normalizeWorkspaceModule(moduleName) {
   return moduleRouteAliases[moduleName] || moduleName;
 }
 
+function formatWorkspaceTimestamp(value) {
+  if (!value) return "Pending";
+
+  const date = value instanceof Date ? value : new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })
+    .format(date)
+    .replace(",", "")
+    .replace(/ am$/i, " AM")
+    .replace(/ pm$/i, " PM");
+}
+
 export default function App() {
   const [view, setView] = useState("workspace");
   const [module, setModule] = useState("home");
@@ -363,7 +432,7 @@ export default function App() {
     }
 
     setResults(out);
-    setUpdated(new Date().toLocaleString());
+    setUpdated(formatWorkspaceTimestamp(new Date()));
   }
 
   useEffect(() => {
@@ -459,8 +528,9 @@ export default function App() {
           <div>
             <h1>{viewTitle(view, module)}</h1>
             <p className="topbar-status-line">
-              <span className="topbar-updated-prefix">Real-time legal operations workspace. Last updated:</span>
-              <span className="topbar-updated-value">{updated}</span>
+              <span className="topbar-updated-prefix">Real-time legal operations workspace</span>
+              <span className="topbar-updated-separator" aria-hidden="true">·</span>
+              <span className="topbar-updated-value">Updated {updated}</span>
             </p>
           </div>
 
@@ -790,7 +860,7 @@ function ModuleFrame({
     return [];
   })();
 
-  const pageProgressNote = "Current App.jsx exposes module-level completion only. Field-level required items can be expanded when page-specific field models are available.";
+  const pageProgressNote = "This module is available. Detailed field-level completion tracking will appear once required field rules are configured.";
 
   const nextTarget = nextMap[title] || "";
 
@@ -816,20 +886,6 @@ function ModuleFrame({
     setModule(nextTarget);
   }
 
-  function goToPageStart() {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }
-
-  function goToPageBottom() {
-    if (typeof window !== "undefined") {
-      window.scrollTo({
-        top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
-        behavior: "smooth"
-      });
-    }
-  }
 
   function renderNavigation(position) {
     const isBottom = position === "bottom";
@@ -858,30 +914,30 @@ function ModuleFrame({
           type="button"
           className="module-page-nav-button module-page-nav-previous"
           onClick={goPrevious}
-          title="Previous Step / Page"
-        >← Previous Step / Page</button>
+          title="Previous Page"
+        >← Previous Page</button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-home"
           onClick={goHome}
-          title="Home Main Page"
-        >Home Main Page</button>
+          title="Home"
+        >Home</button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-next"
           onClick={goNext}
-          title="Continue to Next Step / Page"
-        >Continue to Next Step / Page →</button>
+          title="Next Page"
+        >Next Page →</button>
 
         <button
           type="button"
           className="module-page-nav-button module-page-nav-jump"
           onClick={isBottom ? jumpToPageStart : jumpToPageEnd}
-          title={isBottom ? "Go to Top of Page" : "Go to Bottom/End of Page"}
+          title={isBottom ? "Go to Top" : "Go to Bottom"}
         >
-          {isBottom ? "Go to Top of Page ↑" : "Go to Bottom/End of Page ↓"}
+          {isBottom ? "Go to Top ↑" : "Go to Bottom ↓"}
         </button>
       </nav>
     );
@@ -896,14 +952,14 @@ function ModuleFrame({
           <div>
             <p className="eyebrow">Workflow module</p>
             <h2>{title}</h2>
-            <p className="workflow-node-label">Current Node: {title} · OPEN</p>
+            <p className="workflow-node-label">Current step: {title} · Open</p>
           </div>
         </div>
       )}
 
       <div className="module-frame-body">
         {isPostPage3Module ? (
-          <PageRequiredProgressCard title={title} items={pageProgressItems} note={pageProgressNote} />
+          <PageRequiredProgressCard title={title} items={pageProgressItems} note={pageProgressNote} fieldTrackingAvailable={false} />
         ) : null}
         {children}
       </div>

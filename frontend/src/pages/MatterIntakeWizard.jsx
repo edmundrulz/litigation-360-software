@@ -654,15 +654,15 @@ export default function MatterIntakeWizard({ setModule } = {}) {
         }}
       >
         <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={goPreviousPage}>
-          ← Previous Step / Page
+          ← Previous Page
         </button>
 
         <button type="button" className="module-page-nav-button module-page-nav-home" onClick={() => setModule?.("home")}>
-          Home Main Page
+          Home
         </button>
 
         <button type="button" className="module-page-nav-button module-page-nav-next" onClick={nextStep}>
-          Continue to Next Step / Page →
+          Next Page →
         </button>
 
         <button
@@ -671,7 +671,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
           onClick={goPageEdge}
           style={{ gridColumn: "2 / 3" }}
         >
-          {isTop ? "Go to Bottom/End of Page ↓" : "Go to Top of Page ↑"}
+          {isTop ? "Go to Bottom ↓" : "Go to Top ↑"}
         </button>
       </div>
     );
@@ -882,7 +882,7 @@ export default function MatterIntakeWizard({ setModule } = {}) {
             Change Selection
           </button>
           <button type="button" className="module-page-nav-button module-page-nav-next" onClick={continueFromExistingClient}>
-            Continue to Next Step / Page →
+            Next Page →
           </button>
         </div>
 
@@ -1113,13 +1113,13 @@ export default function MatterIntakeWizard({ setModule } = {}) {
 
         <div className="client-selected-actions">
           <button type="button" className="module-page-nav-button module-page-nav-previous" onClick={() => setClientStepMode(CLIENT_STEP_MODE.SEARCH)}>
-            ← Previous Step / Page
+            ← Previous Page
           </button>
           <button type="button" className="module-page-nav-button module-page-nav-home" onClick={openNewClientCreation}>
             Create Full Profile in Advanced Directory
           </button>
           <button type="button" className="module-page-nav-button module-page-nav-next" onClick={() => continueToCaseDetailsFromNewClient({ allowOverride: true })}>
-            Continue to Next Step / Page →
+            Next Page →
           </button>
         </div>
 

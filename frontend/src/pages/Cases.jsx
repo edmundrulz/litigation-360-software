@@ -15,8 +15,36 @@ import {
 import { formatStatus } from "../utils/formatters";
 import WorkflowProgressDashboard from "../components/workflow/WorkflowProgressDashboard";
 
-export default function Cases() {
+const EMPTY_MATTER_FORM = {
+  case_number: "",
+  title: "",
+  client_id: "",
+  status: "NEW",
+  description: "",
+  opened_date: ""
+};
 
+function getClientDisplayName(client) {
+  if (!client) return "-";
+
+  return (
+    client.full_name ||
+    client.fullName ||
+    [client.givenName, client.surname].filter(Boolean).join(" ") ||
+    client.name ||
+    client.email ||
+    "Unnamed client"
+  );
+}
+
+function getMatterStatusSlug(status) {
+  return String(status || "unknown")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "") || "unknown";
+}
+
+export default function Cases() {
   const [cases, setCases] = useState([]);
   const [clients, setClients] = useState([]);
   const [staffList, setStaffList] = useState([]);
@@ -28,19 +56,10 @@ export default function Cases() {
   const [editingId, setEditingId] = useState(null);
 
   const [successMsg, setSuccessMsg] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  const [formData, setFormData] = useState({
-    case_number: "",
-    title: "",
-    client_id: "",
-    status: "NEW",
-    description: "",
-    opened_date: ""
-  });
+  const [formData, setFormData] = useState(EMPTY_MATTER_FORM);
 
-  // =======================
-  // LOAD DATA
-  // =======================
   useEffect(() => {
     loadData();
   }, []);
@@ -48,6 +67,7 @@ export default function Cases() {
   async function loadData() {
     try {
       setLoading(true);
+      setErrorMsg(null);
 
       const [casesData, staffData, clientsData] = await Promise.all([
         fetchAllCases(),
@@ -55,102 +75,93 @@ export default function Cases() {
         fetchAllClients()
       ]);
 
-      setCases(casesData);
-      setStaffList(staffData);
-      setClients(clientsData);
-
-          console.error("Load error:", err);
+      setCases(Array.isArray(casesData) ? casesData : []);
+      setStaffList(Array.isArray(staffData) ? staffData : []);
+      setClients(Array.isArray(clientsData) ? clientsData : []);
+    } catch (err) {
+      setErrorMsg("Failed to load matters. Please refresh or check the backend connection.");
+      console.error("Matter load error:", err);
     } finally {
       setLoading(false);
     }
   }
 
-  // =======================
-  // CLEAR MESSAGE
-  // =======================
   useEffect(() => {
-    if (!successMsg) return;
-    const t = setTimeout(() => setSuccessMsg(null), 3000);
-    return () => clearTimeout(t);
+    if (!successMsg) return undefined;
+
+    const timer = setTimeout(() => setSuccessMsg(null), 3000);
+    return () => clearTimeout(timer);
   }, [successMsg]);
 
-  // =======================
-  // INPUT HANDLER
-  // =======================
   function handleChange(e) {
     const { name, value } = e.target;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]:
-        name === "client_id"
-          ? (value === "" ? "" : Number(value))
-          : value
+      [name]: name === "client_id" ? (value === "" ? "" : Number(value)) : value
     }));
   }
 
-  // =======================
-  // SUBMIT
-  // =======================
   async function handleSubmit(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (saving) return;
+    if (saving) return;
 
-  try {
-    setSaving(true);
+    try {
+      setSaving(true);
+      setErrorMsg(null);
 
-    const payload = {
-      ...formData,
-      client_id:
-        formData.client_id === "" ? null : Number(formData.client_id)
-    };
+      const payload = {
+        ...formData,
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        client_id: formData.client_id === "" ? null : Number(formData.client_id)
+      };
 
-    let savedCase;
+      let savedCase;
 
-    if (editingId) {
-      await editCase(editingId, payload);
-      savedCase = { ...payload, id: editingId };
-      setSuccessMsg("Matter updated");
-    } else {
-      savedCase = await addCase(payload);
-      setSuccessMsg("Matter created");
+      if (editingId) {
+        await editCase(editingId, payload);
+        savedCase = { ...payload, id: editingId };
+        setSuccessMsg("Matter updated successfully.");
+      } else {
+        savedCase = await addCase(payload);
+        setSuccessMsg("Matter created successfully.");
+      }
+
+      const result = autoAssignCase(savedCase, staffList);
+
+      if (result?.assigned && result.staff?.id) {
+        await assignCaseToStaff(savedCase.id, result.staff.id);
+      }
+
+      resetForm();
+      await loadData();
+    } catch (err) {
+      setErrorMsg("Failed to save matter. Please check required fields and try again.");
+      console.error("Matter submit error:", err);
+    } finally {
+      setSaving(false);
     }
-
-    const result = autoAssignCase(savedCase, staffList);
-
-    if (result.assigned) {
-      await assignCaseToStaff(savedCase.id, result.staff.id);
-    }
-
-    resetForm();
-
-    // SAFE DELAYED REFRESH (CLEAN + CLOSED PROPERLY)
-    setTimeout(() => {
-      loadData();
-    }, 300);
-
-  } catch (err) {
-    console.error("SUBMIT ERROR:", err);
-  } finally {
-    setSaving(false);
-  }
-}
-
-  // =======================
-  // DELETE
-  // =======================
-  async function handleDelete(id) {
-    if (!window.confirm("Delete this case?")) return;
-
-    await removeCase(id);
-    setSuccessMsg("Matter deleted");
-    await loadData();
   }
 
-  // =======================
-  // EDIT
-  // =======================
+  async function handleDelete(matter) {
+    const title = matter?.title || "this matter";
+    const confirmed = window.confirm(`Delete matter "${title}"? This action cannot be undone.`);
+
+    if (!confirmed) return;
+
+    try {
+      setErrorMsg(null);
+      await removeCase(matter.id);
+      setSuccessMsg("Matter deleted successfully.");
+      await loadData();
+    } catch (err) {
+      setErrorMsg("Failed to delete matter. Please try again.");
+      console.error("Matter delete error:", err);
+    }
+  }
+
   function handleEdit(c) {
     setFormData({
       case_number: c.case_number || "",
@@ -163,27 +174,22 @@ export default function Cases() {
 
     setEditingId(c.id);
     setShowForm(true);
+    setErrorMsg(null);
   }
 
-  // =======================
-  // RESET
-  // =======================
   function resetForm() {
-    setFormData({
-      case_number: "",
-      title: "",
-      client_id: "",
-      status: "NEW",
-      description: "",
-      opened_date: ""
-    });
-
+    setFormData(EMPTY_MATTER_FORM);
     setEditingId(null);
     setShowForm(false);
   }
+
   const safeCases = Array.isArray(cases) ? cases : [];
   const safeClients = Array.isArray(clients) ? clients : [];
-  const linkedClientIds = new Set(safeClients.map((client) => Number(client.id)).filter((id) => Number.isFinite(id)));
+  const linkedClientIds = new Set(
+    safeClients
+      .map((client) => Number(client.id))
+      .filter((id) => Number.isFinite(id))
+  );
   const caseTitleComplete = String(formData.title || "").trim().length > 0;
   const caseStatusComplete = String(formData.status || "").trim().length > 0;
   const caseDescriptionComplete = String(formData.description || "").trim().length > 0;
@@ -198,7 +204,7 @@ export default function Cases() {
     caseTitleComplete ? "completed" : "pending",
     caseClientState,
     caseStatusComplete ? "completed" : "pending",
-    caseDescriptionComplete ? "completed" : "pending",
+    caseDescriptionComplete ? "completed" : "pending"
   ];
   const caseFormTotalCount = caseFormFieldStates.length;
   const caseFormCompletedCount = caseFormFieldStates.filter((state) => state === "completed").length;
@@ -217,136 +223,23 @@ export default function Cases() {
     safeClients.length +
     " clients.";
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="loading" role="status" aria-live="polite">
+        Loading matters...
+      </div>
+    );
+  }
 
   return (
-    <div className="matter-page">
-      <style>{`
-        .matter-page {
-          padding: 24px;
-          max-width: 1200px;
-          margin: 0 auto;
-          font-family: Arial, sans-serif;
-          color: #0f172a;
-        }
+    <div className="matter-page l360-workspace-page">
+      <div className="matter-page-header">
+        <div>
+          <h2>Matter Details</h2>
+          <p>Manage legal matters linked to client profiles.</p>
+        </div>
+      </div>
 
-        .matter-page h2 {
-          margin: 0 0 8px 0;
-          font-size: 30px;
-          font-weight: 700;
-        }
-
-        .matter-page p {
-          margin: 0 0 18px 0;
-          color: #475569;
-          font-size: 16px;
-        }
-
-        .matter-toolbar {
-          margin-bottom: 16px;
-        }
-
-        .matter-form {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(240px, 1fr));
-          gap: 14px;
-          padding: 18px;
-          margin: 16px 0 22px 0;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px;
-          box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
-        }
-
-        .matter-form input,
-        .matter-form select,
-        .matter-form textarea {
-          width: 100%;
-          box-sizing: border-box;
-          padding: 10px 12px;
-          border: 1px solid #cbd5e1;
-          border-radius: 8px;
-          font-size: 14px;
-          background: #ffffff;
-        }
-
-        .matter-form textarea {
-          grid-column: 1 / -1;
-          min-height: 90px;
-          resize: vertical;
-        }
-
-        .matter-button {
-          border: none;
-          border-radius: 8px;
-          padding: 9px 14px;
-          font-size: 14px;
-          cursor: pointer;
-        }
-
-        .matter-button-primary {
-          background: #1d4ed8;
-          color: #ffffff;
-        }
-
-        .matter-button-success {
-          background: #15803d;
-          color: #ffffff;
-          justify-self: start;
-        }
-
-        .matter-button-secondary {
-          background: #e2e8f0;
-          color: #0f172a;
-          margin-right: 8px;
-        }
-
-        .matter-button-danger {
-          background: #fee2e2;
-          color: #991b1b;
-        }
-
-        .matter-table {
-          width: 100%;
-          border-collapse: collapse;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
-        }
-
-        .matter-table th {
-          text-align: left;
-          padding: 12px;
-          background: #f8fafc;
-          border-bottom: 1px solid #e2e8f0;
-          font-size: 14px;
-        }
-
-        .matter-table td {
-          padding: 12px;
-          border-bottom: 1px solid #e2e8f0;
-          font-size: 14px;
-        }
-
-        .matter-table tr:last-child td {
-          border-bottom: none;
-        }
-
-        .matter-success {
-          margin-bottom: 14px;
-          padding: 10px 12px;
-          border-radius: 8px;
-          background: #dcfce7;
-          color: #166534;
-          border: 1px solid #bbf7d0;
-        }
-      `}</style>
-
-      
-      <h2>Matter Details</h2>
-      <p>Manage legal matters linked to client profiles.</p>
       <WorkflowProgressDashboard
         title="Case / Matter Workflow Progress"
         stepLabel="Page 4 of 6 · Case / Matter Details"
@@ -357,94 +250,150 @@ export default function Cases() {
         totalCount={caseFormTotalCount}
         notes={caseFormProgressNote}
       />
-{successMsg && <div className="matter-success">{successMsg}</div>}
 
-      <div className="matter-toolbar"><button className="matter-button matter-button-primary" onClick={() => setShowForm(true)}>Create New Matter</button></div>
+      {successMsg && <div className="matter-success" role="status">{successMsg}</div>}
+      {errorMsg && <div className="matter-error" role="alert">{errorMsg}</div>}
+
+      <div className="matter-toolbar l360-page-toolbar">
+        <button
+          className="matter-button matter-button-primary l360-primary-action"
+          type="button"
+          onClick={() => setShowForm((current) => !current)}
+        >
+          {showForm ? "Close Matter Form" : "+ Create New Matter"}
+        </button>
+      </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="matter-form">
+        <form onSubmit={handleSubmit} className="matter-form l360-editor-card">
+          <label>
+            <span>Matter Title *</span>
+            <input
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Matter title"
+              required
+            />
+          </label>
 
-          <input
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            placeholder="Matter Title"
-          />
+          <label>
+            <span>Linked Client *</span>
+            <select
+              name="client_id"
+              value={formData.client_id}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select linked client</option>
+              {safeClients.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {getClientDisplayName(client)}
+                </option>
+              ))}
+            </select>
+          </label>
 
-          <select
-            name="client_id"
-            value={formData.client_id}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Linked Client</option>
+          <label>
+            <span>Status *</span>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              required
+            >
+              <option value="NEW">Open</option>
+              <option value="ACTIVE">Active</option>
+              <option value="PENDING_CLIENT">Pending Client</option>
+              <option value="PENDING_COURT">Pending Court</option>
+              <option value="ON_HOLD">On Hold</option>
+              <option value="CLOSED">Closed</option>
+              <option value="ARCHIVED">Archived</option>
+            </select>
+          </label>
 
-            {safeClients.map(c => (
-              <option key={c.id} value={c.id}>
-                {c.full_name}
-              </option>
-            ))}
-          </select>
+          <label className="matter-form-wide">
+            <span>Matter Description / Summary *</span>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Matter description or summary"
+              rows="4"
+              required
+            />
+          </label>
 
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            required
-          >
-            <option value="NEW">Open</option>
-            <option value="ACTIVE">Active</option>
-            <option value="PENDING_CLIENT">Pending Client</option>
-            <option value="PENDING_COURT">Pending Court</option>
-            <option value="ON_HOLD">On Hold</option>
-            <option value="CLOSED">Closed</option>
-            <option value="ARCHIVED">Archived</option>
-          </select>
-
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Matter Description / Summary"
-            rows="4"
-          />
-
-          <button className="matter-button matter-button-success" type="submit" disabled={saving}>
-            {saving ? "Saving..." : editingId ? "Update Matter" : "Create Matter"}
-          </button>
-
+          <div className="l360-form-actions matter-form-wide">
+            <button className="matter-button matter-button-success l360-primary-action" type="submit" disabled={saving}>
+              {saving ? "Saving..." : editingId ? "Update Matter" : "Create Matter"}
+            </button>
+            <button className="matter-button matter-button-secondary l360-secondary-action" type="button" onClick={resetForm}>
+              Cancel
+            </button>
+          </div>
         </form>
       )}
 
-      <table className="matter-table">
-        <thead>
-          <tr>
-            <th>Matter Title</th>
-            <th>Client</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {safeCases.map(c => (
-            <tr key={c.id}>
-              <td>{c.title}</td>
-              <td>
-                {safeClients.find(client => Number(client.id) === Number(c.client_id))?.full_name || "-"}
-              </td>
-              <td>{formatStatus(c.status)}</td>
-              <td>
-                <button className="matter-button matter-button-secondary" onClick={() => handleEdit(c)}>Edit</button>
-                <button className="matter-button matter-button-danger" onClick={() => handleDelete(c.id)}>Delete</button>
-              </td>
+      <div className="l360-table-scroll matter-table-wrap">
+        <table className="matter-table l360-data-table" aria-label="Matters table">
+          <thead>
+            <tr>
+              <th>Matter Title</th>
+              <th>Client</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
 
-      </table>
+          <tbody>
+            {safeCases.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="l360-empty-state">
+                  No matters loaded yet.
+                </td>
+              </tr>
+            ) : (
+              safeCases.map((matter) => {
+                const client = safeClients.find((item) => Number(item.id) === Number(matter.client_id));
+                const statusLabel = formatStatus(matter.status);
+                const statusSlug = getMatterStatusSlug(matter.status || statusLabel);
 
+                return (
+                  <tr key={matter.id}>
+                    <td>
+                      <strong className="l360-table-primary-text" title={matter.title || "Untitled matter"}>
+                        {matter.title || "Untitled matter"}
+                      </strong>
+                      {matter.case_number ? <span className="l360-table-subtext">Case no: {matter.case_number}</span> : null}
+                    </td>
+                    <td>
+                      <span className="l360-table-secondary-text" title={getClientDisplayName(client)}>
+                        {getClientDisplayName(client)}
+                      </span>
+                    </td>
+                    <td>
+                      <span className={`matter-status-badge status-${statusSlug}`}>
+                        {statusLabel}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="l360-actions-cell">
+                        <button className="matter-button matter-button-secondary l360-secondary-action" type="button" onClick={() => handleEdit(matter)}>
+                          Edit
+                        </button>
+                        <button className="matter-button matter-button-danger l360-danger-action" type="button" onClick={() => handleDelete(matter)}>
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
-
