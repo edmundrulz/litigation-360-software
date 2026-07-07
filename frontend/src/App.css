@@ -8542,3 +8542,337 @@ body {
   border-color: #d7dee8 !important;
   color: #64748b !important;
 }
+
+/* PHASE 14F OPEN BUTTON CENTERED ALIGNMENT START */
+/*
+  Scope:
+  - Standardizes OPEN / PLANNED status badge placement inside dashboard workflow cards.
+  - Centers badge horizontally beneath the corresponding title.
+  - Keeps card text readable and prevents right/left badge drift.
+  - CSS-only override; no workflow logic changed.
+*/
+
+.workspace-module-section .workflow-card {
+  text-align: center !important;
+}
+
+.workspace-module-section .workflow-card .card-meta {
+  justify-self: center !important;
+  align-self: start !important;
+}
+
+.workspace-module-section .workflow-card .workflow-card-header {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.45rem !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.workspace-module-section .workflow-card .workflow-card-title {
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+.workspace-module-section .workflow-card .workflow-status-badge {
+  align-self: center !important;
+  justify-self: center !important;
+  margin: 0.15rem auto 0 !important;
+  width: auto !important;
+  min-width: 64px !important;
+  max-width: max-content !important;
+  min-height: 24px !important;
+  padding: 0.28rem 0.65rem !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+.workspace-module-section .workflow-card > p {
+  width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+/* Keep narrow screens consistent: title and status remain vertically stacked and centered. */
+@media (max-width: 900px) {
+  .workspace-module-section .workflow-card .workflow-card-header {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .workspace-module-section .workflow-card .workflow-status-badge {
+    align-self: center !important;
+    justify-self: center !important;
+  }
+}
+/* PHASE 14F OPEN BUTTON CENTERED ALIGNMENT END */
+
+/* PHASE 14F WORKFLOW CARD TITLE CENTERING ALIGNMENT START */
+/*
+  Scope:
+  - Standardizes workflow card title placement above OPEN / PLANNED badges.
+  - Ensures title/header text is centered consistently across all dashboard workflow cards.
+  - Keeps OPEN / PLANNED badges centered beneath titles.
+  - CSS-only visual alignment fix.
+*/
+
+.workspace-module-section .workflow-card h3,
+.workspace-module-section .workflow-card .workflow-card-title,
+.card.workflow-card h3,
+.card.workflow-card .workflow-card-title {
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+.workspace-module-section .workflow-card .workflow-card-header,
+.card.workflow-card .workflow-card-header {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  gap: 0.45rem !important;
+}
+
+.workspace-module-section .workflow-card .workflow-status-badge,
+.card.workflow-card .workflow-status-badge {
+  align-self: center !important;
+  justify-self: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* PHASE 14F WORKFLOW CARD TITLE CENTERING ALIGNMENT END */
+
+/* PHASE 14F WORKFLOW CARD BOX SPACING FINALIZATION START */
+/*
+  Scope:
+  - Finalizes workflow card box spacing after OPEN / PLANNED centering.
+  - Removes excessive whitespace inside card borders.
+  - Applies symmetrical padding and consistent vertical rhythm.
+  - Keeps title + status badge centered while preserving readable body text.
+  - CSS-only visual spacing refinement.
+*/
+
+.workspace-module-section .grid {
+  align-items: stretch !important;
+}
+
+.workspace-module-section .workflow-card,
+.card.workflow-card {
+  display: grid !important;
+  grid-template-rows: auto auto 1fr !important;
+  align-content: start !important;
+  justify-items: center !important;
+  gap: 0.65rem !important;
+  min-height: 0 !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.workspace-module-section .workflow-card .card-meta,
+.card.workflow-card .card-meta {
+  justify-self: center !important;
+  margin: 0 0 0.1rem !important;
+}
+
+.workspace-module-section .workflow-card .workflow-card-header,
+.card.workflow-card .workflow-card-header {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.4rem !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.workspace-module-section .workflow-card .workflow-card-title,
+.card.workflow-card .workflow-card-title,
+.workspace-module-section .workflow-card h3,
+.card.workflow-card h3 {
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  line-height: 1.22 !important;
+  box-sizing: border-box !important;
+}
+
+.workspace-module-section .workflow-card .workflow-status-badge,
+.card.workflow-card .workflow-status-badge {
+  align-self: center !important;
+  justify-self: center !important;
+  margin: 0 !important;
+  min-width: 64px !important;
+  max-width: max-content !important;
+  min-height: 24px !important;
+  padding: 0.28rem 0.7rem !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+}
+
+.workspace-module-section .workflow-card > p,
+.card.workflow-card > p {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  align-self: start !important;
+  justify-self: stretch !important;
+  text-align: left !important;
+  line-height: 1.42 !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 900px) {
+  .workspace-module-section .workflow-card,
+  .card.workflow-card {
+    padding: 0.95rem !important;
+    gap: 0.6rem !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .workspace-module-section .workflow-card,
+  .card.workflow-card {
+    padding: 0.9rem !important;
+    gap: 0.55rem !important;
+  }
+}
+/* PHASE 14F WORKFLOW CARD BOX SPACING FINALIZATION END */
+
+/* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK START */
+/*
+  LOCKED SCOPE:
+  - White-background main content cards only.
+  - Applies to Operations Centre, Admin Centre, and Developer Centre cards.
+  - Does not touch the left sidebar.
+  - Does not touch App Menu popup/MenuPlatform files.
+  - Does not alter explanations, routing, backend, database, auth, API, or server logic.
+  - Future changes to this block require explicit user approval.
+
+  Root fix:
+  - Card headings, status badges, and body text are all aligned through the same card layout system.
+  - Older .card h3 left-alignment rules are overridden here.
+  - Workflow cards are excluded so the approved OPEN / PLANNED card work remains protected.
+*/
+
+.main > .summary {
+  align-items: stretch !important;
+  gap: 1rem !important;
+}
+
+.main > .summary .metric,
+.main > .summary > button {
+  display: grid !important;
+  place-items: center !important;
+  align-content: center !important;
+  justify-content: center !important;
+  min-height: 6.25rem !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.main > .summary .metric span,
+.main > .summary .metric strong,
+.main > .summary > button {
+  width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center !important;
+}
+
+.main > .grid {
+  align-items: stretch !important;
+  gap: 1rem !important;
+}
+
+.main > .grid > .card:not(.workflow-card) {
+  display: grid !important;
+  grid-template-rows: auto auto auto !important;
+  align-content: start !important;
+  justify-content: center !important;
+  justify-items: center !important;
+  gap: 0.75rem !important;
+  min-height: 8.75rem !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.main > .grid > .card:not(.workflow-card) h3 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
+}
+
+.main > .grid > .card:not(.workflow-card) strong {
+  width: auto !important;
+  min-width: 4.5rem !important;
+  min-height: 1.9rem !important;
+  margin: 0 auto !important;
+  padding: 0.35rem 0.75rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-self: center !important;
+  align-self: center !important;
+  text-align: center !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.main > .grid > .card:not(.workflow-card) p {
+  display: block !important;
+  width: 100% !important;
+  max-width: 24rem !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  justify-self: center !important;
+  text-align: center !important;
+  line-height: 1.4 !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 900px) {
+  .main > .summary .metric,
+  .main > .summary > button,
+  .main > .grid > .card:not(.workflow-card) {
+    min-height: 0 !important;
+    padding: 0.95rem !important;
+  }
+}
+/* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK END */

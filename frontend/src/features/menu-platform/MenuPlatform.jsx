@@ -245,6 +245,7 @@ export function MenuPlatform({
   const triggerRef = useRef(null);
   const searchRef = useRef(null);
   const shellRef = useRef(null);
+  const menuColumnRef = useRef(null);
 
   const searchResults = useMemo(
     () => filterMenuItems(sections, query, { context, featureFlags }),
@@ -301,6 +302,26 @@ export function MenuPlatform({
     setQuery("");
     triggerRef.current?.focus();
   }
+
+  useEffect(() => {
+    if (!open || typeof window === "undefined") return;
+
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
+    window.requestAnimationFrame(() => {
+      shellRef.current?.scrollTo({ top: 0, left: 0 });
+      menuColumnRef.current?.scrollTo({ top: 0, left: 0 });
+
+      try {
+        searchRef.current?.focus({ preventScroll: true });
+      } catch {
+        searchRef.current?.focus();
+      }
+
+      window.scrollTo(scrollX, scrollY);
+    });
+  }, [open]);
 
   function handleSelect(item) {
     if (!isMenuItemEnabled(item, featureFlags)) return;
@@ -393,7 +414,16 @@ export function MenuPlatform({
               aria-label="Application menu"
               onKeyDown={handleKeyDown}
             >
-              <div className="mp-menu-column">
+                            <button
+                type="button"
+                className="mp-menu-close-corner"
+                aria-label="Close application menu"
+                title="Close menu"
+                onClick={closeMenu}
+              >
+                ×
+              </button>
+<div className="mp-menu-column" ref={menuColumnRef}>
                 <label className="mp-search">
                   <span className="mp-visually-hidden">Search menu</span>
                   <input
@@ -437,7 +467,20 @@ export function MenuPlatform({
                     </section>
                   ))
                 )}
-              </div>
+              
+                <button
+                  type="button"
+                  data-menu-row="true"
+                  className="mp-menu-item mp-menu-exit-item"
+                  aria-label="Exit or close application menu"
+                  title="Exit / Close Menu"
+                  onClick={closeMenu}
+                >
+                  <span className="mp-item-icon" aria-hidden="true">×</span>
+                  <span className="mp-item-main">
+                    <span className="mp-item-label">Exit / Close Menu</span>
+                  </span>
+                </button></div>
 
               <div className="mp-panel-column">
                 <PanelHost panelId={activePanelId} appVersion={appVersion} />

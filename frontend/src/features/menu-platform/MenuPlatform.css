@@ -544,3 +544,214 @@
 .mp-close-button {
   white-space: nowrap;
 }
+
+/* PHASE 14F MENU FINAL TOUCH-UP START */
+/*
+  Fixes only:
+  - Background blur while App Menu is open.
+  - Upper-right X close button.
+  - Bottom Exit / Close Menu item.
+  - Consistent menu row text alignment.
+  - Does not override mp-dropdown-shell position.
+*/
+
+.mp-backdrop {
+  background: rgba(15, 23, 42, 0.42) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+.mp-menu-close-corner {
+  position: absolute !important;
+  top: 0.75rem !important;
+  right: 0.75rem !important;
+  z-index: 10 !important;
+  width: 2.1rem !important;
+  height: 2.1rem !important;
+  min-width: 2.1rem !important;
+  min-height: 2.1rem !important;
+  padding: 0 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.2rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+}
+
+.mp-menu-exit-item {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0 !important;
+  width: 100% !important;
+}
+
+.mp-menu-item {
+  grid-template-columns: 1.5rem minmax(0, 1fr) auto auto 1rem !important;
+  column-gap: 0.65rem !important;
+  align-items: center !important;
+  text-align: left !important;
+}
+
+.mp-menu-item .mp-item-icon {
+  width: 1.5rem !important;
+  min-width: 1.5rem !important;
+  justify-self: center !important;
+  text-align: center !important;
+}
+
+.mp-menu-item .mp-item-main {
+  min-width: 0 !important;
+  justify-self: stretch !important;
+  text-align: left !important;
+}
+
+.mp-menu-item .mp-item-label,
+.mp-menu-item .mp-item-trail {
+  text-align: left !important;
+}
+
+.mp-menu-item .mp-badge,
+.mp-menu-item .mp-shortcut,
+.mp-menu-item .mp-expand-indicator {
+  justify-self: end !important;
+  text-align: right !important;
+}
+
+.mp-menu-close-corner:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+
+.mp-menu-close-corner:focus-visible,
+.mp-menu-exit-item:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.35) !important;
+  outline-offset: 2px !important;
+}
+/* PHASE 14F MENU FINAL TOUCH-UP END */
+
+/* PHASE 14F MENU TEXT ALIGNMENT LOCK START */
+/*
+  LOCKED SCOPE:
+  - Menu text alignment and row formatting only.
+  - Do not alter popup position, backdrop, close controls, routing, panels, App.css, backend, database, auth, API, or server logic.
+  - Future changes to this block require explicit user approval.
+
+  Purpose:
+  - Standardize all App Menu rows into one clean column system.
+  - Keep icons, labels, badges, shortcuts, and expand indicators aligned from top to bottom.
+  - Prevent staggered, centered, or uneven text positioning.
+*/
+
+.mp-menu-column {
+  text-align: left !important;
+}
+
+.mp-section-title {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: left !important;
+}
+
+.mp-menu-tree,
+.mp-menu-node,
+.mp-search-results,
+.mp-section {
+  width: 100% !important;
+  text-align: left !important;
+}
+
+.mp-menu-item {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: 1.45rem minmax(0, 1fr) auto auto 0.9rem !important;
+  column-gap: 0.6rem !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  text-align: left !important;
+}
+
+.mp-menu-item[style] {
+  padding-left: calc(0.85rem + (var(--mp-depth, 0) * 1rem)) !important;
+  padding-right: 0.85rem !important;
+}
+
+.mp-item-icon {
+  width: 1.45rem !important;
+  min-width: 1.45rem !important;
+  max-width: 1.45rem !important;
+  justify-self: center !important;
+  text-align: center !important;
+}
+
+.mp-item-main {
+  min-width: 0 !important;
+  width: 100% !important;
+  justify-self: stretch !important;
+  text-align: left !important;
+}
+
+.mp-item-label,
+.mp-item-trail {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.mp-badge,
+.mp-shortcut,
+.mp-expand-indicator {
+  justify-self: end !important;
+  text-align: right !important;
+  white-space: nowrap !important;
+}
+
+.mp-empty {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left !important;
+}
+
+.mp-menu-exit-item {
+  width: 100% !important;
+}
+
+.mp-menu-exit-item .mp-item-main,
+.mp-menu-exit-item .mp-item-label {
+  text-align: left !important;
+}
+/* PHASE 14F MENU TEXT ALIGNMENT LOCK END */
+
+/* PHASE 14F MENU PRIMARY ROOT ALIGNMENT FIX START */
+/*
+  LOCKED SCOPE:
+  - Fix alignment for PRIMARY root menu words only:
+    File, System, Settings.
+  - Do not alter popup position, blur, close buttons, menu routing, panels, App.css, backend, database, auth, API, or server logic.
+  - Future changes to this block require explicit user approval.
+
+  Purpose:
+  - Parent/root menu rows previously sat further left than child rows.
+  - This aligns File/System/Settings with Open/Save/Import/Export/Recent Files.
+*/
+
+.mp-menu-column > .mp-section:first-of-type > .mp-menu-tree > .mp-menu-node > .mp-menu-item {
+  padding-left: calc(0.85rem + 1rem) !important;
+  padding-right: 0.85rem !important;
+}
+
+.mp-menu-column > .mp-section:first-of-type > .mp-menu-tree > .mp-menu-node > .mp-menu-item .mp-item-main,
+.mp-menu-column > .mp-section:first-of-type > .mp-menu-tree > .mp-menu-node > .mp-menu-item .mp-item-label {
+  text-align: left !important;
+  justify-self: stretch !important;
+}
+/* PHASE 14F MENU PRIMARY ROOT ALIGNMENT FIX END */
