@@ -73,6 +73,7 @@ app.use("/api/deadlines", require("./routes/deadlines"));
 app.use("/api/documents", require("./routes/documents"));
 app.use("/api/intake", require("./routes/intake"));
 app.use("/api/audit-logs", require("./routes/auditLogs"));
+app.use("/api/legal-control-desk", require("./routes/legalControlDesk"));
 
 /* =====================================================
    OBSERVABILITY / DIAGNOSTIC ROUTES
@@ -194,6 +195,7 @@ app.use("/api/enterprise/autonomous", require("./routes/autonomousRoutes"));
 app.use("/api/enterprise/ecosystem", require("./routes/autonomousEcosystemRoutes"));
 app.use("/api/enterprise/analytics", require("./routes/operationsAnalyticsRoutes"));
 app.use("/api/enterprise/predictive", require("./routes/predictiveRoutes"));
+
 
 
 
