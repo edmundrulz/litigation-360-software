@@ -1,6 +1,6 @@
 const db = require("../database");
 
-const CONTROL_DESK_VERSION = "15A-F03";
+const CONTROL_DESK_VERSION = "15A-F04";
 const URGENT_DEADLINE_WINDOW_DAYS = 7;
 
 function getGeneratedAt() {
@@ -9,6 +9,13 @@ function getGeneratedAt() {
 
 function toDateOnly(value) {
   if (!value) return null;
+
+  if (typeof value === "string") {
+    const match = value.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (match) {
+      return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+    }
+  }
 
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return null;
@@ -135,6 +142,58 @@ function buildWorkQueue(deadlines, today, urgentCutoff) {
     .slice(0, 10);
 }
 
+function buildDeadlineControl(deadlines, today, urgentCutoff) {
+  const buckets = {
+    overdue: [],
+    urgent: [],
+    upcoming: [],
+    undated: [],
+    completed: [],
+  };
+
+  deadlines.forEach((row) => {
+    if (isDeadlineComplete(row)) {
+      buckets.completed.push(row);
+      return;
+    }
+
+    const status = getDeadlineStatus(row.deadline_date, today, urgentCutoff);
+    buckets[status.bucket].push(row);
+  });
+
+  return {
+    windowDays: URGENT_DEADLINE_WINDOW_DAYS,
+    counts: {
+      overdue: buckets.overdue.length,
+      urgent: buckets.urgent.length,
+      upcoming: buckets.upcoming.length,
+      undated: buckets.undated.length,
+      completed: buckets.completed.length,
+      total: deadlines.length,
+    },
+    status:
+      buckets.overdue.length > 0
+        ? "critical"
+        : buckets.urgent.length > 0
+          ? "attention-required"
+          : "controlled",
+    overdueItems: buckets.overdue.slice(0, 10).map((row) => ({
+      id: row.id,
+      title: row.title,
+      deadlineDate: row.deadline_date,
+      matterNumber: row.case_number || null,
+      matterTitle: row.case_title || null,
+    })),
+    urgentItems: buckets.urgent.slice(0, 10).map((row) => ({
+      id: row.id,
+      title: row.title,
+      deadlineDate: row.deadline_date,
+      matterNumber: row.case_number || null,
+      matterTitle: row.case_title || null,
+    })),
+  };
+}
+
 function buildRiskSnapshot(deadlines, today, urgentCutoff) {
   const activeDeadlines = deadlines.filter((row) => !isDeadlineComplete(row));
 
@@ -183,6 +242,121 @@ function buildRiskSnapshot(deadlines, today, urgentCutoff) {
   return risks;
 }
 
+function getTableQuality(tableName, rows, configured = true) {
+  if (!configured) {
+    return {
+      table: tableName,
+      configured: false,
+      status: "not-configured",
+      rowCount: 0,
+    };
+  }
+
+  return {
+    table: tableName,
+    configured: true,
+    status: rows.length > 0 ? "live" : "live-empty",
+    rowCount: rows.length,
+  };
+}
+
+function buildDataQuality(snapshot) {
+  return {
+    status: "read-only-check-complete",
+    generatedAt: getGeneratedAt(),
+    tables: [
+      getTableQuality("cases", snapshot.cases),
+      getTableQuality("clients", snapshot.clients),
+      getTableQuality("deadlines", snapshot.deadlines),
+      getTableQuality("tasks", [], false),
+      getTableQuality("court_dates", [], false),
+    ],
+    warnings: [
+      "Task storage is not configured for Legal Control Desk aggregation yet.",
+      "Court date storage is not configured for Legal Control Desk aggregation yet.",
+    ],
+  };
+}
+
+function buildActionPlan(summary, deadlineControl, riskSnapshot) {
+  const actions = [];
+
+  if (deadlineControl.counts.overdue > 0) {
+    actions.push({
+      id: "LCD-ACTION-OVERDUE-DEADLINE-REVIEW",
+      priority: "critical",
+      type: "deadline-control",
+      title: "Review overdue deadline queue immediately",
+      reason: `${deadlineControl.counts.overdue} overdue deadline item(s) detected.`,
+      recommendedOwner: "Legal Operations",
+      recommendedTiming: "same-day",
+      status: "open",
+    });
+  }
+
+  if (deadlineControl.counts.urgent > 0) {
+    actions.push({
+      id: "LCD-ACTION-URGENT-DEADLINE-CHECK",
+      priority: "high",
+      type: "deadline-control",
+      title: "Confirm urgent upcoming deadline readiness",
+      reason: `${deadlineControl.counts.urgent} deadline item(s) fall within ${URGENT_DEADLINE_WINDOW_DAYS} day(s).`,
+      recommendedOwner: "Matter Controller",
+      recommendedTiming: "within-24-hours",
+      status: "open",
+    });
+  }
+
+  if (summary.activeMatters > 0) {
+    actions.push({
+      id: "LCD-ACTION-MATTER-STATUS-REVIEW",
+      priority: "medium",
+      type: "matter-control",
+      title: "Review active matter status coverage",
+      reason: `${summary.activeMatters} active matter(s) are currently visible to the Legal Control Desk.`,
+      recommendedOwner: "Case Handler",
+      recommendedTiming: "routine-review",
+      status: "open",
+    });
+  }
+
+  if (riskSnapshot.some((risk) => risk.level === "critical")) {
+    actions.push({
+      id: "LCD-ACTION-RISK-ESCALATION",
+      priority: "critical",
+      type: "risk-control",
+      title: "Escalate critical Legal Control Desk risk",
+      reason: "One or more critical operational risks are currently active.",
+      recommendedOwner: "Senior Legal Controller",
+      recommendedTiming: "same-day",
+      status: "open",
+    });
+  }
+
+  if (actions.length === 0) {
+    actions.push({
+      id: "LCD-ACTION-NO-CRITICAL-ACTION",
+      priority: "low",
+      type: "control-status",
+      title: "Maintain routine control desk monitoring",
+      reason: "No urgent or critical Legal Control Desk action is currently detected.",
+      recommendedOwner: "Legal Operations",
+      recommendedTiming: "routine",
+      status: "open",
+    });
+  }
+
+  return {
+    status: actions.some((action) => action.priority === "critical")
+      ? "critical-action-required"
+      : actions.some((action) => action.priority === "high")
+        ? "action-required"
+        : "routine-monitoring",
+    actionCount: actions.length,
+    actions,
+  };
+}
+
 function buildAggregation() {
   const today = toDateOnly(new Date());
   const urgentCutoff = addDays(today, URGENT_DEADLINE_WINDOW_DAYS);
@@ -200,6 +374,22 @@ function buildAggregation() {
 
     const workQueue = buildWorkQueue(snapshot.deadlines, today, urgentCutoff);
     const riskSnapshot = buildRiskSnapshot(snapshot.deadlines, today, urgentCutoff);
+    const deadlineControl = buildDeadlineControl(snapshot.deadlines, today, urgentCutoff);
+    const dataQuality = buildDataQuality(snapshot);
+
+    const summary = {
+      activeMatters: activeMatters.length,
+      totalMatters: snapshot.cases.length,
+      totalClients: snapshot.clients.length,
+      urgentDeadlines: urgentDeadlines.length,
+      totalDeadlines: snapshot.deadlines.length,
+      upcomingCourtDates: 0,
+      openTasks: workQueue.length,
+      highRiskItems: riskSnapshot.filter((risk) => ["critical", "high"].includes(risk.level)).length,
+      operationalReadiness: "ACTION_PLAN_READY",
+    };
+
+    const actionPlan = buildActionPlan(summary, deadlineControl, riskSnapshot);
 
     return {
       dataSource: {
@@ -214,26 +404,42 @@ function buildAggregation() {
         },
         fallbackUsed: false,
       },
-      summary: {
-        activeMatters: activeMatters.length,
-        totalMatters: snapshot.cases.length,
-        totalClients: snapshot.clients.length,
-        urgentDeadlines: urgentDeadlines.length,
-        totalDeadlines: snapshot.deadlines.length,
-        upcomingCourtDates: 0,
-        openTasks: workQueue.length,
-        highRiskItems: riskSnapshot.filter((risk) => ["critical", "high"].includes(risk.level)).length,
-        operationalReadiness: "SQLITE_AGGREGATION_READY",
-      },
+      summary,
       workQueue,
       riskSnapshot,
+      deadlineControl,
+      dataQuality,
+      actionPlan,
       nextActions: [
+        "Complete overdue deadline review workflow.",
         "Add a dedicated court dates table or mapping when the data model is approved.",
         "Add task table aggregation when the task storage layer is confirmed.",
         "Expose read-only frontend integration only after protected visual approval.",
       ],
     };
   } catch (error) {
+    const fallbackRiskSnapshot = [
+      {
+        id: "LCD-RISK-DATA-AGGREGATION",
+        level: "high",
+        area: "data-access",
+        count: 1,
+        message: "Legal Control Desk could not read the SQLite aggregation source.",
+      },
+    ];
+
+    const fallbackSummary = {
+      activeMatters: 0,
+      totalMatters: 0,
+      totalClients: 0,
+      urgentDeadlines: 0,
+      totalDeadlines: 0,
+      upcomingCourtDates: 0,
+      openTasks: 0,
+      highRiskItems: 1,
+      operationalReadiness: "ACTION_PLAN_ERROR",
+    };
+
     return {
       dataSource: {
         mode: "fallback-error",
@@ -241,27 +447,35 @@ function buildAggregation() {
         fallbackUsed: true,
         error: error.message,
       },
-      summary: {
-        activeMatters: 0,
-        totalMatters: 0,
-        totalClients: 0,
-        urgentDeadlines: 0,
-        totalDeadlines: 0,
-        upcomingCourtDates: 0,
-        openTasks: 0,
-        highRiskItems: 1,
-        operationalReadiness: "SQLITE_AGGREGATION_ERROR",
-      },
+      summary: fallbackSummary,
       workQueue: [],
-      riskSnapshot: [
-        {
-          id: "LCD-RISK-DATA-AGGREGATION",
-          level: "high",
-          area: "data-access",
-          count: 1,
-          message: "Legal Control Desk could not read the SQLite aggregation source.",
+      riskSnapshot: fallbackRiskSnapshot,
+      deadlineControl: {
+        windowDays: URGENT_DEADLINE_WINDOW_DAYS,
+        counts: {
+          overdue: 0,
+          urgent: 0,
+          upcoming: 0,
+          undated: 0,
+          completed: 0,
+          total: 0,
         },
-      ],
+        status: "unknown",
+        overdueItems: [],
+        urgentItems: [],
+      },
+      dataQuality: {
+        status: "read-only-check-failed",
+        generatedAt: getGeneratedAt(),
+        tables: [],
+        warnings: [error.message],
+      },
+      actionPlan: buildActionPlan(fallbackSummary, {
+        counts: {
+          overdue: 0,
+          urgent: 0,
+        },
+      }, fallbackRiskSnapshot),
       nextActions: [
         "Review backend SQLite database availability.",
         "Confirm cases, clients, and deadlines tables are readable.",
@@ -277,7 +491,7 @@ function getLegalControlDeskHealth() {
     module: "Legal Control Desk",
     version: CONTROL_DESK_VERSION,
     status: "online",
-    mode: "read-only-sqlite-aggregation",
+    mode: "read-only-action-plan",
   };
 }
 
@@ -288,7 +502,7 @@ function getLegalControlDeskSummary() {
     ok: true,
     version: CONTROL_DESK_VERSION,
     module: "Legal Control Desk",
-    mode: "read-only-sqlite-aggregation",
+    mode: "read-only-action-plan",
     generatedAt: getGeneratedAt(),
     ...aggregation,
   };
@@ -318,10 +532,49 @@ function getLegalControlDeskRiskSnapshot() {
   };
 }
 
+function getLegalControlDeskActionPlan() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    actionPlan: aggregation.actionPlan,
+  };
+}
+
+function getLegalControlDeskDeadlineControl() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    deadlineControl: aggregation.deadlineControl,
+  };
+}
+
+function getLegalControlDeskDataQuality() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    dataQuality: aggregation.dataQuality,
+  };
+}
+
 module.exports = {
   CONTROL_DESK_VERSION,
   getLegalControlDeskHealth,
   getLegalControlDeskSummary,
   getLegalControlDeskWorkQueue,
   getLegalControlDeskRiskSnapshot,
+  getLegalControlDeskActionPlan,
+  getLegalControlDeskDeadlineControl,
+  getLegalControlDeskDataQuality,
 };

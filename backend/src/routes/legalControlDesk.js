@@ -5,6 +5,9 @@ const {
   getLegalControlDeskSummary,
   getLegalControlDeskWorkQueue,
   getLegalControlDeskRiskSnapshot,
+  getLegalControlDeskActionPlan,
+  getLegalControlDeskDeadlineControl,
+  getLegalControlDeskDataQuality,
 } = require("../services/legalControlDeskService");
 
 const router = express.Router();
@@ -23,6 +26,18 @@ router.get("/work-queue", (req, res) => {
 
 router.get("/risk-snapshot", (req, res) => {
   res.json(getLegalControlDeskRiskSnapshot());
+});
+
+router.get("/action-plan", (req, res) => {
+  res.json(getLegalControlDeskActionPlan());
+});
+
+router.get("/deadline-control", (req, res) => {
+  res.json(getLegalControlDeskDeadlineControl());
+});
+
+router.get("/data-quality", (req, res) => {
+  res.json(getLegalControlDeskDataQuality());
 });
 
 module.exports = router;
