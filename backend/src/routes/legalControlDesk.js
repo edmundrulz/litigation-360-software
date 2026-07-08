@@ -10,6 +10,9 @@ const {
   getLegalControlDeskDataQuality,
   getLegalControlDeskMatterControl,
   getLegalControlDeskClientControl,
+  getLegalControlDeskExecutiveBrief,
+  getLegalControlDeskPriorityMatrix,
+  getLegalControlDeskReadinessScore,
 } = require("../services/legalControlDeskService");
 
 const router = express.Router();
@@ -50,5 +53,18 @@ router.get("/client-control", (req, res) => {
   res.json(getLegalControlDeskClientControl());
 });
 
+router.get("/executive-brief", (req, res) => {
+  res.json(getLegalControlDeskExecutiveBrief());
+});
+
+router.get("/priority-matrix", (req, res) => {
+  res.json(getLegalControlDeskPriorityMatrix());
+});
+
+router.get("/readiness-score", (req, res) => {
+  res.json(getLegalControlDeskReadinessScore());
+});
+
 module.exports = router;
+
 

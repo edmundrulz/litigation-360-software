@@ -1,6 +1,6 @@
 const db = require("../database");
 
-const CONTROL_DESK_VERSION = "15A-F05";
+const CONTROL_DESK_VERSION = "15A-F06";
 const URGENT_DEADLINE_WINDOW_DAYS = 7;
 
 function getGeneratedAt() {
@@ -354,6 +354,187 @@ function buildClientControl(clients, cases) {
   };
 }
 
+function buildReadinessScore(summary, deadlineControl, riskSnapshot, matterControl, clientControl, dataQuality) {
+  const penalties = [];
+
+  function addPenalty(id, amount, reason) {
+    if (amount <= 0) return;
+    penalties.push({
+      id,
+      amount,
+      reason,
+    });
+  }
+
+  const overdueCount = deadlineControl?.counts?.overdue || 0;
+  const urgentCount = deadlineControl?.counts?.urgent || 0;
+  const criticalRiskCount = (riskSnapshot || []).filter((risk) => risk.level === "critical").length;
+  const highRiskCount = (riskSnapshot || []).filter((risk) => risk.level === "high").length;
+  const mattersWithoutClients = matterControl?.counts?.withoutClient || 0;
+  const clientsWithoutMatters = clientControl?.counts?.withoutMatters || 0;
+  const notConfiguredTables = (dataQuality?.tables || []).filter((table) => table.configured === false).length;
+
+  addPenalty("overdue-deadlines", Math.min(overdueCount * 15, 45), `${overdueCount} overdue deadline item(s).`);
+  addPenalty("urgent-deadlines", Math.min(urgentCount * 8, 24), `${urgentCount} urgent deadline item(s).`);
+  addPenalty("critical-risks", Math.min(criticalRiskCount * 10, 20), `${criticalRiskCount} critical risk item(s).`);
+  addPenalty("high-risks", Math.min(highRiskCount * 5, 10), `${highRiskCount} high risk item(s).`);
+  addPenalty("matters-without-clients", Math.min(mattersWithoutClients * 8, 16), `${mattersWithoutClients} matter(s) without linked clients.`);
+  addPenalty("clients-without-matters", Math.min(clientsWithoutMatters * 3, 12), `${clientsWithoutMatters} client(s) without linked matters.`);
+  addPenalty("not-configured-control-tables", Math.min(notConfiguredTables * 5, 10), `${notConfiguredTables} control table(s) not configured.`);
+
+  const totalPenalty = penalties.reduce((sum, penalty) => sum + penalty.amount, 0);
+  const score = Math.max(0, Math.min(100, 100 - totalPenalty));
+
+  const rating =
+    score >= 85
+      ? "strong"
+      : score >= 70
+        ? "watch"
+        : score >= 50
+          ? "at-risk"
+          : "critical";
+
+  return {
+    score,
+    rating,
+    status:
+      rating === "strong"
+        ? "ready"
+        : rating === "watch"
+          ? "monitor"
+          : rating === "at-risk"
+            ? "intervention-required"
+            : "critical-intervention-required",
+    totalPenalty,
+    penalties,
+    scoringModel: "15A-F06-readiness-v1",
+    inputs: {
+      activeMatters: summary.activeMatters,
+      urgentDeadlines: summary.urgentDeadlines,
+      highRiskItems: summary.highRiskItems,
+      overdueDeadlines: overdueCount,
+      mattersWithoutClients,
+      clientsWithoutMatters,
+      notConfiguredTables,
+    },
+  };
+}
+
+function buildPriorityMatrix(actionPlan, workQueue, riskSnapshot) {
+  const matrix = {
+    critical: [],
+    high: [],
+    medium: [],
+    low: [],
+  };
+
+  function normalisePriority(priority) {
+    const value = String(priority || "medium").toLowerCase();
+    return ["critical", "high", "medium", "low"].includes(value) ? value : "medium";
+  }
+
+  function addItem(priority, item) {
+    const bucket = normalisePriority(priority);
+    matrix[bucket].push(item);
+  }
+
+  (actionPlan?.actions || []).forEach((action) => {
+    addItem(action.priority, {
+      source: "action-plan",
+      id: action.id,
+      title: action.title,
+      reason: action.reason,
+      owner: action.recommendedOwner,
+      timing: action.recommendedTiming,
+      status: action.status,
+    });
+  });
+
+  (workQueue || []).forEach((item) => {
+    addItem(item.priority, {
+      source: "work-queue",
+      id: item.id,
+      title: item.title,
+      reason: `${item.bucket} ${item.type}`,
+      owner: item.owner,
+      timing: item.bucket === "overdue" ? "same-day" : "scheduled-review",
+      status: item.status,
+    });
+  });
+
+  (riskSnapshot || []).forEach((risk) => {
+    addItem(risk.level, {
+      source: "risk-snapshot",
+      id: risk.id,
+      title: risk.area,
+      reason: risk.message,
+      owner: "Legal Operations",
+      timing: risk.level === "critical" ? "same-day" : "review",
+      status: "open",
+    });
+  });
+
+  return {
+    status: matrix.critical.length > 0 ? "critical-priorities-present" : matrix.high.length > 0 ? "high-priorities-present" : "routine",
+    counts: {
+      critical: matrix.critical.length,
+      high: matrix.high.length,
+      medium: matrix.medium.length,
+      low: matrix.low.length,
+      total: matrix.critical.length + matrix.high.length + matrix.medium.length + matrix.low.length,
+    },
+    matrix,
+  };
+}
+
+function buildExecutiveBrief(summary, deadlineControl, readinessScore, priorityMatrix, actionPlan, matterControl, clientControl, dataQuality) {
+  const criticalCount = priorityMatrix?.counts?.critical || 0;
+  const highCount = priorityMatrix?.counts?.high || 0;
+  const overdueCount = deadlineControl?.counts?.overdue || 0;
+  const activeMatters = summary?.activeMatters || 0;
+
+  return {
+    status: readinessScore.status,
+    headline:
+      criticalCount > 0
+        ? "Critical Legal Control Desk action required"
+        : highCount > 0
+          ? "Legal Control Desk requires active monitoring"
+          : "Legal Control Desk is under routine control",
+    executiveSummary: `Legal Control Desk is tracking ${activeMatters} active matter(s), ${summary.totalClients} client(s), and ${summary.totalDeadlines} deadline item(s). Readiness score is ${readinessScore.score}/100 with rating '${readinessScore.rating}'.`,
+    keyMetrics: {
+      readinessScore: readinessScore.score,
+      readinessRating: readinessScore.rating,
+      activeMatters: summary.activeMatters,
+      totalClients: summary.totalClients,
+      totalDeadlines: summary.totalDeadlines,
+      overdueDeadlines: overdueCount,
+      urgentDeadlines: summary.urgentDeadlines,
+      criticalPriorities: criticalCount,
+      highPriorities: highCount,
+      mattersWithoutClients: matterControl?.counts?.withoutClient || 0,
+      clientsWithoutMatters: clientControl?.counts?.withoutMatters || 0,
+    },
+    immediateConcerns: readinessScore.penalties.map((penalty) => ({
+      id: penalty.id,
+      impact: penalty.amount,
+      reason: penalty.reason,
+    })),
+    recommendedNextSteps: (actionPlan?.actions || []).slice(0, 5).map((action) => ({
+      id: action.id,
+      priority: action.priority,
+      title: action.title,
+      owner: action.recommendedOwner,
+      timing: action.recommendedTiming,
+    })),
+    governanceNotes: [
+      "Executive brief is generated from read-only SQLite aggregation.",
+      "No frontend or visual layer is modified by this endpoint.",
+      "Task and court date readiness remain limited until those storage layers are configured.",
+    ],
+    dataQualityStatus: dataQuality?.status || "unknown",
+  };
+}
 function buildActionPlan(summary, deadlineControl, riskSnapshot, matterControl = null, clientControl = null) {
   const actions = [];
 
@@ -490,10 +671,13 @@ function buildAggregation() {
       upcomingCourtDates: 0,
       openTasks: workQueue.length,
       highRiskItems: riskSnapshot.filter((risk) => ["critical", "high"].includes(risk.level)).length,
-      operationalReadiness: "MATTER_CLIENT_CONTROL_READY",
+      operationalReadiness: "EXECUTIVE_BRIEF_MATRIX_READY",
     };
 
     const actionPlan = buildActionPlan(summary, deadlineControl, riskSnapshot, matterControl, clientControl);
+    const readinessScore = buildReadinessScore(summary, deadlineControl, riskSnapshot, matterControl, clientControl, dataQuality);
+    const priorityMatrix = buildPriorityMatrix(actionPlan, workQueue, riskSnapshot);
+    const executiveBrief = buildExecutiveBrief(summary, deadlineControl, readinessScore, priorityMatrix, actionPlan, matterControl, clientControl, dataQuality);
 
     return {
       dataSource: {
@@ -516,6 +700,9 @@ function buildAggregation() {
       matterControl,
       clientControl,
       actionPlan,
+      readinessScore,
+      priorityMatrix,
+      executiveBrief,
       nextActions: [
         "Complete overdue deadline review workflow.",
         "Review matter-client linkage exceptions.",
@@ -620,7 +807,7 @@ function getLegalControlDeskHealth() {
     module: "Legal Control Desk",
     version: CONTROL_DESK_VERSION,
     status: "online",
-    mode: "read-only-matter-client-control",
+    mode: "read-only-executive-brief-matrix",
   };
 }
 
@@ -631,7 +818,7 @@ function getLegalControlDeskSummary() {
     ok: true,
     version: CONTROL_DESK_VERSION,
     module: "Legal Control Desk",
-    mode: "read-only-matter-client-control",
+    mode: "read-only-executive-brief-matrix",
     generatedAt: getGeneratedAt(),
     ...aggregation,
   };
@@ -721,6 +908,42 @@ function getLegalControlDeskClientControl() {
   };
 }
 
+function getLegalControlDeskExecutiveBrief() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    executiveBrief: aggregation.executiveBrief,
+  };
+}
+
+function getLegalControlDeskPriorityMatrix() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    priorityMatrix: aggregation.priorityMatrix,
+  };
+}
+
+function getLegalControlDeskReadinessScore() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    readinessScore: aggregation.readinessScore,
+  };
+}
+
 module.exports = {
   CONTROL_DESK_VERSION,
   getLegalControlDeskHealth,
@@ -732,5 +955,9 @@ module.exports = {
   getLegalControlDeskDataQuality,
   getLegalControlDeskMatterControl,
   getLegalControlDeskClientControl,
+  getLegalControlDeskExecutiveBrief,
+  getLegalControlDeskPriorityMatrix,
+  getLegalControlDeskReadinessScore,
 };
+
 
