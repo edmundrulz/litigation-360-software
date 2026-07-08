@@ -3,8 +3,14 @@
 Base Branch:
 docs/14f-navigation-placeholder-plan
 
-Base Commit:
+Original Phase 14F Visual Lock Checkpoint:
 4fdf874
+
+Actual Closure Branch Base:
+cf31e84
+
+Closure Control Pack Commit:
+885ce78
 
 Closure Branch:
 docs/phase-01-14-final-closure-20260708
@@ -45,3 +51,4 @@ A phase is not finally closed until all evidence exists:
 Phases 01–10, 12, 13, and 14 may be processed for formal closure.
 Phase 11 remains locked and incomplete.
 Phases 15 onward remain pending.
+
