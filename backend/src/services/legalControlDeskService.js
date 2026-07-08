@@ -1,6 +1,6 @@
 const db = require("../database");
 
-const CONTROL_DESK_VERSION = "15A-F04";
+const CONTROL_DESK_VERSION = "15A-F05";
 const URGENT_DEADLINE_WINDOW_DAYS = 7;
 
 function getGeneratedAt() {
@@ -278,7 +278,83 @@ function buildDataQuality(snapshot) {
   };
 }
 
-function buildActionPlan(summary, deadlineControl, riskSnapshot) {
+function buildMatterControl(cases) {
+  const statusCounts = cases.reduce((acc, row) => {
+    const key = normaliseStatus(row.status) || "unknown";
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
+  const activeMatters = cases.filter((row) => !isClosedMatter(row.status));
+  const closedMatters = cases.filter((row) => isClosedMatter(row.status));
+  const mattersWithoutClients = cases.filter((row) => !row.client_id);
+
+  return {
+    status: mattersWithoutClients.length > 0 ? "attention-required" : "controlled",
+    counts: {
+      total: cases.length,
+      active: activeMatters.length,
+      closedOrInactive: closedMatters.length,
+      withoutClient: mattersWithoutClients.length,
+    },
+    statusBreakdown: statusCounts,
+    activeMatterItems: activeMatters.slice(0, 10).map((row) => ({
+      id: row.id,
+      matterNumber: row.case_number || null,
+      title: row.title || "Untitled matter",
+      status: row.status || null,
+      clientId: row.client_id || null,
+      openedDate: row.opened_date || null,
+    })),
+    mattersWithoutClients: mattersWithoutClients.slice(0, 10).map((row) => ({
+      id: row.id,
+      matterNumber: row.case_number || null,
+      title: row.title || "Untitled matter",
+      status: row.status || null,
+      openedDate: row.opened_date || null,
+    })),
+  };
+}
+
+function buildClientControl(clients, cases) {
+  const matterCountByClientId = cases.reduce((acc, row) => {
+    if (!row.client_id) return acc;
+    const key = String(row.client_id);
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
+  const clientsWithoutMatters = clients.filter((client) => {
+    return !matterCountByClientId[String(client.id)];
+  });
+
+  const linkedClients = clients.filter((client) => {
+    return matterCountByClientId[String(client.id)] > 0;
+  });
+
+  return {
+    status: clientsWithoutMatters.length > 0 ? "review-required" : "controlled",
+    counts: {
+      total: clients.length,
+      linkedToMatters: linkedClients.length,
+      withoutMatters: clientsWithoutMatters.length,
+    },
+    clientsWithoutMatters: clientsWithoutMatters.slice(0, 10).map((client) => ({
+      id: client.id,
+      fullName: client.full_name || "Unnamed client",
+      email: client.email || null,
+      phone: client.phone || null,
+      createdAt: client.created_at || null,
+    })),
+    clientMatterLinks: clients.slice(0, 10).map((client) => ({
+      id: client.id,
+      fullName: client.full_name || "Unnamed client",
+      matterCount: matterCountByClientId[String(client.id)] || 0,
+    })),
+  };
+}
+
+function buildActionPlan(summary, deadlineControl, riskSnapshot, matterControl = null, clientControl = null) {
   const actions = [];
 
   if (deadlineControl.counts.overdue > 0) {
@@ -315,6 +391,32 @@ function buildActionPlan(summary, deadlineControl, riskSnapshot) {
       title: "Review active matter status coverage",
       reason: `${summary.activeMatters} active matter(s) are currently visible to the Legal Control Desk.`,
       recommendedOwner: "Case Handler",
+      recommendedTiming: "routine-review",
+      status: "open",
+    });
+  }
+
+  if (matterControl && matterControl.counts.withoutClient > 0) {
+    actions.push({
+      id: "LCD-ACTION-MATTER-CLIENT-LINK-REVIEW",
+      priority: "high",
+      type: "matter-control",
+      title: "Resolve matters without linked clients",
+      reason: `${matterControl.counts.withoutClient} matter(s) are missing a linked client.`,
+      recommendedOwner: "Matter Controller",
+      recommendedTiming: "within-24-hours",
+      status: "open",
+    });
+  }
+
+  if (clientControl && clientControl.counts.withoutMatters > 0) {
+    actions.push({
+      id: "LCD-ACTION-CLIENT-MATTER-LINK-REVIEW",
+      priority: "medium",
+      type: "client-control",
+      title: "Review clients without linked matters",
+      reason: `${clientControl.counts.withoutMatters} client(s) are not linked to any matter.`,
+      recommendedOwner: "Client Intake",
       recommendedTiming: "routine-review",
       status: "open",
     });
@@ -376,6 +478,8 @@ function buildAggregation() {
     const riskSnapshot = buildRiskSnapshot(snapshot.deadlines, today, urgentCutoff);
     const deadlineControl = buildDeadlineControl(snapshot.deadlines, today, urgentCutoff);
     const dataQuality = buildDataQuality(snapshot);
+    const matterControl = buildMatterControl(snapshot.cases);
+    const clientControl = buildClientControl(snapshot.clients, snapshot.cases);
 
     const summary = {
       activeMatters: activeMatters.length,
@@ -386,10 +490,10 @@ function buildAggregation() {
       upcomingCourtDates: 0,
       openTasks: workQueue.length,
       highRiskItems: riskSnapshot.filter((risk) => ["critical", "high"].includes(risk.level)).length,
-      operationalReadiness: "ACTION_PLAN_READY",
+      operationalReadiness: "MATTER_CLIENT_CONTROL_READY",
     };
 
-    const actionPlan = buildActionPlan(summary, deadlineControl, riskSnapshot);
+    const actionPlan = buildActionPlan(summary, deadlineControl, riskSnapshot, matterControl, clientControl);
 
     return {
       dataSource: {
@@ -409,9 +513,12 @@ function buildAggregation() {
       riskSnapshot,
       deadlineControl,
       dataQuality,
+      matterControl,
+      clientControl,
       actionPlan,
       nextActions: [
         "Complete overdue deadline review workflow.",
+        "Review matter-client linkage exceptions.",
         "Add a dedicated court dates table or mapping when the data model is approved.",
         "Add task table aggregation when the task storage layer is confirmed.",
         "Expose read-only frontend integration only after protected visual approval.",
@@ -470,6 +577,28 @@ function buildAggregation() {
         tables: [],
         warnings: [error.message],
       },
+      matterControl: {
+        status: "unknown",
+        counts: {
+          total: 0,
+          active: 0,
+          closedOrInactive: 0,
+          withoutClient: 0,
+        },
+        statusBreakdown: {},
+        activeMatterItems: [],
+        mattersWithoutClients: [],
+      },
+      clientControl: {
+        status: "unknown",
+        counts: {
+          total: 0,
+          linkedToMatters: 0,
+          withoutMatters: 0,
+        },
+        clientsWithoutMatters: [],
+        clientMatterLinks: [],
+      },
       actionPlan: buildActionPlan(fallbackSummary, {
         counts: {
           overdue: 0,
@@ -491,7 +620,7 @@ function getLegalControlDeskHealth() {
     module: "Legal Control Desk",
     version: CONTROL_DESK_VERSION,
     status: "online",
-    mode: "read-only-action-plan",
+    mode: "read-only-matter-client-control",
   };
 }
 
@@ -502,7 +631,7 @@ function getLegalControlDeskSummary() {
     ok: true,
     version: CONTROL_DESK_VERSION,
     module: "Legal Control Desk",
-    mode: "read-only-action-plan",
+    mode: "read-only-matter-client-control",
     generatedAt: getGeneratedAt(),
     ...aggregation,
   };
@@ -568,6 +697,30 @@ function getLegalControlDeskDataQuality() {
   };
 }
 
+function getLegalControlDeskMatterControl() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    matterControl: aggregation.matterControl,
+  };
+}
+
+function getLegalControlDeskClientControl() {
+  const aggregation = buildAggregation();
+
+  return {
+    ok: true,
+    version: CONTROL_DESK_VERSION,
+    generatedAt: getGeneratedAt(),
+    dataSource: aggregation.dataSource,
+    clientControl: aggregation.clientControl,
+  };
+}
+
 module.exports = {
   CONTROL_DESK_VERSION,
   getLegalControlDeskHealth,
@@ -577,4 +730,7 @@ module.exports = {
   getLegalControlDeskActionPlan,
   getLegalControlDeskDeadlineControl,
   getLegalControlDeskDataQuality,
+  getLegalControlDeskMatterControl,
+  getLegalControlDeskClientControl,
 };
+

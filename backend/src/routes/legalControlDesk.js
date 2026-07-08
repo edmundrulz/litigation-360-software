@@ -8,6 +8,8 @@ const {
   getLegalControlDeskActionPlan,
   getLegalControlDeskDeadlineControl,
   getLegalControlDeskDataQuality,
+  getLegalControlDeskMatterControl,
+  getLegalControlDeskClientControl,
 } = require("../services/legalControlDeskService");
 
 const router = express.Router();
@@ -40,4 +42,13 @@ router.get("/data-quality", (req, res) => {
   res.json(getLegalControlDeskDataQuality());
 });
 
+router.get("/matter-control", (req, res) => {
+  res.json(getLegalControlDeskMatterControl());
+});
+
+router.get("/client-control", (req, res) => {
+  res.json(getLegalControlDeskClientControl());
+});
+
 module.exports = router;
+
