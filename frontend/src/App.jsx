@@ -1,5 +1,5 @@
 import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { MenuPlatform } from "./features/menu-platform";
 import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
@@ -147,86 +147,6 @@ const workspaceSections = [
   },
 ];
 
-const moduleFrameDetails = {
-  "Matter Intake": {
-    displayTitle: "Matter Intake",
-    group: "Start Here",
-    description: "Guided Stage 2 workspace for duplicate prevention, client linking, new-client preparation, and matter-opening readiness.",
-    position: "Stage 2 · Client Gate",
-    nextModule: "Clients",
-    nextLabel: "Client Details / Authority & Conflict",
-  },
-  "Client Intake Discovery": {
-    displayTitle: "Preliminary Assessment & Triage",
-    group: "Start Here",
-    description: "Guided preliminary intake review before conflict clearance, engagement approval, and matter opening.",
-    position: "Preliminary Assessment",
-    nextModule: "Clients",
-    nextLabel: "Client Details / Authority & Conflict",
-  },
-  Clients: {
-    displayTitle: "Client Details / Authority & Conflict",
-    group: "Start Here",
-    description: "Client records, contact information, onboarding, and profile management.",
-    position: "Workflow Node: Client Details / Authority & Conflict · OPEN",
-    nextModule: "Cases",
-    nextLabel: "Case / Matter Details",
-  },
-  Cases: {
-    displayTitle: "Case / Matter Details",
-    group: "Active Legal Work",
-    description: "Case files, parties, progress, and litigation status.",
-    position: "Workflow Node: Case / Matter Details · OPEN",
-    nextModule: "Court Dates",
-    nextLabel: "Court Dates",
-  },
-  Matters: {
-    displayTitle: "Matter Workspace",
-    group: "Active Legal Work",
-    description: "Matter workspace and legal file tracking.",
-    position: "Reference Module",
-    nextModule: "Court Dates",
-    nextLabel: "Court Dates",
-  },
-  "Court Dates": {
-    displayTitle: "Court Dates",
-    group: "Active Legal Work",
-    description: "Hearings, mentions, deadlines, reminders, and court date tracking.",
-    position: "Workflow Node: Court Dates · OPEN",
-    nextModule: "Documents",
-    nextLabel: "Documents & Evidence Readiness",
-  },
-  Documents: {
-    displayTitle: "Documents & Evidence Readiness",
-    group: "Active Legal Work",
-    description: "Drafts, filings, templates, evidence, and document management.",
-    position: "Workflow Node: Documents & Evidence Readiness · OPEN",
-    nextModule: "Review Submit",
-    nextLabel: "Draft Engagement Preview",
-  },
-  "Draft Engagement Preview": {
-    displayTitle: "Draft Engagement Preview",
-    group: "Review And Completion",
-    description: "Final review point before saving, submission, or future workflow handoff.",
-    position: "Workflow Node: Draft Engagement Preview · OPEN",
-  },
-  Staff: {
-    displayTitle: "Staff",
-    group: "Office Administration",
-    description: "Staff records and internal team administration.",
-    position: "Administration",
-  },
-};
-
-function getModuleFrameDetails(title) {
-  return moduleFrameDetails[title] || {
-    displayTitle: title,
-    group: "Workspace Module",
-    description: "Workspace module.",
-    position: "",
-  };
-}
-
 const moduleRouteAliases = {
   "Client Details / Authority & Conflict": "Clients",
   "Case / Matter Details": "Cases",
@@ -297,33 +217,6 @@ function PageRequiredProgressCard({ title, items, note }) {
     </section>
   );
 }
-function isEditableKeyboardTarget(target) {
-  if (!target || typeof target.closest !== "function") return false;
-
-  return Boolean(
-    target.closest(
-      "input, textarea, select, [contenteditable='true'], [role='textbox']"
-    )
-  );
-}
-
-function isSaveShortcut(event) {
-  return (
-    (event.ctrlKey || event.metaKey) &&
-    !event.altKey &&
-    !event.shiftKey &&
-    event.key.toLowerCase() === "s"
-  );
-}
-
-function isQuestionShortcut(event) {
-  return (
-    event.key === "?" &&
-    !event.ctrlKey &&
-    !event.metaKey &&
-    !event.altKey
-  );
-}
 function normalizeWorkspaceModule(moduleName) {
   return moduleRouteAliases[moduleName] || moduleName;
 }
@@ -367,6 +260,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Preserve the existing immediate initial health check on mount.
     runChecks();
     const timer = setInterval(runChecks, 30000);
     return () => clearInterval(timer);
@@ -814,21 +708,6 @@ function ModuleFrame({
     }
 
     setModule(nextTarget);
-  }
-
-  function goToPageStart() {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }
-
-  function goToPageBottom() {
-    if (typeof window !== "undefined") {
-      window.scrollTo({
-        top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
-        behavior: "smooth"
-      });
-    }
   }
 
   function renderNavigation(position) {
