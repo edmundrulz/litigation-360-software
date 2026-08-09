@@ -1,0 +1,61 @@
+-- LEOS 360 adaptive authentication migration.
+-- The route also creates these tables defensively, but keep this migration as the formal database record.
+
+CREATE TABLE IF NOT EXISTS auth_challenges (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  challenge_type TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  expires_at DATETIME NOT NULL,
+  completed_at DATETIME,
+  failure_count INTEGER NOT NULL DEFAULT 0,
+  metadata_json TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS auth_sessions (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  email TEXT NOT NULL,
+  assurance_level INTEGER NOT NULL DEFAULT 1,
+  status TEXT NOT NULL DEFAULT 'active',
+  ip_address TEXT,
+  user_agent TEXT,
+  started_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  expires_at DATETIME NOT NULL,
+  forced_logout_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS auth_audit_events (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER,
+  event_type TEXT NOT NULL,
+  decision TEXT,
+  risk_score INTEGER NOT NULL DEFAULT 0,
+  ip_address TEXT,
+  user_agent TEXT,
+  details_json TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS auth_failed_attempts (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER,
+  ip_address TEXT,
+  user_agent TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS auth_trusted_devices (
+  id TEXT PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  device_fingerprint_hash TEXT NOT NULL,
+  device_label TEXT,
+  first_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  expires_at DATETIME NOT NULL,
+  revoked_at DATETIME,
+  UNIQUE(user_id, device_fingerprint_hash)
+);
+

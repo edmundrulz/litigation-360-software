@@ -64,6 +64,7 @@ app.use("/api/health", require("./routes/health"));
    MAIN APPLICATION ROUTES
 ===================================================== */
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/adaptive-auth", require("./routes/adaptiveAuth"));
 app.use("/api/cases", require("./routes/cases"));
 app.use("/api/clients", require("./routes/clients"));
 app.use("/api/staff", require("./routes/staff"));
@@ -74,6 +75,7 @@ app.use("/api/documents", require("./routes/documents"));
 app.use("/api/intake", require("./routes/intake"));
 app.use("/api/audit-logs", require("./routes/auditLogs"));
 app.use("/api/legal-control-desk", require("./routes/legalControlDesk"));
+app.use("/api/legal-authorities", require("./routes/legalAuthorities"));
 
 /* =====================================================
    OBSERVABILITY / DIAGNOSTIC ROUTES

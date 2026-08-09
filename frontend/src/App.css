@@ -42,8 +42,7 @@ html, body, #root {
 }
 
 .sidebar button,
-.sidebar-nav-item,
-.sidebar .leos-sidebar-tool-btn {
+.sidebar-nav-item {
   display: block;
   width: 100%;
   margin: 0;
@@ -69,10 +68,640 @@ html, body, #root {
   border-color: white;
 }
 
-.sidebar .leos-sidebar-tool-btn.leos-primary-tool {
-  background: #fff8dd;
-  border-color: #c9a646;
+.sidebar-section {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e5e7eb;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-section-icon,
+.sidebar-tool-icon {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(201, 166, 70, 0.16);
+  border: 1px solid rgba(201, 166, 70, 0.34);
+  color: #d6b75b;
+  font-weight: 900;
+}
+
+.sidebar-tool-list {
+  display: grid;
+  gap: 10px;
+}
+
+.sidebar .sidebar-tool-button {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  line-height: 1.2;
+}
+
+.sidebar-tool-icon-link::before { content: "L"; }
+.sidebar-tool-icon-briefcase::before { content: "B"; }
+.sidebar-tool-icon-folder::before { content: "F"; }
+.sidebar-tool-icon-book::before { content: "I"; }
+.sidebar-tool-icon-scales::before { content: "G"; }
+.sidebar-tool-icon-news::before { content: "N"; }
+.sidebar-tool-icon-gear::before { content: "S"; }
+
+.sidebar-session-area {
+  margin-top: auto;
+  padding-top: 16px;
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-user-card {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(31, 41, 55, 0.76);
+}
+
+.sidebar-user-avatar {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 900;
+}
+
+.sidebar-user-card strong,
+.sidebar-user-card span,
+.sidebar-user-card small {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sidebar-user-card strong {
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.sidebar-user-card span {
+  margin-top: 2px;
+  color: #d1d5db;
+  font-size: 12px;
+}
+
+.sidebar-user-card small {
+  margin-top: 4px;
+  color: #86efac;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.sidebar-session-menu {
+  position: relative;
+}
+
+.sidebar-session-menu summary {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 12px;
+  border: 1px solid rgba(201, 166, 70, 0.52);
+  border-radius: 10px;
+  background: #1f2937;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 900;
+  list-style: none;
+}
+
+.sidebar-session-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.sidebar-session-menu summary::after {
+  content: "▾";
+  color: #d6b75b;
+}
+
+.sidebar-session-menu[open] summary::after {
+  content: "▴";
+}
+
+.sidebar-session-options {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: #0f172a;
+}
+
+.sidebar .sidebar-session-options button {
+  min-height: 40px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.session-warning-backdrop,
+.locked-session-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.64);
+}
+
+.session-warning-dialog,
+.locked-session-card {
+  width: min(480px, 100%);
+  padding: 24px;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.26);
+}
+
+.session-warning-dialog h2,
+.locked-session-card h1 {
+  margin: 0 0 10px;
   color: #111827;
+}
+
+.session-warning-dialog p,
+.locked-session-card p {
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.session-warning-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.session-warning-actions button,
+.locked-session-card form button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f5f4b;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.session-warning-actions button.secondary {
+  border: 1px solid #d9dee8;
+  background: #ffffff;
+  color: #111827;
+}
+
+.locked-session-screen {
+  background:
+    linear-gradient(145deg, rgba(15, 95, 75, 0.22), transparent 45%),
+    #0f172a;
+}
+
+.locked-session-brand,
+.locked-session-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.locked-session-brand {
+  margin-bottom: 22px;
+}
+
+.locked-session-brand strong,
+.locked-session-brand span,
+.locked-session-user strong,
+.locked-session-user span {
+  display: block;
+}
+
+.locked-session-brand span,
+.locked-session-user span {
+  color: #64748b;
+}
+
+.locked-session-logo {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #0f5f4b;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.locked-session-user {
+  margin: 18px 0;
+  padding: 12px;
+  border: 1px solid #d9dee8;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.locked-session-card form,
+.locked-session-card label {
+  display: grid;
+  gap: 9px;
+}
+
+.locked-session-card label span {
+  color: #334155;
+  font-weight: 800;
+}
+
+.locked-session-card input {
+  min-height: 48px;
+  width: 100%;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  padding: 0 14px;
+  font: inherit;
+}
+
+.locked-session-card form button {
+  margin-top: 8px;
+}
+
+.locked-session-logout {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 12px;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #991b1b;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.access-denied-panel {
+  max-width: 720px;
+}
+
+.admin-management-panel,
+.admin-user-management {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-management-panel {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.admin-management-panel article,
+.admin-user-management {
+  padding: 18px;
+  border: 1px solid #d9dee8;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.admin-management-panel h3,
+.admin-user-heading h2 {
+  margin: 0 0 8px;
+}
+
+.admin-management-panel p,
+.admin-user-heading p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.admin-user-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.admin-user-heading > strong {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: #f8fafc;
+  border: 1px solid #d9dee8;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.admin-user-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.admin-user-form label {
+  display: grid;
+  gap: 6px;
+  color: #334155;
+  font-weight: 800;
+}
+
+.admin-user-form input,
+.admin-user-form select {
+  min-height: 42px;
+  width: 100%;
+  padding: 0 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.admin-user-form .admin-checkbox {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.admin-user-form .admin-checkbox input {
+  min-height: auto;
+  width: auto;
+}
+
+.admin-user-form button {
+  min-height: 44px;
+  align-self: end;
+  border: 0;
+  border-radius: 10px;
+  background: #111827;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.admin-authenticator-setup {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto minmax(190px, 0.8fr) minmax(160px, 0.6fr) 150px;
+  gap: 14px;
+  align-items: end;
+  padding: 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  background: #eff6ff;
+}
+
+.admin-authenticator-setup h3,
+.admin-authenticator-setup p {
+  margin: 0;
+}
+
+.admin-authenticator-setup p {
+  color: #475569;
+  line-height: 1.45;
+}
+
+.admin-authenticator-setup img {
+  width: 132px;
+  height: 132px;
+  border: 8px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
+}
+
+.admin-authenticator-setup label {
+  display: grid;
+  gap: 6px;
+  color: #334155;
+  font-weight: 800;
+}
+
+.admin-authenticator-setup input {
+  min-height: 42px;
+  width: 100%;
+  padding: 0 11px;
+  border: 1px solid #93c5fd;
+  border-radius: 9px;
+  background: #ffffff;
+  font: inherit;
+}
+
+.admin-authenticator-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-authenticator-actions button {
+  min-height: 40px;
+  border: 1px solid #bfdbfe;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #1d4ed8;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.admin-authenticator-actions button:first-child {
+  border-color: #0f5f4b;
+  background: #0f5f4b;
+  color: #ffffff;
+}
+
+.admin-user-table {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.admin-user-row {
+  display: grid;
+  grid-template-columns: minmax(210px, 1.4fr) 130px 130px minmax(160px, 1fr) 100px 120px 120px minmax(160px, 0.9fr);
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.admin-user-row:first-child {
+  border-top: 0;
+}
+
+.admin-user-head {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.admin-user-row strong,
+.admin-user-row small {
+  display: block;
+}
+
+.admin-user-row small {
+  color: #64748b;
+  margin-top: 3px;
+}
+
+.admin-user-row .admin-protected-label {
+  width: fit-content;
+  margin-top: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.admin-user-row button {
+  min-height: 36px;
+  border: 1px solid #d9dee8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.admin-user-row button:disabled {
+  cursor: not-allowed;
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.admin-emergency-actions {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-emergency-actions button {
+  min-height: 32px;
+  font-size: 12px;
+}
+
+.legal-tool-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.legal-tool-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #d9dee8;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.legal-tool-tabs button,
+.legal-tool-grid button,
+.legal-tool-list button,
+.legal-tool-grid a {
+  min-height: 44px;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.legal-tool-tabs button {
+  padding: 10px 12px;
+}
+
+.legal-tool-tabs button.active {
+  background: #111827;
+  color: #ffffff;
+  border-color: #111827;
+}
+
+.legal-tool-card {
+  padding: 22px;
+  border: 1px solid #d9dee8;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.legal-tool-card h2 {
+  margin: 0 0 18px;
+}
+
+.legal-tool-grid,
+.legal-tool-list,
+.legal-tool-search {
+  display: grid;
+  gap: 12px;
+}
+
+.legal-tool-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.legal-tool-grid button,
+.legal-tool-list button,
+.legal-tool-grid a,
+.legal-tool-grid article {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 14px;
+  text-align: left;
+}
+
+.legal-tool-grid article {
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.legal-tool-grid article span {
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.legal-tool-search input {
+  min-height: 48px;
+  width: 100%;
+  padding: 0 14px;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  font: inherit;
 }
 
 .main {
@@ -120,6 +749,50 @@ html, body, #root {
 .bad {
   background: #fee2e2;
   color: #991b1b;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.auth-session-button,
+.auth-signout-button {
+  border: 1px solid #d9dee8;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+}
+
+.auth-session-button {
+  min-height: 42px;
+  padding: 10px 14px;
+}
+
+.auth-lock-button {
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.auth-logout-button {
+  border-color: #fed7aa;
+  color: #9a3412;
+}
+
+.auth-exit-button {
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.auth-session-button:hover,
+.auth-session-button:focus,
+.auth-signout-button:hover,
+.auth-signout-button:focus {
+  border-color: #0f5f4b;
+  box-shadow: 0 0 0 3px rgba(15, 95, 75, 0.14);
 }
 
 .hero, .card, .metric, .jsonbox {
@@ -212,6 +885,11 @@ html, body, #root {
   .shell { flex-direction: column; }
   .sidebar { width: 100%; }
   .topbar { flex-direction: column; align-items: flex-start; }
+  .topbar-actions { justify-content: flex-start; }
+  .admin-authenticator-setup,
+  .admin-user-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Phase 10Y Stabilisation Enhancements */
@@ -232,9 +910,7 @@ html, body, #root {
 .actions button:hover,
 .summary button:hover,
 .sidebar button:hover,
-.sidebar-nav-item:hover,
-.sidebar .leos-sidebar-tool-btn:hover,
-.sidebar .leos-sidebar-tool-btn:focus {
+.sidebar-nav-item:hover {
   background: #283447;
   border-color: rgba(201, 166, 70, 0.86);
   color: #ffffff;
@@ -246,13 +922,6 @@ html, body, #root {
   background: white;
   color: #111827;
   border-color: white;
-}
-
-.sidebar .leos-sidebar-tool-btn.leos-primary-tool:hover,
-.sidebar .leos-sidebar-tool-btn.leos-primary-tool:focus {
-  background: #fff8dd;
-  border-color: #c9a646;
-  color: #111827;
 }
 
 .topbar {
@@ -3110,10 +3779,9 @@ Force one consistent active-state design inside the Litigation 360 sidebar.
 
 Reason:
 The first patch may not work when:
-1. legal-management-enhancer.css loads after App.css;
-2. the active class is named selected/current/is-active instead of active;
-3. active styling is injected by the Legal Tools enhancer;
-4. the Legal Web Links item uses a different wrapper class.
+1. the active class is named selected/current/is-active instead of active;
+2. active styling is injected by a browser extension or cached script;
+3. the Legal Web Links item uses a different wrapper class.
 
 Rule:
 All active/current/selected sidebar menu buttons use the SAME white active state.
@@ -8876,3 +9544,465 @@ body {
   }
 }
 /* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK END */
+
+/* CODEX 2026-07-10 CROSS-PLATFORM RESPONSIVE AND ICON SAFETY LAYER
+   Scoped final overrides. No routing, data, authentication, CRUD or API behavior is changed. */
+:root {
+  --l360-focus: #2563eb;
+  --l360-sidebar-width: 280px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--l360-focus) !important;
+  outline-offset: 2px !important;
+}
+
+.ui-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.shell {
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.sidebar {
+  width: var(--l360-sidebar-width);
+  top: 0 !important;
+  align-self: flex-start !important;
+  z-index: 30;
+}
+
+.sidebar .primary-nav-button {
+  min-height: 48px;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.sidebar-section-icon,
+.sidebar-tool-icon {
+  color: #f4d77b;
+}
+
+.sidebar-tool-icon::before {
+  content: none !important;
+}
+
+.main {
+  width: calc(100% - var(--l360-sidebar-width));
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.topbar {
+  gap: 20px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.page-title-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #1e3a5f;
+}
+
+.mobile-nav-trigger,
+.mobile-nav-backdrop {
+  display: none;
+}
+
+.legal-tool-card > h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legal-tool-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.legal-tool-grid > a,
+.legal-tool-grid > button,
+.legal-tool-list > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+}
+
+.legal-tool-grid > a .ui-icon:last-child {
+  margin-left: auto;
+}
+
+.legal-tool-grid > a,
+.legal-tool-grid > button {
+  position: relative;
+  padding-right: 42px;
+}
+
+.legal-tool-grid > a::after {
+  content: "↗";
+  position: absolute;
+  right: 16px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.topbar-status-line {
+  white-space: normal !important;
+}
+
+@media (max-width: 1024px) {
+  .grid,
+  .summary,
+  .workspace-module-section .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .main {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 850px) {
+  .shell {
+    display: block;
+    min-height: 100dvh;
+  }
+
+  .main {
+    width: 100%;
+    padding: 76px 20px 28px;
+  }
+
+  .mobile-nav-trigger {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    z-index: 45;
+    min-width: 96px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #111827;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+    font-weight: 800;
+  }
+
+  .mobile-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 48;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: rgba(15, 23, 42, 0.62);
+  }
+
+  .sidebar {
+    position: fixed !important;
+    inset: 0 auto 0 0;
+    z-index: 50;
+    width: min(88vw, 320px) !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    padding: max(60px, calc(env(safe-area-inset-top) + 52px)) 18px max(18px, env(safe-area-inset-bottom));
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    transform: translateX(-105%);
+    visibility: hidden;
+    transition: transform 180ms ease, visibility 180ms ease;
+    box-shadow: 16px 0 48px rgba(15, 23, 42, 0.34);
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .topbar {
+    position: relative !important;
+    top: auto !important;
+    padding: 20px;
+    align-items: flex-start;
+  }
+
+  .topbar h1 {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    line-height: 1.15;
+  }
+
+  .topbar .pill {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .grid,
+  .summary,
+  .workspace-module-section .grid,
+  .legal-tool-grid,
+  .form-grid,
+  .admin-form-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .hero,
+  .legal-tool-card,
+  .card,
+  .metric {
+    max-width: 100%;
+  }
+
+  .topbar-status-line {
+    display: grid;
+    gap: 4px;
+  }
+
+  .topbar-updated-prefix,
+  .topbar-updated-value {
+    white-space: normal;
+  }
+
+  .page-title-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  button,
+  .actions button,
+  .summary button,
+  .legal-tool-grid > a,
+  .legal-tool-grid > button,
+  .legal-tool-list > button {
+    min-height: 48px;
+  }
+
+  .table-wrap,
+  .admin-table-wrap,
+  .staff-table-wrap {
+    max-width: calc(100vw - 32px);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* CODEX 2026-07-10 WORKSPACE VISUAL RECOVERY LAYER */
+.topbar {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.topbar > div { min-width: 0; }
+
+.topbar .pill {
+  max-width: 100%;
+  min-height: 36px;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.workspace-module-section[data-section="future"] { display: none; }
+
+.deadlines-page .table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.deadline-table {
+  width: 100%;
+  min-width: 980px;
+  table-layout: auto !important;
+}
+
+.deadline-table th,
+.deadline-table td {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  vertical-align: middle;
+}
+
+.deadline-table th:nth-child(1) { min-width: 180px; }
+.deadline-table th:nth-child(2),
+.deadline-table th:nth-child(3),
+.deadline-table th:nth-child(5),
+.deadline-table th:nth-child(6) { min-width: 105px; white-space: nowrap; }
+.deadline-table th:nth-child(4) { min-width: 180px; }
+.deadline-table th:nth-child(7) { min-width: 160px; white-space: nowrap; }
+.deadline-table td:nth-child(2),
+.deadline-table td:nth-child(3),
+.deadline-table td:nth-child(5),
+.deadline-table td:nth-child(6) { white-space: nowrap; }
+.deadline-actions { white-space: nowrap; }
+.deadline-actions .btn { min-width: 68px; margin: 0 6px 0 0 !important; }
+
+@media (max-width: 760px) {
+  .topbar .pill { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .security-help-row button {
+    min-height: 44px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+}
+
+/* LEOS_PHASE_A1_ONE_LINE_STATUS_AND_TABLE_FIX */
+
+/*
+ * Keep role, account-status and protected-state text on one line.
+ * This prevents rendering such as "Protecte" / "d".
+ */
+.admin-protected-label,
+.admin-status-badge,
+.admin-protected-status,
+.admin-account-status,
+.admin-role-label,
+.admin-user-role,
+.admin-user-status,
+.admin-user-table .status,
+.admin-user-table .role,
+.admin-user-table button[disabled] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  min-width: max-content;
+  max-width: none;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  line-height: 1.2;
+}
+
+/*
+ * Prevent status and action columns from collapsing below their labels.
+ */
+.admin-user-table th,
+.admin-user-table td {
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.admin-user-table th:nth-last-child(-n + 4),
+.admin-user-table td:nth-last-child(-n + 4) {
+  min-width: 7.5rem;
+}
+
+.admin-user-table,
+.admin-users-table,
+.admin-account-table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.admin-user-table-wrapper,
+.admin-users-table-wrapper,
+.admin-account-table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-gutter: stable;
+}
+
+/*
+ * Keep the session-control trigger compact and on one row.
+ */
+.session-control-trigger,
+.session-control-button,
+.session-menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/*
+ * At narrower widths, preserve functionality and allow deliberate
+ * horizontal table scrolling rather than broken word wrapping.
+ */
+@media (max-width: 1024px) {
+  .admin-user-table,
+  .admin-users-table,
+  .admin-account-table {
+    min-width: 64rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-user-table,
+  .admin-users-table,
+  .admin-account-table {
+    min-width: 56rem;
+  }
+}
+

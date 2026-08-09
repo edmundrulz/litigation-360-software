@@ -181,24 +181,12 @@ export function RecentFilesPanel() {
       <div className="mp-panel-header">
         <div>
           <h2>Recent Files</h2>
-          <p>Frontend placeholder for future matter documents, templates, and exports.</p>
+          <p>Recently opened matter documents, templates and exports will appear here after file storage is connected.</p>
         </div>
       </div>
 
-      <div className="mp-simple-list">
-        <button type="button" disabled>
-          No recent files connected yet
-        </button>
-        <button type="button" disabled>
-          Future: recent matter document
-        </button>
-        <button type="button" disabled>
-          Future: recent exported report
-        </button>
-      </div>
-
       <p className="mp-empty">
-        Document repository, file storage, and real recent-file history are intentionally not connected in this phase.
+        No recent files yet.
       </p>
     </section>
   );

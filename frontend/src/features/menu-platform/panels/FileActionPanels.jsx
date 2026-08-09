@@ -3,28 +3,21 @@ export function FileOpenPanel() {
     <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2>Open File</h2>
-          <p>Frontend-only file opening placeholder for Litigation 360 workspace assets.</p>
+          <h2>Open</h2>
+          <p>Open a matter document, template, evidence bundle, report or local workspace file.</p>
         </div>
       </div>
 
       <div className="mp-info-card">
-        <h3>Planned Behaviour</h3>
+        <h3>Not available yet</h3>
         <p>
           This action will later open matter documents, templates, evidence bundles,
           exported reports, or recent local workspace files.
         </p>
       </div>
 
-      <div className="mp-action-grid">
-        <button type="button" disabled>Open Matter Document</button>
-        <button type="button" disabled>Open Template</button>
-        <button type="button" disabled>Open Evidence Bundle</button>
-        <button type="button" disabled>Browse Local File</button>
-      </div>
-
       <p className="mp-empty">
-        Backend, storage, and document repository integration are intentionally not connected in this phase.
+        File storage is not connected in this preview. Supported sources will be shown here when opening files is available.
       </p>
     </section>
   );
@@ -35,34 +28,16 @@ export function FileSavePanel() {
     <section className="mp-panel">
       <div className="mp-panel-header">
         <div>
-          <h2>Save Workspace</h2>
-          <p>Frontend-only save confirmation placeholder.</p>
+          <h2>Save</h2>
+          <p>Saving is not available in this preview.</p>
         </div>
       </div>
 
-      <div className="mp-success">
-        <strong>Mock save ready</strong>
-        <span>No production data was written. This is a frontend-only status response.</span>
+      <div className="mp-info-banner">
+        <strong>Changes are not written to permanent storage.</strong>
+        <span>Do not rely on this preview as a saved legal-work record.</span>
       </div>
 
-      <dl className="mp-info-grid">
-        <div>
-          <dt>Save Scope</dt>
-          <dd>Current visible workspace state</dd>
-        </div>
-        <div>
-          <dt>Persistence</dt>
-          <dd>Not connected</dd>
-        </div>
-        <div>
-          <dt>Backend API</dt>
-          <dd>Not used</dd>
-        </div>
-        <div>
-          <dt>Status</dt>
-          <dd>Ready for future wiring</dd>
-        </div>
-      </dl>
     </section>
   );
 }
@@ -88,11 +63,7 @@ export function FileImportPanel() {
         </ul>
       </div>
 
-      <label className="mp-file-drop">
-        <strong>Import area disabled for this phase</strong>
-        <small>No files are uploaded or processed yet.</small>
-        <input type="file" disabled />
-      </label>
+      <p className="mp-empty">Import is not available in this preview. No files can be selected, uploaded or processed yet.</p>
     </section>
   );
 }
@@ -107,15 +78,8 @@ export function FileExportPanel() {
         </div>
       </div>
 
-      <div className="mp-action-grid">
-        <button type="button" disabled>Export PDF</button>
-        <button type="button" disabled>Export CSV</button>
-        <button type="button" disabled>Export Excel</button>
-        <button type="button" disabled>Export Matter Bundle</button>
-      </div>
-
       <p className="mp-empty">
-        Export generation is intentionally disabled until the document/reporting layer is approved.
+        Export is not available in this preview. PDF, CSV, Excel and matter-package options will appear when generation is enabled.
       </p>
     </section>
   );

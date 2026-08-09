@@ -1,0 +1,15 @@
+## fix/court-dates-typography-layout
+ M backend/src/index.js
+ M frontend/index.html
+ M frontend/src/App.css
+ M frontend/src/App.jsx
+ D frontend/src/legal-management-enhancer.css
+ D frontend/src/legal-management-enhancer.js
+?? _backups/
+?? backend/src/migrations/024_adaptive_auth.sql
+?? backend/src/routes/adaptiveAuth.js
+?? backend/src/services/adaptiveAuthService.js
+?? configs/auth-policy.json
+?? docs/ADAPTIVE_AUTH_INTEGRATION.md
+?? frontend/src/pages/SecurityAccessConsole.css
+?? frontend/src/pages/SecurityAccessConsole.jsx

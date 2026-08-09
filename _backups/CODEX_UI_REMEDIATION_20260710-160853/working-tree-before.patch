@@ -1,0 +1,2956 @@
+diff --git a/backend/src/index.js b/backend/src/index.js
+index 7fbd8a0..8321d7e 100644
+--- a/backend/src/index.js
++++ b/backend/src/index.js
+@@ -64,6 +64,7 @@ app.use("/api/health", require("./routes/health"));
+    MAIN APPLICATION ROUTES
+ ===================================================== */
+ app.use("/api/auth", require("./routes/auth"));
++app.use("/api/adaptive-auth", require("./routes/adaptiveAuth"));
+ app.use("/api/cases", require("./routes/cases"));
+ app.use("/api/clients", require("./routes/clients"));
+ app.use("/api/staff", require("./routes/staff"));
+diff --git a/frontend/index.html b/frontend/index.html
+index c2831c5..f94d687 100644
+--- a/frontend/index.html
++++ b/frontend/index.html
+@@ -9,6 +9,5 @@
+   <body>
+     <div id="root"></div>
+     <script type="module" src="/src/main.jsx"></script>
+-      <script type="module" src="/src/legal-management-enhancer.js"></script>
+   </body>
+ </html>
+diff --git a/frontend/src/App.css b/frontend/src/App.css
+index c6468c0..a49c139 100644
+--- a/frontend/src/App.css
++++ b/frontend/src/App.css
+@@ -42,8 +42,7 @@ html, body, #root {
+ }
+ 
+ .sidebar button,
+-.sidebar-nav-item,
+-.sidebar .leos-sidebar-tool-btn {
++.sidebar-nav-item {
+   display: block;
+   width: 100%;
+   margin: 0;
+@@ -69,12 +68,548 @@ html, body, #root {
+   border-color: white;
+ }
+ 
+-.sidebar .leos-sidebar-tool-btn.leos-primary-tool {
+-  background: #fff8dd;
+-  border-color: #c9a646;
++.sidebar-section {
++  display: grid;
++  gap: 12px;
++  margin-top: 14px;
++  padding-top: 14px;
++  border-top: 1px solid rgba(255, 255, 255, 0.1);
++}
++
++.sidebar-section-title {
++  display: flex;
++  align-items: center;
++  gap: 10px;
++  color: #e5e7eb;
++  font-size: 12px;
++  font-weight: 900;
++  letter-spacing: 0.05em;
++}
++
++.sidebar-section-icon,
++.sidebar-tool-icon {
++  width: 30px;
++  height: 30px;
++  flex: 0 0 auto;
++  display: inline-grid;
++  place-items: center;
++  border-radius: 9px;
++  background: rgba(201, 166, 70, 0.16);
++  border: 1px solid rgba(201, 166, 70, 0.34);
++  color: #d6b75b;
++  font-weight: 900;
++}
++
++.sidebar-tool-list {
++  display: grid;
++  gap: 10px;
++}
++
++.sidebar .sidebar-tool-button {
++  min-height: 52px;
++  display: flex;
++  align-items: center;
++  gap: 12px;
++  padding: 11px 12px;
++  line-height: 1.2;
++}
++
++.sidebar-tool-icon-link::before { content: "L"; }
++.sidebar-tool-icon-briefcase::before { content: "B"; }
++.sidebar-tool-icon-folder::before { content: "F"; }
++.sidebar-tool-icon-book::before { content: "I"; }
++.sidebar-tool-icon-scales::before { content: "G"; }
++.sidebar-tool-icon-news::before { content: "N"; }
++.sidebar-tool-icon-gear::before { content: "S"; }
++
++.sidebar-session-area {
++  margin-top: auto;
++  padding-top: 16px;
++  display: grid;
++  gap: 10px;
++  border-top: 1px solid rgba(255, 255, 255, 0.12);
++}
++
++.sidebar-user-card {
++  display: grid;
++  grid-template-columns: 38px 1fr;
++  gap: 10px;
++  align-items: center;
++  padding: 12px;
++  border: 1px solid rgba(255, 255, 255, 0.12);
++  border-radius: 12px;
++  background: rgba(31, 41, 55, 0.76);
++}
++
++.sidebar-user-avatar {
++  width: 38px;
++  height: 38px;
++  display: grid;
++  place-items: center;
++  border-radius: 999px;
++  background: #dcfce7;
++  color: #166534;
++  font-weight: 900;
++}
++
++.sidebar-user-card strong,
++.sidebar-user-card span,
++.sidebar-user-card small {
++  display: block;
++  min-width: 0;
++  overflow-wrap: anywhere;
++}
++
++.sidebar-user-card strong {
++  color: #ffffff;
++  font-size: 13px;
++  line-height: 1.2;
++}
++
++.sidebar-user-card span {
++  margin-top: 2px;
++  color: #d1d5db;
++  font-size: 12px;
++}
++
++.sidebar-user-card small {
++  margin-top: 4px;
++  color: #86efac;
++  font-size: 11px;
++  font-weight: 800;
++}
++
++.sidebar-session-menu {
++  position: relative;
++}
++
++.sidebar-session-menu summary {
++  width: 100%;
++  min-height: 44px;
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 8px;
++  padding: 11px 12px;
++  border: 1px solid rgba(201, 166, 70, 0.52);
++  border-radius: 10px;
++  background: #1f2937;
++  color: #ffffff;
++  cursor: pointer;
++  font-weight: 900;
++  list-style: none;
++}
++
++.sidebar-session-menu summary::-webkit-details-marker {
++  display: none;
++}
++
++.sidebar-session-menu summary::after {
++  content: "▾";
++  color: #d6b75b;
++}
++
++.sidebar-session-menu[open] summary::after {
++  content: "▴";
++}
++
++.sidebar-session-options {
++  margin-top: 8px;
++  display: grid;
++  gap: 8px;
++  padding: 8px;
++  border: 1px solid rgba(255, 255, 255, 0.12);
++  border-radius: 12px;
++  background: #0f172a;
++}
++
++.sidebar .sidebar-session-options button {
++  min-height: 40px;
++  padding: 9px 10px;
++  border-radius: 9px;
++  font-size: 13px;
++}
++
++.session-warning-backdrop,
++.locked-session-screen {
++  position: fixed;
++  inset: 0;
++  z-index: 1000;
++  display: grid;
++  place-items: center;
++  padding: 24px;
++  background: rgba(15, 23, 42, 0.64);
++}
++
++.session-warning-dialog,
++.locked-session-card {
++  width: min(480px, 100%);
++  padding: 24px;
++  border: 1px solid #d9dee8;
++  border-radius: 18px;
++  background: #ffffff;
++  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.26);
++}
++
++.session-warning-dialog h2,
++.locked-session-card h1 {
++  margin: 0 0 10px;
++  color: #111827;
++}
++
++.session-warning-dialog p,
++.locked-session-card p {
++  color: #64748b;
++  line-height: 1.5;
++}
++
++.session-warning-actions {
++  display: flex;
++  gap: 10px;
++  flex-wrap: wrap;
++  margin-top: 18px;
++}
++
++.session-warning-actions button,
++.locked-session-card form button {
++  min-height: 44px;
++  padding: 10px 14px;
++  border: 0;
++  border-radius: 10px;
++  background: #0f5f4b;
++  color: #ffffff;
++  cursor: pointer;
++  font-weight: 900;
++}
++
++.session-warning-actions button.secondary {
++  border: 1px solid #d9dee8;
++  background: #ffffff;
+   color: #111827;
+ }
+ 
++.locked-session-screen {
++  background:
++    linear-gradient(145deg, rgba(15, 95, 75, 0.22), transparent 45%),
++    #0f172a;
++}
++
++.locked-session-brand,
++.locked-session-user {
++  display: flex;
++  align-items: center;
++  gap: 12px;
++}
++
++.locked-session-brand {
++  margin-bottom: 22px;
++}
++
++.locked-session-brand strong,
++.locked-session-brand span,
++.locked-session-user strong,
++.locked-session-user span {
++  display: block;
++}
++
++.locked-session-brand span,
++.locked-session-user span {
++  color: #64748b;
++}
++
++.locked-session-logo {
++  width: 48px;
++  height: 48px;
++  display: grid;
++  place-items: center;
++  background: #0f5f4b;
++  color: #ffffff;
++  font-size: 14px;
++  font-weight: 900;
++}
++
++.locked-session-user {
++  margin: 18px 0;
++  padding: 12px;
++  border: 1px solid #d9dee8;
++  border-radius: 12px;
++  background: #f8fafc;
++}
++
++.locked-session-card form,
++.locked-session-card label {
++  display: grid;
++  gap: 9px;
++}
++
++.locked-session-card label span {
++  color: #334155;
++  font-weight: 800;
++}
++
++.locked-session-card input {
++  min-height: 48px;
++  width: 100%;
++  border: 1px solid #d9dee8;
++  border-radius: 10px;
++  padding: 0 14px;
++  font: inherit;
++}
++
++.locked-session-card form button {
++  margin-top: 8px;
++}
++
++.locked-session-logout {
++  width: 100%;
++  min-height: 42px;
++  margin-top: 12px;
++  border: 1px solid #d9dee8;
++  border-radius: 10px;
++  background: #ffffff;
++  color: #991b1b;
++  cursor: pointer;
++  font-weight: 900;
++}
++
++.access-denied-panel {
++  max-width: 720px;
++}
++
++.admin-management-panel,
++.admin-user-management {
++  display: grid;
++  gap: 16px;
++  margin-top: 20px;
++}
++
++.admin-management-panel {
++  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
++}
++
++.admin-management-panel article,
++.admin-user-management {
++  padding: 18px;
++  border: 1px solid #d9dee8;
++  border-radius: 16px;
++  background: #ffffff;
++}
++
++.admin-management-panel h3,
++.admin-user-heading h2 {
++  margin: 0 0 8px;
++}
++
++.admin-management-panel p,
++.admin-user-heading p {
++  margin: 0;
++  color: #64748b;
++  line-height: 1.45;
++}
++
++.admin-user-heading {
++  display: flex;
++  justify-content: space-between;
++  gap: 16px;
++  align-items: flex-start;
++}
++
++.admin-user-heading > strong {
++  padding: 8px 10px;
++  border-radius: 999px;
++  background: #f8fafc;
++  border: 1px solid #d9dee8;
++  color: #334155;
++  white-space: nowrap;
++}
++
++.admin-user-form {
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
++  gap: 12px;
++  padding: 16px;
++  border: 1px solid #e5e7eb;
++  border-radius: 14px;
++  background: #f8fafc;
++}
++
++.admin-user-form label {
++  display: grid;
++  gap: 6px;
++  color: #334155;
++  font-weight: 800;
++}
++
++.admin-user-form input,
++.admin-user-form select {
++  min-height: 42px;
++  width: 100%;
++  padding: 0 11px;
++  border: 1px solid #cbd5e1;
++  border-radius: 9px;
++  background: #ffffff;
++}
++
++.admin-user-form .admin-checkbox {
++  grid-template-columns: auto 1fr;
++  align-items: center;
++}
++
++.admin-user-form .admin-checkbox input {
++  min-height: auto;
++  width: auto;
++}
++
++.admin-user-form button {
++  min-height: 44px;
++  align-self: end;
++  border: 0;
++  border-radius: 10px;
++  background: #111827;
++  color: #ffffff;
++  cursor: pointer;
++  font-weight: 900;
++}
++
++.admin-user-table {
++  overflow-x: auto;
++  border: 1px solid #e5e7eb;
++  border-radius: 14px;
++}
++
++.admin-user-row {
++  display: grid;
++  grid-template-columns: minmax(210px, 1.4fr) 130px 130px minmax(160px, 1fr) 100px 120px;
++  gap: 10px;
++  align-items: center;
++  padding: 12px;
++  border-top: 1px solid #e5e7eb;
++}
++
++.admin-user-row:first-child {
++  border-top: 0;
++}
++
++.admin-user-head {
++  background: #f8fafc;
++  color: #475569;
++  font-size: 12px;
++  font-weight: 900;
++  text-transform: uppercase;
++}
++
++.admin-user-row strong,
++.admin-user-row small {
++  display: block;
++}
++
++.admin-user-row small {
++  color: #64748b;
++  margin-top: 3px;
++}
++
++.admin-user-row button {
++  min-height: 36px;
++  border: 1px solid #d9dee8;
++  border-radius: 9px;
++  background: #ffffff;
++  color: #111827;
++  cursor: pointer;
++  font-weight: 800;
++}
++
++.legal-tool-panel {
++  display: grid;
++  gap: 18px;
++}
++
++.legal-tool-tabs {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 10px;
++  padding: 14px;
++  border: 1px solid #d9dee8;
++  border-radius: 16px;
++  background: #ffffff;
++}
++
++.legal-tool-tabs button,
++.legal-tool-grid button,
++.legal-tool-list button,
++.legal-tool-grid a {
++  min-height: 44px;
++  border: 1px solid #d9dee8;
++  border-radius: 10px;
++  background: #ffffff;
++  color: #111827;
++  font-weight: 800;
++  text-decoration: none;
++  cursor: pointer;
++}
++
++.legal-tool-tabs button {
++  padding: 10px 12px;
++}
++
++.legal-tool-tabs button.active {
++  background: #111827;
++  color: #ffffff;
++  border-color: #111827;
++}
++
++.legal-tool-card {
++  padding: 22px;
++  border: 1px solid #d9dee8;
++  border-radius: 18px;
++  background: #ffffff;
++}
++
++.legal-tool-card h2 {
++  margin: 0 0 18px;
++}
++
++.legal-tool-grid,
++.legal-tool-list,
++.legal-tool-search {
++  display: grid;
++  gap: 12px;
++}
++
++.legal-tool-grid {
++  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
++}
++
++.legal-tool-grid button,
++.legal-tool-list button,
++.legal-tool-grid a,
++.legal-tool-grid article {
++  display: grid;
++  align-content: start;
++  gap: 6px;
++  padding: 14px;
++  text-align: left;
++}
++
++.legal-tool-grid article {
++  border: 1px solid #d9dee8;
++  border-radius: 10px;
++  background: #f8fafc;
++}
++
++.legal-tool-grid article span {
++  color: #64748b;
++  line-height: 1.4;
++}
++
++.legal-tool-search input {
++  min-height: 48px;
++  width: 100%;
++  padding: 0 14px;
++  border: 1px solid #d9dee8;
++  border-radius: 10px;
++  font: inherit;
++}
++
+ .main {
+   flex: 1;
+   min-width: 0;
+@@ -122,6 +657,50 @@ html, body, #root {
+   color: #991b1b;
+ }
+ 
++.topbar-actions {
++  display: flex;
++  align-items: center;
++  justify-content: flex-end;
++  gap: 10px;
++  flex-wrap: wrap;
++}
++
++.auth-session-button,
++.auth-signout-button {
++  border: 1px solid #d9dee8;
++  background: #ffffff;
++  color: #111827;
++  cursor: pointer;
++}
++
++.auth-session-button {
++  min-height: 42px;
++  padding: 10px 14px;
++}
++
++.auth-lock-button {
++  border-color: #bfdbfe;
++  color: #1d4ed8;
++}
++
++.auth-logout-button {
++  border-color: #fed7aa;
++  color: #9a3412;
++}
++
++.auth-exit-button {
++  border-color: #fecaca;
++  color: #991b1b;
++}
++
++.auth-session-button:hover,
++.auth-session-button:focus,
++.auth-signout-button:hover,
++.auth-signout-button:focus {
++  border-color: #0f5f4b;
++  box-shadow: 0 0 0 3px rgba(15, 95, 75, 0.14);
++}
++
+ .hero, .card, .metric, .jsonbox {
+   background: white;
+   border: 1px solid #d9dee8;
+@@ -212,6 +791,7 @@ html, body, #root {
+   .shell { flex-direction: column; }
+   .sidebar { width: 100%; }
+   .topbar { flex-direction: column; align-items: flex-start; }
++  .topbar-actions { justify-content: flex-start; }
+ }
+ 
+ /* Phase 10Y Stabilisation Enhancements */
+@@ -232,9 +812,7 @@ html, body, #root {
+ .actions button:hover,
+ .summary button:hover,
+ .sidebar button:hover,
+-.sidebar-nav-item:hover,
+-.sidebar .leos-sidebar-tool-btn:hover,
+-.sidebar .leos-sidebar-tool-btn:focus {
++.sidebar-nav-item:hover {
+   background: #283447;
+   border-color: rgba(201, 166, 70, 0.86);
+   color: #ffffff;
+@@ -248,13 +826,6 @@ html, body, #root {
+   border-color: white;
+ }
+ 
+-.sidebar .leos-sidebar-tool-btn.leos-primary-tool:hover,
+-.sidebar .leos-sidebar-tool-btn.leos-primary-tool:focus {
+-  background: #fff8dd;
+-  border-color: #c9a646;
+-  color: #111827;
+-}
+-
+ .topbar {
+   position: sticky;
+   top: 0;
+@@ -3110,10 +3681,9 @@ Force one consistent active-state design inside the Litigation 360 sidebar.
+ 
+ Reason:
+ The first patch may not work when:
+-1. legal-management-enhancer.css loads after App.css;
+-2. the active class is named selected/current/is-active instead of active;
+-3. active styling is injected by the Legal Tools enhancer;
+-4. the Legal Web Links item uses a different wrapper class.
++1. the active class is named selected/current/is-active instead of active;
++2. active styling is injected by a browser extension or cached script;
++3. the Legal Web Links item uses a different wrapper class.
+ 
+ Rule:
+ All active/current/selected sidebar menu buttons use the SAME white active state.
+@@ -8875,4 +9445,4 @@ body {
+     padding: 0.95rem !important;
+   }
+ }
+-/* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK END */
+\ No newline at end of file
++/* PHASE 14F WHITE MAIN PANEL FINAL ALIGNMENT LOCK END */
+diff --git a/frontend/src/App.jsx b/frontend/src/App.jsx
+index 255eecb..41f30bb 100644
+--- a/frontend/src/App.jsx
++++ b/frontend/src/App.jsx
+@@ -1,5 +1,5 @@
+ import MatterIntakeWizard from './pages/MatterIntakeWizard.jsx';
+-import React, { useEffect, useState } from "react";
++import React, { useEffect, useRef, useState } from "react";
+ import "./App.css";
+ import { MenuPlatform } from "./features/menu-platform";
+ import KeyboardShortcutsHelp from "./components/KeyboardShortcutsHelp";
+@@ -11,6 +11,7 @@ import Deadlines from "./pages/Deadlines";
+ import Documents from "./pages/Documents";
+ import Staff from "./pages/Staff";
+ import ClientIntakeDiscovery from "./pages/ClientIntakeDiscovery";
++import SecurityAccessConsole from "./pages/SecurityAccessConsole";
+ 
+ const endpoints = [
+   ["Monitoring", "/api/enterprise/monitoring/health"],
+@@ -116,6 +117,13 @@ const workspaceSections = [
+         sequence: "A",
+         text: "Staff records and internal team administration.",
+       },
++      {
++        module: "Security Access",
++        title: "Login, Lockout & Access Monitoring",
++        status: "OPEN",
++        sequence: "B",
++        text: "Adaptive sign-in, step-up verification, session monitoring and forced logout control.",
++      },
+     ],
+   },
+   {
+@@ -216,6 +224,12 @@ const moduleFrameDetails = {
+     description: "Staff records and internal team administration.",
+     position: "Administration",
+   },
++  "Security Access": {
++    displayTitle: "Login, Lockout & Access Monitoring",
++    group: "Office Administration",
++    description: "Adaptive sign-in, step-up verification, session monitoring and forced logout control.",
++    position: "Administration Security",
++  },
+ };
+ 
+ function getModuleFrameDetails(title) {
+@@ -237,6 +251,114 @@ const moduleRouteAliases = {
+   "Completion Review And Completion": "Review Submit",
+ };
+ 
++const legalSidebarTools = [
++  { id: "legal-links", label: "Legal Web Links", icon: "link", roles: ["staff", "administrator", "system"] },
++  { id: "apps-docs", label: "Launch Apps / Docs", icon: "briefcase", roles: ["staff", "administrator", "system"] },
++  { id: "search-repository", label: "Search Repository", icon: "folder", roles: ["staff", "administrator", "system"] },
++  { id: "instructions", label: "Instructions / Guides", icon: "book", roles: ["staff", "administrator", "system"] },
++  { id: "glossary", label: "Legal Glossary", icon: "scales", roles: ["staff", "administrator", "system"] },
++  { id: "legal-news", label: "MY / SG Legal News", icon: "news", roles: ["staff", "administrator", "system"] },
++  { id: "settings", label: "Settings", icon: "gear", roles: ["administrator", "system"] }
++];
++
++const SESSION_TOKEN_KEY = "l360_adaptive_auth_token";
++const SESSION_USER_KEY = "l360_adaptive_auth_user";
++const SESSION_STARTED_KEY = "l360_session_started_at";
++const FAST_ACCESS_KEY = "l360_fast_access_profile";
++const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000;
++const INACTIVITY_WARNING_MS = 60 * 1000;
++
++function getSessionUser() {
++  try {
++    return JSON.parse(window.sessionStorage.getItem(SESSION_USER_KEY) || "null");
++  } catch {
++    return null;
++  }
++}
++
++function getSessionDurationMs() {
++  const startedAt = window.sessionStorage.getItem(SESSION_STARTED_KEY);
++  if (!startedAt) return 0;
++  return Math.max(Date.now() - new Date(startedAt).getTime(), 0);
++}
++
++function getAutoLockReason(date = new Date()) {
++  void date;
++  return "";
++}
++
++function clearCurrentSession() {
++  window.sessionStorage.removeItem(SESSION_TOKEN_KEY);
++  window.sessionStorage.removeItem(SESSION_USER_KEY);
++  window.sessionStorage.removeItem(SESSION_STARTED_KEY);
++}
++
++function clearFastAccess() {
++  window.localStorage.removeItem(FAST_ACCESS_KEY);
++}
++
++function saveAuthenticatedSession(data) {
++  if (!data?.token) return;
++  window.sessionStorage.setItem(SESSION_TOKEN_KEY, data.token);
++  window.sessionStorage.setItem(SESSION_USER_KEY, JSON.stringify(data.user || {}));
++  window.sessionStorage.setItem(SESSION_STARTED_KEY, new Date().toISOString());
++}
++
++function getDisplayUser(user) {
++  const safeUser = user || {};
++  return {
++    name: safeUser.full_name || safeUser.username || safeUser.email || "Signed-in user",
++    role: safeUser.role || safeUser.role_id || "Administrator",
++    identity: safeUser.username || safeUser.email || ""
++  };
++}
++
++function normalizeRole(user) {
++  const rawRole = String(user?.role || user?.role_id || "").trim().toLowerCase();
++  if (["system", "system_admin", "developer", "owner", "super_admin"].includes(rawRole)) return "system";
++  if (["administrator", "admin", "firm_admin"].includes(rawRole)) return "administrator";
++  return "staff";
++}
++
++function canAccessAdmin(user) {
++  return ["administrator", "system"].includes(normalizeRole(user));
++}
++
++function canAccessDeveloper(user) {
++  return normalizeRole(user) === "system";
++}
++
++function getVisibleLegalTools(user) {
++  const role = normalizeRole(user);
++  return legalSidebarTools.filter((tool) => tool.roles.includes(role));
++}
++
++function decodeTokenPayload(token) {
++  try {
++    const payload = token.split(".")[1];
++    const normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
++    return JSON.parse(window.atob(normalized));
++  } catch {
++    return {};
++  }
++}
++
++function describeUiTarget(target) {
++  if (!target || typeof target.closest !== "function") return "Unknown control";
++
++  const control = target.closest("button, a, input, select, textarea, [role='button']");
++  if (!control) return "Page";
++
++  const label = control.getAttribute("aria-label") ||
++    control.getAttribute("title") ||
++    control.innerText ||
++    control.name ||
++    control.id ||
++    control.placeholder ||
++    control.tagName;
++
++  return String(label || "Control").trim().slice(0, 120);
++}
+ 
+ function computeRequiredProgress(items) {
+   const safeItems = Array.isArray(items) ? items : [];
+@@ -329,12 +451,23 @@ function normalizeWorkspaceModule(moduleName) {
+ }
+ 
+ export default function App() {
++  const [authenticated, setAuthenticated] = useState(() => Boolean(window.sessionStorage.getItem(SESSION_TOKEN_KEY)));
++  const [lockReason, setLockReason] = useState("");
++  const [authScreen, setAuthScreen] = useState(() => Boolean(window.sessionStorage.getItem(SESSION_TOKEN_KEY)) ? "app" : "login");
++  const [lockedUser, setLockedUser] = useState(() => getSessionUser());
++  const [sessionUser, setSessionUser] = useState(() => getSessionUser());
++  const [inactivityWarningOpen, setInactivityWarningOpen] = useState(false);
++  const [warningRemaining, setWarningRemaining] = useState(Math.ceil(INACTIVITY_WARNING_MS / 1000));
+   const [view, setView] = useState("workspace");
+   const [module, setModule] = useState("home");
+   const [moduleHistory, setModuleHistory] = useState([]);
++  const [activeLegalTool, setActiveLegalTool] = useState("legal-links");
+   const [results, setResults] = useState([]);
+   const [updated, setUpdated] = useState("Pending");
+   const [keyboardHelpOpen, setKeyboardHelpOpen] = useState(false);
++  const inactivityWarningTimerRef = useRef(null);
++  const inactivityLockTimerRef = useRef(null);
++  const inactivityCountdownRef = useRef(null);
+ 
+   async function runChecks() {
+     const out = [];
+@@ -375,6 +508,244 @@ export default function App() {
+   const passed = results.filter(r => r.ok).length;
+   const failed = results.length - passed;
+ 
++  async function recordActivity(eventType, details = {}) {
++    const token = window.sessionStorage.getItem(SESSION_TOKEN_KEY);
++    const payload = token ? decodeTokenPayload(token) : {};
++    const user = getSessionUser();
++
++    try {
++      await fetch("/api/adaptive-auth/audit-event", {
++        method: "POST",
++        headers: { "Content-Type": "application/json" },
++        body: JSON.stringify({
++          eventType,
++          userId: user?.id || payload.userId || null,
++          details: {
++            ...details,
++            sessionId: payload.sessionId || null,
++            view,
++            module,
++            durationMs: getSessionDurationMs(),
++            occurredAt: new Date().toISOString()
++          }
++        })
++      });
++    } catch {
++      // Audit delivery should never block the user's local workflow.
++    }
++  }
++
++  function lockSystem(reason = "The workspace has been locked.", options = {}) {
++    const userBeforeLock = getSessionUser();
++    recordActivity(options.eventType || "APP_LOCKED", { reason });
++    setLockedUser(userBeforeLock);
++    clearCurrentSession();
++    setLockReason(reason);
++    setAuthScreen("locked");
++    setSessionUser(null);
++    setInactivityWarningOpen(false);
++    setAuthenticated(false);
++  }
++
++  function logoutSystem(options = {}) {
++    if (!options.skipConfirm) {
++      const confirmed = window.confirm("Logout will fully end this authenticated session. Unsaved work may be lost if it has not been saved. Continue?");
++      if (!confirmed) return;
++    }
++
++    recordActivity("APP_LOGGED_OUT", { reason: options.reason || "User selected logout." });
++    clearCurrentSession();
++    clearFastAccess();
++    setLockedUser(null);
++    setSessionUser(null);
++    setLockReason("You have logged out. Full sign-in is required for the next entry.");
++    setAuthScreen("login");
++    setInactivityWarningOpen(false);
++    setAuthenticated(false);
++  }
++
++  function exitSystem() {
++    const confirmed = window.confirm("Exit Application will securely log you out. Unsaved work may be lost if it has not been saved. Continue?");
++    if (!confirmed) return;
++
++    recordActivity("APP_EXIT_REQUESTED", { reason: "User selected exit." });
++    clearCurrentSession();
++    clearFastAccess();
++    setLockedUser(null);
++    setSessionUser(null);
++    setLockReason("The system has been locked for exit. You may now close this browser tab.");
++    setAuthScreen("login");
++    setInactivityWarningOpen(false);
++    setAuthenticated(false);
++    window.setTimeout(() => window.close(), 100);
++  }
++
++  function handleAuthenticated(data) {
++    const user = data?.user || getSessionUser();
++    setLockReason("");
++    setAuthScreen("app");
++    setLockedUser(user);
++    setSessionUser(user);
++    setAuthenticated(true);
++    recordActivity("APP_SESSION_STARTED", { reason: "Gateway approved access." });
++  }
++
++  function clearInactivityTimers() {
++    window.clearTimeout(inactivityWarningTimerRef.current);
++    window.clearTimeout(inactivityLockTimerRef.current);
++    window.clearInterval(inactivityCountdownRef.current);
++  }
++
++  function resetInactivityTimer() {
++    if (!authenticated) return;
++
++    clearInactivityTimers();
++    setInactivityWarningOpen(false);
++    setWarningRemaining(Math.ceil(INACTIVITY_WARNING_MS / 1000));
++
++    inactivityWarningTimerRef.current = window.setTimeout(() => {
++      setInactivityWarningOpen(true);
++      setWarningRemaining(Math.ceil(INACTIVITY_WARNING_MS / 1000));
++      recordActivity("APP_INACTIVITY_WARNING", {
++        warningSeconds: Math.ceil(INACTIVITY_WARNING_MS / 1000)
++      });
++
++      inactivityCountdownRef.current = window.setInterval(() => {
++        setWarningRemaining((current) => Math.max(current - 1, 0));
++      }, 1000);
++    }, Math.max(INACTIVITY_TIMEOUT_MS - INACTIVITY_WARNING_MS, 0));
++
++    inactivityLockTimerRef.current = window.setTimeout(() => {
++      lockSystem("Your LEOS 360 session was locked because of inactivity.", {
++        eventType: "APP_AUTO_LOCKED"
++      });
++    }, INACTIVITY_TIMEOUT_MS);
++  }
++
++  async function unlockWithCredential(password) {
++    const user = lockedUser || getSessionUser();
++    const displayUser = getDisplayUser(user);
++
++    if (!displayUser.identity || !password) {
++      return { ok: false, error: "Enter your password, PIN or approved credential to unlock." };
++    }
++
++    try {
++      const response = await fetch("/api/adaptive-auth/start", {
++        method: "POST",
++        headers: { "Content-Type": "application/json" },
++        body: JSON.stringify({
++          identity: displayUser.identity,
++          password,
++          requestedModule: "session_unlock"
++        })
++      });
++
++      const data = await response.json();
++      if (!response.ok || !data.token) {
++        recordActivity("APP_UNLOCK_FAILED", { reason: data.error || "Unlock failed" });
++        return { ok: false, error: data.error || "Unlock failed." };
++      }
++
++      saveAuthenticatedSession(data);
++      setLockedUser(data.user || user);
++      setSessionUser(data.user || user);
++      setLockReason("");
++      setAuthScreen("app");
++      setAuthenticated(true);
++      recordActivity("APP_UNLOCKED", { reason: "User re-authenticated from lock screen." });
++      return { ok: true };
++    } catch {
++      return { ok: false, error: "Unlock service is not reachable." };
++    }
++  }
++
++  useEffect(() => {
++    if (!authenticated) return undefined;
++
++    recordActivity("APP_VIEW_ACCESSED", { view, module });
++    const interval = window.setInterval(() => {
++      recordActivity("APP_HEARTBEAT", { view, module });
++      const reason = getAutoLockReason();
++      if (reason) lockSystem(reason, { eventType: "APP_AUTO_LOCKED" });
++    }, 60000);
++
++    const reason = getAutoLockReason();
++    if (reason) {
++      window.setTimeout(() => lockSystem(reason, { eventType: "APP_AUTO_LOCKED" }), 0);
++    }
++
++    return () => window.clearInterval(interval);
++  }, [authenticated, view, module]);
++
++  useEffect(() => {
++    if (!authenticated) {
++      clearInactivityTimers();
++      return undefined;
++    }
++
++    const userActivityEvents = ["mousemove", "mousedown", "keydown", "touchstart", "click", "input", "change"];
++    resetInactivityTimer();
++
++    function handleUserActivity() {
++      resetInactivityTimer();
++    }
++
++    userActivityEvents.forEach((eventName) => {
++      document.addEventListener(eventName, handleUserActivity, true);
++    });
++
++    return () => {
++      userActivityEvents.forEach((eventName) => {
++        document.removeEventListener(eventName, handleUserActivity, true);
++      });
++      clearInactivityTimers();
++    };
++  }, [authenticated, view, module]);
++
++  useEffect(() => {
++    if (!authenticated) return undefined;
++
++    function handleClick(event) {
++      recordActivity("APP_UI_ACTION", {
++        action: "click",
++        target: describeUiTarget(event.target)
++      });
++    }
++
++    function handleSubmit(event) {
++      recordActivity("APP_FORM_SUBMITTED", {
++        form: describeUiTarget(event.target)
++      });
++    }
++
++    function handleChange(event) {
++      const field = event.target?.name || event.target?.id || event.target?.placeholder || event.target?.tagName || "field";
++      recordActivity("APP_FIELD_CHANGED", {
++        field: String(field).slice(0, 80),
++        inputType: event.target?.type || event.target?.tagName || "unknown"
++      });
++    }
++
++    function handleCopy() {
++      recordActivity("APP_COPY_EVENT", {
++        action: "copy"
++      });
++    }
++
++    document.addEventListener("click", handleClick, true);
++    document.addEventListener("submit", handleSubmit, true);
++    document.addEventListener("change", handleChange, true);
++    document.addEventListener("copy", handleCopy, true);
++
++    return () => {
++      document.removeEventListener("click", handleClick, true);
++      document.removeEventListener("submit", handleSubmit, true);
++      document.removeEventListener("change", handleChange, true);
++      document.removeEventListener("copy", handleCopy, true);
++    };
++  }, [authenticated, view, module]);
++
+   function goToModule(nextModule) {
+     const resolvedModule = normalizeWorkspaceModule(nextModule);
+ 
+@@ -417,6 +788,33 @@ export default function App() {
+     }
+   }
+ 
++  function openLegalTool(toolId) {
++    setActiveLegalTool(toolId);
++    setView("legal-tools");
++    setModuleHistory([]);
++    setModule("home");
++  }
++
++  if (!authenticated && authScreen === "locked") {
++    return (
++      <LockedSessionScreen
++        user={lockedUser}
++        reason={lockReason}
++        onUnlock={unlockWithCredential}
++        onLogout={() => logoutSystem({ skipConfirm: true, reason: "User selected logout from locked screen." })}
++      />
++    );
++  }
++
++  if (!authenticated) {
++    return <SecurityAccessConsole mode="gateway" lockedReason={lockReason} onAuthenticated={handleAuthenticated} />;
++  }
++
++  const currentUser = getDisplayUser(sessionUser);
++  const visibleLegalTools = getVisibleLegalTools(sessionUser);
++  const userCanAccessAdmin = canAccessAdmin(sessionUser);
++  const userCanAccessDeveloper = canAccessDeveloper(sessionUser);
++
+   return (
+     <div className="shell">
+       <aside className="sidebar">
+@@ -443,13 +841,66 @@ export default function App() {
+           Operations Centre
+         </button>
+ 
+-        <button className={view === "admin" ? "active" : ""} onClick={() => setView("admin")}>
+-          Admin Centre
+-        </button>
++        {userCanAccessAdmin && (
++          <button className={view === "admin" ? "active" : ""} onClick={() => setView("admin")}>
++            Admin Centre
++          </button>
++        )}
+ 
+-        <button className={view === "developer" ? "active" : ""} onClick={() => setView("developer")}>
+-          Developer Centre
+-        </button>
++        {userCanAccessDeveloper && (
++          <button className={view === "developer" ? "active" : ""} onClick={() => setView("developer")}>
++            Developer Centre
++          </button>
++        )}
++
++        <div className="sidebar-section" aria-label="Legal tools">
++          <div className="sidebar-section-title">
++            <span className="sidebar-section-icon">$</span>
++            <span>LEGAL TOOLS</span>
++          </div>
++
++          <div className="sidebar-tool-list">
++            {visibleLegalTools.map((tool) => (
++              <button
++                key={tool.id}
++                type="button"
++                className={view === "legal-tools" && activeLegalTool === tool.id ? "sidebar-tool-button active" : "sidebar-tool-button"}
++                onClick={() => openLegalTool(tool.id)}
++              >
++                <span className={`sidebar-tool-icon sidebar-tool-icon-${tool.icon}`} aria-hidden="true" />
++                <span>{tool.label}</span>
++              </button>
++            ))}
++          </div>
++        </div>
++
++        <div className="sidebar-session-area" aria-label="Session menu">
++          <div className="sidebar-user-card">
++            <div className="sidebar-user-avatar" aria-hidden="true">
++              {currentUser.name.slice(0, 1).toUpperCase()}
++            </div>
++            <div>
++              <strong>{currentUser.name}</strong>
++              <span>{currentUser.role}</span>
++              <small>Session active</small>
++            </div>
++          </div>
++
++          <details className="sidebar-session-menu">
++            <summary>Lock / Logout / Exit</summary>
++            <div className="sidebar-session-options">
++              <button type="button" onClick={() => lockSystem("Locked by user. Fast access remains available today.")}>
++                Lock Screen
++              </button>
++              <button type="button" onClick={logoutSystem}>
++                Logout
++              </button>
++              <button type="button" onClick={exitSystem}>
++                Exit Application
++              </button>
++            </div>
++          </details>
++        </div>
+       </aside>
+ 
+       <KeyboardShortcutsHelp open={keyboardHelpOpen} onClose={() => setKeyboardHelpOpen(false)} />
+@@ -480,12 +931,22 @@ export default function App() {
+             passed={passed}
+             failed={failed}
+             updated={updated}
++            user={sessionUser}
+           />
+         )}
+ 
+         {view === "operations" && <Operations results={results} run={runChecks} passed={passed} failed={failed} />}
+-        {view === "admin" && <Admin />}
+-        {view === "developer" && <Developer results={results} />}
++        {view === "admin" && (userCanAccessAdmin ? <Admin user={sessionUser} /> : <AccessDenied />)}
++        {view === "developer" && (userCanAccessDeveloper ? <Developer results={results} /> : <AccessDenied />)}
++        {view === "legal-tools" && <LegalToolPanel activeTool={activeLegalTool} setActiveTool={setActiveLegalTool} />}
++
++        {inactivityWarningOpen && (
++          <SessionWarningDialog
++            seconds={warningRemaining}
++            onStayLoggedIn={resetInactivityTimer}
++            onLockNow={() => lockSystem("Locked by user from inactivity warning. Fast access remains available today.")}
++          />
++        )}
+ 
+       </main>
+     </div>
+@@ -499,11 +960,192 @@ function viewTitle(view, module) {
+     workspace: "LEOS Legal Workspace Command Hub",
+     operations: "Operations Centre",
+     admin: "Admin Centre",
+-    developer: "Developer Centre"
++    developer: "Developer Centre",
++    "legal-tools": "Legal Tools"
+   }[view];
+ }
+ 
+-function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated }) {
++function SessionWarningDialog({ seconds, onStayLoggedIn, onLockNow }) {
++  useEffect(() => {
++    function handleKeyDown(event) {
++      if (event.key === "Enter" || event.key === "Escape") {
++        onStayLoggedIn();
++      }
++    }
++
++    document.addEventListener("keydown", handleKeyDown);
++    return () => document.removeEventListener("keydown", handleKeyDown);
++  }, [onStayLoggedIn]);
++
++  return (
++    <div className="session-warning-backdrop" role="presentation">
++      <section className="session-warning-dialog" role="dialog" aria-modal="true" aria-labelledby="sessionWarningTitle">
++        <p className="eyebrow">Session security</p>
++        <h2 id="sessionWarningTitle">Your session is about to be locked due to inactivity.</h2>
++        <p>For your security, the application will lock in <strong>{seconds}</strong> seconds.</p>
++        <div className="session-warning-actions">
++          <button type="button" onClick={onStayLoggedIn}>Stay Logged In</button>
++          <button type="button" className="secondary" onClick={onLockNow}>Lock Now</button>
++        </div>
++      </section>
++    </div>
++  );
++}
++
++function LockedSessionScreen({ user, reason, onUnlock, onLogout }) {
++  const displayUser = getDisplayUser(user);
++  const [credential, setCredential] = useState("");
++  const [message, setMessage] = useState(reason || "Your LEOS 360 session is locked.");
++  const [busy, setBusy] = useState(false);
++
++  async function handleUnlock(event) {
++    event.preventDefault();
++    setBusy(true);
++    setMessage("Checking your credential...");
++
++    const result = await onUnlock(credential);
++    setBusy(false);
++
++    if (!result.ok) {
++      setMessage(result.error || "Unlock failed.");
++      setCredential("");
++    }
++  }
++
++  return (
++    <main className="locked-session-screen">
++      <section className="locked-session-card" aria-labelledby="lockedSessionTitle">
++        <div className="locked-session-brand">
++          <div className="locked-session-logo">L360</div>
++          <div>
++            <strong>LEOS 360</strong>
++            <span>Secure workspace lock</span>
++          </div>
++        </div>
++
++        <h1 id="lockedSessionTitle">Session Locked</h1>
++        <p>{message}</p>
++
++        <div className="locked-session-user">
++          <div className="sidebar-user-avatar" aria-hidden="true">
++            {displayUser.name.slice(0, 1).toUpperCase()}
++          </div>
++          <div>
++            <strong>{displayUser.name}</strong>
++            <span>{displayUser.role}</span>
++          </div>
++        </div>
++
++        <form onSubmit={handleUnlock}>
++          <label>
++            <span>Password, PIN or approved credential</span>
++            <input
++              value={credential}
++              onChange={(event) => setCredential(event.target.value)}
++              type="password"
++              autoComplete="current-password"
++              placeholder="Enter credential to continue"
++              required
++            />
++          </label>
++
++          <button type="submit" disabled={busy}>
++            {busy ? "Unlocking..." : "Unlock"}
++          </button>
++        </form>
++
++        <button className="locked-session-logout" type="button" onClick={onLogout}>
++          Logout Instead
++        </button>
++      </section>
++    </main>
++  );
++}
++
++function LegalToolPanel({ activeTool, setActiveTool }) {
++  void setActiveTool;
++  const active = legalSidebarTools.find((tool) => tool.id === activeTool) || legalSidebarTools[0];
++
++  const panelMap = {
++    "legal-links": (
++      <div className="legal-tool-grid">
++        <a href="https://www.kehakiman.gov.my/" target="_blank" rel="noreferrer">Malaysian Judiciary</a>
++        <a href="https://efs.kehakiman.gov.my/" target="_blank" rel="noreferrer">Court E-Filing</a>
++        <a href="https://lom.agc.gov.my/" target="_blank" rel="noreferrer">Laws of Malaysia</a>
++        <a href="https://www.elitigation.sg/" target="_blank" rel="noreferrer">Singapore eLitigation</a>
++      </div>
++    ),
++    "apps-docs": (
++      <div className="legal-tool-grid">
++        <button type="button">Open client document folder</button>
++        <button type="button">Open matter templates</button>
++        <button type="button">Open court forms</button>
++        <button type="button">Open internal SOP library</button>
++      </div>
++    ),
++    "search-repository": (
++      <div className="legal-tool-search">
++        <input placeholder="Search clients, matters, documents, deadlines, folders..." />
++        <div className="legal-tool-grid">
++          <button type="button">Client Files</button>
++          <button type="button">Matter Folders</button>
++          <button type="button">Documents</button>
++          <button type="button">Deadlines</button>
++          <button type="button">Legal Research</button>
++          <button type="button">Billing / Finance</button>
++        </div>
++      </div>
++    ),
++    instructions: (
++      <div className="legal-tool-list">
++        <button type="button">Getting Started Guide</button>
++        <button type="button">Client Intake Workflow</button>
++        <button type="button">Matter Opening SOP</button>
++        <button type="button">Document Upload & Review Guide</button>
++        <button type="button">Deadline Monitoring Guide</button>
++        <button type="button">Security, RBAC & Audit SOP</button>
++      </div>
++    ),
++    glossary: (
++      <div className="legal-tool-grid">
++        <article><strong>Affidavit</strong><span>A written statement confirmed for use as evidence.</span></article>
++        <article><strong>Cause Papers</strong><span>Court documents filed in a case.</span></article>
++        <article><strong>Client Due Diligence</strong><span>Identity, authority and risk checks before engagement.</span></article>
++        <article><strong>Limitation Period</strong><span>Time limit for starting a claim or legal action.</span></article>
++      </div>
++    ),
++    "legal-news": (
++      <div className="legal-tool-grid">
++        <a href="https://www.malaysianbar.org.my/" target="_blank" rel="noreferrer">Malaysian Bar</a>
++        <a href="https://www.agc.gov.my/" target="_blank" rel="noreferrer">Attorney General's Chambers Malaysia</a>
++        <a href="https://www.lawsociety.org.sg/" target="_blank" rel="noreferrer">Law Society of Singapore</a>
++        <a href="https://www.judiciary.gov.sg/" target="_blank" rel="noreferrer">Singapore Courts</a>
++      </div>
++    ),
++    settings: (
++      <div className="legal-tool-grid">
++        <article><strong>User Preferences</strong><span>Language, default dashboard and quick links.</span></article>
++        <article><strong>Display Settings</strong><span>Theme, density, font size and layout mode.</span></article>
++        <article><strong>Notifications</strong><span>Email, in-app alerts and deadline reminders.</span></article>
++        <article><strong>Access Controls</strong><span>Roles, permissions, module visibility and audit controls.</span></article>
++      </div>
++    )
++  };
++
++  return (
++    <section className="legal-tool-panel">
++      <article className="legal-tool-card">
++        <p className="eyebrow">Legal Tools</p>
++        <h2>{active.label}</h2>
++        {panelMap[active.id]}
++      </article>
++    </section>
++  );
++}
++
++function Workspace({ module, setModule, previous, canGoBack, results, runChecks, passed, failed, updated, user }) {
++  const userCanAccessAdmin = canAccessAdmin(user);
++
+   if (module === "Client Intake Discovery") {
+     return (
+       <ModuleFrame title="Preliminary Assessment & Triage" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+@@ -517,6 +1159,9 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
+   if (module === "Court Dates") return <ModuleFrame title="Court Dates" setModule={setModule} previous={previous} canGoBack={canGoBack}><Deadlines /></ModuleFrame>;
+   if (module === "Documents" || module === "Documents & Evidence Readiness") return <ModuleFrame title="Documents & Evidence Readiness" setModule={setModule} previous={previous} canGoBack={canGoBack}><Documents /></ModuleFrame>;
+   if (module === "Staff") return <ModuleFrame title="Staff" setModule={setModule} previous={previous} canGoBack={canGoBack}><Staff /></ModuleFrame>;
++  if (module === "Security Access") {
++    return userCanAccessAdmin ? <ModuleFrame title="Login, Lockout & Access Monitoring" setModule={setModule} previous={previous} canGoBack={canGoBack}><SecurityOperationsPanel /></ModuleFrame> : <AccessDenied />;
++  }
+   if (module === "Review Submit" || module === "Draft Engagement Preview" || module === "Review And Completion" || module === "Completion Review And Completion") {
+     return (
+       <ModuleFrame title="Draft Engagement Preview" setModule={setModule} previous={previous} canGoBack={canGoBack}>
+@@ -622,7 +1267,16 @@ function Workspace({ module, setModule, previous, canGoBack, results, runChecks,
+         <button onClick={runChecks}>Refresh Now</button>
+       </section>
+       <section className="workspace-section-list" aria-label="Workspace module groups">
+-        {workspaceSections.map((section) => (
++        {workspaceSections
++          .map((section) => {
++            if (section.id !== "office-admin") return section;
++            return {
++              ...section,
++              items: section.items.filter((item) => item.module !== "Security Access" || userCanAccessAdmin)
++            };
++          })
++          .filter((section) => section.items.length > 0)
++          .map((section) => (
+           <section className="workspace-module-section" key={section.id}>
+             <div className="workspace-section-header">
+               <div className="workspace-section-heading">
+@@ -937,13 +1591,187 @@ function Operations({ results, run, passed, failed }) {
+   );
+ }
+ 
+-function Admin() {
++function AccessDenied() {
++  return (
++    <section className="card access-denied-panel">
++      <h2>Access restricted</h2>
++      <p>This area is available only to authorized administrator or system-level accounts.</p>
++    </section>
++  );
++}
++
++function SecurityOperationsPanel() {
++  return (
++    <section className="admin-management-panel">
++      <article>
++        <h3>Session Security</h3>
++        <p>Lock, logout, session expiry, forced logout and audit controls are integrated through the sidebar session control and security audit log.</p>
++      </article>
++      <article>
++        <h3>Authentication Methods</h3>
++        <p>Password, PIN, passcode, OTP, QR, phrase, colour and numeric challenge settings are managed in Admin Centre user management.</p>
++      </article>
++      <article>
++        <h3>Live Monitoring</h3>
++        <p>Administrators can grant or revoke live monitoring access for users and security-sensitive roles.</p>
++      </article>
++    </section>
++  );
++}
++
++function Admin({ user }) {
++  return (
++    <>
++      <section className="grid">
++        <Card title="Governance" status="Ready" text="Compliance, approvals, policies and audit readiness." />
++        <Card title="Backup Recovery" status="Ready" text="Backup status, restore planning and disaster readiness." />
++        <Card title="Deployment Readiness" status="Ready" text="Production readiness, blockers and release checks." />
++        <Card title="Audit Trail" status="Ready" text="System evidence and operational traceability." />
++      </section>
++
++      <AdminUserManagement user={user} />
++    </>
++  );
++}
++
++function AdminUserManagement({ user }) {
++  const [users, setUsers] = useState([]);
++  const [status, setStatus] = useState("Ready to manage users.");
++  const [form, setForm] = useState({
++    full_name: "",
++    username: "",
++    email: "",
++    role: "staff",
++    phone_number: "",
++    initials: "",
++    nric_last4: "",
++    password: "",
++    passcodes: "",
++    enabled_factors: "password,otp",
++    security_phrase: "",
++    security_colour: "",
++    security_number_code: "",
++    live_monitoring_access: false
++  });
++
++  const token = window.sessionStorage.getItem(SESSION_TOKEN_KEY);
++
++  function headers() {
++    return {
++      "Content-Type": "application/json",
++      Authorization: `Bearer ${token}`
++    };
++  }
++
++  async function loadUsers() {
++    try {
++      const response = await fetch("/api/adaptive-auth/admin/users", { headers: headers() });
++      const data = await response.json();
++      if (!response.ok) throw new Error(data.error || "Could not load users.");
++      setUsers(data.users || []);
++    } catch (error) {
++      setStatus(error.message);
++    }
++  }
++
++  useEffect(() => {
++    loadUsers();
++  }, []);
++
++  function updateForm(key, value) {
++    setForm((current) => ({ ...current, [key]: value }));
++  }
++
++  async function saveUser(event) {
++    event.preventDefault();
++    setStatus("Saving user account...");
++
++    try {
++      const payload = {
++        ...form,
++        passcodes: form.passcodes.split(",").map((item) => item.trim()).filter(Boolean),
++        enabled_factors: form.enabled_factors.split(",").map((item) => item.trim()).filter(Boolean)
++      };
++
++      const response = await fetch("/api/adaptive-auth/admin/users", {
++        method: "POST",
++        headers: headers(),
++        body: JSON.stringify(payload)
++      });
++      const data = await response.json();
++      if (!response.ok) throw new Error(data.error || "Could not save user.");
++
++      setStatus("User account saved.");
++      setForm((current) => ({ ...current, full_name: "", username: "", email: "", phone_number: "", initials: "", nric_last4: "", password: "", passcodes: "" }));
++      loadUsers();
++    } catch (error) {
++      setStatus(error.message);
++    }
++  }
++
++  async function updateUser(userId, patch) {
++    setStatus("Updating user...");
++
++    try {
++      const response = await fetch(`/api/adaptive-auth/admin/users/${userId}`, {
++        method: "PATCH",
++        headers: headers(),
++        body: JSON.stringify(patch)
++      });
++      const data = await response.json();
++      if (!response.ok) throw new Error(data.error || "Could not update user.");
++
++      setStatus("User updated.");
++      loadUsers();
++    } catch (error) {
++      setStatus(error.message);
++    }
++  }
++
+   return (
+-    <section className="grid">
+-      <Card title="Governance" status="Ready" text="Compliance, approvals, policies and audit readiness." />
+-      <Card title="Backup Recovery" status="Ready" text="Backup status, restore planning and disaster readiness." />
+-      <Card title="Deployment Readiness" status="Ready" text="Production readiness, blockers and release checks." />
+-      <Card title="Audit Trail" status="Ready" text="System evidence and operational traceability." />
++    <section className="admin-user-management">
++      <div className="admin-user-heading">
++        <div>
++          <p className="eyebrow">Administrator user management</p>
++          <h2>Users, Roles & Authentication</h2>
++          <p>Signed in as {getDisplayUser(user).name}. Changes are role-gated and audited server-side.</p>
++        </div>
++        <strong>{status}</strong>
++      </div>
++
++      <form className="admin-user-form" onSubmit={saveUser}>
++        <label><span>Full legal name</span><input value={form.full_name} onChange={(event) => updateForm("full_name", event.target.value)} required /></label>
++        <label><span>Username</span><input value={form.username} onChange={(event) => updateForm("username", event.target.value)} required /></label>
++        <label><span>Email</span><input type="email" value={form.email} onChange={(event) => updateForm("email", event.target.value)} required /></label>
++        <label><span>Role</span><select value={form.role} onChange={(event) => updateForm("role", event.target.value)}><option value="staff">Staff</option><option value="administrator">Administrator</option><option value="system_admin">System / Developer</option></select></label>
++        <label><span>Phone for MFA</span><input value={form.phone_number} onChange={(event) => updateForm("phone_number", event.target.value)} /></label>
++        <label><span>Initials</span><input value={form.initials} onChange={(event) => updateForm("initials", event.target.value)} /></label>
++        <label><span>NRIC last 4</span><input value={form.nric_last4} onChange={(event) => updateForm("nric_last4", event.target.value)} maxLength={4} /></label>
++        <label><span>Temporary password</span><input type="password" value={form.password} onChange={(event) => updateForm("password", event.target.value)} required /></label>
++        <label><span>PIN / passcodes</span><input value={form.passcodes} onChange={(event) => updateForm("passcodes", event.target.value)} placeholder="5135,1985" /></label>
++        <label><span>Authentication methods</span><input value={form.enabled_factors} onChange={(event) => updateForm("enabled_factors", event.target.value)} placeholder="password,otp,qr,pin" /></label>
++        <label><span>Security phrase / keyword</span><input value={form.security_phrase} onChange={(event) => updateForm("security_phrase", event.target.value)} /></label>
++        <label><span>Security colour</span><input value={form.security_colour} onChange={(event) => updateForm("security_colour", event.target.value)} /></label>
++        <label><span>Numeric challenge</span><input value={form.security_number_code} onChange={(event) => updateForm("security_number_code", event.target.value)} /></label>
++        <label className="admin-checkbox"><input type="checkbox" checked={form.live_monitoring_access} onChange={(event) => updateForm("live_monitoring_access", event.target.checked)} /><span>Grant live monitoring access</span></label>
++        <button type="submit">Create User Account</button>
++      </form>
++
++      <div className="admin-user-table">
++        <div className="admin-user-row admin-user-head">
++          <span>User</span><span>Role</span><span>Phone</span><span>Factors</span><span>Status</span><span>Monitoring</span>
++        </div>
++        {users.map((account) => (
++          <div className="admin-user-row" key={account.id}>
++            <span><strong>{account.full_name || account.username}</strong><small>{account.email}</small></span>
++            <span>{account.role || "staff"}</span>
++            <span>{account.phone_number || "-"}</span>
++            <span>{Array.isArray(account.enabled_factors) ? account.enabled_factors.join(", ") : account.enabled_factors || "-"}</span>
++            <button type="button" onClick={() => updateUser(account.id, { access_status: account.access_status === "revoked" ? "active" : "revoked" })}>{account.access_status === "revoked" ? "Restore" : "Revoke"}</button>
++            <button type="button" onClick={() => updateUser(account.id, { live_monitoring_access: account.live_monitoring_access ? 0 : 1 })}>{account.live_monitoring_access ? "Enabled" : "Disabled"}</button>
++          </div>
++        ))}
++      </div>
+     </section>
+   );
+ }
+diff --git a/frontend/src/legal-management-enhancer.css b/frontend/src/legal-management-enhancer.css
+deleted file mode 100644
+index a083673..0000000
+--- a/frontend/src/legal-management-enhancer.css
++++ /dev/null
+@@ -1,582 +0,0 @@
+-/* ============================================================
+-   LEOS sidebar-integrated legal tools with iconography
+-   ============================================================ */
+-
+-.leos-pro-dock,
+-#leos-pro-legal-dock,
+-#leos-legal-enhancer {
+-  display: none !important;
+-  visibility: hidden !important;
+-  pointer-events: none !important;
+-}
+-
+-.leos-sidebar-tools {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 10px;
+-  margin-top: 14px;
+-  padding-top: 12px;
+-  border-top: 1px solid rgba(255,255,255,0.12);
+-}
+-
+-.leos-sidebar-tools-title-wrap {
+-  display: flex;
+-  align-items: center;
+-  gap: 8px;
+-  margin: 0 0 4px;
+-}
+-
+-.leos-sidebar-tools-title-icon {
+-  width: 28px;
+-  height: 28px;
+-  border-radius: 10px;
+-  display: grid;
+-  place-items: center;
+-  background: rgba(201,166,70,0.18);
+-  border: 1px solid rgba(201,166,70,0.55);
+-  color: #f6d778;
+-  flex: 0 0 auto;
+-}
+-
+-.leos-sidebar-tools-title {
+-  color: rgba(255,255,255,0.82);
+-  font-size: 11px;
+-  font-weight: 900;
+-  letter-spacing: 0.04em;
+-  text-transform: uppercase;
+-}
+-
+-.leos-sidebar-tool-btn {
+-  cursor: pointer;
+-}
+-
+-.leos-sidebar-btn-wrap {
+-  display: flex;
+-  align-items: center;
+-  gap: 10px;
+-}
+-
+-.leos-sidebar-btn-icon {
+-  width: 24px;
+-  height: 24px;
+-  flex: 0 0 auto;
+-  display: grid;
+-  place-items: center;
+-  border-radius: 8px;
+-  background: rgba(255,255,255,0.08);
+-  color: #f8d778;
+-}
+-
+-.leos-primary-tool .leos-sidebar-btn-icon {
+-  background: rgba(17,24,39,0.08);
+-  color: #8a6612;
+-}
+-
+-.leos-sidebar-btn-label {
+-  display: block;
+-  font-weight: 850;
+-}
+-
+-.leos-pro-drawer,
+-.leos-pro-drawer * {
+-  box-sizing: border-box;
+-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+-}
+-
+-.leos-pro-drawer {
+-  position: fixed;
+-  left: 245px;
+-  top: 34px;
+-  width: min(880px, calc(100vw - 275px));
+-  max-height: calc(100vh - 68px);
+-  overflow: auto;
+-  z-index: 2147483001;
+-  background: #ffffff;
+-  color: #111827;
+-  border: 1px solid #e5decf;
+-  border-radius: 20px;
+-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.32);
+-  padding: 20px;
+-  display: none;
+-}
+-
+-.leos-pro-drawer.open {
+-  display: block;
+-}
+-
+-.leos-pro-head {
+-  display: flex;
+-  justify-content: space-between;
+-  align-items: flex-start;
+-  gap: 14px;
+-  border-bottom: 1px solid #ebe4d8;
+-  margin-bottom: 16px;
+-  padding-bottom: 14px;
+-}
+-
+-.leos-pro-head-left {
+-  display: flex;
+-  align-items: flex-start;
+-  gap: 12px;
+-}
+-
+-.leos-pro-head-icon {
+-  width: 46px;
+-  height: 46px;
+-  border-radius: 14px;
+-  display: grid;
+-  place-items: center;
+-  background: #fff8dd;
+-  border: 1px solid #e5d38f;
+-  color: #8a6612;
+-  flex: 0 0 auto;
+-}
+-
+-.leos-pro-head h2 {
+-  margin: 0;
+-  color: #111827;
+-  font-size: 23px;
+-}
+-
+-.leos-pro-head p {
+-  margin: 5px 0 0;
+-  color: #64748b;
+-  font-size: 13px;
+-  line-height: 1.4;
+-}
+-
+-.leos-pro-close {
+-  cursor: pointer;
+-  border: none;
+-  border-radius: 999px;
+-  background: #111827;
+-  color: #ffffff;
+-  padding: 8px 12px;
+-  font-weight: 900;
+-}
+-
+-.leos-pro-grid {
+-  display: grid;
+-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+-  gap: 12px;
+-}
+-
+-.leos-pro-card {
+-  display: grid;
+-  gap: 8px;
+-  min-height: 92px;
+-  border: 1px solid #e5decf;
+-  background: #fffdf8;
+-  border-radius: 16px;
+-  padding: 14px;
+-  color: inherit;
+-  text-decoration: none;
+-}
+-
+-.leos-pro-card-top {
+-  display: flex;
+-  align-items: center;
+-  gap: 10px;
+-}
+-
+-.leos-pro-card-icon {
+-  width: 34px;
+-  height: 34px;
+-  border-radius: 11px;
+-  display: grid;
+-  place-items: center;
+-  background: #fff8dd;
+-  border: 1px solid #ecd89c;
+-  color: #8a6612;
+-  flex: 0 0 auto;
+-}
+-
+-.leos-pro-card strong {
+-  color: #111827;
+-  font-size: 14px;
+-  line-height: 1.25;
+-}
+-
+-.leos-pro-card span,
+-.leos-pro-card small,
+-.leos-pro-card p {
+-  color: #64748b;
+-  font-size: 12px;
+-  line-height: 1.45;
+-  margin: 0;
+-}
+-
+-a.leos-pro-card:hover,
+-button.leos-pro-card:hover {
+-  border-color: #c9a646;
+-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+-}
+-
+-button.leos-pro-card {
+-  cursor: pointer;
+-  text-align: left;
+-  width: 100%;
+-}
+-
+-.leos-pro-input,
+-.leos-pro-form input,
+-.leos-pro-form textarea,
+-.leos-pro-form select {
+-  width: 100%;
+-  border: 1px solid #d8d0c1;
+-  border-radius: 12px;
+-  padding: 11px 12px;
+-  margin-bottom: 10px;
+-  font: inherit;
+-  background: #ffffff;
+-}
+-
+-.leos-pro-form label {
+-  display: block;
+-  color: #475569;
+-  font-size: 12px;
+-  font-weight: 900;
+-  margin-bottom: 4px;
+-}
+-
+-.leos-pro-actions {
+-  display: flex;
+-  flex-wrap: wrap;
+-  gap: 9px;
+-  margin-top: 6px;
+-}
+-
+-.leos-pro-primary,
+-.leos-pro-secondary {
+-  cursor: pointer;
+-  border-radius: 999px;
+-  padding: 10px 14px;
+-  font-weight: 900;
+-}
+-
+-.leos-pro-primary {
+-  border: none;
+-  background: #111827;
+-  color: #ffffff;
+-}
+-
+-.leos-pro-secondary {
+-  border: 1px solid #c9a646;
+-  background: #fff8dd;
+-  color: #5b4614;
+-}
+-
+-.leos-pro-pill {
+-  display: inline-flex;
+-  width: fit-content;
+-  border-radius: 999px;
+-  background: #ecfdf5;
+-  color: #047857;
+-  font-weight: 900;
+-  padding: 4px 8px;
+-  font-size: 11px;
+-}
+-
+-.leos-pro-legal-rule {
+-  border: 1px solid #bfdbfe;
+-  background: #eff6ff;
+-  color: #1e3a8a;
+-  border-radius: 14px;
+-  padding: 12px;
+-  margin-bottom: 14px;
+-  font-size: 12px;
+-  line-height: 1.45;
+-}
+-
+-.leos-pro-danger-rule {
+-  border: 1px solid #fed7aa;
+-  background: #fff7ed;
+-  color: #9a3412;
+-  border-radius: 14px;
+-  padding: 12px;
+-  margin-bottom: 14px;
+-  font-size: 12px;
+-  line-height: 1.45;
+-}
+-
+-.leos-pro-link-row {
+-  display: grid;
+-  gap: 8px;
+-}
+-
+-.leos-pro-link-tools {
+-  display: flex;
+-  gap: 8px;
+-  flex-wrap: wrap;
+-  margin-top: 6px;
+-}
+-
+-.leos-pro-delete {
+-  cursor: pointer;
+-  border: 1px solid #fecaca;
+-  background: #fef2f2;
+-  color: #991b1b;
+-  border-radius: 999px;
+-  padding: 7px 10px;
+-  font-weight: 900;
+-  font-size: 11px;
+-}
+-
+-.leos-pro-legal-category {
+-  display: inline-flex;
+-  width: fit-content;
+-  border-radius: 999px;
+-  background: #eef2ff;
+-  color: #3730a3;
+-  font-weight: 900;
+-  padding: 4px 8px;
+-  font-size: 11px;
+-}
+-
+-.leos-svg-icon {
+-  width: 16px;
+-  height: 16px;
+-  display: inline-block;
+-}
+-
+-.leos-svg-icon.large {
+-  width: 24px;
+-  height: 24px;
+-}
+-
+-.leos-svg-icon svg {
+-  width: 100%;
+-  height: 100%;
+-  display: block;
+-  stroke: currentColor;
+-  fill: none;
+-  stroke-width: 1.8;
+-  stroke-linecap: round;
+-  stroke-linejoin: round;
+-}
+-
+-@media (max-width: 900px) {
+-  .leos-pro-drawer {
+-    left: 10px;
+-    right: 10px;
+-    top: 10px;
+-    width: auto;
+-    max-height: calc(100vh - 20px);
+-  }
+-}
+-/* L360-SIDEBAR-ACTIVE-FORCE-V2-START */
+-/*
+-Purpose:
+-Force one consistent active-state design inside the Litigation 360 sidebar.
+-
+-Reason:
+-The first patch may not work when:
+-1. legal-management-enhancer.css loads after App.css;
+-2. the active class is named selected/current/is-active instead of active;
+-3. active styling is injected by the Legal Tools enhancer;
+-4. the Legal Web Links item uses a different wrapper class.
+-
+-Rule:
+-All active/current/selected sidebar menu buttons use the SAME white active state.
+-Normal dark menu buttons remain dark.
+-Section labels/icons may remain gold.
+-*/
+-
+-.sidebar a.active,
+-.sidebar button.active,
+-.sidebar .active > a,
+-.sidebar .active > button,
+-.sidebar a.selected,
+-.sidebar button.selected,
+-.sidebar .selected > a,
+-.sidebar .selected > button,
+-.sidebar a.current,
+-.sidebar button.current,
+-.sidebar .current > a,
+-.sidebar .current > button,
+-.sidebar a.is-active,
+-.sidebar button.is-active,
+-.sidebar .is-active > a,
+-.sidebar .is-active > button,
+-.sidebar a[aria-current],
+-.sidebar button[aria-current],
+-.sidebar a[aria-current="page"],
+-.sidebar button[aria-current="page"],
+-.sidebar a[data-active="true"],
+-.sidebar button[data-active="true"],
+-.sidebar [role="link"].active,
+-.sidebar [role="button"].active,
+-.sidebar [class*="active"] > a,
+-.sidebar [class*="active"] > button,
+-.sidebar [class*="selected"] > a,
+-.sidebar [class*="selected"] > button,
+-.sidebar [class*="current"] > a,
+-.sidebar [class*="current"] > button,
+-.sidebar .legal-tools a.active,
+-.sidebar .legal-tools button.active,
+-.sidebar .legal-tools .active,
+-.sidebar .legal-tools .selected,
+-.sidebar .legal-tools .current,
+-.sidebar .legal-tools .is-active,
+-.sidebar .legal-management-tools a.active,
+-.sidebar .legal-management-tools button.active,
+-.sidebar .legal-management-tools .active,
+-.sidebar .legal-management-tools .selected,
+-.sidebar .legal-management-tools .current,
+-.sidebar .legal-management-tools .is-active,
+-.sidebar [class*="legal"] a.active,
+-.sidebar [class*="legal"] button.active,
+-.sidebar [class*="legal"] .active,
+-.sidebar [class*="legal"] .selected,
+-.sidebar [class*="legal"] .current,
+-.sidebar [class*="legal"] .is-active,
+-.sidebar [class*="Legal"] a.active,
+-.sidebar [class*="Legal"] button.active,
+-.sidebar [class*="Legal"] .active,
+-.sidebar [class*="Legal"] .selected,
+-.sidebar [class*="Legal"] .current,
+-.sidebar [class*="Legal"] .is-active {
+-  background: #ffffff !important;
+-  background-color: #ffffff !important;
+-  color: #061225 !important;
+-  border-color: rgba(255, 255, 255, 0.92) !important;
+-  box-shadow: none !important;
+-}
+-
+-/* Force child text/icons inside active menu items to readable dark */
+-.sidebar a.active *,
+-.sidebar button.active *,
+-.sidebar .active > a *,
+-.sidebar .active > button *,
+-.sidebar a.selected *,
+-.sidebar button.selected *,
+-.sidebar .selected > a *,
+-.sidebar .selected > button *,
+-.sidebar a.current *,
+-.sidebar button.current *,
+-.sidebar .current > a *,
+-.sidebar .current > button *,
+-.sidebar a.is-active *,
+-.sidebar button.is-active *,
+-.sidebar .is-active > a *,
+-.sidebar .is-active > button *,
+-.sidebar a[aria-current] *,
+-.sidebar button[aria-current] *,
+-.sidebar a[data-active="true"] *,
+-.sidebar button[data-active="true"] *,
+-.sidebar [class*="active"] > a *,
+-.sidebar [class*="active"] > button *,
+-.sidebar [class*="selected"] > a *,
+-.sidebar [class*="selected"] > button *,
+-.sidebar [class*="current"] > a *,
+-.sidebar [class*="current"] > button *,
+-.sidebar [class*="legal"] .active *,
+-.sidebar [class*="legal"] .selected *,
+-.sidebar [class*="legal"] .current *,
+-.sidebar [class*="legal"] .is-active *,
+-.sidebar [class*="Legal"] .active *,
+-.sidebar [class*="Legal"] .selected *,
+-.sidebar [class*="Legal"] .current *,
+-.sidebar [class*="Legal"] .is-active * {
+-  color: #061225 !important;
+-}
+-
+-/* Standardize icon capsule inside active items */
+-.sidebar a.active .icon,
+-.sidebar button.active .icon,
+-.sidebar .active > a .icon,
+-.sidebar .active > button .icon,
+-.sidebar a.selected .icon,
+-.sidebar button.selected .icon,
+-.sidebar .selected > a .icon,
+-.sidebar .selected > button .icon,
+-.sidebar a.current .icon,
+-.sidebar button.current .icon,
+-.sidebar .current > a .icon,
+-.sidebar .current > button .icon,
+-.sidebar a.is-active .icon,
+-.sidebar button.is-active .icon,
+-.sidebar .is-active > a .icon,
+-.sidebar .is-active > button .icon,
+-.sidebar a[aria-current] .icon,
+-.sidebar button[aria-current] .icon,
+-.sidebar a[data-active="true"] .icon,
+-.sidebar button[data-active="true"] .icon,
+-.sidebar [class*="active"] > a .icon,
+-.sidebar [class*="active"] > button .icon,
+-.sidebar [class*="selected"] > a .icon,
+-.sidebar [class*="selected"] > button .icon,
+-.sidebar [class*="current"] > a .icon,
+-.sidebar [class*="current"] > button .icon {
+-  background: rgba(6, 18, 37, 0.08) !important;
+-}
+-
+-/* Remove cream/gold active background from Legal Tools menu items only */
+-.sidebar .legal-tools a,
+-.sidebar .legal-tools button,
+-.sidebar .legal-management-tools a,
+-.sidebar .legal-management-tools button,
+-.sidebar [class*="legal"] a,
+-.sidebar [class*="legal"] button,
+-.sidebar [class*="Legal"] a,
+-.sidebar [class*="Legal"] button {
+-  box-shadow: none;
+-}
+-
+-/* L360-SIDEBAR-ACTIVE-FORCE-V2-END */
+-
+-/* PHASE 15A LEOS PRO DRAWER STACKING FIX START */
+-/* Baseline-preservation fix only: drawer stacking, backdrop coverage, one active drawer, Escape/backdrop close, and non-wrapping Close button. */
+-
+-.leos-pro-backdrop {
+-  position: fixed;
+-  inset: 0;
+-  z-index: 2147482999;
+-  display: none;
+-  width: 100vw;
+-  height: 100vh;
+-  border: 0;
+-  background: rgba(15, 23, 42, 0.56);
+-  backdrop-filter: blur(2px);
+-  cursor: default;
+-}
+-
+-.leos-pro-backdrop.open {
+-  display: block;
+-}
+-
+-.leos-pro-drawer {
+-  z-index: 2147483001 !important;
+-  isolation: isolate;
+-}
+-
+-body.leos-pro-drawer-active {
+-  overflow: hidden;
+-}
+-
+-.leos-pro-close {
+-  display: inline-flex !important;
+-  align-items: center !important;
+-  justify-content: center !important;
+-  min-width: 72px !important;
+-  min-height: 40px !important;
+-  padding: 0.55rem 0.9rem !important;
+-  line-height: 1 !important;
+-  white-space: nowrap !important;
+-  word-break: normal !important;
+-  overflow-wrap: normal !important;
+-  text-align: center !important;
+-  flex-shrink: 0 !important;
+-}
+-
+-@media (max-width: 860px) {
+-  .leos-pro-drawer {
+-    left: 16px !important;
+-    right: 16px !important;
+-    top: 16px !important;
+-    width: auto !important;
+-    max-height: calc(100vh - 32px) !important;
+-  }
+-}
+-
+-/* PHASE 15A LEOS PRO DRAWER STACKING FIX END */
+diff --git a/frontend/src/legal-management-enhancer.js b/frontend/src/legal-management-enhancer.js
+deleted file mode 100644
+index b39d014..0000000
+--- a/frontend/src/legal-management-enhancer.js
++++ /dev/null
+@@ -1,689 +0,0 @@
+-import "./legal-management-enhancer.css";
+-
+-(function installSidebarIntegratedLegalTools() {
+-  const DRAWER_ID = "leos-pro-legal-drawer";
+-  const TOOLS_ID = "leos-sidebar-tools";
+-  const CUSTOM_LEGAL_LINKS_KEY = "leosCustomLegalLinks";
+-
+-  const oldFloatingDock = document.getElementById("leos-pro-legal-dock") || document.getElementById("leos-legal-enhancer");
+-  const oldFloatingDrawer = document.getElementById("leos-legal-drawer");
+-  if (oldFloatingDock) oldFloatingDock.remove();
+-  if (oldFloatingDrawer) oldFloatingDrawer.remove();
+-
+-  const defaultProfile = {
+-    firmName: "Your Law Firm Name",
+-    shortName: "Legal 360",
+-    tagline: "Justice - Integrity - Precision",
+-    address: "Configurable firm address",
+-    email: "admin@example.com",
+-    phone: "+60-00-000-0000",
+-    website: "https://example.com",
+-    partnerName: "Managing Partner Name",
+-    partnerTitle: "Managing Partner / Owner",
+-    partnerEmail: "partner@example.com",
+-    partnerPhone: "+60-00-000-0000",
+-    partnerCredentials: "LLB, Advocate and Solicitor, Professional Credentials"
+-  };
+-
+-  const allowedLegalCategories = [
+-    "Legal News",
+-    "Legal Forms",
+-    "Legal Research",
+-    "Court / Tribunal Portal",
+-    "Bar / Regulator",
+-    "Government Legal Portal",
+-    "Client-Lawyer Work Portal",
+-    "Legal Document Portal",
+-    "Law Firm Resource"
+-  ];
+-
+-  const defaultLegalLinks = [
+-    ["Malaysian Bar Legal News", "Malaysia legal and general legal news.", "https://www.malaysianbar.org.my/list/news/legal-and-general-news/legal-news", "Legal News"],
+-    ["Malaysian Bar Main Portal", "Malaysia Bar updates, legal resources and public information.", "https://www.malaysianbar.org.my/", "Bar / Regulator"],
+-    ["Singapore Law Watch Headlines", "Singapore legal headlines and legal sector updates.", "https://www.singaporelawwatch.sg/Headlines/category/overview", "Legal News"],
+-    ["Singapore Ministry of Law News", "Official Singapore legal-sector announcements and press releases.", "https://www.mlaw.gov.sg/news/press-releases/", "Government Legal Portal"],
+-    ["Singapore Courts News", "Singapore Judiciary news and resources.", "https://www.judiciary.gov.sg/news-and-resources/news", "Court / Tribunal Portal"]
+-  ];
+-
+-  const repositoryItems = [
+-    ["Client Files", "Client profiles, IDs, engagement letters, KYC and contact records."],
+-    ["Matter Folders", "Case files, pleadings, court documents, status notes and progress records."],
+-    ["Documents", "Drafts, letters, affidavits, bundles, exhibits, templates and filings."],
+-    ["Deadlines", "Limitation periods, hearing dates, filing deadlines and reminders."],
+-    ["Legal Research", "Authorities, statutes, legal notes, case summaries and research extracts."],
+-    ["Billing / Finance", "Invoices, receipts, fee notes, disbursements and payment records."],
+-    ["Court Operations", "Court locations, attendance plans, hearing preparation and registry follow-ups."],
+-    ["Audit / Compliance", "Access logs, RBAC checks, compliance evidence and governance records."]
+-  ];
+-
+-  const glossaryTerms = [
+-    ["Affidavit", "A written statement confirmed by oath or affirmation for use as evidence."],
+-    ["Cause Papers", "Court documents filed in a matter, including pleadings, applications and supporting documents."],
+-    ["Client Due Diligence", "Checks used to verify identity, risk, authority and suitability before or during engagement."],
+-    ["Limitation Period", "The legal time limit within which a claim or action must be started."],
+-    ["Matter", "A legal file or case handled for a client."],
+-    ["Retainer", "The engagement arrangement between the client and the legal practitioner or firm."],
+-    ["Hearing", "A court session where a matter, application or issue is considered."],
+-    ["Bundle", "A prepared set of documents arranged for court, hearing, filing or review."]
+-  ];
+-
+-  const appLaunchItems = [
+-    ["New Email", "Create a new email using the default mail application.", "mailto:?subject=Litigation%20360"],
+-    ["Outlook Web Mail", "Open Microsoft Outlook web mail.", "https://outlook.office.com/mail/"],
+-    ["Gmail", "Open Gmail in the browser.", "https://mail.google.com/"],
+-    ["Microsoft Word", "Open Word for the web through Microsoft 365.", "https://www.office.com/launch/word"],
+-    ["Microsoft Excel", "Open Excel for the web through Microsoft 365.", "https://www.office.com/launch/excel"],
+-    ["Microsoft PowerPoint", "Open PowerPoint for the web through Microsoft 365.", "https://www.office.com/launch/powerpoint"],
+-    ["OneDrive", "Open Microsoft OneDrive.", "https://onedrive.live.com/"],
+-    ["SharePoint", "Open Microsoft 365 SharePoint landing page.", "https://www.microsoft365.com/launch/sharepoint"],
+-    ["Adobe Acrobat Online", "Open Adobe Acrobat web tools for PDFs.", "https://acrobat.adobe.com/link/home/"],
+-    ["Google Drive", "Open Google Drive.", "https://drive.google.com/"],
+-    ["Google Docs", "Open Google Docs.", "https://docs.google.com/"],
+-    ["Google Sheets", "Open Google Sheets.", "https://sheets.google.com/"]
+-  ];
+-
+-  const internalDocumentLaunch = [
+-    ["Email Attachments", "Find email attachments connected to clients, matters, deadlines or documents."],
+-    ["Word Documents", "Open or search draft letters, pleadings, agreements and internal notes."],
+-    ["PDF Documents", "Open or search scanned documents, authorities, bundles, exhibits and signed PDFs."],
+-    ["Excel Sheets", "Open or search schedules, ledgers, trackers and matter spreadsheets."],
+-    ["PowerPoint Files", "Open or search presentations, briefings and visual summaries."],
+-    ["Templates", "Open or search firm templates, letters, forms and precedents."],
+-    ["Court Bundles", "Open or search bundles, exhibits, authorities and hearing papers."],
+-    ["Scanned Files", "Open or search scanned files and OCR document folders."]
+-  ];
+-
+-  const iconSvg = {
+-    scales: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M12 3v17"/><path d="M7 7h10"/><path d="M9 7 5.5 12a3.5 3.5 0 0 0 7 0L9 7Z"/><path d="M15 7 11.5 12a3.5 3.5 0 0 0 7 0L15 7Z"/><path d="M8 21h8"/></svg></span>',
+-    courthouse: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M5 9v8"/><path d="M9 9v8"/><path d="M15 9v8"/><path d="M19 9v8"/><path d="M2 19h20"/><path d="M12 4 3 8h18L12 4Z"/></svg></span>',
+-    gavel: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="m14 5 5 5"/><path d="m12 7 5 5"/><path d="m5 14 5 5"/><path d="m4 20 7-7"/><path d="m10 4 7 7"/><path d="M3 21h6"/></svg></span>',
+-    folder: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></span>',
+-    document: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg></span>',
+-    briefcase: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 8h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8Z"/><path d="M3 12h18"/><path d="M10 12v2"/><path d="M14 12v2"/></svg></span>',
+-    partner: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><path d="M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M18 8a3 3 0 0 1 0 6"/><path d="M20 21v-2a4 4 0 0 0-3-3.87"/></svg></span>',
+-    research: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/><path d="m15 15 5 5"/><path d="M8 8h4"/><path d="M8 11h3"/></svg></span>',
+-    settings: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.04-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.04H3a2 2 0 1 1 0-4h.04A1.7 1.7 0 0 0 4.6 8.92a1.7 1.7 0 0 0-.34-1.87L4.2 7a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 8.96 4.6 1.7 1.7 0 0 0 10 3.04V3a2 2 0 1 1 4 0v.04A1.7 1.7 0 0 0 15.04 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06A2 2 0 1 1 19.8 7l-.06.06A1.7 1.7 0 0 0 19.4 8.9c.1.39.61 1.06 1.56 1.06H21a2 2 0 1 1 0 4h-.04c-.95 0-1.46.67-1.56 1.04Z"/></svg></span>',
+-    link: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1"/><path d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 1 1-7-7l1-1"/></svg></span>',
+-    email: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 8 8 6 8-6"/></svg></span>',
+-    news: '<span class="leos-svg-icon"><svg viewBox="0 0 24 24"><path d="M5 5h12v14H5z"/><path d="M17 7h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7"/><path d="M8 9h6"/><path d="M8 12h6"/><path d="M8 15h3"/></svg></span>'
+-  };
+-
+-  function largeIcon(name) {
+-    return `<span class="leos-svg-icon large">${iconSvg[name]?.replace('leos-svg-icon', '').replace('<span class="">', '').replace('</span>', '') || ''}</span>`;
+-  }
+-
+-  function getProfile() {
+-    try {
+-      return { ...defaultProfile, ...(JSON.parse(localStorage.getItem("leosFirmProfile") || "{}")) };
+-    } catch {
+-      return { ...defaultProfile };
+-    }
+-  }
+-
+-  function saveProfile(profile) {
+-    localStorage.setItem("leosFirmProfile", JSON.stringify(profile));
+-  }
+-
+-  function getCustomLegalLinks() {
+-    try {
+-      const parsed = JSON.parse(localStorage.getItem(CUSTOM_LEGAL_LINKS_KEY) || "[]");
+-      return Array.isArray(parsed) ? parsed : [];
+-    } catch {
+-      return [];
+-    }
+-  }
+-
+-  function saveCustomLegalLinks(links) {
+-    localStorage.setItem(CUSTOM_LEGAL_LINKS_KEY, JSON.stringify(links));
+-  }
+-
+-  function escapeHtml(value) {
+-    return String(value == null ? "" : value)
+-      .replaceAll("&", "&amp;")
+-      .replaceAll("<", "&lt;")
+-      .replaceAll(">", "&gt;")
+-      .replaceAll('"', "&quot;")
+-      .replaceAll("'", "&#039;");
+-  }
+-
+-  function normalizeUrl(url) {
+-    const trimmed = String(url || "").trim();
+-    if (!trimmed) return "";
+-    if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("mailto:")) return trimmed;
+-    return "https://" + trimmed;
+-  }
+-
+-  function card(title, description, marker, iconName = "document") {
+-    return `
+-      <article class="leos-pro-card">
+-        <div class="leos-pro-card-top">
+-          <div class="leos-pro-card-icon">${iconSvg[iconName] || iconSvg.document}</div>
+-          <strong>${marker || "Section"} ${escapeHtml(title)}</strong>
+-        </div>
+-        <span>${escapeHtml(description)}</span>
+-      </article>
+-    `;
+-  }
+-
+-  function linkCard(title, description, url, marker, category, customIndex, iconName = "link") {
+-    const deleteButton = Number.isInteger(customIndex)
+-      ? `<button class="leos-pro-delete" type="button" data-delete-legal-link="${customIndex}">Delete manual link</button>`
+-      : "";
+-    return `
+-      <article class="leos-pro-card leos-pro-link-row">
+-        <a href="${escapeHtml(url)}" target="_blank" rel="noreferrer" style="color:inherit;text-decoration:none;">
+-          <div class="leos-pro-card-top">
+-            <div class="leos-pro-card-icon">${iconSvg[iconName] || iconSvg.link}</div>
+-            <strong>${marker || "Open"} ${escapeHtml(title)}</strong>
+-          </div>
+-          <span>${escapeHtml(description)}</span>
+-        </a>
+-        <span class="leos-pro-legal-category">${escapeHtml(category || "Legal Link")}</span>
+-        <div class="leos-pro-link-tools">
+-          <a class="leos-pro-pill" href="${escapeHtml(url)}" target="_blank" rel="noreferrer" style="text-decoration:none;">Open</a>
+-          ${deleteButton}
+-        </div>
+-      </article>
+-    `;
+-  }
+-
+-  function drawerIconByAction(action) {
+-    const map = {
+-      "Legal-Only Web Shortcuts": "scales",
+-      "Search Legal Repository": "folder",
+-      "Instructions and User Guides": "courthouse",
+-      "Legal Glossary": "document",
+-      "Launch Applications and Document Tools": "briefcase",
+-      "Firm Information": "courthouse",
+-      "Owner / Managing Partner Details": "partner",
+-      "Settings and Configuration": "settings"
+-    };
+-    return map[action] || "scales";
+-  }
+-
+-  function ensureDrawer() {
+-    let drawer = document.getElementById(DRAWER_ID);
+-    if (!drawer) {
+-      drawer = document.createElement("section");
+-      drawer.id = DRAWER_ID;
+-      drawer.className = "leos-pro-drawer";
+-      drawer.setAttribute("aria-live", "polite");
+-      document.body.appendChild(drawer);
+-    }
+-    return drawer;
+-  }
+-
+-    function closeLeosProDrawer() {
+-    document.querySelectorAll(".leos-pro-drawer.open").forEach((drawer) => {
+-      drawer.classList.remove("open");
+-    });
+-
+-    const backdrop = document.querySelector(".leos-pro-backdrop");
+-    if (backdrop) {
+-      backdrop.classList.remove("open");
+-    }
+-
+-    document.body.classList.remove("leos-pro-drawer-active");
+-  }
+-
+-  function ensureLeosProBackdrop() {
+-    let backdrop = document.querySelector(".leos-pro-backdrop");
+-
+-    if (!backdrop) {
+-      backdrop = document.createElement("button");
+-      backdrop.type = "button";
+-      backdrop.className = "leos-pro-backdrop";
+-      backdrop.setAttribute("aria-label", "Close legal management drawer");
+-      backdrop.addEventListener("click", closeLeosProDrawer);
+-      document.body.appendChild(backdrop);
+-    }
+-
+-    return backdrop;
+-  }
+-
+-  if (!window.__leosProDrawerEscapeBound) {
+-    document.addEventListener("keydown", (event) => {
+-      if (event.key === "Escape") {
+-        closeLeosProDrawer();
+-      }
+-    });
+-
+-    window.__leosProDrawerEscapeBound = true;
+-  }
+-
+-
+-  function openDrawer(title, subtitle, html) {
+-    const drawer = ensureDrawer();
+-    const drawerIcon = drawerIconByAction(title);
+-    drawer.innerHTML = `
+-      <div class="leos-pro-head">
+-        <div class="leos-pro-head-left">
+-          <div class="leos-pro-head-icon">${iconSvg[drawerIcon] || iconSvg.scales}</div>
+-          <div>
+-            <h2>${title}</h2>
+-            <p>${subtitle}</p>
+-          </div>
+-        </div>
+-        <button class="leos-pro-close" type="button" data-close>Close</button>
+-      </div>
+-      ${html}
+-    `;
+-    closeLeosProDrawer();
+-
+-    const backdrop = ensureLeosProBackdrop();
+-    backdrop.classList.add("open");
+-
+-    drawer.classList.add("open");
+-    document.body.classList.add("leos-pro-drawer-active");
+-
+-    const closeButton = drawer.querySelector("[data-close]");
+-    if (closeButton) {
+-      closeButton.addEventListener("click", closeLeosProDrawer);
+-    }
+-  }
+-
+-  function renderLegalLinksHtml(filterText = "") {
+-    const q = String(filterText || "").toLowerCase();
+-    const defaults = defaultLegalLinks
+-      .map(([title, desc, url, category]) => ({ title, desc, url, category, source: "Default" }));
+-    const customs = getCustomLegalLinks()
+-      .map((item, index) => ({ ...item, source: "Manual", customIndex: index }));
+-
+-    const all = [...defaults, ...customs]
+-      .filter(item => {
+-        const haystack = `${item.title} ${item.desc} ${item.url} ${item.category}`.toLowerCase();
+-        return haystack.includes(q);
+-      });
+-
+-    if (!all.length) {
+-      return card("No legal link found", "No matching legal-only shortcut was found.", "Search", "research");
+-    }
+-
+-    return all.map(item => linkCard(item.title, item.desc, item.url, "Legal", item.category, item.source === "Manual" ? item.customIndex : null, "news")).join("");
+-  }
+-
+-  function showLegalLinks() {
+-    openDrawer(
+-      "Legal-Only Web Shortcuts",
+-      "Manual legal-only links for legal news, legal forms, legal issues, legal research, court portals and client-lawyer work resources.",
+-      `
+-        <div class="leos-pro-legal-rule">
+-          <strong>Legal-only rule:</strong>
+-          Add only legal-based websites: legal news, legal forms, court portals, bar/regulator pages, legal research, government legal portals, client-lawyer work portals, legal document portals, and law-firm work resources.
+-        </div>
+-
+-        <div class="leos-pro-danger-rule">
+-          <strong>Do not mix here:</strong>
+-          General shopping, entertainment, social media, unrelated news, random tools, non-legal business sites, or personal links. General apps remain under "Launch Apps / Docs".
+-        </div>
+-
+-        <input class="leos-pro-input" id="leos-legal-link-search" placeholder="Search legal shortcuts..." />
+-
+-        <div class="leos-pro-grid" id="leos-legal-links-grid">
+-          ${renderLegalLinksHtml("")}
+-        </div>
+-
+-        <hr style="border:none;border-top:1px solid #ebe4d8;margin:18px 0;" />
+-
+-        <h3>Add Manual Legal Link</h3>
+-
+-        <form class="leos-pro-form" id="leos-add-legal-link-form">
+-          <label>Legal Link Title</label>
+-          <input name="title" placeholder="Example: Malaysian Court Forms" required />
+-
+-          <label>URL</label>
+-          <input name="url" placeholder="https://..." required />
+-
+-          <label>Legal Category</label>
+-          <select name="category" required>
+-            ${allowedLegalCategories.map(category => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`).join("")}
+-          </select>
+-
+-          <label>Description / Use</label>
+-          <textarea name="desc" placeholder="Example: Official legal forms, court filing guidance, legal research, law-firm client document portal..." required></textarea>
+-
+-          <div class="leos-pro-actions">
+-            <button class="leos-pro-primary" type="submit">Add Legal-Only Link</button>
+-            <button class="leos-pro-secondary" type="button" id="leos-clear-manual-legal-links">Clear All Manual Legal Links</button>
+-          </div>
+-        </form>
+-      `
+-    );
+-
+-    const search = document.getElementById("leos-legal-link-search");
+-    const grid = document.getElementById("leos-legal-links-grid");
+-
+-    function refreshGrid() {
+-      grid.innerHTML = renderLegalLinksHtml(search.value);
+-      grid.querySelectorAll("[data-delete-legal-link]").forEach(button => {
+-        button.addEventListener("click", () => {
+-          const index = Number(button.getAttribute("data-delete-legal-link"));
+-          const links = getCustomLegalLinks();
+-          links.splice(index, 1);
+-          saveCustomLegalLinks(links);
+-          refreshGrid();
+-        });
+-      });
+-    }
+-
+-    search.addEventListener("input", refreshGrid);
+-    refreshGrid();
+-
+-    document.getElementById("leos-add-legal-link-form").addEventListener("submit", event => {
+-      event.preventDefault();
+-      const form = Object.fromEntries(new FormData(event.currentTarget).entries());
+-      const title = String(form.title || "").trim();
+-      const url = normalizeUrl(form.url);
+-      const category = String(form.category || "").trim();
+-      const desc = String(form.desc || "").trim();
+-
+-      if (!title || !url || !desc || !allowedLegalCategories.includes(category)) {
+-        alert("This shortcut was not added. Please complete all fields and choose an approved legal category only.");
+-        return;
+-      }
+-
+-      const links = getCustomLegalLinks();
+-      links.push({ title, url, category, desc, addedAt: new Date().toISOString() });
+-      saveCustomLegalLinks(links);
+-      event.currentTarget.reset();
+-      refreshGrid();
+-    });
+-
+-    document.getElementById("leos-clear-manual-legal-links").addEventListener("click", () => {
+-      const confirmClear = confirm("Clear all manually added legal-only links from this browser?");
+-      if (confirmClear) {
+-        saveCustomLegalLinks([]);
+-        refreshGrid();
+-      }
+-    });
+-  }
+-
+-  function showSearch() {
+-    const itemHtml = repositoryItems.map(([title, desc]) => card(title, desc, "Repository", "folder")).join("");
+-    openDrawer(
+-      "Search Legal Repository",
+-      "Find documents, files, folders, client records, matter records and legal references.",
+-      `
+-        <input class="leos-pro-input" id="leos-pro-search" placeholder="Search clients, matters, documents, deadlines, folders..." />
+-        <div class="leos-pro-grid" id="leos-pro-search-results">${itemHtml}</div>
+-      `
+-    );
+-
+-    const input = document.getElementById("leos-pro-search");
+-    const results = document.getElementById("leos-pro-search-results");
+-    input.addEventListener("input", () => {
+-      const q = input.value.toLowerCase();
+-      const filtered = repositoryItems.filter(([title, desc]) => (title + " " + desc).toLowerCase().includes(q));
+-      results.innerHTML = filtered.length
+-        ? filtered.map(([title, desc]) => card(title, desc, "Repository", "folder")).join("")
+-        : card("No match", "No matching legal repository folder found.", "Search", "research");
+-    });
+-  }
+-
+-  function showInstructions() {
+-    openDrawer(
+-      "Instructions and User Guides",
+-      "Training, tutorials, SOPs and help documentation for staff.",
+-      `
+-        <div class="leos-pro-grid">
+-          ${card("Getting Started Guide", "How to use the Legal 360 workspace safely.", "Guide", "courthouse")}
+-          ${card("Client Intake Workflow", "Opening a client record, checking profile completeness and locating client files.", "Workflow", "partner")}
+-          ${card("Matter Opening SOP", "How matters should be opened, labelled, linked and monitored.", "SOP", "briefcase")}
+-          ${card("Document Handling Guide", "Document upload, naming, review, filing and archive practices.", "Guide", "document")}
+-          ${card("Deadline Monitoring Guide", "How to check deadlines, reminders and court-related dates.", "Guide", "gavel")}
+-          ${card("Security / RBAC / Audit SOP", "How access controls, user roles and audit logs should be reviewed.", "Control", "scales")}
+-        </div>
+-      `
+-    );
+-  }
+-
+-  function showGlossary() {
+-    openDrawer(
+-      "Legal Glossary",
+-      "Common legal terms and internal terminology used in this system.",
+-      `<div class="leos-pro-grid">${glossaryTerms.map(([term, definition]) => card(term, definition, "Term", "document")).join("")}</div>`
+-    );
+-  }
+-
+-  function showLaunchApps() {
+-    openDrawer(
+-      "Launch Applications and Document Tools",
+-      "General app launcher for email, Microsoft Office, PDF tools, cloud drives and document categories.",
+-      `
+-        <div class="leos-pro-danger-rule">
+-          <strong>Separation rule:</strong>
+-          This area is for general work applications and document tools. Legal-only websites belong under "Legal Web Links".
+-        </div>
+-
+-        <h3>External Applications</h3>
+-        <div class="leos-pro-grid">
+-          ${appLaunchItems.map(([title, desc, url]) => linkCard(title, desc, url, "Open", "Work Application", null, title.includes("Email") || title.includes("Gmail") || title.includes("Outlook") ? "email" : "briefcase")).join("")}
+-        </div>
+-
+-        <h3 style="margin-top:18px;">Internal Document Categories</h3>
+-        <div class="leos-pro-grid">
+-          ${internalDocumentLaunch.map(([title, desc]) => card(title, desc, "Document", "document")).join("")}
+-        </div>
+-
+-        <article class="leos-pro-card" style="margin-top:14px;">
+-          <div class="leos-pro-card-top">
+-            <div class="leos-pro-card-icon">${iconSvg.gavel}</div>
+-            <strong>Desktop app launching note</strong>
+-          </div>
+-          <span>Browsers cannot safely open local Windows programs, folders or local Office files without a trusted connector. For true desktop launch actions, use Windows Power Automate, an Electron shell, or a backend helper with strict allow-listed paths.</span>
+-        </article>
+-      `
+-    );
+-  }
+-
+-  function showFirm() {
+-    const p = getProfile();
+-    openDrawer(
+-      "Firm Information",
+-      "Configurable firm name, logo, tagline and basic firm information.",
+-      `
+-        <div class="leos-pro-grid">
+-          ${card(p.firmName, p.tagline + " | " + p.address, "Firm", "courthouse")}
+-          ${card("Contact", p.email + " | " + p.phone + " | " + p.website, "Profile", "briefcase")}
+-        </div>
+-
+-        <form class="leos-pro-form" id="leos-pro-firm-form" style="margin-top:16px;">
+-          <label>Firm Name</label><input name="firmName" value="${escapeHtml(p.firmName)}" />
+-          <label>Short Name</label><input name="shortName" value="${escapeHtml(p.shortName)}" />
+-          <label>Tagline</label><input name="tagline" value="${escapeHtml(p.tagline)}" />
+-          <label>Address</label><textarea name="address">${escapeHtml(p.address)}</textarea>
+-          <label>Email</label><input name="email" value="${escapeHtml(p.email)}" />
+-          <label>Phone</label><input name="phone" value="${escapeHtml(p.phone)}" />
+-          <label>Website</label><input name="website" value="${escapeHtml(p.website)}" />
+-          <div class="leos-pro-actions">
+-            <button class="leos-pro-primary" type="submit">Save Firm Profile</button>
+-            <button class="leos-pro-secondary" type="button" id="leos-pro-reset-profile">Reset</button>
+-          </div>
+-        </form>
+-      `
+-    );
+-
+-    document.getElementById("leos-pro-firm-form").addEventListener("submit", event => {
+-      event.preventDefault();
+-      const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+-      saveProfile({ ...getProfile(), ...data });
+-      showFirm();
+-    });
+-
+-    document.getElementById("leos-pro-reset-profile").addEventListener("click", () => {
+-      localStorage.removeItem("leosFirmProfile");
+-      showFirm();
+-    });
+-  }
+-
+-  function showPartner() {
+-    const p = getProfile();
+-    openDrawer(
+-      "Owner / Managing Partner Details",
+-      "Editable owner or managing partner information.",
+-      `
+-        <div class="leos-pro-grid">
+-          ${card(p.partnerName, p.partnerTitle + " | " + p.partnerEmail + " | " + p.partnerPhone, "Partner", "partner")}
+-          ${card("Credentials", p.partnerCredentials, "Credentials", "scales")}
+-        </div>
+-
+-        <form class="leos-pro-form" id="leos-pro-partner-form" style="margin-top:16px;">
+-          <label>Name</label><input name="partnerName" value="${escapeHtml(p.partnerName)}" />
+-          <label>Title / Role</label><input name="partnerTitle" value="${escapeHtml(p.partnerTitle)}" />
+-          <label>Email</label><input name="partnerEmail" value="${escapeHtml(p.partnerEmail)}" />
+-          <label>Phone</label><input name="partnerPhone" value="${escapeHtml(p.partnerPhone)}" />
+-          <label>Credentials</label><textarea name="partnerCredentials">${escapeHtml(p.partnerCredentials)}</textarea>
+-          <div class="leos-pro-actions">
+-            <button class="leos-pro-primary" type="submit">Save Managing Partner</button>
+-          </div>
+-        </form>
+-      `
+-    );
+-
+-    document.getElementById("leos-pro-partner-form").addEventListener("submit", event => {
+-      event.preventDefault();
+-      const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+-      saveProfile({ ...getProfile(), ...data });
+-      showPartner();
+-    });
+-  }
+-
+-  function showSettings() {
+-    openDrawer(
+-      "Settings and Configuration",
+-      "System-wide preferences and administrative configuration categories.",
+-      `
+-        <div class="leos-pro-grid">
+-          ${card("User Preferences", "Default workspace, quick links, language and working style.", "Settings", "partner")}
+-          ${card("Display Settings", "Theme, density, font size and layout preferences.", "Settings", "scales")}
+-          ${card("Notification Preferences", "Deadline reminders, alert escalation and staff notifications.", "Settings", "news")}
+-          ${card("Access Controls", "Roles, permissions and module visibility. Backend RBAC remains controlled by the system.", "Control", "scales")}
+-          ${card("Firm Customization", "Firm profile, logo, tagline and contact details.", "Firm", "courthouse")}
+-          ${card("Audit and Compliance", "Audit logs, retention rules and compliance evidence.", "Compliance", "gavel")}
+-          ${card("Application Launcher", "Configure allowed app links, document categories and future Power Automate connectors.", "Apps", "briefcase")}
+-          ${card("Legal Web Links", "Manage legal-only shortcuts separately from general work apps.", "Links", "link")}
+-        </div>
+-      `
+-    );
+-  }
+-
+-  function textOf(el) {
+-    return (el && el.textContent ? el.textContent : "").replace(/\s+/g, " ").trim();
+-  }
+-
+-  function findSidebarContainer() {
+-    const labels = ["End User Workspace", "Operations Centre", "Admin Centre", "Developer Centre"];
+-    const candidates = Array.from(document.querySelectorAll("aside, nav, section, div"));
+-
+-    const matching = candidates
+-      .filter(el => {
+-        const t = textOf(el);
+-        return labels.every(label => t.includes(label));
+-      })
+-      .sort((a, b) => {
+-        const areaA = a.getBoundingClientRect().width * a.getBoundingClientRect().height;
+-        const areaB = b.getBoundingClientRect().width * b.getBoundingClientRect().height;
+-        return areaA - areaB;
+-      });
+-
+-    if (matching.length) return matching[0];
+-
+-    const titleCandidates = candidates
+-      .filter(el => {
+-        const t = textOf(el);
+-        return t.includes("Litigation 360") && (t.includes("End User Workspace") || t.includes("Operations Centre"));
+-      })
+-      .sort((a, b) => {
+-        const areaA = a.getBoundingClientRect().width * a.getBoundingClientRect().height;
+-        const areaB = b.getBoundingClientRect().width * b.getBoundingClientRect().height;
+-        return areaA - areaB;
+-      });
+-
+-    return titleCandidates[0] || null;
+-  }
+-
+-  function createToolButton(label, action, primary, iconName) {
+-    const btn = document.createElement("button");
+-    btn.type = "button";
+-    btn.className = primary ? "leos-sidebar-tool-btn leos-primary-tool" : "leos-sidebar-tool-btn";
+-    btn.setAttribute("data-leos-sidebar-action", action);
+-    btn.innerHTML = `
+-      <span class="leos-sidebar-btn-wrap">
+-        <span class="leos-sidebar-btn-icon">${iconSvg[iconName] || iconSvg.scales}</span>
+-        <span class="leos-sidebar-btn-label">${escapeHtml(label)}</span>
+-      </span>
+-    `;
+-    return btn;
+-  }
+-
+-  function injectSidebarTools() {
+-    const existing = document.getElementById(TOOLS_ID);
+-    if (existing) {
+-      existing.remove();
+-    }
+-
+-    const sidebar = findSidebarContainer();
+-    if (!sidebar) {
+-      return false;
+-    }
+-
+-    const toolBox = document.createElement("div");
+-    toolBox.id = TOOLS_ID;
+-    toolBox.className = "leos-sidebar-tools";
+-
+-    const titleWrap = document.createElement("div");
+-    titleWrap.className = "leos-sidebar-tools-title-wrap";
+-    titleWrap.innerHTML = `
+-      <div class="leos-sidebar-tools-title-icon">${iconSvg.scales}</div>
+-      <div class="leos-sidebar-tools-title">Legal Tools</div>
+-    `;
+-    toolBox.appendChild(titleWrap);
+-
+-    toolBox.appendChild(createToolButton("Legal Web Links", "legal-links", false, "link"));
+-    toolBox.appendChild(createToolButton("Launch Apps / Docs", "launch", false, "briefcase"));
+-    toolBox.appendChild(createToolButton("Search Repository", "search", false, "folder"));
+-    toolBox.appendChild(createToolButton("Instructions", "instructions", false, "courthouse"));
+-    toolBox.appendChild(createToolButton("Glossary", "glossary", false, "document"));
+-    toolBox.appendChild(createToolButton("Firm Info", "firm", false, "courthouse"));
+-    toolBox.appendChild(createToolButton("Managing Partner", "partner", false, "partner"));
+-    toolBox.appendChild(createToolButton("Settings", "settings", false, "settings"));
+-
+-    sidebar.appendChild(toolBox);
+-
+-    toolBox.addEventListener("click", event => {
+-      const button = event.target.closest("[data-leos-sidebar-action]");
+-      if (!button) return;
+-
+-      const action = button.getAttribute("data-leos-sidebar-action");
+-      if (action === "legal-links") showLegalLinks();
+-      if (action === "launch") showLaunchApps();
+-      if (action === "search") showSearch();
+-      if (action === "instructions") showInstructions();
+-      if (action === "glossary") showGlossary();
+-      if (action === "firm") showFirm();
+-      if (action === "partner") showPartner();
+-      if (action === "settings") showSettings();
+-    });
+-
+-    ensureDrawer();
+-    return true;
+-  }
+-
+-  function mount() {
+-    if (injectSidebarTools()) return;
+-
+-    let attempts = 0;
+-    const timer = window.setInterval(() => {
+-      attempts += 1;
+-      if (injectSidebarTools() || attempts > 25) {
+-        window.clearInterval(timer);
+-      }
+-    }, 300);
+-  }
+-
+-  if (document.readyState === "loading") {
+-    document.addEventListener("DOMContentLoaded", mount);
+-  } else {
+-    mount();
+-  }
+-})();

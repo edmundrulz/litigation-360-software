@@ -6,3 +6,6 @@ V004,Documentation control layer work,Current approved branch,Active,Low,2026-06
 V005,Live monitoring and logs,Approved control support,Active,Low,2026-06-23 12:23:24 +08:00
 V006,Production backend API database changes,Future branch only,Locked,High,2026-06-23 12:23:24 +08:00
 V007,Phase 11 implementation,Future branch only,Locked,High,2026-06-23 12:23:24 +08:00
+"VAR-AUTH15-001","Accepted exact-five-path commit supersedes the protected dirty five-file state.","Supersedes the unresolved AUTH-15 five-file working-tree disposition.","ADOPTED","LOW","2026-07-25T08:45:14+08:00"
+"VAR-AUTH15-002","Gate 4 pending validation and Gate 5 pending acceptance are superseded.","Gate 4 is CLOSED-PASS and Gate 5 is CLOSED-ACCEPTED.","ADOPTED","LOW","2026-07-25T08:45:14+08:00"
+"VAR-AUTH15-003","Pre-synchronization Gate 6 status is superseded by the verified fifteen-path synchronization.","Gate 6 becomes CLOSED-PASS and Gate 7 becomes the next checkpoint.","ADOPTED","LOW","2026-07-25T08:45:14+08:00"

@@ -1,0 +1,55 @@
+{
+  "policyVersion": "2026.07.10",
+  "defaultAssuranceLevel": 1,
+  "session": {
+    "idleTimeoutMinutes": 20,
+    "absoluteTimeoutHours": 10,
+    "maxConcurrentSessionsPerUser": 3,
+    "adminForceLogoutEnabled": true
+  },
+  "lockout": {
+    "failedAttemptsBeforeSoftLock": 5,
+    "softLockMinutes": 15,
+    "failedAttemptsBeforeAdminReview": 10,
+    "passwordResetEndsLockout": false
+  },
+  "stepUpSchedule": {
+    "standardUsers": "monthly",
+    "sensitiveUsers": "weekly",
+    "privilegedUsers": "every_login"
+  },
+  "privilegedRoles": [
+    "system_admin",
+    "security_admin",
+    "finance_admin",
+    "hr_admin",
+    "legal_records_admin",
+    "auditor"
+  ],
+  "sensitiveModules": [
+    "user_management",
+    "finance",
+    "hr",
+    "legal_records",
+    "audit_logs",
+    "system_settings"
+  ],
+  "riskSignals": {
+    "unknownDevice": 25,
+    "newCountry": 30,
+    "newIpRange": 15,
+    "failedAttempts": 8,
+    "revokedOrExpiredAccess": 100,
+    "privilegedRole": 20,
+    "sensitiveModule": 25,
+    "outsideWorkingHours": 10,
+    "monthlyChallengeDue": 15,
+    "weeklyChallengeDue": 20
+  },
+  "riskThresholds": {
+    "standard": 0,
+    "stepUp": 30,
+    "restricted": 60,
+    "block": 100
+  }
+}

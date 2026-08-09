@@ -1,0 +1,558 @@
+.security-access-shell {
+  width: 100%;
+  min-height: 0;
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(320px, 390px) minmax(0, 1fr);
+  color: #17201c;
+  background: #ffffff;
+  border: 1px solid #cfd9d3;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(23, 32, 28, 0.08);
+  overflow: hidden;
+}
+
+.security-gateway-shell {
+  min-height: 100dvh;
+  margin: 0;
+  grid-template-columns: minmax(400px, 0.9fr) minmax(420px, 1.1fr);
+  align-items: stretch;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #eef3ef;
+}
+
+.security-admin-shell {
+  min-height: 0;
+}
+
+.security-login-panel,
+.security-monitor-panel {
+  min-width: 0;
+  padding: 24px;
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.security-gateway-shell .security-login-panel,
+.security-gateway-shell .security-monitor-panel {
+  padding: clamp(28px, 4vw, 56px);
+  align-content: start;
+}
+
+.security-login-panel {
+  background:
+    linear-gradient(145deg, rgba(15, 95, 75, 0.12), transparent 42%),
+    linear-gradient(315deg, rgba(122, 87, 18, 0.10), transparent 45%),
+    #f2f7f4;
+}
+
+.security-gateway-shell .security-monitor-panel {
+  background: #ffffff;
+}
+
+.security-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.security-brand-row strong,
+.security-brand-row span,
+.security-policy-list strong,
+.security-policy-list span {
+  display: block;
+}
+
+.security-brand-row strong {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.security-brand-row span,
+.security-login-box label span,
+.security-metrics span,
+.security-policy-list span,
+.security-result,
+.security-challenge-box span {
+  color: #4f5f58;
+}
+
+.security-brand-mark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #0f5f4b;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.security-login-box,
+.security-challenge-box {
+  width: 100%;
+  max-width: none;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 95, 75, 0.18);
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(23, 32, 28, 0.08);
+}
+
+.security-gateway-shell .security-login-box {
+  max-width: 540px;
+  padding: clamp(24px, 3.3vw, 40px);
+}
+
+.security-eyebrow {
+  margin: 0 0 10px;
+  color: #7a5712;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.security-login-box h1,
+.security-monitor-panel h2 {
+  margin: 0;
+  color: #0d1217;
+  letter-spacing: 0;
+}
+
+.security-login-box h1 {
+  max-width: 15rem;
+  font-size: 28px;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.security-gateway-shell .security-login-box h1 {
+  max-width: 14ch;
+  font-size: clamp(34px, 4vw, 46px);
+}
+
+.security-monitor-panel h2 {
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.15;
+}
+
+.security-display {
+  margin: 18px 0;
+  padding: 16px;
+  display: grid;
+  gap: 6px;
+  background: #10251f;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.security-display span,
+.security-display em {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.security-display strong {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.security-display em {
+  font-style: normal;
+  line-height: 1.35;
+}
+
+.security-lock-note,
+.security-fast-note {
+  display: grid;
+  gap: 5px;
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border: 1px solid #cfd9d3;
+  border-radius: 6px;
+  background: #f8fbf9;
+}
+
+.security-lock-note {
+  border-color: #f2b36f;
+  background: #fff7ed;
+  color: #8a2d0c;
+}
+
+.security-fast-note {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.security-lock-note strong,
+.security-fast-note strong {
+  color: inherit;
+}
+
+.security-lock-note span,
+.security-fast-note span {
+  color: #33443c;
+  line-height: 1.35;
+}
+
+.security-login-box label,
+.security-challenge-box {
+  display: grid;
+  gap: 8px;
+}
+
+.security-login-box label {
+  margin-top: 15px;
+  font-weight: 800;
+}
+
+.security-login-box input,
+.security-login-box select,
+.security-challenge-box input {
+  min-height: 48px;
+  width: 100%;
+  border: 1px solid #9aa8a0;
+  border-radius: 2px;
+  background: #f8fbf9;
+  color: #17201c;
+  padding: 0 14px;
+  font: inherit;
+  outline: none;
+}
+
+.security-login-box input::placeholder,
+.security-challenge-box input::placeholder {
+  color: #6d7b74;
+}
+
+.security-login-box input:focus,
+.security-login-box select:focus,
+.security-challenge-box input:focus {
+  border-color: #0b6bda;
+  box-shadow: 0 0 0 3px rgba(11, 107, 218, 0.18);
+}
+
+.security-login-box select {
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, #0f5f4b 50%),
+    linear-gradient(135deg, #0f5f4b 50%, transparent 50%),
+    #f8fbf9;
+  background-position:
+    calc(100% - 18px) 21px,
+    calc(100% - 12px) 21px,
+    0 0;
+  background-size:
+    6px 6px,
+    6px 6px,
+    100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 42px;
+}
+
+.security-login-box input:-webkit-autofill,
+.security-login-box input:-webkit-autofill:hover,
+.security-login-box input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #17201c;
+  box-shadow: 0 0 0 1000px #f8fbf9 inset;
+}
+
+.security-password-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+}
+
+.security-password-row input {
+  border-right: 0;
+}
+
+.security-password-row button,
+.security-help-row button,
+.security-secondary-toggle {
+  border: 1px solid #9aa8a0;
+  background: #ffffff;
+  color: #0f5f4b;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.security-password-row button {
+  min-width: 72px;
+  padding: 0 12px;
+}
+
+.security-help-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.security-help-row button {
+  min-height: 36px;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: transparent;
+}
+
+.security-identity-grid,
+.security-method-row,
+.security-metrics,
+.security-policy-list {
+  display: grid;
+  gap: 10px;
+}
+
+.security-identity-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.security-method-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 18px 0 10px;
+}
+
+.security-method-row button,
+.security-challenge-box button {
+  min-height: 46px;
+  border: 1px solid #9aa8a0;
+  border-radius: 2px;
+  background: #ffffff;
+  color: #0f5f4b;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.security-method-row button:hover,
+.security-method-row button:focus,
+.security-challenge-box button:hover,
+.security-challenge-box button:focus,
+.security-password-row button:hover,
+.security-password-row button:focus,
+.security-secondary-toggle:hover,
+.security-secondary-toggle:focus {
+  border-color: #0b6bda;
+  box-shadow: 0 0 0 3px rgba(11, 107, 218, 0.14);
+}
+
+.security-method-row button.active,
+.security-challenge-box button {
+  background: #0f5f4b;
+  color: #ffffff;
+  border-color: #0f5f4b;
+}
+
+.security-secondary-toggle {
+  min-height: 42px;
+  width: 100%;
+  margin: 0 0 12px;
+  border-color: #cfd9d3;
+}
+
+.security-primary {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 2px;
+  background: #0f5f4b;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.security-primary:hover,
+.security-primary:focus {
+  background: #0b493a;
+  box-shadow: 0 0 0 3px rgba(11, 107, 218, 0.18);
+}
+
+.security-result {
+  min-height: 24px;
+  margin: 16px 0 0;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.security-metrics {
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+}
+
+.security-metrics article,
+.security-policy-list div,
+.security-session-table {
+  border: 1px solid #cfd9d3;
+  background: #ffffff;
+}
+
+.security-metrics article,
+.security-policy-list div {
+  min-width: 0;
+  padding: 16px;
+}
+
+.security-metrics strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.15;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.security-table-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.4fr) 70px 100px 90px minmax(120px, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px 16px;
+  border-top: 1px solid #cfd9d3;
+}
+
+.security-table-row:first-child {
+  border-top: 0;
+}
+
+.security-table-head {
+  min-height: 44px;
+  color: #4f5f58;
+  font-size: 13px;
+  font-weight: 900;
+  background: #f8fbf9;
+}
+
+.security-pill {
+  min-height: 30px;
+  display: inline-grid;
+  place-items: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.security-pill.strong {
+  background: #e5f3ed;
+  color: #0f5f4b;
+}
+
+.security-empty-state {
+  padding: 18px;
+  color: #4f5f58;
+  font-weight: 800;
+}
+
+.security-policy-list {
+  grid-template-columns: repeat(3, minmax(145px, 1fr));
+}
+
+.security-policy-list strong {
+  margin-bottom: 8px;
+  color: #0d1217;
+}
+
+.security-gateway-copy {
+  max-width: 620px;
+  display: grid;
+  gap: 18px;
+  color: #33443c;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.security-gateway-copy p,
+.security-gateway-copy ul {
+  margin: 0;
+}
+
+.security-gateway-copy ul {
+  display: grid;
+  gap: 12px;
+  padding-left: 22px;
+}
+
+@media (max-width: 1020px) {
+  .security-access-shell,
+  .security-gateway-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .security-login-panel,
+  .security-monitor-panel,
+  .security-gateway-shell .security-login-panel,
+  .security-gateway-shell .security-monitor-panel {
+    padding: 24px;
+  }
+
+  .security-gateway-shell .security-login-box {
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 680px) {
+  .security-login-panel,
+  .security-monitor-panel,
+  .security-gateway-shell .security-login-panel,
+  .security-gateway-shell .security-monitor-panel {
+    padding: 18px;
+  }
+
+  .security-gateway-shell .security-login-box h1 {
+    max-width: 100%;
+    font-size: 32px;
+  }
+
+  .security-identity-grid,
+  .security-method-row,
+  .security-metrics,
+  .security-policy-list,
+  .security-table-row {
+    grid-template-columns: 1fr;
+  }
+
+  .security-password-row {
+    grid-template-columns: 1fr;
+  }
+
+  .security-password-row input {
+    border-right: 1px solid #9aa8a0;
+  }
+
+  .security-password-row button {
+    min-height: 44px;
+  }
+
+  .security-table-head {
+    display: none;
+  }
+}
+
+/* LEOS_PHASE_A1_GATEWAY_ROLE_LABEL_FIX */
+
+.security-role-select,
+.security-role-select option,
+.security-access-role,
+.security-access-role option,
+.security-gateway select {
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.security-role-select,
+.security-access-role,
+.security-gateway select {
+  min-height: 3rem;
+  text-overflow: ellipsis;
+}
+

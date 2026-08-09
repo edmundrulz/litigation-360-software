@@ -76,6 +76,20 @@ C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\package
 
 ## 3. Timeline and Currency Tracker
 
+
+<!-- LEOS360:G6-AUTH15-SYNC:MASTER-TIMELINE:BEGIN -->
+### AUTH-15 Gate 4 / Gate 5 / Gate 6 Result
+
+- Accepted branch: auth/access-phrase-gate-20260722
+- Accepted commit: dd27c0ec355569f3868ba2ab5dfabe781244fe55
+- Direct parent: dbeec0d1bac63e1fefd21391f4fe0d0039b1a5de
+- Transaction authority: DEC-029 + DEC-029-R1 + DEC-029-R2 + DEC-029-R3 + DEC-029-R4 - APPROVED
+- Gate 4: CLOSED - PASS.
+- Gate 5: CLOSED - ACCEPTED.
+- Gate 6: CLOSED - PASS after exact fifteen-path corrected transactional verification.
+- Synchronization record: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\LEOS360_AUTH15_GATE4_GATE5_PROGRAMME_SYNC_20260724.md
+- Next checkpoint: Gate 7 - Next-Workstream Selection.
+<!-- LEOS360:G6-AUTH15-SYNC:MASTER-TIMELINE:END -->
 Past:
 - Litigation 360 is treated as a LEOS project.
 - Phase 10 structural work is treated as structurally complete.
@@ -135,6 +149,17 @@ Locked:
 
 ## 6. Defined Path and Journey
 
+
+<!-- LEOS360:G6-AUTH15-SYNC:MASTER-JOURNEY:BEGIN -->
+### Current Defined Programme Position
+
+- AUTH-15 implementation and provenance: complete.
+- Independent validation: complete.
+- Exact-five-path Git acceptance: complete.
+- Programme-governance synchronization: complete under DEC-029-R2 verifier correction, DEC-029-R3 ASCII packaging authority and DEC-029-R4 Windows PowerShell 5.1 compatibility authority.
+- Current programme checkpoint: Gate 7 - Next-Workstream Selection.
+- No push, pull-request creation, merge, release or deployment is authorized.
+<!-- LEOS360:G6-AUTH15-SYNC:MASTER-JOURNEY:END -->
 Milestone 1:
 SSOT control pack creation.
 
@@ -251,6 +276,45 @@ Every future change must update:
 - Verification Checklist when relevant
 
 If older documents conflict with this SSOT, this SSOT controls unless the user explicitly says otherwise.
+<!-- LEOS360:G6-AUTH15-SYNC:MASTER-SECTION:BEGIN -->
+## AUTH-15 Gate 4 / Gate 5 / Gate 6 Synchronization
+
+Authoritative synchronization record: C:\Users\jep_edmundrulz\litigation-360-workspace\litigation-360-software\_LEOS_CONTROL\00_SSOT\PHASE12_NEXT_CURSOR_HANDOVER\LEOS360_AUTH15_GATE4_GATE5_PROGRAMME_SYNC_20260724.md
+
+Transaction authority: DEC-029 + DEC-029-R1 + DEC-029-R2 + DEC-029-R3 + DEC-029-R4 - APPROVED
+
+Accepted branch: auth/access-phrase-gate-20260722
+
+Accepted commit: dd27c0ec355569f3868ba2ab5dfabe781244fe55
+
+Direct parent: dbeec0d1bac63e1fefd21391f4fe0d0039b1a5de
+
+Exact accepted path boundary:
+
+- frontend/preview/officeTestUser01Preview.js
+- frontend/preview/officeTestUser01Preview.test.mjs
+- frontend/src/App.jsx
+- frontend/src/pages/SecurityAccessConsole.jsx
+- frontend/vite.config.js
+
+Final gate position:
+
+- Gate 4 - Independent Pre-Acceptance Validation: CLOSED - PASS.
+- Gate 5 - Exact-Five-Path Git Acceptance: CLOSED - ACCEPTED.
+- Gate 6 - Programme Governance Synchronization: CLOSED - PASS.
+- Gate 7 - Next-Workstream Selection: CURRENT CHECKPOINT.
+
+Continuing restrictions:
+
+- Git push is not authorized.
+- Pull-request creation is not authorized.
+- Merge is not authorized.
+- Release is not authorized.
+- Deployment is not authorized.
+
+Both authority pointers remain unchanged.
+<!-- LEOS360:G6-AUTH15-SYNC:MASTER-SECTION:END -->
+
 
 ## Cursor Opening Prompt
 

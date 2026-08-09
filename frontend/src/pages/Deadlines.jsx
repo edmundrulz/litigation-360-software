@@ -266,7 +266,8 @@ export default function Deadlines() {
           <p style={{ color: 'var(--text)', margin: '20px 0' }}>No deadlines matching filter.</p>
         ) : (
           <div className="table-container">
-            <table className="data-table">
+            <table className="data-table deadline-table">
+              <caption className="visually-hidden">Current deadlines and available actions</caption>
               <thead>
                 <tr>
                   <th>Deadline</th>
@@ -296,7 +297,7 @@ export default function Deadlines() {
                       </td>
                       <td>{getCaseName(deadline.case_id)}</td>
                       <td>{deadline.reminder_days ? `${deadline.reminder_days} days` : '—'}</td>
-                      <td>
+                      <td className="deadline-actions">
                         <span className={`status-badge status-${statusLabel.toLowerCase()}`}>
                           {statusLabel}
                         </span>
