@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:5000/api/legal-authorities";
 
 function headers(json = false) {
-  const token = window.sessionStorage.getItem("l360_adaptive_auth_token") || window.localStorage.getItem("token");
+  const token = window.sessionStorage.getItem("l360_adaptive_auth_token");
   return { ...(json ? { "Content-Type": "application/json" } : {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) };
 }
 

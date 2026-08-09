@@ -5,24 +5,8 @@ const db = require('../database');
 
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-const JWT_EXPIRY = '24h';
-
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    full_name TEXT NOT NULL,
-    role_id INTEGER,
-    role TEXT NOT NULL DEFAULT 'legal_assistant_clerk',
-    staff_id INTEGER,
-    is_active INTEGER DEFAULT 1,
-    last_login DATETIME,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (staff_id) REFERENCES staff(id)
-  );
-`);
+const { getJwtConfig } = require('../security/runtimeConfig');
+const { secret: JWT_SECRET, expiresIn: JWT_EXPIRY } = getJwtConfig();
 
 function writeAudit(userEmail, action, entityType, entityId, oldValue, newValue, ipAddress) {
   try {

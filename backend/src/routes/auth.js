@@ -1,12 +1,12 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const { User, Firm } = require('../models');
+const { User } = require('../models');
 const authMiddleware = require('../middleware/auth');
 const logger = require('../utils/logger');
+const { issueToken } = require('../security/tokenService');
+const { sessionRegistry } = require('../security/sessionRegistry');
+const { loginThrottle } = require('../security/loginThrottle');
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-const JWT_EXPIRY = '24h';
 
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
@@ -34,11 +34,7 @@ router.post('/register', async (req, res) => {
     });
 
     // Generate token
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role },
-      JWT_SECRET,
-      { expiresIn: JWT_EXPIRY }
-    );
+    const { token, sessionId } = issueToken(user, { ipAddress: req.ip, event: 'register' });
 
     logger.info(`User registered: ${email}`);
 
@@ -47,7 +43,8 @@ router.post('/register', async (req, res) => {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      token
+      token,
+      sessionId
     });
   } catch (error) {
     logger.error(`Register error: ${error.message}`);
@@ -64,13 +61,21 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Email and password required' });
     }
 
+    const throttleState = loginThrottle.status(email, req.ip);
+    if (throttleState.blocked) {
+      res.set('Retry-After', String(Math.ceil(throttleState.retryAfterMs / 1000)));
+      return res.status(429).json({ error: 'Too many failed login attempts' });
+    }
+
     const user = await User.findOne({ where: { email } });
     if (!user) {
+      loginThrottle.failure(email, req.ip);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const isValidPassword = await user.validatePassword(password);
     if (!isValidPassword) {
+      loginThrottle.failure(email, req.ip);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -78,11 +83,8 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Account is inactive' });
     }
 
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role, firmId: user.firmId },
-      JWT_SECRET,
-      { expiresIn: JWT_EXPIRY }
-    );
+    loginThrottle.success(email, req.ip);
+    const { token, sessionId } = issueToken(user, { ipAddress: req.ip, event: 'login' });
 
     user.lastLogin = new Date();
     await user.save();
@@ -95,12 +97,18 @@ router.post('/login', async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
-      token
+      token,
+      sessionId
     });
   } catch (error) {
     logger.error(`Login error: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
+});
+
+router.post('/logout', authMiddleware, (req, res) => {
+  sessionRegistry.revoke(req.user.sessionId);
+  res.json({ success: true });
 });
 
 // GET /api/auth/me

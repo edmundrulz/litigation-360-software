@@ -4,11 +4,15 @@ const cors = require("cors");
 
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const authenticate = require("./middleware/auth");
+const { APPLICATION_ROLES, requireRoles } = require("./security/rbac");
+const { getJwtConfig } = require("./security/runtimeConfig");
 
 const { logError } = require("./utils/errorBus");
 const { startScheduler } = require("./jobs/systemScheduler");
 
 const app = express();
+getJwtConfig();
 
 // GLOBAL SECURITY SHIELD
 app.use(helmet());
@@ -65,15 +69,16 @@ app.use("/api/health", require("./routes/health"));
 ===================================================== */
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/adaptive-auth", require("./routes/adaptiveAuth"));
-app.use("/api/cases", require("./routes/cases"));
-app.use("/api/clients", require("./routes/clients"));
-app.use("/api/staff", require("./routes/staff"));
-app.use("/api/matters", require("./routes/matters"));
-app.use("/api/time-entries", require("./routes/timeEntries"));
-app.use("/api/deadlines", require("./routes/deadlines"));
-app.use("/api/documents", require("./routes/documents"));
-app.use("/api/intake", require("./routes/intake"));
-app.use("/api/audit-logs", require("./routes/auditLogs"));
+const applicationAccess = [authenticate, requireRoles(...APPLICATION_ROLES)];
+app.use("/api/cases", ...applicationAccess, require("./routes/cases"));
+app.use("/api/clients", ...applicationAccess, require("./routes/clients"));
+app.use("/api/staff", authenticate, requireRoles("administrator", "managing_partner/senior_lawyer"), require("./routes/staff"));
+app.use("/api/matters", ...applicationAccess, require("./routes/matters"));
+app.use("/api/time-entries", ...applicationAccess, require("./routes/timeEntries"));
+app.use("/api/deadlines", ...applicationAccess, require("./routes/deadlines"));
+app.use("/api/documents", ...applicationAccess, require("./routes/documents"));
+app.use("/api/intake", ...applicationAccess, require("./routes/intake"));
+app.use("/api/audit-logs", authenticate, requireRoles("administrator", "managing_partner/senior_lawyer", "accountant_auditor"), require("./routes/auditLogs"));
 app.use("/api/legal-control-desk", require("./routes/legalControlDesk"));
 app.use("/api/legal-authorities", require("./routes/legalAuthorities"));
 
@@ -119,8 +124,6 @@ app.use("/api/enterprise/deployment-centre", require("./routes/deploymentReadine
 
 const PORT = process.env.PORT || 5000;
 
-startScheduler();
-
 // L360_V3K2_SAFE_GOOGLE_CONTACTS_PLACEHOLDER_ROUTE
 app.get("/api/google-contacts/search", (req, res) => {
   const query = String(req.query.q || "").trim();
@@ -137,23 +140,11 @@ app.get("/api/google-contacts/search", (req, res) => {
 });
 
 
-const server = app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
-});
-
-server.on("error", (err) => {
-  if (err.code === "EADDRINUSE") {
-    console.log("");
-    console.log("====================================");
-    console.log("Litigation 360 Backend already running");
-    console.log("Port: " + PORT);
-    console.log("No action required.");
-    console.log("====================================");
-    process.exit(0);
-  }
-
-  throw err;
-});
+if (require.main === module) {
+  startScheduler();
+  const server = app.listen(PORT, () => console.log("Server running on port " + PORT));
+  server.on("error", (err) => { throw err; });
+}
 
 module.exports = app;
 

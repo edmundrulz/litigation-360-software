@@ -6,7 +6,7 @@ const api = axios.create({
 
 // Attach JWT token automatically
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("l360_adaptive_auth_token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

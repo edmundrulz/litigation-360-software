@@ -4,7 +4,7 @@
 const API_URL = 'http://localhost:5000/api';
 
 function authHeaders() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("l360_adaptive_auth_token");
   const headers = { "Content-Type": "application/json" };
 
   if (token) {
@@ -18,7 +18,7 @@ function authHeaders() {
 // ===== CLIENTS =====
 export async function getClients() {
   try {
-    const response = await fetch(`${API_URL}/clients`);
+    const response = await fetch(`${API_URL}/clients`, { headers: authHeaders() });
     if (!response.ok) throw new Error('Failed to fetch clients');
     return await response.json();
   } catch (error) {
@@ -229,7 +229,7 @@ export async function healthCheck() {
   try {
     const response = await fetch(`${API_URL}/health`);
     return response.ok;
-  } catch (error) {
+  } catch {
     return false;
   }
 }

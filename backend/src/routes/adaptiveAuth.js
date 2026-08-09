@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const QRCode = require("qrcode");
 const db = require("../database");
 const policy = require("../../../configs/auth-policy.json");
+const { getJwtConfig } = require("../security/runtimeConfig");
 const {
   buildSecurityDisplay,
   identityMatches,
@@ -14,11 +15,9 @@ const {
 } = require("../services/adaptiveAuthService");
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
-const JWT_EXPIRY = "24h";
+const { secret: JWT_SECRET, expiresIn: JWT_EXPIRY } = getJwtConfig();
 
-ensureAdaptiveAuthTables();
-repairProtectedSystemAccounts();
+assertAdaptiveAuthSchema();
 
 router.get("/security-display", (req, res) => {
   res.json(buildSecurityDisplay(new Date()));
@@ -889,6 +888,13 @@ function ensureAdaptiveAuthTables() {
       UNIQUE(user_id, device_fingerprint_hash)
     );
   `);
+}
+
+function assertAdaptiveAuthSchema() {
+  const requiredTables = ["users", "auth_challenges", "auth_sessions", "auth_audit_events", "auth_failed_attempts", "auth_trusted_devices"];
+  const existing = new Set(db.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map((row) => row.name));
+  const missing = requiredTables.filter((name) => !existing.has(name));
+  if (missing.length) throw new Error(`Adaptive authentication schema is not migrated: ${missing.join(", ")}`);
 }
 
 function createToken(user, assuranceLevel, options = {}) {
