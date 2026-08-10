@@ -1,3 +1,4 @@
+const requestId = require("./middleware/requestId");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -12,6 +13,7 @@ const { logError } = require("./utils/errorBus");
 const { startScheduler } = require("./jobs/systemScheduler");
 
 const app = express();
+app.use(requestId);
 getJwtConfig();
 
 // GLOBAL SECURITY SHIELD
