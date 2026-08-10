@@ -23,3 +23,18 @@ IMPLEMENT-20 objective:
 
 No merge, push, deployment, authoritative DB migration, Vite lifecycle change,
 Legal Dispatch, or primary mutation.
+
+## G7-A Formal Acceptance - 2026-08-10
+
+The G7-A engineering candidate at
+`1a418bc008218e288138a6ba3c6da82ce4018c92`
+has been formally ACCEPTED by the System Owner following REVIEW-22.
+
+Authoritative decision record:
+`docs/gate7/G7A-ACCEPTANCE-DECISION.md`
+
+Current state:
+- G7-A engineering gate: ACCEPTED.
+- Backend ESLint project configuration: accepted residual tooling debt for this gate only.
+- Merge / push / deployment / production DB migration / release: NOT AUTHORIZED.
+- Production release requires a separate authority decision.
