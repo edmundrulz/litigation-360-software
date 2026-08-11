@@ -9,7 +9,6 @@ const authenticate = require("./middleware/auth");
 const { APPLICATION_ROLES, requireRoles } = require("./security/rbac");
 const { getJwtConfig } = require("./security/runtimeConfig");
 
-const { logError } = require("./utils/errorBus");
 const { startScheduler } = require("./jobs/systemScheduler");
 
 const app = express();
